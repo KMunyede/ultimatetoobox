@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <title>Hilmost Ultimate Toolbox - Free Calculators & Converters</title>
+  <meta name="description" content="The ultimate free online toolbox featuring advanced Math Calculators, Currency Converters, Physics Solvers, BMI Calculators, and Unit Converters. Lightning fast.">
+  <meta name="keywords" content="calculator, currency converter, unit converter, physics solver, bmi calculator, free online tools">
+  <meta property="og:title" content="Hilmost Ultimate Toolbox">
+  <meta property="og:description" content="Every calculation. One place. Free online calculators and converters.">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="hilmost_toolbox">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Elite AdOps: Asynchronous Execution of GPT -->
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+  <script>
+    window.googletag = window.googletag || {cmd: []};
+    // We disable initial load so we can manually control ad refreshing (SPA Hack) and lazy loading.
+    googletag.cmd.push(function() {
+      googletag.pubads().disableInitialLoad();
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+  </script>
+
+  <!-- Loading Screen CSS -->
+  <style>
+    body {
+      margin: 0;
+      background-color: #F5F5F0;
+    }
+    #loading-indicator {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #F5F5F0;
+      transition: opacity 0.5s ease-out;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .cube1, .cube2 {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #4F378B;
+      border-radius: 4px;
+      animation: sk-cubemove 1.8s infinite ease-in-out;
+    }
+    .cube2 {
+      background-color: #D0BCFF;
+      animation-delay: -0.9s;
+    }
+    @keyframes sk-cubemove {
+      25% { transform: translateX(30px) rotate(-90deg) scale(0.5) }
+      50% { transform: translateX(30px) translateY(30px) rotate(-180deg) }
+      75% { transform: translateX(0px) translateY(30px) rotate(-270deg) scale(0.5) }
+      100% { transform: rotate(-360deg) }
+    }
+    .loading-title {
+      color: #1C1B1F;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+    .loading-subtitle {
+      color: #49454F;
+      font-size: 14px;
+      margin: 0;
+      max-width: 300px;
+      text-align: center;
+      line-height: 1.4;
+    }
+  </style>
+
+  <!-- Synchronized Cache Annihilation & Flutter Bootstrapper -->
+  <script>
+    function loadFlutter() {
+      var script = document.createElement("script");
+      // Append a timestamp to completely bypass HTTP cache for the bootstrap script
+      script.src = "flutter_bootstrap.js?v=" + new Date().getTime(); 
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    // Await the destruction of any rogue Service Workers BEFORE loading Flutter
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        let unregistrationPromises = [];
+        for(let registration of registrations) {
+          unregistrationPromises.push(registration.unregister());
+        }
+        return Promise.all(unregistrationPromises);
+      }).then(() => {
+        // Vaporize CacheStorage
+        if ('caches' in window) {
+          return caches.keys().then((names) => {
+            return Promise.all(names.map(name => caches.delete(name)));
+          });
+        }
+      }).then(() => {
+        loadFlutter();
+      }).catch((e) => {
+        console.error("Cache busting failed", e);
+        loadFlutter(); // Load anyway if it fails
+      });
+    } else {
+      loadFlutter();
+    }
+  </script>
+</head>
+<body>
+  <div id="loading-indicator">
+    <div class="spinner">
+      <div class="cube1"></div>
+      <div class="cube2"></div>
+    </div>
+    <h2 class="loading-title">Hilmost Ultimate Toolbox</h2>
+    <p class="loading-subtitle">Checking for updates and assembling your tools... this might take a moment on your first visit.</p>
+  </div>
+</body>
+</html>

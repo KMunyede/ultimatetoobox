@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "hsc-platform-core"
+  },
+  "targets": {
+    "hsc-platform-core": {
+      "hosting": {
+        "hilmost-toolbox": ["hilmost-toolbox"]
+      }
+    }
+  }
+}

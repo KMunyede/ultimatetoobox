@@ -1,0 +1,22 @@
+# Firebase
+.firebase/
+
+# Flutter/Dart/Pub
+.dart_tool/
+.packages
+build/
+*.dart_tool
+*.packages
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Any inner app build folders
+apps/*/build/
+packages/*/build/
