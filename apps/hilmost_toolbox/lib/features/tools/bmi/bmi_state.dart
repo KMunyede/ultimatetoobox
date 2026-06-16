@@ -45,8 +45,11 @@ class BmiController extends Notifier<BmiState> {
   void setUnit(BmiUnit unit) => state = state.copyWith(unit: unit);
   void setMetricHeight(double cm) => state = state.copyWith(heightCm: cm);
   void setMetricWeight(double kg) => state = state.copyWith(weightKg: kg);
-  void setImperialHeight(double feet, double inches) => state = state.copyWith(heightFeet: feet, heightInches: inches);
+  void setImperialHeight(double feet, double inches) =>
+      state = state.copyWith(heightFeet: feet, heightInches: inches);
   void setImperialWeight(double lbs) => state = state.copyWith(weightLbs: lbs);
 }
 
-final bmiControllerProvider = NotifierProvider<BmiController, BmiState>(BmiController.new);
+final bmiControllerProvider = NotifierProvider<BmiController, BmiState>(
+  BmiController.new,
+);

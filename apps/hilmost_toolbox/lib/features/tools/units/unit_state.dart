@@ -43,7 +43,11 @@ class UnitController extends Notifier<UnitState> {
       fromUnit: units[0],
       toUnit: units[1],
       fromValue: 1.0,
-      toValue: _convert(1.0, defaultCat.units[units[0]]!, defaultCat.units[units[1]]!),
+      toValue: _convert(
+        1.0,
+        defaultCat.units[units[0]]!,
+        defaultCat.units[units[1]]!,
+      ),
     );
   }
 
@@ -53,28 +57,51 @@ class UnitController extends Notifier<UnitState> {
   }
 
   void setCategory(UnitCategory category) {
-    final units = category.units.keys.toList();
-    final toVal = _convert(state.fromValue, category.units[units[0]]!, category.units[units[1]]!);
-    state = state.copyWith(category: category, fromUnit: units[0], toUnit: units[1], toValue: toVal);
+    if (state.category != category) {
+      final units = category.units.keys.toList();
+      state = state.copyWith(
+        category: category,
+        fromUnit: units[0],
+        toUnit: units[1],
+        fromValue: 0.0,
+        toValue: 0.0,
+      );
+    }
   }
 
   void setFromUnit(String unit) {
-    final toVal = _convert(state.fromValue, state.category.units[unit]!, state.category.units[state.toUnit]!);
+    final toVal = _convert(
+      state.fromValue,
+      state.category.units[unit]!,
+      state.category.units[state.toUnit]!,
+    );
     state = state.copyWith(fromUnit: unit, toValue: toVal);
   }
 
   void setToUnit(String unit) {
-    final toVal = _convert(state.fromValue, state.category.units[state.fromUnit]!, state.category.units[unit]!);
+    final toVal = _convert(
+      state.fromValue,
+      state.category.units[state.fromUnit]!,
+      state.category.units[unit]!,
+    );
     state = state.copyWith(toUnit: unit, toValue: toVal);
   }
 
   void setFromValue(double val) {
-    final toVal = _convert(val, state.category.units[state.fromUnit]!, state.category.units[state.toUnit]!);
+    final toVal = _convert(
+      val,
+      state.category.units[state.fromUnit]!,
+      state.category.units[state.toUnit]!,
+    );
     state = state.copyWith(fromValue: val, toValue: toVal);
   }
 
   void setToValue(double val) {
-    final fromVal = _convert(val, state.category.units[state.toUnit]!, state.category.units[state.fromUnit]!);
+    final fromVal = _convert(
+      val,
+      state.category.units[state.toUnit]!,
+      state.category.units[state.fromUnit]!,
+    );
     state = state.copyWith(fromValue: fromVal, toValue: val);
   }
 
@@ -86,4 +113,6 @@ class UnitController extends Notifier<UnitState> {
   }
 }
 
-final unitControllerProvider = NotifierProvider<UnitController, UnitState>(UnitController.new);
+final unitControllerProvider = NotifierProvider<UnitController, UnitState>(
+  UnitController.new,
+);

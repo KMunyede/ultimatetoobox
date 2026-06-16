@@ -39,9 +39,9 @@ const List<UnitCategory> unitCategories = [
   }),
   UnitCategory('Temperature', {
     '°C': UnitDef(1.0, 0.0),
-    '°F': UnitDef(5/9, -17.77777777777778),
+    '°F': UnitDef(5 / 9, -17.77777777777778),
     'K': UnitDef(1.0, -273.15),
-    '°R': UnitDef(5/9, -273.15),
+    '°R': UnitDef(5 / 9, -273.15),
   }),
   UnitCategory('Data Storage', {
     'B': UnitDef(1.0),

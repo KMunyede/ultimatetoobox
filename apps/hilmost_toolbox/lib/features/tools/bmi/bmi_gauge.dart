@@ -56,21 +56,21 @@ class _BmiGaugePainter extends CustomPainter {
     final needlePaint = Paint()
       ..color = const Color(0xFF00C9A7)
       ..style = PaintingStyle.fill;
-    
+
     final clampedBmi = bmi.clamp(minBmi, maxBmi);
     final angle = pi + ((clampedBmi - minBmi) / range) * pi;
 
     canvas.save();
     canvas.translate(center.dx, center.dy);
     canvas.rotate(angle);
-    
+
     final path = Path()
       ..moveTo(0, 5)
       ..lineTo(radius - 10, 0)
       ..lineTo(0, -5)
       ..close();
     canvas.drawPath(path, needlePaint);
-    
+
     canvas.drawCircle(const Offset(0, 0), 10, needlePaint);
     canvas.restore();
   }

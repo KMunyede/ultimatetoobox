@@ -77,6 +77,16 @@ class CurrencyController extends Notifier<CurrencyState> {
     state = state.copyWith(fromCode: oldTo, toCode: oldFrom);
     _fetchRates(oldTo);
   }
+
+  void reset() {
+    state = CurrencyState(
+      fromCode: state.fromCode,
+      toCode: state.toCode,
+      amount: 0.0,
+    );
+    _fetchRates(state.fromCode);
+  }
 }
 
-final currencyControllerProvider = NotifierProvider<CurrencyController, CurrencyState>(CurrencyController.new);
+final currencyControllerProvider =
+    NotifierProvider<CurrencyController, CurrencyState>(CurrencyController.new);

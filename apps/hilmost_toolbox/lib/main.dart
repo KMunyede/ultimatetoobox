@@ -2,10 +2,19 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); // Maximize UI footprint
+  // In flutter web, this allows standard right-click (Developer mode, Inspect)
+  BrowserContextMenu.enableContextMenu();
+  usePathUrlStrategy();
+
   PlatformDispatcher.instance.onError = (error, stack) {
     debugPrint('Global Error: $error\n$stack');
     return true;
@@ -26,9 +35,16 @@ void main() {
             children: [
               const Icon(Icons.error_outline, color: Colors.red, size: 64),
               const SizedBox(height: 16),
-              const Text('An unexpected error occurred.', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              const Text(
+                'An unexpected error occurred.',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
               const SizedBox(height: 8),
-              Text(details.exceptionAsString(), textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey)),
+              Text(
+                details.exceptionAsString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.grey),
+              ),
             ],
           ),
         ),

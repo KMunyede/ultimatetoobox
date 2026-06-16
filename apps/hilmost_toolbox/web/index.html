@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <base href="$FLUTTER_BASE_HREF">
@@ -6,10 +6,12 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <title>Hilmost Ultimate Toolbox - Free Calculators & Converters</title>
-  <meta name="description" content="The ultimate free online toolbox featuring advanced Math Calculators, Currency Converters, Physics Solvers, BMI Calculators, and Unit Converters. Lightning fast.">
+  <meta name="description" content="Free online calculators, currency converters, BMI calculators, unit converters and physics solvers. Fast, no signup required.">
   <meta name="keywords" content="calculator, currency converter, unit converter, physics solver, bmi calculator, free online tools">
+  <link rel="canonical" href="https://hilmost-toolbox.hilmost.net/">
   <meta property="og:title" content="Hilmost Ultimate Toolbox">
-  <meta property="og:description" content="Every calculation. One place. Free online calculators and converters.">
+  <meta property="og:description" content="Every calculation. One place. Free online tools.">
+  <meta property="og:url" content="https://hilmost-toolbox.hilmost.net/">
   <meta property="og:type" content="website">
   <meta name="robots" content="index, follow">
 
@@ -20,125 +22,238 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <link rel="manifest" href="manifest.json">
 
-  <!-- Elite AdOps: Asynchronous Execution of GPT -->
-  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-  <script>
-    window.googletag = window.googletag || {cmd: []};
-    // We disable initial load so we can manually control ad refreshing (SPA Hack) and lazy loading.
-    googletag.cmd.push(function() {
-      googletag.pubads().disableInitialLoad();
-      googletag.pubads().enableSingleRequest();
-      googletag.enableServices();
-    });
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Hilmost Ultimate Toolbox",
+    "url": "https://hilmost-toolbox.hilmost.net/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://hilmost-toolbox.hilmost.net/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Standard Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/calculator",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Scientific Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/calculator",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Astrophysics Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/calculator",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Equation Solver",
+    "url": "https://hilmost-toolbox.hilmost.net/calculator",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Compound Interest Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Income Tax Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Loan Amortization Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Salary Converter",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Tip Calculator & Splitter",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "VAT & Sales Tax Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Retirement Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/finance",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Currency Converter",
+    "url": "https://hilmost-toolbox.hilmost.net/currency",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Physics Solver",
+    "url": "https://hilmost-toolbox.hilmost.net/physics",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Unit Converter",
+    "url": "https://hilmost-toolbox.hilmost.net/units",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BMI Calculator",
+    "url": "https://hilmost-toolbox.hilmost.net/bmi",
+    "applicationCategory": "HealthAndFitnessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Word Unscrambler",
+    "url": "https://hilmost-toolbox.hilmost.net/text-and-data/word-unscrambler",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
   </script>
 
-  <!-- Loading Screen CSS -->
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5650522247882745" crossorigin="anonymous"></script>
+
   <style>
     body {
       margin: 0;
-      background-color: #F5F5F0;
-    }
-    #loading-indicator {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100vw;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #F5F5F0;
-      transition: opacity 0.5s ease-out;
-    }
-    .spinner {
-      width: 50px;
-      height: 50px;
-      position: relative;
-      margin-bottom: 24px;
-    }
-    .cube1, .cube2 {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: #4F378B;
-      border-radius: 4px;
-      animation: sk-cubemove 1.8s infinite ease-in-out;
-    }
-    .cube2 {
-      background-color: #D0BCFF;
-      animation-delay: -0.9s;
-    }
-    @keyframes sk-cubemove {
-      25% { transform: translateX(30px) rotate(-90deg) scale(0.5) }
-      50% { transform: translateX(30px) translateY(30px) rotate(-180deg) }
-      75% { transform: translateX(0px) translateY(30px) rotate(-270deg) scale(0.5) }
-      100% { transform: rotate(-360deg) }
-    }
-    .loading-title {
-      color: #1C1B1F;
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0 0 8px 0;
-    }
-    .loading-subtitle {
-      color: #49454F;
-      font-size: 14px;
-      margin: 0;
-      max-width: 300px;
-      text-align: center;
-      line-height: 1.4;
+      background-color: #F8FAFC;
     }
   </style>
 
-  <!-- Synchronized Cache Annihilation & Flutter Bootstrapper -->
-  <script>
-    function loadFlutter() {
-      var script = document.createElement("script");
-      // Append a timestamp to completely bypass HTTP cache for the bootstrap script
-      script.src = "flutter_bootstrap.js?v=" + new Date().getTime(); 
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    // Await the destruction of any rogue Service Workers BEFORE loading Flutter
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        let unregistrationPromises = [];
-        for(let registration of registrations) {
-          unregistrationPromises.push(registration.unregister());
-        }
-        return Promise.all(unregistrationPromises);
-      }).then(() => {
-        // Vaporize CacheStorage
-        if ('caches' in window) {
-          return caches.keys().then((names) => {
-            return Promise.all(names.map(name => caches.delete(name)));
-          });
-        }
-      }).then(() => {
-        loadFlutter();
-      }).catch((e) => {
-        console.error("Cache busting failed", e);
-        loadFlutter(); // Load anyway if it fails
-      });
-    } else {
-      loadFlutter();
-    }
-  </script>
+  <!-- Flutter Bootstrapper -->
+  <script src="flutter_bootstrap.js" async></script>
 </head>
 <body>
-  <div id="loading-indicator">
-    <div class="spinner">
-      <div class="cube1"></div>
-      <div class="cube2"></div>
-    </div>
-    <h2 class="loading-title">Hilmost Ultimate Toolbox</h2>
-    <p class="loading-subtitle">Checking for updates and assembling your tools... this might take a moment on your first visit.</p>
+  <div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+    <h1>Hilmost Ultimate Toolbox — Free Online Calculators and Converters</h1>
+    <p>Hilmost Ultimate Toolbox offers free online calculators and converters including currency converter, BMI calculator, unit converter, math calculator, and physics equation solver. All tools are free, fast, and require no signup.</p>
+    <nav>
+      <ul>
+        <li><a href="/calculator">Standard Calculator — reliable and fast standard calculator</a></li>
+        <li><a href="/calculator">Scientific Calculator — advanced trigonometry, logarithmic functions, exponents, and complex algebraic equations</a></li>
+        <li><a href="/calculator">Astrophysics Calculator — calculate orbital mechanics, gravitational forces, escape velocities, and planetary masses</a></li>
+        <li><a href="/calculator">Equation Solver — solve polynomials, linear formulas, and quadratic equations</a></li>
+        <li><a href="/finance">Compound Interest Calculator — visualize how your wealth grows over time through the magic of compounding</a></li>
+        <li><a href="/finance">Income Tax Calculator — instantly estimate your net take-home pay by deducting estimated federal, state, and local taxes</a></li>
+        <li><a href="/finance">Loan Amortization Calculator — generate complete amortization schedules for mortgages, auto loans, and personal financing</a></li>
+        <li><a href="/finance">Salary Converter — translate your wages across different timeframes: per hour, day, week, month, and year</a></li>
+        <li><a href="/finance">Tip Calculator & Splitter — quickly determine the appropriate gratuity for any service and split the bill among friends</a></li>
+        <li><a href="/finance">VAT & Sales Tax Calculator — rapidly add tax to a net price, or perform a reverse tax calculation</a></li>
+        <li><a href="/finance">Retirement Calculator — forecast your retirement savings and see if you are on track</a></li>
+        <li><a href="/finance">Currency Converter — convert between 150+ world currencies with real-time exchange rates</a></li>
+        <li><a href="/physics">Physics Solver — calculate kinematics, forces, and energy</a></li>
+        <li><a href="/units">Unit Converter — convert length, mass, temperature, area, speed, and volume</a></li>
+        <li><a href="/bmi">BMI Calculator — calculate body mass index and health category</a></li>
+        <li><a href="/text-and-data/word-unscrambler">Word Unscrambler — instantly unscramble letters to find valid dictionary words for Scrabble and Wordle</a></li>
+        <li><a href="/about">About Us — learn more about Hilmost Software Corporation</a></li>
+        <li><a href="/contact">Contact Us — get in touch with our team</a></li>
+        <li><a href="/privacy-policy">Privacy Policy — read our privacy policy</a></li>
+      </ul>
+    </nav>
   </div>
+
 </body>
 </html>

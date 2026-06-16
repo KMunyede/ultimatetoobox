@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../shared/widgets/ad_slot_widget.dart';
 import '../../shared/widgets/pop_out_tile.dart';
+import '../../core/theme/app_theme.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,35 +12,37 @@ class HomePage extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isMobile = screenWidth < 800;
 
-    // The maximum width for the centered home content
-    final double maxContentWidth = 800;
-
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: maxContentWidth),
-        child: SingleChildScrollView(
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(vertical: 32),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 900),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 32),
-              
-              _buildCategories(context, isMobile ? 2 : 3),
+              _buildSectionTitle('CATEGORIES'),
+              const SizedBox(height: 16),
+              _buildCategories(context, isMobile),
               const SizedBox(height: 48),
-              
-              _buildFeatured(context, isMobile ? 1 : 2),
+
+              _buildSectionTitle('FEATURED TOOLS'),
+              const SizedBox(height: 16),
+              _buildFeatured(context, isMobile),
               const SizedBox(height: 48),
-              
-              _buildTrendingSidebar(),
+
+              _buildSectionTitle('TRENDING TODAY'),
+              const SizedBox(height: 16),
+              _buildTrending(context, isMobile),
               const SizedBox(height: 48),
-              
-              // Bottom Advert
-              const AdSlotWidget(
-                slotId: 'ad_home_bottom',
-                adUnitPath: '/1234567/home_bottom',
-                width: 728,
-                height: 90,
+
+              const Center(
+                child: AdSlotWidget(
+                  slotId: 'ad_home_bottom',
+                  adUnitPath: '/1234567/home_bottom',
+                  width: 728,
+                  height: 90,
+                ),
               ),
-              const SizedBox(height: 48),
             ],
           ),
         ),
@@ -47,196 +50,234 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildCategories(BuildContext context, int crossAxisCount) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w800,
+        letterSpacing: 1.2,
+        color: AppTheme.textSecondaryLight,
+      ),
+    );
+  }
+
+  Widget _buildCategories(BuildContext context, bool isMobile) {
+    return Wrap(
+      spacing: 16,
+      runSpacing: 16,
       children: [
-        const Text(
-          'CATEGORIES',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.2, color: Colors.black87),
-        ),
-        const SizedBox(height: 16),
-        GridView.count(
-          crossAxisCount: crossAxisCount,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          childAspectRatio: 2.2, // Adjusted for 3 columns to maintain proportional height
-          children: [
-            _buildCategoryTile('Calculators', '38 tools', Icons.calculate, const Color(0xFFE8F0FE), () => context.go('/calculator')),
-            _buildCategoryTile('Converters', '45 tools', Icons.swap_horiz, const Color(0xFFFEF3E8), () => context.go('/units')),
-            _buildCategoryTile('Finance', '22 tools', Icons.bar_chart, const Color(0xFFE8F5E9), () => context.go('/currency')),
-            _buildCategoryTile('Weather', '8 tools', Icons.cloud_outlined, const Color(0xFFE1F5FE), () => context.go('/stub')),
-            _buildCategoryTile('Health & Fitness', '19 tools', Icons.favorite_border, const Color(0xFFFFEBEE), () => context.go('/bmi')),
-            _buildCategoryTile('Developer', '31 tools', Icons.code, const Color(0xFFF3E5F5), () => context.go('/stub')),
-            _buildCategoryTile('AI Utilities', '14 tools', Icons.smart_toy_outlined, const Color(0xFFE8EAF6), () => context.go('/stub')),
-            _buildCategoryTile('Text & Writing', '26 tools', Icons.edit_outlined, const Color(0xFFFCE4EC), () => context.go('/stub')),
-          ],
-        ),
+        _buildCategoryCard(context, isMobile, 'Calculators', '38 tools', Icons.calculate, '/calculator'),
+        _buildCategoryCard(context, isMobile, 'Converters', '45 tools', Icons.swap_horiz, '/units'),
+        _buildCategoryCard(context, isMobile, 'Finance', '22 tools', Icons.bar_chart, '/finance'),
+        _buildCategoryCard(context, isMobile, 'Weather', '8 tools', Icons.cloud_outlined, '/stub'),
+        _buildCategoryCard(context, isMobile, 'Health & Fitness', '19 tools', Icons.favorite_border, '/bmi'),
+        _buildCategoryCard(context, isMobile, 'Developer', '31 tools', Icons.code, '/stub'),
+        _buildCategoryCard(context, isMobile, 'AI Utilities', '14 tools', Icons.smart_toy_outlined, '/stub'),
+        _buildCategoryCard(context, isMobile, 'Text & Data', '26 tools', Icons.edit_outlined, '/text-and-data'),
       ],
     );
   }
 
-  Widget _buildCategoryTile(String title, String subtitle, IconData icon, Color iconBg, VoidCallback onTap) {
-    Widget titleWidget;
-    if (title.contains(' ')) {
-      titleWidget = Text(
-        title.replaceAll(' ', '\n'),
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87, height: 1.1),
-      );
-    } else {
-      titleWidget = FittedBox(
-        fit: BoxFit.scaleDown,
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black87),
-        ),
-      );
-    }
-
-    return PopOutTile(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: iconBg, borderRadius: BorderRadius.circular(8)),
-              child: Icon(icon, color: Colors.black87, size: 24),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
+  Widget _buildCategoryCard(BuildContext context, bool isMobile, String title, String subtitle, IconData icon, String route) {
+    final width = isMobile ? double.infinity : 280.0;
+    
+    return SizedBox(
+      width: width,
+      child: PopOutTile(
+        onTap: () => context.go(route),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceLight,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppTheme.borderLight),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryBrand.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: AppTheme.primaryBrand, size: 28),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    titleWidget,
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: AppTheme.textPrimaryLight,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppTheme.textSecondaryLight,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildFeatured(BuildContext context, int crossAxisCount) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildFeatured(BuildContext context, bool isMobile) {
+    return Wrap(
+      spacing: 16,
+      runSpacing: 16,
       children: [
-        const Text(
-          'FEATURED',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.2, color: Colors.black87),
-        ),
-        const SizedBox(height: 16),
-        GridView.count(
-          crossAxisCount: crossAxisCount,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          childAspectRatio: 1.8, // Decreased aspect ratio to make tile taller and allow text wrapping
-          children: [
-            _buildFeaturedTile('Currency converter', '180+ live exchange rates', Icons.currency_exchange, const Color(0xFFFFEBEE), 'HOT', Colors.red, () => context.go('/currency')),
-            _buildFeaturedTile('Mortgage calculator', 'Monthly payments & amortization', Icons.calculate_outlined, const Color(0xFFE8F5E9), 'HOT', Colors.grey, () => context.go('/calculator')),
-            _buildFeaturedTile('AI text summariser', 'Condense any article instantly', Icons.subject, const Color(0xFFE8EAF6), 'NEW', Colors.green, () => context.go('/stub')),
-            _buildFeaturedTile('Unit converter', 'Length, mass, temp, volume', Icons.straighten, const Color(0xFFFFEBEE), 'HOT', Colors.grey, () => context.go('/units')),
-            _buildFeaturedTile('BMI calculator', 'With health classification', Icons.monitor_weight_outlined, const Color(0xFFE1F5FE), 'NEW', Colors.green, () => context.go('/bmi')),
-            _buildFeaturedTile('Compound interest', 'Investment growth projections', Icons.trending_up, const Color(0xFFFEF3E8), 'NEW', Colors.green, () => context.go('/stub')),
-          ],
-        ),
+        _buildFeaturedCard(context, isMobile, 'Currency Converter', '180+ live exchange rates', Icons.currency_exchange, 'HOT', AppTheme.accentColor, '/finance'),
+        _buildFeaturedCard(context, isMobile, 'Mortgage Calculator', 'Monthly payments & amortization', Icons.home_work_outlined, 'HOT', AppTheme.accentColor, '/finance'),
+        _buildFeaturedCard(context, isMobile, 'AI Text Summariser', 'Condense any article instantly', Icons.auto_awesome, 'NEW', AppTheme.secondaryBrand, '/stub'),
+        _buildFeaturedCard(context, isMobile, 'Unit Converter', 'Length, mass, temp, volume', Icons.straighten, 'HOT', AppTheme.accentColor, '/units'),
       ],
     );
   }
 
-  Widget _buildFeaturedTile(String title, String subtitle, IconData icon, Color iconBg, String badgeText, Color badgeColor, VoidCallback onTap) {
-    return PopOutTile(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: iconBg, borderRadius: BorderRadius.circular(8)),
-              child: Icon(icon, color: Colors.black87, size: 24),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
+  Widget _buildFeaturedCard(BuildContext context, bool isMobile, String title, String subtitle, IconData icon, String badge, Color badgeColor, String route) {
+    final width = isMobile ? double.infinity : 430.0;
+    
+    return SizedBox(
+      width: width,
+      child: PopOutTile(
+        onTap: () => context.go(route),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceLight,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppTheme.borderLight),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: badgeColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(icon, color: badgeColor, size: 32),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       children: [
-                        // Removed TextOverflow.ellipsis to let the text wrap
-                        Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87))),
-                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: AppTheme.textPrimaryLight,
+                            ),
+                          ),
+                        ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: badgeColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-                          child: Text(badgeText, style: TextStyle(color: badgeColor, fontSize: 10, fontWeight: FontWeight.bold)),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: badgeColor.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            badge,
+                            style: TextStyle(
+                              color: badgeColor,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
-                    // Removed TextOverflow.ellipsis to let the text wrap
-                    Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+                    const SizedBox(height: 6),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppTheme.textSecondaryLight,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTrendingSidebar() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildTrending(BuildContext context, bool isMobile) {
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
       children: [
-        const Text(
-          'Trending today',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.black87),
-        ),
-        const SizedBox(height: 16),
-        _buildTrendingItem('UV index', Icons.wb_sunny_outlined, Colors.orange),
-        _buildTrendingItem('PDF to Word', Icons.picture_as_pdf_outlined, Colors.blue),
-        _buildTrendingItem('Password gen', Icons.lock_outline, Colors.green),
-        _buildTrendingItem('Age calc', Icons.cake_outlined, Colors.red),
-        _buildTrendingItem('Electricity cost', Icons.bolt_outlined, Colors.orange),
-        _buildTrendingItem('VAT / tax calc', Icons.percent, Colors.green),
+        _buildTrendingChip('UV index', Icons.wb_sunny_outlined),
+        _buildTrendingChip('PDF to Word', Icons.picture_as_pdf_outlined),
+        _buildTrendingChip('Password gen', Icons.lock_outline),
+        _buildTrendingChip('Age calc', Icons.cake_outlined),
+        _buildTrendingChip('Electricity calc', Icons.bolt_outlined),
+        _buildTrendingChip('VAT calc', Icons.percent),
       ],
     );
   }
 
-  Widget _buildTrendingItem(String title, IconData icon, Color color) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(6),
+  Widget _buildTrendingChip(String title, IconData icon) {
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppTheme.surfaceLight,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppTheme.borderLight),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 18, color: AppTheme.primaryBrand),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: AppTheme.textPrimaryLight,
+              ),
             ),
-            child: Icon(icon, size: 16, color: color),
-          ),
-          const SizedBox(width: 12),
-          Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black87)),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1032,8 +1032,8 @@ class _ScienceEquationCalcState extends ConsumerState<ScienceEquationCalc> {
           child: TextField(
             controller: _controllers['var${i + 1}'],
             focusNode: _focusNodes['var${i + 1}'],
-            readOnly: true,
             showCursor: true,
+            keyboardType: TextInputType.text,
             onTap: () {
               setState(() {
                 _activeFocusId = 'var${i + 1}';
@@ -1280,96 +1280,12 @@ class _ScienceEquationCalcState extends ConsumerState<ScienceEquationCalc> {
       ],
     );
 
-    return Focus(
-      autofocus: true,
-      onKeyEvent: (FocusNode node, KeyEvent event) {
-        if (event is KeyDownEvent) {
-          final logicalKey = event.logicalKey;
-          final char = event.character;
-
-          if (logicalKey == LogicalKeyboardKey.arrowLeft) {
-            final ctrl = _getActiveController();
-            final sel = ctrl.selection;
-            if (sel.isValid && sel.start > 0) {
-              ctrl.selection = TextSelection.collapsed(offset: sel.start - 1);
-            }
-            return KeyEventResult.handled;
-          } else if (logicalKey == LogicalKeyboardKey.arrowRight) {
-            final ctrl = _getActiveController();
-            final sel = ctrl.selection;
-            if (sel.isValid && sel.start < ctrl.text.length) {
-              ctrl.selection = TextSelection.collapsed(offset: sel.start + 1);
-            }
-            return KeyEventResult.handled;
-          }
-
-          if (logicalKey == LogicalKeyboardKey.escape) {
-            _onKeypadPressed('C');
-            return KeyEventResult.handled;
-          } else if (logicalKey == LogicalKeyboardKey.backspace || logicalKey == LogicalKeyboardKey.delete) {
-            _onKeypadPressed('⌫');
-            return KeyEventResult.handled;
-          } else if (logicalKey == LogicalKeyboardKey.enter || logicalKey == LogicalKeyboardKey.numpadEnter || logicalKey == LogicalKeyboardKey.equal) {
-            _onKeypadPressed('=');
-            return KeyEventResult.handled;
-          }
-
-          if (char != null) {
-            if ('0123456789.()e^!'.contains(char)) {
-              _onKeypadPressed(char == '^' ? 'x^y' : char);
-              return KeyEventResult.handled;
-            } else if (char == '*' || char == 'x') {
-              _onKeypadPressed('×');
-              return KeyEventResult.handled;
-            } else if (char == '/') {
-              _onKeypadPressed('÷');
-              return KeyEventResult.handled;
-            } else if (char == '+' || char == '-') {
-              _onKeypadPressed(char == '-' ? '−' : '+');
-              return KeyEventResult.handled;
-            } else if (char.toLowerCase() == 'c') {
-              _onKeypadPressed('C');
-              return KeyEventResult.handled;
-            } else if (char.toLowerCase() == 'p') {
-              _onKeypadPressed('π');
-              return KeyEventResult.handled;
-            }
-          }
-        }
-        return KeyEventResult.ignored;
-      },
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final bool isLandscape = constraints.maxWidth > constraints.maxHeight;
-
-          Widget content;
-          if (isLandscape) {
-            content = Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(flex: 1, child: _buildKeypad()),
-                const SizedBox(width: 24),
-                Expanded(
-                  flex: 1,
-                  child: SingleChildScrollView(child: inputsAndDisplay),
-                ),
-              ],
-            );
-          } else {
-            content = Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: SingleChildScrollView(child: inputsAndDisplay),
-                ),
-                const SizedBox(height: 8),
-                Expanded(flex: 1, child: _buildKeypad()),
-              ],
-            );
-          }
-          return content;
-        },
+    return SingleChildScrollView(
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600),
+          child: inputsAndDisplay,
+        ),
       ),
     );
   }

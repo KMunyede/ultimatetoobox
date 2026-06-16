@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hilmost.net/sitemap.xml
+Sitemap: https://hilmost-toolbox.hilmost.net/sitemap.xml

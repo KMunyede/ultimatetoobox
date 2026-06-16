@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'unit_data.dart';
 import 'unit_state.dart';
 import '../../../shared/widgets/ad_slot_widget.dart';
+import '../../../shared/widgets/seo_text_accordion.dart';
 import '../../../shared/utils/number_formatter.dart';
 
 class UnitPage extends ConsumerWidget {
@@ -17,9 +18,14 @@ class UnitPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Unit Converter', style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          'Unit Converter',
+          style: theme.textTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(height: 24),
-        
+
         // Category Tabs
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -92,7 +98,10 @@ class UnitPage extends ConsumerWidget {
               const SizedBox(height: 24),
               Text(
                 'Formula: multiply base by scale and add offset',
-                style: TextStyle(color: Colors.grey.shade500, fontStyle: FontStyle.italic),
+                style: TextStyle(
+                  color: Colors.grey.shade500,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
               const SizedBox(height: 24),
               AdSlotWidget(
@@ -101,10 +110,19 @@ class UnitPage extends ConsumerWidget {
                 width: 300,
                 height: 250,
               ),
+              const SizedBox(height: 24),
+              _buildSeoText(),
             ],
           ),
-        )
+        ),
       ],
+    );
+  }
+
+  Widget _buildSeoText() {
+    return const SeoTextAccordion(
+      title: 'About the Unit Converter',
+      content: 'Instantly bridge the gap between different measurement systems with the Hilmost Unit Converter. Whether you are baking a recipe using the metric system, calculating travel distances in miles, or working on an engineering schematic requiring precise temperature shifts, this tool guarantees flawless conversions every time. With comprehensive support for Length, Weight, Temperature, Area, Volume, and Speed, it is an essential utility for daily life.\n\nHow to use it: First, select your desired measurement category from the dropdown menu at the top. Next, choose your starting unit ("From") and your target unit ("To"). As soon as you type a numerical value into either input box, the opposite box instantly updates with the precise converted value. This bi-directional calculation means you never have to guess which way to convert. The tool easily handles vast numbers and microscopic decimals, making it perfect for both casual use in the kitchen and professional use in the field.',
     );
   }
 }
@@ -158,7 +176,13 @@ class _UnitInputPanelState extends State<_UnitInputPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        Text(
+          widget.label,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          ),
+        ),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -170,7 +194,9 @@ class _UnitInputPanelState extends State<_UnitInputPanel> {
             child: DropdownButton<String>(
               isExpanded: true,
               value: widget.unit,
-              items: widget.units.map((u) => DropdownMenuItem(value: u, child: Text(u))).toList(),
+              items: widget.units
+                  .map((u) => DropdownMenuItem(value: u, child: Text(u)))
+                  .toList(),
               onChanged: widget.onUnitChanged,
             ),
           ),
@@ -179,7 +205,11 @@ class _UnitInputPanelState extends State<_UnitInputPanel> {
         TextFormField(
           controller: _controller,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontFamily: 'JetBrains Mono',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             filled: true,

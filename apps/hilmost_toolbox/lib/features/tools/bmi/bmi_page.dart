@@ -4,6 +4,7 @@ import 'bmi_state.dart';
 import 'bmi_utils.dart';
 import 'bmi_gauge.dart';
 import '../../../shared/widgets/ad_slot_widget.dart';
+import '../../../shared/widgets/seo_text_accordion.dart';
 
 class BmiPage extends ConsumerWidget {
   const BmiPage({super.key});
@@ -15,7 +16,11 @@ class BmiPage extends ConsumerWidget {
 
     final BmiResult result = state.unit == BmiUnit.metric
         ? BmiUtils.calculateMetric(state.heightCm, state.weightKg)
-        : BmiUtils.calculateImperial(state.heightFeet, state.heightInches, state.weightLbs);
+        : BmiUtils.calculateImperial(
+            state.heightFeet,
+            state.heightInches,
+            state.weightLbs,
+          );
 
     final inputColumn = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,15 +37,47 @@ class BmiPage extends ConsumerWidget {
         ),
         const SizedBox(height: 24),
         if (state.unit == BmiUnit.metric) ...[
-          _buildSlider('Height (cm)', state.heightCm, 100, 250, (val) => controller.setMetricHeight(val)),
+          _buildSlider(
+            'Height (cm)',
+            state.heightCm,
+            100,
+            250,
+            (val) => controller.setMetricHeight(val),
+          ),
           const SizedBox(height: 16),
-          _buildSlider('Weight (kg)', state.weightKg, 30, 200, (val) => controller.setMetricWeight(val)),
+          _buildSlider(
+            'Weight (kg)',
+            state.weightKg,
+            30,
+            200,
+            (val) => controller.setMetricWeight(val),
+          ),
         ] else ...[
-          _buildSlider('Height (feet)', state.heightFeet, 3, 8, (val) => controller.setImperialHeight(val, state.heightInches), divisions: 5),
+          _buildSlider(
+            'Height (feet)',
+            state.heightFeet,
+            3,
+            8,
+            (val) => controller.setImperialHeight(val, state.heightInches),
+            divisions: 5,
+          ),
           const SizedBox(height: 16),
-          _buildSlider('Height (inches)', state.heightInches, 0, 11, (val) => controller.setImperialHeight(state.heightFeet, val), divisions: 11),
+          _buildSlider(
+            'Height (inches)',
+            state.heightInches,
+            0,
+            11,
+            (val) => controller.setImperialHeight(state.heightFeet, val),
+            divisions: 11,
+          ),
           const SizedBox(height: 16),
-          _buildSlider('Weight (lbs)', state.weightLbs, 60, 400, (val) => controller.setImperialWeight(val)),
+          _buildSlider(
+            'Weight (lbs)',
+            state.weightLbs,
+            60,
+            400,
+            (val) => controller.setImperialWeight(val),
+          ),
         ],
       ],
     );
@@ -51,7 +88,11 @@ class BmiPage extends ConsumerWidget {
         const SizedBox(height: 24),
         Text(
           result.bmi.toStringAsFixed(1),
-          style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, fontFamily: 'JetBrains Mono'),
+          style: const TextStyle(
+            fontSize: 48,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'JetBrains Mono',
+          ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -62,11 +103,18 @@ class BmiPage extends ConsumerWidget {
           ),
           child: Text(
             result.categoryLabel,
-            style: TextStyle(color: result.color, fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(
+              color: result.color,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
           ),
         ),
         const SizedBox(height: 16),
-        Text('Healthy Weight Range: ${result.healthyRangeStr}', style: const TextStyle(color: Colors.grey)),
+        Text(
+          'Healthy Weight Range: ${result.healthyRangeStr}',
+          style: const TextStyle(color: Colors.grey),
+        ),
         const SizedBox(height: 24),
         AdSlotWidget(
           slotId: 'ad_bmi_inline',
@@ -80,7 +128,12 @@ class BmiPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('BMI Calculator', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          'BMI Calculator',
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 24),
         Container(
           decoration: BoxDecoration(
@@ -123,11 +176,27 @@ class BmiPage extends ConsumerWidget {
           'For informational purposes only. Consult a healthcare professional.',
           style: TextStyle(color: Colors.grey, fontSize: 12),
         ),
+        const SizedBox(height: 24),
+        _buildSeoText(),
       ],
     );
   }
 
-  Widget _buildSlider(String label, double value, double min, double max, Function(double) onChanged, {int? divisions}) {
+  Widget _buildSeoText() {
+    return const SeoTextAccordion(
+      title: 'About the BMI Calculator',
+      content: 'Monitor your health and track your fitness journey with the Hilmost BMI Calculator. Body Mass Index (BMI) is a standard screening tool used by healthcare professionals worldwide to estimate total body fat based on your height and weight. While not a diagnostic tool, this free utility gives you an immediate assessment of whether you fall into an underweight, healthy weight, overweight, or obese category.\n\nHow to use it: First, toggle between Metric (kg/cm) or Imperial (lbs/in) systems depending on your preference. Use the smooth, intuitive sliders to accurately input your current height and weight. The calculator will instantaneously generate your BMI score, place you within the appropriate weight category, and highlight your result in a color-coded badge for easy reading. Furthermore, it explicitly calculates your "Healthy Weight Range" so you know exactly what numerical goal to target. It is fast, fully responsive, and an excellent first step in proactive health management.',
+    );
+  }
+
+  Widget _buildSlider(
+    String label,
+    double value,
+    double min,
+    double max,
+    Function(double) onChanged, {
+    int? divisions,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -135,7 +204,10 @@ class BmiPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text(value.toStringAsFixed(1), style: const TextStyle(fontFamily: 'JetBrains Mono')),
+            Text(
+              value.toStringAsFixed(1),
+              style: const TextStyle(fontFamily: 'JetBrains Mono'),
+            ),
           ],
         ),
         Slider(

@@ -8,7 +8,7 @@ class NumberFormatter {
     if (value.isNaN) return 'NaN';
     if (value.isInfinite) return 'Infinity';
     if (value == 0) return '0';
-    
+
     if (useScientificNotation) {
       return value.toStringAsExponential(decimalPlaces);
     } else {

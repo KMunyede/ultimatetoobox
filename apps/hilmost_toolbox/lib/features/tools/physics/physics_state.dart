@@ -6,11 +6,7 @@ class PhysicsState {
   final Map<String, double> inputs;
   final double? result;
 
-  PhysicsState({
-    required this.formula,
-    required this.inputs,
-    this.result,
-  });
+  PhysicsState({required this.formula, required this.inputs, this.result});
 
   PhysicsState copyWith({
     PhysicsFormula? formula,
@@ -29,10 +25,7 @@ class PhysicsState {
 class PhysicsController extends Notifier<PhysicsState> {
   @override
   PhysicsState build() {
-    return PhysicsState(
-      formula: physicsFormulas.first,
-      inputs: {},
-    );
+    return PhysicsState(formula: physicsFormulas.first, inputs: {});
   }
 
   void setFormula(PhysicsFormula f) {
@@ -46,14 +39,19 @@ class PhysicsController extends Notifier<PhysicsState> {
     } else {
       newInputs[variable] = value;
     }
-    
+
     double? res;
     if (newInputs.length == state.formula.variables.length) {
       res = state.formula.calculate(newInputs);
     }
-    
-    state = state.copyWith(inputs: newInputs, result: res, clearResult: res == null);
+
+    state = state.copyWith(
+      inputs: newInputs,
+      result: res,
+      clearResult: res == null,
+    );
   }
 }
 
-final physicsControllerProvider = NotifierProvider<PhysicsController, PhysicsState>(PhysicsController.new);
+final physicsControllerProvider =
+    NotifierProvider<PhysicsController, PhysicsState>(PhysicsController.new);

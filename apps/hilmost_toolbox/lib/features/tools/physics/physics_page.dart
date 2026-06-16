@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'physics_data.dart';
 import 'physics_state.dart';
+import '../../../shared/widgets/ad_slot_widget.dart';
+import '../../../shared/widgets/seo_text_accordion.dart';
 
 class PhysicsPage extends ConsumerWidget {
   const PhysicsPage({super.key});
@@ -15,7 +17,12 @@ class PhysicsPage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Physics Equation Solver', style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          'Physics Equation Solver',
+          style: theme.textTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(height: 24),
         Container(
           padding: const EdgeInsets.all(24),
@@ -27,10 +34,19 @@ class PhysicsPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Select Formula', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+              const Text(
+                'Select Formula',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
                   borderRadius: BorderRadius.circular(8),
@@ -50,7 +66,7 @@ class PhysicsPage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              
+
               // Inputs grid
               Wrap(
                 spacing: 16,
@@ -60,10 +76,14 @@ class PhysicsPage extends ConsumerWidget {
                     width: 250,
                     child: TextFormField(
                       key: ValueKey('${state.formula.name}_$v'),
-                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       decoration: InputDecoration(
                         labelText: v,
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       onChanged: (val) {
                         final parsed = double.tryParse(val);
@@ -74,7 +94,7 @@ class PhysicsPage extends ConsumerWidget {
                 }).toList(),
               ),
               const SizedBox(height: 32),
-              
+
               // Result
               Container(
                 width: double.infinity,
@@ -88,12 +108,24 @@ class PhysicsPage extends ConsumerWidget {
                   children: [
                     Text(
                       state.formula.targetVariable,
-                      style: TextStyle(color: theme.colorScheme.secondary, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: theme.colorScheme.secondary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      state.result != null ? state.result!.toStringAsFixed(4).replaceAll(RegExp(r'0*$'), '').replaceAll(RegExp(r'\.$'), '') : '---',
-                      style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 48, fontWeight: FontWeight.bold),
+                      state.result != null
+                          ? state.result!
+                                .toStringAsFixed(4)
+                                .replaceAll(RegExp(r'0*$'), '')
+                                .replaceAll(RegExp(r'\.$'), '')
+                          : '---',
+                      style: const TextStyle(
+                        fontFamily: 'JetBrains Mono',
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -101,7 +133,25 @@ class PhysicsPage extends ConsumerWidget {
             ],
           ),
         ),
+        const SizedBox(height: 24),
+        const Center(
+          child: AdSlotWidget(
+            slotId: 'ad_physics_inline',
+            adUnitPath: '/1234567/toolbox_physics_inline',
+            width: 320,
+            height: 50,
+          ),
+        ),
+        const SizedBox(height: 24),
+        _buildSeoText(),
       ],
+    );
+  }
+
+  Widget _buildSeoText() {
+    return const SeoTextAccordion(
+      title: 'About the Physics Solver',
+      content: 'Simplify complex mechanics and thermodynamics with the Hilmost Physics Solver. Engineered for students, teachers, and professional physicists, this specialized utility provides instant answers to standard physics formulas without the need for manual algebraic manipulation. Whether you are calculating kinematic equations, force, energy, or fluid dynamics, this tool acts as your personal digital lab partner.\n\nHow to use it: Use the dropdown menu to select the specific physics formula you need to solve (e.g., F = ma, E = mc²). The interface will dynamically generate the required input fields for that specific equation. Enter your known variables, and the solver will instantly calculate the missing value. The tool seamlessly handles decimal points and displays results with high precision. It is an invaluable, free resource for double-checking homework, performing rapid lab calculations, or studying for exams, accessible instantly from any web browser.',
     );
   }
 }
