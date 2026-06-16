@@ -1,0 +1,53 @@
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { ThemeProvider, Header, Footer, AdSenseScript, AdLayout, AutoBreadcrumbs } from "@utilitiessite/ui";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://hilmost-toolbox.hilmost.net'),
+  title: "Hilmost | Software Built For the Modern Era",
+  description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
+  openGraph: {
+    title: "Hilmost Toolbox | Free Online Utilities",
+    description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
+    url: "https://hilmost-toolbox.hilmost.net",
+    siteName: "Hilmost Toolbox",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hilmost Toolbox | Free Online Utilities",
+    description: "Work smarter with our free online calculators and converters.",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 antialiased`}>
+        <AdSenseScript publisherId="ca-pub-5650522247882745" />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <AutoBreadcrumbs />
+          <main className="flex-1">
+            <AdLayout publisherId="ca-pub-5650522247882745">
+              {children}
+            </AdLayout>
+          </main>
+          <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}

@@ -5,7 +5,24 @@
   "targets": {
     "hsc-platform-core": {
       "hosting": {
-        "hilmost-toolbox": ["hilmost-toolbox"]
+        "hilmost-toolbox": [
+          "hilmost-toolbox"
+        ],
+        "hilmost-toolbox-staging": [
+          "hilmost-toolbox-staging"
+        ],
+        "hsc-platform-core-staging": [
+          "hsc-platform-core-staging"
+        ],
+        "hsc-platform-core": [
+          "hsc-platform-core"
+        ],
+        "wisdom-staging": [
+          "hilmost-wisdom-staging"
+        ],
+        "wisdom-prod": [
+          "hilmost-wisdom"
+        ]
       }
     }
   }
