@@ -1,0 +1,25 @@
+{
+  "name": "Hilmost Corporate Agent",
+  "version": "1.0.0",
+  "description": "Hilmost Corporate AI Agent interface",
+  "supportedInterfaces": [
+    {
+      "url": "https://hilmost.net/a2a",
+      "protocol": "a2a-rest"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "info",
+      "name": "Corporate Info",
+      "description": "Provides corporate information."
+    }
+  ],
+  "skills": [
+    {
+      "id": "age-calculator",
+      "name": "Age Calculator",
+      "description": "Calculates age based on two dates."
+    }
+  ]
+}

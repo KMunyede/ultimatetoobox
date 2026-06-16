@@ -1,0 +1,12 @@
+{
+  "serverInfo": {
+    "name": "Hilmost Corporate MCP",
+    "version": "1.0.0"
+  },
+  "endpoint": "/mcp",
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": false
+  }
+}
