@@ -18,7 +18,7 @@ export function CurrencyPageUI({
   const faqs = [
     {
       question: "How often are the exchange rates updated?",
-      answer: "Our currency converter fetches the latest live market rates directly from the European Central Bank (ECB) via the Frankfurter API. These rates are typically updated every business day around 16:00 CET.",
+      answer: "Our currency converter uses a high-availability dual-API system. We fetch real-time data from ExchangeRate-API and use the European Central Bank (ECB) via Frankfurter as a redundant backup. Rates are typically refreshed every few hours or daily depending on the market provider.",
     },
     {
       question: "Are these rates the same as what my bank offers?",
@@ -31,17 +31,17 @@ export function CurrencyPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 md:py-6 max-w-6xl">
       <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+      <div className="text-center max-w-3xl mx-auto mb-4 md:mb-6">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-3 tracking-tight">
           {title.split(' | ')[0].split(' ').map((word, i, arr) => 
             i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '
           )}
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-base md:text-lg text-slate-600 dark:text-slate-400">
           {description.split('.')[0]}. {description.split('.')[1]}.
         </p>
       </div>

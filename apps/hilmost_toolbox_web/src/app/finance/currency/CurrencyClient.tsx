@@ -35,27 +35,54 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
   const [rates, setRates] = useState<Record<string, number>>(FALLBACK_RATES);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [provider, setProvider] = useState<string>("Initializing");
+  const [lastUpdated, setLastUpdated] = useState<string>("");
 
   const fetchRates = async () => {
     setLoading(true);
     setError(false);
+
     try {
-      const res = await fetch("https://api.frankfurter.app/latest?from=USD");
-      if (!res.ok) throw new Error("Failed to fetch");
-      const data = await res.json();
-      setRates({ USD: 1, ...data.rates });
-    } catch (err) {
-      console.warn("Failed to fetch live rates, using fallbacks.", err);
+      // Primary: ExchangeRate-API (160+ currencies)
+      const primaryRes = await fetch("https://open.er-api.com/v6/latest/USD");
+      if (!primaryRes.ok) throw new Error("Primary API failed");
+      const primaryData = await primaryRes.json();
+
+      setRates(primaryData.rates);
+      setProvider("ExchangeRate-API (Global)");
+      setLastUpdated(primaryData.time_last_update_utc || new Date().toUTCString());
+      setLoading(false);
+      return;
+    } catch (primaryErr) {
+      console.warn("Primary API failed, trying backup...", primaryErr);
+    }
+
+    try {
+      // Backup: Frankfurter (ECB Official Rates)
+      const backupRes = await fetch("https://api.frankfurter.app/latest?from=USD");
+      if (!backupRes.ok) throw new Error("Backup API failed");
+      const backupData = await backupRes.json();
+
+      setRates({ USD: 1, ...backupData.rates });
+      setProvider("Frankfurter (Backup)");
+      setLastUpdated(backupData.date || new Date().toISOString());
+      setLoading(false);
+      return;
+    } catch (backupErr) {
+      console.error("All live APIs failed, using hardcoded fallbacks.", backupErr);
       setError(true);
       setRates(FALLBACK_RATES);
+      setProvider("Fallback Engine");
+      setLastUpdated("Cached data");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    setTimeout(() => fetchRates(), 0);
+    fetchRates();
   }, []);
+
 
   useEffect(() => {
     if (activeInput !== 1) return;
@@ -98,15 +125,20 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
       className="@container space-y-6"
     >
       <div className="flex justify-between items-center">
-        <div id="tour-currency-status" className="flex items-center gap-3">
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-widest ${error ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600'}`}>
+        <div id="tour-currency-status" className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${error ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600'}`}>
                 {loading ? <RefreshCw size={10} className="animate-spin" /> : <Globe size={10} />}
-                {loading ? 'Syncing...' : error ? 'Estimated Rates' : 'Live Market Rates'}
+                {loading ? 'Syncing...' : provider}
             </div>
+            {!loading && (
+              <span className="text-[10px] text-text-muted font-bold uppercase tracking-tighter opacity-60">
+                Updated: {lastUpdated.split(' ').slice(0, 4).join(' ')}
+              </span>
+            )}
             <button
                 onClick={fetchRates}
                 disabled={loading}
-                className="p-1.5 rounded-full hover:bg-canvas-muted text-text-muted transition-colors disabled:opacity-50"
+                className="p-1.5 rounded-full hover:bg-canvas-muted text-text-muted transition-colors disabled:opacity-50 hidden sm:block"
             >
                 <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
             </button>

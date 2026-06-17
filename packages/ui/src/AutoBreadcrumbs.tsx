@@ -30,7 +30,7 @@ export function AutoBreadcrumbs() {
   });
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1">
       <Breadcrumbs items={items} />
     </div>
   );

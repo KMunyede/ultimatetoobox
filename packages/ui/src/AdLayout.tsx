@@ -17,9 +17,9 @@ export function AdLayout({
   bottomSlotId = "2372116691",
 }: AdLayoutProps) {
   return (
-    <div className="w-full max-w-[1600px] mx-auto px-4 py-8">
+    <div className="w-full max-w-[1700px] mx-auto px-4 py-2 md:py-4">
       {/* Mobile Top Ad (Visible only on small screens) */}
-      <div className="block lg:hidden mb-8 w-full">
+      <div className="block lg:hidden mb-4 w-full">
         <AdUnit 
           publisherId={publisherId} 
           slotId={bottomSlotId} 
@@ -29,9 +29,9 @@ export function AdLayout({
         />
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 xl:gap-8 items-start justify-center">
+      <div className="flex flex-col lg:flex-row gap-4 xl:gap-6 items-start justify-center">
         {/* Left Sidebar Ad (Hidden on mobile) */}
-        <div className="hidden lg:block w-[160px] xl:w-[300px] shrink-0 sticky top-24">
+        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 sticky top-20">
           <AdUnit 
             publisherId={publisherId} 
             slotId={leftSlotId} 
@@ -42,11 +42,11 @@ export function AdLayout({
         </div>
 
         {/* Center Content */}
-        <div className="flex-1 w-full max-w-3xl min-w-0 mx-auto">
+        <div className="flex-1 w-full max-w-5xl min-w-0 mx-auto">
           {children}
 
           {/* Bottom Horizontal Ad */}
-          <div className="mt-12 w-full">
+          <div className="mt-8 w-full">
             <AdUnit 
               publisherId={publisherId} 
               slotId={bottomSlotId} 
@@ -58,7 +58,7 @@ export function AdLayout({
         </div>
 
         {/* Right Sidebar Ad (Hidden on mobile) */}
-        <div className="hidden lg:block w-[160px] xl:w-[300px] shrink-0 sticky top-24">
+        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 sticky top-20">
           <AdUnit 
             publisherId={publisherId} 
             slotId={rightSlotId} 
@@ -71,3 +71,4 @@ export function AdLayout({
     </div>
   );
 }
+
