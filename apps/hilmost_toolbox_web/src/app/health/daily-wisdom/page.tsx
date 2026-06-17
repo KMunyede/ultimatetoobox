@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     url: "https://hilmost-toolbox.hilmost.net/health/daily-wisdom",
     siteName: "Hilmost Toolbox",
     type: "article",
+    images: ["/og/health.png"],
   },
 };
 

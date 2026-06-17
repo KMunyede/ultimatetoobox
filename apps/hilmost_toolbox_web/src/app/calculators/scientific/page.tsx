@@ -6,6 +6,9 @@ import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Scientific Calculator | Advanced Math Solved Instantly",
   description: "Free online scientific calculator. Advanced mathematics without the learning curve. Solve complex equations instantly in your browser.",
+  openGraph: {
+    images: ["/og/calculators.png"],
+  },
 };
 
 const faqs = [

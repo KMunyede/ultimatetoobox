@@ -4,11 +4,13 @@ export function WebApplicationSchema({
   name,
   description,
   url,
+  image,
   category = "UtilitiesApplication",
 }: {
   name: string;
   description: string;
   url: string;
+  image?: string;
   category?: string;
 }) {
   const schema = {
@@ -17,6 +19,7 @@ export function WebApplicationSchema({
     name: name,
     description: description,
     url: url,
+    image: image,
     applicationCategory: category,
     operatingSystem: "Web Browser",
     browserRequirements: "Requires JavaScript",

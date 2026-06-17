@@ -15,11 +15,20 @@ export const metadata: Metadata = {
     url: "https://hilmost-toolbox.hilmost.net",
     siteName: "Hilmost Toolbox",
     type: "website",
+    images: [
+      {
+        url: "/og/main.png",
+        width: 1200,
+        height: 630,
+        alt: "Hilmost Toolbox",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hilmost Toolbox | Free Online Utilities",
     description: "Work smarter with our free online calculators and converters.",
+    images: ["/og/main.png"],
   },
 };
 

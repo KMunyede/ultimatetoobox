@@ -6,6 +6,11 @@ import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "BMI Calculator | Free Body Mass Index Check",
   description: "Calculate your exact Body Mass Index (BMI) in seconds. A free, beautifully designed health tool to check your ideal weight category.",
+  openGraph: {
+    title: "BMI Calculator | Free Body Mass Index Check",
+    description: "Instantly reveal your exact Body Mass Index and map out your optimal health trajectory.",
+    images: ["/og/health.png"],
+  },
 };
 
 const faqs = [
@@ -26,7 +31,12 @@ const faqs = [
 export default function BMIPage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <WebApplicationSchema name="BMI Calculator | Hilmost Toolbox" description="Free online BMI (Body Mass Index) calculator." url="https://hilmost-toolbox.hilmost.net/health/bmi-calculator" />
+      <WebApplicationSchema
+        name="BMI Calculator | Hilmost Toolbox"
+        description="Free online BMI (Body Mass Index) calculator."
+        url="https://hilmost-toolbox.hilmost.net/health/bmi-calculator"
+        image="https://hilmost-toolbox.hilmost.net/og/health.png"
+      />
       <FAQSchema items={faqs} />
       
       <div className="text-center max-w-3xl mx-auto mb-6">
