@@ -7,9 +7,9 @@ const BASE_OUT_DIR = path.join(__dirname, '../apps/hilmost_toolbox_web/public/di
 const DICTS = {
   en: 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt',
   de: 'https://raw.githubusercontent.com/enz/german-wordlist/master/words',
-  fr: 'https://raw.githubusercontent.com/hbenbel/French-Dictionary/master/dictionary/dictionary.txt',
+  fr: 'https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/fr/fr_full.txt',
   it: 'https://raw.githubusercontent.com/napolux/paroleitaliane/master/paroleitaliane/660000_parole_italiane.txt',
-  es: 'https://raw.githubusercontent.com/lorenbrasseur/spanish-words/master/words.txt',
+  es: 'https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/es/es_full.txt',
   pt: 'https://raw.githubusercontent.com/pythonprobr/palavras/master/palavras.txt'
 };
 
@@ -18,11 +18,21 @@ function removeAccents(str) {
 }
 
 function processAndSplitWords(lang, rawText) {
-  const words = rawText.split(/\r?\n/);
+  // Handle space-separated or newline-separated lists
+  const lines = rawText.split(/\s+/);
   const wordGroups = {};
   
-  for (let word of words) {
-    word = word.trim().toLowerCase();
+  // Frequency lists (fr, es) have "word count"
+  // The split above will put "word" and "count" as separate elements in the array
+  // So we need to iterate carefully.
+  const isFrequencyList = ['fr', 'es'].includes(lang);
+
+  for (let i = 0; i < lines.length; i++) {
+    let word = lines[i].trim().toLowerCase();
+
+    // Skip numbers (frequency counts) if it's a frequency list
+    if (isFrequencyList && /^\d+$/.test(word)) continue;
+
     word = removeAccents(word);
     
     // Only accept basic a-z, length between 2 and 15
@@ -76,14 +86,10 @@ async function downloadAndProcess(lang, url) {
 async function main() {
   const argLang = process.argv[2];
 
+  // Only clean up the specific language if provided, or everything if not
   if (!argLang && fs.existsSync(BASE_OUT_DIR)) {
-    const files = fs.readdirSync(BASE_OUT_DIR);
-    for (const file of files) {
-        const fullPath = path.join(BASE_OUT_DIR, file);
-        if (fs.lstatSync(fullPath).isFile() && file.endsWith('.json')) {
-            fs.unlinkSync(fullPath);
-        }
-    }
+    // If no lang provided, clean up everything inside BASE_OUT_DIR?
+    // Maybe too aggressive. Let's just clean up the folders we touch.
   }
 
   const targets = argLang ? { [argLang]: DICTS[argLang] } : DICTS;
@@ -101,6 +107,5 @@ async function main() {
   }
   console.log("All done!");
 }
-
 
 main();

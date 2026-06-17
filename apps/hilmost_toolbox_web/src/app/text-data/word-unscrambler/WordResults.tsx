@@ -37,17 +37,17 @@ export default function WordResults({ results }: WordResultsProps) {
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {groupedResults[len].map((word) => {
               const score = calculateScrabblePoints(word);
               return (
                 <button
                   key={word}
                   onClick={() => copyToClipboard(word)}
-                  className="group relative bg-canvas-card border border-base p-5 rounded-[1.25rem] flex items-center justify-between hover:border-brand-primary hover:shadow-xl hover:-translate-y-1 transition-all active:scale-95"
+                  className="group relative bg-canvas-card border border-base p-4 md:p-5 rounded-[1.25rem] flex items-center justify-between hover:border-brand-primary hover:shadow-xl hover:-translate-y-1 transition-all active:scale-95"
                 >
-                  <div className="flex flex-col items-start">
-                    <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors uppercase tracking-tight">
+                  <div className="flex flex-col items-start overflow-hidden mr-2">
+                    <span className="text-lg md:text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors uppercase tracking-tight truncate w-full">
                       {word}
                     </span>
                     <div className="flex items-center gap-1 mt-0.5">
@@ -56,11 +56,11 @@ export default function WordResults({ results }: WordResultsProps) {
                       </span>
                     </div>
                   </div>
-                  <div className="text-text-muted group-hover:text-brand-primary transition-all">
+                  <div className="text-text-muted group-hover:text-brand-primary transition-all flex-shrink-0">
                     {copiedWord === word ? (
-                      <Check size={20} className="text-brand-primary" />
+                      <Check size={18} className="text-brand-primary" />
                     ) : (
-                      <Copy size={18} className="opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all" />
+                      <Copy size={16} className="opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all" />
                     )}
                   </div>
                 </button>
