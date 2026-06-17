@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace } from "lucide-react";
+import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles } from "lucide-react";
 
 export default function Home() {
   const categories = [
     {
-      title: "Text, Data & Files",
+      title: "Text & Data",
       description: "Word count, unscramblers, hashing, and encoding utilities.",
-      icon: <FileText className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />,
-      colorClass: "bg-indigo-100 dark:bg-indigo-900/30",
+      icon: <FileText className="w-6 h-6 text-brand-primary" />,
+      colorClass: "bg-brand-primary/10",
       links: [
         { name: "Word Unscrambler", href: "/text-data/word-unscrambler" },
         { name: "Base64 Text Encoder", href: "/text-data/base64-encode" },
@@ -18,8 +18,8 @@ export default function Home() {
     {
       title: "Converters",
       description: "Convert units of length, weight, temperature, data, time, and more.",
-      icon: <Replace className="w-6 h-6 text-green-600 dark:text-green-400" />,
-      colorClass: "bg-green-100 dark:bg-green-900/30",
+      icon: <Replace className="w-6 h-6 text-blue-500" />,
+      colorClass: "bg-blue-500/10",
       links: [
         { name: "Age Calculator", href: "/converters/age-calculator" },
         { name: "Percentage Calculator", href: "/converters/percentage" },
@@ -36,8 +36,8 @@ export default function Home() {
     {
       title: "Calculators",
       description: "Standard, scientific, and specialized math calculators.",
-      icon: <Calculator className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
-      colorClass: "bg-blue-100 dark:bg-blue-900/30",
+      icon: <Calculator className="w-6 h-6 text-indigo-500" />,
+      colorClass: "bg-indigo-500/10",
       links: [
         { name: "Standard Calculator", href: "/calculators/standard" },
         { name: "Scientific Calculator", href: "/calculators/scientific" },
@@ -48,8 +48,8 @@ export default function Home() {
     {
       title: "Finance",
       description: "Currency exchange, loans, compound interest, taxes, and inflation.",
-      icon: <Banknote className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />,
-      colorClass: "bg-yellow-100 dark:bg-yellow-900/30",
+      icon: <Banknote className="w-6 h-6 text-amber-500" />,
+      colorClass: "bg-amber-500/10",
       links: [
         { name: "Currency Converter", href: "/finance/currency" },
         { name: "Loan Calculator", href: "/finance/loan-calculator" },
@@ -64,61 +64,83 @@ export default function Home() {
       ],
     },
     {
-      title: "Health & Fitness",
-      description: "Tools to track your body metrics and daily fitness goals.",
-      icon: <Activity className="w-6 h-6 text-rose-600 dark:text-rose-400" />,
-      colorClass: "bg-rose-100 dark:bg-rose-900/30",
+      title: "Health & Wisdom",
+      description: "Daily wellness, BMI tracking, and stoic philosophy.",
+      icon: <Activity className="w-6 h-6 text-rose-500" />,
+      colorClass: "bg-rose-500/10",
       links: [
+        { name: "Daily Wisdom", href: "/health/daily-wisdom" },
         { name: "BMI Calculator", href: "/health/bmi-calculator" },
       ],
     },
   ];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
-          The <span className="text-blue-600 dark:text-blue-500">Ultimate Toolbox</span>
-        </h1>
-        <p className="text-base text-slate-600 dark:text-slate-400">
-          A comprehensive suite of fast, reliable, and completely free online utilities. No sign up required.
-        </p>
-        
-        <div className="mt-6 flex items-center justify-center">
-          <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-4 py-1.5 rounded-full text-xs font-medium border border-blue-100 dark:border-blue-800/50 flex items-center gap-2 shadow-sm">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <span>We are continuously improving this toolbox with new features and updates!</span>
-          </div>
+    <div className="container mx-auto px-4 py-12 md:py-20 max-w-6xl">
+      {/* Hero Section */}
+      <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-6">
+            <Sparkles size={12} className="animate-pulse" />
+            HSC Platform Core
         </div>
+        <h1 className="text-4xl md:text-6xl font-black tracking-tight text-text-primary mb-6">
+          The <span className="text-brand-primary">Ultimate</span> Toolbox
+        </h1>
+        <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium">
+          A high-performance digital sanctuary for your daily workflow. <br className="hidden md:block" /> Fast, accurate, and optimized for the modern era.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {categories.map((category) => (
-          <div key={category.title} className="flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md">
+          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300">
             <div className="flex items-center gap-x-4 mb-6">
-              <div className={`h-12 w-12 flex items-center justify-center rounded-xl shrink-0 ${category.colorClass}`}>
+              <div className={`h-14 w-14 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>
                 {category.icon}
               </div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">{category.title}</h2>
+              <h2 className="text-xl font-extrabold text-text-primary tracking-tight">{category.title}</h2>
             </div>
-            <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">{category.description}</p>
-            <div className="flex-1 relative">
-              <ul className="space-y-1 overflow-y-auto pr-2 max-h-[260px] custom-scrollbar">
+            <p className="text-text-secondary mb-8 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
+
+            <div className="flex-1">
+              <ul className="space-y-1">
                 {category.links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="group flex items-center justify-between py-2.5 border-b border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/50 transition-colors">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{link.name}</span>
-                      <ArrowRight className="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                    <Link href={link.href} className="group/link flex items-center justify-between py-3 border-b border-base hover:border-brand-primary/50 transition-all">
+                      <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
+                      <ArrowRight className="w-4 h-4 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
+
+            <div className="mt-8 pt-6 border-t border-base opacity-0 group-hover:opacity-100 transition-opacity">
+                <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">
+                    {category.links.length} Tools Available
+                </p>
+            </div>
           </div>
         ))}
+      </div>
+
+      {/* Trust Footer Section */}
+      <div className="mt-24 py-12 border-t border-base text-center">
+          <div className="flex flex-wrap justify-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="flex flex-col items-center">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Secured by</span>
+                <span className="text-lg font-bold text-text-primary mt-1">Firebase</span>
+            </div>
+            <div className="flex flex-col items-center">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Optimized for</span>
+                <span className="text-lg font-bold text-text-primary mt-1">Core Web Vitals</span>
+            </div>
+            <div className="flex flex-col items-center">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Global Edge</span>
+                <span className="text-lg font-bold text-text-primary mt-1">Cloudflare</span>
+            </div>
+          </div>
       </div>
     </div>
   );
