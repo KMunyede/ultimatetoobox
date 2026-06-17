@@ -4,7 +4,7 @@ import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Delete, Eraser, MoveLeft, History } from "lucide-react";
+import { MoveLeft } from "lucide-react";
 
 export function ScientificCalculatorClient() {
   const [state, setState] = useUrlState({
@@ -28,12 +28,17 @@ export function ScientificCalculatorClient() {
 
   const calculate = () => {
     try {
-      // Basic math security check and evaluation
-      // In a principal-level app, we would use a math parser like mathjs
-      // For now, using a safe replacement and eval for the prototype
+      // Improved safe replacement for evaluation
       let safeExp = (expression as string)
         .replace(/π/g, "Math.PI")
         .replace(/e/g, "Math.E")
+        // Handle implicit multiplication (e.g. 2π, (1+2)(3+4))
+        .replace(/(\d)(\()/g, "$1*(")
+        .replace(/(\))(\()/g, "$1*(")
+        .replace(/(\))(\d)/g, "$1*$2")
+        .replace(/(\d)(π|e|sin|cos|tan|sqrt|log|ln)/g, "$1*$2")
+        .replace(/(π|e)(\d)/g, "$1*$2")
+
         .replace(/sin\(/g, mode === "DEG" ? "Math.sin(Math.PI/180*" : "Math.sin(")
         .replace(/cos\(/g, mode === "DEG" ? "Math.cos(Math.PI/180*" : "Math.cos(")
         .replace(/tan\(/g, mode === "DEG" ? "Math.tan(Math.PI/180*" : "Math.tan(")
@@ -42,8 +47,14 @@ export function ScientificCalculatorClient() {
         .replace(/ln\(/g, "Math.log(")
         .replace(/\^/g, "**");
 
+      // eslint-disable-next-line no-eval
       const res = eval(safeExp);
-      setState({ ...state, result: Number.isInteger(res) ? res.toString() : res.toFixed(8).replace(/\.?0+$/, '') });
+
+      if (typeof res !== 'number' || isNaN(res) || !isFinite(res)) {
+         setState({ ...state, result: "Error" });
+      } else {
+         setState({ ...state, result: Number.isInteger(res) ? res.toString() : parseFloat(res.toFixed(10)).toString() });
+      }
     } catch (e) {
       setState({ ...state, result: "Error" });
     }
@@ -57,13 +68,13 @@ export function ScientificCalculatorClient() {
     { label: "e", action: () => append("e"), type: "const" },
     { label: "log", action: () => append("log("), type: "func" },
     { label: "ln", action: () => append("ln("), type: "func" },
-    { label: "(", action: () => append("("), type: "op" },
-    { label: ")", action: () => append(")"), type: "op" },
+    { label: "(", action: () => append("("), type: "op_alt" },
+    { label: ")", action: () => append(")"), type: "op_alt" },
     { label: "√", action: () => append("sqrt("), type: "func" },
-    { label: "^", action: () => append("^"), type: "op" },
-    { label: "C", action: clear, type: "clear" },
-    { label: "/", action: () => append("/"), type: "op" },
-    { label: "*", action: () => append("*"), type: "op" },
+    { label: "^", action: () => append("^"), type: "op_alt" },
+    { label: "AC", action: clear, type: "clear" },
+    { label: "÷", action: () => append("/"), type: "op" },
+    { label: "×", action: () => append("*"), type: "op" },
     { label: "7", action: () => append("7"), type: "num" },
     { label: "8", action: () => append("8"), type: "num" },
     { label: "9", action: () => append("9"), type: "num" },
@@ -91,19 +102,19 @@ export function ScientificCalculatorClient() {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-8"
     >
-      <div className="flex justify-between items-center">
-        <div id="tour-calc-mode" className="flex p-1 bg-canvas-muted rounded-xl border border-base">
+      <div className="flex justify-between items-center px-1">
+        <div id="tour-calc-mode" className="flex p-1 bg-canvas-muted rounded-xl border border-border-base">
           <button
             onClick={() => setState({ ...state, mode: "DEG" })}
-            className={`px-4 py-1.5 text-[10px] font-black rounded-lg transition-all ${mode === "DEG" ? "bg-canvas-card text-brand-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+            className={`px-4 py-2 text-[11px] font-black rounded-lg transition-all ${mode === "DEG" ? "bg-canvas-card text-brand-primary shadow-sm border border-border-base" : "text-text-muted hover:text-text-secondary"}`}
           >
             DEG
           </button>
           <button
             onClick={() => setState({ ...state, mode: "RAD" })}
-            className={`px-4 py-1.5 text-[10px] font-black rounded-lg transition-all ${mode === "RAD" ? "bg-canvas-card text-brand-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+            className={`px-4 py-2 text-[11px] font-black rounded-lg transition-all ${mode === "RAD" ? "bg-canvas-card text-brand-primary shadow-sm border border-border-base" : "text-text-muted hover:text-text-secondary"}`}
           >
             RAD
           </button>
@@ -114,17 +125,25 @@ export function ScientificCalculatorClient() {
         </div>
       </div>
 
-      <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden relative">
-        <div className="absolute top-0 left-0 w-full h-1 bg-brand-primary/20" />
+      <div className="bg-canvas-card border border-border-base rounded-[2.5rem] p-6 md:p-10 shadow-2xl overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-full h-1 bg-purple-500/20" />
         
         {/* Display */}
-        <div id="tour-calc-display" className="mb-8 p-6 bg-canvas-muted rounded-2xl border border-base flex flex-col items-end justify-center min-h-[120px] shadow-inner overflow-hidden">
-            <div className="text-text-muted text-sm font-mono truncate w-full text-right mb-1">
+        <div id="tour-calc-display" className="mb-10 p-8 bg-canvas-muted rounded-3xl border border-border-base flex flex-col items-end justify-center min-h-[160px] shadow-inner relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-3 text-[10px] font-black text-purple-500 uppercase tracking-widest opacity-40">Scientific Engine</div>
+            <div className="text-text-muted text-lg font-mono truncate w-full text-right mb-2 tracking-tight">
                 {expression || "0"}
             </div>
-            <div className="text-4xl md:text-5xl font-black text-text-primary tracking-tighter truncate w-full text-right">
-                {result ? `= ${result}` : expression ? "" : "0"}
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={result}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-5xl md:text-6xl font-black text-text-primary tracking-tighter truncate w-full text-right"
+              >
+                  {result ? `= ${result}` : expression ? "" : "0"}
+              </motion.div>
+            </AnimatePresence>
         </div>
 
         {/* Keypad Grid */}
@@ -133,17 +152,19 @@ export function ScientificCalculatorClient() {
                 <button
                     key={btn.label}
                     onClick={btn.action}
-                    className={`h-14 md:h-16 rounded-2xl font-bold text-lg transition-all active:scale-95 flex items-center justify-center
-                        ${btn.type === 'num' ? 'bg-canvas-card text-text-primary border border-base hover:bg-canvas-muted shadow-sm' :
-                          btn.type === 'op' ? 'bg-canvas-muted text-brand-primary border border-base hover:border-brand-primary/50' :
-                          btn.type === 'func' ? 'bg-brand-primary/5 text-brand-primary border border-brand-primary/10 hover:bg-brand-primary/10 text-sm' :
-                          btn.type === 'const' ? 'bg-indigo-500/5 text-indigo-600 border border-indigo-500/10' :
-                          btn.type === 'eq' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/30 col-span-1' :
-                          btn.type === 'clear' ? 'bg-red-500/5 text-red-500 border border-red-500/10' :
-                          'bg-canvas-muted text-text-secondary'}
+                    className={`h-14 md:h-16 rounded-2xl font-black text-lg transition-all active:scale-95 flex items-center justify-center border
+                        ${btn.type === 'num' ? 'bg-canvas-card text-text-primary border-border-base hover:bg-canvas-muted shadow-sm' :
+                          btn.type === 'op' ? 'bg-orange-500/10 text-orange-600 border-orange-500/10 hover:bg-orange-500/20' :
+                          btn.type === 'op_alt' ? 'bg-canvas-muted text-text-secondary border-border-base hover:border-text-muted' :
+                          btn.type === 'func' ? 'bg-purple-500/5 text-purple-600 border-purple-500/10 hover:bg-purple-500/10 text-sm tracking-tight' :
+                          btn.type === 'const' ? 'bg-pink-500/5 text-pink-600 border-pink-500/10 hover:bg-pink-500/10' :
+                          btn.type === 'eq' ? 'bg-brand-primary text-white border-brand-primary shadow-xl shadow-brand-primary/20 sm:row-span-1' :
+                          btn.type === 'clear' ? 'bg-red-500/10 text-red-600 border-red-500/10 hover:bg-red-500/20' :
+                          btn.type === 'del' ? 'bg-red-500/5 text-red-500 border-red-500/5 hover:bg-red-500/10' :
+                          'bg-canvas-muted text-text-secondary border-border-base'}
                     `}
                 >
-                    {btn.label === 'DEL' ? <MoveLeft size={20} /> : btn.label}
+                    {btn.label === 'DEL' ? <MoveLeft size={22} /> : btn.label}
                 </button>
             ))}
         </div>
