@@ -4,8 +4,20 @@ import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
-import { Search, Hash, Star, Settings2, X, ChevronDown, ChevronUp, Copy, Check, Sparkles } from "lucide-react";
-import { findMatches, groupWordsByLength, calculateScrabblePoints } from "@/lib/wordLogic";
+import { Search, Hash, Star, Settings2, X, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { findMatches } from "@/lib/wordLogic";
+import dynamic from "next/dynamic";
+
+const WordResults = dynamic(() => import("./WordResults"), {
+  loading: () => (
+    <div className="h-64 flex flex-col items-center justify-center space-y-4">
+      <div className="w-12 h-12 border-4 border-brand-primary border-t-transparent rounded-full animate-spin" />
+      <p className="text-sm font-black text-text-muted uppercase tracking-widest">Grouping Results...</p>
+    </div>
+  ),
+  ssr: false,
+});
+
 
 export function WordUnscramblerClient() {
   const [state, setState] = useUrlState({
@@ -20,8 +32,8 @@ export function WordUnscramblerClient() {
   const [results, setResults] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
-  const [copiedWord, setCopiedWord] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+
 
   const fetchWords = async () => {
     if (!letters || (letters as string).length < 2) {
@@ -31,11 +43,22 @@ export function WordUnscramblerClient() {
     setLoading(true);
     setHasSearched(true);
     try {
-      const res = await fetch(`/dictionaries/${language}.json`);
-      if (!res.ok) throw new Error("Dictionary not found");
-      const dictionary: string[] = await res.json();
+      const inputLen = (letters as string).length;
+      const fetchPromises = [];
       
-      const matches = findMatches(letters as string, dictionary, {
+      // Only fetch words up to the length of the input letters
+      for (let i = 2; i <= Math.min(inputLen, 15); i++) {
+        fetchPromises.push(
+          fetch(`/dictionaries/${language}/${i}.json`)
+            .then(res => res.ok ? res.json() : [])
+            .catch(() => [])
+        );
+      }
+
+      const dictionaryParts = await Promise.all(fetchPromises);
+      const combinedDictionary = dictionaryParts.flat();
+
+      const matches = findMatches(letters as string, combinedDictionary, {
         startsWith: startsWith as string,
         endsWith: endsWith as string,
         contains: contains as string,
@@ -43,20 +66,11 @@ export function WordUnscramblerClient() {
 
       setResults(matches);
     } catch (e) {
-      console.error(e);
+      console.error("Unscramble error:", e);
       setResults([]);
     } finally {
       setLoading(false);
     }
-  };
-
-  const groupedResults = useMemo(() => groupWordsByLength(results), [results]);
-  const sortedLengths = useMemo(() => Object.keys(groupedResults).map(Number).sort((a, b) => b - a), [groupedResults]);
-
-  const copyToClipboard = (word: string) => {
-    navigator.clipboard.writeText(word);
-    setCopiedWord(word);
-    setTimeout(() => setCopiedWord(null), 2000);
   };
 
   const tourSteps = [
@@ -65,6 +79,7 @@ export function WordUnscramblerClient() {
     { element: '#tour-unscramble-options', popover: { title: '3. Advanced Filters', description: 'Narrow down results by defining how the word should start, end, or what it must contain.' } },
     { element: '#tour-unscramble-results', popover: { title: '4. Found Words', description: 'Words are grouped by length. Click a word to copy it instantly.' } },
   ];
+
 
   return (
     <motion.div
@@ -230,55 +245,9 @@ export function WordUnscramblerClient() {
                       </div>
                   </motion.div>
               ) : results.length > 0 ? (
-                  <motion.div key="results" initial={{opacity:0, y: 20}} animate={{opacity:1, y: 0}} className="space-y-12">
-                      {sortedLengths.map((len) => (
-                        <div key={len} className="space-y-6">
-                          <div className="flex items-center gap-6">
-                            <h3 className="text-2xl font-black text-text-primary tracking-tighter whitespace-nowrap">
-                              {len} <span className="text-text-muted">Letter Words</span>
-                            </h3>
-                            <div className="h-px w-full bg-gradient-to-r from-border-base to-transparent" />
-                            <div className="flex items-center gap-2 bg-canvas-card border border-base px-3 py-1.5 rounded-full shadow-sm">
-                              <span className="w-2 h-2 rounded-full bg-brand-primary" />
-                              <span className="text-xs font-black text-text-secondary uppercase tracking-widest whitespace-nowrap">
-                                {groupedResults[len].length}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
-                              {groupedResults[len].map((word) => {
-                                const score = calculateScrabblePoints(word);
-                                return (
-                                  <button
-                                    key={word}
-                                    onClick={() => copyToClipboard(word)}
-                                    className="group relative bg-canvas-card border border-base p-5 rounded-[1.25rem] flex items-center justify-between hover:border-brand-primary hover:shadow-xl hover:-translate-y-1 transition-all active:scale-95"
-                                  >
-                                    <div className="flex flex-col items-start">
-                                      <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors uppercase tracking-tight">
-                                        {word}
-                                      </span>
-                                      <div className="flex items-center gap-1 mt-0.5">
-                                        <span className="text-[10px] font-black text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
-                                          {score} Points
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className="text-text-muted group-hover:text-brand-primary transition-all">
-                                      {copiedWord === word ? (
-                                        <Check size={20} className="text-brand-primary" />
-                                      ) : (
-                                        <Copy size={18} className="opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all" />
-                                      )}
-                                    </div>
-                                  </button>
-                                );
-                              })}
-                          </div>
-                        </div>
-                      ))}
-                  </motion.div>
+                  <WordResults results={results} />
               ) : hasSearched ? (
+
                   <motion.div key="empty" initial={{opacity:0}} animate={{opacity:1}} className="max-w-xl mx-auto flex flex-col items-center justify-center text-center p-16 bg-canvas-card border border-base rounded-[3rem] shadow-sm">
                       <div className="w-24 h-24 bg-canvas-muted rounded-full flex items-center justify-center mb-8 border border-base shadow-inner">
                         <Hash size={40} className="text-text-muted opacity-30" />
