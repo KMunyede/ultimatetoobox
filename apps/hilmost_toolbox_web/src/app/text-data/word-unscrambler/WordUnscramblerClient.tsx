@@ -3,8 +3,8 @@ import { ToolTutorial } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
-import { Search, Hash, Star, Settings2, X, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Search, Hash, Star, Settings2, X, ChevronDown, ChevronUp, Copy, Check, Sparkles } from "lucide-react";
 import { findMatches, groupWordsByLength, calculateScrabblePoints } from "@/lib/wordLogic";
 
 export function WordUnscramblerClient() {
@@ -21,6 +21,7 @@ export function WordUnscramblerClient() {
   const [loading, setLoading] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [copiedWord, setCopiedWord] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const fetchWords = async () => {
     if (!letters || (letters as string).length < 2) {
@@ -28,6 +29,7 @@ export function WordUnscramblerClient() {
       return;
     }
     setLoading(true);
+    setHasSearched(true);
     try {
       const res = await fetch(`/dictionaries/${language}.json`);
       if (!res.ok) throw new Error("Dictionary not found");
@@ -48,11 +50,6 @@ export function WordUnscramblerClient() {
     }
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => fetchWords(), 400);
-    return () => clearTimeout(timer);
-  }, [letters, language, startsWith, endsWith, contains]);
-
   const groupedResults = useMemo(() => groupWordsByLength(results), [results]);
   const sortedLengths = useMemo(() => Object.keys(groupedResults).map(Number).sort((a, b) => b - a), [groupedResults]);
 
@@ -64,8 +61,9 @@ export function WordUnscramblerClient() {
 
   const tourSteps = [
     { element: '#tour-unscramble-input', popover: { title: '1. Scrambled Letters', description: 'Enter jumbled letters. Use ? or * for blank tiles (wildcards).' } },
-    { element: '#tour-unscramble-options', popover: { title: '2. Advanced Filters', description: 'Narrow down results by defining how the word should start, end, or what it must contain.' } },
-    { element: '#tour-unscramble-results', popover: { title: '3. Found Words', description: 'Words are grouped by length. Click a word to copy it instantly.' } },
+    { element: '#tour-unscramble-button', popover: { title: '2. Unscramble Now', description: 'Click this button to trigger the search through our dictionaries.' } },
+    { element: '#tour-unscramble-options', popover: { title: '3. Advanced Filters', description: 'Narrow down results by defining how the word should start, end, or what it must contain.' } },
+    { element: '#tour-unscramble-results', popover: { title: '4. Found Words', description: 'Words are grouped by length. Click a word to copy it instantly.' } },
   ];
 
   return (
@@ -90,24 +88,46 @@ export function WordUnscramblerClient() {
                 <div className="flex justify-between items-end px-2">
                   <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.2em]">Jumbled Letters</label>
                   <button
-                    onClick={() => setState({ letters: "" })}
+                    onClick={() => {
+                      setState({ letters: "", startsWith: "", endsWith: "", contains: "" });
+                      setResults([]);
+                      setHasSearched(false);
+                    }}
                     className={`text-xs font-bold text-brand-primary hover:text-brand-hover transition-opacity px-2 py-1 rounded-lg hover:bg-brand-primary/5 ${letters ? 'opacity-100' : 'opacity-0'}`}
                   >
                     Clear All
                   </button>
                 </div>
-                <div className="relative group">
-                    <input
-                        type="text"
-                        inputMode="text"
-                        spellCheck={false}
-                        autoComplete="off"
-                        className="w-full h-16 md:h-20 px-6 pl-14 md:pl-16 border border-base rounded-2xl md:rounded-3xl bg-canvas-muted text-text-primary text-2xl md:text-4xl font-black focus:ring-8 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
-                        value={letters}
-                        onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
-                        placeholder="e.g. oten"
-                    />
-                    <Search size={28} className="absolute left-5 md:left-6 top-5 md:top-6.5 text-text-muted group-focus-within:text-brand-primary transition-colors" />
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="relative group flex-1">
+                      <input
+                          type="text"
+                          inputMode="text"
+                          spellCheck={false}
+                          autoComplete="off"
+                          className="w-full h-16 md:h-20 px-6 pl-14 md:pl-16 border border-base rounded-2xl md:rounded-3xl bg-canvas-muted text-text-primary text-2xl md:text-4xl font-black focus:ring-8 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
+                          value={letters}
+                          onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
+                          onKeyDown={e => e.key === 'Enter' && fetchWords()}
+                          placeholder="e.g. oten"
+                      />
+                      <Search size={28} className="absolute left-5 md:left-6 top-5 md:top-6.5 text-text-muted group-focus-within:text-brand-primary transition-colors" />
+                  </div>
+                  <button
+                    id="tour-unscramble-button"
+                    onClick={fetchWords}
+                    disabled={loading || (letters as string).length < 2}
+                    className="h-16 md:h-20 px-8 md:px-12 bg-brand-primary text-text-inverse font-black text-xl rounded-2xl md:rounded-3xl hover:bg-brand-hover transition-all shadow-lg shadow-brand-primary/20 flex items-center justify-center gap-3 disabled:opacity-50 disabled:grayscale"
+                  >
+                    {loading ? (
+                      <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <Sparkles size={24} />
+                        Unscramble It
+                      </>
+                    )}
+                  </button>
                 </div>
                 <p className="text-[11px] text-text-muted font-medium ml-2 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-primary/40" />
@@ -258,7 +278,7 @@ export function WordUnscramblerClient() {
                         </div>
                       ))}
                   </motion.div>
-              ) : letters ? (
+              ) : hasSearched ? (
                   <motion.div key="empty" initial={{opacity:0}} animate={{opacity:1}} className="max-w-xl mx-auto flex flex-col items-center justify-center text-center p-16 bg-canvas-card border border-base rounded-[3rem] shadow-sm">
                       <div className="w-24 h-24 bg-canvas-muted rounded-full flex items-center justify-center mb-8 border border-base shadow-inner">
                         <Hash size={40} className="text-text-muted opacity-30" />
@@ -273,7 +293,7 @@ export function WordUnscramblerClient() {
                       <Star size={64} className="text-brand-primary opacity-20 mb-6 animate-pulse" />
                       <h3 className="text-xl font-extrabold text-text-primary tracking-tight">Lexicon Ready</h3>
                       <p className="text-sm text-text-muted mt-2 font-bold max-w-xs">
-                        Enter your letters above to scan through the dictionary and find hidden winning combinations.
+                        Enter your letters above and click <span className="text-brand-primary">Unscramble It</span> to scan through the dictionary.
                       </p>
                   </motion.div>
               )}
