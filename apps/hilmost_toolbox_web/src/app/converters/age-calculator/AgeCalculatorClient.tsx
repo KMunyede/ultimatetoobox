@@ -1,150 +1,111 @@
 "use client";
-import { useMemo } from "react";
 import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
-import { CalendarClock } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
-
-type FormatOptions = "hours" | "seconds" | "minutes" | "days" | "full";
+import { motion } from "framer-motion";
+import { Cake, Calendar, Hourglass } from "lucide-react";
+import { differenceInYears, differenceInMonths, differenceInDays, parseISO, intervalToDuration } from "date-fns";
 
 export function AgeCalculatorClient() {
   const [state, setState] = useUrlState({
-    startDate: "",
-    endDate: "",
-    format: "hours",
+    birthDate: "1990-01-01",
+    targetDate: new Date().toISOString().split('T')[0],
   });
 
-  const { startDate, endDate, format } = state as { startDate: string, endDate: string, format: FormatOptions };
+  const { birthDate, targetDate } = state;
 
-  const result = useMemo(() => {
-    if (!startDate || !endDate) return null;
+  let ageResult = { years: 0, months: 0, days: 0 };
+  let totalDays = 0;
+  let totalWeeks = 0;
 
-    const d1 = new Date(startDate);
-    const d2 = new Date(endDate);
-
-    if (isNaN(d1.getTime()) || isNaN(d2.getTime())) return null;
-
-    // Always calculate from earlier date to later date
-    const start = d1 < d2 ? d1 : d2;
-    const end = d1 < d2 ? d2 : d1;
-    const isNegative = d1 > d2;
-
-    const diffMs = end.getTime() - start.getTime();
-
-    let valueStr = "";
-
-    switch (format) {
-      case "seconds":
-        valueStr = (diffMs / 1000).toFixed(0) + " seconds";
-        break;
-      case "minutes":
-        valueStr = (diffMs / (1000 * 60)).toFixed(2) + " minutes";
-        break;
-      case "hours":
-        valueStr = (diffMs / (1000 * 60 * 60)).toFixed(4) + " hours";
-        break;
-      case "days":
-        valueStr = (diffMs / (1000 * 60 * 60 * 24)).toFixed(4) + " days";
-        break;
-      case "full":
-        let years = end.getFullYear() - start.getFullYear();
-        let months = end.getMonth() - start.getMonth();
-        let days = end.getDate() - start.getDate();
-        let hours = end.getHours() - start.getHours();
-        let minutes = end.getMinutes() - start.getMinutes();
-        let seconds = end.getSeconds() - start.getSeconds();
-
-        if (seconds < 0) {
-          seconds += 60;
-          minutes -= 1;
-        }
-        if (minutes < 0) {
-          minutes += 60;
-          hours -= 1;
-        }
-        if (hours < 0) {
-          hours += 24;
-          days -= 1;
-        }
-        if (days < 0) {
-          const previousMonth = new Date(end.getFullYear(), end.getMonth(), 0);
-          days += previousMonth.getDate();
-          months -= 1;
-        }
-        if (months < 0) {
-          months += 12;
-          years -= 1;
-        }
-
-        const centuries = Math.floor(years / 100);
-        years = years % 100;
-
-        valueStr = `${centuries} Centuries : ${years} Years : ${months} Months : ${days} Days : ${hours} Hours : ${minutes} Minutes : ${seconds} Seconds`;
-        break;
+  try {
+    const start = parseISO(birthDate as string);
+    const end = parseISO(targetDate as string);
+    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+      const duration = intervalToDuration({ start, end });
+      ageResult = {
+        years: duration.years || 0,
+        months: duration.months || 0,
+        days: duration.days || 0
+      };
+      totalDays = Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      totalWeeks = Math.floor(totalDays / 7);
     }
-
-    return { valueStr, isNegative };
-  }, [startDate, endDate, format]);
+  } catch (e) {
+    console.error(e);
+  }
 
   const tourSteps = [
-    { element: '#tour-age-dates', popover: { title: '1. Select Dates', description: 'Choose the starting and ending dates for the duration you want to calculate.' } },
-    { element: '#tour-age-format', popover: { title: '2. Choose Format', description: 'Select how you want the result to be displayed (hours, days, full string, etc.).' } },
-    { element: '#tour-age-result', popover: { title: '3. See Result', description: 'Your calculated time difference appears here.' } },
+    { element: '#tour-age-birth', popover: { title: '1. Date of Birth', description: 'Select your birth date or the start date of the period.' } },
+    { element: '#tour-age-target', popover: { title: '2. Age at Date', description: 'Select the date you want to calculate the age at (defaults to today).' } },
+    { element: '#tour-age-results', popover: { title: '3. Age Breakdown', description: 'See your exact age in years, months, and days, plus total weeks and days.' } },
   ];
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="@container space-y-6"
+    >
       <div className="flex justify-end gap-4">
         <ShareButton />
         <ToolTutorial tourId="age_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
-        <div id="tour-age-dates" className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <DateTimePicker
-          label="Start Date & Time"
-          value={startDate}
-          onChange={(val) => setState({ startDate: val })}
-        />
-        <DateTimePicker
-          label="End Date & Time"
-          value={endDate}
-          onChange={(val) => setState({ endDate: val })}
-        />
-      </div>
 
-      <div id="tour-age-format" className="mb-8">
-        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
-          Output Format
-        </label>
-        <select
-          value={format}
-          onChange={(e) => setState({ format: e.target.value as FormatOptions })}
-          className="w-full h-14 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer transition-all hover:border-blue-400"
-        >
-          <option value="hours">Hours (e.g. 16263.5364 hours)</option>
-          <option value="seconds">Seconds</option>
-          <option value="minutes">Minutes</option>
-          <option value="days">Days</option>
-          <option value="full">Full Chronological String (CC:YY:MM:DD:HH:MM:SS)</option>
-        </select>
-      </div>
-
-      {result && (
-        <div id="tour-age-result" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 flex items-start gap-4 transition-all hover:shadow-md">
-          <div className="text-blue-600 dark:text-blue-400 mt-1 animate-pulse">
-            <CalendarClock size={28} />
-          </div>
-          <div>
-            <h3 className="text-sm font-bold text-blue-900 dark:text-blue-300 uppercase tracking-wider mb-1">
-              Time Passed
-            </h3>
-            <p className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-              {result.isNegative ? "-" : ""}{result.valueStr}
-            </p>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Form */}
+        <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-8 shadow-sm">
+            <div id="tour-age-birth" className="space-y-3">
+                <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                    <Cake size={14} className="text-brand-primary" /> Date of Birth
+                </label>
+                <input
+                    type="date"
+                    className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                    value={birthDate}
+                    onChange={e => setState({ birthDate: e.target.value })}
+                />
+            </div>
+            <div id="tour-age-target" className="space-y-3">
+                <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                    <Calendar size={14} className="text-text-muted" /> Age at Date of
+                </label>
+                <input
+                    type="date"
+                    className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                    value={targetDate}
+                    onChange={e => setState({ targetDate: e.target.value })}
+                />
+            </div>
         </div>
-      )}
+
+        {/* Results */}
+        <div id="tour-age-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
+
+            <div className="relative z-10 text-center space-y-4">
+                <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Current Age</span>
+                <div className="flex items-baseline justify-center gap-2">
+                    <span className="text-7xl md:text-8xl font-black text-brand-primary tracking-tighter">{ageResult.years}</span>
+                    <span className="text-xl font-bold text-text-secondary uppercase">Years</span>
+                </div>
+                <p className="text-lg font-medium text-text-muted">
+                    {ageResult.months} months and {ageResult.days} days
+                </p>
+            </div>
+
+            <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
+                <div className="text-center space-y-1">
+                    <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Weeks</span>
+                    <p className="text-2xl font-bold text-text-primary">{totalWeeks.toLocaleString()}</p>
+                </div>
+                <div className="text-center space-y-1">
+                    <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Days</span>
+                    <p className="text-2xl font-bold text-text-primary">{totalDays.toLocaleString()}</p>
+                </div>
+            </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

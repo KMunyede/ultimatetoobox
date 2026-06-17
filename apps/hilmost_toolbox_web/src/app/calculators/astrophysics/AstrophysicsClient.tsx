@@ -3,196 +3,113 @@ import { ToolTutorial, ScientificNumber, ConstantSelector } from "@utilitiessite
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion, AnimatePresence } from "framer-motion";
+import { Zap, Orbit, Compass, Binary } from "lucide-react";
 
-const G = 6.67430e-11; // Gravitational constant (m^3 kg^-1 s^-2)
-const c = 299792458; // Speed of light (m/s)
+type CalcType = "escape" | "orbital" | "schwarzschild";
 
-export function AstrophysicsClient({ defaultTab = "escape" }: { defaultTab?: "escape" | "schwarzschild" | "orbital" }) {
+export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
   const [state, setState] = useUrlState({
-    activeTab: defaultTab,
-    mass: "",
-    radius: ""
+    calc: (defaultTab || "escape") as string,
+    mass: "5.972e24", // Earth
+    radius: "6371000", // Earth
   });
-  
-  const { activeTab, mass, radius } = state as { activeTab: "escape" | "schwarzschild" | "orbital", mass: string, radius: string };
 
-  const setActiveTab = (tab: "escape" | "schwarzschild" | "orbital") => {
-    setState({ activeTab: tab, mass, radius });
-  };
-  
-  const setMass = (m: string) => {
-    setState({ activeTab, mass: m, radius });
-  };
-  
-  const setRadius = (r: string) => {
-    setState({ activeTab, mass, radius: r });
-  };
+  const calc = state.calc as CalcType;
+  const { mass, radius } = state;
 
-  const renderResult = () => {
-    const m = parseFloat(mass);
-    const r = parseFloat(radius);
+  const M = parseFloat(mass as string) || 0;
+  const R = parseFloat(radius as string) || 0;
+  const G = 6.6743e-11;
+  const c = 299792458;
 
-    if (activeTab === "schwarzschild") {
-      if (isNaN(m) || m <= 0) return null;
-      const rs = (2 * G * m) / (c * c);
-      return (
-        <motion.div 
-          key="schwarzschild"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-900/50"
-        >
-          <p className="text-sm text-blue-600 dark:text-blue-400 mb-1">Schwarzschild Radius</p>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white mt-1">
-            <ScientificNumber value={rs} precision={4} suffix="meters" />
-          </div>
-        </motion.div>
-      );
-    }
+  let resultValue = 0;
+  let unit = "m/s";
 
-    if (activeTab === "escape") {
-      if (isNaN(m) || isNaN(r) || m <= 0 || r <= 0) return null;
-      const v = Math.sqrt((2 * G * m) / r);
-      return (
-        <motion.div 
-          key="escape"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-900/50"
-        >
-          <p className="text-sm text-blue-600 dark:text-blue-400 mb-1">Escape Velocity</p>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white mt-1">
-            <ScientificNumber value={v} precision={4} suffix="m/s" />
-          </div>
-          <p className="text-sm text-slate-500 mt-2">({(v / 1000).toFixed(2)} km/s)</p>
-        </motion.div>
-      );
-    }
-
-    if (activeTab === "orbital") {
-      if (isNaN(m) || isNaN(r) || m <= 0 || r <= 0) return null;
-      const v = Math.sqrt((G * m) / r);
-      return (
-        <motion.div 
-          key="orbital"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-900/50"
-        >
-          <p className="text-sm text-blue-600 dark:text-blue-400 mb-1">Orbital Speed</p>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white mt-1">
-            <ScientificNumber value={v} precision={4} suffix="m/s" />
-          </div>
-          <p className="text-sm text-slate-500 mt-2">({(v / 1000).toFixed(2)} km/s)</p>
-        </motion.div>
-      );
-    }
-    return null;
-  };
+  if (calc === "escape") {
+    resultValue = Math.sqrt((2 * G * M) / R);
+  } else if (calc === "orbital") {
+    resultValue = Math.sqrt((G * M) / R);
+  } else if (calc === "schwarzschild") {
+    resultValue = (2 * G * M) / (c * c);
+    unit = "m";
+  }
 
   const tourSteps = [
-    { element: '#tour-astro-tabs', popover: { title: '1. Select Equation', description: 'Choose between calculating Escape Velocity, Schwarzschild Radius, or Orbital Speed.' } },
-    { element: '#tour-astro-inputs', popover: { title: '2. Enter Values', description: 'Input the mass and radius in scientific notation (e.g., 5.972e24). The calculation will update automatically.' } },
+    { element: '#tour-astro-select', popover: { title: '1. Calculation Type', description: 'Choose what you want to calculate: Escape Velocity, Orbital Speed, or Schwarzschild Radius.' } },
+    { element: '#tour-astro-inputs', popover: { title: '2. Mass & Radius', description: 'Enter the mass and radius of the celestial body. Use the dropdown to pick common planets.' } },
+    { element: '#tour-astro-result', popover: { title: '3. Result', description: 'The resulting physical constant will be calculated in real-time.' } },
+  ];
+
+  const categories = [
+    { id: "escape", label: "Escape Velocity", icon: <Zap size={16} /> },
+    { id: "orbital", label: "Orbital Speed", icon: <Orbit size={16} /> },
+    { id: "schwarzschild", label: "Schwarzschild", icon: <Binary size={16} /> },
   ];
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl relative"
+      className="@container space-y-6"
     >
-      <div className="flex justify-end mb-4 gap-2">
-        <ShareButton />
-        <ToolTutorial tourId="astrophysics_calculator" steps={tourSteps} buttonText="How to use" />
-      </div>
-      {/* Tabs */}
-      <div id="tour-astro-tabs" className="flex flex-wrap gap-2 mb-8 bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl">
-        <button
-          onClick={() => setActiveTab("escape")}
-          className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-            activeTab === "escape" 
-              ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" 
-              : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-          }`}
-        >
-          Escape Velocity
-        </button>
-        <button
-          onClick={() => setActiveTab("schwarzschild")}
-          className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-            activeTab === "schwarzschild" 
-              ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" 
-              : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-          }`}
-        >
-          Schwarzschild Radius
-        </button>
-        <button
-          onClick={() => setActiveTab("orbital")}
-          className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-            activeTab === "orbital" 
-              ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" 
-              : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-          }`}
-        >
-          Orbital Speed
-        </button>
+      <div className="flex justify-between items-center px-1">
+        <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Cosmic Constants</span>
+        <div className="flex gap-4">
+            <ShareButton />
+            <ToolTutorial tourId="astro_calc" steps={tourSteps} buttonText="How to use" />
+        </div>
       </div>
 
-      <div id="tour-astro-inputs" className="space-y-5">
-        <motion.div layout>
-          <div className="flex justify-between items-end mb-1.5">
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-              Mass (kg)
-            </label>
-            <div className="-mb-1 -mr-2"><ConstantSelector onSelect={setMass} /></div>
-          </div>
-          <input
-            type="number"
-            value={mass}
-            onChange={(e) => setMass(e.target.value)}
-            placeholder="e.g. 5.972e24 (Earth's mass)"
-            className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-          />
-        </motion.div>
+      <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl space-y-8">
+        {/* Mode Selector */}
+        <div id="tour-astro-select" className="flex p-1 bg-canvas-muted rounded-2xl border border-base overflow-x-auto no-scrollbar">
+            {categories.map((cat) => (
+                <button
+                    key={cat.id}
+                    onClick={() => setState({ ...state, calc: cat.id })}
+                    className={`flex-1 min-w-[120px] flex items-center justify-center gap-2 py-3 text-xs font-bold rounded-xl transition-all ${calc === cat.id ? "bg-canvas-card text-brand-primary shadow-lg border border-base" : "text-text-muted hover:text-text-secondary"}`}
+                >
+                    {cat.icon}
+                    {cat.label}
+                </button>
+            ))}
+        </div>
 
-        <AnimatePresence mode="popLayout">
-          {activeTab !== "schwarzschild" && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="flex justify-between items-end mb-1.5 pt-2">
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-                  Radius (m)
-                </label>
-                <div className="-mb-1 -mr-2"><ConstantSelector onSelect={setRadius} /></div>
-              </div>
-              <input
-                type="number"
-                value={radius}
-                onChange={(e) => setRadius(e.target.value)}
-                placeholder="e.g. 6.371e6 (Earth's radius)"
-                className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+        <div id="tour-astro-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="space-y-3">
+                <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Mass (kg)</label>
+                    <ConstantSelector onSelect={(val) => setState({ ...state, mass: val })} />
+                </div>
+                <input
+                    type="text"
+                    className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all font-mono"
+                    value={mass as string}
+                    onChange={e => setState({ ...state, mass: e.target.value })}
+                />
+            </div>
+            <div className="space-y-3">
+                <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Radius (m)</label>
+                    <ConstantSelector onSelect={(val) => setState({ ...state, radius: val })} />
+                </div>
+                <input
+                    type="text"
+                    className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all font-mono"
+                    value={radius as string}
+                    onChange={e => setState({ ...state, radius: e.target.value })}
+                />
+            </div>
+        </div>
 
-      <AnimatePresence mode="popLayout">
-        {renderResult()}
-      </AnimatePresence>
-
-      <div className="mt-8 text-xs text-slate-500 dark:text-slate-400 space-y-1">
-        <p>Constants used:</p>
-        <p>G (Gravitational constant) = 6.67430 × 10⁻¹¹ m³ kg⁻¹ s⁻²</p>
-        {activeTab === "schwarzschild" && <p>c (Speed of light) = 299,792,458 m/s</p>}
+        {/* Result Area */}
+        <div id="tour-astro-result" className="p-8 bg-brand-primary/5 rounded-3xl border border-brand-primary/10 flex flex-col items-center justify-center shadow-inner relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-brand-primary/20" />
+            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest mb-3">Calculated Physics Constant</span>
+            <div className="flex items-center gap-3">
+                <ScientificNumber value={resultValue} suffix={unit} className="text-3xl md:text-5xl font-black text-text-primary tracking-tighter" />
+            </div>
+        </div>
       </div>
     </motion.div>
   );

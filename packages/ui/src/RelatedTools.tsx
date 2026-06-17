@@ -64,22 +64,22 @@ export function RelatedTools({ category, currentPath }: RelatedToolsProps) {
   if (selectedTools.length === 0) return null;
 
   return (
-    <div className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
-      <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Related Tools</h2>
+    <div className="mt-16 pt-12 border-t border-base">
+      <h2 className="text-2xl font-bold text-text-primary mb-6">Related Tools</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {selectedTools.map((tool) => (
           <Link
             key={tool.href}
             href={tool.href}
-            className="group flex flex-col p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-md transition-all"
+            className="group flex flex-col p-5 bg-canvas-card border border-base rounded-2xl hover:border-brand-primary hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <h3 className="font-semibold text-text-primary group-hover:text-brand-primary transition-colors">
                 {tool.name}
               </h3>
-              <ArrowRight size={18} className="text-slate-400 group-hover:text-blue-500 transition-colors group-hover:translate-x-1" />
+              <ArrowRight size={18} className="text-text-muted group-hover:text-brand-primary transition-colors group-hover:translate-x-1" />
             </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-text-secondary">
               {tool.description}
             </p>
           </Link>

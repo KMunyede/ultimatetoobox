@@ -1,0 +1,22 @@
+{
+  "issuer": "https://hilmost.net",
+  "authorization_endpoint": "https://hilmost.net/oauth/authorize",
+  "token_endpoint": "https://hilmost.net/oauth/token",
+  "jwks_uri": "https://hilmost.net/oauth/jwks",
+  "response_types_supported": [
+    "code",
+    "token"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials"
+  ],
+  "agent_auth": {
+    "skill": "https://hilmost.net/auth.md",
+    "register_uri": "https://hilmost.net/contact",
+    "identity_types_supported": ["anonymous"],
+    "anonymous": {
+      "credential_types_supported": ["bearer_token"]
+    }
+  }
+}

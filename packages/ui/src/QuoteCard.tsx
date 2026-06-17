@@ -50,33 +50,33 @@ export function QuoteCard({ quote, className = "", showFavorite = true }: QuoteC
   };
 
   return (
-    <div className={`relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-lg shadow-emerald-900/5 transition-all min-h-[250px] group flex flex-col justify-between ${className}`}>
-      <div className="absolute top-0 right-0 -mr-8 -mt-8 opacity-5 text-emerald-600 dark:text-emerald-400 transition-transform group-hover:scale-110 duration-700 pointer-events-none">
+    <div className={`@container group relative flex min-h-[250px] flex-col justify-between rounded-3xl border border-base bg-canvas-card p-6 transition-all shadow-lg shadow-emerald-900/5 @md:p-10 ${className}`}>
+      <div className="pointer-events-none absolute top-0 right-0 -mt-8 -mr-8 text-brand-primary opacity-5 transition-transform duration-700 group-hover:scale-110">
         <Quote size={200} />
       </div>
       
       {showFavorite && (
         <button 
           onClick={toggleFavorite}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="absolute top-4 right-4 z-20 rounded-full p-2 transition-colors hover:bg-canvas-muted"
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
           <Star 
-            className={`w-6 h-6 transition-colors ${isFavorite ? "fill-amber-400 text-amber-400" : "text-slate-300 dark:text-slate-600"}`} 
+            className={`h-6 w-6 transition-colors ${isFavorite ? "fill-amber-400 text-amber-400" : "text-text-muted"}`}
           />
         </button>
       )}
       
-      <div className="relative z-10 text-center space-y-6 flex-1 flex flex-col justify-center">
-        <Quote className="w-8 h-8 text-emerald-500 mx-auto opacity-50 mb-2" />
-        <h2 className="text-base sm:text-lg md:text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-100 italic font-serif break-words whitespace-pre-wrap">
+      <div className="relative z-10 flex flex-1 flex-col justify-center space-y-6 text-center">
+        <Quote className="mx-auto mb-2 h-8 w-8 text-brand-primary opacity-50 @md:h-12 @md:w-12" />
+        <h2 className="font-serif text-base italic font-medium leading-relaxed text-text-primary break-words whitespace-pre-wrap @sm:text-lg @md:text-2xl @lg:text-3xl">
           "{quote.text}"
         </h2>
       </div>
         
-      <div className="pt-6 relative z-10 text-center">
-        <div className="h-px w-12 bg-emerald-200 dark:bg-emerald-800/50 mx-auto mb-4"></div>
-        <p className="text-sm md:text-base font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
+      <div className="relative z-10 pt-6 text-center @md:pt-10">
+        <div className="mx-auto mb-4 h-px w-12 bg-emerald-200 dark:bg-emerald-800/50"></div>
+        <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary @md:text-base">
           {quote.philosopher}
         </p>
       </div>

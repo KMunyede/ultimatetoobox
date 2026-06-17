@@ -1,2 +1,51 @@
-﻿.hide-scrollbar::-webkit-scrollbar
- display: none; 
+﻿@layer base {
+  :root {
+    /* Backgrounds */
+    --color-canvas-base: #f8fafc; /* slate-50 */
+    --color-canvas-card: #ffffff;
+    --color-canvas-muted: #f1f5f9; /* slate-100 */
+
+    /* Text */
+    --color-text-primary: #0f172a; /* slate-900 */
+    --color-text-secondary: #475569; /* slate-600 */
+    --color-text-muted: #94a3b8; /* slate-400 */
+    --color-text-inverse: #ffffff;
+
+    /* Brand / Action */
+    --color-brand-primary: #059669; /* emerald-600 */
+    --color-brand-hover: #047857; /* emerald-700 */
+    --color-brand-alpha: rgba(5, 150, 105, 0.1);
+
+    /* UI Elements */
+    --color-border-base: #e2e8f0; /* slate-200 */
+    --color-border-focus: #10b981; /* emerald-500 */
+    --color-shadow: rgba(15, 23, 42, 0.05); /* slate-900/5 */
+  }
+
+  .dark {
+    /* Backgrounds */
+    --color-canvas-base: #0f172a; /* slate-900 */
+    --color-canvas-card: #1e293b; /* slate-800 */
+    --color-canvas-muted: #334155; /* slate-700 */
+
+    /* Text */
+    --color-text-primary: #f8fafc; /* slate-50 */
+    --color-text-secondary: #94a3b8; /* slate-400 */
+    --color-text-muted: #64748b; /* slate-500 */
+    --color-text-inverse: #0f172a;
+
+    /* Brand / Action */
+    --color-brand-primary: #10b981; /* emerald-500 */
+    --color-brand-hover: #34d399; /* emerald-400 */
+    --color-brand-alpha: rgba(16, 185, 129, 0.1);
+
+    /* UI Elements */
+    --color-border-base: #1e293b; /* slate-800 */
+    --color-border-focus: #10b981; /* emerald-500 */
+    --color-shadow: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

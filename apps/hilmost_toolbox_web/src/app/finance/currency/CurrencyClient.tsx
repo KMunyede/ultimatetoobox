@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ArrowRightLeft, RefreshCw } from "lucide-react";
-import { ToolTutorial, CopyButton, Tooltip } from "@utilitiessite/ui";
+import { ArrowRightLeft, RefreshCw, Globe, Zap } from "lucide-react";
+import { ToolTutorial } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,12 +21,12 @@ const FALLBACK_RATES: Record<string, number> = {
   NZD: 1.66,
 };
 
-export function CurrencyClient({ defaultFrom = "USD", defaultTo = "EUR" }: { defaultFrom?: string, defaultTo?: string }) {
+export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: string, defaultTo?: string }) {
   const [state, setState] = useUrlState({
     val1: "1",
-    unit1: defaultFrom,
+    unit1: defaultFrom || "USD",
     val2: "",
-    unit2: defaultTo,
+    unit2: defaultTo || "EUR",
     activeInput: 1,
   });
 
@@ -40,29 +40,14 @@ export function CurrencyClient({ defaultFrom = "USD", defaultTo = "EUR" }: { def
     setLoading(true);
     setError(false);
     try {
-      // Primary API: Frankfurter (European Central Bank data)
       const res = await fetch("https://api.frankfurter.app/latest?from=USD");
-      if (!res.ok) throw new Error("Primary API failed");
+      if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
       setRates({ USD: 1, ...data.rates });
-    } catch (primaryErr) {
-      console.warn("Primary API failed, trying backup API...", primaryErr);
-      try {
-        // Backup API: Fawazahmed0 Currency API (CDN hosted, extremely reliable)
-        const res = await fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json");
-        if (!res.ok) throw new Error("Backup API failed");
-        const data = await res.json();
-        // The backup API returns lowercase keys inside data.usd
-        const upperRates: Record<string, number> = { USD: 1 };
-        for (const [key, val] of Object.entries(data.usd)) {
-          upperRates[key.toUpperCase()] = val as number;
-        }
-        setRates(upperRates);
-      } catch (backupErr) {
-        console.warn("All live APIs failed, using hardcoded fallbacks.", backupErr);
-        setError(true);
-        setRates(FALLBACK_RATES);
-      }
+    } catch (err) {
+      console.warn("Failed to fetch live rates, using fallbacks.", err);
+      setError(true);
+      setRates(FALLBACK_RATES);
     } finally {
       setLoading(false);
     }
@@ -80,12 +65,11 @@ export function CurrencyClient({ defaultFrom = "USD", defaultTo = "EUR" }: { def
     }
     const num = parseFloat(val1);
     if (!isNaN(num) && rates[unit1] && rates[unit2]) {
-      // Convert to USD first, then to target
       const inUSD = num / rates[unit1];
       const result = inUSD * rates[unit2];
       setState({ val2: result.toFixed(2) });
     }
-  }, [val1, unit1, unit2, activeInput, rates]);
+  }, [val1, unit1, unit2, activeInput, rates, setState]);
 
   useEffect(() => {
     if (activeInput !== 2) return;
@@ -99,7 +83,7 @@ export function CurrencyClient({ defaultFrom = "USD", defaultTo = "EUR" }: { def
       const result = inUSD * rates[unit1];
       setState({ val1: result.toFixed(2) });
     }
-  }, [val2, unit1, unit2, activeInput, rates]);
+  }, [val2, unit1, unit2, activeInput, rates, setState]);
 
   const tourSteps = [
     { element: '#tour-currency-input1', popover: { title: '1. Base Currency', description: 'Enter your amount and select the currency you are converting from.' } },
@@ -111,113 +95,88 @@ export function CurrencyClient({ defaultFrom = "USD", defaultTo = "EUR" }: { def
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
+      className="@container space-y-6"
     >
-      <div className="flex justify-end gap-4 mb-4 md:mb-6">
-        <ShareButton />
-        <ToolTutorial tourId="currency_converter" steps={tourSteps} buttonText="How to use" />
-      </div>
-      <div id="tour-currency-status" className="flex items-center justify-between mb-6">
-        <div className="text-sm text-slate-500 dark:text-slate-400">
-          <AnimatePresence mode="wait">
-            {loading ? (
-              <motion.span key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2"><RefreshCw size={14} className="animate-spin" /> Fetching latest rates...</motion.span>
-            ) : error ? (
-              <motion.span key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-amber-600 dark:text-amber-500">Using estimated rates. Our live feed is taking a quick breather, but we are working on it! Check back shortly.</motion.span>
-            ) : (
-              <motion.span key="success" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-emerald-600 dark:text-emerald-500 font-medium">Using live market rates</motion.span>
-            )}
-          </AnimatePresence>
+      <div className="flex justify-between items-center">
+        <div id="tour-currency-status" className="flex items-center gap-3">
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-widest ${error ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600'}`}>
+                {loading ? <RefreshCw size={10} className="animate-spin" /> : <Globe size={10} />}
+                {loading ? 'Syncing...' : error ? 'Estimated Rates' : 'Live Market Rates'}
+            </div>
+            <button
+                onClick={fetchRates}
+                disabled={loading}
+                className="p-1.5 rounded-full hover:bg-canvas-muted text-text-muted transition-colors disabled:opacity-50"
+            >
+                <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
+            </button>
         </div>
-        <Tooltip content="Fetch latest exchange rates">
-          <button 
-            onClick={fetchRates}
-            disabled={loading}
-            className="p-2 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors disabled:opacity-50"
-            aria-label="Refresh rates"
-          >
-            <RefreshCw size={18} className={loading ? "animate-spin" : ""} />
-          </button>
-        </Tooltip>
+        <div className="flex gap-4">
+            <ShareButton />
+            <ToolTutorial tourId="currency_converter" steps={tourSteps} buttonText="How to use" />
+        </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
-        {/* Input 1 */}
-        <motion.div layout id="tour-currency-input1" className="flex-1 w-full flex flex-col gap-2">
-          <Tooltip content="Enter base currency amount" className="w-full">
-            <input
-              type="number"
-              inputMode="decimal"
-              className="w-full h-14 px-4 text-xl font-medium border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-              value={val1}
-              onChange={(e) => {
-                setState({ activeInput: 1, val1: e.target.value });
-              }}
-            />
-          </Tooltip>
-          <Tooltip content="Select starting currency">
-            <select
-              className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer font-medium hover:border-blue-400 transition-all"
-              value={unit1}
-              onChange={(e) => {
-                setState({ activeInput: 1, unit1: e.target.value });
-              }}
-            >
-              {Object.keys(rates).sort().map(u => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
-          </Tooltip>
-          <div className="flex items-center justify-between mt-2 px-1 text-sm">
-            {val1 && !isNaN(Number(val1)) && (
-              <span className="text-slate-500 font-mono font-medium">
-                {Number(val1).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {unit1}
-              </span>
-            )}
-            {val1 && <CopyButton value={val1} />}
-          </div>
-        </motion.div>
+      <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl">
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
 
-        {/* Icon */}
-        <motion.div layout className="hidden md:flex flex-shrink-0 h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-          <ArrowRightLeft size={24} />
-        </motion.div>
-        
-        {/* Input 2 */}
-        <motion.div layout id="tour-currency-input2" className="flex-1 w-full flex flex-col gap-2">
-          <Tooltip content="Enter target currency amount for reverse calculation" className="w-full">
-            <input
-              type="number"
-              inputMode="decimal"
-              className="w-full h-14 px-4 text-xl font-medium border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-              value={val2}
-              onChange={(e) => {
-                setState({ activeInput: 2, val2: e.target.value });
-              }}
-            />
-          </Tooltip>
-          <Tooltip content="Select target currency">
-            <select
-              className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer font-medium hover:border-blue-400 transition-all"
-              value={unit2}
-              onChange={(e) => {
-                setState({ activeInput: 1, unit2: e.target.value });
-              }}
-            >
-              {Object.keys(rates).sort().map(u => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
-          </Tooltip>
-          <div className="flex items-center justify-between mt-2 px-1 text-sm">
-            {val2 && !isNaN(Number(val2)) && (
-              <span className="text-slate-500 font-mono font-medium">
-                {Number(val2).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {unit2}
-              </span>
-            )}
-            {val2 && <CopyButton value={val2} />}
+          {/* Currency 1 */}
+          <div id="tour-currency-input1" className="flex-1 w-full space-y-3">
+            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
+            <div className="space-y-3">
+              <input
+                type="number"
+                inputMode="decimal"
+                className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                value={val1}
+                onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
+              />
+              <select
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                value={unit1}
+                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value })}
+              >
+                {Object.keys(rates).sort().map(u => (
+                  <option key={u} value={u}>{u}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        </motion.div>
+
+          <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-inner">
+            <ArrowRightLeft size={24} className="rotate-90 md:rotate-0" />
+          </div>
+
+          {/* Currency 2 */}
+          <div id="tour-currency-input2" className="flex-1 w-full space-y-3">
+            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
+            <div className="space-y-3">
+              <input
+                type="number"
+                inputMode="decimal"
+                className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                value={val2}
+                onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
+              />
+              <select
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                value={unit2}
+                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value })}
+              >
+                {Object.keys(rates).sort().map(u => (
+                  <option key={u} value={u}>{u}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="mt-10 pt-8 border-t border-base text-center">
+            <p className="text-text-secondary font-medium italic">
+                {val1 || "0"} <span className="font-bold not-italic">{unit1}</span> equals approximately <span className="text-brand-primary font-black not-italic text-2xl">{val2 || "0"}</span> <span className="font-bold not-italic">{unit2}</span>
+            </p>
+        </div>
       </div>
     </motion.div>
   );

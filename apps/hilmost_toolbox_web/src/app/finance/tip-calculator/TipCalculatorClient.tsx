@@ -3,124 +3,105 @@ import { ToolTutorial, NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+import { Users, DollarSign, Percent } from "lucide-react";
 
 export function TipCalculatorClient() {
   const [state, setState] = useUrlState({
-    bill: "",
-    tipPercent: "15",
-    people: "1",
+    bill: "120",
+    tipPerc: "18",
+    people: "4",
   });
 
-  const { bill, tipPercent, people } = state;
+  const { bill, tipPerc, people } = state;
 
-  const b = parseFloat(bill as string) || 0;
-  const t = parseFloat(tipPercent as string) || 0;
-  const p = parseInt(people as string) || 1;
+  const B = parseFloat(bill as string) || 0;
+  const T = parseFloat(tipPerc as string) || 0;
+  const P = Math.max(1, parseInt(people as string) || 1);
 
-  const tipAmount = b * (t / 100);
-  const totalAmount = b + tipAmount;
-  
-  const tipPerPerson = tipAmount / p;
-  const totalPerPerson = totalAmount / p;
+  const totalTip = B * (T / 100);
+  const totalBill = B + totalTip;
+  const perPerson = totalBill / P;
 
   const tourSteps = [
-    { element: '#tour-tip-inputs', popover: { title: '1. Bill Details', description: 'Enter the bill amount, adjust your tip percentage, and set how many people are splitting it.' } },
-    { element: '#tour-tip-results', popover: { title: '2. Your Share', description: 'Instantly see the tip and total amount owed per person.' } },
+    { element: '#tour-tip-inputs', popover: { title: '1. Bill Details', description: 'Enter the bill amount and your desired tip percentage.' } },
+    { element: '#tour-tip-split', popover: { title: '2. Splitting', description: 'Enter the number of people to split the total cost evenly.' } },
+    { element: '#tour-tip-results', popover: { title: '3. Final Amounts', description: 'Instantly see the tip total and exactly what each person owes.' } },
   ];
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm"
+      className="@container space-y-6"
     >
-      <div className="flex justify-end gap-4 mb-4 md:mb-6">
+      <div className="flex justify-end gap-4">
         <ShareButton />
         <ToolTutorial tourId="tip_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
-      <div id="tour-tip-inputs" className="space-y-5 mb-8">
-        <div>
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Bill Amount</label>
-          <div className="relative">
-            <span className="absolute left-4 top-3 text-slate-500">$</span>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Form */}
+        <div id="tour-tip-inputs" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
+          <div className="space-y-2">
+            <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                <DollarSign size={12} /> Bill Amount
+            </label>
             <input
               type="number"
+              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={bill}
-              onChange={(e) => setState({ bill: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl pl-8 pr-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 transition-all hover:border-blue-400"
+              onChange={e => setState({ bill: e.target.value })}
             />
           </div>
-        </div>
-        
-        <div>
-          <label className="flex justify-between text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-            <span>Tip Percentage</span>
-            <span className="text-blue-600 dark:text-blue-400 font-bold">{tipPercent}%</span>
-          </label>
-          <input
-            type="range"
-            min="0"
-            max="30"
-            step="1"
-            value={tipPercent}
-            onChange={(e) => setState({ tipPercent: e.target.value })}
-            className="w-full accent-blue-600"
-          />
-          <div className="flex justify-between text-xs text-slate-500 mt-1">
-            <span>0%</span>
-            <span>15%</span>
-            <span>30%</span>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+                <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                    <Percent size={12} /> Tip %
+                </label>
+                <input
+                type="number"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={tipPerc}
+                onChange={e => setState({ tipPerc: e.target.value })}
+                />
+            </div>
+            <div id="tour-tip-split" className="space-y-2">
+                <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                    <Users size={12} /> Split
+                </label>
+                <input
+                type="number"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={people}
+                onChange={e => setState({ people: e.target.value })}
+                />
+            </div>
           </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Number of People</label>
-          <div className="flex items-center space-x-4">
-            <button 
-              onClick={() => setState({ people: String(Math.max(1, p - 1)) })}
-              className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-            >
-              -
-            </button>
-            <span className="text-xl font-semibold text-slate-900 dark:text-white w-8 text-center">{p}</span>
-            <button 
-              onClick={() => setState({ people: String(p + 1) })}
-              className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-            >
-              +
-            </button>
+        {/* Results */}
+        <div id="tour-tip-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
+
+          <div className="relative z-10 text-center space-y-2">
+            <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Total Per Person</span>
+            <div className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter">
+              $<NumberTicker value={perPerson} decimals={2} />
+            </div>
+          </div>
+
+          <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
+            <div className="text-center space-y-1">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Tip</span>
+                <p className="text-xl font-bold text-text-primary">$<NumberTicker value={totalTip} decimals={2} /></p>
+            </div>
+            <div className="text-center space-y-1">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Bill</span>
+                <p className="text-xl font-bold text-text-primary">$<NumberTicker value={totalBill} decimals={2} /></p>
+            </div>
           </div>
         </div>
       </div>
-
-      <div id="tour-tip-results" className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 space-y-4 transition-all hover:shadow-md">
-        <div className="flex justify-between items-center">
-          <div>
-            <p className="font-semibold text-slate-900 dark:text-white">Tip Amount</p>
-            <p className="text-xs text-slate-500">/ person</p>
-          </div>
-          <span className="text-2xl font-bold text-blue-600 dark:text-blue-400 flex items-center">
-            <NumberTicker value={tipPerPerson} prefix="$" decimals={2} duration={0.5} />
-          </span>
-        </div>
-        
-        <div className="flex justify-between items-center pt-4 border-t border-slate-200 dark:border-slate-700">
-          <div>
-            <p className="font-semibold text-slate-900 dark:text-white">Total</p>
-            <p className="text-xs text-slate-500">/ person</p>
-          </div>
-          <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 flex items-center">
-            <NumberTicker value={totalPerPerson} prefix="$" decimals={2} duration={0.5} />
-          </span>
-        </div>
-      </div>
-
-      {p > 1 && (
-        <div className="mt-4 text-center text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1">
-          Total Bill with Tip: <span className="font-semibold text-slate-700 dark:text-slate-300"><NumberTicker value={totalAmount} prefix="$" decimals={2} duration={0.5} /></span>
-        </div>
-      )}
     </motion.div>
   );
 }

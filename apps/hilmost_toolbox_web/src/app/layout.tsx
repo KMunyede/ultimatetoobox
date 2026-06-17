@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 antialiased`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-canvas-base text-text-primary antialiased`}>
         <AdSenseScript publisherId="ca-pub-5650522247882745" />
         <ThemeProvider
           attribute="class"

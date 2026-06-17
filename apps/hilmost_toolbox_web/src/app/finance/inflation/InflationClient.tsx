@@ -3,101 +3,112 @@ import { ToolTutorial, NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+import { TrendingUp, Calendar } from "lucide-react";
 
 export function InflationClient() {
   const [state, setState] = useUrlState({
-    amount: "1000",
-    years: "10",
-    rate: "3",
+    amount: "100",
+    startYear: "1990",
+    endYear: "2024",
+    rate: "2.5",
   });
 
-  const { amount, years, rate } = state;
+  const { amount, startYear, endYear, rate } = state;
 
-  const a = parseFloat(amount as string) || 0;
-  const y = parseFloat(years as string) || 0;
-  const r = (parseFloat(rate as string) || 0) / 100;
+  const V = parseFloat(amount as string) || 0;
+  const startY = parseInt(startYear as string) || 1990;
+  const endY = parseInt(endYear as string) || 2024;
+  const R = parseFloat(rate as string) || 0;
 
-  const futureCost = a * Math.pow(1 + r, y);
-  const purchasingPower = a / Math.pow(1 + r, y);
+  const years = Math.max(0, endY - startY);
+  const adjustedValue = V * Math.pow(1 + R / 100, years);
+  const cumulativeInflation = ((adjustedValue - V) / V) * 100;
 
   const tourSteps = [
-    { element: '#tour-inflation-inputs', popover: { title: '1. Parameters', description: 'Enter the amount, time period, and estimated inflation rate.' } },
-    { element: '#tour-inflation-cost', popover: { title: '2. Future Cost', description: 'See how much more you will need to buy the same things in the future.' } },
-    { element: '#tour-inflation-power', popover: { title: '3. Purchasing Power', description: 'See how much your money will actually be worth in today\'s terms.' } },
+    { element: '#tour-inf-inputs', popover: { title: '1. Purchasing Power', description: 'Enter the historical amount of money and the timeframe you want to compare.' } },
+    { element: '#tour-inf-results', popover: { title: '2. Adjusted Value', description: 'See what that same amount of money is worth today based on the average inflation rate.' } },
   ];
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm"
+      className="@container space-y-6"
     >
-      <div className="flex justify-end gap-4 mb-4 md:mb-6">
+      <div className="flex justify-end gap-4">
         <ShareButton />
         <ToolTutorial tourId="inflation_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
-      <div id="tour-inflation-inputs" className="space-y-5 mb-8">
-        <div>
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Current Amount</label>
-          <div className="relative">
-            <span className="absolute left-4 top-3 text-slate-500">$</span>
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setState({ amount: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl pl-8 pr-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 transition-all hover:border-blue-400"
-            />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Years</label>
-            <input
-              type="number"
-              value={years}
-              onChange={(e) => setState({ years: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 transition-all hover:border-blue-400"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Average Inflation Rate (%)</label>
-            <input
-              type="number"
-              value={rate}
-              onChange={(e) => setState({ rate: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 transition-all hover:border-blue-400"
-            />
-          </div>
-        </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        <motion.div 
-          layout
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          id="tour-inflation-cost" 
-          className="p-5 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 rounded-2xl transition-all hover:shadow-md"
-        >
-          <p className="text-sm font-medium text-red-600 dark:text-red-400 mb-1">Cost of Goods in {y} Years</p>
-          <p className="text-3xl font-bold text-slate-900 dark:text-white flex items-center">
-            <NumberTicker value={futureCost} prefix="$" decimals={2} duration={0.8} />
-          </p>
-          <p className="text-xs text-slate-500 mt-2">What costs ${a} today will cost ${Math.round(futureCost)} in {y} years.</p>
-        </motion.div>
-        
-        <motion.div 
-          layout
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          id="tour-inflation-power" 
-          className="p-5 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-900/50 rounded-2xl transition-all hover:shadow-md"
-        >
-          <p className="text-sm font-medium text-amber-600 dark:text-amber-400 mb-1">Purchasing Power in {y} Years</p>
-          <p className="text-3xl font-bold text-slate-900 dark:text-white flex items-center">
-            <NumberTicker value={purchasingPower} prefix="$" decimals={2} duration={0.8} />
-          </p>
-          <p className="text-xs text-slate-500 mt-2">${a} will only buy ${Math.round(purchasingPower)} worth of today&apos;s goods.</p>
-        </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Form */}
+        <div id="tour-inf-inputs" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
+          <div className="space-y-2">
+            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Historical Amount ($)</label>
+            <input
+              type="number"
+              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              value={amount}
+              onChange={e => setState({ amount: e.target.value })}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+                <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                    <Calendar size={12} /> Start Year
+                </label>
+                <input
+                type="number"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={startYear}
+                onChange={e => setState({ startYear: e.target.value })}
+                />
+            </div>
+            <div className="space-y-2">
+                <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                    <Calendar size={12} /> End Year
+                </label>
+                <input
+                type="number"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={endYear}
+                onChange={e => setState({ endYear: e.target.value })}
+                />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
+                <TrendingUp size={12} /> Avg. Inflation Rate (%)
+            </label>
+            <input
+              type="number"
+              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              value={rate}
+              onChange={e => setState({ rate: e.target.value })}
+            />
+          </div>
+        </div>
+
+        {/* Results */}
+        <div id="tour-inf-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
+
+          <div className="relative z-10 text-center space-y-2">
+            <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Adjusted Value in {endYear}</span>
+            <div className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter">
+              $<NumberTicker value={adjustedValue} decimals={2} />
+            </div>
+          </div>
+
+          <div className="relative z-10 grid grid-cols-1 gap-4 mt-8 pt-8 border-t border-base">
+            <div className="text-center space-y-1">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Cumulative Inflation</span>
+                <p className="text-2xl font-bold text-text-primary">
+                    <NumberTicker value={cumulativeInflation} decimals={1} />%
+                </p>
+            </div>
+          </div>
+        </div>
       </div>
     </motion.div>
   );

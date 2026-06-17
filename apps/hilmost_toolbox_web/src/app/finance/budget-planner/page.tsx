@@ -1,5 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Budget Planner | 50/30/20 Rule Calculator",
@@ -45,7 +46,9 @@ export default function BudgetPlannerPage() {
         <p className="text-slate-500">Generated via hilmost-toolbox.hilmost.net</p>
       </div>
       
-      <BudgetClient />
+      <Suspense fallback={<div className="h-96 animate-pulse bg-canvas-muted rounded-3xl w-full" />}>
+        <BudgetClient />
+      </Suspense>
 
       <div className="print:hidden">
         <ToolArticle title="Mastering Your Money with the 50/30/20 Rule">

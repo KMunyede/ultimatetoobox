@@ -6,125 +6,102 @@ import { motion } from "framer-motion";
 
 export function LoanCalculatorClient() {
   const [state, setState] = useUrlState({
-    principal: "10000",
-    rate: "5",
-    years: "5",
+    amount: "250000",
+    rate: "6.5",
+    years: "30",
   });
 
-  const { principal, rate, years } = state;
+  const { amount, rate, years } = state;
+
+  const P = parseFloat(amount as string);
+  const r = parseFloat(rate as string) / 100 / 12;
+  const n = parseFloat(years as string) * 12;
 
   let monthlyPayment = 0;
-  let totalPayment = 0;
+  let totalPayable = 0;
   let totalInterest = 0;
 
-  const p = parseFloat(principal as string) || 0;
-  const r = (parseFloat(rate as string) || 0) / 100 / 12; // monthly interest rate
-  const n = (parseFloat(years as string) || 0) * 12; // total number of months
-
-  if (p > 0 && n > 0) {
-    if (r === 0) {
-      monthlyPayment = p / n;
-    } else {
-      monthlyPayment = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-    }
-    totalPayment = monthlyPayment * n;
-    totalInterest = totalPayment - p;
+  if (P > 0 && r > 0 && n > 0) {
+    monthlyPayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    totalPayable = monthlyPayment * n;
+    totalInterest = totalPayable - P;
   }
 
   const tourSteps = [
-    { element: '#tour-loan-inputs', popover: { title: '1. Loan Details', description: 'Enter the principal amount, interest rate, and term of the loan.' } },
-    { element: '#tour-loan-payment', popover: { title: '2. Monthly Payment', description: 'This is your required monthly payment to pay off the loan in time.' } },
-    { element: '#tour-loan-summary', popover: { title: '3. Total Cost', description: 'See how much interest you will pay and the true total cost of the loan.' } },
+    { element: '#tour-loan-amount', popover: { title: '1. Loan Amount', description: 'Enter the total amount you want to borrow.' } },
+    { element: '#tour-loan-rate', popover: { title: '2. Interest Rate', description: 'Enter the annual interest rate offered by the bank.' } },
+    { element: '#tour-loan-term', popover: { title: '3. Loan Term', description: 'How many years will the loan last? (e.g. 15 or 30)' } },
+    { element: '#tour-loan-results', popover: { title: '4. Monthly Payment', description: 'Your estimated monthly payment and total interest are shown here.' } },
   ];
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-6"
+      className="@container space-y-6"
     >
       <div className="flex justify-end gap-4">
         <ShareButton />
         <ToolTutorial tourId="loan_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        {/* Inputs */}
-        <motion.div layout id="tour-loan-inputs" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm space-y-6 hover:shadow-md transition-shadow">
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Loan Amount</label>
-          <div className="relative">
-            <span className="absolute left-4 top-3 text-slate-400">$</span>
+        {/* Input Form */}
+        <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+          <div id="tour-loan-amount" className="space-y-2">
+            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Loan Amount ($)</label>
             <input
               type="number"
-              className="w-full h-12 pl-8 pr-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-              value={principal}
-              onChange={e => setState({ principal: e.target.value })}
-              placeholder="e.g. 10000"
+              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              value={amount}
+              onChange={e => setState({ amount: e.target.value })}
+              placeholder="e.g. 250000"
             />
           </div>
-        </div>
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Annual Interest Rate (%)</label>
-          <div className="relative">
+          <div id="tour-loan-rate" className="space-y-2">
+            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Interest Rate (%)</label>
             <input
               type="number"
-              className="w-full h-12 px-4 pr-8 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={rate}
               onChange={e => setState({ rate: e.target.value })}
-              placeholder="e.g. 5"
+              placeholder="e.g. 6.5"
             />
-            <span className="absolute right-4 top-3 text-slate-400">%</span>
+          </div>
+          <div id="tour-loan-term" className="space-y-2">
+            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Loan Term (Years)</label>
+            <input
+              type="number"
+              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              value={years}
+              onChange={e => setState({ years: e.target.value })}
+              placeholder="e.g. 30"
+            />
           </div>
         </div>
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Loan Term (Years)</label>
-          <input
-            type="number"
-            className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-            value={years}
-            onChange={e => setState({ years: e.target.value })}
-            placeholder="e.g. 5"
-          />
-        </div>
-        </motion.div>
 
-      {/* Results */}
-      <motion.div layout className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col justify-center hover:shadow-md transition-shadow">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Payment Summary</h2>
-        
-        <div className="space-y-6">
-          <div id="tour-loan-payment" className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl transition-all">
-            <div className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Monthly Payment</div>
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 flex items-center">
-              <NumberTicker value={monthlyPayment} decimals={2} duration={0.8} prefix="$" />
+        {/* Results */}
+        <div id="tour-loan-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
+
+          <div className="relative z-10 text-center space-y-2">
+            <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Monthly Payment</span>
+            <div className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter">
+              $<NumberTicker value={monthlyPayment} decimals={2} />
             </div>
           </div>
 
-          <div id="tour-loan-summary" className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
-              <div className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Total Principal</div>
-              <div className="text-lg font-bold text-slate-900 dark:text-white">
-                <NumberTicker value={p > 0 && n > 0 ? p : 0} decimals={2} duration={0.8} prefix="$" />
-              </div>
+          <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
+            <div className="text-center space-y-1">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Interest</span>
+                <p className="text-xl font-bold text-text-primary">$<NumberTicker value={totalInterest} decimals={0} /></p>
             </div>
-            <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
-              <div className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Total Interest</div>
-              <div className="text-lg font-bold text-slate-900 dark:text-white text-rose-500 dark:text-rose-400">
-                <NumberTicker value={totalInterest} decimals={2} duration={0.8} prefix="$" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
-            <div className="text-base font-medium text-slate-700 dark:text-slate-300">Total Cost of Loan</div>
-            <div className="text-xl font-bold text-slate-900 dark:text-white">
-              <NumberTicker value={totalPayment} decimals={2} duration={0.8} prefix="$" />
+            <div className="text-center space-y-1">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Payable</span>
+                <p className="text-xl font-bold text-text-primary">$<NumberTicker value={totalPayable} decimals={0} /></p>
             </div>
           </div>
         </div>
-      </motion.div>
-
       </div>
     </motion.div>
   );

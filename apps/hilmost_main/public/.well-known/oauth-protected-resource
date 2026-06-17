@@ -1,0 +1,14 @@
+{
+  "resource": "https://hilmost.net",
+  "authorization_servers": [
+    "https://hilmost.net"
+  ],
+  "scopes_supported": [
+    "read",
+    "write",
+    "utilities"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ]
+}

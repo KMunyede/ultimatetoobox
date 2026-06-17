@@ -1,294 +1,222 @@
 {
-    "hosting":  [
-                    {
-                        "target":  "hilmost-toolbox",
-                        "public":  "apps/hilmost_toolbox_web/out",
-                        "cleanUrls":  true,
-                        "ignore":  [
-                                       "firebase.json",
-                                       "**/.*",
-                                       "**/node_modules/**"
-                                   ],
-                        "rewrites":  [
-                                         {
-                                             "regex":  "^/(.+)/__next\\.(.+)\\.__PAGE__\\.txt$",
-                                             "destination":  "/$1/__next.$2/__PAGE__.txt"
-                                         }
-                                     ],
-                        "headers":  [
-                                        {
-                                            "source":  "**/*.@(css|woff2|wasm)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "max-age=31536000, immutable"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(html|js)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "no-cache, no-store, must-revalidate"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "X-Frame-Options",
-                                                                "value":  "SAMEORIGIN"
-                                                            }
-                                                        ]
-                                        }
-                                    ]
-                    },
-                    {
-                        "target":  "hilmost-toolbox-staging",
-                        "public":  "apps/hilmost_toolbox_web/out",
-                        "cleanUrls":  true,
-                        "ignore":  [
-                                       "firebase.json",
-                                       "**/.*",
-                                       "**/node_modules/**"
-                                   ],
-                        "rewrites":  [
-                                         {
-                                             "regex":  "^/(.+)/__next\\.(.+)\\.__PAGE__\\.txt$",
-                                             "destination":  "/$1/__next.$2/__PAGE__.txt"
-                                         }
-                                     ],
-                        "headers":  [
-                                        {
-                                            "source":  "**/*.@(css|woff2|wasm)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "max-age=31536000, immutable"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(html|js)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "no-cache, no-store, must-revalidate"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "X-Frame-Options",
-                                                                "value":  "SAMEORIGIN"
-                                                            }
-                                                        ]
-                                        }
-                                    ]
-                    },
-                    {
-                        "target":  "hsc-platform-core-staging",
-                        "public":  "apps/hilmost_main/out",
-                        "cleanUrls":  true,
-                        "ignore":  [
-                                       "firebase.json",
-                                       "**/.*",
-                                       "**/node_modules/**"
-                                   ],
-                        "rewrites":  [
-                                         {
-                                             "regex":  "^/(.+)/__next\\.(.+)\\.__PAGE__\\.txt$",
-                                             "destination":  "/$1/__next.$2/__PAGE__.txt"
-                                         }
-                                     ],
-                        "headers":  [
-                                        {
-                                            "source":  "**/*.@(css|woff2|wasm)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "max-age=31536000, immutable"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(html|js)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "no-cache, no-store, must-revalidate"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "X-Frame-Options",
-                                                                "value":  "SAMEORIGIN"
-                                                            }
-                                                        ]
-                                        }
-                                    ]
-                    },
-                    {
-                        "target":  "hsc-platform-core",
-                        "public":  "apps/hilmost_main/out",
-                        "cleanUrls":  true,
-                        "ignore":  [
-                                       "firebase.json",
-                                       "**/.*",
-                                       "**/node_modules/**"
-                                   ],
-                        "rewrites":  [
-                                         {
-                                             "regex":  "^/(.+)/__next\\.(.+)\\.__PAGE__\\.txt$",
-                                             "destination":  "/:1/__next.:2/__PAGE__.txt"
-                                         }
-                                     ],
-                        "headers":  [
-                                        {
-                                            "source":  "/",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Link",
-                                                                "value":  "\u003c/.well-known/api-catalog\u003e; rel=\"api-catalog\""
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "/.well-known/api-catalog",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Content-Type",
-                                                                "value":  "application/linkset+json"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(css|woff2|wasm)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "max-age=31536000, immutable"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(html|js)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "no-cache, no-store, must-revalidate"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "X-Frame-Options",
-                                                                "value":  "SAMEORIGIN"
-                                                            }
-                                                        ]
-                                        }
-                                    ]
-                    },
-                    {
-                        "target":  "wisdom-staging",
-                        "public":  "apps/hilmost_toolbox_web/out",
-                        "cleanUrls":  true,
-                        "ignore":  [
-                                       "firebase.json",
-                                       "**/.*",
-                                       "**/node_modules/**"
-                                   ],
-                        "headers":  [
-                                        {
-                                            "source":  "**/*.@(css|woff2|wasm)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "max-age=31536000, immutable"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(html|js)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "no-cache, no-store, must-revalidate"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "X-Frame-Options",
-                                                                "value":  "SAMEORIGIN"
-                                                            }
-                                                        ]
-                                        }
-                                    ],
-                        "redirects":  [
-                                          {
-                                              "destination":  "https://hilmost-toolbox.hilmost.net/health/daily-wisdom",
-                                              "source":  "**",
-                                              "type":  301
-                                          }
-                                      ]
-                    },
-                    {
-                        "target":  "wisdom-prod",
-                        "public":  "apps/hilmost_toolbox_web/out",
-                        "cleanUrls":  true,
-                        "ignore":  [
-                                       "firebase.json",
-                                       "**/.*",
-                                       "**/node_modules/**"
-                                   ],
-                        "headers":  [
-                                        {
-                                            "source":  "**/*.@(css|woff2|wasm)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "max-age=31536000, immutable"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**/*.@(html|js)",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "Cache-Control",
-                                                                "value":  "no-cache, no-store, must-revalidate"
-                                                            }
-                                                        ]
-                                        },
-                                        {
-                                            "source":  "**",
-                                            "headers":  [
-                                                            {
-                                                                "key":  "X-Frame-Options",
-                                                                "value":  "SAMEORIGIN"
-                                                            }
-                                                        ]
-                                        }
-                                    ],
-                        "redirects":  [
-                                          {
-                                              "destination":  "https://hilmost-toolbox.hilmost.net/health/daily-wisdom",
-                                              "source":  "**",
-                                              "type":  301
-                                          }
-                                      ]
-                    }
-                ]
+    "hosting": [
+        {
+            "target": "hilmost-toolbox",
+            "public": "apps/hilmost_toolbox_web/out",
+            "cleanUrls": true,
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "headers": [
+                {
+                    "source": "**/*.@(js|css|webp|png|jpg|svg|woff2|ico)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=31536000, immutable"
+                        }
+                    ]
+                },
+                {
+                    "source": "**/@(.html|index.html)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-cache, no-store, must-revalidate"
+                        }
+                    ]
+                },
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "*"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "SAMEORIGIN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "target": "hilmost-toolbox-staging",
+            "public": "apps/hilmost_toolbox_web/out",
+            "cleanUrls": true,
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "headers": [
+                {
+                    "source": "**/*.@(js|css|webp|png|jpg|svg|woff2|ico)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=31536000, immutable"
+                        }
+                    ]
+                },
+                {
+                    "source": "**/@(.html|index.html)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-cache, no-store, must-revalidate"
+                        }
+                    ]
+                },
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "*"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "SAMEORIGIN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "target": "hsc-platform-core-staging",
+            "public": "apps/hilmost_main/out",
+            "cleanUrls": true,
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "headers": [
+                {
+                    "source": "**/*.@(js|css|webp|png|jpg|svg|woff2|ico)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=31536000, immutable"
+                        }
+                    ]
+                },
+                {
+                    "source": "**/@(.html|index.html)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-cache, no-store, must-revalidate"
+                        }
+                    ]
+                },
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "*"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "SAMEORIGIN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "target": "hsc-platform-core",
+            "public": "apps/hilmost_main/out",
+            "cleanUrls": true,
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "headers": [
+                {
+                    "source": "**/*.@(js|css|webp|png|jpg|svg|woff2|ico)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public, max-age=31536000, immutable"
+                        }
+                    ]
+                },
+                {
+                    "source": "**/@(.html|index.html)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-cache, no-store, must-revalidate"
+                        }
+                    ]
+                },
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "*"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "SAMEORIGIN"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "target": "wisdom-staging",
+            "public": "apps/hilmost_toolbox_web/out",
+            "cleanUrls": true,
+            "headers": [
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "*"
+                        }
+                    ]
+                }
+            ],
+            "redirects": [
+                {
+                    "destination": "https://hilmost-toolbox.hilmost.net/health/daily-wisdom",
+                    "source": "**",
+                    "type": 301
+                }
+            ]
+        },
+        {
+            "target": "wisdom-prod",
+            "public": "apps/hilmost_toolbox_web/out",
+            "cleanUrls": true,
+            "headers": [
+                {
+                    "source": "**",
+                    "headers": [
+                        {
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "*"
+                        }
+                    ]
+                }
+            ],
+            "redirects": [
+                {
+                    "destination": "https://hilmost-toolbox.hilmost.net/health/daily-wisdom",
+                    "source": "**",
+                    "type": 301
+                }
+            ]
+        }
+    ]
 }

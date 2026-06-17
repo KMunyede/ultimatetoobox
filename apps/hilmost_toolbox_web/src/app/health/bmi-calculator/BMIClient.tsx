@@ -33,10 +33,10 @@ export function BMIClient() {
   }
 
   const getCategory = (b: number) => {
-    if (b < 18.5) return { label: "Underweight", color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-900/20", border: "border-blue-200 dark:border-blue-800" };
-    if (b < 25) return { label: "Normal weight", color: "text-green-500", bg: "bg-green-50 dark:bg-green-900/20", border: "border-green-200 dark:border-green-800" };
-    if (b < 30) return { label: "Overweight", color: "text-yellow-500", bg: "bg-yellow-50 dark:bg-yellow-900/20", border: "border-yellow-200 dark:border-yellow-800" };
-    return { label: "Obese", color: "text-red-500", bg: "bg-red-50 dark:bg-red-900/20", border: "border-red-200 dark:border-red-800" };
+    if (b < 18.5) return { label: "Underweight", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" };
+    if (b < 25) return { label: "Normal weight", color: "text-brand-primary", bg: "bg-brand-primary/10", border: "border-brand-primary/20" };
+    if (b < 30) return { label: "Overweight", color: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20" };
+    return { label: "Obese", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" };
   };
 
   const tourSteps = [
@@ -49,7 +49,7 @@ export function BMIClient() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="space-y-6"
+      className="@container space-y-6"
     >
       <div className="flex justify-end gap-4">
         <ShareButton />
@@ -58,85 +58,85 @@ export function BMIClient() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Inputs */}
-        <div id="tour-bmi-inputs" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm space-y-6 hover:shadow-md transition-shadow">
+        <div id="tour-bmi-inputs" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm space-y-6 hover:shadow-md transition-shadow">
         
         {/* Unit Toggle */}
-        <div className="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl">
+        <div className="flex p-1 bg-canvas-muted rounded-xl border border-base">
           <button
             onClick={() => setState({ unitSystem: "metric" })}
-            className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${unitSystem === "metric" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"}`}
+            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "metric" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
           >
-            Metric (kg, cm)
+            Metric
           </button>
           <button
             onClick={() => setState({ unitSystem: "imperial" })}
-            className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${unitSystem === "imperial" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"}`}
+            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "imperial" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
           >
-            Imperial (lbs, ft)
+            Imperial
           </button>
         </div>
 
         {unitSystem === "metric" ? (
-          <>
+          <div className="space-y-4">
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Height (cm)</label>
+              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height (cm)</label>
               <input
                 type="number"
-                className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                 value={cm}
                 onChange={e => setState({ cm: e.target.value })}
                 placeholder="e.g. 175"
               />
             </div>
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Weight (kg)</label>
+              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (kg)</label>
               <input
                 type="number"
-                className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                 value={kg}
                 onChange={e => setState({ kg: e.target.value })}
                 placeholder="e.g. 70"
               />
             </div>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="space-y-4">
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Height</label>
+              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height</label>
               <div className="flex gap-4">
                 <div className="flex-1 relative">
                   <input
                      type="number"
-                     className="w-full h-12 px-4 pr-8 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+                     className="w-full h-14 px-4 pr-8 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                      value={ft}
                      onChange={e => setState({ ft: e.target.value })}
                      placeholder="ft"
                   />
-                  <span className="absolute right-3 top-3 text-slate-400">ft</span>
+                  <span className="absolute right-4 top-4 text-text-muted font-bold text-sm">ft</span>
                 </div>
                 <div className="flex-1 relative">
                   <input
                      type="number"
-                     className="w-full h-12 px-4 pr-10 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+                     className="w-full h-14 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                      value={inch}
                      onChange={e => setState({ inch: e.target.value })}
                      placeholder="in"
                   />
-                  <span className="absolute right-3 top-3 text-slate-400">in</span>
+                  <span className="absolute right-4 top-4 text-text-muted font-bold text-sm">in</span>
                 </div>
               </div>
             </div>
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Weight (lbs)</label>
+              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (lbs)</label>
               <input
                 type="number"
-                className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                 value={lbs}
                 onChange={e => setState({ lbs: e.target.value })}
                 placeholder="e.g. 150"
               />
             </div>
-          </>
+          </div>
         )}
       </div>
 
@@ -145,26 +145,33 @@ export function BMIClient() {
         layout
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         id="tour-bmi-results" 
-        className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow"
+        className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow min-h-[300px]"
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
-            <div className="text-slate-500 dark:text-slate-400 font-medium mb-2">Your BMI is</div>
-            <div className="text-6xl font-black text-slate-900 dark:text-white mb-6">
+            <div className="text-text-secondary font-medium mb-2">Your BMI is</div>
+            <div className="text-7xl md:text-8xl font-black text-text-primary mb-8 tracking-tighter">
               <NumberTicker value={bmi} decimals={1} duration={0.8} />
             </div>
             {(() => {
               const cat = getCategory(bmi);
               return (
-                <div className={`px-6 py-2 rounded-full border ${cat.bg} ${cat.border} ${cat.color} font-bold text-lg`}>
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className={`px-8 py-3 rounded-full border ${cat.bg} ${cat.border} ${cat.color} font-bold text-xl md:text-2xl shadow-sm`}
+                >
                   {cat.label}
-                </div>
+                </motion.div>
               );
             })()}
           </>
         ) : (
-          <div className="text-slate-400 dark:text-slate-500">
-            Enter your height and weight to see your BMI.
+          <div className="flex flex-col items-center gap-4 text-text-muted">
+            <div className="w-16 h-16 rounded-full bg-canvas-muted flex items-center justify-center border border-base">
+                <span className="text-2xl font-bold">?</span>
+            </div>
+            <p className="max-w-[200px]">Enter your height and weight to see your BMI.</p>
           </div>
         )}
       </motion.div>
