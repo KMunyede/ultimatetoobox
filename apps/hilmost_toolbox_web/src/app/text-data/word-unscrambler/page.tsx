@@ -46,15 +46,22 @@ export default function WordUnscramblerPage() {
 
       <ToolArticle title="Master Your Text: The Power of Unscrambling">
         <p>
-          Whether you are stuck on a difficult anagram, trying to maximize your score in Scrabble, or just want to explore the hidden linguistic possibilities inside a jumble of letters, a powerful word unscrambler provides instant human gratification.
+          Whether you are stuck on a difficult anagram, trying to maximize your score in Scrabble, or just want to explore the hidden linguistic possibilities inside a jumble of letters, our powerful Word Unscrambler provides instant solutions with professional-grade depth.
         </p>
         
+        <h3>Advanced Features for Word Enthusiasts</h3>
+        <ul>
+          <li><strong>Wildcard Support:</strong> Use <code>?</code> or <code>*</code> to represent blank tiles, essential for Scrabble and Words with Friends.</li>
+          <li><strong>Ergonomic Filters:</strong> Narrow down thousands of results by specifying starting letters, suffixes, or required characters.</li>
+          <li><strong>Scrabble Scoring:</strong> Every found word includes its standard Scrabble point value, helping you pick the highest-scoring play.</li>
+          <li><strong>Length-Based Grouping:</strong> Words are organized by length and sorted by score, so you find the best options in seconds.</li>
+        </ul>
+
         <h3>How to Use This Tool</h3>
-        
         <ol>
-          <li><strong>Step 1: Paste Text</strong> - Insert your raw text or data string into the main input area.</li>
-          <li><strong>Step 2: Select Action</strong> - Choose your formatting, encoding, or analysis mode.</li>
-          <li><strong>Step 3: Copy Result</strong> - View the generated analytics or encoded output and click to copy.</li>
+          <li><strong>Step 1: Enter Letters</strong> - Type your scrambled letters into the main box. Use wildcards for missing pieces.</li>
+          <li><strong>Step 2: Apply Filters</strong> - Use the "Advanced Filters" panel if you need words that fit a specific board position.</li>
+          <li><strong>Step 3: Pick & Copy</strong> - Review the grouped results and click any word to copy it to your clipboard.</li>
         </ol>
       </ToolArticle>
 
