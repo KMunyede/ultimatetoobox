@@ -8,6 +8,7 @@ export const metadata = {
 };
 
 const links = [
+  { name: "Daily Wisdom & Wellness", href: "/health/daily-wisdom" },
   { name: "BMI Calculator", href: "/health/bmi-calculator" },
 ];
 
