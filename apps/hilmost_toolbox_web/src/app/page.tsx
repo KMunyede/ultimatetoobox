@@ -76,17 +76,17 @@ export default function Home() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-20 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
       {/* Hero Section */}
-      <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-6">
-            <Sparkles size={12} className="animate-pulse" />
-            HSC Platform Core
+      <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-6">
+            <Sparkles size={14} className="animate-pulse" />
+            The fastest, versatile toolbox
         </div>
-        <h1 className="text-4xl md:text-6xl font-black tracking-tight text-text-primary mb-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight text-text-primary mb-6">
           The <span className="text-brand-primary">Ultimate</span> Toolbox
         </h1>
-        <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium">
+        <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium">
           A high-performance digital sanctuary for your daily workflow. <br className="hidden md:block" /> Fast, accurate, and optimized for the modern era.
         </p>
       </div>
@@ -94,36 +94,39 @@ export default function Home() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {categories.map((category) => (
-          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300">
-            <div className="flex items-center gap-x-4 mb-6">
-              <div className={`h-14 w-14 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>
+          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300">
+            <div className="flex items-center gap-x-4 mb-4">
+              <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>
                 {category.icon}
               </div>
-              <h2 className="text-xl font-extrabold text-text-primary tracking-tight">{category.title}</h2>
+              <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.title}</h2>
             </div>
-            <p className="text-text-secondary mb-8 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
+            <p className="text-text-secondary mb-6 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
 
-            <div className="flex-1">
-              <ul className="space-y-1">
-                {category.links.map((link) => (
-                  <li key={link.name}>
-                    <Link href={link.href} className="group/link flex items-center justify-between py-3 border-b border-base hover:border-brand-primary/50 transition-all">
-                      <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
-                      <ArrowRight className="w-4 h-4 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="flex-1 overflow-hidden">
+              <div className={`pr-1 ${category.links.length > 5 ? 'max-h-[280px] overflow-y-auto custom-scrollbar' : ''}`}>
+                <ul className="space-y-0.5">
+                  {category.links.map((link) => (
+                    <li key={link.name}>
+                      <Link href={link.href} className="group/link flex items-center justify-between py-2.5 border-b border-base/50 hover:border-brand-primary/50 transition-all">
+                        <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-base opacity-0 group-hover:opacity-100 transition-opacity">
-                <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">
+            <div className="mt-6 pt-4 border-t border-base">
+                <p className="text-[10px] font-black uppercase tracking-widest text-text-muted opacity-60">
                     {category.links.length} Tools Available
                 </p>
             </div>
           </div>
         ))}
       </div>
+
 
       {/* Trust Footer Section */}
       <div className="mt-24 py-12 border-t border-base text-center">
