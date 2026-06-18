@@ -11,24 +11,25 @@ export default function SoftwareHub() {
   return (
     <main className="flex-1 bg-canvas-base">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 md:py-24">
-          <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-brand-primary/5 to-transparent" />
+        <section className="relative overflow-hidden py-8 md:py-12">
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-brand-primary/5 to-transparent" />
           <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-8">
-                <Sparkles size={12} className="animate-pulse" />
-                Innovation Hub
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-6">
+                <Sparkles size={14} className="animate-pulse" />
+                The best software hub
             </div>
-            <h1 className="mx-auto max-w-4xl font-black tracking-tight text-text-primary text-4xl sm:text-6xl">
+            <h1 className="mx-auto max-w-4xl font-black tracking-tight text-text-primary text-2xl sm:text-3xl md:text-4xl lg:text-[40px]">
               Hilmost <span className="text-brand-primary">Software</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-text-secondary leading-relaxed font-medium">
+            <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg text-text-secondary leading-relaxed font-medium">
               A comprehensive laboratory of digital products. From high-precision utility suites to cross-platform native experiences.
             </p>
           </div>
         </section>
 
         {/* Product Hub Grid */}
-        <section className="py-12 md:py-20 border-t border-base">
+        <section className="py-8 md:py-10 border-t border-base">
+
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-6xl">
               <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
