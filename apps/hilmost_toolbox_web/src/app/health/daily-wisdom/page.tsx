@@ -17,19 +17,20 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-text-primary mb-2">
+    <div className="container mx-auto px-4 py-4 md:py-6 max-w-4xl">
+      <div className="text-center mb-6">
+        <h1 className="text-xl font-black tracking-tight text-text-primary mb-1">
           Daily Wisdom and Wellness
         </h1>
-        <p className="text-lg md:text-xl font-medium text-brand-primary mb-6">
+        <p className="text-sm font-bold text-brand-primary mb-4 uppercase tracking-widest">
           The Change you want to see starts within You
         </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
           Take a moment to center yourself. Reflect on timeless philosophy and let ancient wisdom guide your modern life.
         </p>
       </div>
-      
+
+
       <DailyQuoteClient />
       
       <div className="mt-16 flex flex-wrap justify-center gap-4">

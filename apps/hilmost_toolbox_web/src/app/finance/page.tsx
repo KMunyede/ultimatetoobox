@@ -22,19 +22,20 @@ const links = [
 
 export default function FinanceHub() {
   return (
-    <div className="container mx-auto px-4 py-12 md:py-24 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 md:py-6 max-w-5xl">
       <WebApplicationSchema name="Financial Calculators | Hilmost Ultimate Toolbox" description="Turn complexity into clarity. Experience the joy of getting things done beautifully with our financial tools for loans, interest, and taxes." url="https://hilmost-toolbox.hilmost.net/finance" />
-      <div className="flex items-center gap-4 mb-6">
-        <div className="h-16 w-16 flex items-center justify-center rounded-2xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
-          <Banknote className="w-8 h-8" />
+      <div className="flex items-center gap-3 mb-4">
+        <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
+          <Banknote className="w-5 h-5" />
         </div>
-        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
           Finance
         </h1>
       </div>
-      <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">
+      <p className="text-base text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
         Manage your wealth, compute compounding returns, estimate taxes, and convert global currencies using our robust financial toolbox.
       </p>
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {links.map((link) => (
