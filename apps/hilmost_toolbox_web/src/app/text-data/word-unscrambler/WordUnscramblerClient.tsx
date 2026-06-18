@@ -93,81 +93,81 @@ export function WordUnscramblerClient() {
       </div>
 
       {/* Centered Search Hero */}
-      <div className="max-w-4xl mx-auto w-full space-y-6">
-        <div id="tour-unscramble-input" className="bg-canvas-card border border-base rounded-[2.5rem] p-6 md:p-10 shadow-xl shadow-shadow/5 relative overflow-hidden">
+      <div className="max-w-4xl mx-auto w-full space-y-4">
+        <div id="tour-unscramble-input" className="bg-canvas-card border border-base rounded-2xl p-4 md:p-6 shadow-md shadow-shadow/5 relative overflow-hidden">
           {/* Decorative background element */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-48 h-48 bg-brand-primary/5 rounded-full -mr-24 -mt-24 blur-3xl pointer-events-none" />
 
-          <div className="relative space-y-6">
-            <div className="space-y-3">
-                <div className="flex justify-between items-end px-2">
-                  <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.2em]">Jumbled Letters</label>
+          <div className="relative space-y-4">
+            <div className="space-y-2">
+                <div className="flex justify-between items-end px-1">
+                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">Jumbled Letters</label>
                   <button
                     onClick={() => {
                       setState({ letters: "", startsWith: "", endsWith: "", contains: "" });
                       setResults([]);
                       setHasSearched(false);
                     }}
-                    className={`text-xs font-bold text-brand-primary hover:text-brand-hover transition-opacity px-2 py-1 rounded-lg hover:bg-brand-primary/5 ${letters ? 'opacity-100' : 'opacity-0'}`}
+                    className={`text-[10px] font-bold text-brand-primary hover:text-brand-hover transition-opacity px-2 py-0.5 rounded-md hover:bg-brand-primary/5 ${letters ? 'opacity-100' : 'opacity-0'}`}
                   >
                     Clear All
                   </button>
                 </div>
-                <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-3">
                   <div className="relative group flex-1">
                       <input
                           type="text"
                           inputMode="text"
                           spellCheck={false}
                           autoComplete="off"
-                          className="w-full h-16 md:h-20 px-6 pl-14 md:pl-16 border border-base rounded-2xl md:rounded-3xl bg-canvas-muted text-text-primary text-2xl md:text-4xl font-black focus:ring-8 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
+                          className="w-full h-12 md:h-14 px-4 pl-12 md:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl md:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
                           value={letters}
                           onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
                           onKeyDown={e => e.key === 'Enter' && fetchWords()}
                           placeholder="e.g. oten"
                       />
-                      <Search size={28} className="absolute left-5 md:left-6 top-5 md:top-6.5 text-text-muted group-focus-within:text-brand-primary transition-colors" />
+                      <Search size={22} className="absolute left-4 md:left-5 top-3.5 md:top-4 text-text-muted group-focus-within:text-brand-primary transition-colors" />
                   </div>
                   <button
                     id="tour-unscramble-button"
                     onClick={fetchWords}
                     disabled={loading || (letters as string).length < 2}
-                    className="h-16 md:h-20 px-8 md:px-12 bg-brand-primary text-text-inverse font-black text-xl rounded-2xl md:rounded-3xl hover:bg-brand-hover transition-all shadow-lg shadow-brand-primary/20 flex items-center justify-center gap-3 disabled:opacity-50 disabled:grayscale"
+                    className="h-12 md:h-14 px-6 md:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
                   >
                     {loading ? (
-                      <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
                       <>
-                        <Sparkles size={24} />
-                        Unscramble It
+                        <Sparkles size={18} />
+                        Unscramble
                       </>
                     )}
                   </button>
                 </div>
-                <p className="text-[11px] text-text-muted font-medium ml-2 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-primary/40" />
+                <p className="text-[10px] text-text-muted font-medium ml-1 flex items-center gap-1.5">
+                  <span className="w-1 h-1 rounded-full bg-brand-primary/40" />
                   Use <code className="bg-canvas-muted px-1 rounded text-text-primary">?</code> or <code className="bg-canvas-muted px-1 rounded text-text-primary">*</code> for blank tiles
                 </p>
             </div>
 
             {/* Desktop Action Row / Mobile Stack */}
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1 space-y-2">
-                  <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.2em] ml-2">Dictionary</label>
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="flex-1 space-y-1.5">
+                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] ml-1">Dictionary</label>
                   <div className="relative">
                     <select
-                        className="w-full h-14 px-5 pr-12 border border-base rounded-2xl bg-canvas-muted text-text-primary font-extrabold outline-none cursor-pointer hover:bg-canvas-card hover:border-brand-primary/30 transition-all appearance-none shadow-sm"
+                        className="w-full h-11 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary text-sm font-extrabold outline-none cursor-pointer hover:bg-canvas-card hover:border-brand-primary/30 transition-all appearance-none shadow-sm"
                         value={language}
                         onChange={e => setState({ language: e.target.value })}
                     >
-                        <option value="en">English (US/UK Scrabble)</option>
+                        <option value="en">English (Scrabble)</option>
                         <option value="fr">French</option>
                         <option value="de">German</option>
                         <option value="es">Spanish</option>
                         <option value="it">Italian</option>
                         <option value="pt">Portuguese</option>
                     </select>
-                    <ChevronDown size={20} className="absolute right-5 top-4.5 text-text-muted pointer-events-none" />
+                    <ChevronDown size={16} className="absolute right-4 top-3.5 text-text-muted pointer-events-none" />
                   </div>
               </div>
 
@@ -175,13 +175,13 @@ export function WordUnscramblerClient() {
                 <button
                   id="tour-unscramble-options"
                   onClick={() => setShowOptions(!showOptions)}
-                  className={`w-full h-14 flex items-center justify-between px-6 rounded-2xl border transition-all font-black text-sm tracking-tight ${showOptions ? 'bg-brand-primary text-text-inverse border-brand-primary shadow-lg shadow-brand-primary/20' : 'bg-canvas-card border-base text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-md'}`}
+                  className={`w-full h-11 flex items-center justify-between px-4 rounded-xl border transition-all font-black text-xs tracking-tight ${showOptions ? 'bg-brand-primary text-text-inverse border-brand-primary shadow-md shadow-brand-primary/20' : 'bg-canvas-card border-base text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-sm'}`}
                 >
-                  <div className="flex items-center gap-2.5">
-                    <Settings2 size={18} />
+                  <div className="flex items-center gap-2">
+                    <Settings2 size={16} />
                     {showOptions ? 'Hide Filters' : 'Advanced Filters'}
                   </div>
-                  {showOptions ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                  {showOptions ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
               </div>
             </div>
@@ -195,18 +195,18 @@ export function WordUnscramblerClient() {
                   exit={{ height: 0, opacity: 0 }}
                   className="overflow-hidden"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-base mt-2">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-base mt-1">
                     {[
                       { label: "Starts with", key: "startsWith", placeholder: "Prefix" },
                       { label: "Ends with", key: "endsWith", placeholder: "Suffix" },
                       { label: "Must contain", key: "contains", placeholder: "Included" }
                     ].map(filter => (
-                      <div key={filter.key} className="space-y-2">
-                        <label className="block text-[10px] font-bold text-text-muted uppercase tracking-wider ml-1">{filter.label}</label>
+                      <div key={filter.key} className="space-y-1.5">
+                        <label className="block text-[9px] font-bold text-text-muted uppercase tracking-wider ml-1">{filter.label}</label>
                         <div className="relative">
                           <input
                             type="text"
-                            className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-sm font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase shadow-inner"
+                            className="w-full h-10 px-3 border border-base rounded-lg bg-canvas-muted text-text-primary text-xs font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase shadow-inner"
                             value={state[filter.key as keyof typeof state]}
                             onChange={e => setState({ [filter.key]: e.target.value.replace(/[^a-zA-Z]/g, '') })}
                             placeholder={filter.placeholder}
@@ -214,9 +214,9 @@ export function WordUnscramblerClient() {
                           {state[filter.key as keyof typeof state] && (
                             <button
                               onClick={() => setState({ [filter.key]: "" })}
-                              className="absolute right-3 top-3.5 text-text-muted hover:text-red-500 transition-colors"
+                              className="absolute right-2.5 top-2.5 text-text-muted hover:text-red-500 transition-colors"
                             >
-                              <X size={16} />
+                              <X size={14} />
                             </button>
                           )}
                         </div>
@@ -229,6 +229,7 @@ export function WordUnscramblerClient() {
           </div>
         </div>
       </div>
+
 
       {/* Results Section - Full Width Expansion */}
       <div id="tour-unscramble-results" className="min-h-[500px]">
