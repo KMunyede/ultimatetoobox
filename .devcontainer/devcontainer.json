@@ -1,0 +1,11 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/flutter:2": {
+      "version": "stable"
+    },
+    "ghcr.io/devcontainers-contrib/features/firebase-cli:2": {
+      "version": "latest"
+    }
+  }
+}
