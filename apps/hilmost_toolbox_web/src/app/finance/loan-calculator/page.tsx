@@ -29,8 +29,8 @@ export default function LoanCalculatorPage() {
       <WebApplicationSchema name="Loan Calculator | Hilmost Toolbox" description="Expose hidden bank fees. Calculate monthly payments, total interest, and total cost of your loan instantly." url="https://hilmost-toolbox.hilmost.net/finance/loan-calculator" />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+      <div className="text-center max-w-3xl mx-auto mb-3">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
           Smart <span className="text-blue-600 dark:text-blue-400">Loan Calculator</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">

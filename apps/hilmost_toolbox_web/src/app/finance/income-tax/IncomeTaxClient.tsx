@@ -40,14 +40,14 @@ export function IncomeTaxClient() {
         <ToolTutorial tourId="income_tax_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Form */}
-        <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 space-y-6 shadow-sm hover:shadow-md transition-shadow">
           <div id="tour-tax-salary" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Gross Salary ($)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={salary}
               onChange={e => setState({ salary: e.target.value })}
               placeholder="e.g. 85000"
@@ -57,7 +57,7 @@ export function IncomeTaxClient() {
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Deductions ($)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={deductions}
               onChange={e => setState({ deductions: e.target.value })}
               placeholder="e.g. 13850"
@@ -67,7 +67,7 @@ export function IncomeTaxClient() {
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Estimated Tax Rate (%)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={taxRate}
               onChange={e => setState({ taxRate: e.target.value })}
               placeholder="e.g. 22"
@@ -76,7 +76,7 @@ export function IncomeTaxClient() {
         </div>
 
         {/* Results Dashboard */}
-        <div id="tour-tax-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+        <div id="tour-tax-results" className="bg-canvas-card border border-base rounded-2xl p-5 flex flex-col justify-between shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
           <div className="relative z-10 text-center space-y-2">
@@ -88,11 +88,11 @@ export function IncomeTaxClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Annual Net</span>
+                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Annual Net</span>
                 <p className="text-xl font-bold text-text-primary">$<NumberTicker value={netAnnual} decimals={0} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Tax Paid</span>
+                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Tax Paid</span>
                 <p className="text-xl font-bold text-red-500">$<NumberTicker value={taxAmount} decimals={0} /></p>
             </div>
           </div>

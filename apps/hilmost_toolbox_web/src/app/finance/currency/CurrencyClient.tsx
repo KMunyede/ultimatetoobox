@@ -126,12 +126,12 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
     >
       <div className="flex justify-between items-center">
         <div id="tour-currency-status" className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${error ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600'}`}>
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-black uppercase tracking-widest ${error ? 'bg-amber-500/10 border-amber-500/20 text-amber-600' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600'}`}>
                 {loading ? <RefreshCw size={10} className="animate-spin" /> : <Globe size={10} />}
                 {loading ? 'Syncing...' : provider}
             </div>
             {!loading && (
-              <span className="text-[10px] text-text-muted font-bold uppercase tracking-tighter opacity-60">
+              <span className="text-xs text-text-muted font-bold uppercase tracking-tighter opacity-60">
                 Updated: {lastUpdated.split(' ').slice(0, 4).join(' ')}
               </span>
             )}
@@ -149,8 +149,8 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
         </div>
       </div>
 
-      <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl">
-        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+      <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl">
+        <div className="flex flex-col md:flex-row items-center gap-5 md:gap-5">
 
           {/* Currency 1 */}
           <div id="tour-currency-input1" className="flex-1 w-full space-y-3">
@@ -159,7 +159,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
               <input
                 type="number"
                 inputMode="decimal"
-                className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
                 value={val1}
                 onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
               />
@@ -176,7 +176,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
           </div>
 
           <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-inner">
-            <ArrowRightLeft size={24} className="rotate-90 md:rotate-0" />
+            <ArrowRightLeft size={20} className="rotate-90 md:rotate-0" />
           </div>
 
           {/* Currency 2 */}
@@ -186,7 +186,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
               <input
                 type="number"
                 inputMode="decimal"
-                className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
                 value={val2}
                 onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
               />

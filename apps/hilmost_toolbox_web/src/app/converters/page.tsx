@@ -22,9 +22,9 @@ const links = [
 
 export default function ConvertersHub() {
   return (
-    <div className="container mx-auto px-4 py-4 md:py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Converters | Hilmost Ultimate Toolbox" description="Step into a smoother workflow. Discover converters designed to respect your time and elevate your craft with instant unit transformations." url="https://hilmost-toolbox.hilmost.net/converters" />
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-2">
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
           <Replace className="w-5 h-5" />
         </div>
@@ -32,7 +32,7 @@ export default function ConvertersHub() {
           Converters
         </h1>
       </div>
-      <p className="text-base text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
+      <p className="text-base text-slate-600 dark:text-slate-400 mb-3 max-w-2xl">
         A complete collection of precision conversion tools. Easily convert units of length, weight, temperature, digital storage, and time with instant results.
       </p>
 

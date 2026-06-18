@@ -47,9 +47,9 @@ export function VatTaxClient() {
         <ToolTutorial tourId="vat_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Form */}
-        <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 space-y-6 shadow-sm hover:shadow-md transition-shadow">
 
           <div id="tour-vat-mode" className="flex p-1 bg-canvas-muted rounded-xl border border-base">
             <button
@@ -71,7 +71,7 @@ export function VatTaxClient() {
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">{mode === 'add' ? 'Net Amount' : 'Gross Amount'} ($)</label>
                 <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={amount}
                 onChange={e => setState({ amount: e.target.value })}
                 />
@@ -80,7 +80,7 @@ export function VatTaxClient() {
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">VAT / Tax Rate (%)</label>
                 <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={rate}
                 onChange={e => setState({ rate: e.target.value })}
                 />
@@ -89,7 +89,7 @@ export function VatTaxClient() {
         </div>
 
         {/* Results */}
-        <div id="tour-vat-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+        <div id="tour-vat-results" className="bg-canvas-card border border-base rounded-2xl p-5 flex flex-col justify-between shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
           <div className="relative z-10 text-center space-y-2">
@@ -101,11 +101,11 @@ export function VatTaxClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Net Amount</span>
+                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Net Amount</span>
                 <p className="text-xl font-bold text-text-primary">$<NumberTicker value={net} decimals={2} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Tax Amount ({rate}%)</span>
+                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Tax Amount ({rate}%)</span>
                 <p className="text-xl font-bold text-emerald-600">+$<NumberTicker value={vat} decimals={2} /></p>
             </div>
           </div>

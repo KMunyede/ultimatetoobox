@@ -53,7 +53,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
         <ToolTutorial tourId="base64_converter" steps={tourSteps} buttonText="How to use" />
       </div>
 
-      <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl space-y-8">
+      <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl space-y-8">
 
         <div id="tour-b64-mode" className="flex p-1 bg-canvas-muted rounded-2xl border border-base max-w-sm mx-auto">
           <button
@@ -70,7 +70,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
           {/* Input */}
           <div id="tour-b64-input" className="space-y-4">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Input Text</label>

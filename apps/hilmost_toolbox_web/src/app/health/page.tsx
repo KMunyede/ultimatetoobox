@@ -14,9 +14,9 @@ const links = [
 
 export default function HealthHub() {
   return (
-    <div className="container mx-auto px-4 py-4 md:py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Health & Fitness | Hilmost Ultimate Toolbox" description="Free online health and fitness tools including BMI calculators and metric trackers." url="https://hilmost-toolbox.hilmost.net/health" />
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-2">
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
           <Activity className="w-5 h-5" />
         </div>
@@ -24,7 +24,7 @@ export default function HealthHub() {
           Health & Fitness
         </h1>
       </div>
-      <p className="text-base text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
+      <p className="text-base text-slate-600 dark:text-slate-400 mb-3 max-w-2xl">
         Monitor your health metrics and maintain your well-being with our simple and accurate fitness calculators.
       </p>
 

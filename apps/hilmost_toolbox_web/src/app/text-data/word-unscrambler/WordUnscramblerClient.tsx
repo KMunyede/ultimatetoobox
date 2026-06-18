@@ -94,21 +94,21 @@ export function WordUnscramblerClient() {
 
       {/* Centered Search Hero */}
       <div className="max-w-4xl mx-auto w-full space-y-4">
-        <div id="tour-unscramble-input" className="bg-canvas-card border border-base rounded-2xl p-4 md:p-6 shadow-md shadow-shadow/5 relative overflow-hidden">
+        <div id="tour-unscramble-input" className="bg-canvas-card border border-base rounded-2xl p-4 md:p-5 shadow-md shadow-shadow/5 relative overflow-hidden">
           {/* Decorative background element */}
           <div className="absolute top-0 right-0 w-48 h-48 bg-brand-primary/5 rounded-full -mr-24 -mt-24 blur-3xl pointer-events-none" />
 
           <div className="relative space-y-4">
             <div className="space-y-2">
                 <div className="flex justify-between items-end px-1">
-                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">Jumbled Letters</label>
+                  <label className="block text-xs font-black text-text-muted uppercase tracking-[0.2em]">Jumbled Letters</label>
                   <button
                     onClick={() => {
                       setState({ letters: "", startsWith: "", endsWith: "", contains: "" });
                       setResults([]);
                       setHasSearched(false);
                     }}
-                    className={`text-[10px] font-bold text-brand-primary hover:text-brand-hover transition-opacity px-2 py-0.5 rounded-md hover:bg-brand-primary/5 ${letters ? 'opacity-100' : 'opacity-0'}`}
+                    className={`text-xs font-bold text-brand-primary hover:text-brand-hover transition-opacity px-2 py-0.5 rounded-md hover:bg-brand-primary/5 ${letters ? 'opacity-100' : 'opacity-0'}`}
                   >
                     Clear All
                   </button>
@@ -120,7 +120,7 @@ export function WordUnscramblerClient() {
                           inputMode="text"
                           spellCheck={false}
                           autoComplete="off"
-                          className="w-full h-12 md:h-14 px-4 pl-12 md:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl md:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
+                          className="w-full h-12 md:h-12 px-4 pl-12 md:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl md:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
                           value={letters}
                           onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
                           onKeyDown={e => e.key === 'Enter' && fetchWords()}
@@ -132,7 +132,7 @@ export function WordUnscramblerClient() {
                     id="tour-unscramble-button"
                     onClick={fetchWords}
                     disabled={loading || (letters as string).length < 2}
-                    className="h-12 md:h-14 px-6 md:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
+                    className="h-12 md:h-12 px-6 md:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
                   >
                     {loading ? (
                       <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
@@ -144,7 +144,7 @@ export function WordUnscramblerClient() {
                     )}
                   </button>
                 </div>
-                <p className="text-[10px] text-text-muted font-medium ml-1 flex items-center gap-1.5">
+                <p className="text-xs text-text-muted font-medium ml-1 flex items-center gap-1.5">
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40" />
                   Use <code className="bg-canvas-muted px-1 rounded text-text-primary">?</code> or <code className="bg-canvas-muted px-1 rounded text-text-primary">*</code> for blank tiles
                 </p>
@@ -153,7 +153,7 @@ export function WordUnscramblerClient() {
             {/* Desktop Action Row / Mobile Stack */}
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1 space-y-1.5">
-                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] ml-1">Dictionary</label>
+                  <label className="block text-xs font-black text-text-muted uppercase tracking-[0.2em] ml-1">Dictionary</label>
                   <div className="relative">
                     <select
                         className="w-full h-11 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary text-sm font-extrabold outline-none cursor-pointer hover:bg-canvas-card hover:border-brand-primary/30 transition-all appearance-none shadow-sm"
@@ -202,7 +202,7 @@ export function WordUnscramblerClient() {
                       { label: "Must contain", key: "contains", placeholder: "Included" }
                     ].map(filter => (
                       <div key={filter.key} className="space-y-1.5">
-                        <label className="block text-[9px] font-bold text-text-muted uppercase tracking-wider ml-1">{filter.label}</label>
+                        <label className="block text-xs font-bold text-text-muted uppercase tracking-wider ml-1">{filter.label}</label>
                         <div className="relative">
                           <input
                             type="text"
@@ -237,8 +237,8 @@ export function WordUnscramblerClient() {
               {loading ? (
                   <motion.div key="loading" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="h-96 flex flex-col items-center justify-center space-y-6">
                       <div className="relative">
-                        <div className="w-16 h-16 border-4 border-brand-primary/10 rounded-full" />
-                        <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0" />
+                        <div className="w-16 h-14 border-4 border-brand-primary/10 rounded-full" />
+                        <div className="w-16 h-14 border-4 border-brand-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0" />
                       </div>
                       <div className="text-center">
                         <p className="font-black text-text-primary uppercase tracking-[0.2em] text-sm mb-1">Scanning Dictionary</p>

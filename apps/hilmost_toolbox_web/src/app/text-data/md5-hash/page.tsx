@@ -29,8 +29,8 @@ export default function MD5Page() {
       <WebApplicationSchema name="MD5 Hash Generator | Hilmost" description="Lightning-fast, secure cryptographic hashing to verify data integrity with zero delay." url="https://hilmost-toolbox.hilmost.net/text-data/md5-hash" />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+      <div className="text-center max-w-3xl mx-auto mb-3">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
           MD5 <span className="text-blue-500">Hash Generator</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">

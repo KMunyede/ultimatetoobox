@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-4 md:py-6 max-w-4xl">
-      <div className="text-center mb-6">
+    <div className="container mx-auto px-4 py-1 max-w-4xl">
+      <div className="text-center mb-3">
         <h1 className="text-xl font-black tracking-tight text-text-primary mb-1">
           Daily Wisdom and Wellness
         </h1>
-        <p className="text-sm font-bold text-brand-primary mb-4 uppercase tracking-widest">
+        <p className="text-sm font-bold text-brand-primary mb-2 uppercase tracking-widest">
           The Change you want to see starts within You
         </p>
         <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">

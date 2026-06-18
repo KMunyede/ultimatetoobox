@@ -29,8 +29,8 @@ export default function WordCountPage() {
       <WebApplicationSchema name="Word Count Tool | Hilmost" description="Precision text analytics in real-time. Know exactly what you&apos;ve written, down to the character." url="https://hilmost-toolbox.hilmost.net/text-data/word-count" />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+      <div className="text-center max-w-3xl mx-auto mb-3">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
           Word <span className="text-blue-500">Count Tool</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">

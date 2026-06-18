@@ -48,15 +48,15 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
         <ToolTutorial tourId="salary_converter" steps={tourSteps} buttonText="How to use" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Sidebar Inputs */}
         <div className="space-y-6">
-            <div id="tour-salary-input" className="bg-canvas-card border border-base rounded-3xl p-6 space-y-4 shadow-sm">
+            <div id="tour-salary-input" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-4 shadow-sm">
                 <div className="space-y-2">
                     <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Amount ($)</label>
                     <input
                         type="number"
-                        className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                        className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                         value={amount}
                         onChange={e => setState({ amount: e.target.value })}
                     />
@@ -77,7 +77,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                 </div>
             </div>
 
-            <div id="tour-salary-hours" className="bg-canvas-card border border-base rounded-3xl p-6 space-y-2 shadow-sm">
+            <div id="tour-salary-hours" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-2 shadow-sm">
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Hours Per Week</label>
                 <input
                     type="number"
@@ -93,9 +93,9 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
             {results.map((res, idx) => (
                 <div
                     key={res.label}
-                    className={`p-6 rounded-3xl border transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-canvas-card border-base text-text-primary shadow-sm hover:shadow-md'}`}
+                    className={`p-5 rounded-2xl border transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-canvas-card border-base text-text-primary shadow-sm hover:shadow-md'}`}
                 >
-                    <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-text-muted'}`}>
+                    <span className={`text-xs font-bold uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-text-muted'}`}>
                         {res.label} Pay
                     </span>
                     <div className={`font-black tracking-tighter ${idx === 0 ? 'text-4xl md:text-5xl' : 'text-2xl'}`}>

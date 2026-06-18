@@ -25,11 +25,11 @@ const faqs = [
 
 export default function WordUnscramblerPage() {
   return (
-    <div className="container mx-auto px-4 py-4 md:py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Word Unscrambler | Hilmost" description="Instantly untangle any anagram and find the hidden words in milliseconds." url="https://hilmost-toolbox.hilmost.net/text-data/word-unscrambler" />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-4 md:mb-6">
+      <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-3 tracking-tight">
           Word <span className="text-blue-500">Unscrambler</span>
         </h1>

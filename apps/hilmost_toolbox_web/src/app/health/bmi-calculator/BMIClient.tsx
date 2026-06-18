@@ -55,10 +55,10 @@ export function BMIClient() {
         <ShareButton />
         <ToolTutorial tourId="bmi_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         
         {/* Inputs */}
-        <div id="tour-bmi-inputs" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm space-y-6 hover:shadow-md transition-shadow">
+        <div id="tour-bmi-inputs" className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 shadow-sm space-y-6 hover:shadow-md transition-shadow">
         
         {/* Unit Toggle */}
         <div className="flex p-1 bg-canvas-muted rounded-xl border border-base">
@@ -82,7 +82,7 @@ export function BMIClient() {
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height (cm)</label>
               <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                 value={cm}
                 onChange={e => setState({ cm: e.target.value })}
                 placeholder="e.g. 175"
@@ -92,7 +92,7 @@ export function BMIClient() {
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (kg)</label>
               <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                 value={kg}
                 onChange={e => setState({ kg: e.target.value })}
                 placeholder="e.g. 70"
@@ -107,7 +107,7 @@ export function BMIClient() {
                 <div className="flex-1 relative">
                   <input
                      type="number"
-                     className="w-full h-14 px-4 pr-8 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                     className="w-full h-12 px-4 pr-8 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                      value={ft}
                      onChange={e => setState({ ft: e.target.value })}
                      placeholder="ft"
@@ -117,7 +117,7 @@ export function BMIClient() {
                 <div className="flex-1 relative">
                   <input
                      type="number"
-                     className="w-full h-14 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                     className="w-full h-12 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                      value={inch}
                      onChange={e => setState({ inch: e.target.value })}
                      placeholder="in"
@@ -130,7 +130,7 @@ export function BMIClient() {
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (lbs)</label>
               <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
                 value={lbs}
                 onChange={e => setState({ lbs: e.target.value })}
                 placeholder="e.g. 150"
@@ -145,7 +145,7 @@ export function BMIClient() {
         layout
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         id="tour-bmi-results" 
-        className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow min-h-[300px]"
+        className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow min-h-[300px]"
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
@@ -168,7 +168,7 @@ export function BMIClient() {
           </>
         ) : (
           <div className="flex flex-col items-center gap-4 text-text-muted">
-            <div className="w-16 h-16 rounded-full bg-canvas-muted flex items-center justify-center border border-base">
+            <div className="w-16 h-14 rounded-full bg-canvas-muted flex items-center justify-center border border-base">
                 <span className="text-2xl font-bold">?</span>
             </div>
             <p className="max-w-[200px]">Enter your height and weight to see your BMI.</p>

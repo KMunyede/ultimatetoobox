@@ -57,14 +57,14 @@ export function CompoundInterestClient() {
         <ToolTutorial tourId="compound_interest" steps={tourSteps} buttonText="How to use" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Form Column */}
-        <div id="tour-ci-inputs" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow h-fit">
+        <div id="tour-ci-inputs" className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 space-y-6 shadow-sm hover:shadow-md transition-shadow h-fit">
           <div className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Initial Principal ($)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={principal}
               onChange={e => setState({ principal: e.target.value })}
             />
@@ -73,26 +73,26 @@ export function CompoundInterestClient() {
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Monthly Contribution ($)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={monthly}
               onChange={e => setState({ monthly: e.target.value })}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Annual Rate (%)</label>
+                <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Rate (%)</label>
                 <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
                 value={rate}
                 onChange={e => setState({ rate: e.target.value })}
                 />
             </div>
             <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Years</label>
+                <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Years</label>
                 <input
                 type="number"
-                className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
                 value={years}
                 onChange={e => setState({ years: e.target.value })}
                 />
@@ -102,7 +102,7 @@ export function CompoundInterestClient() {
 
         {/* Chart/Result Column */}
         <div className="lg:col-span-2 space-y-6">
-            <div id="tour-ci-chart" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-xl">
+            <div id="tour-ci-chart" className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 shadow-xl">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                     <div>
                         <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Estimated Future Balance</span>
@@ -111,7 +111,7 @@ export function CompoundInterestClient() {
                         </div>
                     </div>
                     <div className="text-right sm:text-right">
-                        <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Interest Earned</span>
+                        <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Interest Earned</span>
                         <p className="text-xl font-bold text-text-primary">+$<NumberTicker value={totalInterest} decimals={0} /></p>
                     </div>
                 </div>
@@ -137,14 +137,14 @@ export function CompoundInterestClient() {
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="flex justify-center gap-6 mt-6">
+                <div className="flex justify-center gap-5 mt-6">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full bg-brand-primary" />
-                        <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Balance</span>
+                        <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Balance</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full border-2 border-dashed border-text-muted" />
-                        <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Contributions</span>
+                        <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Contributions</span>
                     </div>
                 </div>
             </div>

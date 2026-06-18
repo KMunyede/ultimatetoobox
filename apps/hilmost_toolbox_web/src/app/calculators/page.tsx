@@ -16,9 +16,9 @@ const links = [
 
 export default function CalculatorsHub() {
   return (
-    <div className="container mx-auto px-4 py-4 md:py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Calculators | Hilmost Ultimate Toolbox" description="Master your daily tasks with quiet confidence. Everything you need, exactly when you need it: standard, scientific, and specialized math calculators." url="https://hilmost-toolbox.hilmost.net/calculators" />
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-2">
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
           <Calculator className="w-5 h-5" />
         </div>
@@ -26,7 +26,7 @@ export default function CalculatorsHub() {
           Calculators
         </h1>
       </div>
-      <p className="text-base text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
+      <p className="text-base text-slate-600 dark:text-slate-400 mb-3 max-w-2xl">
         Whether you need a simple standard calculator or complex scientific computing, these tools provide robust processing power directly in your browser.
       </p>
 

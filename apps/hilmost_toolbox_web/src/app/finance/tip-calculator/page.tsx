@@ -29,8 +29,8 @@ export default function TipCalculatorPage() {
       <WebApplicationSchema name="Tip Calculator | Hilmost" description="Free online tip calculator. Calculate gratuity and split the bill among friends." url="https://hilmost-toolbox.hilmost.net/finance/tip-calculator" />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+      <div className="text-center max-w-3xl mx-auto mb-3">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
           Tip & Split <span className="text-emerald-500">Calculator</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">

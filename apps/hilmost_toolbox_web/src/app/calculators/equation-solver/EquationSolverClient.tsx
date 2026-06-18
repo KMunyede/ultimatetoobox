@@ -71,7 +71,7 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
   const renderInputs = () => {
     if (equation === "kinematics") {
       return (
-        <motion.div key="kinematics" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} id="tour-equation-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <motion.div key="kinematics" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} id="tour-equation-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Input label="Final Velocity (v)" value={v} onChange={(v) => setValue("v", v)} placeholder="m/s" accent="red" />
           <Input label="Initial Velocity (u)" value={u} onChange={(v) => setValue("u", v)} placeholder="m/s" accent="red" />
           <Input label="Acceleration (a)" value={a} onChange={(v) => setValue("a", v)} placeholder="m/s²" accent="orange" />
@@ -81,7 +81,7 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
     }
     if (equation === "force") {
       return (
-        <motion.div key="force" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} id="tour-equation-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <motion.div key="force" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} id="tour-equation-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Input label="Force (F)" value={F} onChange={(v) => setValue("F", v)} placeholder="N" accent="red" />
           <Input label="Mass (m)" value={m} onChange={(v) => setValue("m", v)} placeholder="kg" accent="orange" />
           <Input label="Acceleration (a)" value={aForce} onChange={(v) => setValue("aForce", v)} placeholder="m/s²" accent="orange" />
@@ -90,7 +90,7 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
     }
     if (equation === "gas") {
       return (
-        <motion.div key="gas" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} id="tour-equation-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <motion.div key="gas" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} id="tour-equation-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Input label="Pressure (P)" value={P} onChange={(v) => setValue("P", v)} placeholder="Pa" accent="red" />
           <Input label="Volume (V)" value={VGas} onChange={(v) => setValue("VGas", v)} placeholder="m³" accent="orange" />
           <Input label="Moles (n)" value={n} onChange={(v) => setValue("n", v)} placeholder="mol" accent="pink" />
@@ -125,7 +125,7 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
         </div>
       </div>
 
-      <div className="bg-canvas-card border border-border-base rounded-[2.5rem] p-6 md:p-12 shadow-2xl space-y-10 relative overflow-hidden">
+      <div className="bg-canvas-card border border-border-base rounded-[2.5rem] p-5 md:p-12 shadow-2xl space-y-10 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-orange-500/20" />
 
         <div className="space-y-4">
@@ -135,14 +135,14 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
               id="tour-equation-select"
               value={equation}
               onChange={(e) => setEquation(e.target.value as EquationType)}
-              className="w-full h-16 bg-canvas-muted border border-border-base rounded-2xl px-6 text-xl font-black text-text-primary focus:ring-8 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all cursor-pointer appearance-none shadow-inner"
+              className="w-full h-14 bg-canvas-muted border border-border-base rounded-2xl px-6 text-xl font-black text-text-primary focus:ring-8 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all cursor-pointer appearance-none shadow-inner"
               >
                   <option value="kinematics">Kinematics: v = u + at</option>
                   <option value="force">Newton&apos;s Law: F = ma</option>
                   <option value="gas">Ideal Gas Law: PV = nRT</option>
               </select>
               <div className="pointer-events-none absolute right-6 top-5 text-text-muted group-hover:text-brand-primary transition-colors">
-                  <ChevronDown size={24} />
+                  <ChevronDown size={20} />
               </div>
           </div>
         </div>
@@ -151,7 +151,7 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
             {renderInputs()}
         </AnimatePresence>
 
-        <div id="tour-equation-result" className={`mt-12 p-10 md:p-14 rounded-[2rem] border transition-all duration-500 flex flex-col items-center justify-center shadow-inner relative overflow-hidden ${result ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-canvas-muted border-border-base opacity-60'}`}>
+        <div id="tour-equation-result" className={`mt-12 p-8 md:p-14 rounded-[2rem] border transition-all duration-500 flex flex-col items-center justify-center shadow-inner relative overflow-hidden ${result ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-canvas-muted border-border-base opacity-60'}`}>
             <div className="absolute top-0 right-0 p-4">
               {result ? <Sparkles size={20} className="text-brand-primary animate-pulse" /> : <AlertCircle size={20} className="text-text-muted" />}
             </div>
@@ -183,7 +183,7 @@ function Input({ label, value, onChange, placeholder, accent }: { label: string,
   return (
     <div className="space-y-3">
       <div className="flex justify-between items-end px-1">
-        <label className="block text-[10px] font-black text-text-muted uppercase tracking-widest">
+        <label className="block text-xs font-black text-text-muted uppercase tracking-widest">
           {label}
         </label>
         <ConstantSelector onSelect={onChange} />
@@ -195,7 +195,7 @@ function Input({ label, value, onChange, placeholder, accent }: { label: string,
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className={`w-full h-14 px-5 border border-border-base rounded-xl bg-canvas-muted text-text-primary text-xl font-black placeholder:text-text-muted/30 outline-none transition-all shadow-inner ${accentColors[accent]}`}
+          className={`w-full h-12 px-5 border border-border-base rounded-xl bg-canvas-muted text-text-primary text-xl font-black placeholder:text-text-muted/30 outline-none transition-all shadow-inner ${accentColors[accent]}`}
         />
       </div>
     </div>

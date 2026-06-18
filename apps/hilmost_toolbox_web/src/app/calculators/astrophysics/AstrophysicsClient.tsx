@@ -63,7 +63,7 @@ export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
         </div>
       </div>
 
-      <div className="bg-canvas-card border border-border-base rounded-[2.5rem] p-6 md:p-12 shadow-2xl space-y-10 relative overflow-hidden">
+      <div className="bg-canvas-card border border-border-base rounded-[2.5rem] p-5 md:p-12 shadow-2xl space-y-10 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-30" />
 
         {/* Mode Selector */}
@@ -80,7 +80,7 @@ export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
             ))}
         </div>
 
-        <div id="tour-astro-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+        <div id="tour-astro-inputs" className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="space-y-4">
                 <div className="flex justify-between items-end px-1">
                     <label className="text-[11px] font-black text-text-muted uppercase tracking-[0.15em]">Body Mass (kg)</label>
@@ -92,11 +92,11 @@ export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
                   <input
                       type="text"
                       inputMode="decimal"
-                      className="w-full h-16 px-6 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-black focus:ring-8 focus:ring-pink-500/10 focus:border-pink-500 outline-none transition-all font-mono shadow-inner"
+                      className="w-full h-14 px-6 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-black focus:ring-8 focus:ring-pink-500/10 focus:border-pink-500 outline-none transition-all font-mono shadow-inner"
                       value={mass as string}
                       onChange={e => setState({ ...state, mass: e.target.value })}
                   />
-                  <div className="absolute right-4 top-5 text-[10px] font-black text-text-muted uppercase tracking-widest pointer-events-none">kg</div>
+                  <div className="absolute right-4 top-5 text-xs font-black text-text-muted uppercase tracking-widest pointer-events-none">kg</div>
                 </div>
             </div>
             <div className="space-y-4">
@@ -108,18 +108,18 @@ export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
                   <input
                       type="text"
                       inputMode="decimal"
-                      className="w-full h-16 px-6 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-black focus:ring-8 focus:ring-purple-500/10 focus:border-purple-500 outline-none transition-all font-mono shadow-inner"
+                      className="w-full h-14 px-6 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-black focus:ring-8 focus:ring-purple-500/10 focus:border-purple-500 outline-none transition-all font-mono shadow-inner"
                       value={radius as string}
                       onChange={e => setState({ ...state, radius: e.target.value })}
                   />
-                  <div className="absolute right-4 top-5 text-[10px] font-black text-text-muted uppercase tracking-widest pointer-events-none">m</div>
+                  <div className="absolute right-4 top-5 text-xs font-black text-text-muted uppercase tracking-widest pointer-events-none">m</div>
                 </div>
             </div>
         </div>
 
         {/* Result Area */}
-        <div id="tour-astro-result" className="p-10 md:p-14 bg-canvas-muted rounded-[2rem] border border-border-base flex flex-col items-center justify-center shadow-inner relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 text-[10px] font-black text-text-muted uppercase tracking-[0.2em] opacity-30">Universal Solution</div>
+        <div id="tour-astro-result" className="p-8 md:p-14 bg-canvas-muted rounded-[2rem] border border-border-base flex flex-col items-center justify-center shadow-inner relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 text-xs font-black text-text-muted uppercase tracking-[0.2em] opacity-30">Universal Solution</div>
             <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-500/10 transition-colors duration-700" />
 
             <span className="text-[11px] font-black text-text-secondary uppercase tracking-[0.25em] mb-4">Calculated Velocity</span>
@@ -128,7 +128,7 @@ export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
             </div>
             <div className="mt-4 flex items-center gap-2">
                <div className="h-1 w-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full" />
-               <span className="text-[10px] font-bold text-text-muted italic">Instant Physics Resolution</span>
+               <span className="text-xs font-bold text-text-muted italic">Instant Physics Resolution</span>
                <div className="h-1 w-12 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full" />
             </div>
         </div>

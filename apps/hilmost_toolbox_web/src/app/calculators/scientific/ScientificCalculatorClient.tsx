@@ -98,7 +98,7 @@ export function ScientificCalculatorClient() {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container grid grid-cols-1 xl:grid-cols-4 gap-8 max-w-7xl mx-auto"
+      className="@container grid grid-cols-1 xl:grid-cols-4 gap-5 max-w-7xl mx-auto"
     >
       <div className="xl:col-span-3 space-y-8">
         <div className="flex justify-between items-center px-1">
@@ -122,12 +122,12 @@ export function ScientificCalculatorClient() {
           </div>
         </div>
 
-        <div className="bg-canvas-card border border-border-base rounded-[3.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        <div className="bg-canvas-card border border-border-base rounded-[3.5rem] p-5 md:p-12 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-500 to-pink-500 opacity-20" />
 
           {/* Display */}
-          <div id="tour-calc-display" className="mb-12 p-10 bg-canvas-muted rounded-[2.5rem] border border-border-base flex flex-col items-end justify-center min-h-[200px] shadow-inner relative group">
-              <div className="absolute top-6 left-8 flex items-center gap-2">
+          <div id="tour-calc-display" className="mb-12 p-8 bg-canvas-muted rounded-[2.5rem] border border-border-base flex flex-col items-end justify-center min-h-[200px] shadow-inner relative group">
+              <div className="absolute top-5 left-8 flex items-center gap-2">
                  <div className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
                  <span className="text-[11px] font-black text-text-muted uppercase tracking-[0.25em]">Scientific Engine</span>
               </div>
@@ -152,7 +152,7 @@ export function ScientificCalculatorClient() {
                   <button
                       key={btn.label}
                       onClick={btn.action}
-                      className={`h-14 md:h-16 rounded-2xl font-black text-lg transition-all active:scale-95 flex items-center justify-center border
+                      className={`h-12 md:h-14 rounded-2xl font-black text-lg transition-all active:scale-95 flex items-center justify-center border
                           ${btn.type === 'num' ? 'bg-canvas-card text-text-primary border-border-base hover:bg-canvas-muted shadow-sm text-2xl' :
                             btn.type === 'op' ? 'bg-orange-500/10 text-orange-600 border-orange-500/10 hover:bg-orange-500/20 text-2xl' :
                             btn.type === 'op_alt' ? 'bg-canvas-muted text-text-secondary border-border-base hover:border-text-muted text-sm uppercase tracking-tighter' :
@@ -173,10 +173,10 @@ export function ScientificCalculatorClient() {
 
       {/* Side Panel: History */}
       <div id="tour-calc-history" className="space-y-6">
-          <div className="bg-canvas-card border border-border-base rounded-[3rem] p-8 shadow-xl h-full min-h-[500px]">
+          <div className="bg-canvas-card border border-border-base rounded-[3rem] p-5 shadow-xl h-full min-h-[500px]">
               <div className="flex items-center gap-3 mb-10">
                   <div className="p-3 bg-purple-500/10 rounded-2xl text-purple-600">
-                    <History size={24} />
+                    <History size={20} />
                   </div>
                   <h3 className="text-2xl font-black text-text-primary tracking-tighter">Calculation Log</h3>
               </div>
@@ -189,14 +189,14 @@ export function ScientificCalculatorClient() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         key={i}
-                        className="p-6 bg-canvas-muted border border-border-base rounded-3xl group hover:border-purple-500/30 transition-all cursor-pointer relative overflow-hidden"
+                        className="p-5 bg-canvas-muted border border-border-base rounded-2xl group hover:border-purple-500/30 transition-all cursor-pointer relative overflow-hidden"
                         onClick={() => {
                            const parts = entry.split('=');
                            if (parts.length > 1) setState({ ...state, expression: parts[1].trim() });
                         }}
                       >
                         <div className="absolute top-0 right-0 w-1 h-full bg-purple-500/20" />
-                        <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.25em] mb-2 group-hover:text-purple-500 transition-colors">Session Log {history.length - i}</p>
+                        <p className="text-xs font-black text-text-muted uppercase tracking-[0.25em] mb-2 group-hover:text-purple-500 transition-colors">Session Log {history.length - i}</p>
                         <p className="text-base font-bold text-text-primary break-all leading-tight">{entry}</p>
                       </motion.div>
                     ))

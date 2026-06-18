@@ -56,13 +56,13 @@ export function RetirementPlannerClient() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm"
+      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 md:p-5 shadow-sm"
     >
       <div className="flex justify-end gap-4 mb-4 md:mb-6">
         <ShareButton />
         <ToolTutorial tourId="retirement_planner" steps={tourSteps} buttonText="How to use" />
       </div>
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-5">
         
         {/* Inputs */}
         <div id="tour-retire-inputs" className="space-y-5 md:col-span-1">
@@ -128,7 +128,7 @@ export function RetirementPlannerClient() {
             layout
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             id="tour-retire-results" 
-            className="bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl p-6 border border-indigo-100 dark:border-indigo-900/30 mb-6 flex-shrink-0 transition-all hover:shadow-md"
+            className="bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl p-5 border border-indigo-100 dark:border-indigo-900/30 mb-6 flex-shrink-0 transition-all hover:shadow-md"
           >
             <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-1">Projected Savings at Age {retireAge}</p>
             <p className="text-4xl font-bold text-slate-900 dark:text-white flex items-center">

@@ -31,11 +31,11 @@ export function CurrencyPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 md:py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       
-      <div className="text-center max-w-3xl mx-auto mb-4 md:mb-6">
+      <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-3 tracking-tight">
           {title.split(' | ')[0].split(' ').map((word, i, arr) => 
             i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '

@@ -77,7 +77,7 @@ export function UnixTimeClient() {
       </div>
       
       {/* Current Epoch */}
-      <div id="tour-unix-current" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-3xl p-6 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
+      <div id="tour-unix-current" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-5 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
         <div>
           <h2 className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-1 uppercase tracking-wider">Current Unix Epoch Time</h2>
           <div className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 dark:text-white tracking-wider">
@@ -86,40 +86,40 @@ export function UnixTimeClient() {
         </div>
         <button
           onClick={handleCopy}
-          className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-2xl bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-slate-700 transition-all shadow-sm active:scale-95"
+          className="flex-shrink-0 flex items-center justify-center h-12 w-14 rounded-2xl bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-slate-700 transition-all shadow-sm active:scale-95"
           title="Copy current epoch"
         >
-          {copied ? <Check size={24} className="text-emerald-500" /> : <Copy size={24} />}
+          {copied ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Timestamp to Date */}
-        <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm transition-all hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-md">
+        <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-all hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-md">
           <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Timestamp to Date</h2>
           <div className="space-y-4">
             <input
               type="text"
-              className="w-full h-14 px-4 text-lg font-mono border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+              className="w-full h-12 px-4 text-lg font-mono border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
               value={timestampStr}
               onChange={e => setState({ timestampStr: e.target.value })}
               placeholder="e.g. 1718000000"
             />
-            <div className="h-20 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-blue-700 dark:text-blue-400 font-medium break-words leading-tight">
+            <div className="h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-blue-700 dark:text-blue-400 font-medium break-words leading-tight">
               {getReadableDate(timestampStr)}
             </div>
           </div>
         </div>
 
         {/* Date to Timestamp */}
-        <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm transition-all hover:border-emerald-200 dark:hover:border-emerald-800 hover:shadow-md">
+        <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-all hover:border-emerald-200 dark:hover:border-emerald-800 hover:shadow-md">
           <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Date to Timestamp</h2>
           <div className="space-y-4">
             <DateTimePicker
               value={dateStr}
               onChange={(val) => setState({ dateStr: val })}
             />
-            <div className="h-20 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-emerald-700 dark:text-emerald-400 font-mono text-2xl font-bold break-all">
+            <div className="h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-emerald-700 dark:text-emerald-400 font-mono text-2xl font-bold break-all">
               {getTimestampFromDate(dateStr)}
             </div>
           </div>

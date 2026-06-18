@@ -97,7 +97,7 @@ export function BudgetClient() {
     { element: '#tour-budget-summary', popover: { title: '3. Net Balance', description: 'The most important number: what is left over at the end of the month.' } },
   ];
 
-  if (!isLoaded) return <div className="h-96 animate-pulse bg-canvas-muted rounded-3xl" />;
+  if (!isLoaded) return <div className="h-96 animate-pulse bg-canvas-muted rounded-2xl" />;
 
   return (
     <motion.div 
@@ -108,7 +108,7 @@ export function BudgetClient() {
       <div className="flex justify-between items-center px-2">
         <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
-            <span className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">Live Budget Engine</span>
+            <span className="text-xs font-black text-text-muted uppercase tracking-[0.2em]">Live Budget Engine</span>
         </div>
         <div className="flex gap-4">
           <ShareButton />
@@ -162,7 +162,7 @@ export function BudgetClient() {
 
         {/* Sidebar Summary */}
         <div className="space-y-8">
-            <div id="tour-budget-summary" className="sticky top-24 bg-canvas-card border border-base rounded-[2.5rem] p-8 shadow-2xl overflow-hidden">
+            <div id="tour-budget-summary" className="sticky top-24 bg-canvas-card border border-base rounded-[2.5rem] p-5 shadow-2xl overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-brand-primary/20" />
 
                 <h3 className="text-xl font-black text-text-primary mb-8 flex items-center gap-3">
@@ -210,7 +210,7 @@ export function BudgetClient() {
                         </PieChart>
                     </ResponsiveContainer>
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-[10px] font-bold text-text-muted uppercase tracking-tighter">Remaining</span>
+                        <span className="text-xs font-bold text-text-muted uppercase tracking-tighter">Remaining</span>
                         <span className="text-lg font-black text-text-primary">
                             {totals.income > 0 ? Math.round((Math.max(0, netBalance) / totals.income) * 100) : 0}%
                         </span>

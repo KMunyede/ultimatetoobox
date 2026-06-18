@@ -45,14 +45,14 @@ export function LoanCalculatorClient() {
         <ToolTutorial tourId="loan_calculator" steps={tourSteps} buttonText="How to use" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Input Form */}
-        <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 space-y-6 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 space-y-6 shadow-sm hover:shadow-md transition-shadow">
           <div id="tour-loan-amount" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Loan Amount ($)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={amount}
               onChange={e => setState({ amount: e.target.value })}
               placeholder="e.g. 250000"
@@ -62,7 +62,7 @@ export function LoanCalculatorClient() {
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Interest Rate (%)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={rate}
               onChange={e => setState({ rate: e.target.value })}
               placeholder="e.g. 6.5"
@@ -72,7 +72,7 @@ export function LoanCalculatorClient() {
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Loan Term (Years)</label>
             <input
               type="number"
-              className="w-full h-14 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               value={years}
               onChange={e => setState({ years: e.target.value })}
               placeholder="e.g. 30"
@@ -81,7 +81,7 @@ export function LoanCalculatorClient() {
         </div>
 
         {/* Results */}
-        <div id="tour-loan-results" className="bg-canvas-card border border-base rounded-3xl p-8 flex flex-col justify-between shadow-xl relative overflow-hidden">
+        <div id="tour-loan-results" className="bg-canvas-card border border-base rounded-2xl p-5 flex flex-col justify-between shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
           <div className="relative z-10 text-center space-y-2">
@@ -93,11 +93,11 @@ export function LoanCalculatorClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Interest</span>
+                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Interest</span>
                 <p className="text-xl font-bold text-text-primary">$<NumberTicker value={totalInterest} decimals={0} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Payable</span>
+                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Payable</span>
                 <p className="text-xl font-bold text-text-primary">$<NumberTicker value={totalPayable} decimals={0} /></p>
             </div>
           </div>
