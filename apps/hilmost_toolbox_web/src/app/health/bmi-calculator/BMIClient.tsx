@@ -150,7 +150,7 @@ export function BMIClient() {
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
             <div className="text-text-secondary font-medium mb-2">Your BMI is</div>
-            <div className="text-7xl md:text-8xl font-black text-text-primary mb-8 tracking-tighter">
+            <div className="text-5xl md:text-6xl font-black text-text-primary mb-8 tracking-tighter">
               <NumberTicker value={bmi} decimals={1} duration={0.8} />
             </div>
             {(() => {

@@ -124,7 +124,7 @@ export function AstrophysicsClient({ defaultTab }: { defaultTab?: CalcType }) {
 
             <span className="text-[11px] font-black text-text-secondary uppercase tracking-[0.25em] mb-4">Calculated Velocity</span>
             <div className="flex items-center gap-4">
-                <ScientificNumber value={resultValue} suffix={unit} className="text-4xl md:text-7xl font-black text-text-primary tracking-tighter" />
+                <ScientificNumber value={resultValue} suffix={unit} className="text-3xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter" />
             </div>
             <div className="mt-4 flex items-center gap-2">
                <div className="h-1 w-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full" />

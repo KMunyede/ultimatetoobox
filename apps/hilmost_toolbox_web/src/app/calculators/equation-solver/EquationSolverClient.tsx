@@ -34,7 +34,7 @@ export function EquationSolverClient({ defaultEquation }: { defaultEquation?: Eq
         className="flex items-center justify-center gap-4"
       >
         <span className="text-2xl font-black text-text-muted italic">{label} =</span>
-        <ScientificNumber value={value} suffix={unit} className="text-4xl md:text-5xl font-black text-brand-primary tracking-tighter" />
+        <ScientificNumber value={value} suffix={unit} className="text-3xl md:text-5xl font-black text-brand-primary tracking-tighter" />
       </motion.div>
     );
   };

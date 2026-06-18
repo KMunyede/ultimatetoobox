@@ -86,7 +86,7 @@ export function AgeCalculatorClient() {
             <div className="relative z-10 text-center space-y-4">
                 <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Current Age</span>
                 <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-7xl md:text-8xl font-black text-brand-primary tracking-tighter">{ageResult.years}</span>
+                    <span className="text-5xl md:text-6xl font-black text-brand-primary tracking-tighter">{ageResult.years}</span>
                     <span className="text-xl font-bold text-text-secondary uppercase">Years</span>
                 </div>
                 <p className="text-lg font-medium text-text-muted">

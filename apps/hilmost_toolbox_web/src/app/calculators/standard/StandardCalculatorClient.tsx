@@ -146,7 +146,7 @@ export function StandardCalculatorClient() {
               key={display}
               initial={{ y: 5, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter truncate"
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter truncate"
             >
               {display}
             </motion.div>

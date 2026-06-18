@@ -182,7 +182,7 @@ export function BudgetClient() {
                     <div className="h-px bg-border-base" />
                     <div className="flex justify-between items-end pt-2">
                         <span className="text-xs font-black text-text-primary uppercase tracking-widest">Net Balance</span>
-                        <span className={`text-4xl font-black ${netBalance >= 0 ? 'text-brand-primary' : 'text-rose-600'}`}>
+                        <span className={`text-2xl md:text-3xl font-black ${netBalance >= 0 ? 'text-brand-primary' : 'text-rose-600'}`}>
                             {netBalance < 0 && "-"}$<NumberTicker value={Math.abs(netBalance)} />
                         </span>
                     </div>

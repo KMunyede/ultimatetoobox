@@ -10,16 +10,26 @@ export function factorial(n: number): number {
   return res;
 }
 
+/**
+ * Formats numerical results for display.
+ * - Standardizes precision.
+ * - Adds 3-digit grouping (commas) for readability.
+ * - Handles Infinity and NaN.
+ */
 export function formatResult(num: number): string {
   if (isNaN(num)) return "Error";
   if (!isFinite(num)) return "Infinity";
 
-  // Handle precision issues
-  const s = parseFloat(num.toFixed(12)).toString();
-  if (s.length > 12 && s.includes('.')) {
-      return parseFloat(num.toFixed(8)).toString();
-  }
-  return s;
+  // Limit precision to avoid long tail of decimals
+  const precision = 10;
+  const fixed = parseFloat(num.toFixed(precision));
+
+  const parts = fixed.toString().split(".");
+
+  // Add commas to integer part
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  return parts.join(".");
 }
 
 /**

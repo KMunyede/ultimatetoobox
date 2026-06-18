@@ -29,11 +29,18 @@ export function NumberTicker({
   }, [value, springValue]);
 
   const display = useTransform(springValue, (current) => {
-    return `${prefix}${current.toFixed(decimals)}${suffix}`;
+    const fixed = current.toFixed(decimals);
+    const parts = fixed.split(".");
+    // Add commas for 3-digit grouping
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return `${prefix}${parts.join(".")}${suffix}`;
   });
 
   if (!hasMounted) {
-    return <span>{prefix}{value.toFixed(decimals)}{suffix}</span>;
+    const raw = value.toFixed(decimals);
+    const p = raw.split(".");
+    p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return <span>{prefix}{p.join(".")}{suffix}</span>;
   }
 
   return <motion.span>{display}</motion.span>;

@@ -95,7 +95,7 @@ export function InflationClient() {
 
           <div className="relative z-10 text-center space-y-2">
             <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Adjusted Value in {endYear}</span>
-            <div className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter">
+            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-brand-primary tracking-tighter">
               $<NumberTicker value={adjustedValue} decimals={2} />
             </div>
           </div>
