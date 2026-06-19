@@ -1,7 +1,8 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { getCanonicalUrl } from "@utilitiessite/config";
 import { Suspense } from "react";
 import { Base64Client } from "./Base64Client";
+import { Calendar } from "lucide-react";
 
 const TOOL_NAME = "Base64 Text Encoder & Decoder";
 const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII format — no signup required.";
@@ -11,14 +12,19 @@ export function Base64PageUI({
   defaultMode = "encode",
   title = TOOL_NAME,
   description = "Free online Base64 text encoder and decoder. Developer-grade data encoding to safely transform your text strings, instantly.",
-  canonicalUrl = getCanonicalUrl(PATH)
+  canonicalUrl = getCanonicalUrl(PATH),
+  lastUpdated
 }: {
   defaultMode?: "encode" | "decode";
   title?: string;
   description?: string;
   canonicalUrl?: string;
+  lastUpdated?: string;
 }) {
-  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/text-data/base64-encode/page.tsx");
+  const breadcrumbItems = [
+    { label: "Text & Data", href: "/text-data" },
+    { label: "Base64 Encoder", href: "/text-data/base64-encode" },
+  ];
 
   const faqs = [
     {
@@ -36,22 +42,27 @@ export function Base64PageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-2xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {title.split(' | ')[0].split(' ').map((word, i, arr) => 
             i === arr.length - 1 || word.toLowerCase() === 'encoder' || word.toLowerCase() === 'decoder' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '
           )}
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-          Last updated: {lastUpdated}
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           {description.split('.')[0]}. {description.split('.')[1]}.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>

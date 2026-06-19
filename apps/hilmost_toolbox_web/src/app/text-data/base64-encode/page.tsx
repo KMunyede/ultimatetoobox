@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Base64PageUI } from "./Base64PageUI";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const TOOL_NAME = "Base64 Text Encoder & Decoder";
 const TOOL_TYPE = "Base64 Converter";
@@ -9,7 +10,7 @@ const PATH = "/text-data/base64-encode";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
-  const description = `Free online ${TOOL_NAME.toLowerCase()}. ${TOOL_DESC}`;
+  const description = `Safely encode and decode text strings to Base64 format instantly. Free online developer tool for URL-safe data transformation with high precision.`;
   const canonical = getCanonicalUrl(PATH);
 
   return {
@@ -25,5 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Base64Page() {
-  return <Base64PageUI />;
+  const filePath = path.join(process.cwd(), "src/app/text-data/base64-encode/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  return <Base64PageUI lastUpdated={lastUpdated} />;
 }

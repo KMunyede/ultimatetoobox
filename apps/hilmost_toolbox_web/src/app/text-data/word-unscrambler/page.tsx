@@ -1,8 +1,10 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
 import { Suspense } from "react";
+import path from "path";
+import { Calendar } from "lucide-react";
 
 const TOOL_NAME = "Word Unscrambler";
 const TOOL_TYPE = "Anagram Solver";
@@ -11,7 +13,7 @@ const PATH = "/text-data/word-unscrambler";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
-  const description = `Free online ${TOOL_NAME.toLowerCase()}. ${TOOL_DESC}`;
+  const description = `Unscramble letters and solve anagrams instantly. Free online tool for Scrabble, Words with Friends, and crossword puzzles. Find all possible words from your letters.`;
   const canonical = getCanonicalUrl(PATH);
 
   return {
@@ -42,24 +44,35 @@ const faqs = [
 ];
 
 export default function WordUnscramblerPage() {
-  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/text-data/word-unscrambler/page.tsx");
+  const breadcrumbItems = [
+    { label: "Text & Data", href: "/text-data" },
+    { label: "Word Unscrambler", href: "/text-data/word-unscrambler" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/text-data/word-unscrambler/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
   const canonicalUrl = getCanonicalUrl(PATH);
 
   return (
-    <div className="container mx-auto px-4 py-1 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
-          Word <span className="text-blue-500">Unscrambler</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Word <span className="text-indigo-600 dark:text-indigo-500">Unscrambler</span>
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-          Last updated: {lastUpdated}
-        </p>
-        <p className="text-base md:text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Instantly untangle any anagram. Find the hidden words in milliseconds.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
