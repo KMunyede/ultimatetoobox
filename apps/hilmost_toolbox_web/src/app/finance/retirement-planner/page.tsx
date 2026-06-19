@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RetirementPlannerClient } from "./RetirementPlannerClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Retirement Planner | Track Your Financial Future",
-  description: "Free online retirement planner with visual charts. Calculate exactly how much you need to save to retire comfortably.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Retirement Planner — Track Your Financial Future | Hilmost Toolbox",
+    description: "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts and high-precision projections.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/retirement-planner"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function RetirementPlannerPage() {
+  const breadcrumbItems = [
+    { label: "Finance", href: "/finance" },
+    { label: "Retirement Planner", href: "/finance/retirement-planner" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/finance/retirement-planner/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
+    <div className="container mx-auto px-4 py-6 max-w-6xl">
       <WebApplicationSchema name="Retirement Planner | Hilmost" description="Free online retirement planner with visual charts. Calculate exactly how much you need to save to retire comfortably." url="https://hilmost-toolbox.hilmost.net/finance/retirement-planner" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Retirement <span className="text-indigo-500">Planner</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Retirement <span className="text-indigo-600 dark:text-indigo-500">Planner</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Take absolute control of your timeline. Visualize your exact retirement trajectory and guarantee your savings are on track to freedom.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>

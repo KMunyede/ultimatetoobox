@@ -1,16 +1,32 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Metadata } from "next";
+import { Calendar } from "lucide-react";
 
-export const metadata = {
-  title: "Budget Planner | 50/30/20 Rule Calculator",
-  description: "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Download as CSV or print to PDF. Private and secure.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Budget Planner — 50/30/20 Rule Calculator | Hilmost Toolbox",
+    description: "Track your income, needs, wants, and savings with our free online budget planner. Uses the 50/30/20 rule to help you manage your finances securely and privately.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/budget-planner"),
+    },
+  };
+}
 
 export default function BudgetPlannerPage() {
-  const title = metadata.title;
-  const description = metadata.description;
-  const canonicalUrl = "https://hilmost-toolbox.hilmost.net/finance/budget-planner";
+  const breadcrumbItems = [
+    { label: "Finance", href: "/finance" },
+    { label: "Budget Planner", href: "/finance/budget-planner" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/finance/budget-planner/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+  const canonicalUrl = getCanonicalUrl("/finance/budget-planner");
+  const title = "Budget Planner | 50/30/20 Rule Calculator";
+  const description = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Download as CSV or print to PDF. Private and secure.";
 
   const faqs = [
     {
@@ -28,17 +44,25 @@ export default function BudgetPlannerPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-1 max-w-6xl">
+    <div className="container mx-auto px-4 py-6 max-w-6xl">
       <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3 print:hidden">
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-3 tracking-tight">
-          {title.split(' | ')[0]} <span className="text-blue-500">Calculator</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8 print:hidden">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          {title.split(' | ')[0]} <span className="text-blue-600 dark:text-blue-500">Calculator</span>
         </h1>
-        <p className="text-base md:text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           {description.split('.')[0]}. {description.split('.')[1]}.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
 
       <div className="hidden print:block text-center mb-8">

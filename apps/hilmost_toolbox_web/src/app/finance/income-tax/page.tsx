@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { IncomeTaxClient } from "./IncomeTaxClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Income Tax Calculator | Stop Guessing Your Tax Burden",
-  description: "Stop guessing. Free online income tax calculator. Calculate your exact net take-home pay after deductions and estimated taxes instantly.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Income Tax Calculator — Stop Guessing Your Tax Burden | Hilmost Toolbox",
+    description: "Calculate your exact net take-home pay after deductions and estimated taxes instantly. Free online income tax calculator with high precision.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/income-tax"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function IncomeTaxPage() {
+  const breadcrumbItems = [
+    { label: "Finance", href: "/finance" },
+    { label: "Income Tax", href: "/finance/income-tax" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/finance/income-tax/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name="Income Tax Calculator | Hilmost" description="Stop guessing your tax burden. Estimate your net income after deductions and taxes instantly." url="https://hilmost-toolbox.hilmost.net/finance/income-tax" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          Income <span className="text-blue-500">Tax Calculator</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Income <span className="text-blue-600 dark:text-blue-500">Tax Calculator</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Stop guessing your tax burden. Calculate your exact take-home pay, apply deductions, and see your net monthly income instantly.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
