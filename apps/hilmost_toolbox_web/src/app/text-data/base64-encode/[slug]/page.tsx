@@ -1,9 +1,11 @@
 import { Metadata } from "next";
 import { Base64PageUI } from "../Base64PageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const SLUGS = [
-  { slug: "base64-encode", type: "encode", title: "Base64 Text Encoder", desc: "Encode text strings into Base64 format securely and instantly within your browser." },
-  { slug: "base64-decode", type: "decode", title: "Base64 Text Decoder", desc: "Decode Base64 strings back into human-readable text securely and instantly within your browser." }
+  { slug: "base64-encode", type: "encode", title: "Base64 Text Encoder", desc: "Encode text strings into Base64 format securely and instantly within your browser. Local processing for maximum privacy." },
+  { slug: "base64-decode", type: "decode", title: "Base64 Text Decoder", desc: "Decode Base64 strings back into human-readable text securely and instantly within your browser. Fast, accurate, and secure." }
 ] as const;
 
 export function generateStaticParams() {
@@ -16,8 +18,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!config) return { title: "Base64 Converter" };
 
   return {
-    title: `${config.title} | Developer-Grade Tool`,
-    description: `Free online ${config.title.toLowerCase()}. ${config.desc}`,
+    title: `${config.title} — Free Online Utility | Hilmost Toolbox`,
+    description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based data transformation.`,
+    alternates: {
+      canonical: getCanonicalUrl(`/text-data/base64-encode/${resolvedParams.slug}`),
+    },
   };
 }
 
@@ -26,12 +31,16 @@ export default async function Base64ProgrammaticPage({ params }: { params: Promi
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return <Base64PageUI />;
 
+  const filePath = path.join(process.cwd(), "src/app/text-data/base64-encode/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
     <Base64PageUI 
       defaultMode={config.type as "encode" | "decode"}
-      title={`${config.title} | Developer-Grade Tool`}
+      title={`${config.title}`}
       description={config.desc}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/text-data/base64-encode/${resolvedParams.slug}`}
+      canonicalUrl={getCanonicalUrl(`/text-data/base64-encode/${resolvedParams.slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }
