@@ -16,6 +16,18 @@ export default function Home() {
       ],
     },
     {
+      title: "PDF Tools",
+      description: "Merge, split, rotate, and delete pages from PDF files.",
+      icon: <FileText className="w-6 h-6 text-red-500" />,
+      colorClass: "bg-red-500/10",
+      links: [
+        { name: "Merge PDF", href: "/pdf-tools/merge-pdf" },
+        { name: "Split PDF", href: "/pdf-tools/split-pdf" },
+        { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf" },
+        { name: "Delete Pages", href: "/pdf-tools/delete-pages" },
+      ],
+    },
+    {
       title: "Converters",
       description: "Convert units of length, weight, temperature, data, time, and more.",
       icon: <Replace className="w-6 h-6 text-blue-500" />,
