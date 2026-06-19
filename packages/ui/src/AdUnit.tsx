@@ -10,6 +10,11 @@ interface AdUnitProps {
   responsive?: boolean;
   className?: string;
   style?: React.CSSProperties;
+  /**
+   * Explicit height for CLS prevention.
+   * For standard banners use '90px', for sidebars '600px', for rectangles '250px'.
+   */
+  minHeight?: string;
 }
 
 export function AdUnit({ 
@@ -18,7 +23,8 @@ export function AdUnit({
   format = "auto", 
   responsive = true, 
   className = "",
-  style
+  style,
+  minHeight = "280px"
 }: AdUnitProps) {
   const pathname = usePathname();
   const adRef = useRef<HTMLModElement>(null);
@@ -38,8 +44,11 @@ export function AdUnit({
   }, [pathname]);
 
   return (
-    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={style}>
-      <span className="absolute text-xs text-slate-400 dark:text-slate-500 font-medium">Advertisement</span>
+    <div
+      className={`relative flex items-center justify-center overflow-hidden bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-800/50 ${className}`}
+      style={{ minHeight, ...style }}
+    >
+      <span className="absolute text-xs text-slate-300 dark:text-slate-600 font-bold uppercase tracking-widest pointer-events-none">Advertisement</span>
       <ins
         ref={adRef}
         className="adsbygoogle w-full h-full relative z-10"

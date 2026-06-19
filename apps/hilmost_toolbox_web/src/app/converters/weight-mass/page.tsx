@@ -1,11 +1,21 @@
 import { Metadata } from "next";
 import { WeightMassPageUI } from "./WeightMassPageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
-export const metadata: Metadata = {
-  title: "Weight & Mass Converter | KG to LBS Instantly",
-  description: "Free online weight and mass converter. Instantly convert between kilograms, pounds, grams, ounces, metric tons, and stones.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Weight & Mass Converter — Grams, Pounds, Kilograms | Hilmost Toolbox",
+    description: "Convert between grams, kilograms, pounds, ounces, and metric tons instantly. Accurate weight and mass conversion for kitchen, lab, or shipping.",
+    alternates: {
+      canonical: getCanonicalUrl("/converters/weight-mass"),
+    },
+  };
+}
 
 export default function WeightConverterPage() {
-  return <WeightMassPageUI />;
+  const filePath = path.join(process.cwd(), "src/app/converters/weight-mass/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  return <WeightMassPageUI lastUpdated={lastUpdated} />;
 }

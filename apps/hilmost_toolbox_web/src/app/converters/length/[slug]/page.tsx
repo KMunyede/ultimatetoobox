@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { LengthPageUI } from "../LengthPageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const UNITS = ["meters", "kilometers", "centimeters", "millimeters", "miles", "yards", "feet", "inches"];
 
@@ -24,8 +26,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   return {
-    title: `Convert ${capitalize(from)} to ${capitalize(to)} | Free Calculator`,
-    description: `Instantly convert ${from} to ${to}. Free online distance and length converter.`,
+    title: `Convert ${capitalize(from)} to ${capitalize(to)} — Fast Online Calculator`,
+    description: `Instantly convert ${from} to ${to}. Accurate, free online distance and length converter for ${from} to ${to} transformations.`,
+    alternates: {
+      canonical: getCanonicalUrl(`/converters/length/${resolvedParams.slug}`),
+    },
   };
 }
 
@@ -39,6 +44,8 @@ export default async function LengthProgrammaticPage({ params }: { params: Promi
   }
 
   const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  const filePath = path.join(process.cwd(), "src/app/converters/length/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
 
   return (
     <LengthPageUI 
@@ -46,7 +53,8 @@ export default async function LengthProgrammaticPage({ params }: { params: Promi
       defaultUnit2={to}
       title={`${capitalize(from)} to ${capitalize(to)} Converter`}
       description={`Easily convert ${from} to ${to} using our fast, free calculator. Perfect for both metric and imperial measurements.`}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/converters/length/${resolvedParams.slug}`}
+      canonicalUrl={getCanonicalUrl(`/converters/length/${resolvedParams.slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }

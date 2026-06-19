@@ -1,216 +1,248 @@
 "use client";
-import { ToolTutorial } from "@utilitiessite/ui";
-import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { MoveLeft, History } from "lucide-react";
-import { evaluateScientific, formatResult } from "@/lib/calcLogic";
+
+import React, { useState, useEffect, useCallback, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
+import { useHistory } from "../../../hooks/useHistory";
+import { create, all } from "mathjs";
+import { IconShare, IconCopy, IconCheck } from "@tabler/icons-react";
+
+const math = create(all);
+
+type AngleMode = "deg" | "rad" | "grad";
 
 export function ScientificCalculatorClient() {
-  const [state, setState] = useUrlState({
-    expression: "",
-    result: "",
-    mode: "DEG",
-    ans: "0"
-  });
+  return (
+    <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
+      <ScientificCalculatorInner />
+    </Suspense>
+  );
+}
 
-  const { expression, result, mode, ans } = state as Record<string, string>;
-  const [history, setHistory] = useState<string[]>([]);
+function ScientificCalculatorInner() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const append = (char: string) => {
-    setState({ ...state, expression: expression + char });
-  };
+  const [expression, setExpression] = useState("");
+  const [result, setResult] = useState("");
+  const [shouldReset, setShouldReset] = useState(false);
+  const [angleMode, setAngleMode] = useState<AngleMode>("rad");
+  const [isSecond, setIsSecond] = useState(false);
+  const [isHyp, setIsHyp] = useState(false);
+  const [copying, setCopying] = useState(false);
 
-  const clear = () => setState({ ...state, expression: "", result: "" });
+  const { history, addEntry, clearHistory } = useHistory("scientific");
 
-  const backspace = () => {
-    setState({ ...state, expression: expression.slice(0, -1) });
-  };
+  // Restore from URL
+  useEffect(() => {
+    const expr = searchParams.get("expr");
+    if (expr) {
+      setExpression(decodeURIComponent(expr));
+    }
+  }, [searchParams]);
 
-  const calculate = () => {
-    const res = evaluateScientific(expression, mode as "DEG" | "RAD");
-    const formatted = formatResult(res);
+  const calculate = useCallback(() => {
+    if (!expression) return;
+    try {
+      // Configure mathjs for current angle mode
+      let evalResult: any;
 
-    if (formatted !== "Error" && formatted !== "Infinity") {
-      setHistory(prev => [`${expression} = ${formatted}`, ...prev].slice(0, 5));
-      setState({ ...state, result: formatted, ans: formatted });
+      // We wrap the evaluation to handle degrees/radians/gradians for trig functions
+      // This is a bit complex in mathjs, a common trick is to use 'unit' for inputs
+      // or configure the global math instance.
+      // For simplicity, we'll try to use the raw expression and rely on mathjs's unit system if possible,
+      // or manually convert trig inputs if we detect sin/cos/tan.
+
+      // Let's use a simpler approach: if in DEG mode, we append ' deg' to trig arguments if they are numbers.
+      // But better: mathjs supports 'sin(45 deg)'.
+      // We'll replace sin(x) with sin(x deg) if in deg mode, etc.
+
+      let processedExpr = expression
+        .replace(/π/g, "pi")
+        .replace(/e/g, "e")
+        .replace(/√\(/g, "sqrt(")
+        .replace(/\^2/g, "^2")
+        .replace(/\^3/g, "^3")
+        .replace(/×/g, "*")
+        .replace(/÷/g, "/")
+        .replace(/−/g, "-");
+
+      if (angleMode === "deg") {
+        // This is naive but works for simple sin(45) -> sin(45 deg)
+        processedExpr = processedExpr.replace(/(sin|cos|tan|asin|acos|atan)\(([^)]+)\)/g, "$1(($2) deg)");
+      } else if (angleMode === "grad") {
+        processedExpr = processedExpr.replace(/(sin|cos|tan|asin|acos|atan)\(([^)]+)\)/g, "$1(($2) grad)");
+      }
+
+      evalResult = math.evaluate(processedExpr);
+
+      const formattedResult = typeof evalResult === "number"
+        ? (Number.isInteger(evalResult) ? evalResult.toString() : parseFloat(evalResult.toFixed(10)).toString())
+        : evalResult.toString();
+
+      setResult(formattedResult);
+      addEntry(expression, formattedResult);
+      setShouldReset(true);
+    } catch (e) {
+      setResult("Error");
+    }
+  }, [expression, addEntry, angleMode]);
+
+  const handleInput = useCallback((val: string) => {
+    if (shouldReset) {
+      if (/[0-9.]/.test(val)) {
+        setExpression(val);
+        setResult("");
+      } else {
+        setExpression(result + val);
+        setResult("");
+      }
+      setShouldReset(false);
     } else {
-      setState({ ...state, result: formatted });
+      setExpression((prev) => prev + val);
+    }
+  }, [shouldReset, result]);
+
+  const handleShare = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("expr", encodeURIComponent(expression));
+    navigator.clipboard.writeText(url.toString());
+    setCopying(true);
+    setTimeout(() => setCopying(false), 2000);
+  };
+
+  const onButtonClick = (val: string, type: string) => {
+    if (type === "number") handleInput(val);
+    else if (type === "operator") handleInput(val);
+    else if (type === "func") handleInput(val + "(");
+    else if (type === "clear") {
+      setExpression("");
+      setResult("");
+      setShouldReset(false);
+    } else if (type === "equals") calculate();
+    else if (type === "mode") {
+      if (val === "DEG" || val === "RAD" || val === "GRAD") setAngleMode(val.toLowerCase() as AngleMode);
+      if (val === "2nd") setIsSecond(!isSecond);
+      if (val === "HYP") setIsHyp(!isHyp);
     }
   };
 
-  const useAns = () => append(ans);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (/[0-9]/.test(e.key)) handleInput(e.key);
+      if (e.key === ".") handleInput(".");
+      if (e.key === "+") handleInput("+");
+      if (e.key === "-") handleInput("-");
+      if (e.key === "*") handleInput("*");
+      if (e.key === "/") handleInput("/");
+      if (e.key === "(") handleInput("(");
+      if (e.key === ")") handleInput(")");
+      if (e.key === "^") handleInput("^");
+      if (e.key === "Enter") {
+        e.preventDefault();
+        calculate();
+      }
+      if (e.key === "Escape") {
+        setExpression("");
+        setResult("");
+      }
+      if (e.key === "Backspace") {
+        setExpression((prev) => prev.slice(0, -1));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleInput, calculate]);
 
   const buttons = [
-    // Functions (Left)
-    { label: "sin", action: () => append("sin("), type: "func" },
-    { label: "cos", action: () => append("cos("), type: "func" },
-    { label: "tan", action: () => append("tan("), type: "func" },
-    { label: "π", action: () => append("π"), type: "const" },
-    { label: "e", action: () => append("e"), type: "const" },
+    // Top Row Functions
+    { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func" },
+    { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func" },
+    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func" },
+    { label: "ln", type: "func" },
+    { label: "log", type: "func" },
 
-    { label: "log", action: () => append("log("), type: "func" },
-    { label: "ln", action: () => append("ln("), type: "func" },
-    { label: "n!", action: () => append("!"), type: "func" },
-    { label: "(", action: () => append("("), type: "op_alt" },
-    { label: ")", action: () => append(")"), type: "op_alt" },
+    // Power/Root Row
+    { label: "x²", type: "operator", val: "^2" },
+    { label: "x³", type: "operator", val: "^3" },
+    { label: "√x", type: "func", val: "√" },
+    { label: "π", type: "number" },
+    { label: "e", type: "number" },
 
-    { label: "√", action: () => append("sqrt("), type: "func" },
-    { label: "x²", action: () => append("^2"), type: "func" },
-    { label: "xʸ", action: () => append("^"), type: "func" },
-    { label: "1/x", action: () => append("1/("), type: "func" },
-    { label: "AC", action: clear, type: "clear" },
+    // Mode Toggles
+    { label: "DEG", type: "mode", active: angleMode === "deg" },
+    { label: "RAD", type: "mode", active: angleMode === "rad" },
+    { label: "GRAD", type: "mode", active: angleMode === "grad" },
+    { label: "2nd", type: "mode", active: isSecond },
+    { label: "HYP", type: "mode", active: isHyp },
 
-    // Keypad (Right)
-    { label: "7", action: () => append("7"), type: "num" },
-    { label: "8", action: () => append("8"), type: "num" },
-    { label: "9", action: () => append("9"), type: "num" },
-    { label: "DEL", action: backspace, type: "del" },
-    { label: "÷", action: () => append("/"), type: "op" },
+    // Standard Layout Below
+    { label: "7", type: "number" },
+    { label: "8", type: "number" },
+    { label: "9", type: "number" },
+    { label: "(", type: "operator" },
+    { label: ")", type: "operator" },
 
-    { label: "4", action: () => append("4"), type: "num" },
-    { label: "5", action: () => append("5"), type: "num" },
-    { label: "6", action: () => append("6"), type: "num" },
-    { label: "Ans", action: useAns, type: "op_alt" },
-    { label: "×", action: () => append("*"), type: "op" },
+    { label: "4", type: "number" },
+    { label: "5", type: "number" },
+    { label: "6", type: "number" },
+    { label: "×", type: "operator", val: "×" },
+    { label: "÷", type: "operator", val: "÷" },
 
-    { label: "1", action: () => append("1"), type: "num" },
-    { label: "2", action: () => append("2"), type: "num" },
-    { label: "3", action: () => append("3"), type: "num" },
-    { label: "EXP", action: () => append("*10^"), type: "op_alt" },
-    { label: "-", action: () => append("-"), type: "op" },
+    { label: "1", type: "number" },
+    { label: "2", type: "number" },
+    { label: "3", type: "number" },
+    { label: "+", type: "operator" },
+    { label: "−", type: "operator", val: "−" },
 
-    { label: "0", action: () => append("0"), type: "num" },
-    { label: ".", action: () => append("."), type: "num" },
-    { label: "%", action: () => append("/100"), type: "op_alt" },
-    { label: "=", action: calculate, type: "eq" },
-    { label: "+", action: () => append("+"), type: "op" },
-  ];
-
-  const tourSteps = [
-    { element: '#tour-calc-display', popover: { title: '1. Expression View', description: 'Type full mathematical expressions with nested functions.' } },
-    { element: '#tour-calc-grid', popover: { title: '2. Scientific Grid', description: 'Access trigonometry, logarithms, factorials, and powers.' } },
-    { element: '#tour-calc-history', popover: { title: '3. Calculation Log', description: 'Your recent results are saved for quick reference.' } },
+    { label: "AC", type: "clear", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
+    { label: "0", type: "number" },
+    { label: ".", type: "number" },
+    { label: "^", type: "operator" },
+    { label: "=", type: "equals", className: "bg-blue-600 text-white" },
   ];
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="@container grid grid-cols-1 xl:grid-cols-4 gap-5 max-w-7xl mx-auto"
-    >
-      <div className="xl:col-span-3 space-y-8">
-        <div className="flex justify-between items-center px-1">
-          <div id="tour-calc-mode" className="flex p-1.5 bg-canvas-muted rounded-[1.25rem] border border-border-base shadow-inner">
-            <button
-              onClick={() => setState({ ...state, mode: "DEG" })}
-              className={`px-6 py-2.5 text-[11px] font-black rounded-xl transition-all ${mode === "DEG" ? "bg-canvas-card text-brand-primary shadow-xl border border-border-base scale-[1.05]" : "text-text-muted hover:text-text-secondary"}`}
-            >
-              DEG
-            </button>
-            <button
-              onClick={() => setState({ ...state, mode: "RAD" })}
-              className={`px-6 py-2.5 text-[11px] font-black rounded-xl transition-all ${mode === "RAD" ? "bg-canvas-card text-brand-primary shadow-xl border border-border-base scale-[1.05]" : "text-text-muted hover:text-text-secondary"}`}
-            >
-              RAD
-            </button>
-          </div>
-          <div className="flex gap-4">
-              <ShareButton />
-              <ToolTutorial tourId="scientific_calc" steps={tourSteps} buttonText="How to use" />
-          </div>
-        </div>
+    <div className="max-w-2xl mx-auto">
+      <CalculatorDisplay
+        expression={expression}
+        result={result}
+        history={history}
+        onClearHistory={clearHistory}
+        onRestore={(entry) => {
+          setExpression(entry.expression);
+          setResult(entry.result);
+          setShouldReset(true);
+        }}
+      />
 
-        <div className="bg-canvas-card border border-border-base rounded-[3.5rem] p-5 md:p-12 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-purple-500 to-pink-500 opacity-20" />
-
-          {/* Display */}
-          <div id="tour-calc-display" className="mb-12 p-8 bg-canvas-muted rounded-[2.5rem] border border-border-base flex flex-col items-end justify-center min-h-[200px] shadow-inner relative group">
-              <div className="absolute top-5 left-8 flex items-center gap-2">
-                 <div className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
-                 <span className="text-[11px] font-black text-text-muted uppercase tracking-[0.25em]">Scientific Engine</span>
-              </div>
-              <div className="text-text-muted text-xl font-mono truncate w-full text-right mb-4 tracking-tight opacity-70">
-                  {expression || "0"}
-              </div>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={result}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-4xl md:text-5xl lg:text-6xl font-black text-text-primary tracking-tighter truncate w-full text-right"
-                >
-                    {result ? `= ${result}` : expression ? "" : "0"}
-                </motion.div>
-              </AnimatePresence>
-          </div>
-
-          {/* Keypad Grid */}
-          <div id="tour-calc-grid" className="grid grid-cols-4 sm:grid-cols-5 gap-3 md:gap-4">
-              {buttons.map((btn) => (
-                  <button
-                      key={btn.label}
-                      onClick={btn.action}
-                      className={`h-12 md:h-14 rounded-2xl font-black text-lg transition-all active:scale-95 flex items-center justify-center border
-                          ${btn.type === 'num' ? 'bg-canvas-card text-text-primary border-border-base hover:bg-canvas-muted shadow-sm text-2xl' :
-                            btn.type === 'op' ? 'bg-orange-500/10 text-orange-600 border-orange-500/10 hover:bg-orange-500/20 text-2xl' :
-                            btn.type === 'op_alt' ? 'bg-canvas-muted text-text-secondary border-border-base hover:border-text-muted text-sm uppercase tracking-tighter' :
-                            btn.type === 'func' ? 'bg-purple-500/5 text-purple-600 border-purple-500/10 hover:bg-purple-500/10 text-sm italic' :
-                            btn.type === 'const' ? 'bg-pink-500/5 text-pink-600 border-pink-500/10 hover:bg-pink-500/10 font-serif' :
-                            btn.type === 'eq' ? 'bg-brand-primary text-white border-brand-primary shadow-2xl shadow-brand-primary/30 text-3xl' :
-                            btn.type === 'clear' ? 'bg-red-500/10 text-red-600 border-red-500/10 hover:bg-red-500/20' :
-                            btn.type === 'del' ? 'bg-red-500/5 text-red-500 border-red-500/5 hover:bg-red-500/10 text-xs font-black' :
-                            'bg-canvas-muted text-text-secondary border-border-base'}
-                      `}
-                  >
-                      {btn.label === 'DEL' ? <MoveLeft size={22} /> : btn.label}
-                  </button>
-              ))}
-          </div>
-        </div>
+      <div className="flex justify-end gap-2 mt-4">
+        <button
+          onClick={handleShare}
+          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:border-blue-500 transition-all shadow-sm active:scale-95"
+        >
+          {copying ? <IconCheck size={18} className="text-green-600" /> : <IconShare size={18} />}
+          {copying ? "Link Copied!" : "Share Calculation"}
+        </button>
       </div>
 
-      {/* Side Panel: History */}
-      <div id="tour-calc-history" className="space-y-6">
-          <div className="bg-canvas-card border border-border-base rounded-[3rem] p-5 shadow-xl h-full min-h-[500px]">
-              <div className="flex items-center gap-3 mb-10">
-                  <div className="p-3 bg-purple-500/10 rounded-2xl text-purple-600">
-                    <History size={20} />
-                  </div>
-                  <h3 className="text-2xl font-black text-text-primary tracking-tighter">Calculation Log</h3>
-              </div>
-
-              <div className="space-y-6">
-                <AnimatePresence mode="popLayout">
-                  {history.length > 0 ? (
-                    history.map((entry, i) => (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        key={i}
-                        className="p-5 bg-canvas-muted border border-border-base rounded-2xl group hover:border-purple-500/30 transition-all cursor-pointer relative overflow-hidden"
-                        onClick={() => {
-                           const parts = entry.split('=');
-                           if (parts.length > 1) setState({ ...state, expression: parts[1].trim() });
-                        }}
-                      >
-                        <div className="absolute top-0 right-0 w-1 h-full bg-purple-500/20" />
-                        <p className="text-xs font-black text-text-muted uppercase tracking-[0.25em] mb-2 group-hover:text-purple-500 transition-colors">Session Log {history.length - i}</p>
-                        <p className="text-base font-bold text-text-primary break-all leading-tight">{entry}</p>
-                      </motion.div>
-                    ))
-                  ) : (
-                    <div className="h-80 flex flex-col items-center justify-center text-center opacity-30 grayscale">
-                        <History size={64} className="text-text-muted mb-6" />
-                        <p className="text-lg font-black text-text-primary uppercase tracking-widest">Awaiting Math</p>
-                        <p className="text-sm font-medium text-text-muted mt-2">Calculations will appear here.</p>
-                    </div>
-                  )}
-                </AnimatePresence>
-              </div>
-          </div>
+      <div className="grid grid-cols-5 gap-2 mt-4">
+        {buttons.map((btn, i) => (
+          <button
+            key={i}
+            onClick={() => onButtonClick(btn.label, btn.type)}
+            className={`
+              h-14 md:h-16 rounded-xl text-sm md:text-base font-bold transition-all active:scale-95
+              ${btn.className || (btn.type === "mode"
+                ? (btn.active ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-100 dark:border-slate-800")
+                : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-blue-500")}
+            `}
+          >
+            {btn.label}
+          </button>
+        ))}
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,18 +1,25 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Suspense } from "react";
 import { Base64Client } from "./Base64Client";
 
+const TOOL_NAME = "Base64 Text Encoder & Decoder";
+const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII format — no signup required.";
+const PATH = "/text-data/base64-encode";
+
 export function Base64PageUI({
   defaultMode = "encode",
-  title = "Base64 Text Encoder & Decoder | Developer-Grade Encoding",
+  title = TOOL_NAME,
   description = "Free online Base64 text encoder and decoder. Developer-grade data encoding to safely transform your text strings, instantly.",
-  canonicalUrl = "https://hilmost-toolbox.hilmost.net/text-data/base64-encode"
+  canonicalUrl = getCanonicalUrl(PATH)
 }: {
   defaultMode?: "encode" | "decode";
   title?: string;
   description?: string;
   canonicalUrl?: string;
 }) {
+  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/text-data/base64-encode/page.tsx");
+
   const faqs = [
     {
       question: "What is Base64 encoding used for?",
@@ -30,15 +37,18 @@ export function Base64PageUI({
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       
       <div className="text-center max-w-2xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
           {title.split(' | ')[0].split(' ').map((word, i, arr) => 
             i === arr.length - 1 || word.toLowerCase() === 'encoder' || word.toLowerCase() === 'decoder' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '
           )}
         </h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+          Last updated: {lastUpdated}
+        </p>
         <p className="text-lg text-slate-600 dark:text-slate-400">
           {description.split('.')[0]}. {description.split('.')[1]}.
         </p>
@@ -65,7 +75,7 @@ export function Base64PageUI({
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="text-data" currentPath={canonicalUrl.replace("https://hilmost-toolbox.hilmost.net", "")} />
+      <RelatedTools category="text-data" currentPath="/text-data/base64-encode" />
     </div>
   );
 }

@@ -1,12 +1,30 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
 import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Word Unscrambler | Instantly Untangle Any Anagram",
-  description: "Free online word unscrambler. Instantly untangle any anagram and find the hidden words in milliseconds for games like Scrabble or Words with Friends.",
-};
+const TOOL_NAME = "Word Unscrambler";
+const TOOL_TYPE = "Anagram Solver";
+const TOOL_DESC = "Instantly untangle any anagram and find the hidden words in milliseconds — no signup required.";
+const PATH = "/text-data/word-unscrambler";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
+  const description = `Free online ${TOOL_NAME.toLowerCase()}. ${TOOL_DESC}`;
+  const canonical = getCanonicalUrl(PATH);
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,15 +42,21 @@ const faqs = [
 ];
 
 export default function WordUnscramblerPage() {
+  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/text-data/word-unscrambler/page.tsx");
+  const canonicalUrl = getCanonicalUrl(PATH);
+
   return (
     <div className="container mx-auto px-4 py-1 max-w-5xl">
-      <WebApplicationSchema name="Word Unscrambler | Hilmost" description="Instantly untangle any anagram and find the hidden words in milliseconds." url="https://hilmost-toolbox.hilmost.net/text-data/word-unscrambler" />
+      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       
       <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-3 tracking-tight">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
           Word <span className="text-blue-500">Unscrambler</span>
         </h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+          Last updated: {lastUpdated}
+        </p>
         <p className="text-base md:text-lg text-slate-600 dark:text-slate-400">
           Instantly untangle any anagram. Find the hidden words in milliseconds.
         </p>
@@ -66,7 +90,7 @@ export default function WordUnscramblerPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="text-data" currentPath="/text-data/word-unscrambler" />
+      <RelatedTools category="text-data" currentPath={PATH} />
     </div>
   );
 }

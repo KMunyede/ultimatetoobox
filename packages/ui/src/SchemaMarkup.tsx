@@ -5,7 +5,7 @@ export function WebApplicationSchema({
   description,
   url,
   image,
-  category = "UtilitiesApplication",
+  category = "UtilityApplication",
 }: {
   name: string;
   description: string;
@@ -21,13 +21,39 @@ export function WebApplicationSchema({
     url: url,
     image: image,
     applicationCategory: category,
-    operatingSystem: "Web Browser",
+    operatingSystem: "All",
     browserRequirements: "Requires JavaScript",
     offers: {
       "@type": "Offer",
-      price: "0.00",
+      price: "0",
       priceCurrency: "USD",
     },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function BreadcrumbSchema({
+  items,
+}: {
+  items: { label: string; href: string }[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      item: item.href.startsWith("http")
+        ? item.href
+        : `https://hilmost-toolbox.hilmost.net${item.href}`,
+    })),
   };
 
   return (

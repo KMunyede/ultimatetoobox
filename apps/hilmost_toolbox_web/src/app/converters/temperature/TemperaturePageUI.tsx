@@ -1,8 +1,21 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Suspense } from "react";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
 
-export function TemperaturePageUI({ defaultUnit1 = "celsius", defaultUnit2 = "fahrenheit", title = "Temperature Converter", description = "Effortlessly switch between global weather scales. Instant conversions for Celsius, Fahrenheit, and Kelvin.", canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/temperature" }) {
+const TOOL_NAME = "Temperature Converter";
+const TOOL_DESC = "Convert seamlessly between Celsius, Fahrenheit, and Kelvin in real-time — no signup required.";
+const PATH = "/converters/temperature";
+
+export function TemperaturePageUI({
+  defaultUnit1 = "celsius",
+  defaultUnit2 = "fahrenheit",
+  title = TOOL_NAME,
+  description = "Effortlessly switch between global weather scales. Instant conversions for Celsius, Fahrenheit, and Kelvin.",
+  canonicalUrl = getCanonicalUrl(PATH)
+}) {
+  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/converters/temperature/page.tsx");
+
   const faqs = [
     {
       question: "How do you convert Celsius to Fahrenheit manually?",
@@ -20,15 +33,18 @@ export function TemperaturePageUI({ defaultUnit1 = "celsius", defaultUnit2 = "fa
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <WebApplicationSchema name={title + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       
       <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
           {title.split(' ').map((word, i, arr) => 
             i === arr.length - 1 ? <span key={i} className="text-rose-500">{word}</span> : word + ' '
           )}
         </h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+          Last updated: {lastUpdated}
+        </p>
         <p className="text-lg text-slate-600 dark:text-slate-400">
           {description}
         </p>
@@ -55,7 +71,7 @@ export function TemperaturePageUI({ defaultUnit1 = "celsius", defaultUnit2 = "fa
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="converters" currentPath={canonicalUrl.replace("https://hilmost-toolbox.hilmost.net", "")} />
+      <RelatedTools category="converters" currentPath={PATH} />
     </div>
   );
 }

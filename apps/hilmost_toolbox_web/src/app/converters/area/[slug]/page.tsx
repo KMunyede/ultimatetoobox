@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AreaPageUI } from "../AreaPageUI";
+import { getCanonicalUrl } from "@utilitiessite/config";
 
 const AREA_UNITS = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Hectare", "Acre", "Square Foot", "Square Inch", "Square Yard", "Square Mile"];
 
@@ -35,10 +36,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   const fromUnit = match[1].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   const toUnit = match[2].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const canonical = getCanonicalUrl(`/converters/area/${slug}`);
 
   return {
-    title: `Convert ${fromUnit} to ${toUnit} | Area Calculator`,
-    description: `Instantly convert ${fromUnit} to ${toUnit} using our free area calculator. Perfect for real estate, landscaping, and construction.`,
+    title: `Convert ${fromUnit} to ${toUnit} | Area Calculator — Free Online Converter | Hilmost Toolbox`,
+    description: `Free online area converter. Instantly convert ${fromUnit} to ${toUnit} using our free area calculator. Perfect for real estate, landscaping, and construction — no signup required.`,
+    alternates: { canonical },
+    openGraph: {
+      title: `Convert ${fromUnit} to ${toUnit} | Area Calculator`,
+      description: `Instantly convert ${fromUnit} to ${toUnit} using our free area calculator.`,
+      url: canonical,
+    },
   };
 }
 
@@ -63,7 +71,7 @@ export default async function AreaDynamicPage({ params }: { params: Promise<{ sl
       defaultTo={toUnitStr}
       title={`Convert ${fromUnitStr} to ${toUnitStr} | Area Calculator`}
       description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free area calculator. Perfect for real estate, landscaping, and construction.`}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/converters/area/${slug}`}
+      canonicalUrl={getCanonicalUrl(`/converters/area/${slug}`)}
     />
   );
 }

@@ -41,10 +41,10 @@ export function Footer() {
             <h3 className="font-semibold text-text-primary mb-6 uppercase tracking-wider text-xs">Subsidiaries</h3>
             <ul className="space-y-3 text-sm text-text-secondary">
               <li><Link href={`${domains.corporate}/softwarehub`} className="hover:text-brand-primary transition-colors">Hilmost Software</Link></li>
-              <li><Link href="#" className="hover:text-brand-primary transition-colors">Hilmost Engineering</Link></li>
-              <li><Link href="#" className="hover:text-brand-primary transition-colors">Hilmost Foods</Link></li>
+              <li><span className="opacity-60">Hilmost Engineering</span></li>
+              <li><span className="opacity-60">Hilmost Foods</span></li>
               <li><Link href={`${domains.corporate}/healthhub`} className="hover:text-brand-primary transition-colors">Hilmost Health</Link></li>
-              <li><Link href="#" className="hover:text-brand-primary transition-colors">Hilmost Insurance</Link></li>
+              <li><span className="opacity-60">Hilmost Insurance</span></li>
             </ul>
           </div>
 

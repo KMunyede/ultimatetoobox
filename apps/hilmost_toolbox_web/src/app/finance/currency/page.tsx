@@ -1,14 +1,24 @@
 import { Metadata } from "next";
 import { CurrencyPageUI } from "./CurrencyPageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
-export const metadata: Metadata = {
-  title: "Live Currency Converter | Stop Overpaying Banks",
-  description: "Free, real-time currency converter. Stop overpaying banks and instantly convert between global currencies using live foreign exchange market rates.",
-  openGraph: {
-    images: ["/og/finance.png"],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Live Currency Converter — Real-Time Exchange Rates | Hilmost Toolbox",
+    description: "Convert global currencies instantly with real-time exchange rates. Free foreign exchange tool for USD, EUR, GBP, and 100+ other currencies.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/currency"),
+    },
+    openGraph: {
+      images: ["/og/finance.png"],
+    },
+  };
+}
 
 export default function CurrencyPage() {
-  return <CurrencyPageUI />;
+  const filePath = path.join(process.cwd(), "src/app/finance/currency/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  return <CurrencyPageUI lastUpdated={lastUpdated} />;
 }

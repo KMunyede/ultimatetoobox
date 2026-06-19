@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Compound Interest Calculator | Unlock The 8th Wonder",
-  description: "Free, beautifully visual compound interest calculator. Unlock the 8th wonder of the world and discover how your money grows exponentially over time.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Compound Interest Calculator — Visualize Your Investment Growth | Hilmost Toolbox",
+    description: "Discover the power of compounding. Free online calculator to project investment growth, monthly contributions, and long-term wealth accumulation.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/compound-interest"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,38 @@ const faqs = [
 ];
 
 export default function CompoundInterestPage() {
+  const breadcrumbItems = [
+    { label: "Finance", href: "/finance" },
+    { label: "Compound Interest", href: "/finance/compound-interest" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/finance/compound-interest/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
-      <WebApplicationSchema name="Compound Interest Calculator" description="Unlock the 8th wonder of the world. Free online compound interest calculator to see how your money grows exponentially." url="https://hilmost-toolbox.hilmost.net/finance/compound-interest" />
+    <div className="container mx-auto px-4 py-6 max-w-6xl">
+      <WebApplicationSchema
+        name="Compound Interest Calculator"
+        description="Unlock the 8th wonder of the world. Free online compound interest calculator to see how your money grows exponentially."
+        url="https://hilmost-toolbox.hilmost.net/finance/compound-interest"
+      />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-6">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Compound <span className="text-emerald-500">Interest Calculator</span>
+          Compound <span className="text-emerald-600 dark:text-emerald-500">Interest Calculator</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Unlock the eighth wonder of the world. Visualize how your investments grow exponentially over time and plan your early retirement.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>

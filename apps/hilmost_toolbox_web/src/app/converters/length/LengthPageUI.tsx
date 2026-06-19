@@ -1,8 +1,28 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Suspense } from "react";
 import { LengthConverterClient } from "./LengthConverterClient";
+import { Calendar } from "lucide-react";
 
-export function LengthPageUI({ defaultUnit1 = "meters", defaultUnit2 = "feet", title = "Length & Distance Converter", description = "Bridge the gap between Metric and Imperial systems. Convert any distance measurement instantly.", canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/length" }) {
+export function LengthPageUI({
+  defaultUnit1 = "meters",
+  defaultUnit2 = "feet",
+  title = "Length & Distance Converter",
+  description = "Bridge the gap between Metric and Imperial systems. Convert any distance measurement instantly.",
+  canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/length",
+  lastUpdated
+}: {
+  defaultUnit1?: string;
+  defaultUnit2?: string;
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  lastUpdated?: string;
+}) {
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Length", href: "/converters/length" },
+  ];
+
   const faqs = [
     {
       question: "What is the difference between Metric and Imperial systems?",
@@ -19,19 +39,27 @@ export function LengthPageUI({ defaultUnit1 = "meters", defaultUnit2 = "feet", t
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name={title + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {title.split(' ').map((word, i, arr) => 
-            i === arr.length - 1 ? <span key={i} className="text-blue-500">{word}</span> : word + ' '
+            i === arr.length - 1 ? <span key={i} className="text-blue-600 dark:text-blue-500">{word}</span> : word + ' '
           )}
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           {description}
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>

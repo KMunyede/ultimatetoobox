@@ -1,0 +1,12 @@
+{
+  "name": "@utilitiessite/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo 'No build step needed for config package'"
+  },
+  "dependencies": {
+    "child_process": "*"
+  }
+}

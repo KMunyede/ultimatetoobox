@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { CurrencyPageUI } from "../CurrencyPageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const CURRENCIES = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "INR", "ZAR", "NZD"];
 
@@ -25,8 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const to = match[2].toUpperCase();
 
   return {
-    title: `${from} to ${to} Exchange Rate | Live Currency Converter`,
-    description: `Convert ${from} to ${to} instantly. Get real-time mid-market exchange rates and stop overpaying banks.`,
+    title: `${from} to ${to} Exchange Rate — Live Converter | Hilmost Toolbox`,
+    description: `Convert ${from} to ${to} instantly. Get real-time mid-market exchange rates and accurate ${from}/${to} foreign exchange values.`,
+    alternates: {
+      canonical: getCanonicalUrl(`/finance/currency/${resolvedParams.slug}`),
+    },
   };
 }
 
@@ -39,13 +44,17 @@ export default async function CurrencyProgrammaticPage({ params }: { params: Pro
   const from = match[1].toUpperCase();
   const to = match[2].toUpperCase();
 
+  const filePath = path.join(process.cwd(), "src/app/finance/currency/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
     <CurrencyPageUI 
       defaultFrom={from}
       defaultTo={to}
       title={`${from} to ${to} | Live Currency Converter`}
       description={`Convert ${from} to ${to} instantly using live mid-market exchange rates.`}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/finance/currency/${resolvedParams.slug}`}
+      canonicalUrl={getCanonicalUrl(`/finance/currency/${resolvedParams.slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }

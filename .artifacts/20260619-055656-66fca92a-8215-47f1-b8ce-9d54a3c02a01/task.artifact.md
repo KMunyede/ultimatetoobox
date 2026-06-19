@@ -1,0 +1,26 @@
+# Task Management
+
+- [x] Initializing SEO Framework
+    - [x] Acknowledge architectural state and priorities
+    - [x] Implement `build-utils.ts` for Git-based freshness
+    - [x] Implement `SchemaMarkup.tsx` for JSON-LD injection
+    - [x] Define standardized `generateMetadata` pattern for tool pages
+- [x] Refactor Tool Categories (Phase 1: Converters & Text-Data)
+    - [x] Converters Hub & Length/Weight Tools
+    - [x] Text-Data Hub
+- [x] Implement 4 Calculator Pages
+    - [x] Shared `CalculatorDisplay` & `HistoryTape`
+    - [x] Standard Calculator with keyboard support
+    - [x] Scientific Calculator with trig & URL share
+    - [x] Astrophysics Calculator with large value input system
+    - [x] Equation Solver with physics library
+- [ ] Infrastructure & Performance
+    - [x] AutoBreadcrumbs SEO optimization
+    - [x] AdUnit CLS prevention (Fixed-dimension containers)
+    - [ ] Route-based code-splitting audit
+    - [ ] Web Worker integration for heavy calculations
+- [ ] Deployment & Backup
+    - [ ] Build and Deploy to Staging (Firebase)
+    - [ ] Verify on Staging environment
+    - [ ] Build and Deploy to Live (Firebase)
+    - [ ] Push all changes to GitHub backup

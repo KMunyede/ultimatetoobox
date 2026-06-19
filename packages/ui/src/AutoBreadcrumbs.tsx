@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Breadcrumbs } from "./Breadcrumbs";
+import { BreadcrumbSchema } from "./SchemaMarkup";
 
 function formatLabel(segment: string) {
   // Replace hyphens with spaces and capitalize words
@@ -16,6 +17,13 @@ export function AutoBreadcrumbs() {
 
   // If we are on the home page, don't show breadcrumbs
   if (!pathname || pathname === "/") {
+    return null;
+  }
+
+  // Skip auto-breadcrumbs for tool pages that handle their own breadcrumbs for SEO
+  // This prevents double-rendering and ensures we use the precise labels defined in those pages
+  const isToolPage = pathname.split("/").length > 2;
+  if (isToolPage) {
     return null;
   }
 

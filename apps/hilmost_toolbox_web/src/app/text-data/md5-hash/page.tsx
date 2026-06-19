@@ -1,12 +1,30 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { MD5HashClient } from "./MD5HashClient";
 import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "MD5 Hash Generator | Lightning-Fast Cryptographic Hashing",
-  description: "Free online MD5 hash generator. Lightning-fast, secure cryptographic hashing to verify data integrity with zero delay.",
-};
+const TOOL_NAME = "MD5 Hash Generator";
+const TOOL_TYPE = "MD5 Hashing Tool";
+const TOOL_DESC = "Generate lightning-fast MD5 hashes to verify data integrity — no signup required.";
+const PATH = "/text-data/md5-hash";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
+  const description = `Free online ${TOOL_NAME.toLowerCase()}. ${TOOL_DESC}`;
+  const canonical = getCanonicalUrl(PATH);
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,15 +42,21 @@ const faqs = [
 ];
 
 export default function MD5Page() {
+  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/text-data/md5-hash/page.tsx");
+  const canonicalUrl = getCanonicalUrl(PATH);
+
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <WebApplicationSchema name="MD5 Hash Generator | Hilmost" description="Lightning-fast, secure cryptographic hashing to verify data integrity with zero delay." url="https://hilmost-toolbox.hilmost.net/text-data/md5-hash" />
+      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       
       <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
           MD5 <span className="text-blue-500">Hash Generator</span>
         </h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+          Last updated: {lastUpdated}
+        </p>
         <p className="text-lg text-slate-600 dark:text-slate-400">
           Lightning-fast, secure cryptographic hashing. Verify data integrity with zero delay.
         </p>
@@ -59,7 +83,7 @@ export default function MD5Page() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="text-data" currentPath="/text-data/md5-hash" />
+      <RelatedTools category="text-data" currentPath={PATH} />
     </div>
   );
 }

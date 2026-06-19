@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { WeightMassPageUI } from "../WeightMassPageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const UNITS = ["kilograms", "grams", "milligrams", "metric tons", "pounds", "ounces", "stones"];
 
@@ -32,8 +34,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const capitalize = (s: string) => s.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
   return {
-    title: `Convert ${capitalize(from)} to ${capitalize(to)} | Free Calculator`,
-    description: `Instantly convert ${from} to ${to}. Free online weight and mass converter.`,
+    title: `Convert ${capitalize(from)} to ${capitalize(to)} — Fast Online Calculator`,
+    description: `Instantly convert ${from} to ${to}. Accurate, free online weight and mass converter for ${from} to ${to} transformations.`,
+    alternates: {
+      canonical: getCanonicalUrl(`/converters/weight-mass/${resolvedParams.slug}`),
+    },
   };
 }
 
@@ -50,6 +55,8 @@ export default async function WeightProgrammaticPage({ params }: { params: Promi
   }
 
   const capitalize = (s: string) => s.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  const filePath = path.join(process.cwd(), "src/app/converters/weight-mass/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
 
   return (
     <WeightMassPageUI 
@@ -57,7 +64,8 @@ export default async function WeightProgrammaticPage({ params }: { params: Promi
       defaultUnit2={to}
       title={`${capitalize(from)} to ${capitalize(to)} Converter`}
       description={`Easily convert ${from} to ${to} using our fast, free calculator.`}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/converters/weight-mass/${resolvedParams.slug}`}
+      canonicalUrl={getCanonicalUrl(`/converters/weight-mass/${resolvedParams.slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }

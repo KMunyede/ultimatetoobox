@@ -1,12 +1,32 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { WordCountClient } from "./WordCountClient";
 import { Suspense } from "react";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Word Count Tool | Precision Text Analytics",
-  description: "Free online word count tool. Precision text analytics in real-time. Know exactly what you&apos;ve written, down to the character.",
-};
+const TOOL_NAME = "Word Count Tool";
+const TOOL_TYPE = "Word Counter";
+const TOOL_DESC = "Count words, characters and sentences instantly — no signup required.";
+const PATH = "/text-data/word-count";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
+  const description = `Analyze your text with precision. Free online word counter to track word density, character counts, and sentence structure instantly.`;
+  const canonical = getCanonicalUrl(PATH);
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +44,35 @@ const faqs = [
 ];
 
 export default function WordCountPage() {
+  const breadcrumbItems = [
+    { label: "Text & Data", href: "/text-data" },
+    { label: "Word Count", href: "/text-data/word-count" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/text-data/word-count/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+  const canonicalUrl = getCanonicalUrl(PATH);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <WebApplicationSchema name="Word Count Tool | Hilmost" description="Precision text analytics in real-time. Know exactly what you&apos;ve written, down to the character." url="https://hilmost-toolbox.hilmost.net/text-data/word-count" />
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
+      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          Word <span className="text-blue-500">Count Tool</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Word <span className="text-blue-600 dark:text-blue-500">Count Tool</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Precision text analytics in real-time. Know exactly what you&apos;ve written, down to the character.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
@@ -59,7 +96,7 @@ export default function WordCountPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="text-data" currentPath="/text-data/word-count" />
+      <RelatedTools category="text-data" currentPath={PATH} />
     </div>
   );
 }

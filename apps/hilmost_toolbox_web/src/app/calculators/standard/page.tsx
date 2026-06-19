@@ -1,65 +1,71 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
 import { StandardCalculatorClient } from "./StandardCalculatorClient";
-import { Suspense } from "react";
+import { getCanonicalUrl } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
-  title: "Standard Calculator | Everyday Math Solved Instantly",
-  description: "Free online standard calculator. Drop the heavy math and get instant, reliable answers with our beautiful everyday calculator.",
+  title: "Standard Calculator — Free Online Calculator | Hilmost Toolbox",
+  description: "Free online standard calculator. Fast arithmetic in your browser — add, subtract, multiply, divide. No app required.",
+  alternates: {
+    canonical: getCanonicalUrl("/calculators/standard"),
+  },
 };
 
 const faqs = [
   {
-    question: "Can I share my calculation result?",
-    answer: "Yes! As you type, the URL updates automatically to reflect your current equation. You can click the share icon at any time to copy the exact state of your calculator and send it to a friend.",
+    question: "Does this calculator support operator precedence?",
+    answer: "Yes, it uses standard algebraic hierarchy (PEMDAS/BODMAS). For example, 2 + 3 × 4 will correctly evaluate to 14 because multiplication is performed before addition.",
   },
   {
-    question: "Is there a history of my calculations?",
-    answer: "Currently, this standard calculator is designed for quick, ephemeral calculations. However, because the state is synced to the URL, you can use your browser's back button to undo your recent inputs.",
+    question: "Can I use my keyboard with this calculator?",
+    answer: "Absolutely. You can use the number pad or top row numbers, along with +, -, *, and / for operations. Press 'Enter' for equals and 'Escape' to clear the display.",
   },
   {
-    question: "Does it support keyboard shortcuts?",
-    answer: "Our interface is optimized for both touch devices and point-and-click. Native keyboard support is currently being enhanced for a seamless desktop experience.",
+    question: "Is my calculation history saved?",
+    answer: "Yes, your last 50 calculations are stored locally in your browser's memory. You can access the history tape by clicking the clock icon in the top right of the display.",
   },
 ];
 
 export default function StandardCalculatorPage() {
+  const breadcrumbItems = [
+    { label: "Calculators", href: "/calculators" },
+    { label: "Standard", href: "/calculators/standard" },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <WebApplicationSchema name="Standard Calculator | Hilmost" description="Drop the heavy math and get instant, reliable answers with our beautiful everyday calculator." url="https://hilmost-toolbox.hilmost.net/calculators/standard" />
-      <FAQSchema items={faqs} />
+    <AdLayout publisherId="ca-pub-5650522247882745">
+      <WebApplicationSchema
+        name="Standard Calculator | Hilmost Toolbox"
+        description="Free online standard calculator. Fast arithmetic in your browser."
+        url="https://hilmost-toolbox.hilmost.net/calculators/standard"
+      />
+      <Breadcrumbs items={breadcrumbItems} />
       
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          Standard <span className="text-blue-500">Calculator</span>
+      <div className="mb-8">
+        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
+          Standard Calculator
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400">
-          Drop the heavy math. Get instant, reliable answers with our beautiful everyday calculator.
+          Reliable arithmetic for everyday tasks. Fast, responsive, and always available.
         </p>
       </div>
-      
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-sm mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <StandardCalculatorClient />
-        </div>
-      </Suspense>
 
-      <ToolArticle title="The Perfect Everyday Calculator">
+      <StandardCalculatorClient />
+
+      <ToolArticle title="Why Use Our Standard Calculator?">
         <p>
-          You don&apos;t always need a complex graphing calculator or an advanced scientific tool. Sometimes, you just need a reliable, beautiful, and instantly accessible interface to solve your everyday arithmetic.
+          In a world of complex apps, sometimes you just need to add up a few numbers quickly. Our Standard Calculator is designed for speed, accessibility, and precision. It works perfectly on mobile devices and supports full physical keyboard input for desktop users.
         </p>
-        
-        <h3>How to Use This Tool</h3>
-        
-        <ol>
-          <li><strong>Step 1: Input Data</strong> - Click or type to enter your mathematical sequence.</li>
-          <li><strong>Step 2: Apply Operations</strong> - Select standard or advanced mathematical operators.</li>
-          <li><strong>Step 3: Calculate</strong> - Hit equals to instantly evaluate your expression.</li>
-        </ol>
+        <h3>Core Features</h3>
+        <ul>
+          <li><strong>Instant Results:</strong> Calculations are performed locally in your browser for zero latency.</li>
+          <li><strong>History Tape:</strong> Never lose track of your work with the built-in history panel.</li>
+          <li><strong>Keyboard Shortcuts:</strong> Use your existing typing skills to calculate even faster.</li>
+        </ul>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="calculators" currentPath="/calculators/standard" />
-    </div>
+    </AdLayout>
   );
 }
