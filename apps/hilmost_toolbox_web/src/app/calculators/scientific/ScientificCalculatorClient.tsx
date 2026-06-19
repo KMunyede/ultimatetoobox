@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { create, all } from "mathjs";
 import { IconShare, IconCopy, IconCheck } from "@tabler/icons-react";
 
 const math = create(all);
@@ -41,9 +40,13 @@ function ScientificCalculatorInner() {
     }
   }, [searchParams]);
 
-  const calculate = useCallback(() => {
+  const calculate = useCallback(async () => {
     if (!expression) return;
     try {
+      // Lazy load mathjs
+      const { create, all } = await import("mathjs");
+      const math = create(all);
+
       // Configure mathjs for current angle mode
       let evalResult: any;
 

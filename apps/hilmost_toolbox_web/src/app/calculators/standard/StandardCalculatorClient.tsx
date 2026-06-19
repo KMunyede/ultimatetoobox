@@ -3,9 +3,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { create, all } from "mathjs";
-
-const math = create(all);
 
 const BUTTONS = [
   { label: "AC", type: "clear", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
@@ -35,9 +32,13 @@ export function StandardCalculatorClient() {
   const [shouldReset, setShouldReset] = useState(false);
   const { history, addEntry, clearHistory } = useHistory("standard");
 
-  const calculate = useCallback(() => {
+  const calculate = useCallback(async () => {
     if (!expression) return;
     try {
+      // Lazy load mathjs
+      const { create, all } = await import("mathjs");
+      const math = create(all);
+
       // Clean expression for mathjs
       const cleanExpr = expression.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
       const evalResult = math.evaluate(cleanExpr);
@@ -74,9 +75,11 @@ export function StandardCalculatorClient() {
     setShouldReset(false);
   }, []);
 
-  const handleToggleSign = useCallback(() => {
+  const handleToggleSign = useCallback(async () => {
     if (expression) {
       try {
+        const { create, all } = await import("mathjs");
+        const math = create(all);
         const evalResult = math.evaluate(`(${expression}) * -1`);
         setExpression(evalResult.toString());
       } catch (e) {
@@ -85,9 +88,11 @@ export function StandardCalculatorClient() {
     }
   }, [expression]);
 
-  const handlePercent = useCallback(() => {
+  const handlePercent = useCallback(async () => {
     if (expression) {
       try {
+        const { create, all } = await import("mathjs");
+        const math = create(all);
         const evalResult = math.evaluate(`(${expression}) / 100`);
         setExpression(evalResult.toString());
       } catch (e) {
