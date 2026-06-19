@@ -7,6 +7,7 @@ interface AdLayoutProps {
   leftSlotId?: string;
   rightSlotId?: string;
   bottomSlotId?: string;
+  showInnerAds?: boolean;
 }
 
 export function AdLayout({
@@ -15,19 +16,22 @@ export function AdLayout({
   leftSlotId = "4408382392",
   rightSlotId = "8526461509",
   bottomSlotId = "2372116691",
+  showInnerAds = true,
 }: AdLayoutProps) {
   return (
     <div className="w-full max-w-[1700px] mx-auto px-4 py-0">
       {/* Mobile Top Ad (Visible only on small screens) */}
-      <div className="block lg:hidden mb-2 w-full">
-        <AdUnit 
-          publisherId={publisherId} 
-          slotId={bottomSlotId} 
-          format="horizontal" 
-          className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-          style={{ width: "100%", minHeight: "90px" }}
-        />
-      </div>
+      {showInnerAds && (
+        <div className="block lg:hidden mb-2 w-full">
+          <AdUnit
+            publisherId={publisherId}
+            slotId={bottomSlotId}
+            format="horizontal"
+            className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
+            style={{ width: "100%", minHeight: "90px" }}
+          />
+        </div>
+      )}
 
       <div className="flex flex-col lg:flex-row gap-4 xl:gap-6 items-start justify-center">
         {/* Left Sidebar Ad (Hidden on mobile) */}
@@ -46,15 +50,17 @@ export function AdLayout({
           {children}
 
           {/* Bottom Horizontal Ad */}
-          <div className="mt-6 w-full">
-            <AdUnit 
-              publisherId={publisherId} 
-              slotId={bottomSlotId} 
-              format="horizontal" 
-              className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-              style={{ width: "100%", minHeight: "90px" }}
-            />
-          </div>
+          {showInnerAds && (
+            <div className="mt-6 w-full">
+              <AdUnit
+                publisherId={publisherId}
+                slotId={bottomSlotId}
+                format="horizontal"
+                className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
+                style={{ width: "100%", minHeight: "90px" }}
+              />
+            </div>
+          )}
         </div>
 
         {/* Right Sidebar Ad (Hidden on mobile) */}

@@ -34,7 +34,7 @@ export default function ScientificCalculatorPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745">
+    <AdLayout publisherId="ca-pub-5650522247882745" showInnerAds={false}>
       <WebApplicationSchema
         name="Scientific Calculator | Hilmost Toolbox"
         description="Free online scientific calculator with advanced math functions."

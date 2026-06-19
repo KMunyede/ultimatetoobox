@@ -33,7 +33,7 @@ export default function AstrophysicsCalculatorPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745">
+    <AdLayout publisherId="ca-pub-5650522247882745" showInnerAds={false}>
       <WebApplicationSchema
         name="Astrophysics Calculator | Hilmost Toolbox"
         description="Free online astrophysics calculator for cosmic mechanics."

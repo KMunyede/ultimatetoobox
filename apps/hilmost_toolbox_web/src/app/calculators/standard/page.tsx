@@ -33,7 +33,7 @@ export default function StandardCalculatorPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745">
+    <AdLayout publisherId="ca-pub-5650522247882745" showInnerAds={false}>
       <WebApplicationSchema
         name="Standard Calculator | Hilmost Toolbox"
         description="Free online standard calculator. Fast arithmetic in your browser."
