@@ -1,12 +1,20 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, FAQSchema, ToolArticle , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { TimeZoneClient } from "./TimeZoneClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Time Zone Converter & Global Clock | Compare Multiple Cities",
-  description: "Free online time zone converter. Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Time Zone Converter & Global Clock — Compare Multiple Cities | Hilmost Toolbox",
+    description: "Free online time zone converter. Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly.",
+    alternates: {
+      canonical: getCanonicalUrl("/converters/time-zone"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function TimeZonePage() {
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Time Zone", href: "/converters/time-zone" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/converters/time-zone/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
+    <div className="container mx-auto px-4 py-6 max-w-6xl">
       <WebApplicationSchema name="Time Zone Converter | Hilmost" description="Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly." url="https://hilmost-toolbox.hilmost.net/converters/time-zone" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-2xl mx-auto mb-6">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-2xl mx-auto mb-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Time Zone <span className="text-emerald-500">Converter</span>
+          Time Zone <span className="text-emerald-600 dark:text-emerald-500">Converter</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Coordinate globally. Compare exact local times and schedule international meetings without the guesswork.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
 
       <div className="mb-8">

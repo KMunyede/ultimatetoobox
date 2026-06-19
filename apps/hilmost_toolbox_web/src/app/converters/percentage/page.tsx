@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { PercentageClient } from "./PercentageClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Percentage Calculator | Find % Increase & Decrease",
-  description: "Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Percentage Calculator — Find % Increase & Decrease | Hilmost Toolbox",
+    description: "Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems.",
+    alternates: {
+      canonical: getCanonicalUrl("/converters/percentage"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function PercentagePage() {
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Percentage", href: "/converters/percentage" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/converters/percentage/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name="Percentage Calculator | Hilmost" description="Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems." url="https://hilmost-toolbox.hilmost.net/converters/percentage" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          Percentage <span className="text-blue-500">Calculator</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Percentage <span className="text-blue-600 dark:text-blue-500">Calculator</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Solve any percentage problem instantly. Find discounts, markups, and calculate percentage growth without the mental gymnastics.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>

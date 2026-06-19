@@ -1,20 +1,28 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Suspense } from "react";
 import { AreaClient } from "./AreaClient";
+import { Calendar } from "lucide-react";
 
 export function AreaPageUI({
   defaultFrom = "Square Foot",
   defaultTo = "Square Meter",
   title = "Area Converter | Square Feet, Meters, Acres & More",
   description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more for real estate, farming, and construction.",
-  canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area"
+  canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area",
+  lastUpdated
 }: {
   defaultFrom?: string;
   defaultTo?: string;
   title?: string;
   description?: string;
   canonicalUrl?: string;
+  lastUpdated?: string;
 }) {
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Area", href: "/converters/area" },
+  ];
+
   const faqs = [
     {
       question: "What is the difference between an Acre and a Hectare?",
@@ -31,19 +39,27 @@ export function AreaPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl">
+    <div className="container mx-auto px-4 py-6 max-w-6xl">
       <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {title.split(' | ')[0].split(' ').map((word, i, arr) => 
-            i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '
+            i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-600 dark:text-blue-500">{word} </span> : word + ' '
           )}
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           {description.split('.')[0]}. {description.split('.')[1]}.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-48 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>

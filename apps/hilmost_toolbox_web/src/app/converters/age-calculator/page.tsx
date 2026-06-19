@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { AgeCalculatorClient } from "./AgeCalculatorClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Age & Date Calculator | Discover Your Exact Age",
-  description: "Free online date and age calculator. Instantly calculate the exact time passed between two dates in hours, days, seconds, or a full chronological string.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Age & Date Calculator — Discover Your Exact Age | Hilmost Toolbox",
+    description: "Free online date and age calculator. Instantly calculate the exact time passed between two dates in hours, days, seconds, or a full chronological string.",
+    alternates: {
+      canonical: getCanonicalUrl("/converters/age-calculator"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function AgeCalculatorPage() {
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Age Calculator", href: "/converters/age-calculator" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/converters/age-calculator/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name="Age & Date Calculator | Hilmost" description="Calculate the exact time that has passed between two dates in hours, days, seconds, or a full chronological string." url="https://hilmost-toolbox.hilmost.net/converters/age-calculator" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          Age & Date <span className="text-blue-500">Calculator</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Age & Date <span className="text-blue-600 dark:text-blue-500">Calculator</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Uncover the exact time. Calculate the precise duration between any two moments in history with zero effort.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
