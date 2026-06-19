@@ -33,7 +33,7 @@ export default function EquationSolverPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745" showInnerAds={false}>
+    <AdLayout publisherId="ca-pub-5650522247882745">
       <WebApplicationSchema
         name="Science Equation Solver | Hilmost Toolbox"
         description="Free online science equation solver for physics and chemistry."

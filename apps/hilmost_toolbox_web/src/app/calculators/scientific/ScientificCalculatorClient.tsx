@@ -6,8 +6,6 @@ import { CalculatorDisplay } from "../../../components/calculators/CalculatorDis
 import { useHistory } from "../../../hooks/useHistory";
 import { IconShare, IconCopy, IconCheck } from "@tabler/icons-react";
 
-const math = create(all);
-
 type AngleMode = "deg" | "rad" | "grad";
 
 export function ScientificCalculatorClient() {
