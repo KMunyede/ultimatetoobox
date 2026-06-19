@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "VAT & Sales Tax Calculator | Perfect Your Invoices Instantly",
-  description: "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax from a gross price.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "VAT & Sales Tax Calculator — Perfect Your Invoices Instantly | Hilmost Toolbox",
+    description: "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax from a gross price.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/vat-tax"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function VatTaxPage() {
+  const breadcrumbItems = [
+    { label: "Finance", href: "/finance" },
+    { label: "VAT & Tax", href: "/finance/vat-tax" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/finance/vat-tax/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name="VAT Calculator | Hilmost" description="Perfect your business invoices. Free online VAT and Tax calculator. Easily add or remove VAT from any amount." url="https://hilmost-toolbox.hilmost.net/finance/vat-tax" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          VAT & Sales Tax <span className="text-emerald-500">Calculator</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          VAT & Sales Tax <span className="text-emerald-600 dark:text-emerald-500">Calculator</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Perfect your business invoices. Easily add tax to a net price, or reverse-calculate the exact tax from a grand total instantly.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-xl mx-auto w-full"></div>}>

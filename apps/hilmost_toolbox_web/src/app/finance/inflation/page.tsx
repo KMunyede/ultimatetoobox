@@ -1,12 +1,20 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { InflationClient } from "./InflationClient";
 import { Suspense } from "react";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Inflation Calculator | See Your True Purchasing Power",
-  description: "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power over time.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Inflation Calculator — See Your True Purchasing Power | Hilmost Toolbox",
+    description: "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power over time.",
+    alternates: {
+      canonical: getCanonicalUrl("/finance/inflation"),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -24,18 +32,34 @@ const faqs = [
 ];
 
 export default function InflationPage() {
+  const breadcrumbItems = [
+    { label: "Finance", href: "/finance" },
+    { label: "Inflation", href: "/finance/inflation" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/finance/inflation/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name="Inflation Calculator | Hilmost" description="Free online inflation calculator to see how the value of money changes over time." url="https://hilmost-toolbox.hilmost.net/finance/inflation" />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">
-          Inflation <span className="text-amber-500">Calculator</span>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+          Inflation <span className="text-amber-600 dark:text-amber-500">Calculator</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           Uncover the hidden tax. Calculate exactly how inflation erodes your wealth and increases the future cost of living.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
