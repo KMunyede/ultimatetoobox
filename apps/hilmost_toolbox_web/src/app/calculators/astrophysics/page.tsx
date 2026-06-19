@@ -33,7 +33,7 @@ export default function AstrophysicsCalculatorPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745">
+    <div className="w-full">
       <WebApplicationSchema
         name="Astrophysics Calculator | Hilmost Toolbox"
         description="Free online astrophysics calculator for cosmic mechanics."
@@ -68,6 +68,6 @@ export default function AstrophysicsCalculatorPage() {
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="calculators" currentPath="/calculators/astrophysics" />
-    </AdLayout>
+    </div>
   );
 }

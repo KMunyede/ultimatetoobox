@@ -33,7 +33,7 @@ export default function EquationSolverPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745">
+    <div className="w-full">
       <WebApplicationSchema
         name="Science Equation Solver | Hilmost Toolbox"
         description="Free online science equation solver for physics and chemistry."
@@ -68,6 +68,6 @@ export default function EquationSolverPage() {
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="calculators" currentPath="/calculators/equation-solver" />
-    </AdLayout>
+    </div>
   );
 }

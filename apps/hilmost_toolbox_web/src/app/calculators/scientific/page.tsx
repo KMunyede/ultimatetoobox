@@ -34,7 +34,7 @@ export default function ScientificCalculatorPage() {
   ];
 
   return (
-    <AdLayout publisherId="ca-pub-5650522247882745">
+    <div className="w-full">
       <WebApplicationSchema
         name="Scientific Calculator | Hilmost Toolbox"
         description="Free online scientific calculator with advanced math functions."
@@ -70,6 +70,6 @@ export default function ScientificCalculatorPage() {
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="calculators" currentPath="/calculators/scientific" />
-    </AdLayout>
+    </div>
   );
 }
