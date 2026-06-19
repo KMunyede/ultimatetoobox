@@ -1,7 +1,8 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Suspense } from "react";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
+import { Calendar } from "lucide-react";
 
 const TOOL_NAME = "Temperature Converter";
 const TOOL_DESC = "Convert seamlessly between Celsius, Fahrenheit, and Kelvin in real-time — no signup required.";
@@ -15,6 +16,11 @@ export function TemperaturePageUI({
   canonicalUrl = getCanonicalUrl(PATH)
 }) {
   const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/converters/temperature/page.tsx");
+
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Temperature", href: "/converters/temperature" },
+  ];
 
   const faqs = [
     {
@@ -32,22 +38,27 @@ export function TemperaturePageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
       <FAQSchema items={faqs} />
-      
-      <div className="text-center max-w-3xl mx-auto mb-3">
-        <h1 className="text-2xl md:text-[28px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {title.split(' ').map((word, i, arr) => 
-            i === arr.length - 1 ? <span key={i} className="text-rose-500">{word}</span> : word + ' '
+            i === arr.length - 1 ? <span key={i} className="text-rose-600 dark:text-rose-500">{word}</span> : word + ' '
           )}
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-          Last updated: {lastUpdated}
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
           {description}
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
