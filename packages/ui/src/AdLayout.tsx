@@ -40,8 +40,7 @@ export function AdLayout({
             publisherId={publisherId} 
             slotId={leftSlotId} 
             format="vertical" 
-            className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-            style={{ width: "100%", minHeight: "600px" }}
+            style={{ width: "100%" }}
           />
         </div>
 
@@ -56,8 +55,7 @@ export function AdLayout({
                 publisherId={publisherId}
                 slotId={bottomSlotId}
                 format="horizontal"
-                className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-                style={{ width: "100%", minHeight: "90px" }}
+                style={{ width: "100%" }}
               />
             </div>
           )}
@@ -69,8 +67,7 @@ export function AdLayout({
             publisherId={publisherId} 
             slotId={rightSlotId} 
             format="vertical" 
-            className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-            style={{ width: "100%", minHeight: "600px" }}
+            style={{ width: "100%" }}
           />
         </div>
       </div>

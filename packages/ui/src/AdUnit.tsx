@@ -24,7 +24,7 @@ export function AdUnit({
   responsive = true, 
   className = "",
   style,
-  minHeight = "280px"
+  minHeight = "auto"
 }: AdUnitProps) {
   const pathname = usePathname();
   const adRef = useRef<HTMLModElement>(null);
@@ -45,10 +45,9 @@ export function AdUnit({
 
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-800/50 ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden ${className}`}
       style={{ minHeight, ...style }}
     >
-      <span className="absolute text-xs text-slate-300 dark:text-slate-600 font-bold uppercase tracking-widest pointer-events-none">Advertisement</span>
       <ins
         ref={adRef}
         className="adsbygoogle w-full h-full relative z-10"
