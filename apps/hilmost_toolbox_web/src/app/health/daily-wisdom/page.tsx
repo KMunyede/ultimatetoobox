@@ -1,33 +1,60 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
-import { RelatedTools } from "@utilitiessite/ui";
+import { RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
+import { Calendar } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Daily Wisdom & Wellness | Inspirational Quotes & Philosophy",
-  description: "Reflect on timeless stoic philosophy and nurture your mental wellness with our daily wisdom tool. Find peace and focus in the modern era.",
-  openGraph: {
-    title: "Daily Wisdom & Wellness",
-    description: "Reflect on timeless philosophy and let ancient wisdom guide your modern life.",
-    url: "https://hilmost-toolbox.hilmost.net/health/daily-wisdom",
-    siteName: "Hilmost Toolbox",
-    type: "article",
-    images: ["/og/health.png"],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "Daily Wisdom & Wellness — Inspirational Quotes & Philosophy | Hilmost Toolbox";
+  const description = "Reflect on timeless stoic philosophy and nurture your mental wellness with our daily wisdom tool. Find peace and focus in the modern era.";
+  const canonical = getCanonicalUrl("/health/daily-wisdom");
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: "Hilmost Toolbox",
+      type: "article",
+      images: ["/og/health.png"],
+    },
+  };
+}
 
 export default function Home() {
+  const breadcrumbItems = [
+    { label: "Health", href: "/health" },
+    { label: "Daily Wisdom", href: "/health/daily-wisdom" },
+  ];
+
+  const filePath = path.join(process.cwd(), "src/app/health/daily-wisdom/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
-    <div className="container mx-auto px-4 py-1 max-w-4xl">
-      <div className="text-center mb-3">
-        <h1 className="text-xl font-black tracking-tight text-text-primary mb-1">
+    <div className="container mx-auto px-4 py-6 max-w-4xl">
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <div className="text-center mb-8">
+        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-text-primary mb-2">
           Daily Wisdom and Wellness
         </h1>
-        <p className="text-sm font-bold text-brand-primary mb-2 uppercase tracking-widest">
+        <p className="text-sm font-bold text-brand-primary mb-4 uppercase tracking-widest">
           The Change you want to see starts within You
         </p>
-        <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-4">
           Take a moment to center yourself. Reflect on timeless philosophy and let ancient wisdom guide your modern life.
         </p>
+
+        {lastUpdated && (
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <Calendar size={14} />
+            <span>Last updated: {lastUpdated}</span>
+          </div>
+        )}
       </div>
 
 
