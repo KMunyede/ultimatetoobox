@@ -234,7 +234,7 @@ function ScientificCalculatorInner() {
             key={i}
             onClick={() => onButtonClick(btn.label, btn.type)}
             className={`
-              h-14 md:h-16 rounded-xl text-sm md:text-base font-bold transition-all active:scale-95
+              h-12 md:h-14 rounded-xl text-sm md:text-base font-bold transition-all active:scale-95
               ${btn.className || (btn.type === "mode"
                 ? (btn.active ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-100 dark:border-slate-800")
                 : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-blue-500")}

@@ -224,13 +224,13 @@ export function EquationSolverClient() {
         </div>
 
         {/* Solver Panel */}
-        <div className="md:col-span-2 flex flex-col gap-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
-          <div className="flex flex-col gap-2">
+        <div className="md:col-span-2 flex flex-col gap-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+          <div className="flex flex-col gap-1.5">
             <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Solve for</label>
             <select
               value={target}
               onChange={(e) => setTarget(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-lg font-bold text-slate-900 dark:text-white outline-none"
+              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-lg font-bold text-slate-900 dark:text-white outline-none"
             >
               {equation.variables.map(v => (
                 <option key={v.id} value={v.id}>{v.label}</option>
@@ -273,7 +273,7 @@ export function EquationSolverClient() {
 
           <button
             onClick={solve}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95 mt-2"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-3.5 rounded-2xl text-xl shadow-lg transition-all active:scale-95 mt-1"
           >
             SOLVE
           </button>

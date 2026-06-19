@@ -142,15 +142,15 @@ export function AstrophysicsCalculatorClient() {
 
   return (
     <div className="max-w-4xl mx-auto flex flex-col gap-6">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
-        <div className="flex flex-col gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        <div className="flex flex-col gap-5">
           {/* Calc Type Selector */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Calculation Type</label>
             <select
               value={calcType}
               onChange={(e) => setCalcType(e.target.value as CalcType)}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-lg font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-2.5 text-lg font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             >
               <option value="gravity">Gravitational Force</option>
               <option value="orbital">Orbital Velocity</option>
@@ -212,7 +212,7 @@ export function AstrophysicsCalculatorClient() {
 
           <button
             onClick={calculate}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-3.5 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
           >
             CALCULATE
           </button>
