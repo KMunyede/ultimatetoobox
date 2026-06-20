@@ -3,29 +3,22 @@
 import React, { useState, useCallback } from "react";
 import { PDFDocument, degrees } from "pdf-lib";
 import { useDropzone } from "react-dropzone";
-import { IconUpload, IconRotateClockwise, IconDownload, IconAlertCircle, IconFiles } from "@tabler/icons-react";
+import { IconUpload, IconRotateClockwise, IconDownload, IconAlertCircle, IconFiles, IconLoader2 } from "@tabler/icons-react";
 import { PDFThumbnail } from "./PDFThumbnail";
+import { usePDFDocument } from "../../hooks/usePDFDocument";
 
 export function RotatePDFClient() {
   const [file, setFile] = useState<File | null>(null);
-  const [pageCount, setPageCount] = useState(0);
+  const { pdfProxy, loading: loadingPdf, error: pdfError, pageCount } = usePDFDocument(file);
   const [rotations, setRotations] = useState<Record<number, number>>({});
   const [rotating, setRotating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
-    const uploadedFile = acceptedFiles[0];
-    try {
-      const arrayBuffer = await uploadedFile.arrayBuffer();
-      const pdf = await PDFDocument.load(arrayBuffer);
-      setPageCount(pdf.getPageCount());
-      setFile(uploadedFile);
-      setRotations({});
-      setError(null);
-    } catch (err) {
-      setError("Failed to load PDF. It might be encrypted or corrupted.");
-    }
+    setFile(acceptedFiles[0]);
+    setRotations({});
+    setError(null);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -108,14 +101,15 @@ export function RotatePDFClient() {
       ) : (
         <div className="flex flex-col gap-6">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
-            <PDFThumbnail file={file} className="w-24 h-32 shrink-0" />
+            <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white truncate">{file.name}</h3>
               <p className="text-slate-500 font-bold uppercase text-xs mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-4">
                 <button
                   onClick={rotateAll}
-                  className="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest flex items-center gap-1 hover:underline"
+                  disabled={loadingPdf}
+                  className="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-widest flex items-center gap-1 hover:underline disabled:opacity-50"
                 >
                   <IconRotateClockwise size={14} />
                   Rotate All
@@ -130,38 +124,47 @@ export function RotatePDFClient() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {Array.from({ length: pageCount }).map((_, i) => (
-              <div key={i} className="flex flex-col gap-2">
-                <div
-                  className="relative group rounded-2xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 p-2 overflow-hidden aspect-[3/4]"
-                  style={{ transform: `rotate(${rotations[i] || 0}deg)`, transition: 'transform 0.3s ease-in-out' }}
-                >
-                  <PDFThumbnail file={file} pageNumber={i + 1} className="w-full h-full" />
-                </div>
-                <button
-                  onClick={() => rotatePage(i)}
-                  className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center justify-center gap-1 transition-colors"
-                >
-                  <IconRotateClockwise size={14} />
-                  Rotate 90°
-                </button>
-              </div>
-            ))}
-          </div>
+          {loadingPdf && (
+            <div className="flex flex-col items-center gap-2 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
+              <IconLoader2 className="animate-spin text-red-500" size={32} />
+              <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">Generating previews...</p>
+            </div>
+          )}
 
-          {error && (
+          {!loadingPdf && pdfProxy && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+              {Array.from({ length: pageCount }).map((_, i) => (
+                <div key={i} className="flex flex-col gap-2">
+                  <div
+                    className="relative group rounded-2xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 p-2 overflow-hidden aspect-[3/4]"
+                    style={{ transform: `rotate(${rotations[i] || 0}deg)`, transition: 'transform 0.3s ease-in-out' }}
+                  >
+                    <PDFThumbnail pdfProxy={pdfProxy} pageNumber={i + 1} className="w-full h-full" />
+                  </div>
+                  <button
+                    onClick={() => rotatePage(i)}
+                    className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center justify-center gap-1 transition-colors"
+                  >
+                    <IconRotateClockwise size={14} />
+                    Rotate 90°
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {(error || pdfError) && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-4 flex items-center gap-3 text-red-600 dark:text-red-400">
               <IconAlertCircle size={20} />
-              <span className="font-bold text-sm">{error}</span>
+              <span className="font-bold text-sm">{error || pdfError}</span>
             </div>
           )}
 
           <button
             onClick={saveRotatedPDF}
-            disabled={rotating}
+            disabled={rotating || loadingPdf}
             className={`w-full py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 transition-all shadow-lg active:scale-[0.98] ${
-              rotating ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
+              rotating || loadingPdf ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
             }`}
           >
             {rotating ? (

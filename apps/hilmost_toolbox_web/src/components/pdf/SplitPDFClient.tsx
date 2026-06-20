@@ -3,31 +3,24 @@
 import React, { useState, useCallback } from "react";
 import { PDFDocument } from "pdf-lib";
 import { useDropzone } from "react-dropzone";
-import { IconUpload, IconScissors, IconDownload, IconAlertCircle, IconFiles } from "@tabler/icons-react";
+import { IconUpload, IconScissors, IconDownload, IconAlertCircle, IconFiles, IconLoader2 } from "@tabler/icons-react";
 import { PDFThumbnail } from "./PDFThumbnail";
+import { usePDFDocument } from "../../hooks/usePDFDocument";
 
 export function SplitPDFClient() {
   const [file, setFile] = useState<File | null>(null);
-  const [pageCount, setPageCount] = useState(0);
+  const { pdfProxy, loading: loadingPdf, error: pdfError, pageCount } = usePDFDocument(file);
   const [splitMode, setSplitMode] = useState<"extract" | "ranges">("extract");
   const [extractPages, setExtractPages] = useState<number[]>([]);
   const [ranges, setRanges] = useState("");
   const [splitting, setSplitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
-    const uploadedFile = acceptedFiles[0];
-    try {
-      const arrayBuffer = await uploadedFile.arrayBuffer();
-      const pdf = await PDFDocument.load(arrayBuffer);
-      setPageCount(pdf.getPageCount());
-      setFile(uploadedFile);
-      setExtractPages([]);
-      setError(null);
-    } catch (err) {
-      setError("Failed to load PDF. It might be encrypted or corrupted.");
-    }
+    setFile(acceptedFiles[0]);
+    setExtractPages([]);
+    setError(null);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -129,7 +122,7 @@ export function SplitPDFClient() {
       ) : (
         <div className="flex flex-col gap-6">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
-            <PDFThumbnail file={file} className="w-24 h-32 shrink-0" />
+            <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white truncate">{file.name}</h3>
               <p className="text-slate-500 font-bold uppercase text-xs mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
@@ -142,66 +135,77 @@ export function SplitPDFClient() {
             </div>
           </div>
 
-          <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl self-center">
-            <button
-              onClick={() => setSplitMode("extract")}
-              className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "extract" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
-            >
-              Select Pages
-            </button>
-            <button
-              onClick={() => setSplitMode("ranges")}
-              className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "ranges" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
-            >
-              Custom Range
-            </button>
-          </div>
-
-          {splitMode === "extract" ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {Array.from({ length: pageCount }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => togglePageSelection(i)}
-                  className={`relative group rounded-2xl border-2 transition-all p-2 bg-white dark:bg-slate-900 ${
-                    extractPages.includes(i) ? "border-red-500 ring-4 ring-red-500/10" : "border-transparent hover:border-slate-300 dark:hover:border-slate-700"
-                  }`}
-                >
-                  <PDFThumbnail file={file} pageNumber={i + 1} className="w-full aspect-[3/4]" />
-                  <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center font-bold text-xs ${
-                    extractPages.includes(i) ? "bg-red-500 text-white" : "bg-slate-200 dark:bg-slate-700 text-slate-500"
-                  }`}>
-                    {i + 1}
-                  </div>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col gap-4">
-              <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Page Ranges</label>
-              <input
-                type="text"
-                value={ranges}
-                onChange={(e) => setRanges(e.target.value)}
-                placeholder="e.g. 1-5, 8, 11-14"
-                className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 text-lg font-mono font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-red-500 outline-none w-full"
-              />
-              <p className="text-xs text-slate-500 font-medium italic">Enter comma-separated page numbers or ranges to extract.</p>
+          {loadingPdf && (
+            <div className="flex flex-col items-center gap-2 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
+              <IconLoader2 className="animate-spin text-red-500" size={32} />
+              <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">Analyzing PDF structure...</p>
             </div>
           )}
 
-          {error && (
+          {!loadingPdf && pdfProxy && (
+            <>
+              <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl self-center">
+                <button
+                  onClick={() => setSplitMode("extract")}
+                  className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "extract" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
+                >
+                  Select Pages
+                </button>
+                <button
+                  onClick={() => setSplitMode("ranges")}
+                  className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "ranges" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
+                >
+                  Custom Range
+                </button>
+              </div>
+
+              {splitMode === "extract" ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                  {Array.from({ length: pageCount }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => togglePageSelection(i)}
+                      className={`relative group rounded-2xl border-2 transition-all p-2 bg-white dark:bg-slate-900 ${
+                        extractPages.includes(i) ? "border-red-500 ring-4 ring-red-500/10" : "border-transparent hover:border-slate-300 dark:hover:border-slate-700"
+                      }`}
+                    >
+                      <PDFThumbnail pdfProxy={pdfProxy} pageNumber={i + 1} className="w-full aspect-[3/4]" />
+                      <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center font-bold text-xs ${
+                        extractPages.includes(i) ? "bg-red-500 text-white" : "bg-slate-200 dark:bg-slate-700 text-slate-500"
+                      }`}>
+                        {i + 1}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col gap-4">
+                  <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Page Ranges</label>
+                  <input
+                    type="text"
+                    value={ranges}
+                    onChange={(e) => setRanges(e.target.value)}
+                    placeholder="e.g. 1-5, 8, 11-14"
+                    className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 text-lg font-mono font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-red-500 outline-none w-full"
+                  />
+                  <p className="text-xs text-slate-500 font-medium italic">Enter comma-separated page numbers or ranges to extract.</p>
+                </div>
+              )}
+            </>
+          )}
+
+          {(error || pdfError) && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-4 flex items-center gap-3 text-red-600 dark:text-red-400">
               <IconAlertCircle size={20} />
-              <span className="font-bold text-sm">{error}</span>
+              <span className="font-bold text-sm">{error || pdfError}</span>
             </div>
           )}
 
           <button
             onClick={splitPDF}
-            disabled={splitting || (splitMode === "extract" && extractPages.length === 0)}
+            disabled={splitting || loadingPdf || (splitMode === "extract" && extractPages.length === 0)}
             className={`w-full py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 transition-all shadow-lg active:scale-[0.98] ${
-              splitting ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
+              splitting || loadingPdf ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
             }`}
           >
             {splitting ? (
