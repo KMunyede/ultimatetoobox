@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../seo/seo_engine.dart';
 import '../../features/shell/shell_layout.dart';
 import '../../features/home/home_page.dart';
 import '../../features/tools/bmi/bmi_page.dart';
@@ -19,6 +20,11 @@ import '../../features/tools/text/word_unscrambler_page.dart';
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/',
+    // Global listener for SEO updates
+    redirect: (context, state) {
+      ToolSeoEngine.updateForPath(state.matchedLocation);
+      return null;
+    },
     routes: [
       ShellRoute(
         builder: (context, state, child) {

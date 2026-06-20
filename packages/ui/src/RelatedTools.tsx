@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-type Category = "converters" | "calculators" | "finance" | "text-data" | "health";
+type Category = "converters" | "calculators" | "finance" | "text-data" | "health" | "pdf-tools";
 
 interface RelatedToolsProps {
   category: Category;
@@ -49,6 +49,12 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
   health: [
     { name: "BMI Calculator", href: "/health/bmi-calculator", description: "Check your Body Mass Index." },
     { name: "Daily Wisdom", href: "/health/daily-wisdom", description: "Inspirational quotes & journaling." },
+  ],
+  "pdf-tools": [
+    { name: "Merge PDF", href: "/pdf-tools/merge-pdf", description: "Combine multiple PDF files." },
+    { name: "Split PDF", href: "/pdf-tools/split-pdf", description: "Extract pages from a PDF." },
+    { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf", description: "Fix PDF orientation." },
+    { name: "Delete Pages", href: "/pdf-tools/delete-pages", description: "Remove pages from a PDF." },
   ],
 };
 

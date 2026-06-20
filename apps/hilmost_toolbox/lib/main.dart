@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
+import 'package:meta_seo/meta_seo.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'core/router/app_router.dart';
@@ -13,6 +14,9 @@ void main() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); // Maximize UI footprint
   // In flutter web, this allows standard right-click (Developer mode, Inspect)
   BrowserContextMenu.enableContextMenu();
+  if (kIsWeb) {
+    MetaSEO().config();
+  }
   usePathUrlStrategy();
 
   PlatformDispatcher.instance.onError = (error, stack) {

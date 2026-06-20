@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "target": "hilmost-toolbox",
+    "public": "build/web",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [{"source": "/**", "destination": "/index.html"}]
+  }
+}
