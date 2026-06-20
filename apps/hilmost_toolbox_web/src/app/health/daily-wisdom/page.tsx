@@ -64,30 +64,27 @@ export default function Home() {
 
       <DailyQuoteClient />
       
-      <div className="mt-16 flex flex-wrap justify-center gap-4">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
         <a 
           href="/health/daily-wisdom/library" 
-          className="inline-flex items-center justify-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-semibold py-4 px-8 rounded-2xl transition-all shadow-md hover:shadow-lg"
+          className="flex items-center justify-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-bold py-4 px-6 rounded-2xl transition-all shadow-md hover:shadow-lg text-center"
         >
           Wisdom Library
         </a>
         <a 
           href="/health/daily-wisdom/journal" 
-          className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all shadow-md hover:shadow-lg"
+          className="flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-md hover:shadow-lg text-center"
         >
           Open Private Journal
         </a>
-      </div>
-      
-      <div className="mt-4 flex flex-wrap justify-center gap-4 opacity-75">
-        <span 
-          className="inline-flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-semibold py-4 px-8 rounded-2xl cursor-not-allowed"
+        <span
+          className="flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold py-4 px-6 rounded-2xl cursor-not-allowed opacity-75 text-center"
           title="Coming Soon"
         >
           My Favorites (Soon)
         </span>
         <span 
-          className="inline-flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-semibold py-4 px-8 rounded-2xl cursor-not-allowed"
+          className="flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold py-4 px-6 rounded-2xl cursor-not-allowed opacity-75 text-center"
           title="Coming Soon"
         >
           My Profile (Soon)
