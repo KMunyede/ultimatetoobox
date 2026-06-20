@@ -1,13 +1,14 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { SplitPDFClient } from "../../../components/pdf/SplitPDFClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Split PDF Pages";
 const TOOL_DESC = "Extract specific pages or ranges from your PDF document instantly. Secure, browser-side splitting with visual page selection.";
 const PATH = "/pdf-tools/split-pdf";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Split PDF Files — Extract Pages Free Online | Hilmost Toolbox";
@@ -23,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: canonical,
       type: "website",
+      images: ["/og/pdf-tools.png"],
     },
   };
 }
@@ -51,24 +53,31 @@ export default function SplitPDFPage() {
   const filePath = path.join(process.cwd(), "src/app/pdf-tools/split-pdf/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.pdf-dropzone', popover: { title: '1. Upload', description: 'Drag and drop your PDF file here.' } },
+    { element: '.pdf-split-options', popover: { title: '2. Select Mode', description: 'Choose between selecting specific pages visually or entering a range.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={getCanonicalUrl(PATH)} />
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
+      />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Split PDF <span className="text-red-600 dark:text-red-500">Pages</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Break down large documents or extract exactly what you need. Fast, visual, and completely private PDF splitting.
-        </p>
-
-        <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-          <Calendar size={14} />
-          <span>Last updated: {lastUpdated}</span>
-        </div>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Break down large documents or extract exactly what you need. Fast, visual, and completely private."
+        lastUpdated={lastUpdated}
+        tourId="split_pdf"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <SplitPDFClient />
 

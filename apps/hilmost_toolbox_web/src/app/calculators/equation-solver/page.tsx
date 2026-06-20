@@ -1,13 +1,18 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
 import { EquationSolverClient } from "./EquationSolverClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TOOL_NAME = "Science Equation Solver";
+const TOOL_DESC = "Free online physics equation solver. Solve for any variable in mechanics, thermodynamics, electromagnetism, quantum, relativity, and optics equations.";
+const PATH = "/calculators/equation-solver";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export const metadata: Metadata = {
-  title: "Science Equation Solver — Physics Formula Calculator | Hilmost Toolbox",
-  description: "Free online physics equation solver. Solve for any variable in mechanics, thermodynamics, electromagnetism, quantum, relativity, and optics equations.",
+  title: `${TOOL_NAME} — Physics Formula Calculator | Hilmost Toolbox`,
+  description: TOOL_DESC,
   alternates: {
-    canonical: getCanonicalUrl("/calculators/equation-solver"),
+    canonical: getCanonicalUrl(PATH),
   },
 };
 
@@ -29,16 +34,19 @@ const faqs = [
 export default function EquationSolverPage() {
   const breadcrumbItems = [
     { label: "Calculators", href: "/calculators" },
-    { label: "Equation Solver", href: "/calculators/equation-solver" },
+    { label: "Equation Solver", href: PATH },
   ];
 
   return (
     <div className="w-full">
       <WebApplicationSchema
-        name="Science Equation Solver | Hilmost Toolbox"
-        description="Free online science equation solver for physics and chemistry."
-        url="https://hilmost-toolbox.hilmost.net/calculators/equation-solver"
+        name={`${TOOL_NAME} | Hilmost Toolbox`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="mb-8">
@@ -58,11 +66,11 @@ export default function EquationSolverPage() {
         </p>
         <h3>Libraries Included</h3>
         <ul>
-          <li><strong>Mechanics:</strong> Newton's Laws, Kinetic Energy, Work, and Power.</li>
+          <li><strong>Mechanics:</strong> Newton&apos;s Laws, Kinetic Energy, Work, and Power.</li>
           <li><strong>Thermodynamics:</strong> Ideal Gas Law, Heat Transfer, and Efficiency.</li>
-          <li><strong>Electromagnetism:</strong> Ohm's Law, Coulomb's Law, and Capacitance.</li>
-          <li><strong>Quantum & Relativity:</strong> Photon Energy, Time Dilation, and E=mc².</li>
-          <li><strong>Optics:</strong> Snell's Law and Thin Lens equations.</li>
+          <li><strong>Electromagnetism:</strong> Ohm&apos;s Law, Coulomb&apos;s Law, and Capacitance.</li>
+          <li><strong>Quantum &amp; Relativity:</strong> Photon Energy, Time Dilation, and E=mc².</li>
+          <li><strong>Optics:</strong> Snell&apos;s Law and Thin Lens equations.</li>
         </ul>
       </ToolArticle>
 

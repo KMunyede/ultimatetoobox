@@ -5,6 +5,7 @@ import { CalculatorDisplay } from "../../../components/calculators/CalculatorDis
 import { ScientificInput } from "../../../components/calculators/ScientificInput";
 import { useHistory } from "../../../hooks/useHistory";
 import { ScientificNumber } from "@utilitiessite/ui";
+import { motion } from "framer-motion";
 
 const CONSTANTS = {
   G: 6.674e-11,
@@ -121,14 +122,12 @@ export function AstrophysicsCalculatorClient() {
         unit = "m/s";
         break;
       case "luminosity":
-        // val1: radius, val2: temp
         res = 4 * Math.PI * Math.pow(val1, 2) * CONSTANTS.sigma * Math.pow(val2, 4);
         expr = `4π * ${val1.toExponential(2)}² * σ * ${val2}⁴`;
         unit = "watts";
         break;
       case "hubble":
-        // val1: velocity (km/s)
-        res = val1 / CONSTANTS.H0; // Distance in Mpc
+        res = val1 / CONSTANTS.H0;
         expr = `${val1} / H0`;
         unit = "megaparsecs";
         break;
@@ -141,26 +140,41 @@ export function AstrophysicsCalculatorClient() {
   }, [calcType, val1, val2, val3, addEntry]);
 
   return (
-    <div className="max-w-4xl mx-auto flex flex-col gap-6">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
-        <div className="flex flex-col gap-5">
-          {/* Calc Type Selector */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Calculation Type</label>
-            <select
-              value={calcType}
-              onChange={(e) => setCalcType(e.target.value as CalcType)}
-              className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-2.5 text-lg font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="@container max-w-4xl mx-auto flex flex-col gap-6"
+    >
+      <div className="bg-canvas-card border border-base rounded-3xl p-5 md:p-8 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+
+          {/* Controls Column */}
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Calculation Type</label>
+              <select
+                value={calcType}
+                onChange={(e) => setCalcType(e.target.value as CalcType)}
+                className="w-full bg-canvas-muted border border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer"
+              >
+                <option value="gravity">Gravitational Force</option>
+                <option value="orbital">Orbital Velocity</option>
+                <option value="escape">Escape Velocity</option>
+                <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
+                <option value="hubble">Hubble Distance</option>
+              </select>
+            </div>
+
+            {/* Main Action Button */}
+            <button
+              onClick={calculate}
+              className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
             >
-              <option value="gravity">Gravitational Force</option>
-              <option value="orbital">Orbital Velocity</option>
-              <option value="escape">Escape Velocity</option>
-              <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
-              <option value="hubble">Hubble Distance</option>
-            </select>
+              CALCULATE
+            </button>
           </div>
 
-          {/* Dynamic Inputs */}
+          {/* Dynamic Inputs Column */}
           <div className="flex flex-col gap-4">
             {calcType === "gravity" && (
               <>
@@ -178,72 +192,72 @@ export function AstrophysicsCalculatorClient() {
             {calcType === "luminosity" && (
               <>
                 <ScientificInput label="Star Radius (R)" value={val1} onChange={setVal1} presets={DIST_PRESETS} units={DIST_UNITS} />
-                <div className="flex flex-col gap-2 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
-                  <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Surface Temperature (T)</label>
+                <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-base rounded-2xl">
+                  <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
                   <div className="flex items-center gap-3">
                     <input
                       type="number"
+                      inputMode="decimal"
                       value={val2}
                       onChange={(e) => setVal2(parseFloat(e.target.value))}
-                      className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-lg font-mono font-bold text-slate-900 dark:text-white"
+                      className="flex-1 bg-canvas-card border border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                       placeholder="5778"
                     />
-                    <span className="text-sm font-bold text-slate-500">Kelvin</span>
+                    <span className="text-xs font-bold text-text-muted uppercase">Kelvin</span>
                   </div>
                 </div>
               </>
             )}
             {calcType === "hubble" && (
-              <div className="flex flex-col gap-2 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
-                <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Recessional Velocity (v)</label>
+              <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-base rounded-2xl">
+                <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Recessional Velocity (v)</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
+                    inputMode="decimal"
                     value={val1}
                     onChange={(e) => setVal1(parseFloat(e.target.value))}
-                    className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-lg font-mono font-bold text-slate-900 dark:text-white"
+                    className="flex-1 bg-canvas-card border border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                     placeholder="1000"
                   />
-                  <span className="text-sm font-bold text-slate-500">km/s</span>
+                  <span className="text-xs font-bold text-text-muted uppercase">km/s</span>
                 </div>
               </div>
             )}
           </div>
-
-          <button
-            onClick={calculate}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-3.5 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
-          >
-            CALCULATE
-          </button>
         </div>
       </div>
 
       {/* Result Card */}
       {result && (
-        <div className="bg-blue-600 rounded-3xl p-8 text-white shadow-xl">
-          <div className="text-sm font-bold uppercase tracking-widest opacity-80 mb-2">Calculated Result</div>
-          <div className="text-3xl md:text-4xl font-mono font-black mb-2">
-            <ScientificNumber value={parseFloat(result)} className="text-white" />
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="bg-brand-primary rounded-[2rem] p-8 text-white shadow-2xl relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
+          <div className="relative z-10">
+            <div className="text-xs font-bold uppercase tracking-[0.2em] opacity-80 mb-2">Calculated Result</div>
+            <div className="text-4xl md:text-5xl font-mono font-black mb-3 tracking-tighter">
+              <ScientificNumber value={parseFloat(result)} className="text-white" />
+            </div>
+            <div className="text-lg font-medium opacity-90 italic">
+              {humanResult}
+            </div>
           </div>
-          <div className="text-lg font-medium opacity-90 italic">
-            {humanResult}
-          </div>
-        </div>
+        </motion.div>
       )}
 
       {/* History Section */}
-      <div className="mt-4">
-        <CalculatorDisplay
-          expression=""
-          result={result}
-          history={history}
-          onClearHistory={clearHistory}
-          onRestore={(entry) => {
-            setResult(entry.result);
-          }}
-        />
-      </div>
-    </div>
+      <CalculatorDisplay
+        expression=""
+        result={result}
+        history={history}
+        onClearHistory={clearHistory}
+        onRestore={(entry) => {
+          setResult(entry.result);
+        }}
+      />
+    </motion.div>
   );
 }

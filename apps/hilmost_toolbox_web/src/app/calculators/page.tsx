@@ -1,15 +1,20 @@
-import { WebApplicationSchema, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Calculator, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TITLE = "Online Calculators";
+const DESC = "Master your daily tasks with quiet confidence. Everything you need, exactly when you need it: standard, scientific, and specialized math calculators.";
+const PATH = "/calculators";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Online Calculators — Free Standard, Scientific & Specialized Tools | Hilmost Toolbox",
+    title: `${TITLE} — Free Standard, Scientific & Specialized Tools | Hilmost Toolbox`,
     description: "Master complex math with ease. Free online calculators for standard arithmetic, scientific computing, astrophysics, and physics equation solving.",
     alternates: {
-      canonical: getCanonicalUrl("/calculators"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -38,15 +43,17 @@ const links = [
 ];
 
 export default function CalculatorsHub() {
-  const breadcrumbItems = [{ label: "Calculators", href: "/calculators" }];
+  const breadcrumbItems = [{ label: "Calculators", href: PATH }];
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema
-        name="Calculators | Hilmost Ultimate Toolbox"
-        description="Master your daily tasks with quiet confidence. Everything you need, exactly when you need it: standard, scientific, and specialized math calculators."
-        url="https://hilmost-toolbox.hilmost.net/calculators"
+        name={`${TITLE} | Hilmost Ultimate Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">

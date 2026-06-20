@@ -1,14 +1,18 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
 import { ScientificCalculatorClient } from "./ScientificCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { Suspense } from "react";
+
+const TOOL_NAME = "Scientific Calculator";
+const TOOL_DESC = "Free online scientific calculator with trig, logarithms, and constants. Solve advanced math instantly in your browser.";
+const PATH = "/calculators/scientific";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: "Scientific Calculator — Free Online Scientific Calculator | Hilmost Toolbox",
-  description: "Free online scientific calculator with trig, logarithms, and constants. Solve advanced math instantly in your browser.",
+  title: `${TOOL_NAME} — Free Online Scientific Calculator | Hilmost Toolbox`,
+  description: TOOL_DESC,
   alternates: {
-    canonical: getCanonicalUrl("/calculators/scientific"),
+    canonical: getCanonicalUrl(PATH),
   },
 };
 
@@ -30,16 +34,19 @@ const faqs = [
 export default function ScientificCalculatorPage() {
   const breadcrumbItems = [
     { label: "Calculators", href: "/calculators" },
-    { label: "Scientific", href: "/calculators/scientific" },
+    { label: "Scientific", href: PATH },
   ];
 
   return (
     <div className="w-full">
       <WebApplicationSchema
-        name="Scientific Calculator | Hilmost Toolbox"
-        description="Free online scientific calculator with advanced math functions."
-        url="https://hilmost-toolbox.hilmost.net/calculators/scientific"
+        name={`${TOOL_NAME} | Hilmost Toolbox`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className="mb-8">
@@ -51,9 +58,7 @@ export default function ScientificCalculatorPage() {
         </p>
       </div>
 
-      <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <ScientificCalculatorClient />
-      </Suspense>
+      <ScientificCalculatorClient />
 
       <ToolArticle title="Mastering Advanced Calculations">
         <p>
@@ -63,7 +68,7 @@ export default function ScientificCalculatorPage() {
         <ul>
           <li><strong>Trigonometry:</strong> Support for Sine, Cosine, Tangent, and their inverses in multiple angle modes.</li>
           <li><strong>Logarithms:</strong> Calculate natural logs (ln) and base-10 logs (log) with ease.</li>
-          <li><strong>Constants:</strong> Built-in values for Pi (π) and Euler's number (e).</li>
+          <li><strong>Constants:</strong> Built-in values for Pi (π) and Euler&apos;s number (e).</li>
           <li><strong>URL Sharing:</strong> Collaborate by sharing direct links to your complex calculations.</li>
         </ul>
       </ToolArticle>

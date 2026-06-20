@@ -1,5 +1,4 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
-import { Suspense } from "react";
 import { WeightConverterClient } from "./WeightConverterClient";
 import { Calendar } from "lucide-react";
 
@@ -62,11 +61,9 @@ export function WeightMassPageUI({
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <WeightConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
-        </div>
-      </Suspense>
+      <div className="max-w-4xl mx-auto">
+        <WeightConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
+      </div>
 
       <ToolArticle title="The Heavy Lifting of Global Logistics">
         <p>

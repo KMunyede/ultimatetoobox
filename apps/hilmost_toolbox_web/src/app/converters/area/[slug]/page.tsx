@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AreaPageUI } from "../AreaPageUI";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const AREA_UNITS = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Hectare", "Acre", "Square Foot", "Square Inch", "Square Yard", "Square Mile"];
 
@@ -46,6 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `Convert ${fromUnit} to ${toUnit} | Area Calculator`,
       description: `Instantly convert ${fromUnit} to ${toUnit} using our free area calculator.`,
       url: canonical,
+      images: ["/og/converters.png"],
     },
   };
 }
@@ -65,6 +67,9 @@ export default async function AreaDynamicPage({ params }: { params: Promise<{ sl
     return notFound();
   }
 
+  const filePath = path.join(process.cwd(), "src/app/converters/area/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
     <AreaPageUI 
       defaultFrom={fromUnitStr} 
@@ -72,6 +77,7 @@ export default async function AreaDynamicPage({ params }: { params: Promise<{ sl
       title={`Convert ${fromUnitStr} to ${toUnitStr} | Area Calculator`}
       description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free area calculator. Perfect for real estate, landscaping, and construction.`}
       canonicalUrl={getCanonicalUrl(`/converters/area/${slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }

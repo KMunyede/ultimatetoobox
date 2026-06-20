@@ -1,12 +1,11 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
-import { Suspense } from "react";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { CurrencyClient } from "./CurrencyClient";
 import { Calendar } from "lucide-react";
 
 export function CurrencyPageUI({
   defaultFrom = "USD",
   defaultTo = "EUR",
-  title = "Live Currency Converter | Stop Overpaying Banks",
+  title = "Live Currency Converter",
   description = "Free, real-time currency converter. Stop overpaying banks and instantly convert between global currencies using live foreign exchange market rates.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/finance/currency",
   lastUpdated
@@ -40,8 +39,14 @@ export function CurrencyPageUI({
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-6xl">
-      <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={title}
+        description={description}
+        url={canonicalUrl}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -51,7 +56,7 @@ export function CurrencyPageUI({
           )}
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description.split('.')[0]}. {description.split('.')[1]}.
+          {description}
         </p>
 
         {lastUpdated && (
@@ -62,13 +67,11 @@ export function CurrencyPageUI({
         )}
       </div>
       
-      <Suspense fallback={<div className="h-48 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <CurrencyClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
-      </Suspense>
+      <CurrencyClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
 
       <ToolArticle title="Understanding Global Exchange Rates">
         <p>
-          Whether you are traveling internationally, purchasing goods from overseas, or investing in the foreign exchange (Forex) market, understanding how currency conversion works is crucial to ensuring you don't overpay.
+          Whether you are traveling internationally, purchasing goods from overseas, or investing in the foreign exchange (Forex) market, understanding how currency conversion works is crucial to ensuring you don&apos;t overpay.
         </p>
         
         <h3>How to Use This Tool</h3>

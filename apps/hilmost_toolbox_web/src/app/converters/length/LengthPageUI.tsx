@@ -1,5 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
-import { Suspense } from "react";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { LengthConverterClient } from "./LengthConverterClient";
 import { Calendar } from "lucide-react";
 
@@ -40,8 +39,14 @@ export function LengthPageUI({
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={title + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={`${title} | Hilmost`}
+        description={description}
+        url={canonicalUrl}
+        image="https://hilmost-toolbox.hilmost.net/og/converters.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,11 +67,9 @@ export function LengthPageUI({
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <LengthConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
-        </div>
-      </Suspense>
+      <div className="max-w-4xl mx-auto">
+        <LengthConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
+      </div>
 
       <ToolArticle title="Mastering Measurement Conversions">
         <p>

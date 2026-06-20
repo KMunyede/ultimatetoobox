@@ -1,13 +1,14 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { MergePDFClient } from "../../../components/pdf/MergePDFClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Merge PDF Files";
 const TOOL_DESC = "Combine multiple PDF documents into one instantly. Secure, browser-side merging with drag-to-reorder functionality.";
 const PATH = "/pdf-tools/merge-pdf";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Merge PDF Files Free Online — Combine Multiple PDFs | Hilmost Toolbox";
@@ -52,24 +53,31 @@ export default function MergePDFPage() {
   const filePath = path.join(process.cwd(), "src/app/pdf-tools/merge-pdf/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.pdf-dropzone', popover: { title: '1. Select Files', description: 'Click or drag PDF files into this area to start.' } },
+    { element: '.pdf-merge-btn', popover: { title: '2. Combine', description: 'Click this button to merge your documents once you are happy with the order.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={getCanonicalUrl(PATH)} />
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
+      />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Merge PDF <span className="text-red-600 dark:text-red-500">Files</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Combine multiple documents into a single, organized PDF instantly. Professional-grade merging without the subscription.
-        </p>
-
-        <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-          <Calendar size={14} />
-          <span>Last updated: {lastUpdated}</span>
-        </div>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Combine multiple documents into a single, organized PDF instantly. Professional-grade merging."
+        lastUpdated={lastUpdated}
+        tourId="merge_pdf"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <MergePDFClient />
 
@@ -79,7 +87,7 @@ export default function MergePDFPage() {
         </p>
         <h3>Privacy-First Merging</h3>
         <p>
-          Our Merge PDF tool uses the <code>pdf-lib</code> engine to perform all calculations directly inside your browser's memory. This means your private information—bank statements, contracts, or personal IDs—never leaves your machine.
+          Our Merge PDF tool uses the <code>pdf-lib</code> engine to perform all calculations directly inside your browser&apos;s memory. This means your private information—bank statements, contracts, or personal IDs—never leaves your machine.
         </p>
         <h3>How to Use This Tool</h3>
         <ol>

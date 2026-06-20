@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Compound Interest Calculator";
+const TOOL_DESC = "Discover the power of compounding. Free online calculator to project investment growth, monthly contributions, and long-term wealth accumulation.";
+const PATH = "/finance/compound-interest";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Compound Interest Calculator — Visualize Your Investment Growth | Hilmost Toolbox",
-    description: "Discover the power of compounding. Free online calculator to project investment growth, monthly contributions, and long-term wealth accumulation.",
+    title: `${TOOL_NAME} — Visualize Your Investment Growth | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/compound-interest"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function CompoundInterestPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Compound Interest", href: "/finance/compound-interest" },
+    { label: "Compound Interest", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/compound-interest/page.tsx");
@@ -43,11 +47,13 @@ export default function CompoundInterestPage() {
   return (
     <div className="container mx-auto px-4 py-6 max-w-6xl">
       <WebApplicationSchema
-        name="Compound Interest Calculator"
-        description="Unlock the 8th wonder of the world. Free online compound interest calculator to see how your money grows exponentially."
-        url="https://hilmost-toolbox.hilmost.net/finance/compound-interest"
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -66,9 +72,7 @@ export default function CompoundInterestPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <CompoundInterestClient />
-      </Suspense>
+      <CompoundInterestClient />
 
       <ToolArticle title="The Magic of Compound Interest">
         <p>

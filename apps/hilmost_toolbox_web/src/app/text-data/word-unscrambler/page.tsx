@@ -1,8 +1,7 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
-import { Suspense } from "react";
 import path from "path";
 import { Calendar } from "lucide-react";
 
@@ -10,6 +9,7 @@ const TOOL_NAME = "Word Unscrambler";
 const TOOL_TYPE = "Anagram Solver";
 const TOOL_DESC = "Instantly untangle any anagram and find the hidden words in milliseconds — no signup required.";
 const PATH = "/text-data/word-unscrambler";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
@@ -24,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       url: canonical,
+      images: ["/og/text-data.png"],
     },
   };
 }
@@ -46,17 +47,22 @@ const faqs = [
 export default function WordUnscramblerPage() {
   const breadcrumbItems = [
     { label: "Text & Data", href: "/text-data" },
-    { label: "Word Unscrambler", href: "/text-data/word-unscrambler" },
+    { label: "Word Unscrambler", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/text-data/word-unscrambler/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
-  const canonicalUrl = getCanonicalUrl(PATH);
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/text-data.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -75,11 +81,9 @@ export default function WordUnscramblerPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-5xl mx-auto">
-          <WordUnscramblerClient />
-        </div>
-      </Suspense>
+      <div className="max-w-5xl mx-auto">
+        <WordUnscramblerClient />
+      </div>
 
       <ToolArticle title="Master Your Text: The Power of Unscrambling">
         <p>
@@ -97,8 +101,8 @@ export default function WordUnscramblerPage() {
         <h3>How to Use This Tool</h3>
         <ol>
           <li><strong>Step 1: Enter Letters</strong> - Type your scrambled letters into the main box. Use wildcards for missing pieces.</li>
-          <li><strong>Step 2: Apply Filters</strong> - Use the "Advanced Filters" panel if you need words that fit a specific board position.</li>
-          <li><strong>Step 3: Pick & Copy</strong> - Review the grouped results and click any word to copy it to your clipboard.</li>
+          <li><strong>Step 2: Apply Filters</strong> - Use the &quot;Advanced Filters&quot; panel if you need words that fit a specific board position.</li>
+          <li><strong>Step 3: Pick &amp; Copy</strong> - Review the grouped results and click any word to copy it to your clipboard.</li>
         </ol>
       </ToolArticle>
 

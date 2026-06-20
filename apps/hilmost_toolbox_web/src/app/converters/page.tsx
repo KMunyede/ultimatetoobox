@@ -1,15 +1,20 @@
-import { WebApplicationSchema, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Replace, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TITLE = "Unit Converters";
+const DESC = "A complete collection of precision conversion tools. Easily convert units of length, weight, temperature, digital storage, and time with instant results.";
+const PATH = "/converters";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Unit Converters — Free Online Measurement Tools | Hilmost Toolbox",
+    title: `${TITLE} — Free Online Measurement Tools | Hilmost Toolbox`,
     description: "Convert units of length, weight, temperature, data storage, and time instantly. Free online converters with precision results and no signup required.",
     alternates: {
-      canonical: getCanonicalUrl("/converters"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -68,15 +73,17 @@ const links = [
 ];
 
 export default function ConvertersHub() {
-  const breadcrumbItems = [{ label: "Converters", href: "/converters" }];
+  const breadcrumbItems = [{ label: "Converters", href: PATH }];
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema
-        name="Converters | Hilmost Ultimate Toolbox"
-        description="A complete collection of precision conversion tools. Easily convert units of length, weight, temperature, digital storage, and time with instant results."
-        url="https://hilmost-toolbox.hilmost.net/converters"
+        name={`${TITLE} | Hilmost Ultimate Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/converters.png"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">
@@ -88,7 +95,7 @@ export default function ConvertersHub() {
         </h1>
       </div>
       <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">
-        Precision measurement transformations for everyday tasks. Whether you're working on engineering projects, cooking, or traveling, our converters deliver instant, accurate results across all standard unit systems.
+        Precision measurement transformations for everyday tasks. Whether you&apos;re working on engineering projects, cooking, or traveling, our converters deliver instant, accurate results across all standard unit systems.
       </p>
 
 

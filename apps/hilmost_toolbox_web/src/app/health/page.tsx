@@ -1,15 +1,20 @@
-import { WebApplicationSchema, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Activity, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TITLE = "Health & Fitness Tools";
+const DESC = "Free online health and fitness tools including BMI calculators and metric trackers. Monitor your health metrics and maintain your well-being with precision.";
+const PATH = "/health";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Health & Fitness Tools — Free Online Wellness Calculators | Hilmost Toolbox",
+    title: `${TITLE} — Free Online Wellness Calculators | Hilmost Toolbox`,
     description: "Monitor your fitness and wellness with precision. Free online tools including BMI calculators, body metrics, and daily wellness resources.",
     alternates: {
-      canonical: getCanonicalUrl("/health"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -28,15 +33,17 @@ const links = [
 ];
 
 export default function HealthHub() {
-  const breadcrumbItems = [{ label: "Health", href: "/health" }];
+  const breadcrumbItems = [{ label: "Health", href: PATH }];
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema
-        name="Health & Fitness Tools | Hilmost Ultimate Toolbox"
-        description="Free online health and fitness tools including BMI calculators and metric trackers. Monitor your health metrics and maintain your well-being with precision."
-        url="https://hilmost-toolbox.hilmost.net/health"
+        name={`${TITLE} | Hilmost Ultimate Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/health.png"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">

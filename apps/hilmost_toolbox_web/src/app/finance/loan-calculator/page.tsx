@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { LoanCalculatorClient } from "./LoanCalculatorClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Loan Calculator";
+const TOOL_DESC = "Calculate your monthly loan payments, total interest, and exact amortization schedule instantly. Free online tool to uncover the true cost of your loan.";
+const PATH = "/finance/loan-calculator";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Loan Calculator — Monthly Payments & Amortization Schedule | Hilmost Toolbox",
-    description: "Calculate your monthly loan payments, total interest, and exact amortization schedule instantly. Free online tool to uncover the true cost of your loan.",
+    title: `${TOOL_NAME} — Monthly Payments & Amortization Schedule | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/loan-calculator"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function LoanCalculatorPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Loan Calculator", href: "/finance/loan-calculator" },
+    { label: "Loan Calculator", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/loan-calculator/page.tsx");
@@ -42,8 +46,14 @@ export default function LoanCalculatorPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="Loan Calculator | Hilmost Toolbox" description="Expose hidden bank fees. Calculate monthly payments, total interest, and total cost of your loan instantly." url="https://hilmost-toolbox.hilmost.net/finance/loan-calculator" />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,9 +72,7 @@ export default function LoanCalculatorPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-2xl w-full"></div>}>
-        <LoanCalculatorClient />
-      </Suspense>
+      <LoanCalculatorClient />
 
       <ToolArticle title="Mastering Your Debt: How Loans Work">
         <p>

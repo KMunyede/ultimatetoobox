@@ -19,25 +19,32 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const match = resolvedParams.slug.match(/^([a-z]{3})-to-([a-z]{3})$/);
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z]{3})-to-([a-z]{3})$/);
   
   if (!match) return { title: "Currency Converter" };
   
   const from = match[1].toUpperCase();
   const to = match[2].toUpperCase();
+  const canonical = getCanonicalUrl(`/finance/currency/${slug}`);
 
   return {
-    title: `${from} to ${to} Exchange Rate — Live Converter | Hilmost Toolbox`,
-    description: `Convert ${from} to ${to} instantly. Get real-time mid-market exchange rates and accurate ${from}/${to} foreign exchange values.`,
-    alternates: {
-      canonical: getCanonicalUrl(`/finance/currency/${resolvedParams.slug}`),
+    title: `Convert ${from} to ${to} | Live Exchange Rate — Free Online Converter | Hilmost Toolbox`,
+    description: `Free online currency converter. Instantly convert ${from} to ${to} using live mid-market exchange rates. Perfect for travelers, freelancers, and global businesses — no signup required.`,
+    alternates: { canonical },
+    openGraph: {
+      title: `Convert ${from} to ${to} | Live Exchange Rate`,
+      description: `Instantly convert ${from} to ${to} using live mid-market exchange rates.`,
+      url: canonical,
+      images: ["/og/finance.png"],
     },
   };
 }
 
 export default async function CurrencyProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const match = resolvedParams.slug.match(/^([a-z]{3})-to-([a-z]{3})$/);
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z]{3})-to-([a-z]{3})$/);
   
   if (!match) return <CurrencyPageUI />;
 
@@ -51,9 +58,9 @@ export default async function CurrencyProgrammaticPage({ params }: { params: Pro
     <CurrencyPageUI 
       defaultFrom={from}
       defaultTo={to}
-      title={`${from} to ${to} | Live Currency Converter`}
-      description={`Convert ${from} to ${to} instantly using live mid-market exchange rates.`}
-      canonicalUrl={getCanonicalUrl(`/finance/currency/${resolvedParams.slug}`)}
+      title={`Convert ${from} to ${to} | Live Exchange Rate`}
+      description={`Instantly convert ${from} to ${to} using live mid-market exchange rates. Perfect for travelers, freelancers, and global businesses.`}
+      canonicalUrl={getCanonicalUrl(`/finance/currency/${slug}`)}
       lastUpdated={lastUpdated}
     />
   );

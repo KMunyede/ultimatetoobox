@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RetirementPlannerClient } from "./RetirementPlannerClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Retirement Planner";
+const TOOL_DESC = "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts and high-precision projections.";
+const PATH = "/finance/retirement-planner";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Retirement Planner — Track Your Financial Future | Hilmost Toolbox",
-    description: "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts and high-precision projections.",
+    title: `${TOOL_NAME} — Track Your Financial Future | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/retirement-planner"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function RetirementPlannerPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Retirement Planner", href: "/finance/retirement-planner" },
+    { label: "Retirement Planner", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/retirement-planner/page.tsx");
@@ -42,8 +46,14 @@ export default function RetirementPlannerPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-6xl">
-      <WebApplicationSchema name="Retirement Planner | Hilmost" description="Free online retirement planner with visual charts. Calculate exactly how much you need to save to retire comfortably." url="https://hilmost-toolbox.hilmost.net/finance/retirement-planner" />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,9 +72,7 @@ export default function RetirementPlannerPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <RetirementPlannerClient />
-      </Suspense>
+      <RetirementPlannerClient />
 
       <ToolArticle title="The Blueprint for a Comfortable Retirement">
         <p>

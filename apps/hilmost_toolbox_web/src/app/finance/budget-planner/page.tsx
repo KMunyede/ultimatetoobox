@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Metadata } from "next";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Budget Planner";
+const TOOL_DESC = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Private and secure.";
+const PATH = "/finance/budget-planner";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Budget Planner — 50/30/20 Rule Calculator | Hilmost Toolbox",
+    title: `${TOOL_NAME} — 50/30/20 Rule Calculator | Hilmost Toolbox`,
     description: "Track your income, needs, wants, and savings with our free online budget planner. Uses the 50/30/20 rule to help you manage your finances securely and privately.",
     alternates: {
-      canonical: getCanonicalUrl("/finance/budget-planner"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -19,14 +23,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function BudgetPlannerPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Budget Planner", href: "/finance/budget-planner" },
+    { label: "Budget Planner", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/budget-planner/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
-  const canonicalUrl = getCanonicalUrl("/finance/budget-planner");
-  const title = "Budget Planner | 50/30/20 Rule Calculator";
-  const description = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Download as CSV or print to PDF. Private and secure.";
 
   const faqs = [
     {
@@ -45,16 +46,22 @@ export default function BudgetPlannerPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-6xl">
-      <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8 print:hidden">
         <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' | ')[0]} <span className="text-blue-600 dark:text-blue-500">Calculator</span>
+          Budget Planner <span className="text-blue-600 dark:text-blue-500">Calculator</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description.split('.')[0]}. {description.split('.')[1]}.
+          {TOOL_DESC}
         </p>
 
         {lastUpdated && (
@@ -70,14 +77,12 @@ export default function BudgetPlannerPage() {
         <p className="text-slate-500">Generated via hilmost-toolbox.hilmost.net</p>
       </div>
       
-      <Suspense fallback={<div className="h-96 animate-pulse bg-canvas-muted rounded-3xl w-full" />}>
-        <BudgetClient />
-      </Suspense>
+      <BudgetClient />
 
       <div className="print:hidden">
         <ToolArticle title="Mastering Your Money with the 50/30/20 Rule">
         <p>
-          Budgeting doesn't have to mean complicated spreadsheets or restrictive spending. The 50/30/20 rule offers a simple, flexible framework to manage your finances while still enjoying your money.
+          Budgeting doesn&apos;t have to mean complicated spreadsheets or restrictive spending. The 50/30/20 rule offers a simple, flexible framework to manage your finances while still enjoying your money.
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -90,7 +95,7 @@ export default function BudgetPlannerPage() {
       </ToolArticle>
 
         <FAQAccordion items={faqs} />
-        <RelatedTools category="finance" currentPath={canonicalUrl.replace("https://hilmost-toolbox.hilmost.net", "")} />
+        <RelatedTools category="finance" currentPath={PATH} />
       </div>
     </div>
   );

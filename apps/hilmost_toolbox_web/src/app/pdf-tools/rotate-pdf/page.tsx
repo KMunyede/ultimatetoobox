@@ -1,13 +1,14 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { RotatePDFClient } from "../../../components/pdf/RotatePDFClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Rotate PDF Pages";
 const TOOL_DESC = "Rotate individual or all pages of a PDF document instantly. Secure, browser-side rotation with live visual previews.";
 const PATH = "/pdf-tools/rotate-pdf";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Rotate PDF Files — Free Online Document Rotator | Hilmost Toolbox";
@@ -23,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: canonical,
       type: "website",
+      images: ["/og/pdf-tools.png"],
     },
   };
 }
@@ -51,24 +53,31 @@ export default function RotatePDFPage() {
   const filePath = path.join(process.cwd(), "src/app/pdf-tools/rotate-pdf/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.pdf-dropzone', popover: { title: '1. Upload', description: 'Drag and drop your PDF file to see individual page controls.' } },
+    { element: '.pdf-rotate-controls', popover: { title: '2. Fix Orientation', description: 'Rotate individual pages or use the "Rotate All" feature.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={getCanonicalUrl(PATH)} />
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
+      />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Rotate PDF <span className="text-red-600 dark:text-red-500">Pages</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Fix upside-down scans or misaligned documents. Permanently rotate PDF pages with real-time visual feedback.
-        </p>
-
-        <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-          <Calendar size={14} />
-          <span>Last updated: {lastUpdated}</span>
-        </div>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Fix upside-down scans or misaligned documents. Permanently rotate PDF pages with real-time feedback."
+        lastUpdated={lastUpdated}
+        tourId="rotate_pdf"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <RotatePDFClient />
 
@@ -83,7 +92,7 @@ export default function RotatePDFPage() {
         <h3>How to Use This Tool</h3>
         <ol>
           <li><strong>Step 1: Upload PDF</strong> - Drag your document into the rotation grid.</li>
-          <li><strong>Step 2: Adjust Rotation</strong> - Use 'Rotate All' for universal changes or click individual page buttons.</li>
+          <li><strong>Step 2: Adjust Rotation</strong> - Use &apos;Rotate All&apos; for universal changes or click individual page buttons.</li>
           <li><strong>Step 3: Save</strong> - Download your corrected PDF instantly.</li>
         </ol>
       </ToolArticle>

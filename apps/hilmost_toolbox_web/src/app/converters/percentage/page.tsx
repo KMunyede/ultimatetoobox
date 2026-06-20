@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { PercentageClient } from "./PercentageClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Percentage Calculator";
+const TOOL_DESC = "Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems.";
+const PATH = "/converters/percentage";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Percentage Calculator — Find % Increase & Decrease | Hilmost Toolbox",
-    description: "Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems.",
+    title: `${TOOL_NAME} — Find % Increase & Decrease | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/converters/percentage"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function PercentagePage() {
   const breadcrumbItems = [
     { label: "Converters", href: "/converters" },
-    { label: "Percentage", href: "/converters/percentage" },
+    { label: "Percentage", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/converters/percentage/page.tsx");
@@ -42,8 +46,14 @@ export default function PercentagePage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="Percentage Calculator | Hilmost" description="Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems." url="https://hilmost-toolbox.hilmost.net/converters/percentage" />
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/converters.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,11 +72,9 @@ export default function PercentagePage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <PercentageClient />
-        </div>
-      </Suspense>
+      <div className="max-w-4xl mx-auto">
+        <PercentageClient />
+      </div>
 
       <ToolArticle title="The Mathematics of Everyday Life">
         <p>

@@ -1,13 +1,14 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { DeletePagesClient } from "../../../components/pdf/DeletePagesClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Delete PDF Pages";
 const TOOL_DESC = "Remove unwanted pages from your PDF document instantly. Secure, browser-side deletion with visual page selection.";
 const PATH = "/pdf-tools/delete-pages";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Delete PDF Pages Free Online — Remove PDF Pages | Hilmost Toolbox";
@@ -23,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: canonical,
       type: "website",
+      images: ["/og/pdf-tools.png"],
     },
   };
 }
@@ -51,24 +53,31 @@ export default function DeletePagesPage() {
   const filePath = path.join(process.cwd(), "src/app/pdf-tools/delete-pages/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.pdf-dropzone', popover: { title: '1. Upload', description: 'Select the PDF you want to clean up.' } },
+    { element: '.pdf-page-grid', popover: { title: '2. Select to Discard', description: 'Click the pages you want to remove from the document.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={getCanonicalUrl(PATH)} />
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
+      />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Delete PDF <span className="text-red-600 dark:text-red-500">Pages</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Clean up your documents by removing irrelevant or sensitive pages. Fast, secure, and completely visual.
-        </p>
-
-        <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-          <Calendar size={14} />
-          <span>Last updated: {lastUpdated}</span>
-        </div>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Clean up your documents by removing irrelevant or sensitive pages. Fast, secure, and completely visual."
+        lastUpdated={lastUpdated}
+        tourId="delete_pages"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <DeletePagesClient />
 

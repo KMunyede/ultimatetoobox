@@ -1,7 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { TimeConverterClient } from "./TimeConverterClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
@@ -62,11 +61,9 @@ export default function TimeConverterPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <TimeConverterClient />
-        </div>
-      </Suspense>
+      <div className="max-w-4xl mx-auto">
+        <TimeConverterClient />
+      </div>
 
       <ToolArticle title="Understanding Time Units">
         <p>

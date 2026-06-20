@@ -1,20 +1,24 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { BMIClient } from "./BMIClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "BMI Calculator";
+const TOOL_DESC = "Calculate your Body Mass Index (BMI) instantly. A free, beautifully designed health tool to check your ideal weight category with high precision.";
+const PATH = "/health/bmi-calculator";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "BMI Calculator — Free Body Mass Index Check | Hilmost Toolbox",
-    description: "Calculate your Body Mass Index (BMI) instantly. A free, beautifully designed health tool to check your ideal weight category with high precision.",
+    title: `${TOOL_NAME} — Free Body Mass Index Check | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/health/bmi-calculator"),
+      canonical: getCanonicalUrl(PATH),
     },
     openGraph: {
-      title: "BMI Calculator — Body Mass Index Checker",
+      title: `${TOOL_NAME} — Body Mass Index Checker`,
       description: "Instantly reveal your exact Body Mass Index and map out your optimal health trajectory.",
       images: ["/og/health.png"],
     },
@@ -39,7 +43,7 @@ const faqs = [
 export default function BMIPage() {
   const breadcrumbItems = [
     { label: "Health", href: "/health" },
-    { label: "BMI Calculator", href: "/health/bmi-calculator" },
+    { label: "BMI Calculator", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/health/bmi-calculator/page.tsx");
@@ -48,12 +52,13 @@ export default function BMIPage() {
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema
-        name="BMI Calculator | Hilmost Toolbox"
-        description="Free online BMI (Body Mass Index) calculator. Accurate height-to-weight ratio checker."
-        url="https://hilmost-toolbox.hilmost.net/health/bmi-calculator"
+        name={`${TOOL_NAME} | Hilmost Toolbox`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/health.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -72,9 +77,7 @@ export default function BMIPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-2xl w-full"></div>}>
-        <BMIClient />
-      </Suspense>
+      <BMIClient />
 
       <ToolArticle title="Understanding Your Body Mass Index (BMI)">
         <p>

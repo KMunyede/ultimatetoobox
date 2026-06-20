@@ -1,14 +1,15 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { LengthPageUI } from "../LengthPageUI";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 
-const UNITS = ["meters", "kilometers", "centimeters", "millimeters", "miles", "yards", "feet", "inches"];
+const LENGTH_UNITS = ["meters", "kilometers", "centimeters", "millimeters", "miles", "yards", "feet", "inches"];
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const params: { slug: string }[] = [];
-  for (const from of UNITS) {
-    for (const to of UNITS) {
+  for (const from of LENGTH_UNITS) {
+    for (const to of LENGTH_UNITS) {
       if (from !== to) {
         params.push({ slug: `${from}-to-${to}` });
       }
@@ -19,41 +20,52 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const [from, to] = resolvedParams.slug.split("-to-");
-  if (!from || !to || !UNITS.includes(from) || !UNITS.includes(to)) {
-    return { title: "Length Converter" };
-  }
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z-]+)-to-([a-z-]+)$/);
 
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  if (!match) return { title: "Length Converter" };
+
+  const fromUnit = match[1].charAt(0).toUpperCase() + match[1].slice(1);
+  const toUnit = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+  const canonical = getCanonicalUrl(`/converters/length/${slug}`);
+
   return {
-    title: `Convert ${capitalize(from)} to ${capitalize(to)} — Fast Online Calculator`,
-    description: `Instantly convert ${from} to ${to}. Accurate, free online distance and length converter for ${from} to ${to} transformations.`,
-    alternates: {
-      canonical: getCanonicalUrl(`/converters/length/${resolvedParams.slug}`),
+    title: `Convert ${fromUnit} to ${toUnit} | Length Calculator — Free Online Converter | Hilmost Toolbox`,
+    description: `Free online length converter. Instantly convert ${fromUnit} to ${toUnit} using our free distance calculator. High precision for engineering, craft, and travel — no signup required.`,
+    alternates: { canonical },
+    openGraph: {
+      title: `Convert ${fromUnit} to ${toUnit} | Length Calculator`,
+      description: `Instantly convert ${fromUnit} to ${toUnit} using our free length calculator.`,
+      url: canonical,
+      images: ["/og/converters.png"],
     },
   };
 }
 
-export default async function LengthProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function LengthDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const [from, to] = resolvedParams.slug.split("-to-");
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z-]+)-to-([a-z-]+)$/);
   
-  if (!from || !to || !UNITS.includes(from) || !UNITS.includes(to)) {
-    // Fallback if somehow accessed directly with invalid slug
-    return <LengthPageUI />;
+  if (!match) return notFound();
+
+  const fromUnitStr = match[1];
+  const toUnitStr = match[2];
+
+  if (!LENGTH_UNITS.includes(fromUnitStr) || !LENGTH_UNITS.includes(toUnitStr)) {
+    return notFound();
   }
 
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   const filePath = path.join(process.cwd(), "src/app/converters/length/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
   return (
     <LengthPageUI 
-      defaultUnit1={from}
-      defaultUnit2={to}
-      title={`${capitalize(from)} to ${capitalize(to)} Converter`}
-      description={`Easily convert ${from} to ${to} using our fast, free calculator. Perfect for both metric and imperial measurements.`}
-      canonicalUrl={getCanonicalUrl(`/converters/length/${resolvedParams.slug}`)}
+      defaultUnit1={fromUnitStr}
+      defaultUnit2={toUnitStr}
+      title={`Convert ${fromUnitStr.charAt(0).toUpperCase() + fromUnitStr.slice(1)} to ${toUnitStr.charAt(0).toUpperCase() + toUnitStr.slice(1)} | Length Calculator`}
+      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free distance calculator.`}
+      canonicalUrl={getCanonicalUrl(`/converters/length/${slug}`)}
       lastUpdated={lastUpdated}
     />
   );

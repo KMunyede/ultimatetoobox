@@ -1,12 +1,11 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
-import { Suspense } from "react";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { AreaClient } from "./AreaClient";
 import { Calendar } from "lucide-react";
 
 export function AreaPageUI({
   defaultFrom = "Square Foot",
   defaultTo = "Square Meter",
-  title = "Area Converter | Square Feet, Meters, Acres & More",
+  title = "Area Converter",
   description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more for real estate, farming, and construction.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area",
   lastUpdated
@@ -40,8 +39,14 @@ export function AreaPageUI({
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-6xl">
-      <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={`${title.split(" | ")[0]} | Hilmost`}
+        description={description}
+        url={canonicalUrl}
+        image="https://hilmost-toolbox.hilmost.net/og/converters.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -51,7 +56,7 @@ export function AreaPageUI({
           )}
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description.split('.')[0]}. {description.split('.')[1]}.
+          {description}
         </p>
 
         {lastUpdated && (
@@ -62,13 +67,11 @@ export function AreaPageUI({
         )}
       </div>
       
-      <Suspense fallback={<div className="h-48 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <AreaClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
-      </Suspense>
+      <AreaClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
 
       <ToolArticle title="The Importance of Accurate Area Conversion">
         <p>
-          Whether you are buying a new home, planning an agricultural project, or laying down new flooring, understanding area conversions is a critical skill that ensures you don't overspend on materials or misunderstand property values.
+          Whether you are buying a new home, planning an agricultural project, or laying down new flooring, understanding area conversions is a critical skill that ensures you don&apos;t overspend on materials or misunderstand property values.
         </p>
         
         <h3>How to Use This Tool</h3>

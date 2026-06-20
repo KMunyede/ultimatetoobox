@@ -1,23 +1,26 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
-import { RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { RelatedTools, Breadcrumbs, WebApplicationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const title = "Daily Wisdom & Wellness — Inspirational Quotes & Philosophy | Hilmost Toolbox";
-  const description = "Reflect on timeless stoic philosophy and nurture your mental wellness with our daily wisdom tool. Find peace and focus in the modern era.";
-  const canonical = getCanonicalUrl("/health/daily-wisdom");
+const TITLE = "Daily Wisdom & Wellness";
+const DESC = "Reflect on timeless stoic philosophy and nurture your mental wellness with our daily wisdom tool. Find peace and focus in the modern era.";
+const PATH = "/health/daily-wisdom";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title,
-    description,
-    alternates: { canonical },
+    title: `${TITLE} — Inspirational Quotes & Philosophy | Hilmost Toolbox`,
+    description: DESC,
+    alternates: {
+      canonical: getCanonicalUrl(PATH),
+    },
     openGraph: {
-      title,
-      description,
-      url: canonical,
+      title: TITLE,
+      description: DESC,
+      url: CANONICAL_URL,
       siteName: "Hilmost Toolbox",
       type: "article",
       images: ["/og/health.png"],
@@ -28,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   const breadcrumbItems = [
     { label: "Health", href: "/health" },
-    { label: "Daily Wisdom", href: "/health/daily-wisdom" },
+    { label: "Daily Wisdom", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/health/daily-wisdom/page.tsx");
@@ -36,6 +39,13 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-4xl">
+      <WebApplicationSchema
+        name={`${TITLE} | Hilmost Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/health.png"
+      />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center mb-8">

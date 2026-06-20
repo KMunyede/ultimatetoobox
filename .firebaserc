@@ -22,8 +22,12 @@
         ],
         "wisdom-prod": [
           "hilmost-wisdom"
+        ],
+        "hilmost-staging": [
+          "hilmost-staging"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }

@@ -27,4 +27,5 @@ export { RelatedTools } from "./RelatedTools";
 export { GlobalSearch } from "./GlobalSearch";
 export { CopyButton } from "./CopyButton";
 export { Tooltip } from "./Tooltip";
-
+export { KnowledgeCard } from "./KnowledgeCard";
+export { ToolHeader } from "./ToolHeader";

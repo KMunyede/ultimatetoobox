@@ -1,38 +1,96 @@
 ﻿import { Metadata } from "next";
+import { User, ShieldCheck, Code, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us | Hilmost Software Corporation",
-  description: "Learn more about Hilmost Software Corporation (HSC) and our subsidiaries.",
+  title: "About the Lab | Hilmost Digital Labs",
+  description: "Learn about Hilmost Digital Labs, our commitment to high-precision software engineering, and our mission to build secure online utilities.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 py-16 max-w-4xl">
-      <div className="prose prose-slate dark:prose-invert max-w-none">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-8">About Hilmost Software Corporation</h1>
-        <p className="lead text-xl text-slate-600 dark:text-slate-400 mb-8">
-          Hilmost Software Corporation (HSC) is the operating entity for a diverse holding company. We leverage technology to drive innovation across multiple sectors.
+    <div className="container mx-auto px-4 py-16 max-w-5xl">
+      {/* Hero Section */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-6 uppercase">
+          Engineering the <span className="text-blue-600">Everyday</span>
+        </h1>
+        <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          Hilmost Digital Labs is a specialized software research unit dedicated to building high-precision online utilities.
+          We bridge the gap between complex enterprise logic and simple, secure browser-based tools.
         </p>
-        
-        <div className="space-y-12">
-          <section>
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-6">Our Subsidiaries</h2>
-            <p className="mb-4">Our corporate portfolio encompasses several key divisions:</p>
-            <ul className="list-disc pl-6 space-y-3">
-              <li><strong>Hilmost Software Corporation:</strong> Building digital platforms and SaaS solutions.</li>
-              <li><strong>Hilmost Engineering:</strong> Delivering robust infrastructural and engineering solutions.</li>
-              <li><strong>Hilmost Foods:</strong> Innovating in food processing and distribution.</li>
-              <li><strong>Hilmost Health:</strong> Advancing digital and physical health services.</li>
-              <li><strong>Hilmost Insurance:</strong> Providing comprehensive risk management and coverage.</li>
-            </ul>
-          </section>
+      </div>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-6">Our Mission</h2>
-            <p>
-              At HSC, we believe in building sustainable, scalable, and beautifully designed solutions that solve real-world problems. Whether it's through our suite of free online utilities or our enterprise services, we are committed to excellence.
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+        <div className="prose prose-slate dark:prose-invert max-w-none">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+            <ShieldCheck className="text-blue-600" /> Our Privacy DNA
+          </h2>
+          <p>
+            Most online tools send your data to a remote server for processing. We think differently.
+            The vast majority of our tools, from the <strong>Scientific Calculator</strong> to the <strong>PDF Merger</strong>,
+            perform 100% of their calculations <strong>locally in your browser</strong>.
+          </p>
+          <p>
+            Your sensitive financial data, health metrics, and private documents never touch our servers.
+            This "Client-Side First" philosophy is our commitment to data privacy in the modern era.
+          </p>
+        </div>
+        <div className="prose prose-slate dark:prose-invert max-w-none">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+            <Code className="text-blue-600" /> Banking-Grade Precision
+          </h2>
+          <p>
+            Founded by a software architect with over 15 years of experience in <strong>High-Availability Banking Systems</strong>,
+            Hilmost Digital Labs applies the same rigorous testing and mathematical accuracy to simple converters
+            as we do to complex financial modeling tools.
+          </p>
+          <p>
+            We don't just build links; we build software. Every tool is optimized for performance,
+            accessibility (WCAG 2.1), and complete device adaptability.
+          </p>
+        </div>
+      </div>
+
+      {/* Founder Section - High E-E-A-T Signal */}
+      <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-32 -mt-32" />
+        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          <div className="w-32 h-32 md:w-40 md:h-40 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center border-4 border-white dark:border-slate-900 shadow-xl flex-shrink-0">
+             <User size={64} className="text-slate-400" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">The Lab Founder</h3>
+            <h4 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Keepy Munyede</h4>
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              With 15+ years of experience across the IT landscape—specializing in large-scale financial platforms—Keepy founded
+              Hilmost Software Corporation to democratize access to precise, enterprise-quality digital tools.
+              His vision is to transform the "Hilmost" monorepo into a global standard for utility engineering.
             </p>
-          </section>
+            <div className="flex flex-wrap gap-4">
+               <span className="px-4 py-1.5 bg-white dark:bg-slate-900 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 shadow-sm">FinTech Architect</span>
+               <span className="px-4 py-1.5 bg-white dark:bg-slate-900 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 shadow-sm">15+ Years Experience</span>
+               <span className="px-4 py-1.5 bg-white dark:bg-slate-900 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 shadow-sm">Full-Stack Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Research Frontiers */}
+      <div className="mt-20">
+        <h2 className="text-center text-3xl font-black text-slate-900 dark:text-white mb-12 uppercase tracking-tight">Active Research Frontiers</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { title: "Financial Modeling", desc: "Compound growth, tax burden analysis, and loan amortization engines." },
+            { title: "Health Informatics", desc: "Standardized biological metrics and wellness tracking algorithms." },
+            { title: "Data Privacy", desc: "Local cryptographic hashing and secure text manipulation." },
+            { title: "Utility Engineering", desc: "High-precision physical constant conversions and scientific solvers." }
+          ].map((item, i) => (
+            <div key={i} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 transition-all group">
+              <Zap size={20} className="text-blue-500 mb-4 group-hover:scale-110 transition-transform" />
+              <h5 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h5>
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

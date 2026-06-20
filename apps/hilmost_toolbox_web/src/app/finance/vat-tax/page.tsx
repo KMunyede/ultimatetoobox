@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "VAT & Sales Tax Calculator";
+const TOOL_DESC = "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax from a gross price.";
+const PATH = "/finance/vat-tax";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "VAT & Sales Tax Calculator — Perfect Your Invoices Instantly | Hilmost Toolbox",
-    description: "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax from a gross price.",
+    title: `${TOOL_NAME} — Perfect Your Invoices Instantly | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/vat-tax"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function VatTaxPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "VAT & Tax", href: "/finance/vat-tax" },
+    { label: "VAT & Tax", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/vat-tax/page.tsx");
@@ -42,8 +46,14 @@ export default function VatTaxPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="VAT Calculator | Hilmost" description="Perfect your business invoices. Free online VAT and Tax calculator. Easily add or remove VAT from any amount." url="https://hilmost-toolbox.hilmost.net/finance/vat-tax" />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,11 +72,9 @@ export default function VatTaxPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-xl mx-auto w-full"></div>}>
-        <div className="max-w-xl mx-auto">
-          <VatTaxClient />
-        </div>
-      </Suspense>
+      <div className="max-w-xl mx-auto">
+        <VatTaxClient />
+      </div>
 
       <ToolArticle title="Invoicing Made Easy: Adding and Removing Tax">
         <p>

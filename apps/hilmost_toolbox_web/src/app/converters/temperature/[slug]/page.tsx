@@ -1,12 +1,15 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TemperaturePageUI } from "../TemperaturePageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
-const UNITS = ["celsius", "fahrenheit", "kelvin"];
+const TEMP_UNITS = ["celsius", "fahrenheit", "kelvin"];
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const params: { slug: string }[] = [];
-  for (const from of UNITS) {
-    for (const to of UNITS) {
+  for (const from of TEMP_UNITS) {
+    for (const to of TEMP_UNITS) {
       if (from !== to) {
         params.push({ slug: `${from}-to-${to}` });
       }
@@ -17,44 +20,53 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const parts = resolvedParams.slug.split("-to-");
-  if (parts.length !== 2) return { title: "Temperature Converter" };
-
-  const from = parts[0];
-  const to = parts[1];
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z-]+)-to-([a-z-]+)$/);
   
-  if (!UNITS.includes(from) || !UNITS.includes(to)) {
-    return { title: "Temperature Converter" };
-  }
+  if (!match) return { title: "Temperature Converter" };
 
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  const fromUnit = match[1].charAt(0).toUpperCase() + match[1].slice(1);
+  const toUnit = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+  const canonical = getCanonicalUrl(`/converters/temperature/${slug}`);
+
   return {
-    title: `Convert ${capitalize(from)} to ${capitalize(to)} | Free Calculator`,
-    description: `Instantly convert ${capitalize(from)} to ${capitalize(to)}. Free online temperature converter.`,
+    title: `Convert ${fromUnit} to ${toUnit} | Temperature Calculator — Free Online Converter | Hilmost Toolbox`,
+    description: `Free online temperature converter. Instantly convert ${fromUnit} to ${toUnit} using our free thermal calculator. Accurate for science, cooking, and weather — no signup required.`,
+    alternates: { canonical },
+    openGraph: {
+      title: `Convert ${fromUnit} to ${toUnit} | Temperature Calculator`,
+      description: `Instantly convert ${fromUnit} to ${toUnit} using our free temperature calculator.`,
+      url: canonical,
+      images: ["/og/converters.png"],
+    },
   };
 }
 
-export default async function TemperatureProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function TemperatureDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const parts = resolvedParams.slug.split("-to-");
-  if (parts.length !== 2) return <TemperaturePageUI />;
-
-  const from = parts[0];
-  const to = parts[1];
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z-]+)-to-([a-z-]+)$/);
   
-  if (!UNITS.includes(from) || !UNITS.includes(to)) {
-    return <TemperaturePageUI />;
+  if (!match) return notFound();
+
+  const fromUnitStr = match[1];
+  const toUnitStr = match[2];
+
+  if (!TEMP_UNITS.includes(fromUnitStr) || !TEMP_UNITS.includes(toUnitStr)) {
+    return notFound();
   }
 
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  const filePath = path.join(process.cwd(), "src/app/converters/temperature/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
 
   return (
     <TemperaturePageUI 
-      defaultUnit1={from}
-      defaultUnit2={to}
-      title={`${capitalize(from)} to ${capitalize(to)} Converter`}
-      description={`Easily convert ${capitalize(from)} to ${capitalize(to)} using our fast, free calculator.`}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/converters/temperature/${resolvedParams.slug}`}
+      defaultUnit1={fromUnitStr}
+      defaultUnit2={toUnitStr}
+      title={`Convert ${fromUnitStr.charAt(0).toUpperCase() + fromUnitStr.slice(1)} to ${toUnitStr.charAt(0).toUpperCase() + toUnitStr.slice(1)} | Temperature Calculator`}
+      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free thermal calculator.`}
+      canonicalUrl={getCanonicalUrl(`/converters/temperature/${slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }

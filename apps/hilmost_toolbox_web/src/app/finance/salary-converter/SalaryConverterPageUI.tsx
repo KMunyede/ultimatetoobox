@@ -1,5 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
-import { Suspense } from "react";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { SalaryConverterClient } from "./SalaryConverterClient";
 import { Calendar } from "lucide-react";
 
@@ -7,7 +6,7 @@ type Period = "hourly" | "daily" | "weekly" | "monthly" | "annually";
 
 export function SalaryConverterPageUI({
   defaultPeriod = "annually",
-  title = "Salary Converter | Convert Hourly to Annual Pay",
+  title = "Salary Converter",
   description = "Free online salary converter. Compare your wages and instantly translate hourly rates into daily, weekly, monthly, and annual salaries.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/finance/salary-converter",
   lastUpdated
@@ -40,14 +39,20 @@ export function SalaryConverterPageUI({
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={title.split(" | ")[0] + " | Hilmost"} description={description} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={title.split(" | ")[0]}
+        description={description}
+        url={canonicalUrl}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
         <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {title.split(' | ')[0].split(' ').map((word, i, arr) => 
-            i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '
+            i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-600 dark:text-blue-500">{word} </span> : word + ' '
           )}
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
@@ -62,11 +67,9 @@ export function SalaryConverterPageUI({
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-xl mx-auto w-full"></div>}>
-        <div className="max-w-xl mx-auto">
-          <SalaryConverterClient defaultPeriod={defaultPeriod} />
-        </div>
-      </Suspense>
+      <div className="max-w-xl mx-auto">
+        <SalaryConverterClient defaultPeriod={defaultPeriod} />
+      </div>
 
       <ToolArticle title="Understanding Wage Conversions">
         <p>

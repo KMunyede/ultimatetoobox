@@ -1,15 +1,20 @@
-import { WebApplicationSchema, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TITLE = "Financial Calculators";
+const DESC = "A complete collection of robust financial tools. Manage your wealth, compute compounding returns, estimate taxes, and convert global currencies with ease.";
+const PATH = "/finance";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Financial Calculators — Free Online Finance Tools | Hilmost Toolbox",
+    title: `${TITLE} — Free Online Finance Tools | Hilmost Toolbox`,
     description: "Manage your money with precision. Free online calculators for loans, compound interest, income tax, salary conversion, and retirement planning.",
     alternates: {
-      canonical: getCanonicalUrl("/finance"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -68,15 +73,17 @@ const links = [
 ];
 
 export default function FinanceHub() {
-  const breadcrumbItems = [{ label: "Finance", href: "/finance" }];
+  const breadcrumbItems = [{ label: "Finance", href: PATH }];
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema
-        name="Financial Calculators | Hilmost Ultimate Toolbox"
-        description="A complete collection of robust financial tools. Manage your wealth, compute compounding returns, estimate taxes, and convert global currencies with ease."
-        url="https://hilmost-toolbox.hilmost.net/finance"
+        name={`${TITLE} | Hilmost Ultimate Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">

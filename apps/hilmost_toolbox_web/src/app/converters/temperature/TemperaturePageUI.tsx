@@ -1,5 +1,5 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { getCanonicalUrl } from "@utilitiessite/config";
 import { Suspense } from "react";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
 import { Calendar } from "lucide-react";
@@ -13,13 +13,19 @@ export function TemperaturePageUI({
   defaultUnit2 = "fahrenheit",
   title = TOOL_NAME,
   description = "Effortlessly switch between global weather scales. Instant conversions for Celsius, Fahrenheit, and Kelvin.",
-  canonicalUrl = getCanonicalUrl(PATH)
+  canonicalUrl = getCanonicalUrl(PATH),
+  lastUpdated
+}: {
+  defaultUnit1?: string;
+  defaultUnit2?: string;
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  lastUpdated?: string;
 }) {
-  const lastUpdated = getFileLastUpdated("apps/hilmost_toolbox_web/src/app/converters/temperature/page.tsx");
-
   const breadcrumbItems = [
     { label: "Converters", href: "/converters" },
-    { label: "Temperature", href: "/converters/temperature" },
+    { label: "Temperature", href: PATH },
   ];
 
   const faqs = [
@@ -39,8 +45,14 @@ export function TemperaturePageUI({
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={canonicalUrl}
+        image="https://hilmost-toolbox.hilmost.net/og/converters.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">

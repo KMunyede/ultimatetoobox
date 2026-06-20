@@ -17,11 +17,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return { title: "Base64 Converter" };
 
+  const canonical = getCanonicalUrl(`/text-data/base64-encode/${resolvedParams.slug}`);
+
   return {
     title: `${config.title} — Free Online Utility | Hilmost Toolbox`,
     description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based data transformation.`,
-    alternates: {
-      canonical: getCanonicalUrl(`/text-data/base64-encode/${resolvedParams.slug}`),
+    alternates: { canonical },
+    openGraph: {
+      title: config.title,
+      description: config.desc,
+      url: canonical,
+      images: ["/og/text-data.png"],
     },
   };
 }

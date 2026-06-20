@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { SalaryConverterPageUI } from "../SalaryConverterPageUI";
+import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import path from "path";
 
 const SLUGS = [
   { slug: "hourly-to-salary", type: "hourly", title: "Hourly to Salary Converter", desc: "Convert your hourly wage to an annual salary instantly. See how much you make per year." },
@@ -18,9 +20,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return { title: "Salary Converter" };
 
+  const canonical = getCanonicalUrl(`/finance/salary-converter/${resolvedParams.slug}`);
+
   return {
-    title: `${config.title} | Free Online Calculator`,
-    description: `Free online ${config.title.toLowerCase()}. ${config.desc}`,
+    title: `${config.title} — Free Online Calculator | Hilmost Toolbox`,
+    description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based financial calculations.`,
+    alternates: { canonical },
+    openGraph: {
+      title: config.title,
+      description: config.desc,
+      url: canonical,
+      images: ["/og/finance.png"],
+    },
   };
 }
 
@@ -29,12 +40,16 @@ export default async function SalaryProgrammaticPage({ params }: { params: Promi
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return <SalaryConverterPageUI />;
 
+  const filePath = path.join(process.cwd(), "src/app/finance/salary-converter/[slug]/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
   return (
     <SalaryConverterPageUI 
       defaultPeriod={config.type as "hourly" | "daily" | "weekly" | "monthly" | "annually"}
       title={`${config.title}`}
       description={config.desc}
-      canonicalUrl={`https://hilmost-toolbox.hilmost.net/finance/salary-converter/${resolvedParams.slug}`}
+      canonicalUrl={getCanonicalUrl(`/finance/salary-converter/${resolvedParams.slug}`)}
+      lastUpdated={lastUpdated}
     />
   );
 }

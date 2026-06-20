@@ -1,13 +1,18 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "./AstrophysicsCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TOOL_NAME = "Astrophysics Calculator";
+const TOOL_DESC = "Free online astrophysics calculator. Compute gravitational force, orbital velocity, escape velocity, and luminosity using preset cosmic values — no scientific notation typing required.";
+const PATH = "/calculators/astrophysics";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export const metadata: Metadata = {
-  title: "Astrophysics Calculator — Gravitational Force, Orbital Velocity & More | Hilmost Toolbox",
-  description: "Free online astrophysics calculator. Compute gravitational force, orbital velocity, escape velocity, and luminosity using preset cosmic values — no scientific notation typing required.",
+  title: `${TOOL_NAME} — Gravitational Force, Orbital Velocity & More | Hilmost Toolbox`,
+  description: TOOL_DESC,
   alternates: {
-    canonical: getCanonicalUrl("/calculators/astrophysics"),
+    canonical: getCanonicalUrl(PATH),
   },
 };
 
@@ -29,16 +34,19 @@ const faqs = [
 export default function AstrophysicsCalculatorPage() {
   const breadcrumbItems = [
     { label: "Calculators", href: "/calculators" },
-    { label: "Astrophysics", href: "/calculators/astrophysics" },
+    { label: "Astrophysics", href: PATH },
   ];
 
   return (
     <div className="w-full">
       <WebApplicationSchema
-        name="Astrophysics Calculator | Hilmost Toolbox"
-        description="Free online astrophysics calculator for cosmic mechanics."
-        url="https://hilmost-toolbox.hilmost.net/calculators/astrophysics"
+        name={`${TOOL_NAME} | Hilmost Toolbox`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="mb-8">

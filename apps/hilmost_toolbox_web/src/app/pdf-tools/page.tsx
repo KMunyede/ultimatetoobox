@@ -1,15 +1,20 @@
-import { WebApplicationSchema, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TITLE = "PDF Tools";
+const DESC = "A complete suite of private, browser-side PDF manipulation tools. Merge, split, rotate, and delete pages without uploading your files to any server.";
+const PATH = "/pdf-tools";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "PDF Tools — Merge, Split, Rotate & Delete PDF Pages | Hilmost Toolbox",
+    title: `${TITLE} — Merge, Split, Rotate & Delete PDF Pages | Hilmost Toolbox`,
     description: "Manage your PDF documents with ease. Fast, free online tools to merge PDFs, split pages, rotate documents, and delete pages. 100% private, browser-side processing.",
     alternates: {
-      canonical: getCanonicalUrl("/pdf-tools"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -38,15 +43,17 @@ const links = [
 ];
 
 export default function PDFToolsHub() {
-  const breadcrumbItems = [{ label: "PDF Tools", href: "/pdf-tools" }];
+  const breadcrumbItems = [{ label: "PDF Tools", href: PATH }];
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
       <WebApplicationSchema
-        name="PDF Tools | Hilmost Ultimate Toolbox"
-        description="A complete suite of private, browser-side PDF manipulation tools. Merge, split, rotate, and delete pages without uploading your files to any server."
-        url="https://hilmost-toolbox.hilmost.net/pdf-tools"
+        name={`${TITLE} | Hilmost Ultimate Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">
@@ -54,7 +61,7 @@ export default function PDFToolsHub() {
           <FileText className="w-5 h-5" />
         </div>
         <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">
-          PDF Utilities
+          {TITLE}
         </h1>
       </div>
       <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">

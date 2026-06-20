@@ -1,18 +1,14 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { Suspense } from "react";
 import { Base64Client } from "./Base64Client";
 import { Calendar } from "lucide-react";
 
-const TOOL_NAME = "Base64 Text Encoder & Decoder";
-const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII format — no signup required.";
-const PATH = "/text-data/base64-encode";
-
 export function Base64PageUI({
   defaultMode = "encode",
-  title = TOOL_NAME,
+  title = "Base64 Text Encoder & Decoder",
   description = "Free online Base64 text encoder and decoder. Developer-grade data encoding to safely transform your text strings, instantly.",
-  canonicalUrl = getCanonicalUrl(PATH),
+  canonicalUrl = "https://hilmost-toolbox.hilmost.net/text-data/base64-encode",
   lastUpdated
 }: {
   defaultMode?: "encode" | "decode";
@@ -43,8 +39,14 @@ export function Base64PageUI({
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name={TOOL_NAME} description={TOOL_DESC} url={canonicalUrl} />
+      <WebApplicationSchema
+        name={`${title} | Hilmost`}
+        description={description}
+        url={canonicalUrl}
+        image="https://hilmost-toolbox.hilmost.net/og/text-data.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -71,9 +73,9 @@ export function Base64PageUI({
         </div>
       </Suspense>
 
-      <ToolArticle title="The Developer's Guide to Base64">
+      <ToolArticle title="The Developer&apos;s Guide to Base64">
         <p>
-          When you're dealing with strict data transfer protocols, moving raw binary data or special characters can break your JSON payload or corrupt your HTTP request. Base64 encoding solves this problem by safely transforming your strings into a uniform, URL-safe ASCII format.
+          When you&apos;re dealing with strict data transfer protocols, moving raw binary data or special characters can break your JSON payload or corrupt your HTTP request. Base64 encoding solves this problem by safely transforming your strings into a uniform, URL-safe ASCII format.
         </p>
         
         <h3>How to Use This Tool</h3>

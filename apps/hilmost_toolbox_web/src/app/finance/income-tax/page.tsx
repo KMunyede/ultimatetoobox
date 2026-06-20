@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { IncomeTaxClient } from "./IncomeTaxClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Income Tax Calculator";
+const TOOL_DESC = "Calculate your exact net take-home pay after deductions and estimated taxes instantly. Free online income tax calculator with high precision.";
+const PATH = "/finance/income-tax";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Income Tax Calculator — Stop Guessing Your Tax Burden | Hilmost Toolbox",
-    description: "Calculate your exact net take-home pay after deductions and estimated taxes instantly. Free online income tax calculator with high precision.",
+    title: `${TOOL_NAME} — Stop Guessing Your Tax Burden | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/income-tax"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function IncomeTaxPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Income Tax", href: "/finance/income-tax" },
+    { label: "Income Tax", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/income-tax/page.tsx");
@@ -42,8 +46,14 @@ export default function IncomeTaxPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="Income Tax Calculator | Hilmost" description="Stop guessing your tax burden. Estimate your net income after deductions and taxes instantly." url="https://hilmost-toolbox.hilmost.net/finance/income-tax" />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,9 +72,7 @@ export default function IncomeTaxPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <IncomeTaxClient />
-      </Suspense>
+      <IncomeTaxClient />
 
       <ToolArticle title="Mastering Your Paycheck: How Taxes Work">
         <p>

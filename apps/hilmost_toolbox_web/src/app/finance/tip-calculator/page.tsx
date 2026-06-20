@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { TipCalculatorClient } from "./TipCalculatorClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Tip & Split Calculator";
+const TOOL_DESC = "Calculate the perfect tip amount and split the restaurant bill evenly among friends instantly. Free online tip calculator for stress-free dining.";
+const PATH = "/finance/tip-calculator";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Tip & Split Calculator — Easy Bill Splitting | Hilmost Toolbox",
-    description: "Calculate the perfect tip amount and split the restaurant bill evenly among friends instantly. Free online tip calculator for stress-free dining.",
+    title: `${TOOL_NAME} — Easy Bill Splitting | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/tip-calculator"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function TipCalculatorPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Tip Calculator", href: "/finance/tip-calculator" },
+    { label: "Tip Calculator", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/tip-calculator/page.tsx");
@@ -42,8 +46,14 @@ export default function TipCalculatorPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="Tip Calculator | Hilmost" description="Free online tip calculator. Calculate gratuity and split the bill among friends." url="https://hilmost-toolbox.hilmost.net/finance/tip-calculator" />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,11 +72,9 @@ export default function TipCalculatorPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-xl mx-auto w-full"></div>}>
-        <div className="max-w-xl mx-auto">
-          <TipCalculatorClient />
-        </div>
-      </Suspense>
+      <div className="max-w-xl mx-auto">
+        <TipCalculatorClient />
+      </div>
 
       <ToolArticle title="The Etiquette of Tipping">
         <p>

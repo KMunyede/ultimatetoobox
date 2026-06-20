@@ -1,19 +1,17 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { WeightMassPageUI } from "../WeightMassPageUI";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 
-const UNITS = ["kilograms", "grams", "milligrams", "metric tons", "pounds", "ounces", "stones"];
+const WEIGHT_UNITS = ["kilograms", "grams", "milligrams", "metric tons", "pounds", "ounces", "stones"];
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const params: { slug: string }[] = [];
-  for (const from of UNITS) {
-    for (const to of UNITS) {
+  for (const from of WEIGHT_UNITS) {
+    for (const to of WEIGHT_UNITS) {
       if (from !== to) {
-        // Handle space in metric tons
-        const slugFrom = from.replace(" ", "-");
-        const slugTo = to.replace(" ", "-");
-        params.push({ slug: `${slugFrom}-to-${slugTo}` });
+        params.push({ slug: `${from.replace(" ", "-")}-to-${to.replace(" ", "-")}` });
       }
     }
   }
@@ -22,49 +20,52 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const parts = resolvedParams.slug.split("-to-");
-  if (parts.length !== 2) return { title: "Weight Converter" };
-
-  const from = parts[0].replace("-", " ");
-  const to = parts[1].replace("-", " ");
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z-]+)-to-([a-z-]+)$/);
   
-  if (!UNITS.includes(from) || !UNITS.includes(to)) {
-    return { title: "Weight Converter" };
-  }
+  if (!match) return { title: "Weight Converter" };
 
-  const capitalize = (s: string) => s.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  const fromUnit = match[1].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const toUnit = match[2].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const canonical = getCanonicalUrl(`/converters/weight-mass/${slug}`);
+
   return {
-    title: `Convert ${capitalize(from)} to ${capitalize(to)} — Fast Online Calculator`,
-    description: `Instantly convert ${from} to ${to}. Accurate, free online weight and mass converter for ${from} to ${to} transformations.`,
-    alternates: {
-      canonical: getCanonicalUrl(`/converters/weight-mass/${resolvedParams.slug}`),
+    title: `Convert ${fromUnit} to ${toUnit} | Weight Calculator — Free Online Converter | Hilmost Toolbox`,
+    description: `Free online weight converter. Instantly convert ${fromUnit} to ${toUnit} using our free mass calculator. Precise for kitchen, laboratory, and shipping — no signup required.`,
+    alternates: { canonical },
+    openGraph: {
+      title: `Convert ${fromUnit} to ${toUnit} | Weight Calculator`,
+      description: `Instantly convert ${fromUnit} to ${toUnit} using our free weight calculator.`,
+      url: canonical,
+      images: ["/og/converters.png"],
     },
   };
 }
 
-export default async function WeightProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function WeightDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const parts = resolvedParams.slug.split("-to-");
-  if (parts.length !== 2) return <WeightMassPageUI />;
-
-  const from = parts[0].replace("-", " ");
-  const to = parts[1].replace("-", " ");
+  const slug = resolvedParams.slug;
+  const match = slug.match(/^([a-z-]+)-to-([a-z-]+)$/);
   
-  if (!UNITS.includes(from) || !UNITS.includes(to)) {
-    return <WeightMassPageUI />;
+  if (!match) return notFound();
+
+  const fromUnitStr = match[1].replace("-", " ");
+  const toUnitStr = match[2].replace("-", " ");
+
+  if (!WEIGHT_UNITS.includes(fromUnitStr) || !WEIGHT_UNITS.includes(toUnitStr)) {
+    return notFound();
   }
 
-  const capitalize = (s: string) => s.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
   const filePath = path.join(process.cwd(), "src/app/converters/weight-mass/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
   return (
     <WeightMassPageUI 
-      defaultUnit1={from}
-      defaultUnit2={to}
-      title={`${capitalize(from)} to ${capitalize(to)} Converter`}
-      description={`Easily convert ${from} to ${to} using our fast, free calculator.`}
-      canonicalUrl={getCanonicalUrl(`/converters/weight-mass/${resolvedParams.slug}`)}
+      defaultUnit1={fromUnitStr}
+      defaultUnit2={toUnitStr}
+      title={`Convert ${fromUnitStr.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} to ${toUnitStr.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} | Weight Calculator`}
+      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free mass calculator.`}
+      canonicalUrl={getCanonicalUrl(`/converters/weight-mass/${slug}`)}
       lastUpdated={lastUpdated}
     />
   );

@@ -1,13 +1,18 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
 import { StandardCalculatorClient } from "./StandardCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 
+const TOOL_NAME = "Standard Calculator";
+const TOOL_DESC = "Free online standard calculator. Fast arithmetic in your browser — add, subtract, multiply, divide. No app required.";
+const PATH = "/calculators/standard";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export const metadata: Metadata = {
-  title: "Standard Calculator — Free Online Calculator | Hilmost Toolbox",
-  description: "Free online standard calculator. Fast arithmetic in your browser — add, subtract, multiply, divide. No app required.",
+  title: `${TOOL_NAME} — Free Online Calculator | Hilmost Toolbox`,
+  description: TOOL_DESC,
   alternates: {
-    canonical: getCanonicalUrl("/calculators/standard"),
+    canonical: getCanonicalUrl(PATH),
   },
 };
 
@@ -29,16 +34,19 @@ const faqs = [
 export default function StandardCalculatorPage() {
   const breadcrumbItems = [
     { label: "Calculators", href: "/calculators" },
-    { label: "Standard", href: "/calculators/standard" },
+    { label: "Standard", href: PATH },
   ];
 
   return (
     <div className="w-full">
       <WebApplicationSchema
-        name="Standard Calculator | Hilmost Toolbox"
-        description="Free online standard calculator. Fast arithmetic in your browser."
-        url="https://hilmost-toolbox.hilmost.net/calculators/standard"
+        name={`${TOOL_NAME} | Hilmost Toolbox`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
+      <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className="mb-8">

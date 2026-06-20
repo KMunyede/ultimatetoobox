@@ -1,17 +1,21 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { InflationClient } from "./InflationClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Calendar } from "lucide-react";
 
+const TOOL_NAME = "Inflation Calculator";
+const TOOL_DESC = "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power over time.";
+const PATH = "/finance/inflation";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Inflation Calculator — See Your True Purchasing Power | Hilmost Toolbox",
-    description: "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power over time.",
+    title: `${TOOL_NAME} — See Your True Purchasing Power | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/finance/inflation"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
@@ -34,7 +38,7 @@ const faqs = [
 export default function InflationPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
-    { label: "Inflation", href: "/finance/inflation" },
+    { label: "Inflation", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/finance/inflation/page.tsx");
@@ -42,8 +46,14 @@ export default function InflationPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="Inflation Calculator | Hilmost" description="Free online inflation calculator to see how the value of money changes over time." url="https://hilmost-toolbox.hilmost.net/finance/inflation" />
+      <WebApplicationSchema
+        name={TOOL_NAME}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center max-w-3xl mx-auto mb-8">
@@ -62,11 +72,9 @@ export default function InflationPage() {
         )}
       </div>
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl w-full"></div>}>
-        <div className="max-w-2xl mx-auto">
-          <InflationClient />
-        </div>
-      </Suspense>
+      <div className="max-w-2xl mx-auto">
+        <InflationClient />
+      </div>
 
       <ToolArticle title="The Invisible Tax: Understanding Inflation">
         <p>
