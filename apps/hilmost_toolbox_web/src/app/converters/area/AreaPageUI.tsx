@@ -1,12 +1,12 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { AreaClient } from "./AreaClient";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export function AreaPageUI({
   defaultFrom = "Square Foot",
   defaultTo = "Square Meter",
   title = "Area Converter",
-  description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more for real estate, farming, and construction.",
+  description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area",
   lastUpdated
 }: {
@@ -25,20 +25,25 @@ export function AreaPageUI({
   const faqs = [
     {
       question: "What is the difference between an Acre and a Hectare?",
-      answer: "Both are standard units for measuring land, but Acre is part of the Imperial system (primarily used in the US and UK) while Hectare is part of the Metric system. One Hectare is exactly 10,000 square meters, which is roughly equal to 2.47 Acres.",
+      answer: "One Hectare is part of the Metric system and is exactly 10,000 square meters. One Acre is part of the Imperial system and is roughly 0.4047 Hectares.",
     },
     {
       question: "How do I calculate the area of a room in square feet?",
-      answer: "Measure the length and width of the room in feet, then multiply those two numbers together. For example, a room that is 10 feet long and 12 feet wide has an area of 120 square feet.",
+      answer: "Multiply the length of the room by the width (both in feet). For example, a 10ft x 12ft room is 120 square feet.",
     },
     {
-      question: "Why do we use different units for area depending on the context?",
-      answer: "Small units like square inches or centimeters are used for precise crafting and manufacturing. Medium units like square feet or square meters are standard for residential floor plans and room sizes. Large units like acres, hectares, and square miles are necessary for large-scale agriculture, real estate development, and geographical mapping.",
+      question: "Why do we use different units for area?",
+      answer: "Context matters. Small units (sq in) are for manufacturing. Medium units (sq ft) are for housing. Large units (acres) are for agriculture and development.",
     },
   ];
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Input Area', description: 'Enter the numeric value of the land or floor space.' } },
+    { element: 'select', popover: { title: '2. Target Unit', description: 'Switch between metrics or agricultural units instantly.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema
         name={`${title.split(" | ")[0]} | Hilmost`}
         description={description}
@@ -49,29 +54,20 @@ export function AreaPageUI({
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' | ')[0].split(' ').map((word, i, arr) => 
-            i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-600 dark:text-blue-500">{word} </span> : word + ' '
-          )}
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description}
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={title.split(' | ')[0]}
+        subtitle={description}
+        lastUpdated={lastUpdated}
+        tourId="area_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <AreaClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
 
       <ToolArticle title="The Importance of Accurate Area Conversion">
         <p>
-          Whether you are buying a new home, planning an agricultural project, or laying down new flooring, understanding area conversions is a critical skill that ensures you don&apos;t overspend on materials or misunderstand property values.
+          Whether you are buying a new home, planning an agricultural project, or laying down new flooring, understanding area conversions is a critical skill that ensures you don&apos;t overspend on materials.
         </p>
         
         <h3>How to Use This Tool</h3>

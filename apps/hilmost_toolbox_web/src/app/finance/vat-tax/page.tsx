@@ -1,12 +1,12 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "VAT & Sales Tax Calculator";
-const TOOL_DESC = "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax from a gross price.";
+const TOOL_DESC = "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax.";
 const PATH = "/finance/vat-tax";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
@@ -23,15 +23,15 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What does VAT stand for?",
-    answer: "VAT stands for Value-Added Tax. It is a consumption tax assessed on the value added to goods and services. It applies to nearly all goods and services that are bought and sold for use or consumption.",
+    answer: "VAT stands for Value-Added Tax. It is a consumption tax assessed on the value added to goods and services at each stage of production.",
   },
   {
     question: "How do you reverse-calculate VAT from a total?",
-    answer: "To extract the VAT amount from a gross price, you divide the gross price by (1 + the VAT rate). For example, to remove a 20% VAT from $120, you divide 120 by 1.20, which gives you a net price of $100.",
+    answer: "Divide the gross price by (1 + the VAT rate). For example, to remove a 20% VAT from $120: $120 / 1.20 = $100 net.",
   },
   {
     question: "What is the difference between VAT, GST, and Sales Tax?",
-    answer: "They are all forms of consumption taxes paid by the end-user. VAT (Value-Added Tax) and GST (Goods and Services Tax) are typically federal taxes collected at every stage of the supply chain. US Sales Tax is collected only at the final point of sale to the consumer by state or local governments.",
+    answer: "VAT and GST are typically federal taxes collected at every stage. US Sales Tax is collected only at the final point of sale to the consumer.",
   },
 ];
 
@@ -44,8 +44,13 @@ export default function VatTaxPage() {
   const filePath = path.join(process.cwd(), "src/app/finance/vat-tax/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Amount', description: 'Enter the price you want to apply tax to or remove tax from.' } },
+    { element: '.flex-1 > select', popover: { title: '2. Tax Rate', description: 'Select common global rates or enter a custom percentage.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -56,29 +61,22 @@ export default function VatTaxPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          VAT & Sales Tax <span className="text-emerald-600 dark:text-emerald-500">Calculator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Perfect your business invoices. Easily add tax to a net price, or reverse-calculate the exact tax from a grand total instantly.
-        </p>
+      <ToolHeader
+        title="VAT & GST Calculator"
+        subtitle="Perfect your business invoices. Easily add tax to a net price, or reverse-calculate the exact tax instantly."
+        lastUpdated={lastUpdated}
+        tourId="vat_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
-      
       <div className="max-w-xl mx-auto">
         <VatTaxClient />
       </div>
 
       <ToolArticle title="Invoicing Made Easy: Adding and Removing Tax">
         <p>
-          Whether you are a freelancer generating an invoice or a consumer trying to figure out how much you actually paid in taxes, dealing with VAT (Value-Added Tax), GST (Goods and Services Tax), or localized Sales Tax can be confusing.
+          Whether you are a freelancer generating an invoice or a consumer trying to figure out how much you actually paid in taxes, dealing with VAT, GST, or Sales Tax can be confusing.
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -91,7 +89,7 @@ export default function VatTaxPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="finance" currentPath="/finance/vat-tax" />
+      <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { EquationSolverClient } from "./EquationSolverClient";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import path from "path";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Science Equation Solver";
 const TOOL_DESC = "Free online physics equation solver. Solve for any variable in mechanics, thermodynamics, electromagnetism, quantum, relativity, and optics equations.";
@@ -37,8 +39,16 @@ export default function EquationSolverPage() {
     { label: "Equation Solver", href: PATH },
   ];
 
+  const filePath = path.join(process.cwd(), "src/app/calculators/equation-solver/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  const tourSteps = [
+    { element: '.flex-wrap', popover: { title: '1. Categories', description: 'Switch between Mechanics, Thermodynamics, and more.' } },
+    { element: '.md\\:col-span-4', popover: { title: '2. Equation List', description: 'Pick the specific formula you want to solve.' } },
+  ];
+
   return (
-    <div className="w-full">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -49,14 +59,14 @@ export default function EquationSolverPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="mb-8">
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
-          Science Equation Solver
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
-          Solve for any variable in a wide range of physics and chemistry formulas.
-        </p>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Solve for any variable in a wide range of physics and chemistry formulas."
+        lastUpdated={lastUpdated}
+        tourId="equation_solver"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <EquationSolverClient />
 
@@ -75,7 +85,7 @@ export default function EquationSolverPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="calculators" currentPath="/calculators/equation-solver" />
+      <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );
 }

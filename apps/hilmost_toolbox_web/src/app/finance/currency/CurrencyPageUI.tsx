@@ -1,12 +1,12 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { CurrencyClient } from "./CurrencyClient";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export function CurrencyPageUI({
   defaultFrom = "USD",
   defaultTo = "EUR",
   title = "Live Currency Converter",
-  description = "Free, real-time currency converter. Stop overpaying banks and instantly convert between global currencies using live foreign exchange market rates.",
+  description = "Free, real-time currency converter. Stop overpaying banks and instantly convert global currencies using live FX market rates.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/finance/currency",
   lastUpdated
 }: {
@@ -25,20 +25,25 @@ export function CurrencyPageUI({
   const faqs = [
     {
       question: "How often are the exchange rates updated?",
-      answer: "Our currency converter uses a high-availability dual-API system. We fetch real-time data from ExchangeRate-API and use the European Central Bank (ECB) via Frankfurter as a redundant backup. Rates are typically refreshed every few hours or daily depending on the market provider.",
+      answer: "Rates are typically refreshed every few hours or daily depending on the market provider. We use a high-availability dual-API system for redundancy.",
     },
     {
       question: "Are these rates the same as what my bank offers?",
-      answer: "No. The rates shown here are the 'mid-market' exchange rates, which are the true, wholesale rates used between banks. Consumer banks and exchange kiosks typically add a markup (spread) of 2% to 5% when you convert cash or use your credit card abroad.",
+      answer: "No. These are 'mid-market' exchange rates. Consumer banks typically add a markup (spread) of 2% to 5% when you convert cash or use a credit card abroad.",
     },
     {
       question: "Can I convert currencies in reverse?",
-      answer: "Yes! Our converter is fully bidirectional. If you type a value into the top input, the bottom input calculates automatically. If you type into the bottom input, the top input reverses the calculation instantly.",
+      answer: "Yes! Our converter is fully bidirectional. Typing into either input field will update the other instantly.",
     },
   ];
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Enter Amount', description: 'Type the value in your base currency.' } },
+    { element: 'select', popover: { title: '2. Pick Currencies', description: 'Choose from over 150 global currencies to compare values.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema
         name={title}
         description={description}
@@ -49,29 +54,20 @@ export function CurrencyPageUI({
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' | ')[0].split(' ').map((word, i, arr) => 
-            i === arr.length - 1 || word.toLowerCase() === 'converter' ? <span key={i} className="text-blue-600 dark:text-blue-500">{word} </span> : word + ' '
-          )}
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description}
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={title.split(' | ')[0]}
+        subtitle={description}
+        lastUpdated={lastUpdated}
+        tourId="currency_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <CurrencyClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
 
       <ToolArticle title="Understanding Global Exchange Rates">
         <p>
-          Whether you are traveling internationally, purchasing goods from overseas, or investing in the foreign exchange (Forex) market, understanding how currency conversion works is crucial to ensuring you don&apos;t overpay.
+          Whether you are traveling internationally, purchasing goods from overseas, or investing in the foreign exchange (Forex) market, understanding how currency conversion works is crucial.
         </p>
         
         <h3>How to Use This Tool</h3>

@@ -1,6 +1,6 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { WeightConverterClient } from "./WeightConverterClient";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export function WeightMassPageUI({
   defaultUnit1 = "kilograms",
@@ -29,7 +29,7 @@ export function WeightMassPageUI({
     },
     {
       question: "What is the difference between weight and mass?",
-      answer: "Mass is the amount of matter in an object, which never changes regardless of location. Weight is the gravitational force acting on that mass. While you would weigh much less on the Moon because of lower gravity, your mass remains exactly the same.",
+      answer: "Mass is the amount of matter in an object. Weight is the gravitational force acting on that mass. While you would weigh less on the Moon, your mass remains the same.",
     },
     {
       question: "What is a 'Stone' in weight measurement?",
@@ -37,29 +37,25 @@ export function WeightMassPageUI({
     },
   ];
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Input Weight', description: 'Enter the value you wish to convert.' } },
+    { element: 'select', popover: { title: '2. Select Unit', description: 'Choose from global standards like kg, lbs, or stones.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema name={title + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' ').map((word, i, arr) => 
-            i === arr.length - 1 ? <span key={i} className="text-blue-600 dark:text-blue-500">{word}</span> : word + ' '
-          )}
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description}
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={title}
+        subtitle={description}
+        lastUpdated={lastUpdated}
+        tourId="weight_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <div className="max-w-4xl mx-auto">
         <WeightConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />

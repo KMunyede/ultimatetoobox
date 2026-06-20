@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
-import { RelatedTools, Breadcrumbs, WebApplicationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
+import { RelatedTools, Breadcrumbs, WebApplicationSchema, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TITLE = "Daily Wisdom & Wellness";
 const DESC = "Reflect on timeless stoic philosophy and nurture your mental wellness with our daily wisdom tool. Find peace and focus in the modern era.";
@@ -37,8 +37,13 @@ export default function Home() {
   const filePath = path.join(process.cwd(), "src/app/health/daily-wisdom/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.quote-container', popover: { title: '1. Daily Quote', description: 'Read a hand-picked philosophical insight every day.' } },
+    { element: '.bg-emerald-600', popover: { title: '2. Private Journal', description: 'Reflect on the quote and record your thoughts privately.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-4xl">
+    <div className="container mx-auto px-4 py-4 max-w-4xl">
       <WebApplicationSchema
         name={`${TITLE} | Hilmost Toolbox`}
         description={DESC}
@@ -48,25 +53,14 @@ export default function Home() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-text-primary mb-2">
-          Daily Wisdom and Wellness
-        </h1>
-        <p className="text-sm font-bold text-brand-primary mb-4 uppercase tracking-widest">
-          The Change you want to see starts within You
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-4">
-          Take a moment to center yourself. Reflect on timeless philosophy and let ancient wisdom guide your modern life.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
-
+      <ToolHeader
+        title="Wisdom & Reflection"
+        subtitle="The Change you want to see starts within You. Reflect on timeless stoic philosophy."
+        lastUpdated={lastUpdated}
+        tourId="daily_wisdom"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <DailyQuoteClient />
       
@@ -90,13 +84,13 @@ export default function Home() {
           className="inline-flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-semibold py-4 px-8 rounded-2xl cursor-not-allowed"
           title="Coming Soon"
         >
-          My Favorites (Coming Soon)
+          My Favorites (Soon)
         </span>
         <span 
           className="inline-flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-semibold py-4 px-8 rounded-2xl cursor-not-allowed"
           title="Coming Soon"
         >
-          My Profile (Coming Soon)
+          My Profile (Soon)
         </span>
       </div>
 
@@ -104,4 +98,3 @@ export default function Home() {
     </div>
   );
 }
-

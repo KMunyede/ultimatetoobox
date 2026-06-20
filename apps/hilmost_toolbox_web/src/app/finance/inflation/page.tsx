@@ -1,12 +1,12 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { InflationClient } from "./InflationClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Inflation Calculator";
-const TOOL_DESC = "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power over time.";
+const TOOL_DESC = "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power.";
 const PATH = "/finance/inflation";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
@@ -23,15 +23,15 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What is inflation?",
-    answer: "Inflation is the rate at which the general level of prices for goods and services is rising. Consequently, as inflation rises, every dollar you own buys a smaller percentage of a good or service.",
+    answer: "Inflation is the rate at which the general level of prices for goods and services is rising, decreasing the purchasing power of your money.",
   },
   {
     question: "What is the difference between Future Cost and Purchasing Power?",
-    answer: "Future cost tells you how much money you will need in the future to buy something that costs a certain amount today. Purchasing power tells you what your current money will actually be worth in the future compared to today&apos;s standards.",
+    answer: "Future cost is what an item today will cost later. Purchasing power is what your money today will be worth in the future.",
   },
   {
     question: "Why does inflation happen?",
-    answer: "Inflation is generally caused by two factors: &apos;Demand-pull&apos; (when demand for goods outpaces supply) and &apos;Cost-push&apos; (when the cost to produce goods increases, so companies raise prices to maintain profit margins). Central banks also influence inflation by printing more money, which devalues the currency.",
+    answer: "Mainly due to demand outpacing supply (demand-pull) or rising production costs (cost-push). Central bank policies also play a role.",
   },
 ];
 
@@ -44,8 +44,13 @@ export default function InflationPage() {
   const filePath = path.join(process.cwd(), "src/app/finance/inflation/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Present Value', description: 'Enter the current cost of an item or your current savings.' } },
+    { element: '.text-brand-primary', popover: { title: '2. Impact', description: 'See how much value your money loses over your specified timeframe.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -56,21 +61,14 @@ export default function InflationPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Inflation <span className="text-amber-600 dark:text-amber-500">Calculator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Uncover the hidden tax. Calculate exactly how inflation erodes your wealth and increases the future cost of living.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title="Purchasing Power Calculator"
+        subtitle="Uncover the hidden tax. Calculate exactly how inflation erodes your wealth over time."
+        lastUpdated={lastUpdated}
+        tourId="inflation_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <div className="max-w-2xl mx-auto">
         <InflationClient />
@@ -78,7 +76,7 @@ export default function InflationPage() {
 
       <ToolArticle title="The Invisible Tax: Understanding Inflation">
         <p>
-          If you bury The Invisible Tax: Understanding Inflation00,000 in your backyard and dig it up 10 years later, you will still have exactly The Invisible Tax: Understanding Inflation00,000 in cash. However, that money will buy significantly less than it could have a decade prior. This phenomenon is known as inflation, and it acts as an invisible tax on...
+          If you bury $100 in your backyard and dig it up 10 years later, you will still have exactly $100. However, that money will buy significantly less than it could have a decade prior.
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -91,7 +89,7 @@ export default function InflationPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="finance" currentPath="/finance/inflation" />
+      <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );
 }

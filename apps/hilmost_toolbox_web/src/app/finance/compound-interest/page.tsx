@@ -1,9 +1,9 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Compound Interest Calculator";
 const TOOL_DESC = "Discover the power of compounding. Free online calculator to project investment growth, monthly contributions, and long-term wealth accumulation.";
@@ -23,15 +23,15 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What is the difference between simple and compound interest?",
-    answer: "Simple interest is only calculated on your initial principal deposit. Compound interest is calculated on your principal AND the accumulated interest of previous periods, creating a snowball effect where your wealth grows exponentially.",
+    answer: "Simple interest is only calculated on your initial principal. Compound interest is calculated on your principal AND the accumulated interest of previous periods.",
   },
   {
     question: "How often is the interest compounded in this calculator?",
-    answer: "This calculator assumes your interest is compounded monthly. This is standard for most high-yield savings accounts and stock market projection averages.",
+    answer: "This calculator assumes your interest is compounded monthly. This is standard for most high-yield savings accounts and stock market projections.",
   },
   {
     question: "Why are monthly contributions so important?",
-    answer: "While starting with a large initial deposit is great, consistently adding money every month ensures your baseline principal continues to grow. When compound interest acts on this continually growing principal, the final returns are drastically higher than leaving a lump sum alone.",
+    answer: "Consistently adding money ensures your baseline principal continues to grow. When compound interest acts on this growing principal, final returns are drastically higher.",
   },
 ];
 
@@ -44,8 +44,13 @@ export default function CompoundInterestPage() {
   const filePath = path.join(process.cwd(), "src/app/finance/compound-interest/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '#tour-ci-inputs', popover: { title: '1. Strategy', description: 'Enter your initial deposit, monthly contribution, and expected return.' } },
+    { element: '#tour-ci-chart', popover: { title: '2. Visualization', description: 'Watch the "Snowball Effect" happen as your interest starts earning its own interest.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -56,27 +61,20 @@ export default function CompoundInterestPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Compound <span className="text-emerald-600 dark:text-emerald-500">Interest Calculator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Unlock the eighth wonder of the world. Visualize how your investments grow exponentially over time and plan your early retirement.
-        </p>
+      <ToolHeader
+        title="Compounding Interest Engine"
+        subtitle="Unlock the eighth wonder of the world. Visualize how your investments grow exponentially over time."
+        lastUpdated={lastUpdated}
+        tourId="compound_interest"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
-      
       <CompoundInterestClient />
 
       <ToolArticle title="The Magic of Compound Interest">
         <p>
-          Albert Einstein supposedly called compound interest &quot;the eighth wonder of the world,&quot; stating: &quot;He who understands it, earns it; he who doesn&apos;t, pays it.&quot; Whether you&apos;re saving for retirement, a down payment, or just building wealth, understanding compound interest is the ultimate key to financial freedom.
+          Albert Einstein supposedly called compound interest &quot;the eighth wonder of the world,&quot; stating: &quot;He who understands it, earns it; he who doesn&apos;t, pays it.&quot;
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -89,7 +87,7 @@ export default function CompoundInterestPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="finance" currentPath="/finance/compound-interest" />
+      <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );
 }

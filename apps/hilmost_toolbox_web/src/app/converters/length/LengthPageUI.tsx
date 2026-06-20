@@ -1,6 +1,6 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { LengthConverterClient } from "./LengthConverterClient";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export function LengthPageUI({
   defaultUnit1 = "meters",
@@ -25,7 +25,7 @@ export function LengthPageUI({
   const faqs = [
     {
       question: "What is the difference between Metric and Imperial systems?",
-      answer: "The Metric system (meters, kilometers) is a base-10 system used by 95% of the world, making calculations simple. The Imperial system (feet, inches, miles) is used primarily in the United States, Liberia, and Myanmar.",
+      answer: "The Metric system (meters, kilometers) is a base-10 system used by 95% of the world. The Imperial system (feet, inches, miles) is used primarily in the United States, Liberia, and Myanmar.",
     },
     {
       question: "How many feet are in a meter?",
@@ -37,8 +37,13 @@ export function LengthPageUI({
     },
   ];
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Enter Value', description: 'Type the number you want to convert.' } },
+    { element: 'select', popover: { title: '2. Change Units', description: 'Switch between Metric and Imperial systems instantly.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${title} | Hilmost`}
         description={description}
@@ -49,23 +54,14 @@ export function LengthPageUI({
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' ').map((word, i, arr) => 
-            i === arr.length - 1 ? <span key={i} className="text-blue-600 dark:text-blue-500">{word}</span> : word + ' '
-          )}
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description}
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={title.split(' — ')[0]}
+        subtitle={description}
+        lastUpdated={lastUpdated}
+        tourId="length_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <div className="max-w-4xl mx-auto">
         <LengthConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />

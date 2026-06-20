@@ -1,20 +1,24 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { StandardCalculatorClient } from "./StandardCalculatorClient";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import path from "path";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Standard Calculator";
 const TOOL_DESC = "Free online standard calculator. Fast arithmetic in your browser — add, subtract, multiply, divide. No app required.";
 const PATH = "/calculators/standard";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
-export const metadata: Metadata = {
-  title: `${TOOL_NAME} — Free Online Calculator | Hilmost Toolbox`,
-  description: TOOL_DESC,
-  alternates: {
-    canonical: getCanonicalUrl(PATH),
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `${TOOL_NAME} — Free Online Calculator | Hilmost Toolbox`,
+    description: TOOL_DESC,
+    alternates: {
+      canonical: getCanonicalUrl(PATH),
+    },
+  };
+}
 
 const faqs = [
   {
@@ -37,8 +41,16 @@ export default function StandardCalculatorPage() {
     { label: "Standard", href: PATH },
   ];
 
+  const filePath = path.join(process.cwd(), "src/app/calculators/standard/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  const tourSteps = [
+    { element: '.calculator-display', popover: { title: '1. Display', description: 'See your expression and result here. Click the clock icon for history.' } },
+    { element: '.calculator-grid', popover: { title: '2. Input', description: 'Use the buttons or your keyboard to perform arithmetic.' } },
+  ];
+
   return (
-    <div className="w-full">
+    <div className="container mx-auto px-4 py-4 max-w-4xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -49,16 +61,18 @@ export default function StandardCalculatorPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
       
-      <div className="mb-8">
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
-          Standard Calculator
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
-          Reliable arithmetic for everyday tasks. Fast, responsive, and always available.
-        </p>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Reliable arithmetic for everyday tasks. Fast, responsive, and always available."
+        lastUpdated={lastUpdated}
+        tourId="standard_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
-      <StandardCalculatorClient />
+      <div className="max-w-2xl mx-auto">
+        <StandardCalculatorClient />
+      </div>
 
       <ToolArticle title="Why Use Our Standard Calculator?">
         <p>
@@ -73,7 +87,7 @@ export default function StandardCalculatorPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="calculators" currentPath="/calculators/standard" />
+      <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );
 }

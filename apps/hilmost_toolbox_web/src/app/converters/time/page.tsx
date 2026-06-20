@@ -1,9 +1,9 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { TimeConverterClient } from "./TimeConverterClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: "How are months calculated in this tool?",
-    answer: "Because months have varying lengths (28 to 31 days), this tool calculates a 'Month' as an exact mathematical average of 30.44 days (730.5 hours).",
+    answer: "Because months have varying lengths (28 to 31 days), this tool calculates a 'Month' as an exact mathematical average of 30.44 days.",
   },
   {
     question: "How many seconds are in a day?",
@@ -39,27 +39,25 @@ export default function TimeConverterPage() {
   const filePath = path.join(process.cwd(), "src/app/converters/time/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Duration', description: 'Enter the amount of time you want to convert.' } },
+    { element: 'select', popover: { title: '2. Interval', description: 'Switch between small units like seconds or large units like years.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema name="Time Converter | Hilmost" description="Free online time converter. Instantly convert between seconds, minutes, hours, days, weeks, months, and years." url="https://hilmost-toolbox.hilmost.net/converters/time" />
       <FAQSchema items={faqs} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Time <span className="text-indigo-600 dark:text-indigo-500">Converter</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Take control of your timeline. Instantly transform hours into days, weeks into minutes, and years into seconds.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title="Time Unit Converter"
+        subtitle="Take control of your timeline. Instantly transform hours into days, weeks into minutes, and years into seconds."
+        lastUpdated={lastUpdated}
+        tourId="time_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <div className="max-w-4xl mx-auto">
         <TimeConverterClient />

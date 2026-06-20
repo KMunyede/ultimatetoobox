@@ -1,8 +1,7 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { Suspense } from "react";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Temperature Converter";
 const TOOL_DESC = "Convert seamlessly between Celsius, Fahrenheit, and Kelvin in real-time — no signup required.";
@@ -31,11 +30,11 @@ export function TemperaturePageUI({
   const faqs = [
     {
       question: "How do you convert Celsius to Fahrenheit manually?",
-      answer: "The formula is: (Celsius × 9/5) + 32. For a quick mental estimate, you can simply multiply the Celsius temperature by 2 and add 30. (e.g., 20°C × 2 = 40. 40 + 30 = 70°F).",
+      answer: "The formula is: (Celsius × 9/5) + 32. For a quick mental estimate, you can simply multiply the Celsius temperature by 2 and add 30.",
     },
     {
       question: "What is Absolute Zero?",
-      answer: "Absolute zero is the lowest limit of the thermodynamic temperature scale, a state at which the enthalpy and entropy of a cooled ideal gas reach their minimum value, taken as zero. It is exactly 0 Kelvin, which equals -273.15°C or -459.67°F.",
+      answer: "Absolute zero is exactly 0 Kelvin, which equals -273.15°C or -459.67°F.",
     },
     {
       question: "At what temperature are Celsius and Fahrenheit the same?",
@@ -43,8 +42,13 @@ export function TemperaturePageUI({
     },
   ];
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Input Temperature', description: 'Enter the numeric value you want to scale.' } },
+    { element: 'select', popover: { title: '2. Select Scale', description: 'Switch between weather-standard or scientific units.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -55,29 +59,18 @@ export function TemperaturePageUI({
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' ').map((word, i, arr) => 
-            i === arr.length - 1 ? <span key={i} className="text-rose-600 dark:text-rose-500">{word}</span> : word + ' '
-          )}
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description}
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle={description}
+        lastUpdated={lastUpdated}
+        tourId="temperature_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <TemperatureConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
-        </div>
-      </Suspense>
+      <div className="max-w-4xl mx-auto">
+        <TemperatureConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
+      </div>
 
       <ToolArticle title="Decoding Global Temperatures">
         <p>

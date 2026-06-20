@@ -1,9 +1,9 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Metadata } from "next";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Budget Planner";
 const TOOL_DESC = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Private and secure.";
@@ -13,7 +13,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${TOOL_NAME} — 50/30/20 Rule Calculator | Hilmost Toolbox`,
-    description: "Track your income, needs, wants, and savings with our free online budget planner. Uses the 50/30/20 rule to help you manage your finances securely and privately.",
+    description: "Track your income, needs, wants, and savings with our free online budget planner. Uses the 50/30/20 rule to help you manage your finances.",
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
@@ -32,20 +32,25 @@ export default function BudgetPlannerPage() {
   const faqs = [
     {
       question: "What is the 50/30/20 Budgeting Rule?",
-      answer: "The 50/30/20 rule is a simple budgeting framework that recommends allocating your after-tax income into three categories: 50% for Needs (housing, groceries, utilities), 30% for Wants (dining out, entertainment, hobbies), and 20% for Savings and Debt repayment.",
+      answer: "A simple framework: 50% for Needs (housing, groceries), 30% for Wants (entertainment, dining), and 20% for Savings and Debt repayment.",
     },
     {
       question: "What is Zero-Based Budgeting?",
-      answer: "Zero-based budgeting is a method where your income minus your expenses equals exactly zero. This doesn't mean you spend all your money; it means every single dollar is assigned a specific 'job' before the month begins, whether that job is buying groceries or going into an investment account.",
+      answer: "A method where income minus expenses equals zero. Every dollar is assigned a job (spending, saving, or investing) before the month begins.",
     },
     {
       question: "Is my financial data safe?",
-      answer: "Yes, 100%. This budget planner runs entirely in your web browser using client-side processing. Your financial numbers are never uploaded to our servers, saved in a database, or shared with third parties. Once you close the tab, the data is gone unless you choose to export it to a CSV or PDF.",
+      answer: "Yes. This planner runs entirely in your browser. Data is never uploaded to our servers and is cleared when you close the tab.",
     },
   ];
 
+  const tourSteps = [
+    { element: '.bg-emerald-50', popover: { title: '1. Income', description: 'Enter your total after-tax monthly income.' } },
+    { element: '.grid-cols-1', popover: { title: '2. Allocation', description: 'Assign your income to Needs, Wants, and Savings categories.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -56,21 +61,14 @@ export default function BudgetPlannerPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8 print:hidden">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Budget Planner <span className="text-blue-600 dark:text-blue-500">Calculator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {TOOL_DESC}
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title="Personal Budget Engine"
+        subtitle="Master your cash flow. Track your income, needs, wants, and savings using the proven 50/30/20 rule."
+        lastUpdated={lastUpdated}
+        tourId="budget_planner"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <div className="hidden print:block text-center mb-8">
         <h1 className="text-3xl font-bold text-slate-900">Personal Budget Planner</h1>
@@ -82,7 +80,7 @@ export default function BudgetPlannerPage() {
       <div className="print:hidden">
         <ToolArticle title="Mastering Your Money with the 50/30/20 Rule">
         <p>
-          Budgeting doesn&apos;t have to mean complicated spreadsheets or restrictive spending. The 50/30/20 rule offers a simple, flexible framework to manage your finances while still enjoying your money.
+          Budgeting doesn&apos;t have to mean complicated spreadsheets. The 50/30/20 rule offers a simple, flexible framework to manage your finances while still enjoying life.
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -90,7 +88,7 @@ export default function BudgetPlannerPage() {
         <ol>
           <li><strong>Step 1: Add Income</strong> - Enter your total after-tax monthly income sources.</li>
           <li><strong>Step 2: Track Expenses</strong> - Log your needs, wants, and savings contributions.</li>
-          <li><strong>Step 3: Review Breakdown</strong> - Monitor the visual 50/30/20 progress bar to see if your spending aligns with recommended targets.</li>
+          <li><strong>Step 3: Review Breakdown</strong> - Monitor the visual progress bar to see if your spending aligns with targets.</li>
         </ol>
       </ToolArticle>
 

@@ -1,9 +1,9 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Word Unscrambler";
 const TOOL_TYPE = "Anagram Solver";
@@ -13,7 +13,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
-  const description = `Unscramble letters and solve anagrams instantly. Free online tool for Scrabble, Words with Friends, and crossword puzzles. Find all possible words from your letters.`;
+  const description = `Unscramble letters and solve anagrams instantly. Free online tool for Scrabble, Words with Friends, and crossword puzzles.`;
   const canonical = getCanonicalUrl(PATH);
 
   return {
@@ -32,15 +32,15 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What is a Word Unscrambler used for?",
-    answer: "A Word Unscrambler is an incredibly useful tool for solving anagrams and finding valid words hidden within jumbled letters. It is frequently used by players of Scrabble, Words with Friends, and crossword puzzles to gain a competitive edge or solve difficult challenges.",
+    answer: "A Word Unscrambler is used for solving anagrams and finding valid words in jumbled letters. It is frequently used by Scrabble and crossword players.",
   },
   {
     question: "Does it support multiple languages?",
-    answer: "Yes! Our Word Unscrambler supports multiple dictionaries including English, German, French, Italian, Spanish, and Portuguese, allowing you to untangle anagrams no matter what language you are playing in.",
+    answer: "Yes! Our Word Unscrambler supports multiple dictionaries including English, German, French, Italian, Spanish, and Portuguese.",
   },
   {
-    question: "Can it find blank tile possibilities like in Scrabble?",
-    answer: "Currently, this specific tool is designed to find exact matches using only the letters provided. If you want to simulate blank tiles, you can try entering common vowels or consonants along with your scrambled letters to manually test possibilities.",
+    question: "Can it find blank tile possibilities?",
+    answer: "Currently, this specific tool finds exact matches. Use common vowels or consonants along with your scrambled letters to test possibilities.",
   },
 ];
 
@@ -53,8 +53,13 @@ export default function WordUnscramblerPage() {
   const filePath = path.join(process.cwd(), "src/app/text-data/word-unscrambler/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: 'input', popover: { title: '1. Enter Letters', description: 'Type your scrambled letters here. Supports up to 15 characters.' } },
+    { element: '.bg-blue-600', popover: { title: '2. Unscramble', description: 'Click to search our dictionaries for all possible word combinations.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -65,21 +70,14 @@ export default function WordUnscramblerPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Word <span className="text-indigo-600 dark:text-indigo-500">Unscrambler</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Instantly untangle any anagram. Find the hidden words in milliseconds.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title="Word Anagram Solver"
+        subtitle="Instantly untangle any anagram. Find hidden words in milliseconds using our global dictionaries."
+        lastUpdated={lastUpdated}
+        tourId="word_unscrambler"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <div className="max-w-5xl mx-auto">
         <WordUnscramblerClient />
@@ -87,22 +85,21 @@ export default function WordUnscramblerPage() {
 
       <ToolArticle title="Master Your Text: The Power of Unscrambling">
         <p>
-          Whether you are stuck on a difficult anagram, trying to maximize your score in Scrabble, or just want to explore the hidden linguistic possibilities inside a jumble of letters, our powerful Word Unscrambler provides instant solutions with professional-grade depth.
+          Whether you are stuck on a difficult anagram or trying to maximize your score in Scrabble, our powerful Word Unscrambler provides instant solutions.
         </p>
         
         <h3>Advanced Features for Word Enthusiasts</h3>
         <ul>
-          <li><strong>Wildcard Support:</strong> Use <code>?</code> or <code>*</code> to represent blank tiles, essential for Scrabble and Words with Friends.</li>
-          <li><strong>Ergonomic Filters:</strong> Narrow down thousands of results by specifying starting letters, suffixes, or required characters.</li>
-          <li><strong>Scrabble Scoring:</strong> Every found word includes its standard Scrabble point value, helping you pick the highest-scoring play.</li>
-          <li><strong>Length-Based Grouping:</strong> Words are organized by length and sorted by score, so you find the best options in seconds.</li>
+          <li><strong>Wildcard Support:</strong> Use <code>?</code> or <code>*</code> to represent blank tiles.</li>
+          <li><strong>Ergonomic Filters:</strong> Narrow down results by specifying starting letters or suffixes.</li>
+          <li><strong>Scrabble Scoring:</strong> Every found word includes its standard point value.</li>
         </ul>
 
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Enter Letters</strong> - Type your scrambled letters into the main box. Use wildcards for missing pieces.</li>
-          <li><strong>Step 2: Apply Filters</strong> - Use the &quot;Advanced Filters&quot; panel if you need words that fit a specific board position.</li>
-          <li><strong>Step 3: Pick &amp; Copy</strong> - Review the grouped results and click any word to copy it to your clipboard.</li>
+          <li><strong>Step 1: Enter Letters</strong> - Type your scrambled letters into the main box.</li>
+          <li><strong>Step 2: Apply Filters</strong> - Use advanced filters if you need words for a specific board position.</li>
+          <li><strong>Step 3: Pick &amp; Copy</strong> - Review the grouped results and click any word to copy.</li>
         </ol>
       </ToolArticle>
 

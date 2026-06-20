@@ -1,9 +1,9 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { BMIClient } from "./BMIClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "BMI Calculator";
 const TOOL_DESC = "Calculate your Body Mass Index (BMI) instantly. A free, beautifully designed health tool to check your ideal weight category with high precision.";
@@ -28,15 +28,15 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What is a healthy BMI?",
-    answer: "A healthy BMI typically falls between 18.5 and 24.9. If your BMI is below 18.5, you may be considered underweight. Above 25 is considered overweight, and above 30 is considered obese.",
+    answer: "A healthy BMI typically falls between 18.5 and 24.9. Below 18.5 is underweight, above 25 is overweight, and above 30 is obese.",
   },
   {
     question: "Is BMI an accurate measure of health?",
-    answer: "BMI is a useful screening tool, but it is not a direct diagnostic measure of body fatness or overall health. It does not account for muscle mass, bone density, or fat distribution. Athletes may have a high BMI due to muscle weight, not fat.",
+    answer: "It's a useful screening tool but not a direct diagnostic of body fat. It doesn't account for muscle mass, bone density, or distribution.",
   },
   {
     question: "How is BMI calculated?",
-    answer: "BMI is calculated by taking your weight in kilograms and dividing it by your height in meters squared (kg/m²). For imperial measurements, the formula is your weight in pounds divided by your height in inches squared, multiplied by 703.",
+    answer: "Weight in kilograms divided by height in meters squared (kg/m²).",
   },
 ];
 
@@ -49,8 +49,13 @@ export default function BMIPage() {
   const filePath = path.join(process.cwd(), "src/app/health/bmi-calculator/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '#tour-bmi-inputs', popover: { title: '1. Enter Details', description: 'Input your height and weight. You can toggle between metric and imperial units.' } },
+    { element: '#tour-bmi-results', popover: { title: '2. Your BMI', description: 'See your calculated BMI score and which health category it falls into.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -61,27 +66,20 @@ export default function BMIPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Calculate Your <span className="text-rose-600 dark:text-rose-500">BMI</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Stop guessing your true physical status. Instantly reveal your exact Body Mass Index and map out your optimal health trajectory.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Stop guessing your true physical status. Instantly reveal your exact Body Mass Index."
+        lastUpdated={lastUpdated}
+        tourId="bmi_calculator"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
       <BMIClient />
 
       <ToolArticle title="Understanding Your Body Mass Index (BMI)">
         <p>
-          Body Mass Index (BMI) is a standardized metric used globally by health professionals to estimate whether a person has a healthy body weight for their height. While it doesn&apos;t measure body fat directly, research has shown that BMI strongly correlates with more direct measures of body fat.
+          Body Mass Index (BMI) is a standardized metric used globally by health professionals to estimate whether a person has a healthy body weight for their height.
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -94,7 +92,7 @@ export default function BMIPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="health" currentPath="/health/bmi-calculator" />
+      <RelatedTools category="health" currentPath={PATH} />
     </div>
   );
 }

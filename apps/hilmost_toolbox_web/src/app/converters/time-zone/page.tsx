@@ -1,10 +1,9 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, FAQSchema, ToolArticle , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle , RelatedTools, Breadcrumbs, ToolHeader, FAQAccordion } from "@utilitiessite/ui";
 import { TimeZoneClient } from "./TimeZoneClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -19,11 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "How does the time zone converter work?",
-    answer: "Simply select your starting time and base time zone, then add any target cities or regions. The tool automatically handles all time differences, including complex daylight saving time (DST) shifts, providing you the exact local time in those regions."
+    answer: "Simply select your starting time and base time zone, then add any target cities or regions. The tool automatically handles all time differences, including complex daylight saving time (DST) shifts."
   },
   {
     question: "Does it account for Daylight Saving Time (DST)?",
-    answer: "Yes, our time zone converter automatically factors in Daylight Saving Time rules for all global IANA time zones. It adjusts the result dynamically based on the specific date you select."
+    answer: "Yes, our time zone converter automatically factors in Daylight Saving Time rules for all global IANA time zones."
   },
   {
     question: "Can I compare more than two time zones?",
@@ -40,48 +39,45 @@ export default function TimeZonePage() {
   const filePath = path.join(process.cwd(), "src/app/converters/time-zone/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.bg-blue-600', popover: { title: '1. Add Zones', description: 'Click to add multiple cities to your tracking list.' } },
+    { element: '.flex-1 > input', popover: { title: '2. Adjust Time', description: 'Change the slider or input time to see it update across all selected regions.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema name="Time Zone Converter | Hilmost" description="Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly." url="https://hilmost-toolbox.hilmost.net/converters/time-zone" />
       <FAQSchema items={faqs} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Time Zone <span className="text-emerald-600 dark:text-emerald-500">Converter</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Coordinate globally. Compare exact local times and schedule international meetings without the guesswork.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title="Global Time Zone Hub"
+        subtitle="Coordinate globally. Compare exact local times and schedule international meetings without the guesswork."
+        lastUpdated={lastUpdated}
+        tourId="timezone_hub"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <div className="mb-8">
-        <Suspense fallback={<div className="h-96 flex items-center justify-center text-slate-500 animate-pulse bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">Loading global clock...</div>}>
-          <TimeZoneClient />
-        </Suspense>
+        <TimeZoneClient />
       </div>
 
       <ToolArticle title="Master Global Scheduling with the Ultimate Time Zone Converter">
         <p>
-          In today&apos;s interconnected world, scheduling a simple call can become a logistical nightmare. Between different UTC offsets, varying regional names (like EST vs EDT), and the chaotic transitions of Daylight Saving Time, making a mistake is all too easy. Our Time Zone Converter removes that friction completely.
+          In today&apos;s interconnected world, scheduling a simple call can become a logistical nightmare. Between different UTC offsets, varying regional names (like EST vs EDT), and the chaotic transitions of Daylight Saving Time, making a mistake is all too easy.
         </p>
         
         <h3>How to Use This Tool</h3>
-        
         <ol>
-          <li><strong>Step 1: Select Units</strong> - Choose your starting unit and your target conversion unit.</li>
-          <li><strong>Step 2: Enter Value</strong> - Type the number you want to convert into the input field.</li>
-          <li><strong>Step 3: Get Result</strong> - The converted measurement updates instantly as you type.</li>
+          <li><strong>Step 1: Set Base Time</strong> - Pick your current location and the time of the meeting.</li>
+          <li><strong>Step 2: Add Destinations</strong> - Type in the cities or time zones you want to compare against.</li>
+          <li><strong>Step 3: View Synchronization</strong> - See a unified timeline showing exactly what time it will be for every participant.</li>
         </ol>
       </ToolArticle>
-          <RelatedTools category="converters" currentPath="/converters/time-zone" />
+
+      <FAQAccordion items={faqs} />
+      <RelatedTools category="converters" currentPath="/converters/time-zone" />
     </div>
   );
 }

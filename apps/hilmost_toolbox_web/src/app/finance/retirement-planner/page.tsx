@@ -1,12 +1,12 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RetirementPlannerClient } from "./RetirementPlannerClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Retirement Planner";
-const TOOL_DESC = "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts and high-precision projections.";
+const TOOL_DESC = "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts.";
 const PATH = "/finance/retirement-planner";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
@@ -23,15 +23,15 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What is a good expected return rate?",
-    answer: "Historically, the S&P 500 (the top 500 companies in the US) has returned an average of about 10% per year before inflation. Accounting for average inflation, a &apos;safe&apos; conservative expected return to plug into calculators is typically 7%.",
+    answer: "Historically, the S&P 500 has returned an average of about 10% before inflation. For conservative planning, 6% to 7% is often used.",
   },
   {
     question: "What is the 4% rule?",
-    answer: "The 4% rule is a rule of thumb used to determine how much you can withdraw from your retirement savings each year without running out of money. If you need $40,000 a year to live comfortably, you would need $1,000,000 saved up ($1,000,000 * 4% = $40,000).",
+    answer: "A rule of thumb for safe withdrawal. If you need $40,000/year to live, you need a nest egg of $1,000,000 ($40,000 / 0.04).",
   },
   {
-    question: "Is it ever too late to start saving for retirement?",
-    answer: "No. While starting earlier leverages the power of compound interest to a massive degree, starting late is always better than never starting. Many governments offer &apos;catch-up contributions&apos; allowing older workers to invest more pre-tax money into retirement accounts.",
+    question: "Is it ever too late to start saving?",
+    answer: "No. While early is best, many governments offer 'catch-up contributions' for older workers to accelerate their savings.",
   },
 ];
 
@@ -44,8 +44,13 @@ export default function RetirementPlannerPage() {
   const filePath = path.join(process.cwd(), "src/app/finance/retirement-planner/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '#tour-retire-inputs', popover: { title: '1. Plan Details', description: 'Enter your current age, target retirement age, and current savings.' } },
+    { element: '#tour-retire-chart', popover: { title: '2. Growth Trajectory', description: 'Visualize your wealth accumulation leading up to retirement.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="container mx-auto px-4 py-4 max-w-6xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -56,27 +61,20 @@ export default function RetirementPlannerPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Retirement <span className="text-indigo-600 dark:text-indigo-500">Planner</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Take absolute control of your timeline. Visualize your exact retirement trajectory and guarantee your savings are on track to freedom.
-        </p>
+      <ToolHeader
+        title="Retirement Savings Planner"
+        subtitle="Take absolute control of your timeline. Visualize your retirement trajectory and guarantee your savings stay on track."
+        lastUpdated={lastUpdated}
+        tourId="retirement_planner"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
-      
       <RetirementPlannerClient />
 
       <ToolArticle title="The Blueprint for a Comfortable Retirement">
         <p>
-          Planning for retirement is one of the most critical financial tasks you will ever undertake. Unlike a short-term savings goal, retirement planning requires estimating decades into the future, accounting for market fluctuations, and understanding your lifestyle needs.
+          Planning for retirement is one of the most critical financial tasks you will ever undertake. It requires estimating decades into the future and understanding your lifestyle needs.
         </p>
         
         <h3>How to Use This Tool</h3>
@@ -89,7 +87,7 @@ export default function RetirementPlannerPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="finance" currentPath="/finance/retirement-planner" />
+      <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );
 }

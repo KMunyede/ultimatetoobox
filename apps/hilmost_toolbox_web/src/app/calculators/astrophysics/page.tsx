@@ -1,7 +1,9 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "./AstrophysicsCalculatorClient";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import path from "path";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Astrophysics Calculator";
 const TOOL_DESC = "Free online astrophysics calculator. Compute gravitational force, orbital velocity, escape velocity, and luminosity using preset cosmic values — no scientific notation typing required.";
@@ -37,8 +39,16 @@ export default function AstrophysicsCalculatorPage() {
     { label: "Astrophysics", href: PATH },
   ];
 
+  const filePath = path.join(process.cwd(), "src/app/calculators/astrophysics/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  const tourSteps = [
+    { element: 'select', popover: { title: '1. Select Type', description: 'Choose the cosmic phenomenon you want to calculate.' } },
+    { element: '.bg-blue-600', popover: { title: '2. Precision Results', description: 'See results in scientific notation with human-readable descriptions.' } },
+  ];
+
   return (
-    <div className="w-full">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -49,14 +59,14 @@ export default function AstrophysicsCalculatorPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="mb-8">
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
-          Astrophysics Calculator
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
-          Compute the mechanics of the cosmos with precision presets and scientific notation.
-        </p>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Compute the mechanics of the cosmos with precision presets and scientific notation."
+        lastUpdated={lastUpdated}
+        tourId="astro_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <AstrophysicsCalculatorClient />
 
@@ -75,7 +85,7 @@ export default function AstrophysicsCalculatorPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="calculators" currentPath="/calculators/astrophysics" />
+      <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );
 }

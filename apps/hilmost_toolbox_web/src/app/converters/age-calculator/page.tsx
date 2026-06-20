@@ -1,89 +1,92 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { AgeCalculatorClient } from "./AgeCalculatorClient";
-import { Suspense } from "react";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
+
+const TOOL_NAME = "Age Calculator";
+const TOOL_DESC = "Calculate your exact age in years, months, weeks, days, and even minutes instantly. Free online tool to track time and celebrate milestones.";
+const PATH = "/converters/age-calculator";
+const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Age & Date Calculator — Discover Your Exact Age | Hilmost Toolbox",
-    description: "Free online date and age calculator. Instantly calculate the exact time passed between two dates in hours, days, seconds, or a full chronological string.",
+    title: `${TOOL_NAME} — Exact Years, Months & Days | Hilmost Toolbox`,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl("/converters/age-calculator"),
+      canonical: getCanonicalUrl(PATH),
     },
   };
 }
 
 const faqs = [
   {
-    question: "Does this calculator account for leap years?",
-    answer: "Yes! The system utilizes the built-in JavaScript Date engine, meaning leap years (the extra day in February every 4 years) are mathematically accounted for and flawlessly integrated into the final calculation.",
+    question: "How is age calculated in months and days?",
+    answer: "Our tool calculates age by determining the number of full years between dates, then the remaining full months, and finally the leftover days. It accounts for leap years and the varying number of days in each month automatically.",
   },
   {
-    question: "Can I calculate time in the future?",
-    answer: "Absolutely. If you set the End Date into the future, the calculator acts as a countdown timer. This is perfect for determining exactly how many days or hours are left until your retirement, vacation, or anniversary.",
+    question: "Can I use this for chronological age in research?",
+    answer: "Yes, this tool provides the standard chronological age used in medical and academic research, expressed in total days or years/months/days format.",
   },
   {
-    question: "What does the Full Chronological String output mean?",
-    answer: "Instead of just converting a duration into one massive number (e.g., 20,000 days), the full string breaks it down exactly like a clock, showing the duration in Centuries, Years, Months, Days, Hours, Minutes, and Seconds.",
+    question: "Does it work for future dates?",
+    answer: "While typically used for past birth dates, you can use it to calculate the time remaining until a future event by setting the 'Date of Birth' as today and the 'Age at Date' as the future event date.",
   },
 ];
 
 export default function AgeCalculatorPage() {
   const breadcrumbItems = [
     { label: "Converters", href: "/converters" },
-    { label: "Age Calculator", href: "/converters/age-calculator" },
+    { label: "Age Calculator", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/converters/age-calculator/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: 'input[type="date"]', popover: { title: '1. Select Dates', description: 'Enter your birth date and the date you want to calculate your age at.' } },
+    { element: '.text-brand-primary', popover: { title: '2. Instant Results', description: 'See your age broken down into multiple time units simultaneously.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <WebApplicationSchema name="Age & Date Calculator | Hilmost" description="Calculate the exact time that has passed between two dates in hours, days, seconds, or a full chronological string." url="https://hilmost-toolbox.hilmost.net/converters/age-calculator" />
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
+      <WebApplicationSchema
+        name={`${TOOL_NAME} | Hilmost`}
+        description={TOOL_DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/converters.png"
+      />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Age & Date <span className="text-blue-600 dark:text-blue-500">Calculator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Uncover the exact time. Calculate the precise duration between any two moments in history with zero effort.
-        </p>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Precision chronological tracking. Know exactly how much time has passed between two dates."
+        lastUpdated={lastUpdated}
+        tourId="age_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
-      
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <AgeCalculatorClient />
-        </div>
-      </Suspense>
+      <AgeCalculatorClient />
 
-      <ToolArticle title="The Complexity of Time Calculation">
+      <ToolArticle title="The Importance of Precision Timing">
         <p>
-          Calculating the exact time between two dates sounds simple until you attempt to do it manually. Because the Gregorian Calendar is highly irregular, manual chronological subtraction is notoriously prone to errors.
+          Knowing your exact age isn&apos;t just for birthdays. It&apos;s a critical metric for medical dosages, legal eligibility, and tracking developmental milestones in children.
         </p>
         
         <h3>How to Use This Tool</h3>
-        
         <ol>
-          <li><strong>Step 1: Select Units</strong> - Choose your starting unit and your target conversion unit.</li>
-          <li><strong>Step 2: Enter Value</strong> - Type the number you want to convert into the input field.</li>
-          <li><strong>Step 3: Get Result</strong> - The converted measurement updates instantly as you type.</li>
+          <li><strong>Step 1: Input Birth Date</strong> - Select your date of birth using the calendar picker.</li>
+          <li><strong>Step 2: Set Target Date</strong> - Choose the date you want to calculate your age at (default is today).</li>
+          <li><strong>Step 3: View Breakdown</strong> - See your age displayed in years, months, and even total minutes.</li>
         </ol>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-          <RelatedTools category="converters" currentPath="/converters/age-calculator" />
+      <RelatedTools category="converters" currentPath={PATH} />
     </div>
   );
 }

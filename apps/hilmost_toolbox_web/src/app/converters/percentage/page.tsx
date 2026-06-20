@@ -1,9 +1,9 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { PercentageClient } from "./PercentageClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Percentage Calculator";
 const TOOL_DESC = "Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems.";
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: "Why do percentages matter in finance?",
-    answer: "Percentages are the foundation of all finance. Interest rates on your bank account, the APR on your credit card, and the ROI (Return on Investment) of your stock portfolio are all expressed as percentages. Understanding how percentages compound is the key to building wealth.",
+    answer: "Percentages are the foundation of all finance. Interest rates on your bank account, the APR on your credit card, and the ROI (Return on Investment) of your stock portfolio are all expressed as percentages.",
   },
 ];
 
@@ -44,8 +44,13 @@ export default function PercentagePage() {
   const filePath = path.join(process.cwd(), "src/app/converters/percentage/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const tourSteps = [
+    { element: '.grid-cols-1', popover: { title: '1. Select Mode', description: 'Choose between standard percentage, increase/decrease, or tipping.' } },
+    { element: 'input', popover: { title: '2. Instant Math', description: 'Values update in real-time as you type.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -56,42 +61,32 @@ export default function PercentagePage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          Percentage <span className="text-blue-600 dark:text-blue-500">Calculator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          Solve any percentage problem instantly. Find discounts, markups, and calculate percentage growth without the mental gymnastics.
-        </p>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Solve any percentage problem instantly. Find discounts, markups, and calculate growth."
+        lastUpdated={lastUpdated}
+        tourId="percentage_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
-      
-      <div className="max-w-4xl mx-auto">
-        <PercentageClient />
-      </div>
+      <PercentageClient />
 
       <ToolArticle title="The Mathematics of Everyday Life">
         <p>
-          Percentages are simply fractions out of 100. The word itself comes from the Latin &quot;per centum,&quot; meaning &quot;by the hundred.&quot; While the concept is simple, manually applying percentage formulas to real-world scenarios—like retail discounts or stock market losses—can be frustrating.
+          Percentages are simply fractions out of 100. While the concept is simple, manually applying percentage formulas to real-world scenarios—like retail discounts or stock market losses—can be frustrating.
         </p>
         
         <h3>How to Use This Tool</h3>
-        
         <ol>
-          <li><strong>Step 1: Select Units</strong> - Choose your starting unit and your target conversion unit.</li>
-          <li><strong>Step 2: Enter Value</strong> - Type the number you want to convert into the input field.</li>
-          <li><strong>Step 3: Get Result</strong> - The converted measurement updates instantly as you type.</li>
+          <li><strong>Step 1: Choose Scenario</strong> - Select the type of percentage problem you need to solve.</li>
+          <li><strong>Step 2: Enter Values</strong> - Input your numbers into the labeled fields.</li>
+          <li><strong>Step 3: Get Result</strong> - The answer appears immediately with a clear explanation of the logic.</li>
         </ol>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="converters" currentPath="/converters/percentage" />
+      <RelatedTools category="converters" currentPath={PATH} />
     </div>
   );
 }

@@ -1,8 +1,7 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { Suspense } from "react";
 import { Base64Client } from "./Base64Client";
-import { Calendar } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export function Base64PageUI({
   defaultMode = "encode",
@@ -25,20 +24,25 @@ export function Base64PageUI({
   const faqs = [
     {
       question: "What is Base64 encoding used for?",
-      answer: "Base64 is a group of binary-to-text encoding schemes that represent binary data in an ASCII string format. It is commonly used when there is a need to encode binary data, especially when that data needs to be stored and transferred over media that are designed to deal with text, like JSON or HTML.",
+      answer: "Representing binary data in ASCII format, commonly used in JSON or HTML data transfers.",
     },
     {
       question: "Is Base64 encoding a form of encryption?",
-      answer: "No, Base64 is NOT encryption. It is merely a data format translation. Anyone can easily decode a Base64 string back to its original form. Do not use Base64 to secure passwords or sensitive data.",
+      answer: "No, Base64 is NOT encryption. It is a data format translation and is easily reversible.",
     },
     {
       question: "Is my data sent to a server?",
-      answer: "No. All encoding and decoding happens directly in your browser using JavaScript. We do not store, log, or transmit your data to any external server, ensuring maximum privacy and security for your strings.",
+      answer: "No. All encoding and decoding happens locally in your browser for maximum privacy.",
     },
   ];
 
+  const tourSteps = [
+    { element: 'textarea', popover: { title: '1. Paste Content', description: 'Enter the text you want to encode or decode.' } },
+    { element: '.bg-blue-600', popover: { title: '2. Convert', description: 'Select the mode and get your result instantly.' } },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${title} | Hilmost`}
         description={description}
@@ -49,41 +53,30 @@ export function Base64PageUI({
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center max-w-3xl mx-auto mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-          {title.split(' | ')[0].split(' ').map((word, i, arr) => 
-            i === arr.length - 1 || word.toLowerCase() === 'encoder' || word.toLowerCase() === 'decoder' ? <span key={i} className="text-blue-500">{word} </span> : word + ' '
-          )}
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-4">
-          {description.split('.')[0]}. {description.split('.')[1]}.
-        </p>
-
-        {lastUpdated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <Calendar size={14} />
-            <span>Last updated: {lastUpdated}</span>
-          </div>
-        )}
-      </div>
+      <ToolHeader
+        title={title.split(' — ')[0]}
+        subtitle={description}
+        lastUpdated={lastUpdated}
+        tourId="base64_converter"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
       
-      <Suspense fallback={<div className="h-64 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl max-w-4xl mx-auto w-full"></div>}>
-        <div className="max-w-4xl mx-auto">
-          <Base64Client defaultMode={defaultMode} />
-        </div>
-      </Suspense>
+      <div className="max-w-4xl mx-auto">
+        <Base64Client defaultMode={defaultMode} />
+      </div>
 
       <ToolArticle title="The Developer&apos;s Guide to Base64">
         <p>
-          When you&apos;re dealing with strict data transfer protocols, moving raw binary data or special characters can break your JSON payload or corrupt your HTTP request. Base64 encoding solves this problem by safely transforming your strings into a uniform, URL-safe ASCII format.
+          When you&apos;re dealing with strict data transfer protocols, moving raw binary data or special characters can break your JSON payload. Base64 encoding solves this by transforming strings into a uniform, URL-safe format.
         </p>
         
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Paste Text</strong> - Insert your raw text or data string into the main input area.</li>
-          <li><strong>Step 2: Select Action</strong> - Choose your formatting, encoding, or analysis mode.</li>
-          <li><strong>Step 3: Copy Result</strong> - View the generated analytics or encoded output and click to copy.</li>
+          <li><strong>Step 1: Paste Text</strong> - Insert your raw text into the main input area.</li>
+          <li><strong>Step 2: Select Mode</strong> - Choose between Encoding or Decoding.</li>
+          <li><strong>Step 3: Copy Result</strong> - View the transformed output and click to copy.</li>
         </ol>
       </ToolArticle>
 

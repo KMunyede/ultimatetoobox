@@ -1,7 +1,9 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, AdLayout, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
 import { ScientificCalculatorClient } from "./ScientificCalculatorClient";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import path from "path";
+import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Scientific Calculator";
 const TOOL_DESC = "Free online scientific calculator with trig, logarithms, and constants. Solve advanced math instantly in your browser.";
@@ -37,8 +39,16 @@ export default function ScientificCalculatorPage() {
     { label: "Scientific", href: PATH },
   ];
 
+  const filePath = path.join(process.cwd(), "src/app/calculators/scientific/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  const tourSteps = [
+    { element: '.calculator-display', popover: { title: '1. Advanced Display', description: 'Supports complex expressions and scientific notation.' } },
+    { element: '.grid', popover: { title: '2. Scientific Grid', description: 'Access trigonometry, logs, and roots with the 2nd and HYP toggles.' } },
+  ];
+
   return (
-    <div className="w-full">
+    <div className="container mx-auto px-4 py-4 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -49,14 +59,14 @@ export default function ScientificCalculatorPage() {
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
       
-      <div className="mb-8">
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2">
-          Scientific Calculator
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
-          Advanced mathematics for engineering, physics, and academia.
-        </p>
-      </div>
+      <ToolHeader
+        title={TOOL_NAME}
+        subtitle="Advanced mathematics for engineering, physics, and academia."
+        lastUpdated={lastUpdated}
+        tourId="scientific_calc"
+        tourSteps={tourSteps}
+        shareButton={<ShareButton />}
+      />
 
       <ScientificCalculatorClient />
 
@@ -74,7 +84,7 @@ export default function ScientificCalculatorPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="calculators" currentPath="/calculators/scientific" />
+      <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );
 }
