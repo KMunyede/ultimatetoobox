@@ -1,17 +1,17 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "./AstrophysicsCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
-const TOOL_NAME = "Astrophysics Calculator";
-const TOOL_DESC = "Free online astrophysics calculator. Compute gravitational force, orbital velocity, escape velocity, and luminosity using preset cosmic values — no scientific notation typing required.";
+const TOOL_NAME = "Astrophysics Calculator Suite";
+const TOOL_DESC = "Compute the mechanics of the cosmos. High-precision astrophysics calculator for gravitational force, orbital velocity, escape velocity, and stellar luminosity.";
 const PATH = "/calculators/astrophysics";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: `${TOOL_NAME} — Gravitational Force, Orbital Velocity & More | Hilmost Toolbox`,
+  title: `${TOOL_NAME} — High-Precision Cosmic Calculations | Hilmost Toolbox`,
   description: TOOL_DESC,
   alternates: {
     canonical: getCanonicalUrl(PATH),
@@ -20,17 +20,28 @@ export const metadata: Metadata = {
 
 const faqs = [
   {
-    question: "Why use presets for mass and distance?",
-    answer: "Astronomical values are incredibly large (e.g., Earth's mass is 5.972 × 10²⁴ kg). Typing these manually is prone to error. Our presets allow you to select common celestial bodies instantly, ensuring your calculations are based on accurate, standard scientific constants.",
+    question: "How accurate are the planetary mass presets?",
+    answer: "Our presets utilize the latest planetary data from NASA's Planetary Fact Sheets. We use 64-bit floating-point precision to ensure that massive values (like the Sun's 1.989e30 kg) are handled without rounding errors common in standard calculators.",
   },
   {
-    question: "How do I calculate the gravitational force between two objects?",
-    answer: "Select 'Gravitational Force' from the dropdown, then choose or input the masses of both objects and the distance between their centers. The calculator uses Newton's Law of Universal Gravitation: F = G(m1m2)/r².",
+    question: "What is the difference between Orbital and Escape Velocity?",
+    answer: "Orbital velocity is the speed needed to stay in a stable circular orbit around a body. Escape velocity is the minimum speed required to break free from that body's gravitational pull entirely and travel to 'infinity.'",
   },
   {
-    question: "What is Hubble's Law?",
-    answer: "Hubble's Law describes the expansion of the universe, stating that the recessional velocity of a galaxy is proportional to its distance from us. This calculator helps you determine the distance or velocity using the Hubble constant.",
+    question: "Does this calculator account for general relativity?",
+    answer: "This tool utilizes Newtonian mechanics, which is highly accurate for most orbital and gravitational calculations. For extreme scenarios near black holes, relativistic corrections would be required, though our Schwarzschild radius calculations (planned) would handle those specific edge cases.",
   },
+  {
+    question: "What value of the Gravitational Constant (G) is used?",
+    answer: "We use the CODATA recommended value of G = 6.67430 × 10⁻¹¹ m³ kg⁻¹ s⁻², ensuring your physics research aligns with international scientific standards.",
+  },
+];
+
+const howToSteps = [
+  { name: "Select Cosmic Event", text: "Choose the specific calculation type, such as Gravitational Force or Hubble Distance, from the dropdown menu." },
+  { name: "Input Masses or Distances", text: "Enter values manually in scientific notation or use our 'One-Tap Presets' for Earth, the Moon, or the Sun." },
+  { name: "Define Units", text: "Ensure your units are consistent (e.g., meters vs. kilometers) using the integrated unit selectors." },
+  { name: "Analyze Results", text: "Review the calculated output in both scientific notation and human-readable 'Billions/Trillions' descriptions." },
 ];
 
 export default function AstrophysicsCalculatorPage() {
@@ -43,8 +54,8 @@ export default function AstrophysicsCalculatorPage() {
   const lastUpdated = getFileLastUpdated(filePath);
 
   const tourSteps = [
-    { element: 'select', popover: { title: '1. Select Type', description: 'Choose the cosmic phenomenon you want to calculate.' } },
-    { element: '.bg-blue-600', popover: { title: '2. Precision Results', description: 'See results in scientific notation with human-readable descriptions.' } },
+    { element: 'select', popover: { title: '1. Select Calculation', description: 'Switch between gravity, orbits, or stellar luminosity instantly.' } },
+    { element: '.bg-brand-primary', popover: { title: '2. Cosmic Results', description: 'Results are shown in high-precision scientific notation with human-readable labels.' } },
   ];
 
   return (
@@ -56,6 +67,11 @@ export default function AstrophysicsCalculatorPage() {
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <FAQSchema items={faqs} />
+      <HowToSchema
+        name="How to Compute Celestial Mechanics"
+        description="Follow our professional guide to calculating orbits and gravitational forces using our high-precision engine."
+        steps={howToSteps}
+      />
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
@@ -70,25 +86,38 @@ export default function AstrophysicsCalculatorPage() {
 
       <AstrophysicsCalculatorClient />
 
-      <ToolArticle title="Exploring Celestial Mechanics">
+      <ToolArticle title="Mastering Celestial Mechanics: A Guide to the Universe">
         <p>
-          Astrophysics involves some of the most extreme scales in the universe, from the microscopic quantum fluctuations to the macroscopic expansion of space-time. Our calculator bridges these gaps by handling large-scale data with ease.
+          Astrophysics is the study of the physical properties of celestial objects and the universe as a whole. Because space involves scales that are difficult for the human mind to comprehend&mdash;from the microscopic to the vast expanses of intergalactic space&mdash;precision tools are essential. Our <strong>Astrophysics Calculator Suite</strong> is designed to simplify these complex formulas, allowing students and researchers to focus on the results rather than the tedious scientific notation.
         </p>
-        <h3>How to Use This Tool</h3>
-        <ol>
-          <li><strong>Step 1: Select cosmic event</strong> - Choose from Gravitational Force, Orbital Velocity, Escape Velocity, and more.</li>
-          <li><strong>Step 2: Use Presets</strong> - Select celestial bodies like Earth or the Sun to avoid typing extreme scientific notation.</li>
-          <li><strong>Step 3: Review Results</strong> - See precision calculations in scientific notation with clear descriptions of the physics.</li>
-        </ol>
 
-        <h3>Calculations Supported</h3>
-        <ul>
-          <li><strong>Gravitational Force:</strong> Determine the pull between any two masses across space.</li>
-          <li><strong>Orbital Velocity:</strong> Find the speed required to maintain a stable orbit around a body.</li>
-          <li><strong>Escape Velocity:</strong> Calculate the minimum speed needed to break free from a gravitational field.</li>
-          <li><strong>Luminosity:</strong> Understand energy output using the Stefan-Boltzmann law.</li>
-          <li><strong>Hubble Distance:</strong> Estimate cosmological distances based on galactic recession.</li>
-        </ul>
+        <h3>The Law of Universal Gravitation</h3>
+        <p>
+          At the heart of our suite is Newton&apos;s Law of Universal Gravitation. Every object with mass attracts every other object. The force is proportional to the product of their masses and inversely proportional to the square of the distance between their centers. This fundamental force is what keeps planets in orbit and galaxies together. Our engine handles these &quot;Big G&quot; calculations with extreme precision, utilizing constants verified by <strong>NIST</strong>.
+        </p>
+
+        <h3>Stellar Luminosity and the Life of Stars</h3>
+        <p>
+          How bright is a star? The answer depends on its radius and its surface temperature. Using the <strong>Stefan-Boltzmann Law</strong>, our luminosity tool allows you to calculate the total power output (Watts) of any celestial body. This is a key metric used by astronomers to classify stars on the Hertzsprung-Russell diagram and determine their distance from Earth.
+        </p>
+
+        <h3>Hubble&apos;s Law and the Expanding Universe</h3>
+        <p>
+          We are not in a static universe. Hubble&apos;s Law shows that galaxies are moving away from us at speeds proportional to their distance. This reveals the expansion of the universe itself. By using our Hubble Distance tool, you can estimate the distance of a galaxy in Megaparsecs based on its recessional velocity (v = H0d), a cornerstone of modern cosmology.
+        </p>
+
+        <h3>Why Use Our Presets?</h3>
+        <p>
+          Astronomical values are prone to &quot;typo-errors&quot; because of their scale. For example, Earth&apos;s mass is <code>5.972 &times; 10²⁴ kg</code>. Typing that manually into a standard calculator often leads to exponent errors. Our <strong>One-Tap Presets</strong> load verified data for the Sun, Milky Way, and all major planets instantly, providing a secure baseline for your physics research.
+        </p>
+
+        <SourceReference
+          sources={[
+            { name: "NASA - Space Science Data Coordinated Archive", url: "https://nssdc.gsfc.nasa.gov/planetary/factsheet/" },
+            { name: "ESA - The Study of Astrophysics", url: "https://www.esa.int/Science_Exploration/Space_Science/Astrophysics" },
+            { name: "NASA JPL - Physical Constants Guide", url: "https://ssd.jpl.nasa.gov/?constants" }
+          ]}
+        />
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
