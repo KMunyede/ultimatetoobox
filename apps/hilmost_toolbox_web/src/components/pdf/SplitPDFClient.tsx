@@ -4,6 +4,7 @@ import React, { useState, useCallback } from "react";
 import { PDFDocument } from "pdf-lib";
 import { useDropzone } from "react-dropzone";
 import { IconUpload, IconScissors, IconDownload, IconAlertCircle, IconFiles, IconLoader2 } from "@tabler/icons-react";
+import { Tooltip } from "@utilitiessite/ui";
 import { PDFThumbnail } from "./PDFThumbnail";
 import { usePDFDocument } from "../../hooks/usePDFDocument";
 
@@ -102,23 +103,25 @@ export function SplitPDFClient() {
   return (
     <div className="flex flex-col gap-6">
       {!file ? (
-        <div
-          {...getRootProps()}
-          className={`border-2 border-dashed rounded-3xl p-12 transition-all cursor-pointer text-center ${
-            isDragActive ? "border-red-500 bg-red-50 dark:bg-red-900/10" : "border-slate-200 dark:border-slate-800 hover:border-red-400 dark:hover:border-red-600"
-          }`}
-        >
-          <input {...getInputProps()} />
-          <div className="flex flex-col items-center gap-4">
-            <div className="h-16 w-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl flex items-center justify-center">
-              <IconUpload size={32} />
-            </div>
-            <div>
-              <p className="text-xl font-bold text-slate-900 dark:text-white">Click or drag PDF file here</p>
-              <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm font-medium uppercase tracking-wider">Select one PDF to split</p>
+        <Tooltip content="Drag and drop a PDF file here to split it into multiple parts" position="top">
+          <div
+            {...getRootProps()}
+            className={`border-2 border-dashed rounded-3xl p-12 transition-all cursor-pointer text-center ${
+              isDragActive ? "border-red-500 bg-red-50 dark:bg-red-900/10" : "border-slate-200 dark:border-slate-800 hover:border-red-400 dark:hover:border-red-600"
+            }`}
+          >
+            <input {...getInputProps()} title="Upload PDF file" />
+            <div className="flex flex-col items-center gap-4">
+              <div className="h-16 w-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl flex items-center justify-center">
+                <IconUpload size={32} />
+              </div>
+              <div>
+                <p className="text-xl font-bold text-slate-900 dark:text-white">Click or drag PDF file here</p>
+                <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm font-medium uppercase tracking-wider">Select one PDF to split</p>
+              </div>
             </div>
           </div>
-        </div>
+        </Tooltip>
       ) : (
         <div className="flex flex-col gap-6">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
@@ -145,18 +148,22 @@ export function SplitPDFClient() {
           {!loadingPdf && pdfProxy && (
             <>
               <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl self-center">
-                <button
-                  onClick={() => setSplitMode("extract")}
-                  className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "extract" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
-                >
-                  Select Pages
-                </button>
-                <button
-                  onClick={() => setSplitMode("ranges")}
-                  className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "ranges" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
-                >
-                  Custom Range
-                </button>
+                <Tooltip content="Manually pick individual pages to extract" position="top">
+                  <button
+                    onClick={() => setSplitMode("extract")}
+                    className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "extract" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
+                  >
+                    Select Pages
+                  </button>
+                </Tooltip>
+                <Tooltip content="Enter specific page numbers or ranges (e.g. 1-5)" position="top">
+                  <button
+                    onClick={() => setSplitMode("ranges")}
+                    className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${splitMode === "ranges" ? "bg-white dark:bg-slate-900 text-red-600 shadow-sm" : "text-slate-500"}`}
+                  >
+                    Custom Range
+                  </button>
+                </Tooltip>
               </div>
 
               {splitMode === "extract" ? (
@@ -181,13 +188,16 @@ export function SplitPDFClient() {
               ) : (
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col gap-4">
                   <label className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Page Ranges</label>
-                  <input
-                    type="text"
-                    value={ranges}
-                    onChange={(e) => setRanges(e.target.value)}
-                    placeholder="e.g. 1-5, 8, 11-14"
-                    className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 text-lg font-mono font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-red-500 outline-none w-full"
-                  />
+                  <Tooltip content="Enter comma-separated ranges, e.g. 1-3, 5, 10-12" position="top">
+                    <input
+                      type="text"
+                      title="Page Range Input"
+                      value={ranges}
+                      onChange={(e) => setRanges(e.target.value)}
+                      placeholder="e.g. 1-5, 8, 11-14"
+                      className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl px-6 py-4 text-lg font-mono font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-red-500 outline-none w-full"
+                    />
+                  </Tooltip>
                   <p className="text-xs text-slate-500 font-medium italic">Enter comma-separated page numbers or ranges to extract.</p>
                 </div>
               )}
@@ -201,25 +211,28 @@ export function SplitPDFClient() {
             </div>
           )}
 
-          <button
-            onClick={splitPDF}
-            disabled={splitting || loadingPdf || (splitMode === "extract" && extractPages.length === 0)}
-            className={`w-full py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 transition-all shadow-lg active:scale-[0.98] ${
-              splitting || loadingPdf ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
-            }`}
-          >
-            {splitting ? (
-              <>
-                <div className="h-5 w-5 border-3 border-slate-300 border-t-slate-600 animate-spin rounded-full" />
-                Processing...
-              </>
-            ) : (
-              <>
-                <IconScissors size={24} />
-                Split and Download
-              </>
-            )}
-          </button>
+          <Tooltip content="Extract selected pages and download as a new PDF" position="top" className="w-full">
+            <button
+              onClick={splitPDF}
+              disabled={splitting || loadingPdf || (splitMode === "extract" && extractPages.length === 0)}
+              title="Split and Download PDF"
+              className={`w-full py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 transition-all shadow-lg active:scale-[0.98] ${
+                splitting || loadingPdf ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
+              }`}
+            >
+              {splitting ? (
+                <>
+                  <div className="h-5 w-5 border-3 border-slate-300 border-t-slate-600 animate-spin rounded-full" />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <IconScissors size={24} />
+                  Split and Download
+                </>
+              )}
+            </button>
+          </Tooltip>
         </div>
       )}
     </div>
