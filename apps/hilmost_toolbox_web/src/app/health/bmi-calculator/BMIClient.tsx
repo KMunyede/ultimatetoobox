@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -52,43 +52,53 @@ export function BMIClient() {
         
         {/* Unit Toggle */}
         <div className="flex p-1 bg-canvas-muted rounded-xl border border-base">
-          <button
-            onClick={() => setState({ unitSystem: "metric" })}
-            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "metric" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
-          >
-            Metric
-          </button>
-          <button
-            onClick={() => setState({ unitSystem: "imperial" })}
-            className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "imperial" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
-          >
-            Imperial
-          </button>
+          <Tooltip content="Use Metric units (cm, kg)" position="top" className="flex-1">
+            <button
+              onClick={() => setState({ unitSystem: "metric" })}
+              className={`w-full py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "metric" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+            >
+              Metric
+            </button>
+          </Tooltip>
+          <Tooltip content="Use Imperial units (ft, in, lbs)" position="top" className="flex-1">
+            <button
+              onClick={() => setState({ unitSystem: "imperial" })}
+              className={`w-full py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "imperial" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
+            >
+              Imperial
+            </button>
+          </Tooltip>
         </div>
 
         {unitSystem === "metric" ? (
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height (cm)</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                value={cm}
-                onChange={e => setState({ cm: e.target.value })}
-                placeholder="e.g. 175"
-              />
+              <Tooltip content="Enter your height in centimeters" position="top" className="w-full">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Height in Centimeters"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                  value={cm}
+                  onChange={e => setState({ cm: e.target.value })}
+                  placeholder="e.g. 175"
+                />
+              </Tooltip>
             </div>
             <div className="space-y-2">
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (kg)</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                value={kg}
-                onChange={e => setState({ kg: e.target.value })}
-                placeholder="e.g. 70"
-              />
+              <Tooltip content="Enter your weight in kilograms" position="top" className="w-full">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Weight in Kilograms"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                  value={kg}
+                  onChange={e => setState({ kg: e.target.value })}
+                  placeholder="e.g. 70"
+                />
+              </Tooltip>
             </div>
           </div>
         ) : (
@@ -97,39 +107,48 @@ export function BMIClient() {
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height</label>
               <div className="flex gap-4">
                 <div className="flex-1 relative">
-                  <input
-                     type="number"
-                     inputMode="decimal"
-                     className="w-full h-12 px-4 pr-8 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                     value={ft}
-                     onChange={e => setState({ ft: e.target.value })}
-                     placeholder="ft"
-                  />
+                  <Tooltip content="Enter feet" position="top" className="w-full">
+                    <input
+                       type="number"
+                       inputMode="decimal"
+                       title="Height in Feet"
+                       className="w-full h-12 px-4 pr-8 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                       value={ft}
+                       onChange={e => setState({ ft: e.target.value })}
+                       placeholder="ft"
+                    />
+                  </Tooltip>
                   <span className="absolute right-4 top-4 text-text-muted font-bold text-sm">ft</span>
                 </div>
                 <div className="flex-1 relative">
-                  <input
-                     type="number"
-                     inputMode="decimal"
-                     className="w-full h-12 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                     value={inch}
-                     onChange={e => setState({ inch: e.target.value })}
-                     placeholder="in"
-                  />
+                  <Tooltip content="Enter inches" position="top" className="w-full">
+                    <input
+                       type="number"
+                       inputMode="decimal"
+                       title="Height in Inches"
+                       className="w-full h-12 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                       value={inch}
+                       onChange={e => setState({ inch: e.target.value })}
+                       placeholder="in"
+                    />
+                  </Tooltip>
                   <span className="absolute right-4 top-4 text-text-muted font-bold text-sm">in</span>
                 </div>
               </div>
             </div>
             <div className="space-y-2">
               <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (lbs)</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                value={lbs}
-                onChange={e => setState({ lbs: e.target.value })}
-                placeholder="e.g. 150"
-              />
+              <Tooltip content="Enter your weight in pounds" position="top" className="w-full">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Weight in Pounds"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
+                  value={lbs}
+                  onChange={e => setState({ lbs: e.target.value })}
+                  placeholder="e.g. 150"
+                />
+              </Tooltip>
             </div>
           </div>
         )}

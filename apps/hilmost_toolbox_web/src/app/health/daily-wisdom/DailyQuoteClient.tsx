@@ -1,7 +1,7 @@
 "use client";
 
 import { useRandomQuotes } from "@/hooks/wisdom/useRandomQuotes";
-import { QuoteCard } from "@utilitiessite/ui";
+import { QuoteCard, Tooltip } from "@utilitiessite/ui";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
@@ -58,13 +58,16 @@ export function DailyQuoteClient() {
     <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
       <div className="relative flex items-center w-full px-4 md:px-12">
         {/* Desktop Arrows - Positioned absolutely to be clearly "detached" */}
-        <button 
-          onClick={() => scrollToQuote(activeIndex - 1)}
-          className="absolute left-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-bold hidden sm:flex -ml-2 md:-ml-7"
-          aria-label="Previous quote"
-        >
-          {"<"}
-        </button>
+        <Tooltip content="Previous philosophical insight" position="top">
+          <button
+            onClick={() => scrollToQuote(activeIndex - 1)}
+            className="absolute left-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-bold hidden sm:flex -ml-2 md:-ml-7"
+            aria-label="Previous quote"
+            title="Previous Quote"
+          >
+            {"<"}
+          </button>
+        </Tooltip>
         
         <div 
           ref={scrollContainerRef}
@@ -82,13 +85,16 @@ export function DailyQuoteClient() {
           ))}
         </div>
 
-        <button 
-          onClick={() => scrollToQuote(activeIndex + 1)}
-          className="absolute right-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-bold hidden sm:flex -mr-2 md:-mr-7"
-          aria-label="Next quote"
-        >
-          {">"}
-        </button>
+        <Tooltip content="Next philosophical insight" position="top">
+          <button
+            onClick={() => scrollToQuote(activeIndex + 1)}
+            className="absolute right-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-bold hidden sm:flex -mr-2 md:-mr-7"
+            aria-label="Next quote"
+            title="Next Quote"
+          >
+            {">"}
+          </button>
+        </Tooltip>
       </div>
       
       {/* Mobile Navigation */}
