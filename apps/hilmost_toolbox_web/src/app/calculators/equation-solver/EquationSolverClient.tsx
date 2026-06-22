@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { ScientificNumber } from "@utilitiessite/ui";
+import { ScientificNumber, Tooltip } from "@utilitiessite/ui";
 import { motion } from "framer-motion";
 
 const CONSTANTS = {
@@ -217,15 +217,18 @@ export function EquationSolverClient({
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Solve for</label>
-                <select
-                  value={target}
-                  onChange={(e) => setTarget(e.target.value)}
-                  className="w-full bg-canvas-muted border border-base rounded-2xl px-4 py-3 text-lg font-black text-text-primary outline-none focus:ring-4 focus:ring-brand-primary/10 transition-all cursor-pointer"
-                >
-                  {equation.variables.map(v => (
-                    <option key={v.id} value={v.id}>{v.label}</option>
-                  ))}
-                </select>
+                <Tooltip content="Choose which variable you want the calculator to find" position="top" className="w-full">
+                  <select
+                    value={target}
+                    title="Target Variable to Solve"
+                    onChange={(e) => setTarget(e.target.value)}
+                    className="w-full bg-canvas-muted border border-base rounded-2xl px-4 py-3 text-lg font-black text-text-primary outline-none focus:ring-4 focus:ring-brand-primary/10 transition-all cursor-pointer"
+                  >
+                    {equation.variables.map(v => (
+                      <option key={v.id} value={v.id}>{v.label}</option>
+                    ))}
+                  </select>
+                </Tooltip>
               </div>
 
               <div className="space-y-4">
@@ -233,36 +236,45 @@ export function EquationSolverClient({
                   <div key={v.id} className="space-y-2">
                     <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">{v.label}</label>
                     <div className="flex gap-2">
-                      <input
-                        type="number"
-                        inputMode="decimal"
-                        value={inputs[v.id] || ""}
-                        onChange={(e) => setInputs(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
-                        className="flex-1 bg-canvas-muted border border-base rounded-xl px-4 py-3 font-mono font-bold text-lg text-text-primary outline-none focus:border-brand-primary transition-colors"
-                        placeholder="0.00"
-                      />
+                      <Tooltip content={`Enter the value for ${v.label}`} position="top" className="flex-1">
+                        <input
+                          type="number"
+                          inputMode="decimal"
+                          title={`${v.label} Input`}
+                          value={inputs[v.id] || ""}
+                          onChange={(e) => setInputs(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
+                          className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 font-mono font-bold text-lg text-text-primary outline-none focus:border-brand-primary transition-colors"
+                          placeholder="0.00"
+                        />
+                      </Tooltip>
                       {v.units.length > 1 && (
-                        <select
-                          value={inputUnits[v.id] || v.units[0].value}
-                          onChange={(e) => setInputUnits(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
-                          className="bg-canvas-card border border-base rounded-xl px-3 py-3 text-sm font-bold text-text-secondary outline-none cursor-pointer"
-                        >
-                          {v.units.map(u => (
-                            <option key={u.label} value={u.value}>{u.label}</option>
-                          ))}
-                        </select>
+                        <Tooltip content="Choose unit of measurement" position="top">
+                          <select
+                            value={inputUnits[v.id] || v.units[0].value}
+                            title={`${v.label} Unit Selection`}
+                            onChange={(e) => setInputUnits(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
+                            className="bg-canvas-card border border-base rounded-xl px-3 py-3 text-sm font-bold text-text-secondary outline-none cursor-pointer"
+                          >
+                            {v.units.map(u => (
+                              <option key={u.label} value={u.value}>{u.label}</option>
+                            ))}
+                          </select>
+                        </Tooltip>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <button
-                onClick={solve}
-                className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95 mt-2"
-              >
-                SOLVE EQUATION
-              </button>
+              <Tooltip content="Solve the equation for the target variable" position="bottom" className="w-full">
+                <button
+                  onClick={solve}
+                  title="Run Solver"
+                  className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95 mt-2"
+                >
+                  SOLVE EQUATION
+                </button>
+              </Tooltip>
             </div>
 
             {/* Right: Results Display */}

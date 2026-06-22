@@ -228,27 +228,33 @@ export function AstrophysicsCalculatorClient({
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Calculation Type</label>
-              <select
-                value={calcType}
-                onChange={(e) => setCalcType(e.target.value as CalcType)}
-                className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer shadow-inner"
-              >
-                <option value="gravity">Gravitational Force</option>
-                <option value="orbital">Orbital Velocity</option>
-                <option value="escape">Escape Velocity</option>
-                <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
-                <option value="hubble">Hubble Distance</option>
-                <option value="schwarzschild">Schwarzschild Radius (Black Holes)</option>
-                <option value="redshift">Redshift to Velocity</option>
-              </select>
+              <Tooltip content="Select the astrophysical law or formula you want to compute" position="top" className="w-full">
+                <select
+                  value={calcType}
+                  title="Astrophysics Calculation Type"
+                  onChange={(e) => setCalcType(e.target.value as CalcType)}
+                  className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer shadow-inner"
+                >
+                  <option value="gravity">Gravitational Force</option>
+                  <option value="orbital">Orbital Velocity</option>
+                  <option value="escape">Escape Velocity</option>
+                  <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
+                  <option value="hubble">Hubble Distance</option>
+                  <option value="schwarzschild">Schwarzschild Radius (Black Holes)</option>
+                  <option value="redshift">Redshift to Velocity</option>
+                </select>
+              </Tooltip>
             </div>
 
-            <button
-              onClick={calculate}
-              className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
-            >
-              CALCULATE
-            </button>
+            <Tooltip content="Instantly compute the astrophysical result based on inputs" position="bottom" className="w-full">
+              <button
+                onClick={calculate}
+                title="Run Calculation"
+                className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
+              >
+                CALCULATE
+              </button>
+            </Tooltip>
           </div>
 
           {/* Dynamic Inputs Column */}
@@ -274,14 +280,17 @@ export function AstrophysicsCalculatorClient({
                 <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
                   <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
                   <div className="flex items-center gap-3">
-                    <input
-                      type="number"
-                      inputMode="decimal"
-                      value={val2}
-                      onChange={(e) => setVal2(parseFloat(e.target.value))}
-                      className="flex-1 bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
-                      placeholder="5778"
-                    />
+                    <Tooltip content="The effective temperature of the stellar body" position="top" className="flex-1">
+                      <input
+                        type="number"
+                        inputMode="decimal"
+                        title="Surface Temperature Input"
+                        value={val2}
+                        onChange={(e) => setVal2(parseFloat(e.target.value))}
+                        className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
+                        placeholder="5778"
+                      />
+                    </Tooltip>
                     <span className="text-xs font-bold text-text-muted uppercase">Kelvin</span>
                   </div>
                 </div>
@@ -291,14 +300,17 @@ export function AstrophysicsCalculatorClient({
               <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
                 <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Recessional Velocity (v)</label>
                 <div className="flex items-center gap-3">
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    value={val1}
-                    onChange={(e) => setVal1(parseFloat(e.target.value))}
-                    className="flex-1 bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
-                    placeholder="1000"
-                  />
+                  <Tooltip content="The speed at which the object is moving away from the observer" position="top" className="flex-1">
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      title="Recessional Velocity Input"
+                      value={val1}
+                      onChange={(e) => setVal1(parseFloat(e.target.value))}
+                      className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
+                      placeholder="1000"
+                    />
+                  </Tooltip>
                   <span className="text-xs font-bold text-text-muted uppercase">km/s</span>
                 </div>
               </div>
@@ -307,14 +319,17 @@ export function AstrophysicsCalculatorClient({
               <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
                 <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Redshift (z)</label>
                 <div className="flex items-center gap-3">
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    value={val1}
-                    onChange={(e) => setVal1(parseFloat(e.target.value))}
-                    className="flex-1 bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
-                    placeholder="0.1"
-                  />
+                  <Tooltip content="The cosmological redshift value" position="top" className="flex-1">
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      title="Redshift Input"
+                      value={val1}
+                      onChange={(e) => setVal1(parseFloat(e.target.value))}
+                      className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
+                      placeholder="0.1"
+                    />
+                  </Tooltip>
                 </div>
               </div>
             )}
