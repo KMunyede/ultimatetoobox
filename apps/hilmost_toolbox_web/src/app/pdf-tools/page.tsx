@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArticle, PrivacyBadge } from "@utilitiessite/ui";
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -60,7 +60,7 @@ export default function PDFToolsHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
           <FileText className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
           {TITLE}
         </h1>
       </div>
@@ -81,6 +81,28 @@ export default function PDFToolsHub() {
           </Link>
         ))}
       </div>
+
+      <PrivacyBadge />
+
+      <ToolArticle title="The Future of Private Document Management">
+        <p>
+          Portable Document Format (PDF) has become the universal standard for business, legal, and academic communication. However, managing these files usually requires expensive desktop software or risky online converters that compromise your privacy. Our <strong>PDF Tools Suite</strong> is designed to solve this by bringing professional document manipulation directly into your browser.
+        </p>
+
+        <h3>Security by Architecture</h3>
+        <p>
+          The primary concern with online PDF tools is data security. When you upload a bank statement or a legal contract to a standard website, that file is stored on a server you don&apos;t control. We have eliminated this risk. By utilizing the <code>pdf-lib</code> and <code>pdf.js</code> JavaScript frameworks, our tools perform every operation locally. Your browser processes the bytes, generates the new file, and hands it back to you. We have zero serverside storage for your documents.
+        </p>
+
+        <h3>Why Hilmost Tools Stand Out</h3>
+        <ul>
+          <li><strong>Zero Upload Time:</strong> Since files stay on your machine, there is no waiting for slow server uploads.</li>
+          <li><strong>Offline Capability:</strong> Once the page is loaded, you can perform PDF tasks even if your internet connection drops.</li>
+          <li><strong>Universal Compatibility:</strong> Our lossless engine ensures that the PDFs you generate here are compatible with all major viewers, including Adobe Acrobat, Google Chrome, and macOS Preview.</li>
+        </ul>
+      </ToolArticle>
+
+      <AuthorBio />
     </div>
   );
 }

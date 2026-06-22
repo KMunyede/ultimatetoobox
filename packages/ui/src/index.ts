@@ -30,3 +30,6 @@ export { Tooltip } from "./Tooltip";
 export { KnowledgeCard } from "./KnowledgeCard";
 export { ToolHeader } from "./ToolHeader";
 export { SourceReference } from "./SourceReference";
+export { AuthorBio } from "./AuthorBio";
+export { DidYouKnow } from "./DidYouKnow";
+export { PrivacyBadge } from "./PrivacyBadge";

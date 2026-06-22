@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -84,6 +84,8 @@ export default function CompoundInterestPage() {
 
       <CompoundInterestClient />
 
+      <DidYouKnow category="finance" />
+
       <ToolArticle title="The Magic of Compound Interest">
         <p>
           Albert Einstein supposedly called compound interest &quot;the eighth wonder of the world,&quot; stating: &quot;He who understands it, earns it; he who doesn&apos;t, pays it.&quot; While the quote&apos;s origin is debated, the mathematical reality is undeniable. Compound interest is the process where the interest you earn on your savings is reinvested, meaning you earn interest on your interest in the next period.
@@ -131,6 +133,9 @@ export default function CompoundInterestPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+
+      <AuthorBio />
+
       <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );

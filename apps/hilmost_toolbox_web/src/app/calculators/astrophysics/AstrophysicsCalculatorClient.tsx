@@ -6,7 +6,7 @@ import { ScientificInput } from "../../../components/calculators/ScientificInput
 import { useHistory } from "../../../hooks/useHistory";
 import { ScientificNumber, Tooltip } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
-import { Copy, Terminal, FileJson, Check } from "lucide-react";
+import { Copy, Terminal, FileJson, Check, MoonStar } from "lucide-react";
 
 const CONSTANTS = {
   G: 6.67430e-11,
@@ -101,6 +101,7 @@ export function AstrophysicsCalculatorClient({
   const [lastLaTeX, setLastLaTeX] = useState("");
   const [lastPython, setLastPython] = useState("");
   const [copiedType, setCopiedType] = useState<string | null>(null);
+  const [isAstronomerMode, setIsAstronomerMode] = useState(false);
 
   const { history, addEntry, clearHistory } = useHistory("astrophysics");
 
@@ -182,8 +183,44 @@ export function AstrophysicsCalculatorClient({
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container max-w-4xl mx-auto flex flex-col gap-6"
+      className={`@container max-w-4xl mx-auto flex flex-col gap-6 transition-colors duration-500 ${isAstronomerMode ? 'astronomer-theme' : ''}`}
     >
+      {/* Theme Toggle Header */}
+      <div className="flex justify-end items-center gap-4 px-2">
+        <div className="flex items-center gap-2 mr-auto">
+          <div className={`w-2 h-2 rounded-full ${isAstronomerMode ? 'bg-red-500 animate-pulse' : 'bg-brand-primary'}`} />
+          <span className={`text-[10px] font-black uppercase tracking-widest ${isAstronomerMode ? 'text-red-500' : 'text-text-muted'}`}>
+            {isAstronomerMode ? 'Red Night-Vision Active' : 'Daylight Mode'}
+          </span>
+        </div>
+
+        <Tooltip content="Toggle Deep-Red interface for low-light observatory use" position="left">
+          <button
+            onClick={() => setIsAstronomerMode(!isAstronomerMode)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest border transition-all active:scale-95 ${
+              isAstronomerMode
+                ? 'bg-red-950 text-red-500 border-red-900 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
+                : 'bg-white dark:bg-slate-900 border-border-base text-text-secondary hover:border-brand-primary'
+            }`}
+          >
+            <MoonStar size={14} className={isAstronomerMode ? 'animate-pulse' : ''} />
+            Astronomer Mode
+          </button>
+        </Tooltip>
+      </div>
+
+      <style jsx global>{`
+        .astronomer-theme .bg-canvas-card { background-color: #0c0000 !important; border-color: #300000 !important; }
+        .astronomer-theme .bg-canvas-muted { background-color: #1a0000 !important; border-color: #300000 !important; }
+        .astronomer-theme .text-text-primary { color: #ff3333 !important; }
+        .astronomer-theme .text-text-secondary { color: #cc0000 !important; }
+        .astronomer-theme .text-text-muted { color: #880000 !important; }
+        .astronomer-theme .bg-brand-primary { background-color: #660000 !important; color: #ff3333 !important; }
+        .astronomer-theme input, .astronomer-theme select { color: #ff3333 !important; border-color: #440000 !important; }
+        .astronomer-theme .border-border-base { border-color: #330000 !important; }
+        .astronomer-theme .shadow-sm, .astronomer-theme .shadow-xl { box-shadow: 0 10px 15px -3px rgba(139, 0, 0, 0.1) !important; }
+      `}</style>
+
       <div className="bg-canvas-card border border-border-base rounded-3xl p-5 md:p-8 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
 

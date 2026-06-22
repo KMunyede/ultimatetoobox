@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, SourceReference, HowToSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, SourceReference, HowToSchema, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { ScientificCalculatorClient } from "./ScientificCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
@@ -90,6 +90,8 @@ export default function ScientificCalculatorPage() {
 
       <ScientificCalculatorClient />
 
+      <DidYouKnow category="calculators" />
+
       <ToolArticle title="Mastering Advanced Calculations in the Modern Era">
         <p>
           Our Scientific Calculator provides the power of a dedicated handheld device directly in your modern web browser. Designed for students, engineers, and scientists, it bridges the gap between simple arithmetic and complex relativistic physics. Whether you are solving for trigonometric identities, logarithmic transformations, or exploring the properties of Euler&apos;s number, our engine delivers precision results instantly.
@@ -123,6 +125,9 @@ export default function ScientificCalculatorPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+
+      <AuthorBio />
+
       <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );

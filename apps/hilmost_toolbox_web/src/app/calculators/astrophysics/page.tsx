@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "./AstrophysicsCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
@@ -86,6 +86,8 @@ export default function AstrophysicsCalculatorPage() {
 
       <AstrophysicsCalculatorClient />
 
+      <DidYouKnow category="astrophysics" />
+
       <ToolArticle title="Mastering Celestial Mechanics: A Guide to the Universe">
         <p>
           Astrophysics is the study of the physical properties of celestial objects and the universe as a whole. Because space involves scales that are difficult for the human mind to comprehend&mdash;from the microscopic to the vast expanses of intergalactic space&mdash;precision tools are essential. Our <strong>Astrophysics Calculator Suite</strong> is designed to simplify these complex formulas, allowing students and researchers to focus on the results rather than the tedious scientific notation.
@@ -121,6 +123,9 @@ export default function AstrophysicsCalculatorPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+
+      <AuthorBio />
+
       <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );
