@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -40,12 +40,15 @@ export function WordCountClient() {
       <div className="grid grid-cols-1 @[800px]:grid-cols-4 gap-8">
         {/* Editor */}
         <div id="tour-wc-input" className="@[800px]:col-span-3 bg-canvas-card border border-base rounded-3xl p-4 md:p-6 shadow-sm focus-within:border-brand-primary transition-colors">
-          <textarea
-            className="w-full min-h-[300px] @[800px]:min-h-[400px] p-4 bg-transparent text-text-primary text-lg font-medium outline-none resize-none placeholder:text-text-muted"
-            placeholder="Start typing or paste your text here..."
-            value={text}
-            onChange={e => setState({ text: e.target.value })}
-          />
+          <Tooltip content="Paste or type your text here for real-time analysis" position="top" className="w-full">
+            <textarea
+              className="w-full min-h-[300px] @[800px]:min-h-[400px] p-4 bg-transparent text-text-primary text-lg font-medium outline-none resize-none placeholder:text-text-muted"
+              placeholder="Start typing or paste your text here..."
+              title="Text Content Input"
+              value={text}
+              onChange={e => setState({ text: e.target.value })}
+            />
+          </Tooltip>
         </div>
 
         {/* Stats Sidebar */}

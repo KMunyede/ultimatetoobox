@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -40,28 +40,35 @@ export function MD5HashClient() {
                 <ShieldCheck size={16} className="text-brand-primary" />
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest">Input String</label>
             </div>
-            <textarea
-                className="w-full h-40 p-5 bg-canvas-muted border border-base rounded-2xl text-text-primary text-xl font-medium outline-none focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary transition-all resize-none"
-                placeholder="Enter text to generate MD5 hash..."
-                value={text}
-                onChange={e => setState({ text: e.target.value })}
-            />
+            <Tooltip content="Enter text or raw data to generate its unique MD5 fingerprint" position="top" className="w-full">
+              <textarea
+                  className="w-full h-40 p-5 bg-canvas-muted border border-base rounded-2xl text-text-primary text-xl font-medium outline-none focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary transition-all resize-none"
+                  placeholder="Enter text to generate MD5 hash..."
+                  title="MD5 Input String"
+                  value={text}
+                  onChange={e => setState({ text: e.target.value })}
+              />
+            </Tooltip>
         </div>
 
         <div id="tour-md5-result" className="space-y-4">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Generated MD5 Hash</label>
             <div className="relative group">
-                <div className="w-full min-h-20 p-6 bg-canvas-card border border-brand-primary/20 rounded-2xl flex items-center justify-center font-mono text-xl md:text-2xl font-black text-brand-primary break-all shadow-inner">
-                    {hash || <span className="opacity-10">00000000000000000000000000000000</span>}
-                </div>
+                <Tooltip content="The 32-character hexadecimal MD5 hash result" position="top" className="w-full">
+                  <div className="w-full min-h-20 p-6 bg-canvas-card border border-brand-primary/20 rounded-2xl flex items-center justify-center font-mono text-xl md:text-2xl font-black text-brand-primary break-all shadow-inner">
+                      {hash || <span className="opacity-10">00000000000000000000000000000000</span>}
+                  </div>
+                </Tooltip>
                 {hash && (
-                    <button
-                        onClick={handleCopy}
-                        className="absolute top-2 right-2 p-2 bg-canvas-muted text-text-muted rounded-lg hover:text-brand-primary transition-all"
-                        title="Copy hash"
-                    >
-                        {copied ? <Check size={18} /> : <Copy size={18} />}
-                    </button>
+                    <Tooltip content="Copy checksum to clipboard" position="left">
+                      <button
+                          onClick={handleCopy}
+                          className="absolute top-2 right-2 p-2 bg-canvas-muted text-text-muted rounded-lg hover:text-brand-primary transition-all"
+                          title="Copy hash"
+                      >
+                          {copied ? <Check size={18} /> : <Copy size={18} />}
+                      </button>
+                    </Tooltip>
                 )}
             </div>
         </div>

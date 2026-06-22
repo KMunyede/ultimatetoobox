@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion, AnimatePresence } from "framer-motion";
@@ -135,34 +135,40 @@ export function WordUnscramblerClient() {
                 </div>
                 <div className="flex flex-col @[600px]:flex-row gap-3">
                   <div className="relative group flex-1">
-                      <input
-                          type="text"
-                          inputMode="text"
-                          spellCheck={false}
-                          autoComplete="off"
-                          className="w-full h-12 @[600px]:h-12 px-4 pl-12 @[600px]:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl @[600px]:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
-                          value={letters}
-                          onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
-                          onKeyDown={e => e.key === 'Enter' && fetchWords()}
-                          placeholder="e.g. oten"
-                      />
+                      <Tooltip content="Enter scrambled letters. Use '?' or '*' for wildcards." position="top" className="w-full">
+                        <input
+                            type="text"
+                            inputMode="text"
+                            spellCheck={false}
+                            autoComplete="off"
+                            className="w-full h-12 @[600px]:h-12 px-4 pl-12 @[600px]:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl @[600px]:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
+                            value={letters}
+                            onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
+                            onKeyDown={e => e.key === 'Enter' && fetchWords()}
+                            placeholder="e.g. oten"
+                            title="Scrambled Letters Input"
+                        />
+                      </Tooltip>
                       <Search size={22} className="absolute left-4 @[600px]:left-5 top-3.5 @[600px]:top-4 text-text-muted group-focus-within:text-brand-primary transition-colors" />
                   </div>
-                  <button
-                    id="tour-unscramble-button"
-                    onClick={fetchWords}
-                    disabled={loading || (letters as string).length < 2}
-                    className="h-12 @[600px]:h-12 px-6 @[600px]:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
-                  >
-                    {loading ? (
-                      <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
-                    ) : (
-                      <>
-                        <Sparkles size={18} />
-                        Unscramble
-                      </>
-                    )}
-                  </button>
+                  <Tooltip content="Search dictionary for valid words" position="top">
+                    <button
+                      id="tour-unscramble-button"
+                      onClick={fetchWords}
+                      disabled={loading || (letters as string).length < 2}
+                      title="Unscramble Letters"
+                      className="h-12 @[600px]:h-12 px-6 @[600px]:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
+                    >
+                      {loading ? (
+                        <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          <Sparkles size={18} />
+                          Unscramble
+                        </>
+                      )}
+                    </button>
+                  </Tooltip>
                 </div>
                 <p className="text-xs text-text-muted font-medium ml-1 flex items-center gap-1.5">
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40" />
@@ -175,18 +181,21 @@ export function WordUnscramblerClient() {
               <div className="flex-1 space-y-1.5">
                   <label className="block text-xs font-black text-text-muted uppercase tracking-[0.2em] ml-1">Dictionary</label>
                   <div className="relative">
-                    <select
-                        className="w-full h-11 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary text-sm font-extrabold outline-none cursor-pointer hover:bg-canvas-card hover:border-brand-primary/30 transition-all appearance-none shadow-sm"
-                        value={language}
-                        onChange={e => setState({ language: e.target.value })}
-                    >
-                        <option value="en">English (Scrabble)</option>
-                        <option value="fr">French</option>
-                        <option value="de">German</option>
-                        <option value="es">Spanish</option>
-                        <option value="it">Italian</option>
-                        <option value="pt">Portuguese</option>
-                    </select>
+                    <Tooltip content="Choose a language dictionary for unscrambling" position="top" className="w-full">
+                      <select
+                          className="w-full h-11 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary text-sm font-extrabold outline-none cursor-pointer hover:bg-canvas-card hover:border-brand-primary/30 transition-all appearance-none shadow-sm"
+                          value={language}
+                          title="Select Language Dictionary"
+                          onChange={e => setState({ language: e.target.value })}
+                      >
+                          <option value="en">English (Scrabble)</option>
+                          <option value="fr">French</option>
+                          <option value="de">German</option>
+                          <option value="es">Spanish</option>
+                          <option value="it">Italian</option>
+                          <option value="pt">Portuguese</option>
+                      </select>
+                    </Tooltip>
                     <ChevronDown size={16} className="absolute right-4 top-3.5 text-text-muted pointer-events-none" />
                   </div>
               </div>
@@ -224,13 +233,16 @@ export function WordUnscramblerClient() {
                       <div key={filter.key} className="space-y-1.5">
                         <label className="block text-xs font-bold text-text-muted uppercase tracking-wider ml-1">{filter.label}</label>
                         <div className="relative">
-                          <input
-                            type="text"
-                            className="w-full h-10 px-3 border border-base rounded-lg bg-canvas-muted text-text-primary text-xs font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase shadow-inner"
-                            value={state[filter.key as keyof typeof state]}
-                            onChange={e => setState({ [filter.key]: e.target.value.replace(/[^a-zA-Z]/g, '') })}
-                            placeholder={filter.placeholder}
-                          />
+                          <Tooltip content={`Filter results by ${filter.label.toLowerCase()}`} position="top" className="w-full">
+                            <input
+                              type="text"
+                              className="w-full h-10 px-3 border border-base rounded-lg bg-canvas-muted text-text-primary text-xs font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase shadow-inner"
+                              value={state[filter.key as keyof typeof state]}
+                              onChange={e => setState({ [filter.key]: e.target.value.replace(/[^a-zA-Z]/g, '') })}
+                              placeholder={filter.placeholder}
+                              title={`${filter.label} Filter`}
+                            />
+                          </Tooltip>
                           {state[filter.key as keyof typeof state] && (
                             <button
                               onClick={() => setState({ [filter.key]: "" })}
