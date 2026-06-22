@@ -72,7 +72,7 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
     >
 
       <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl">
-        <div className="flex flex-col md:flex-row items-center gap-5 md:gap-5">
+        <div className="flex flex-col @[600px]:flex-row items-center gap-5 @[600px]:gap-5">
           
           {/* Unit 1 */}
           <div id="tour-temp-input1" className="flex-1 w-full space-y-3">
@@ -99,7 +99,7 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
 
           {/* Transfer Icon */}
           <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-inner">
-            <ArrowRightLeft size={20} className="rotate-90 md:rotate-0" />
+            <ArrowRightLeft size={20} className="rotate-90 @[600px]:rotate-0" />
           </div>
 
           {/* Unit 2 */}

@@ -133,26 +133,26 @@ export function WordUnscramblerClient() {
                     Clear All
                   </button>
                 </div>
-                <div className="flex flex-col md:flex-row gap-3">
+                <div className="flex flex-col @[600px]:flex-row gap-3">
                   <div className="relative group flex-1">
                       <input
                           type="text"
                           inputMode="text"
                           spellCheck={false}
                           autoComplete="off"
-                          className="w-full h-12 md:h-12 px-4 pl-12 md:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl md:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
+                          className="w-full h-12 @[600px]:h-12 px-4 pl-12 @[600px]:pl-14 border border-base rounded-xl bg-canvas-muted text-text-primary text-xl @[600px]:text-2xl font-black focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all uppercase placeholder:normal-case shadow-inner"
                           value={letters}
                           onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
                           onKeyDown={e => e.key === 'Enter' && fetchWords()}
                           placeholder="e.g. oten"
                       />
-                      <Search size={22} className="absolute left-4 md:left-5 top-3.5 md:top-4 text-text-muted group-focus-within:text-brand-primary transition-colors" />
+                      <Search size={22} className="absolute left-4 @[600px]:left-5 top-3.5 @[600px]:top-4 text-text-muted group-focus-within:text-brand-primary transition-colors" />
                   </div>
                   <button
                     id="tour-unscramble-button"
                     onClick={fetchWords}
                     disabled={loading || (letters as string).length < 2}
-                    className="h-12 md:h-12 px-6 md:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
+                    className="h-12 @[600px]:h-12 px-6 @[600px]:px-10 bg-brand-primary text-text-inverse font-black text-base rounded-xl hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:grayscale"
                   >
                     {loading ? (
                       <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
@@ -171,7 +171,7 @@ export function WordUnscramblerClient() {
             </div>
 
             {/* Desktop Action Row / Mobile Stack */}
-            <div className="flex flex-col md:flex-row gap-3">
+            <div className="flex flex-col @[600px]:flex-row gap-3">
               <div className="flex-1 space-y-1.5">
                   <label className="block text-xs font-black text-text-muted uppercase tracking-[0.2em] ml-1">Dictionary</label>
                   <div className="relative">
@@ -191,7 +191,7 @@ export function WordUnscramblerClient() {
                   </div>
               </div>
 
-              <div className="flex-1 md:flex-[0.6] flex items-end">
+              <div className="flex-1 @[600px]:md:flex-[0.6] flex items-end">
                 <button
                   id="tour-unscramble-options"
                   onClick={() => setShowOptions(!showOptions)}
@@ -215,7 +215,7 @@ export function WordUnscramblerClient() {
                   exit={{ height: 0, opacity: 0 }}
                   className="overflow-hidden"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-base mt-1">
+                  <div className="grid grid-cols-1 @[600px]:grid-cols-3 gap-3 pt-3 border-t border-base mt-1">
                     {[
                       { label: "Starts with", key: "startsWith", placeholder: "Prefix" },
                       { label: "Ends with", key: "endsWith", placeholder: "Suffix" },

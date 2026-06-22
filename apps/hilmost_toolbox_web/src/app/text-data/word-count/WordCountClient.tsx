@@ -37,11 +37,11 @@ export function WordCountClient() {
       className="@container space-y-4"
     >
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 @[800px]:grid-cols-4 gap-8">
         {/* Editor */}
-        <div id="tour-wc-input" className="lg:col-span-3 bg-canvas-card border border-base rounded-3xl p-4 md:p-6 shadow-sm focus-within:border-brand-primary transition-colors">
+        <div id="tour-wc-input" className="@[800px]:col-span-3 bg-canvas-card border border-base rounded-3xl p-4 md:p-6 shadow-sm focus-within:border-brand-primary transition-colors">
           <textarea
-            className="w-full min-h-[400px] p-4 bg-transparent text-text-primary text-lg font-medium outline-none resize-none placeholder:text-text-muted"
+            className="w-full min-h-[300px] @[800px]:min-h-[400px] p-4 bg-transparent text-text-primary text-lg font-medium outline-none resize-none placeholder:text-text-muted"
             placeholder="Start typing or paste your text here..."
             value={text}
             onChange={e => setState({ text: e.target.value })}
@@ -49,17 +49,17 @@ export function WordCountClient() {
         </div>
 
         {/* Stats Sidebar */}
-        <div id="tour-wc-stats" className="space-y-4">
+        <div id="tour-wc-stats" className="grid grid-cols-2 @[800px]:grid-cols-1 gap-4">
             {stats.map((stat, idx) => (
                 <div
                     key={stat.label}
-                    className={`bg-canvas-card border border-base rounded-2xl p-6 flex flex-col transition-all hover:shadow-md ${idx === 0 ? 'border-brand-primary/30 ring-1 ring-brand-primary/5' : ''}`}
+                    className={`bg-canvas-card border border-base rounded-2xl p-4 @[800px]:p-6 flex flex-col transition-all hover:shadow-md ${idx === 0 ? 'border-brand-primary/30 ring-1 ring-brand-primary/5' : ''}`}
                 >
                     <div className="flex items-center gap-2 text-text-muted mb-2">
                         {stat.icon}
                         <span className="text-[10px] font-black uppercase tracking-widest">{stat.label}</span>
                     </div>
-                    <div className={`text-4xl font-black ${idx === 0 ? 'text-brand-primary' : 'text-text-primary'}`}>
+                    <div className={`text-2xl @[800px]:text-4xl font-black ${idx === 0 ? 'text-brand-primary' : 'text-text-primary'}`}>
                         {stat.value.toLocaleString()}
                     </div>
                 </div>

@@ -66,12 +66,12 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
+        <div className="grid grid-cols-1 @[800px]:grid-cols-2 gap-5 items-stretch">
           {/* Input */}
           <div id="tour-b64-input" className="space-y-4">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Input Text</label>
             <textarea
-              className="w-full h-64 p-5 bg-canvas-muted border border-base rounded-2xl text-text-primary font-mono text-lg outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all resize-none"
+              className="w-full h-48 @[800px]:h-64 p-5 bg-canvas-muted border border-base rounded-2xl text-text-primary font-mono text-lg outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all resize-none"
               placeholder={mode === 'encode' ? 'Enter plain text...' : 'Enter Base64 string...'}
               value={input}
               onChange={e => setState({ input: e.target.value })}
@@ -81,7 +81,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
           {/* Output */}
           <div id="tour-b64-output" className="space-y-4 relative">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Result</label>
-            <div className={`w-full h-64 p-5 rounded-2xl border font-mono text-lg break-all overflow-y-auto custom-scrollbar relative ${error ? 'bg-red-500/5 border-red-500/20 text-red-500' : 'bg-canvas-card border-base text-brand-primary font-bold shadow-inner'}`}>
+            <div className={`w-full h-48 @[800px]:h-64 p-5 rounded-2xl border font-mono text-lg break-all overflow-y-auto custom-scrollbar relative ${error ? 'bg-red-500/5 border-red-500/20 text-red-500' : 'bg-canvas-card border-base text-brand-primary font-bold shadow-inner'}`}>
               {error || output || <span className="opacity-20 italic">Waiting for input...</span>}
 
               {output && !error && (
