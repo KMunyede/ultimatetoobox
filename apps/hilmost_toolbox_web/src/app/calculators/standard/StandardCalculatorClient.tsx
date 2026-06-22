@@ -3,27 +3,28 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
+import { Tooltip } from "@utilitiessite/ui";
 
 const BUTTONS = [
-  { label: "AC", type: "clear", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
-  { label: "+/−", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
-  { label: "%", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
-  { label: "÷", type: "operator", value: "/", className: "bg-blue-600 text-white" },
+  { label: "AC", type: "clear", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "All Clear" },
+  { label: "+/−", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "Toggle Positive/Negative" },
+  { label: "%", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "Percentage" },
+  { label: "÷", type: "operator", value: "/", className: "bg-blue-600 text-white", tip: "Division" },
   { label: "7", type: "number" },
   { label: "8", type: "number" },
   { label: "9", type: "number" },
-  { label: "×", type: "operator", value: "*", className: "bg-blue-600 text-white" },
+  { label: "×", type: "operator", value: "*", className: "bg-blue-600 text-white", tip: "Multiplication" },
   { label: "4", type: "number" },
   { label: "5", type: "number" },
   { label: "6", type: "number" },
-  { label: "−", type: "operator", value: "-", className: "bg-blue-600 text-white" },
+  { label: "−", type: "operator", value: "-", className: "bg-blue-600 text-white", tip: "Subtraction" },
   { label: "1", type: "number" },
   { label: "2", type: "number" },
   { label: "3", type: "number" },
-  { label: "+", type: "operator", value: "+", className: "bg-blue-600 text-white" },
+  { label: "+", type: "operator", value: "+", className: "bg-blue-600 text-white", tip: "Addition" },
   { label: "0", type: "number", span: 2 },
-  { label: ".", type: "number" },
-  { label: "=", type: "equals", className: "bg-blue-600 text-white" },
+  { label: ".", type: "number", tip: "Decimal Point" },
+  { label: "=", type: "equals", className: "bg-blue-600 text-white", tip: "Calculate Result" },
 ];
 
 export function StandardCalculatorClient() {
@@ -155,19 +156,31 @@ export function StandardCalculatorClient() {
       />
 
       <div className="grid grid-cols-4 gap-2 mt-4">
-        {BUTTONS.map((btn, i) => (
-          <button
-            key={i}
-            onClick={() => onButtonClick(btn)}
-            className={`
-              h-12 md:h-14 rounded-2xl text-lg md:text-xl font-bold transition-all active:scale-95
-              ${btn.span === 2 ? "col-span-2" : "col-span-1"}
-              ${btn.className || "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-blue-500"}
-            `}
-          >
-            {btn.label}
-          </button>
-        ))}
+        {BUTTONS.map((btn, i) => {
+          const buttonNode = (
+            <button
+              key={i}
+              onClick={() => onButtonClick(btn)}
+              className={`
+                w-full h-12 md:h-14 rounded-2xl text-lg md:text-xl font-bold transition-all active:scale-95
+                ${btn.span === 2 ? "col-span-2" : "col-span-1"}
+                ${btn.className || "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-blue-500"}
+              `}
+            >
+              {btn.label}
+            </button>
+          );
+
+          return btn.tip ? (
+            <Tooltip key={i} content={btn.tip} position="top" className={btn.span === 2 ? "col-span-2" : "col-span-1"}>
+              {buttonNode}
+            </Tooltip>
+          ) : (
+            <React.Fragment key={i}>
+              {buttonNode}
+            </React.Fragment>
+          );
+        })}
       </div>
     </div>
   );
