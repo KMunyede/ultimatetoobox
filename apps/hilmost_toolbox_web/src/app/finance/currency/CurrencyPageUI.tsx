@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, SourceReference } from "@utilitiessite/ui";
 import { CurrencyClient } from "./CurrencyClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -67,16 +67,40 @@ export function CurrencyPageUI({
 
       <ToolArticle title="Understanding Global Exchange Rates">
         <p>
-          Whether you are traveling internationally, purchasing goods from overseas, or investing in the foreign exchange (Forex) market, understanding how currency conversion works is crucial.
+          Whether you are traveling internationally, purchasing goods from overseas, or investing in the foreign exchange (Forex) market, understanding how currency conversion works is crucial. In the digital economy, money moves across borders in milliseconds, but the value of that money changes constantly based on market demand, geopolitical stability, and central bank policies.
         </p>
         
+        <h3>The Mid-Market Exchange Rate</h3>
+        <p>
+          Our converter utilizes &quot;mid-market&quot; rates. This is the midpoint between the buy and sell prices of two currencies on the global markets. It is the &quot;fairest&quot; rate possible. When you visit a retail bank or an airport currency kiosk, they typically provide a different rate that includes a markup or spread, which is how they make their profit. By using our tool, you can see the true value of your money before those fees are applied.
+        </p>
+
         <h3>How to Use This Tool</h3>
-        
+        <p>
+          We designed our currency engine to be the fastest way to compare global values. Follow these steps for the best results:
+        </p>
         <ol>
-          <li><strong>Step 1: Pick Currencies</strong> - Select the base currency and the target currency from over 150 global options.</li>
-          <li><strong>Step 2: Enter Amount</strong> - Type the value in either field; the other updates automatically using live FX rates.</li>
-          <li><strong>Step 3: Check Source</strong> - Monitor the status bar to see if you are using live market data or cached fallbacks.</li>
+          <li><strong>Step 1: Pick Currencies</strong> - Select the base currency (what you have) and the target currency (what you want) from our comprehensive list of over 150 global options, including USD, EUR, GBP, JPY, and more.</li>
+          <li><strong>Step 2: Enter Amount</strong> - Type the value in either field. Our bidirectional engine ensures that if you change the &quot;To&quot; field, the &quot;From&quot; field updates instantly.</li>
+          <li><strong>Step 3: Check Source</strong> - Monitor the status bar above the converter. We prioritize high-availability data from the European Central Bank and global FX market providers.</li>
         </ol>
+
+        <h3>Why Exchange Rates Fluctuate</h3>
+        <p>
+          Exchange rates are determined by a complex interplay of factors, including:
+        </p>
+        <ul>
+          <li><strong>Interest Rates:</strong> Higher interest rates in a country typically attract more foreign investment, increasing demand for that currency.</li>
+          <li><strong>Economic Data:</strong> Reports on GDP, employment, and manufacturing performance can cause immediate shifts in currency value.</li>
+          <li><strong>Geopolitics:</strong> Political stability or unrest can lead investors to move their money to &quot;Safe Haven&quot; currencies like the Swiss Franc or the US Dollar.</li>
+        </ul>
+
+        <SourceReference
+          sources={[
+            { name: "European Central Bank (ECB) - Foreign Exchange Rates", url: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" },
+            { name: "International Monetary Fund (IMF) - Representative Rates", url: "https://www.imf.org/external/np/fin/data/param_rms_mth.aspx" }
+          ]}
+        />
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

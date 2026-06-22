@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -86,30 +86,49 @@ export default function VatTaxPage() {
 
       <ToolArticle title="Invoicing Made Easy: Mastering Tax Calculations">
         <p>
-          Whether you are a freelancer generating a professional invoice or a consumer trying to figure out the &quot;true&quot; cost of a purchase, mastering VAT (Value Added Tax) and GST (Goods and Services Tax) is essential for financial clarity.
+          Whether you are a freelancer generating a professional invoice or a consumer trying to figure out the &quot;true&quot; cost of a purchase, mastering VAT (Value Added Tax) and GST (Goods and Services Tax) is essential for financial clarity. VAT is a consumption tax placed on a product whenever value is added at each stage of the supply chain, from production to the point of sale.
         </p>
         
         <h3>Adding Tax vs. Removing Tax</h3>
         <p>
-          Our tool supports two primary workflows used by businesses worldwide:
+          Our tool supports two primary workflows used by businesses and tax professionals worldwide:
         </p>
         <ul>
-          <li><strong>Add VAT:</strong> Typically used when quoting a price to a customer. You start with your net service fee and add the government mandated tax rate to get the final total.</li>
-          <li><strong>Remove VAT (Reverse Calculation):</strong> Used when you have a total receipt amount and need to separate the tax for bookkeeping purposes.</li>
+          <li><strong>Add VAT:</strong> Typically used when quoting a price to a customer. You start with your net service fee (the amount you want to keep) and add the government mandated tax rate to get the final gross total that the customer pays.</li>
+          <li><strong>Remove VAT (Reverse Calculation):</strong> Used when you have a total receipt or "Inclusive" price and need to separate the tax for bookkeeping purposes. This is common when claiming back business expenses.</li>
         </ul>
 
         <h3>Common Global Tax Rates</h3>
         <p>
-          While tax rates vary by jurisdiction, common values include 20% (United Kingdom), 15% (New Zealand/South Africa), and 5% (various GST regions). Always verify the current legal rate for your specific region before finalizing documents.
+          While tax rates vary by jurisdiction, common values include 20% (United Kingdom), 15% (New Zealand/South Africa), and various GST rates in Canada and Australia. Always verify the current legal rate for your specific region before finalizing official documents. In many countries, certain items like books, children's clothes, or basic groceries may be "Zero-rated" or exempt.
+        </p>
+
+        <h3>The Math Behind the Calculation</h3>
+        <p>
+          To calculate the <strong>Gross Amount</strong> (Adding Tax):
+          <br />
+          <code>Gross = Net * (1 + Rate/100)</code>
+        </p>
+        <p>
+          To calculate the <strong>Net Amount</strong> (Removing Tax):
+          <br />
+          <code>Net = Gross / (1 + Rate/100)</code>
         </p>
 
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Select Mode</strong> - Use the toggle to switch between adding or removing tax.</li>
-          <li><strong>Step 2: Enter Amount</strong> - Input the price you want to calculate the tax for.</li>
-          <li><strong>Step 3: Set Tax Rate</strong> - Enter the custom percentage applicable to your region.</li>
-          <li><strong>Step 4: Breakdown</strong> - Review the high-impact result card for a clear split between net, tax, and gross.</li>
+          <li><strong>Step 1: Select Mode</strong> - Use the toggle at the top to switch between "Add VAT" or "Remove VAT." This changes the logic of the entire calculation instantly.</li>
+          <li><strong>Step 2: Enter Amount</strong> - Input the price you want to work with. Our high-impact display updates in real-time as you type.</li>
+          <li><strong>Step 3: Set Tax Rate</strong> - Enter the custom percentage applicable to your specific region or product category.</li>
+          <li><strong>Step 4: Breakdown</strong> - Review the result card for a clear split between the base price and the tax component.</li>
         </ol>
+
+        <SourceReference
+          sources={[
+            { name: "GOV.UK - VAT rates and rules", url: "https://www.gov.uk/vat-rates" },
+            { name: "OECD - Consumption Tax Trends", url: "https://www.oecd.org/tax/consumption/" }
+          ]}
+        />
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

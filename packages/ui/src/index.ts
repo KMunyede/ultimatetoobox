@@ -29,3 +29,4 @@ export { CopyButton } from "./CopyButton";
 export { Tooltip } from "./Tooltip";
 export { KnowledgeCard } from "./KnowledgeCard";
 export { ToolHeader } from "./ToolHeader";
+export { SourceReference } from "./SourceReference";
