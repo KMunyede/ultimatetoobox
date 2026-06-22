@@ -30,7 +30,7 @@ export function ToolTutorial({ tourId, steps, buttonText = "How to use" }: ToolT
   return (
     <div className="flex items-center gap-2">
       <a
-        href={`mailto:support@hilmost.net?subject=Feedback for Tool: ${tourId}&body=Please describe your feedback or issue below:%0D%0A%0D%0A`}
+        href={`mailto:k.munyede@gmail.com?subject=Feedback for Tool: ${tourId}&body=Please describe your feedback or issue below:%0D%0A%0D%0A`}
         className="inline-flex items-center gap-1.5 px-2 py-1 text-[10px] font-bold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 dark:text-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
         title="Report a problem or suggest an improvement"
       >

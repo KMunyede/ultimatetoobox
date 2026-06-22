@@ -69,7 +69,7 @@ export function Footer() {
                 <strong>Technical Disclaimer:</strong> Tools provided by Hilmost Digital Labs are intended for informational and research purposes. Calculations are performed locally on your device to ensure data privacy. Please consult a qualified professional for high-stakes financial, health, or legal decisions.
               </p>
               <p>
-                Developer Feedback? <a href="mailto:support@hilmost.net?subject=Lab Feedback" className="text-brand-primary hover:underline transition-colors font-medium">Contact the Engineering Team</a>
+                Developer Feedback? <a href="mailto:k.munyede@gmail.com?subject=Lab Feedback" className="text-brand-primary hover:underline transition-colors font-medium">Contact the Engineering Team</a>
               </p>
             </div>
           </div>
