@@ -1,17 +1,17 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, SourceReference, HowToSchema } from "@utilitiessite/ui";
 import { ScientificCalculatorClient } from "./ScientificCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Scientific Calculator";
-const TOOL_DESC = "Free online scientific calculator with trig, logarithms, and constants. Solve advanced math instantly in your browser.";
+const TOOL_DESC = "Free online scientific calculator with trigonometry, logarithms, and constants. Solve advanced math instantly in your browser with high precision.";
 const PATH = "/calculators/scientific";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: `${TOOL_NAME} — Free Online Scientific Calculator | Hilmost Toolbox`,
+  title: `${TOOL_NAME} — Free Online Advanced Math Tool | Hilmost Toolbox`,
   description: TOOL_DESC,
   alternates: {
     canonical: getCanonicalUrl(PATH),
@@ -21,16 +21,31 @@ export const metadata: Metadata = {
 const faqs = [
   {
     question: "What is the difference between DEG, RAD, and GRAD modes?",
-    answer: "These modes determine how trigonometric functions (sin, cos, tan) interpret angles. DEG (Degrees) uses a 360-degree circle, RAD (Radians) uses 2π, and GRAD (Gradians) uses 400. RAD is standard for most calculus and scientific work.",
+    answer: "These modes determine how trigonometric functions (sin, cos, tan) interpret angles. DEG (Degrees) uses a 360-degree circle, RAD (Radians) uses 2π for a full rotation (standard for calculus), and GRAD (Gradians) uses 400. Choose the mode that matches your specific mathematical field.",
   },
   {
-    question: "How do I use the '2nd' button?",
-    answer: "Tapping the '2nd' button toggles the inverse functions for trigonometry (e.g., sin becomes arcsin) and other advanced operations. It allows you to access a wider range of mathematical tools within the same grid.",
+    question: "How do I use the '2nd' button on this calculator?",
+    answer: "The '2nd' button acts as a shift key. When active, it toggles inverse trigonometric functions (e.g., sin becomes arcsin/asin) and other secondary operations. This allows for a more compact and efficient mathematical grid.",
   },
   {
-    question: "Can I share a specific calculation with someone else?",
-    answer: "Yes! Use the 'Share' button to generate a unique URL that includes your current expression. When someone opens the link, the calculator will automatically restore your work.",
+    question: "Does this calculator support scientific notation?",
+    answer: "Yes. Our engine automatically formats very large or very small results using standard scientific notation (e.g., 1.23e+10) to maintain precision and readability across all scientific disciplines.",
   },
+  {
+    question: "Is the calculation history cleared when I close the tab?",
+    answer: "No. Your calculation history is stored locally in your browser's secure memory. It will persist between sessions unless you manually click the 'Clear All' button in the history tape.",
+  },
+  {
+    question: "What is the 'HYP' button used for?",
+    answer: "The 'HYP' toggle enables hyperbolic functions like sinh, cosh, and tanh. These are essential for advanced physics and engineering problems involving catenary curves or relativity.",
+  },
+];
+
+const howToSteps = [
+  { name: "Enter Expression", text: "Use the numerical grid or your physical keyboard to type your mathematical expression." },
+  { name: "Select Mode", text: "Toggle between DEG and RAD depending on whether you are working with degrees or radians." },
+  { name: "Apply Functions", text: "Access advanced trigonometry, logarithms, or powers using the scientific buttons." },
+  { name: "Review Results", text: "Click the equals (=) button to see your precision result and track it in the history tape." },
 ];
 
 export default function ScientificCalculatorPage() {
@@ -56,12 +71,17 @@ export default function ScientificCalculatorPage() {
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <FAQSchema items={faqs} />
+      <HowToSchema
+        name={`How to Use Our Scientific Calculator`}
+        description="Master advanced mathematics with this comprehensive guide to our online scientific computing engine."
+        steps={howToSteps}
+      />
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
       
       <ToolHeader
         title={TOOL_NAME}
-        subtitle="Advanced mathematics for engineering, physics, and academia."
+        subtitle="Precision mathematics for engineering, physics, and academic research."
         lastUpdated={lastUpdated}
         tourId="scientific_calc"
         tourSteps={tourSteps}
@@ -70,24 +90,36 @@ export default function ScientificCalculatorPage() {
 
       <ScientificCalculatorClient />
 
-      <ToolArticle title="Mastering Advanced Calculations">
+      <ToolArticle title="Mastering Advanced Calculations in the Modern Era">
         <p>
-          Our Scientific Calculator provides the power of a dedicated handheld device directly in your browser. From trigonometric identities to logarithmic transformations, it handles complex expressions with precision and speed.
+          Our Scientific Calculator provides the power of a dedicated handheld device directly in your modern web browser. Designed for students, engineers, and scientists, it bridges the gap between simple arithmetic and complex relativistic physics. Whether you are solving for trigonometric identities, logarithmic transformations, or exploring the properties of Euler&apos;s number, our engine delivers precision results instantly.
         </p>
-        <h3>How to Use This Tool</h3>
-        <ol>
-          <li><strong>Step 1: Select Functions</strong> - Access trigonometry, logarithms, and roots using the advanced mathematical grid.</li>
-          <li><strong>Step 2: Set Angle Mode</strong> - Choose between Degrees (DEG) and Radians (RAD) for precise scientific calculations.</li>
-          <li><strong>Step 3: Solve Complex Math</strong> - Enter multi-step expressions and use constants like Pi (&pi;) and Euler&apos;s number (e).</li>
-        </ol>
 
-        <h3>Advanced Functionality</h3>
+        <h3>The Evolution of Computing Power</h3>
+        <p>
+          The history of the scientific calculator dates back to the early 1970s with the introduction of the Hewlett-Packard HP-35. Before this, engineers relied on slide rules and massive tables of trigonometric values. Today, we bring that same robust logic to the cloud, utilizing 64-bit floating-point precision to ensure that your structural engineering or astrophysics homework is always accurate.
+        </p>
+
+        <h3>Advanced Functionality Guide</h3>
         <ul>
-          <li><strong>Trigonometry:</strong> Support for Sine, Cosine, Tangent, and their inverses in multiple angle modes.</li>
-          <li><strong>Logarithms:</strong> Calculate natural logs (ln) and base-10 logs (log) with ease.</li>
-          <li><strong>Constants:</strong> Built-in values for Pi (&pi;) and Euler&apos;s number (e).</li>
-          <li><strong>URL Sharing:</strong> Collaborate by sharing direct links to your complex calculations.</li>
+          <li><strong>Trigonometry:</strong> Full support for Sine, Cosine, Tangent, and their inverses (arcsin, arccos, arctan) across multiple angle modes.</li>
+          <li><strong>Hyperbolic Functions:</strong> Toggle the <code>HYP</code> button to access sinh and cosh, vital for electrical engineering and bridge design.</li>
+          <li><strong>Logarithmic Logic:</strong> Calculate natural logs (ln) for exponential growth or base-10 logs (log) for decibel and pH scales.</li>
+          <li><strong>Constants:</strong> Instant access to high-precision values for Pi (&pi;) and Euler&apos;s number (e), ensuring your circular and exponential calculations are exact.</li>
         </ul>
+
+        <h3>Why Precision Matters</h3>
+        <p>
+          In scientific computing, rounding errors can accumulate quickly. Our calculator utilizes the industry-standard Math.js library to handle expressions with high depth, ensuring that PEMDAS/BODMAS hierarchy is respected in every multi-step operation. The integrated <strong>History Tape</strong> allows you to audit your work, providing a digital paper trail for complex multi-variable problems.
+        </p>
+
+        <SourceReference
+          sources={[
+            { name: "NIST - International System of Units (SI)", url: "https://www.nist.gov/pml/owm/metric-si/si-units" },
+            { name: "IEEE - Standard for Floating-Point Arithmetic (754)", url: "https://ieeexplore.ieee.org/document/8766229" },
+            { name: "Wolfram MathWorld - Trigonometric Functions", url: "https://mathworld.wolfram.com/TrigonometricFunctions.html" }
+          ]}
+        />
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
