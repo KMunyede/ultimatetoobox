@@ -38,7 +38,7 @@ export function VatTaxClient() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-4"
     >

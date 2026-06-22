@@ -27,10 +27,10 @@ export function ToolHeader({
   shareButton
 }: ToolHeaderProps) {
   return (
-    <div className="w-full mb-2">
+    <div className="w-full mb-3">
       {/* Title & Date Line - Tightened further */}
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-0.5">
-        <h1 className="text-[18px] md:text-[20px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+        <h1 className="text-[17px] md:text-[19px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
           {title}
         </h1>
         {lastUpdated && (
@@ -42,18 +42,18 @@ export function ToolHeader({
       </div>
 
       {/* Subtitle - Single line, smaller text */}
-      <p className="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mb-2">
+      <p className="text-[10px] md:text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mb-3">
         {subtitle}
       </p>
 
-      {/* Action Row - Ultra-tight padding */}
-      <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2 py-2 border-y border-slate-100 dark:border-slate-800/50 mb-1">
-        <div className="flex items-center gap-2">
-          <ToolTutorial tourId={tourId} steps={tourSteps} />
-        </div>
-        <div className="flex-shrink-0">
-          {shareButton}
-        </div>
+      {/* Action Row - Forced 1-line with divider */}
+      <div className="flex items-center gap-3 py-1.5 border-y border-slate-100 dark:border-slate-800/50">
+        <ToolTutorial tourId={tourId} steps={tourSteps} />
+        {shareButton && (
+          <div className="flex-shrink-0 border-l border-slate-200 dark:border-slate-700 pl-3">
+            {shareButton}
+          </div>
+        )}
       </div>
     </div>
   );
