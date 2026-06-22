@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -50,37 +50,46 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
             <div id="tour-salary-input" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-4 shadow-sm">
                 <div className="space-y-2">
                     <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Amount ($)</label>
-                    <input
-                        type="number"
-                        className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                        value={amount}
-                        onChange={e => setState({ amount: e.target.value })}
-                    />
+                    <Tooltip content="The base pay amount to convert" position="top">
+                        <input
+                            type="number"
+                            title="Base Pay Amount"
+                            className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                            value={amount}
+                            onChange={e => setState({ amount: e.target.value })}
+                        />
+                    </Tooltip>
                 </div>
                 <div className="space-y-2">
                     <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Frequency</label>
-                    <select
-                        className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-bold outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                        value={frequency}
-                        onChange={e => setState({ frequency: e.target.value })}
-                    >
-                        <option value="hourly">Hourly</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="annually">Annually</option>
-                    </select>
+                    <Tooltip content="How often this amount is earned" position="top">
+                        <select
+                            title="Payment Frequency"
+                            className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-bold outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                            value={frequency}
+                            onChange={e => setState({ frequency: e.target.value })}
+                        >
+                            <option value="hourly">Hourly</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="annually">Annually</option>
+                        </select>
+                    </Tooltip>
                 </div>
             </div>
 
             <div id="tour-salary-hours" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-2 shadow-sm">
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Hours Per Week</label>
-                <input
-                    type="number"
-                    className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                    value={hoursPerWeek}
-                    onChange={e => setState({ hoursPerWeek: e.target.value })}
-                />
+                <Tooltip content="The average number of hours you work each week" position="top">
+                    <input
+                        type="number"
+                        title="Weekly Work Hours"
+                        className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                        value={hoursPerWeek}
+                        onChange={e => setState({ hoursPerWeek: e.target.value })}
+                    />
+                </Tooltip>
             </div>
         </div>
 

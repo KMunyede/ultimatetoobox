@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
-import { NumberTicker } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -12,7 +12,7 @@ const AreaChart = dynamic(() => import("recharts").then(mod => mod.AreaChart), {
 const Area = dynamic(() => import("recharts").then(mod => mod.Area), { ssr: false });
 const XAxis = dynamic(() => import("recharts").then(mod => mod.XAxis), { ssr: false });
 const YAxis = dynamic(() => import("recharts").then(mod => mod.YAxis), { ssr: false });
-const Tooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
+const ChartTooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
 const CartesianGrid = dynamic(() => import("recharts").then(mod => mod.CartesianGrid), { ssr: false });
 
 export function CompoundInterestClient() {
@@ -78,48 +78,60 @@ export function CompoundInterestClient() {
             <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">
               Initial Principal ($)
             </label>
-            <input
-              type="number"
-              inputMode="decimal"
-              className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-              value={principal}
-              onChange={e => setState({ principal: e.target.value })}
-            />
+            <Tooltip content="The starting balance of your investment" position="top">
+              <input
+                type="number"
+                title="Initial Investment Principal"
+                inputMode="decimal"
+                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                value={principal}
+                onChange={e => setState({ principal: e.target.value })}
+              />
+            </Tooltip>
           </div>
 
           <div className="space-y-3">
             <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">
               Monthly Contribution ($)
             </label>
-            <input
-              type="number"
-              inputMode="decimal"
-              className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-              value={monthly}
-              onChange={e => setState({ monthly: e.target.value })}
-            />
+            <Tooltip content="How much you add to your investment each month" position="top">
+              <input
+                type="number"
+                title="Monthly Contribution Amount"
+                inputMode="decimal"
+                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                value={monthly}
+                onChange={e => setState({ monthly: e.target.value })}
+              />
+            </Tooltip>
           </div>
 
           <div className="grid grid-cols-1 @[300px]:grid-cols-2 gap-5">
             <div className="space-y-3">
                 <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">Annual Rate (%)</label>
-                <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={rate}
-                onChange={e => setState({ rate: e.target.value })}
-                />
+                <Tooltip content="The estimated yearly return rate" position="top">
+                  <input
+                  type="number"
+                  title="Annual Interest Rate Percentage"
+                  inputMode="decimal"
+                  className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                  value={rate}
+                  onChange={e => setState({ rate: e.target.value })}
+                  />
+                </Tooltip>
             </div>
             <div className="space-y-3">
                 <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">Years</label>
-                <input
-                type="number"
-                inputMode="numeric"
-                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={years}
-                onChange={e => setState({ years: e.target.value })}
-                />
+                <Tooltip content="The duration of your investment in years" position="top">
+                  <input
+                  type="number"
+                  title="Duration in Years"
+                  inputMode="numeric"
+                  className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                  value={years}
+                  onChange={e => setState({ years: e.target.value })}
+                  />
+                </Tooltip>
             </div>
           </div>
         </div>
@@ -157,7 +169,7 @@ export function CompoundInterestClient() {
                               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148, 163, 184, 0.1)" />
                               <XAxis dataKey="year" stroke="var(--color-text-muted)" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tick={{dy: 10}} />
                               <YAxis stroke="var(--color-text-muted)" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tickFormatter={(v) => `$${v/1000}k`} />
-                              <Tooltip
+                              <ChartTooltip
                                   contentStyle={{
                                     backgroundColor: 'var(--color-canvas-card)',
                                     borderRadius: '16px',

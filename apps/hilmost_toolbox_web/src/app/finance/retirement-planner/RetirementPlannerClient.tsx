@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { NumberTicker } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -11,7 +11,7 @@ const Area = dynamic(() => import("recharts").then(mod => mod.Area), { ssr: fals
 const XAxis = dynamic(() => import("recharts").then(mod => mod.XAxis), { ssr: false });
 const YAxis = dynamic(() => import("recharts").then(mod => mod.YAxis), { ssr: false });
 const CartesianGrid = dynamic(() => import("recharts").then(mod => mod.CartesianGrid), { ssr: false });
-const Tooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
+const ChartTooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
 const ResponsiveContainer = dynamic(() => import("recharts").then(mod => mod.ResponsiveContainer), { ssr: false });
 
 export function RetirementPlannerClient() {
@@ -75,55 +75,70 @@ export function RetirementPlannerClient() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Current Age</label>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  value={currentAge}
-                  onChange={(e) => setState({ currentAge: e.target.value })}
-                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                />
+                <Tooltip content="Your current age today" position="top">
+                  <input
+                    type="number"
+                    title="Your Current Age"
+                    inputMode="numeric"
+                    value={currentAge}
+                    onChange={(e) => setState({ currentAge: e.target.value })}
+                    className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  />
+                </Tooltip>
               </div>
               <div>
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Retire Age</label>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  value={retireAge}
-                  onChange={(e) => setState({ retireAge: e.target.value })}
-                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                />
+                <Tooltip content="The age at which you plan to stop working" position="top">
+                  <input
+                    type="number"
+                    title="Planned Retirement Age"
+                    inputMode="numeric"
+                    value={retireAge}
+                    onChange={(e) => setState({ retireAge: e.target.value })}
+                    className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  />
+                </Tooltip>
               </div>
             </div>
 
             <div>
               <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Current Savings ($)</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                value={currentSavings}
-                onChange={(e) => setState({ currentSavings: e.target.value })}
-                className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-              />
+              <Tooltip content="The total amount you have already saved for retirement" position="top">
+                <input
+                  type="number"
+                  title="Existing Retirement Savings"
+                  inputMode="decimal"
+                  value={currentSavings}
+                  onChange={(e) => setState({ currentSavings: e.target.value })}
+                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                />
+              </Tooltip>
             </div>
             <div>
               <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Monthly Contribution ($)</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                value={monthlyContribution}
-                onChange={(e) => setState({ monthlyContribution: e.target.value })}
-                className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-              />
+              <Tooltip content="How much you plan to save every month until retirement" position="top">
+                <input
+                  type="number"
+                  title="Monthly Savings Amount"
+                  inputMode="decimal"
+                  value={monthlyContribution}
+                  onChange={(e) => setState({ monthlyContribution: e.target.value })}
+                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                />
+              </Tooltip>
             </div>
             <div>
               <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Expected Return (%)</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                value={expectedReturn}
-                onChange={(e) => setState({ expectedReturn: e.target.value })}
-                className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-              />
+              <Tooltip content="The estimated annual growth rate of your investments" position="top">
+                <input
+                  type="number"
+                  title="Estimated Annual ROI Percentage"
+                  inputMode="decimal"
+                  value={expectedReturn}
+                  onChange={(e) => setState({ expectedReturn: e.target.value })}
+                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                />
+              </Tooltip>
             </div>
           </div>
 
@@ -162,7 +177,7 @@ export function RetirementPlannerClient() {
                       tickFormatter={(value) => `$${value >= 1000 ? (value / 1000) + 'k' : value}`}
                     />
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148, 163, 184, 0.1)" />
-                    <Tooltip
+                    <ChartTooltip
                       labelFormatter={(label) => `Age ${label}`}
                       formatter={(value: unknown) => formatCurrency(Number(value))}
                       contentStyle={{ backgroundColor: 'var(--color-canvas-card)', borderRadius: '12px', border: '1px solid var(--color-border-base)', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}

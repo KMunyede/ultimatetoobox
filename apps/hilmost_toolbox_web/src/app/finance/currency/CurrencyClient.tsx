@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ArrowRightLeft, RefreshCw, Globe } from "lucide-react";
+import { Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -161,22 +162,28 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
           <div id="tour-currency-input1" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 text-2xl font-bold border border-border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={val1}
-                onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-border-base rounded-xl bg-canvas-card text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                value={unit1}
-                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value })}
-              >
-                {Object.keys(rates).sort().map(u => (
-                  <option key={u} value={u}>{u}</option>
-                ))}
-              </select>
+              <Tooltip content="The amount you want to convert" position="top">
+                <input
+                  type="number"
+                  title="Source Currency Amount"
+                  inputMode="decimal"
+                  className="w-full h-14 px-5 text-2xl font-bold border border-border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                  value={val1}
+                  onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the currency you are converting from" position="bottom">
+                <select
+                  title="Select Source Currency"
+                  className="w-full h-12 px-4 border border-border-base rounded-xl bg-canvas-card text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                  value={unit1}
+                  onChange={(e) => setState({ activeInput: 1, unit1: e.target.value })}
+                >
+                  {Object.keys(rates).sort().map(u => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
           </div>
 
@@ -188,22 +195,28 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
           <div id="tour-currency-input2" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 text-2xl font-bold border border-border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={val2}
-                onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-border-base rounded-xl bg-canvas-card text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                value={unit2}
-                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value })}
-              >
-                {Object.keys(rates).sort().map(u => (
-                  <option key={u} value={u}>{u}</option>
-                ))}
-              </select>
+              <Tooltip content="The resulting amount after conversion" position="top">
+                <input
+                  type="number"
+                  title="Resulting Currency Amount"
+                  inputMode="decimal"
+                  className="w-full h-14 px-5 text-2xl font-bold border border-border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                  value={val2}
+                  onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the currency you want to convert to" position="bottom">
+                <select
+                  title="Select Target Currency"
+                  className="w-full h-12 px-4 border border-border-base rounded-xl bg-canvas-card text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                  value={unit2}
+                  onChange={(e) => setState({ activeInput: 1, unit2: e.target.value })}
+                >
+                  {Object.keys(rates).sort().map(u => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
           </div>
 

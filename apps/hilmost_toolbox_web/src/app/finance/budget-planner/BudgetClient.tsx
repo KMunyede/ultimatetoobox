@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip as TooltipUI } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useState, useEffect, useMemo } from "react";
@@ -268,30 +268,38 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
                 exit={{ opacity: 0, height: 0 }}
                 className="group flex flex-col sm:flex-row items-center gap-4 p-4 hover:bg-canvas-muted/50 transition-colors"
               >
-                <input
-                  type="text"
-                  placeholder={config.placeholder}
-                  className="flex-1 w-full h-12 bg-transparent text-sm font-bold text-text-primary placeholder:text-text-muted outline-none px-2"
-                  value={item.name}
-                  onChange={(e) => onUpdate(item.id, { name: e.target.value })}
-                />
+                <TooltipUI content={`Name of this ${category} item`} position="top" className="flex-1 w-full">
+                  <input
+                    type="text"
+                    title="Item Name"
+                    placeholder={config.placeholder}
+                    className="w-full h-12 bg-transparent text-sm font-bold text-text-primary placeholder:text-text-muted outline-none px-2"
+                    value={item.name}
+                    onChange={(e) => onUpdate(item.id, { name: e.target.value })}
+                  />
+                </TooltipUI>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
                     <div className="relative flex-1 sm:w-32">
                         <span className="absolute left-3 top-3 text-text-muted font-bold text-sm">$</span>
-                        <input
-                            type="number"
-                            inputMode="decimal"
-                            className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
-                            value={item.amount || ""}
-                            onChange={(e) => onUpdate(item.id, { amount: parseFloat(e.target.value) || 0 })}
-                        />
+                        <TooltipUI content={`Amount for ${item.name || 'this item'}`} position="top">
+                          <input
+                              type="number"
+                              title="Item Amount"
+                              inputMode="decimal"
+                              className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
+                              value={item.amount || ""}
+                              onChange={(e) => onUpdate(item.id, { amount: parseFloat(e.target.value) || 0 })}
+                          />
+                        </TooltipUI>
                     </div>
-                    <button
-                        onClick={() => onDelete(item.id)}
-                        className="p-3 text-text-muted hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
-                    >
-                        <Trash2 size={18} />
-                    </button>
+                    <TooltipUI content="Delete this item" position="top">
+                      <button
+                          onClick={() => onDelete(item.id)}
+                          className="p-3 text-text-muted hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
+                      >
+                          <Trash2 size={18} />
+                      </button>
+                    </TooltipUI>
                 </div>
               </motion.div>
             ))}

@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -41,47 +41,59 @@ export function InflationClient() {
         <div id="tour-inf-inputs" className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 space-y-6 shadow-sm">
           <div className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Historical Amount ($)</label>
-            <input
-              type="number"
-              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-              value={amount}
-              onChange={e => setState({ amount: e.target.value })}
-            />
+            <Tooltip content="The amount of money in the starting year" position="top">
+              <input
+                type="number"
+                title="Historical Monetary Amount"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                value={amount}
+                onChange={e => setState({ amount: e.target.value })}
+              />
+            </Tooltip>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
                 <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
                     <Calendar size={12} /> Start Year
                 </label>
-                <input
-                type="number"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
-                value={startYear}
-                onChange={e => setState({ startYear: e.target.value })}
-                />
+                <Tooltip content="The year the money was originally held" position="top">
+                  <input
+                  type="number"
+                  title="Starting Year"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                  value={startYear}
+                  onChange={e => setState({ startYear: e.target.value })}
+                  />
+                </Tooltip>
             </div>
             <div className="space-y-2">
                 <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
                     <Calendar size={12} /> End Year
                 </label>
-                <input
-                type="number"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
-                value={endYear}
-                onChange={e => setState({ endYear: e.target.value })}
-                />
+                <Tooltip content="The target year for comparison" position="top">
+                  <input
+                  type="number"
+                  title="Target Comparison Year"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                  value={endYear}
+                  onChange={e => setState({ endYear: e.target.value })}
+                  />
+                </Tooltip>
             </div>
           </div>
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
                 <TrendingUp size={12} /> Avg. Inflation Rate (%)
             </label>
-            <input
-              type="number"
-              className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-              value={rate}
-              onChange={e => setState({ rate: e.target.value })}
-            />
+            <Tooltip content="The average annual inflation rate over the period" position="top">
+              <input
+                type="number"
+                title="Average Annual Inflation Rate Percentage"
+                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                value={rate}
+                onChange={e => setState({ rate: e.target.value })}
+              />
+            </Tooltip>
           </div>
         </div>
 

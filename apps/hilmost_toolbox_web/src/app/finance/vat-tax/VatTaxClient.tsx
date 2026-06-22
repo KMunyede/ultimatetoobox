@@ -1,6 +1,6 @@
 "use client";
 
-import { NumberTicker, ToolTutorial } from "@utilitiessite/ui";
+import { NumberTicker, ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -72,25 +72,31 @@ export function VatTaxClient() {
                 <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.2em] ml-1">
                   {mode === 'add' ? 'Net Amount (Before Tax)' : 'Gross Amount (Total Price)'} ($)
                 </label>
-                <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={amount}
-                onChange={e => setState({ amount: e.target.value })}
-                />
+                <Tooltip content={mode === 'add' ? "The price before tax is added" : "The total price including tax"} position="top">
+                  <input
+                  type="number"
+                  title="Monetary Amount"
+                  inputMode="decimal"
+                  className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                  value={amount}
+                  onChange={e => setState({ amount: e.target.value })}
+                  />
+                </Tooltip>
             </div>
             <div className="space-y-3">
                 <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.2em] ml-1">
                   VAT / Sales Tax Rate (%)
                 </label>
-                <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={rate}
-                onChange={e => setState({ rate: e.target.value })}
-                />
+                <Tooltip content="The tax percentage to be applied or removed" position="top">
+                  <input
+                  type="number"
+                  title="Tax Rate Percentage"
+                  inputMode="decimal"
+                  className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
+                  value={rate}
+                  onChange={e => setState({ rate: e.target.value })}
+                  />
+                </Tooltip>
             </div>
           </div>
         </div>
