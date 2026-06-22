@@ -31,5 +31,29 @@ export const KNOWLEDGE_BASE: KBArticle[] = [
     excerpt: "Everything you need to know about 10-digit timestamps and the impending Year 2038 problem.",
     relatedTools: ["/converters/unix-time"],
     content: "In the digital world, time is often represented as a single integer: the number of seconds elapsed since January 1st, 1970. This system, known as Unix Time, provides a universal standard..."
+  },
+  {
+    slug: "universal-law-of-gravitation",
+    title: "Newton's Universal Law of Gravitation: Beyond the Apple",
+    category: "physics",
+    excerpt: "Understanding the force that binds the cosmos, from falling objects to orbiting planets.",
+    relatedTools: ["/calculators/astrophysics/gravitational-force", "/calculators/equation-solver/newtons-second-law"],
+    content: "Sir Isaac Newton's law of universal gravitation states that every particle attracts every other particle in the universe with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers. This 'inverse-square law' was revolutionary because it unified the physics of Earth with the physics of the stars..."
+  },
+  {
+    slug: "cryptographic-hashing-md5",
+    title: "Cryptographic Hashing: The Role and Risks of MD5",
+    category: "data-science",
+    excerpt: "A technical look at how data integrity is verified and why collision resistance matters.",
+    relatedTools: ["/text-data/md5-hash", "/text-data/base64-encode"],
+    content: "Hashing is a process that transforms any given block of data into a fixed-size string of characters, which is usually a hexadecimal representation. The MD5 (Message-Digest algorithm 5) was designed by Ronald Rivest in 1991. While it is no longer considered secure for cryptographic signatures due to collision vulnerabilities, it remains a high-performance choice for non-security critical checksums and file integrity verification..."
+  },
+  {
+    slug: "percentage-math-in-economics",
+    title: "Percentage Mathematics: The Language of Economic Change",
+    category: "finance",
+    excerpt: "Why understanding percentage increase and decrease is vital for tracking inflation and market growth.",
+    relatedTools: ["/converters/percentage", "/finance/inflation"],
+    content: "Percentages allow us to standardize comparisons across different scales. In economics, the ability to calculate percentage change is the difference between understanding growth and being misled by raw numbers. Whether tracking the Consumer Price Index (CPI) for inflation or evaluating the yield of a bond, percentage math provides the relative context needed for sound financial decision-making..."
   }
 ];
