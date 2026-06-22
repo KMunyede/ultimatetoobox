@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { ScientificInput } from "../../../components/calculators/ScientificInput";
 import { useHistory } from "../../../hooks/useHistory";
-import { ScientificNumber } from "@utilitiessite/ui";
-import { motion } from "framer-motion";
+import { ScientificNumber, Tooltip } from "@utilitiessite/ui";
+import { motion, AnimatePresence } from "framer-motion";
+import { Copy, Terminal, FileJson, Check } from "lucide-react";
 
 const CONSTANTS = {
-  G: 6.674e-11,
-  sigma: 5.67e-8,
+  G: 6.67430e-11,
+  sigma: 5.67037e-8,
   H0: 70, // km/s/Mpc
-  c: 3e8,
+  c: 299792458,
   earthMass: 5.972e24,
   solarMass: 1.989e30,
   jupiterMass: 1.898e27,
@@ -44,8 +45,6 @@ const DIST_PRESETS = [
   { label: "10 Parsecs", value: CONSTANTS.parsec * 10 },
 ];
 
-type CalcType = "gravity" | "orbital" | "escape" | "luminosity" | "hubble";
-
 const MASS_UNITS = [
   { label: "kg", value: 1 },
   { label: "Earth masses", value: CONSTANTS.earthMass },
@@ -60,6 +59,8 @@ const DIST_UNITS = [
   { label: "Light-years", value: CONSTANTS.lightYear },
   { label: "Parsecs", value: CONSTANTS.parsec },
 ];
+
+type CalcType = "gravity" | "orbital" | "escape" | "luminosity" | "hubble" | "schwarzschild" | "redshift";
 
 function formatHumanReadable(val: number, unit: string) {
   if (val === 0) return "0 " + unit;
@@ -97,50 +98,89 @@ export function AstrophysicsCalculatorClient({
 
   const [result, setResult] = useState("");
   const [humanResult, setHumanResult] = useState("");
+  const [lastLaTeX, setLastLaTeX] = useState("");
+  const [lastPython, setLastPython] = useState("");
+  const [copiedType, setCopiedType] = useState<string | null>(null);
+
   const { history, addEntry, clearHistory } = useHistory("astrophysics");
 
   const calculate = useCallback(() => {
     let res = 0;
     let expr = "";
     let unit = "";
+    let latex = "";
+    let python = "";
 
     switch (calcType) {
       case "gravity":
         res = (CONSTANTS.G * val1 * val2) / Math.pow(val3, 2);
         expr = `G(${val1.toExponential(2)} * ${val2.toExponential(2)}) / ${val3.toExponential(2)}²`;
         unit = "newtons";
+        latex = `F = G \\frac{m_1 m_2}{r^2} = ${res.toExponential(4)} \\text{ N}`;
+        python = `G = 6.67430e-11\nm1 = ${val1}\nm2 = ${val2}\nr = ${val3}\nF = (G * m1 * m2) / (r**2)`;
         break;
       case "orbital":
         res = Math.sqrt((CONSTANTS.G * val1) / val3);
         expr = `√(G * ${val1.toExponential(2)} / ${val3.toExponential(2)})`;
         unit = "m/s";
+        latex = `v_o = \\sqrt{\\frac{GM}{r}} = ${res.toExponential(4)} \\text{ m/s}`;
+        python = `G = 6.67430e-11\nM = ${val1}\nr = ${val3}\nv_o = (G * M / r)**0.5`;
         break;
       case "escape":
         res = Math.sqrt((2 * CONSTANTS.G * val1) / val3);
         expr = `√(2 * G * ${val1.toExponential(2)} / ${val3.toExponential(2)})`;
         unit = "m/s";
+        latex = `v_e = \\sqrt{\\frac{2GM}{r}} = ${res.toExponential(4)} \\text{ m/s}`;
+        python = `G = 6.67430e-11\nM = ${val1}\nr = ${val3}\nv_e = (2 * G * M / r)**0.5`;
         break;
       case "luminosity":
         res = 4 * Math.PI * Math.pow(val1, 2) * CONSTANTS.sigma * Math.pow(val2, 4);
         expr = `4π * ${val1.toExponential(2)}² * σ * ${val2}⁴`;
         unit = "watts";
+        latex = `L = 4\\pi R^2 \\sigma T^4 = ${res.toExponential(4)} \\text{ W}`;
+        python = `import math\nsigma = 5.67037e-8\nR = ${val1}\nT = ${val2}\nL = 4 * math.pi * (R**2) * sigma * (T**4)`;
         break;
       case "hubble":
         res = val1 / CONSTANTS.H0;
         expr = `${val1} / H0`;
         unit = "megaparsecs";
+        latex = `d = \\frac{v}{H_0} = ${res.toExponential(4)} \\text{ Mpc}`;
+        python = `v = ${val1}\nH0 = 70\nd = v / H0`;
+        break;
+      case "schwarzschild":
+        res = (2 * CONSTANTS.G * val1) / Math.pow(CONSTANTS.c, 2);
+        expr = `(2 * G * ${val1.toExponential(2)}) / c²`;
+        unit = "meters";
+        latex = `R_s = \\frac{2GM}{c^2} = ${res.toExponential(4)} \\text{ m}`;
+        python = `G = 6.67430e-11\nc = 299792458\nM = ${val1}\nRs = (2 * G * M) / (c**2)`;
+        break;
+      case "redshift":
+        // simple v = c*z for low z
+        res = val1 * CONSTANTS.c;
+        expr = `${val1} * c`;
+        unit = "m/s";
+        latex = `v \\approx cz = ${res.toExponential(4)} \\text{ m/s}`;
+        python = `c = 299792458\nz = ${val1}\nv = c * z`;
         break;
     }
 
     const resStr = res.toExponential(4);
     setResult(resStr);
     setHumanResult(formatHumanReadable(res, unit));
+    setLastLaTeX(latex);
+    setLastPython(python);
     addEntry(expr, resStr + " " + unit);
   }, [calcType, val1, val2, val3, addEntry]);
 
+  const copyToClipboard = (text: string, type: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedType(type);
+    setTimeout(() => setCopiedType(null), 2000);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className="@container max-w-4xl mx-auto flex flex-col gap-6"
     >
@@ -150,21 +190,22 @@ export function AstrophysicsCalculatorClient({
           {/* Controls Column */}
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Calculation Type</label>
+              <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Calculation Type</label>
               <select
                 value={calcType}
                 onChange={(e) => setCalcType(e.target.value as CalcType)}
-                className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer"
+                className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer shadow-inner"
               >
                 <option value="gravity">Gravitational Force</option>
                 <option value="orbital">Orbital Velocity</option>
                 <option value="escape">Escape Velocity</option>
                 <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
                 <option value="hubble">Hubble Distance</option>
+                <option value="schwarzschild">Schwarzschild Radius (Black Holes)</option>
+                <option value="redshift">Redshift to Velocity</option>
               </select>
             </div>
 
-            {/* Main Action Button */}
             <button
               onClick={calculate}
               className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95"
@@ -182,17 +223,19 @@ export function AstrophysicsCalculatorClient({
                 <ScientificInput label="Distance (r)" value={val3} onChange={setVal3} presets={DIST_PRESETS} units={DIST_UNITS} />
               </>
             )}
-            {(calcType === "orbital" || calcType === "escape") && (
+            {(calcType === "orbital" || calcType === "escape" || calcType === "schwarzschild") && (
               <>
                 <ScientificInput label="Central Mass (M)" value={val1} onChange={setVal1} presets={MASS_PRESETS} units={MASS_UNITS} />
-                <ScientificInput label="Radius/Distance (r)" value={val3} onChange={setVal3} presets={DIST_PRESETS} units={DIST_UNITS} />
+                {calcType !== "schwarzschild" && (
+                   <ScientificInput label="Radius/Distance (r)" value={val3} onChange={setVal3} presets={DIST_PRESETS} units={DIST_UNITS} />
+                )}
               </>
             )}
             {calcType === "luminosity" && (
               <>
                 <ScientificInput label="Star Radius (R)" value={val1} onChange={setVal1} presets={DIST_PRESETS} units={DIST_UNITS} />
-                <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl">
-                  <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
+                <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
+                  <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
                   <div className="flex items-center gap-3">
                     <input
                       type="number"
@@ -208,8 +251,8 @@ export function AstrophysicsCalculatorClient({
               </>
             )}
             {calcType === "hubble" && (
-              <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl">
-                <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Recessional Velocity (v)</label>
+              <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
+                <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Recessional Velocity (v)</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="number"
@@ -223,28 +266,68 @@ export function AstrophysicsCalculatorClient({
                 </div>
               </div>
             )}
+            {calcType === "redshift" && (
+              <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
+                <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Redshift (z)</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    value={val1}
+                    onChange={(e) => setVal1(parseFloat(e.target.value))}
+                    className="flex-1 bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
+                    placeholder="0.1"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Result Card */}
       {result && (
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="bg-brand-primary rounded-[2rem] p-8 text-white shadow-2xl relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
-          <div className="relative z-10">
-            <div className="text-xs font-bold uppercase tracking-[0.2em] opacity-80 mb-2">Calculated Result</div>
-            <div className="text-4xl md:text-5xl font-mono font-black mb-3 tracking-tighter">
-              <ScientificNumber value={parseFloat(result)} className="text-white" />
+        <div className="space-y-4">
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-brand-primary rounded-[2.5rem] p-8 md:p-10 text-white shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24 pointer-events-none" />
+            <div className="relative z-10">
+              <div className="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-3">Calculated Result</div>
+              <div className="text-4xl md:text-6xl font-mono font-black mb-4 tracking-tighter leading-none">
+                <ScientificNumber value={parseFloat(result)} className="text-white" />
+              </div>
+              <div className="text-lg font-medium opacity-90 italic">
+                {humanResult}
+              </div>
             </div>
-            <div className="text-lg font-medium opacity-90 italic">
-              {humanResult}
-            </div>
+          </motion.div>
+
+          {/* Research Export Actions */}
+          <div className="flex flex-wrap gap-3">
+            <Tooltip content="Copy formula and result for a research paper (LaTeX format)" position="bottom">
+              <button
+                onClick={() => copyToClipboard(lastLaTeX, 'latex')}
+                className="flex-1 min-w-[180px] h-12 flex items-center justify-center gap-2.5 bg-white dark:bg-slate-900 border border-border-base rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-primary transition-all active:scale-95 shadow-sm"
+              >
+                {copiedType === 'latex' ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
+                {copiedType === 'latex' ? 'LaTeX Copied!' : 'Copy for Paper (LaTeX)'}
+              </button>
+            </Tooltip>
+
+            <Tooltip content="Copy code snippet for Python (AstroPy compatible)" position="bottom">
+              <button
+                onClick={() => copyToClipboard(lastPython, 'python')}
+                className="flex-1 min-w-[180px] h-12 flex items-center justify-center gap-2.5 bg-white dark:bg-slate-900 border border-border-base rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-primary transition-all active:scale-95 shadow-sm"
+              >
+                {copiedType === 'python' ? <Check size={14} className="text-green-600" /> : <Terminal size={14} />}
+                {copiedType === 'python' ? 'Python Copied!' : 'Copy as Python'}
+              </button>
+            </Tooltip>
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* History Section */}
