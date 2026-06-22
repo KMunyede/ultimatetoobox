@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { ArrowRightLeft } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
@@ -78,22 +78,28 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
           <div id="tour-temp-input1" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                value={val1}
-                onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
-                value={unit1}
-                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
-              >
-                <option value="celsius">Celsius</option>
-                <option value="fahrenheit">Fahrenheit</option>
-                <option value="kelvin">Kelvin</option>
-              </select>
+              <Tooltip content="Enter the temperature value you want to convert" position="top">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Source Temperature Value"
+                  className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                  value={val1}
+                  onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the temperature scale for the value above" position="bottom">
+                <select
+                  title="Select Source Scale"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
+                  value={unit1}
+                  onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
+                >
+                  <option value="celsius">Celsius</option>
+                  <option value="fahrenheit">Fahrenheit</option>
+                  <option value="kelvin">Kelvin</option>
+                </select>
+              </Tooltip>
             </div>
           </div>
 
@@ -106,22 +112,28 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
           <div id="tour-temp-input2" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                value={val2}
-                onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
-                value={unit2}
-                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
-              >
-                <option value="celsius">Celsius</option>
-                <option value="fahrenheit">Fahrenheit</option>
-                <option value="kelvin">Kelvin</option>
-              </select>
+              <Tooltip content="The converted temperature appears here" position="top">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Target Temperature Value"
+                  className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                  value={val2}
+                  onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the temperature scale you want to convert to" position="bottom">
+                <select
+                  title="Select Target Scale"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
+                  value={unit2}
+                  onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
+                >
+                  <option value="celsius">Celsius</option>
+                  <option value="fahrenheit">Fahrenheit</option>
+                  <option value="kelvin">Kelvin</option>
+                </select>
+              </Tooltip>
             </div>
           </div>
 

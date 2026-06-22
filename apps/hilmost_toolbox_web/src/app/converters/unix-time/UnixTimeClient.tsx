@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
+import { ToolTutorial, DateTimePicker, Tooltip } from "@utilitiessite/ui";
 import { Copy, Check } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
@@ -76,17 +76,21 @@ export function UnixTimeClient() {
       <div id="tour-unix-current" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-5 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
         <div>
           <h2 className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-1 uppercase tracking-wider">Current Unix Epoch Time</h2>
-          <div className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 dark:text-white tracking-wider">
-            {currentEpoch || "..."}
-          </div>
+          <Tooltip content="The number of seconds since January 1, 1970 (UTC)" position="right">
+            <div className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 dark:text-white tracking-wider">
+              {currentEpoch || "..."}
+            </div>
+          </Tooltip>
         </div>
-        <button
-          onClick={handleCopy}
-          className="flex-shrink-0 flex items-center justify-center h-12 w-14 rounded-2xl bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-slate-700 transition-all shadow-sm active:scale-95"
-          title="Copy current epoch"
-        >
-          {copied ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
-        </button>
+        <Tooltip content="Copy the current Unix timestamp to your clipboard" position="left">
+          <button
+            onClick={handleCopy}
+            className="flex-shrink-0 flex items-center justify-center h-12 w-14 rounded-2xl bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:slate-700 transition-all shadow-sm active:scale-95"
+            title="Copy current epoch"
+          >
+            {copied ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
+          </button>
+        </Tooltip>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -94,13 +98,16 @@ export function UnixTimeClient() {
         <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-all hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-md">
           <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Timestamp to Date</h2>
           <div className="space-y-4">
-            <input
-              type="text"
-              className="w-full h-12 px-4 text-lg font-mono border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-              value={timestampStr}
-              onChange={e => setState({ timestampStr: e.target.value })}
-              placeholder="e.g. 1718000000"
-            />
+            <Tooltip content="Paste a 10-digit (seconds) or 13-digit (ms) Unix timestamp" position="top" className="w-full">
+              <input
+                type="text"
+                className="w-full h-12 px-4 text-lg font-mono border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+                value={timestampStr}
+                onChange={e => setState({ timestampStr: e.target.value })}
+                placeholder="e.g. 1718000000"
+                title="Input Unix Timestamp"
+              />
+            </Tooltip>
             <div className="h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-blue-700 dark:text-blue-400 font-medium break-words leading-tight">
               {getReadableDate(timestampStr)}
             </div>

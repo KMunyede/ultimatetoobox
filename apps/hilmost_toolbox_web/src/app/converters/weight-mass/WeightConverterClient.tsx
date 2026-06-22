@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { ArrowRightLeft } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
@@ -84,50 +84,62 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
           <div id="tour-weight-input1" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                value={val1}
-                onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                value={unit1}
-                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
-              >
-                {Object.keys(UNITS).map(u => (
-                  <option key={u} value={u}>{formatUnitName(u)}</option>
-                ))}
-              </select>
+              <Tooltip content="Enter the weight value you want to convert" position="top">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Source Weight Value"
+                  className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                  value={val1}
+                  onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the mass/weight unit for the value above" position="bottom">
+                <select
+                  title="Select Source Weight Unit"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                  value={unit1}
+                  onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
+                >
+                  {Object.keys(UNITS).map(u => (
+                    <option key={u} value={u}>{formatUnitName(u)}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
           </div>
 
           {/* Transfer Icon */}
           <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-inner">
-            <ArrowRightLeft size={20} className="rotate-90 md:rotate-0" />
+            <ArrowRightLeft size={20} className="rotate-90 @[600px]:rotate-0" />
           </div>
 
           {/* Unit 2 */}
           <div id="tour-weight-input2" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                value={val2}
-                onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                value={unit2}
-                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
-              >
-                {Object.keys(UNITS).map(u => (
-                  <option key={u} value={u}>{formatUnitName(u)}</option>
-                ))}
-              </select>
+              <Tooltip content="The converted weight value appears here" position="top">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Target Weight Value"
+                  className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                  value={val2}
+                  onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the weight unit you want to convert to" position="bottom">
+                <select
+                  title="Select Target Weight Unit"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
+                  value={unit2}
+                  onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
+                >
+                  {Object.keys(UNITS).map(u => (
+                    <option key={u} value={u}>{formatUnitName(u)}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
           </div>
 

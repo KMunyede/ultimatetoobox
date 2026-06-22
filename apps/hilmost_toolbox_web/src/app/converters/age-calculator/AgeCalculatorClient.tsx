@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
+import { ToolTutorial, DateTimePicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -55,23 +55,29 @@ export function AgeCalculatorClient() {
                 <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
                     <Cake size={14} className="text-brand-primary" /> Date of Birth
                 </label>
-                <input
-                    type="date"
-                    className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                    value={birthDate}
-                    onChange={e => setState({ birthDate: e.target.value })}
-                />
+                <Tooltip content="Select your date of birth" position="top">
+                  <input
+                      type="date"
+                      title="Date of Birth"
+                      className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                      value={birthDate}
+                      onChange={e => setState({ birthDate: e.target.value })}
+                  />
+                </Tooltip>
             </div>
             <div id="tour-age-target" className="space-y-3">
                 <label className="flex items-center gap-2 text-xs font-bold text-text-muted uppercase tracking-widest ml-1">
                     <Calendar size={14} className="text-text-muted" /> Age at Date of
                 </label>
-                <input
-                    type="date"
-                    className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                    value={targetDate}
-                    onChange={e => setState({ targetDate: e.target.value })}
-                />
+                <Tooltip content="Select the date you want to calculate the age at" position="top">
+                  <input
+                      type="date"
+                      title="Target Age Date"
+                      className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                      value={targetDate}
+                      onChange={e => setState({ targetDate: e.target.value })}
+                  />
+                </Tooltip>
             </div>
         </div>
 

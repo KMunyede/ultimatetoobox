@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { ArrowRightLeft } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
@@ -68,26 +68,32 @@ export function DataStorageClient() {
           
           {/* Input 1 */}
           <div id="tour-ds-input1" className="flex-1 w-full flex flex-col gap-2">
-          <input
-            type="number"
-            inputMode="decimal"
-            className="w-full h-14 px-4 text-xl font-medium border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-            value={val1}
-            onChange={(e) => {
-              setState({ activeInput: 1, val1: e.target.value });
-            }}
-          />
-          <select
-            className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer transition-all hover:border-blue-400"
-            value={unit1}
-            onChange={(e) => {
-              setState({ activeInput: 1, unit1: e.target.value as UnitType });
-            }}
-          >
-            {Object.keys(UNITS).map(u => (
-              <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>
-            ))}
-          </select>
+          <Tooltip content="Enter the data storage size (e.g. 500)" position="top" className="w-full">
+            <input
+              type="number"
+              inputMode="decimal"
+              title="Source Data Size"
+              className="w-full h-14 px-4 text-xl font-medium border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+              value={val1}
+              onChange={(e) => {
+                setState({ activeInput: 1, val1: e.target.value });
+              }}
+            />
+          </Tooltip>
+          <Tooltip content="Select the digital storage unit (e.g. GB, MB)" position="bottom" className="w-full">
+            <select
+              title="Select Source Unit"
+              className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer transition-all hover:border-blue-400"
+              value={unit1}
+              onChange={(e) => {
+                setState({ activeInput: 1, unit1: e.target.value as UnitType });
+              }}
+            >
+              {Object.keys(UNITS).map(u => (
+                <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>
+              ))}
+            </select>
+          </Tooltip>
         </div>
 
         {/* Icon */}
@@ -97,26 +103,32 @@ export function DataStorageClient() {
         
         {/* Input 2 */}
         <div id="tour-ds-input2" className="flex-1 w-full flex flex-col gap-2">
-          <input
-            type="number"
-            inputMode="decimal"
-            className="w-full h-14 px-4 text-xl font-medium border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-            value={val2}
-            onChange={(e) => {
-              setState({ activeInput: 2, val2: e.target.value });
-            }}
-          />
-          <select
-            className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer transition-all hover:border-blue-400"
-            value={unit2}
-            onChange={(e) => {
-              setState({ activeInput: 1, unit2: e.target.value as UnitType });
-            }}
-          >
-            {Object.keys(UNITS).map(u => (
-              <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>
-            ))}
-          </select>
+          <Tooltip content="The converted storage size appears here" position="top" className="w-full">
+            <input
+              type="number"
+              inputMode="decimal"
+              title="Target Data Size"
+              className="w-full h-14 px-4 text-xl font-medium border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
+              value={val2}
+              onChange={(e) => {
+                setState({ activeInput: 2, val2: e.target.value });
+              }}
+            />
+          </Tooltip>
+          <Tooltip content="Select the unit you want to convert to" position="bottom" className="w-full">
+            <select
+              title="Select Target Unit"
+              className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer transition-all hover:border-blue-400"
+              value={unit2}
+              onChange={(e) => {
+                setState({ activeInput: 1, unit2: e.target.value as UnitType });
+              }}
+            >
+              {Object.keys(UNITS).map(u => (
+                <option key={u} value={u}>{u.charAt(0).toUpperCase() + u.slice(1)}</option>
+              ))}
+            </select>
+          </Tooltip>
         </div>
 
         </div>

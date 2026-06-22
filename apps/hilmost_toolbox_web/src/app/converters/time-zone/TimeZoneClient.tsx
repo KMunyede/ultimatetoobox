@@ -7,6 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { Plus, X, ArrowRight, Clock } from "lucide-react";
+import { Tooltip } from "@utilitiessite/ui";
 
 const formatZoneName = (zone: string) => zone.replace(/[_-]/g, " ");
 
@@ -101,15 +102,18 @@ export function TimeZoneClient() {
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Time Zone
               </label>
-              <select
-                value={sourceZone}
-                onChange={(e) => setState({ sourceZone: e.target.value })}
-                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500"
-              >
-                {availableZones.map(z => (
-                  <option key={z} value={z}>{formatZoneName(z)}</option>
-                ))}
-              </select>
+              <Tooltip content="Select the starting time zone" position="top" className="w-full">
+                <select
+                  value={sourceZone}
+                  title="Source Time Zone"
+                  onChange={(e) => setState({ sourceZone: e.target.value })}
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500"
+                >
+                  {availableZones.map(z => (
+                    <option key={z} value={z}>{formatZoneName(z)}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
             
             <DateTimePicker
@@ -156,13 +160,16 @@ export function TimeZoneClient() {
                       <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{formattedTime}</p>
                       <p className="text-sm text-slate-500">{formattedDate}</p>
                     </div>
-                    <button
-                      onClick={() => handleRemoveZone(zone)}
-                      className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition"
-                      aria-label={`Remove ${zone}`}
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
+                    <Tooltip content={`Remove ${formatZoneName(zone)} from the comparison list`} position="left">
+                      <button
+                        onClick={() => handleRemoveZone(zone)}
+                        className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition"
+                        aria-label={`Remove ${zone}`}
+                        title={`Remove ${formatZoneName(zone)}`}
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </Tooltip>
                   </motion.div>
                 );
               })}
@@ -180,23 +187,29 @@ export function TimeZoneClient() {
               Add Time Zone
             </label>
             <div className="flex gap-2">
-              <select
-                value={newZone}
-                onChange={(e) => setNewZone(e.target.value)}
-                className="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500"
-              >
-                <option value="">Select a region/city...</option>
-                {availableZones.filter(z => !targets.includes(z)).map(z => (
-                  <option key={z} value={z}>{formatZoneName(z)}</option>
-                ))}
-              </select>
-              <button
-                onClick={handleAddZone}
-                disabled={!newZone}
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white p-3 rounded-xl transition"
-              >
-                <Plus className="w-6 h-6" />
-              </button>
+              <Tooltip content="Choose a city or region to add to your dashboard" position="top" className="flex-1">
+                <select
+                  value={newZone}
+                  title="Select Time Zone to Add"
+                  onChange={(e) => setNewZone(e.target.value)}
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500"
+                >
+                  <option value="">Select a region/city...</option>
+                  {availableZones.filter(z => !targets.includes(z)).map(z => (
+                    <option key={z} value={z}>{formatZoneName(z)}</option>
+                  ))}
+                </select>
+              </Tooltip>
+              <Tooltip content="Add this zone to your list" position="top">
+                <button
+                  onClick={handleAddZone}
+                  disabled={!newZone}
+                  title="Add Zone"
+                  className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white p-3 rounded-xl transition"
+                >
+                  <Plus className="w-6 h-6" />
+                </button>
+              </Tooltip>
             </div>
           </div>
         </div>

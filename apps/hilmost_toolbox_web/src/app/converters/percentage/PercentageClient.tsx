@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -39,19 +39,25 @@ export function PercentageClient() {
           <h2 className="text-sm font-bold text-text-muted uppercase tracking-widest mb-6">What is X% of Y?</h2>
           <div className="flex flex-wrap items-center gap-4">
             <span className="text-lg font-medium text-text-secondary">What is</span>
-            <input
-              type="number"
-              className="w-24 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
-              value={p1}
-              onChange={e => setState({ p1: e.target.value })}
-            />
+            <Tooltip content="The percentage you want to find (e.g. 20)" position="top">
+              <input
+                type="number"
+                title="Percentage Value"
+                className="w-24 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={p1}
+                onChange={e => setState({ p1: e.target.value })}
+              />
+            </Tooltip>
             <span className="text-lg font-medium text-text-secondary">% of</span>
-            <input
-              type="number"
-              className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
-              value={v1}
-              onChange={e => setState({ v1: e.target.value })}
-            />
+            <Tooltip content="The total amount to calculate from" position="top">
+              <input
+                type="number"
+                title="Total Amount"
+                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={v1}
+                onChange={e => setState({ v1: e.target.value })}
+              />
+            </Tooltip>
             <span className="text-lg font-medium text-text-secondary">?</span>
             <div className="flex-1 min-w-[120px] h-14 flex items-center justify-center bg-brand-primary/10 border border-brand-primary/20 rounded-xl">
               <span className="text-2xl font-black text-brand-primary">{!isNaN(res1) ? res1.toFixed(2).replace(/\.?0+$/, '') : "0"}</span>
@@ -63,19 +69,25 @@ export function PercentageClient() {
         <div id="tour-perc-2" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all">
           <h2 className="text-sm font-bold text-text-muted uppercase tracking-widest mb-6">X is what % of Y?</h2>
           <div className="flex flex-wrap items-center gap-4">
-            <input
-              type="number"
-              className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
-              value={p2_1}
-              onChange={e => setState({ p2_1: e.target.value })}
-            />
+            <Tooltip content="The smaller amount to compare" position="top">
+              <input
+                type="number"
+                title="Part Value"
+                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={p2_1}
+                onChange={e => setState({ p2_1: e.target.value })}
+              />
+            </Tooltip>
             <span className="text-lg font-medium text-text-secondary">is what % of</span>
-            <input
-              type="number"
-              className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
-              value={p2_2}
-              onChange={e => setState({ p2_2: e.target.value })}
-            />
+            <Tooltip content="The base or total amount" position="top">
+              <input
+                type="number"
+                title="Base Value"
+                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={p2_2}
+                onChange={e => setState({ p2_2: e.target.value })}
+              />
+            </Tooltip>
             <span className="text-lg font-medium text-text-secondary">?</span>
             <div className="flex-1 min-w-[120px] h-14 flex items-center justify-center bg-brand-primary/10 border border-brand-primary/20 rounded-xl">
               <span className="text-2xl font-black text-brand-primary">{!isNaN(res2) && isFinite(res2) ? res2.toFixed(2).replace(/\.?0+$/, '') + "%" : "0%"}</span>
@@ -88,19 +100,25 @@ export function PercentageClient() {
           <h2 className="text-sm font-bold text-text-muted uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
           <div className="flex flex-wrap items-center gap-4">
             <span className="text-lg font-medium text-text-secondary">From</span>
-            <input
-              type="number"
-              className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
-              value={v3_1}
-              onChange={e => setState({ v3_1: e.target.value })}
-            />
+            <Tooltip content="The original starting value" position="top">
+              <input
+                type="number"
+                title="Starting Value"
+                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={v3_1}
+                onChange={e => setState({ v3_1: e.target.value })}
+              />
+            </Tooltip>
             <span className="text-lg font-medium text-text-secondary">to</span>
-            <input
-              type="number"
-              className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
-              value={v3_2}
-              onChange={e => setState({ v3_2: e.target.value })}
-            />
+            <Tooltip content="The new or target value" position="top">
+              <input
+                type="number"
+                title="New Value"
+                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+                value={v3_2}
+                onChange={e => setState({ v3_2: e.target.value })}
+              />
+            </Tooltip>
             <span className="text-lg font-medium text-text-secondary">is a</span>
             <div className={`flex-1 min-w-[150px] h-14 flex items-center justify-center rounded-xl border ${res3 >= 0 ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600" : "bg-red-500/10 border-red-500/20 text-red-600"}`}>
               <span className="text-2xl font-black uppercase tracking-tighter">

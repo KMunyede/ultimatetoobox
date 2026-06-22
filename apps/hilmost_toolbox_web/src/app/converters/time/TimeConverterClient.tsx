@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { ToolTutorial } from "@utilitiessite/ui";
+import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { ArrowRightLeft } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
@@ -77,22 +77,28 @@ export function TimeConverterClient() {
           <div id="tour-time-input1" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                value={val1}
-                onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
-                value={unit1}
-                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
-              >
-                {Object.keys(UNITS).map(u => (
-                  <option key={u} value={u}>{u}</option>
-                ))}
-              </select>
+              <Tooltip content="Enter the duration of time you want to convert" position="top">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Source Time Duration"
+                  className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                  value={val1}
+                  onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the source time unit (e.g. hours, days)" position="bottom">
+                <select
+                  title="Select Source Time Unit"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
+                  value={unit1}
+                  onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
+                >
+                  {Object.keys(UNITS).map(u => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
           </div>
 
@@ -105,22 +111,28 @@ export function TimeConverterClient() {
           <div id="tour-time-input2" className="flex-1 w-full space-y-3">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
             <div className="space-y-3">
-              <input
-                type="number"
-                inputMode="decimal"
-                className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                value={val2}
-                onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
-              />
-              <select
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
-                value={unit2}
-                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
-              >
-                {Object.keys(UNITS).map(u => (
-                  <option key={u} value={u}>{u}</option>
-                ))}
-              </select>
+              <Tooltip content="The converted duration appears here" position="top">
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  title="Target Time Duration"
+                  className="w-full h-16 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
+                  value={val2}
+                  onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
+                />
+              </Tooltip>
+              <Tooltip content="Select the time unit you want to convert to" position="bottom">
+                <select
+                  title="Select Target Time Unit"
+                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all capitalize"
+                  value={unit2}
+                  onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
+                >
+                  {Object.keys(UNITS).map(u => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
+                </select>
+              </Tooltip>
             </div>
           </div>
 
