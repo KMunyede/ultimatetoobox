@@ -59,7 +59,7 @@ export default function WordCountPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -91,9 +91,9 @@ export default function WordCountPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Paste Text</strong> - Insert your raw text or data string into the main input area.</li>
-          <li><strong>Step 2: Select Action</strong> - Choose your formatting, encoding, or analysis mode.</li>
-          <li><strong>Step 3: Copy Result</strong> - View the generated analytics or encoded output and click to copy.</li>
+          <li><strong>Step 1: Enter Content</strong> - Paste your text or start typing directly into the high-performance editor.</li>
+          <li><strong>Step 2: Review Statistics</strong> - Monitor word, character, and line counts updating in real-time in the sidebar.</li>
+          <li><strong>Step 3: Analyze Density</strong> - Use the metrics to ensure your content meets specific publication or academic limits.</li>
         </ol>
       </ToolArticle>
 

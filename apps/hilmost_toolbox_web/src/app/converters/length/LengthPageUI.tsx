@@ -43,7 +43,7 @@ export function LengthPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${title} | Hilmost`}
         description={description}
@@ -75,9 +75,9 @@ export function LengthPageUI({
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Select Units</strong> - Choose your starting unit and your target conversion unit.</li>
-          <li><strong>Step 2: Enter Value</strong> - Type the number you want to convert into the input field.</li>
-          <li><strong>Step 3: Get Result</strong> - The converted measurement updates instantly as you type.</li>
+          <li><strong>Step 1: Enter Value</strong> - Type the distance or length measurement into the starting field.</li>
+          <li><strong>Step 2: Select Unit Type</strong> - Bridge the gap between Metric and Imperial systems by choosing your desired units.</li>
+          <li><strong>Step 3: Review Distance</strong> - Instantly see the conversion between meters, miles, feet, or kilometers.</li>
         </ol>
       </ToolArticle>
 

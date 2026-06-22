@@ -46,7 +46,7 @@ export default function TextDataHub() {
   const breadcrumbItems = [{ label: "Text & Data", href: PATH }];
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="container mx-auto px-4 py-2 max-w-5xl">
       <WebApplicationSchema
         name={`${TITLE} | Hilmost Ultimate Toolbox`}
         description={DESC}

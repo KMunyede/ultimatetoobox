@@ -50,7 +50,7 @@ export default function IncomeTaxPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -80,9 +80,9 @@ export default function IncomeTaxPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Input Gross Salary</strong> - Enter your total annual or monthly income before any deductions.</li>
+          <li><strong>Step 2: Apply Deductions</strong> - Subtract standard deductions or retirement contributions to find your taxable income.</li>
+          <li><strong>Step 3: Review Net Pay</strong> - See your exact take-home pay after federal and local tax estimates are applied.</li>
         </ol>
       </ToolArticle>
 

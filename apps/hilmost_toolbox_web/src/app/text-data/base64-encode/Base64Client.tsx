@@ -46,12 +46,8 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="base64_converter" steps={tourSteps} buttonText="How to use" />
-      </div>
 
       <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl space-y-8">
 

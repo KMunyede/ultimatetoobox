@@ -70,11 +70,7 @@ export function UnixTimeClient() {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="unix_time_converter" steps={tourSteps} buttonText="How to use" />
-      </div>
+    <div className="space-y-4">
       
       {/* Current Epoch */}
       <div id="tour-unix-current" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-5 shadow-sm flex items-center justify-between transition-all hover:shadow-md">

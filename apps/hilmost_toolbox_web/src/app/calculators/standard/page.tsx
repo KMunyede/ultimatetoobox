@@ -50,7 +50,7 @@ export default function StandardCalculatorPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-4xl">
+    <div className="container mx-auto px-4 py-1 max-w-4xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -78,6 +78,13 @@ export default function StandardCalculatorPage() {
         <p>
           In a world of complex apps, sometimes you just need to add up a few numbers quickly. Our Standard Calculator is designed for speed, accessibility, and precision. It works perfectly on mobile devices and supports full physical keyboard input for desktop users.
         </p>
+        <h3>How to Use This Tool</h3>
+        <ol>
+          <li><strong>Step 1: Enter Expression</strong> - Use the UI buttons or your physical keyboard to type your mathematical problem.</li>
+          <li><strong>Step 2: Apply Operators</strong> - Perform standard arithmetic using PEMDAS/BODMAS hierarchy for accurate results.</li>
+          <li><strong>Step 3: Track History</strong> - Review your previous 50 calculations using the built-in history tape for easy reference.</li>
+        </ol>
+
         <h3>Core Features</h3>
         <ul>
           <li><strong>Instant Results:</strong> Calculations are performed locally in your browser for zero latency.</li>

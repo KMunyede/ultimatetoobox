@@ -58,17 +58,41 @@ export function WordUnscramblerClient() {
       const dictionaryParts = await Promise.all(fetchPromises);
       const combinedDictionary = dictionaryParts.flat();
 
-      const matches = findMatches(letters as string, combinedDictionary, {
-        startsWith: startsWith as string,
-        endsWith: endsWith as string,
-        contains: contains as string,
+      // Use Web Worker for filtering
+      const worker = new Worker(new URL('@/lib/wordWorker.ts', import.meta.url));
+
+      worker.postMessage({
+        letters: letters as string,
+        dictionary: combinedDictionary,
+        options: {
+          startsWith: startsWith as string,
+          endsWith: endsWith as string,
+          contains: contains as string,
+        }
       });
 
-      setResults(matches);
+      worker.onmessage = (e) => {
+        setResults(e.data);
+        setLoading(false);
+        worker.terminate();
+      };
+
+      worker.onerror = (err) => {
+        console.error("Worker error:", err);
+        // Fallback to main thread if worker fails
+        const matches = findMatches(letters as string, combinedDictionary, {
+          startsWith: startsWith as string,
+          endsWith: endsWith as string,
+          contains: contains as string,
+        });
+        setResults(matches);
+        setLoading(false);
+        worker.terminate();
+      };
+
     } catch (e) {
       console.error("Unscramble error:", e);
       setResults([]);
-    } finally {
       setLoading(false);
     }
   };
@@ -85,12 +109,8 @@ export function WordUnscramblerClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-12"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="word_unscrambler" steps={tourSteps} buttonText="How to use" />
-      </div>
 
       {/* Centered Search Hero */}
       <div className="max-w-4xl mx-auto w-full space-y-4">

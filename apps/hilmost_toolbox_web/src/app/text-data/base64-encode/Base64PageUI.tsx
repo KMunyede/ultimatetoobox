@@ -42,7 +42,7 @@ export function Base64PageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${title} | Hilmost`}
         description={description}
@@ -74,9 +74,9 @@ export function Base64PageUI({
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Paste Text</strong> - Insert your raw text into the main input area.</li>
-          <li><strong>Step 2: Select Mode</strong> - Choose between Encoding or Decoding.</li>
-          <li><strong>Step 3: Copy Result</strong> - View the transformed output and click to copy.</li>
+          <li><strong>Step 1: Select Direction</strong> - Choose whether you want to Encode text to Base64 or Decode strings back to plain text.</li>
+          <li><strong>Step 2: Input Data</strong> - Enter your source content into the input field for immediate processing.</li>
+          <li><strong>Step 3: Copy Transformation</strong> - Grab your encoded or decoded result instantly for use in your code or protocols.</li>
         </ol>
       </ToolArticle>
 

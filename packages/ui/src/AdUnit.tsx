@@ -59,7 +59,7 @@ export function AdUnit({
           observer.disconnect();
         }
       },
-      { rootMargin: "400px" } // Load earlier than before to allow script to fetch before user reaches it
+      { rootMargin: "600px" } // Load earlier (600px) to allow script to fetch before user reaches it
     );
 
     if (containerRef.current) {
@@ -80,7 +80,7 @@ export function AdUnit({
         const timer = setTimeout(() => {
           adsbygoogle.push({});
           initialized.current = true;
-        }, 50);
+        }, 100);
         return () => clearTimeout(timer);
       } catch (err) {
         console.error("AdSense Error", err);
@@ -98,13 +98,24 @@ export function AdUnit({
         ...style
       }}
     >
-      <span className="absolute text-[10px] text-slate-300 dark:text-slate-600 font-bold uppercase tracking-[0.2em] pointer-events-none select-none">
+      {/* Skeleton Shimmer */}
+      {!initialized.current && (
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-200/20 dark:via-slate-700/20 to-transparent animate-[shimmer_2s_infinite] -translate-x-full" />
+          <div className="flex flex-col items-center justify-center h-full gap-2 opacity-20 grayscale">
+             <div className="w-12 h-12 rounded-lg bg-slate-200 dark:bg-slate-700" />
+             <div className="w-24 h-2 bg-slate-200 dark:bg-slate-700 rounded" />
+          </div>
+        </div>
+      )}
+
+      <span className="absolute text-[10px] text-slate-300 dark:text-slate-600 font-bold uppercase tracking-[0.2em] pointer-events-none select-none z-0">
         Advertisement
       </span>
       {isVisible && (
         <ins
           className="adsbygoogle w-full h-full relative z-10"
-          style={{ display: "block" }}
+          style={{ display: "block", minHeight: finalMinHeight }}
           data-ad-client={publisherId}
           data-ad-slot={slotId}
           data-ad-format={format}

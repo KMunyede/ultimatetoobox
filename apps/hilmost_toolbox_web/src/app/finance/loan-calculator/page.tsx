@@ -50,7 +50,7 @@ export default function LoanCalculatorPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -80,9 +80,9 @@ export default function LoanCalculatorPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Enter Principal</strong> - Input the total amount you intend to borrow from the lender.</li>
+          <li><strong>Step 2: Set Terms</strong> - Define the annual interest rate and the length of the loan in years.</li>
+          <li><strong>Step 3: View Schedule</strong> - See your monthly payment and the total interest you will pay over the life of the loan.</li>
         </ol>
       </ToolArticle>
 

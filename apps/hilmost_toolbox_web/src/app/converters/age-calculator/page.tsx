@@ -50,7 +50,7 @@ export default function AgeCalculatorPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -79,9 +79,9 @@ export default function AgeCalculatorPage() {
         
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Input Birth Date</strong> - Select your date of birth using the calendar picker.</li>
-          <li><strong>Step 2: Set Target Date</strong> - Choose the date you want to calculate your age at (default is today).</li>
-          <li><strong>Step 3: View Breakdown</strong> - See your age displayed in years, months, and even total minutes.</li>
+          <li><strong>Step 1: Enter Birth Date</strong> - Use the calendar picker to select your exact date and time of birth.</li>
+          <li><strong>Step 2: Set Target Date</strong> - Choose the date you want to calculate your age at (defaults to today).</li>
+          <li><strong>Step 3: View Breakdown</strong> - See your age displayed in years, months, days, and even total minutes.</li>
         </ol>
       </ToolArticle>
 

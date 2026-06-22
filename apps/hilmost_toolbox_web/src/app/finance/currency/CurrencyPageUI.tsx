@@ -43,7 +43,7 @@ export function CurrencyPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
         name={title}
         description={description}
@@ -73,9 +73,9 @@ export function CurrencyPageUI({
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Pick Currencies</strong> - Select the base currency and the target currency from over 150 global options.</li>
+          <li><strong>Step 2: Enter Amount</strong> - Type the value in either field; the other updates automatically using live FX rates.</li>
+          <li><strong>Step 3: Check Source</strong> - Monitor the status bar to see if you are using live market data or cached fallbacks.</li>
         </ol>
       </ToolArticle>
 

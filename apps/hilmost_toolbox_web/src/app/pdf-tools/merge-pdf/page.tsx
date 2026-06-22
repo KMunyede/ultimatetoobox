@@ -59,7 +59,7 @@ export default function MergePDFPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -91,9 +91,9 @@ export default function MergePDFPage() {
         </p>
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Select Files</strong> - Click the upload zone or drag and drop your PDF files.</li>
-          <li><strong>Step 2: Reorder</strong> - Drag the file cards to arrange them in the correct sequence.</li>
-          <li><strong>Step 3: Download</strong> - Click the merge button to generate and save your new document instantly.</li>
+          <li><strong>Step 1: Upload Documents</strong> - Drag and drop multiple PDF files into the secure browser-side dropzone.</li>
+          <li><strong>Step 2: Reorder Files</strong> - Use the grab handles to arrange your documents in the exact order you want them merged.</li>
+          <li><strong>Step 3: Combine & Save</strong> - Click the merge button to generate a single, unified PDF document instantly.</li>
         </ol>
       </ToolArticle>
 

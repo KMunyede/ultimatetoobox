@@ -1,10 +1,18 @@
 "use client";
 import { useMemo, useState, useEffect } from "react";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { ToolTutorial, NumberTicker } from "@utilitiessite/ui";
+import dynamic from "next/dynamic";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+
+// Lazy load Recharts
+const AreaChart = dynamic(() => import("recharts").then(mod => mod.AreaChart), { ssr: false });
+const Area = dynamic(() => import("recharts").then(mod => mod.Area), { ssr: false });
+const XAxis = dynamic(() => import("recharts").then(mod => mod.XAxis), { ssr: false });
+const YAxis = dynamic(() => import("recharts").then(mod => mod.YAxis), { ssr: false });
+const CartesianGrid = dynamic(() => import("recharts").then(mod => mod.CartesianGrid), { ssr: false });
+const Tooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
+const ResponsiveContainer = dynamic(() => import("recharts").then(mod => mod.ResponsiveContainer), { ssr: false });
 
 export function RetirementPlannerClient() {
   const [isClient, setIsClient] = useState(false);
@@ -17,6 +25,7 @@ export function RetirementPlannerClient() {
   });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
   }, []);
 
@@ -50,25 +59,15 @@ export function RetirementPlannerClient() {
   const finalBalance = chartData.length > 0 ? chartData[chartData.length - 1].balance : 0;
   const formatCurrency = (val: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(val);
 
-  const tourSteps = [
-    { element: '#tour-retire-inputs', popover: { title: '1. Plan Details', description: 'Enter your ages, current savings, contributions, and expected returns.' } },
-    { element: '#tour-retire-results', popover: { title: '2. Projected Savings', description: 'See how much you are projected to have saved by your retirement age.' } },
-    { element: '#tour-retire-chart', popover: { title: '3. Growth Trajectory', description: 'Visualize your wealth accumulation over time leading up to retirement.' } },
-  ];
-
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="@container space-y-6"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="retirement_planner" steps={tourSteps} buttonText="How to use" />
-      </div>
 
-      <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-6 shadow-sm">
+      <div className="bg-canvas-card border border-border-base rounded-2xl p-5 md:p-6 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* Inputs */}
@@ -81,7 +80,7 @@ export function RetirementPlannerClient() {
                   inputMode="numeric"
                   value={currentAge}
                   onChange={(e) => setState({ currentAge: e.target.value })}
-                  className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 />
               </div>
               <div>
@@ -91,7 +90,7 @@ export function RetirementPlannerClient() {
                   inputMode="numeric"
                   value={retireAge}
                   onChange={(e) => setState({ retireAge: e.target.value })}
-                  className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 />
               </div>
             </div>
@@ -103,7 +102,7 @@ export function RetirementPlannerClient() {
                 inputMode="decimal"
                 value={currentSavings}
                 onChange={(e) => setState({ currentSavings: e.target.value })}
-                className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               />
             </div>
             <div>
@@ -113,7 +112,7 @@ export function RetirementPlannerClient() {
                 inputMode="decimal"
                 value={monthlyContribution}
                 onChange={(e) => setState({ monthlyContribution: e.target.value })}
-                className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               />
             </div>
             <div>
@@ -123,7 +122,7 @@ export function RetirementPlannerClient() {
                 inputMode="decimal"
                 value={expectedReturn}
                 onChange={(e) => setState({ expectedReturn: e.target.value })}
-                className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
               />
             </div>
           </div>

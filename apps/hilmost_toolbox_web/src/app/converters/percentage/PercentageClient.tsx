@@ -30,12 +30,8 @@ export function PercentageClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-8"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="percentage_calculator" steps={tourSteps} buttonText="How to use" />
-      </div>
 
       <div className="grid grid-cols-1 gap-6">
         {/* Section 1: X% of Y */}

@@ -67,12 +67,8 @@ export function TimeConverterClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="time_converter" steps={tourSteps} buttonText="How to use" />
-      </div>
 
       <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl">
         <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">

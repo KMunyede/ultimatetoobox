@@ -43,7 +43,7 @@ export function AreaPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
         name={`${title.split(" | ")[0]} | Hilmost`}
         description={description}
@@ -73,9 +73,9 @@ export function AreaPageUI({
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Select Units</strong> - Choose your starting unit and your target conversion unit.</li>
-          <li><strong>Step 2: Enter Value</strong> - Type the number you want to convert into the input field.</li>
-          <li><strong>Step 3: Get Result</strong> - The converted measurement updates instantly as you type.</li>
+          <li><strong>Step 1: Select Units</strong> - Choose between metric (sq m) or imperial (sq ft) and agricultural units like acres.</li>
+          <li><strong>Step 2: Enter Dimensions</strong> - Type the numeric value of the land or floor space you want to convert.</li>
+          <li><strong>Step 3: Get Instant Result</strong> - The converted measurement updates in real-time as you modify either field.</li>
         </ol>
       </ToolArticle>
 

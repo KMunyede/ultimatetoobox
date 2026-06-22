@@ -1,11 +1,16 @@
 "use client";
-import { ToolTutorial, NumberTicker } from "@utilitiessite/ui";
-import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
+import { NumberTicker } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import dynamic from "next/dynamic";
 import { useState, useEffect, useMemo } from "react";
 import { Plus, Trash2, Wallet, CreditCard, PiggyBank, ArrowDownCircle, ArrowUpCircle, Info } from "lucide-react";
+
+// Lazy load Recharts
+const PieChart = dynamic(() => import("recharts").then(mod => mod.PieChart), { ssr: false });
+const Pie = dynamic(() => import("recharts").then(mod => mod.Pie), { ssr: false });
+const Cell = dynamic(() => import("recharts").then(mod => mod.Cell), { ssr: false });
+const ResponsiveContainer = dynamic(() => import("recharts").then(mod => mod.ResponsiveContainer), { ssr: false });
+const Tooltip = dynamic(() => import("recharts").then(mod => mod.Tooltip), { ssr: false });
 
 type Category = 'income' | 'fixed' | 'variable' | 'savings';
 
@@ -16,7 +21,7 @@ interface BudgetItem {
   category: Category;
 }
 
-const CATEGORY_CONFIG: Record<Category, { label: string; color: string; icon: any; placeholder: string }> = {
+const CATEGORY_CONFIG: Record<Category, { label: string; color: string; icon: React.ElementType; placeholder: string }> = {
   income: { label: "Income", color: "var(--color-brand-primary)", icon: Wallet, placeholder: "e.g. Salary, Freelance" },
   fixed: { label: "Fixed Expenses", color: "#f43f5e", icon: ArrowDownCircle, placeholder: "e.g. Rent, Bills" },
   variable: { label: "Variable Expenses", color: "#fbbf24", icon: CreditCard, placeholder: "e.g. Food, Fun" },
@@ -29,15 +34,18 @@ export function BudgetClient() {
 
   // Load from LocalStorage
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const saved = localStorage.getItem("hsc_budget_items");
     if (saved) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse budget items", e);
       }
     } else {
         // Initial defaults
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems([
             { id: '1', name: 'Monthly Salary', amount: 5000, category: 'income' },
             { id: '2', name: 'Rent/Mortgage', amount: 1500, category: 'fixed' },
@@ -45,6 +53,7 @@ export function BudgetClient() {
             { id: '4', name: 'Savings', amount: 500, category: 'savings' },
         ]);
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoaded(true);
   }, []);
 
@@ -91,28 +100,18 @@ export function BudgetClient() {
     { name: "Remaining", value: Math.max(0, netBalance), color: "var(--color-brand-primary)" },
   ].filter(d => d.value > 0);
 
-  const tourSteps = [
-    { element: '#tour-budget-income', popover: { title: '1. Add Income', description: 'List all your sources of monthly income here.' } },
-    { element: '#tour-budget-expenses', popover: { title: '2. Track Expenses', description: 'Enter your fixed and variable costs to see where your money goes.' } },
-    { element: '#tour-budget-summary', popover: { title: '3. Net Balance', description: 'The most important number: what is left over at the end of the month.' } },
-  ];
-
   if (!isLoaded) return <div className="h-96 animate-pulse bg-canvas-muted rounded-2xl" />;
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-12"
+      className="@container space-y-6"
     >
       <div className="flex justify-between items-center px-2">
         <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
             <span className="text-xs font-black text-text-muted uppercase tracking-[0.2em]">Live Budget Engine</span>
-        </div>
-        <div className="flex gap-4">
-          <ShareButton />
-          <ToolTutorial tourId="budget_advanced" steps={tourSteps} buttonText="Help Guide" />
         </div>
       </div>
 
@@ -162,7 +161,7 @@ export function BudgetClient() {
 
         {/* Sidebar Summary */}
         <div className="space-y-8">
-            <div id="tour-budget-summary" className="sticky top-24 bg-canvas-card border border-base rounded-[2.5rem] p-5 shadow-2xl overflow-hidden">
+            <div id="tour-budget-summary" className="sticky top-24 bg-canvas-card border border-border-base rounded-[2.5rem] p-5 shadow-2xl overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-brand-primary/20" />
 
                 <h3 className="text-xl font-black text-text-primary mb-8 flex items-center gap-3">
@@ -217,7 +216,7 @@ export function BudgetClient() {
                     </div>
                 </div>
 
-                <div className="bg-canvas-muted rounded-2xl p-4 flex gap-3 items-start border border-base">
+                <div className="bg-canvas-muted rounded-2xl p-4 flex gap-3 items-start border border-border-base">
                     <Info size={18} className="text-brand-primary shrink-0 mt-0.5" />
                     <p className="text-[11px] text-text-secondary leading-relaxed font-medium">
                         Your data is saved automatically to your device. Click the share icon above to send this budget to someone else.
@@ -258,7 +257,7 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
         </div>
       </div>
 
-      <div className="bg-canvas-card border border-base rounded-[2rem] p-2 shadow-sm overflow-hidden">
+      <div className="bg-canvas-card border border-border-base rounded-[2rem] p-2 shadow-sm overflow-hidden">
         <div className="divide-y divide-border-base/50">
           <AnimatePresence initial={false}>
             {items.map((item) => (
@@ -281,7 +280,8 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
                         <span className="absolute left-3 top-3 text-text-muted font-bold text-sm">$</span>
                         <input
                             type="number"
-                            className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
+                            inputMode="decimal"
+                            className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
                             value={item.amount || ""}
                             onChange={(e) => onUpdate(item.id, { amount: parseFloat(e.target.value) || 0 })}
                         />

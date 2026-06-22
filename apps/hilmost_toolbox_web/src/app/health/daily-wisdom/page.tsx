@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
-import { RelatedTools, Breadcrumbs, WebApplicationSchema, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { RelatedTools, Breadcrumbs, WebApplicationSchema, BreadcrumbSchema, ToolHeader, ToolArticle } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
@@ -43,7 +43,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-4xl">
+    <div className="container mx-auto px-4 py-1 max-w-4xl">
       <WebApplicationSchema
         name={`${TITLE} | Hilmost Toolbox`}
         description={DESC}
@@ -63,7 +63,20 @@ export default function Home() {
       />
 
       <DailyQuoteClient />
-      
+
+      <ToolArticle title="Nurturing Your Mental Sanctuary">
+        <p>
+          In a world of constant digital noise, taking a moment to reflect on timeless philosophy can significantly improve your focus and mental clarity. Our Daily Wisdom engine is designed to provide that essential pause.
+        </p>
+
+        <h3>How to Use This Tool</h3>
+        <ol>
+          <li><strong>Step 1: Reflect on Wisdom</strong> - Read the daily hand-picked philosophical quote and consider its application to your life.</li>
+          <li><strong>Step 2: Start Journaling</strong> - Use the private journal tool to record your thoughts, gratitude, or challenges for the day.</li>
+          <li><strong>Step 3: Explore the Library</strong> - Dive deeper into our curated library of stoic and modern wisdom to expand your perspective.</li>
+        </ol>
+      </ToolArticle>
+
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
         <a 
           href="/health/daily-wisdom/library" 

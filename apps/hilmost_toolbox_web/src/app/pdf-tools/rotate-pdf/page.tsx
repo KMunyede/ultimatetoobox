@@ -59,7 +59,7 @@ export default function RotatePDFPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -91,9 +91,9 @@ export default function RotatePDFPage() {
         </p>
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Upload PDF</strong> - Drag your document into the rotation grid.</li>
-          <li><strong>Step 2: Adjust Rotation</strong> - Use &apos;Rotate All&apos; for universal changes or click individual page buttons.</li>
-          <li><strong>Step 3: Save</strong> - Download your corrected PDF instantly.</li>
+          <li><strong>Step 1: Add PDF File</strong> - Drag your misaligned document into the visual rotation workspace.</li>
+          <li><strong>Step 2: Adjust Orientation</strong> - Click individual page rotate buttons or use &quot;Rotate All&quot; to fix upside-down scans.</li>
+          <li><strong>Step 3: Download Corrected</strong> - Save your permanently rotated PDF document to your device in seconds.</li>
         </ol>
       </ToolArticle>
 

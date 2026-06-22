@@ -50,7 +50,7 @@ export default function TipCalculatorPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -82,9 +82,9 @@ export default function TipCalculatorPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Enter Bill Total</strong> - Input the final amount from your restaurant or service receipt.</li>
+          <li><strong>Step 2: Set Tip %</strong> - Choose a standard percentage or enter a custom gratuity based on service quality.</li>
+          <li><strong>Step 3: Split the Check</strong> - Enter the number of people to see exactly how much each person needs to pay.</li>
         </ol>
       </ToolArticle>
 

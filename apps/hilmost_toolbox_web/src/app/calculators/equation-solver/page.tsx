@@ -48,7 +48,7 @@ export default function EquationSolverPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -74,6 +74,13 @@ export default function EquationSolverPage() {
         <p>
           Solving science problems often involves more algebra than actual science. Our Equation Solver eliminates the need to manually rearrange formulas. Simply plug in your known values, select the target variable, and get an instant, accurate result.
         </p>
+        <h3>How to Use This Tool</h3>
+        <ol>
+          <li><strong>Step 1: Choose Category</strong> - Select from Mechanics, Thermodynamics, Relativity, or other scientific disciplines.</li>
+          <li><strong>Step 2: Pick Formula</strong> - Select the specific equation you need to solve and choose the target variable.</li>
+          <li><strong>Step 3: Solve for X</strong> - Enter known values and units to bypass complex algebraic rearrangement instantly.</li>
+        </ol>
+
         <h3>Libraries Included</h3>
         <ul>
           <li><strong>Mechanics:</strong> Newton&apos;s Laws, Kinetic Energy, Work, and Power.</li>

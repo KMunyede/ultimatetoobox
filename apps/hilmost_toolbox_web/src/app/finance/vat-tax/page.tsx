@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -35,6 +35,13 @@ const faqs = [
   },
 ];
 
+const howToSteps = [
+  { name: "Choose Calculation Mode", text: "Select whether you want to 'Add VAT' to a net amount or 'Remove VAT' from a total (gross) price." },
+  { name: "Input Base Amount", text: "Enter the currency value you wish to calculate tax for." },
+  { name: "Set Tax Rate", text: "Input the applicable percentage rate (e.g., 20% for UK VAT or 15% for standard GST)." },
+  { name: "Review Breakdown", text: "Instantly see the split between the net price, the tax amount, and the final grand total." },
+];
+
 export default function VatTaxPage() {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
@@ -45,12 +52,12 @@ export default function VatTaxPage() {
   const lastUpdated = getFileLastUpdated(filePath);
 
   const tourSteps = [
-    { element: 'input', popover: { title: '1. Amount', description: 'Enter the price you want to apply tax to or remove tax from.' } },
-    { element: '.flex-1 > select', popover: { title: '2. Tax Rate', description: 'Select common global rates or enter a custom percentage.' } },
+    { element: '#tour-vat-mode', popover: { title: '1. Select Mode', description: 'Decide if you are adding tax to a price or removing it from a total.' } },
+    { element: 'input', popover: { title: '2. Values', description: 'Enter the amount and the specific tax percentage.' } },
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -58,6 +65,11 @@ export default function VatTaxPage() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
+      <HowToSchema
+        name={`How to Calculate VAT & Sales Tax`}
+        description="Follow our four-step guide to accurately calculate taxes for your business invoices or personal purchases."
+        steps={howToSteps}
+      />
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
@@ -70,21 +82,33 @@ export default function VatTaxPage() {
         shareButton={<ShareButton />}
       />
 
-      <div className="max-w-xl mx-auto">
-        <VatTaxClient />
-      </div>
+      <VatTaxClient />
 
-      <ToolArticle title="Invoicing Made Easy: Adding and Removing Tax">
+      <ToolArticle title="Invoicing Made Easy: Mastering Tax Calculations">
         <p>
-          Whether you are a freelancer generating an invoice or a consumer trying to figure out how much you actually paid in taxes, dealing with VAT, GST, or Sales Tax can be confusing.
+          Whether you are a freelancer generating a professional invoice or a consumer trying to figure out the &quot;true&quot; cost of a purchase, mastering VAT (Value Added Tax) and GST (Goods and Services Tax) is essential for financial clarity.
         </p>
         
+        <h3>Adding Tax vs. Removing Tax</h3>
+        <p>
+          Our tool supports two primary workflows used by businesses worldwide:
+        </p>
+        <ul>
+          <li><strong>Add VAT:</strong> Typically used when quoting a price to a customer. You start with your net service fee and add the government mandated tax rate to get the final total.</li>
+          <li><strong>Remove VAT (Reverse Calculation):</strong> Used when you have a total receipt amount and need to separate the tax for bookkeeping purposes.</li>
+        </ul>
+
+        <h3>Common Global Tax Rates</h3>
+        <p>
+          While tax rates vary by jurisdiction, common values include 20% (United Kingdom), 15% (New Zealand/South Africa), and 5% (various GST regions). Always verify the current legal rate for your specific region before finalizing documents.
+        </p>
+
         <h3>How to Use This Tool</h3>
-        
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Select Mode</strong> - Use the toggle to switch between adding or removing tax.</li>
+          <li><strong>Step 2: Enter Amount</strong> - Input the price you want to calculate the tax for.</li>
+          <li><strong>Step 3: Set Tax Rate</strong> - Enter the custom percentage applicable to your region.</li>
+          <li><strong>Step 4: Breakdown</strong> - Review the high-impact result card for a clear split between net, tax, and gross.</li>
         </ol>
       </ToolArticle>
 

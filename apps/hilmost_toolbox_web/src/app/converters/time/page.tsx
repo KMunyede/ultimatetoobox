@@ -45,7 +45,7 @@ export default function TimeConverterPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Time Converter | Hilmost" description="Free online time converter. Instantly convert between seconds, minutes, hours, days, weeks, months, and years." url="https://hilmost-toolbox.hilmost.net/converters/time" />
       <FAQSchema items={faqs} />
       <Breadcrumbs items={breadcrumbItems} />
@@ -71,9 +71,9 @@ export default function TimeConverterPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Select Units</strong> - Choose your starting unit and your target conversion unit.</li>
-          <li><strong>Step 2: Enter Value</strong> - Type the number you want to convert into the input field.</li>
-          <li><strong>Step 3: Get Result</strong> - The converted measurement updates instantly as you type.</li>
+          <li><strong>Step 1: Input Duration</strong> - Enter the amount of time you want to convert (e.g., 500 minutes).</li>
+          <li><strong>Step 2: Choose Interval</strong> - Switch between small units like seconds or large units like years effortlessly.</li>
+          <li><strong>Step 3: Verify Conversion</strong> - See the precise decimal or integer result for your specific timeframe.</li>
         </ol>
       </ToolArticle>
 

@@ -59,7 +59,7 @@ export default function MD5Page() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -91,8 +91,9 @@ export default function MD5Page() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Paste Text</strong> - Insert your raw text or data string into the main input area.</li>
-          <li><strong>Step 2: Copy Result</strong> - View the generated hash and click to copy.</li>
+          <li><strong>Step 1: Paste Raw Text</strong> - Insert your text or data string into the secure, local input area.</li>
+          <li><strong>Step 2: Generate Hash</strong> - The 32-character hexadecimal MD5 checksum is created instantly as you type.</li>
+          <li><strong>Step 3: Verify Integrity</strong> - Copy the unique hash to confirm file authenticity or perform data deduplication.</li>
         </ol>
       </ToolArticle>
 

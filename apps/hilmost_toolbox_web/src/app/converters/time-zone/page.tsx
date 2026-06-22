@@ -45,7 +45,7 @@ export default function TimeZonePage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema name="Time Zone Converter | Hilmost" description="Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly." url="https://hilmost-toolbox.hilmost.net/converters/time-zone" />
       <FAQSchema items={faqs} />
       <Breadcrumbs items={breadcrumbItems} />
@@ -59,7 +59,7 @@ export default function TimeZonePage() {
         shareButton={<ShareButton />}
       />
 
-      <div className="mb-8">
+      <div className="mb-4">
         <TimeZoneClient />
       </div>
 
@@ -70,9 +70,9 @@ export default function TimeZonePage() {
         
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Set Base Time</strong> - Pick your current location and the time of the meeting.</li>
-          <li><strong>Step 2: Add Destinations</strong> - Type in the cities or time zones you want to compare against.</li>
-          <li><strong>Step 3: View Synchronization</strong> - See a unified timeline showing exactly what time it will be for every participant.</li>
+          <li><strong>Step 1: Set Base Time</strong> - Pick your current location and the specific time of your event or meeting.</li>
+          <li><strong>Step 2: Add Destinations</strong> - Type in the cities or time zones you want to compare against your base.</li>
+          <li><strong>Step 3: Sync Globally</strong> - View a unified timeline showing exactly what time it will be for every participant.</li>
         </ol>
       </ToolArticle>
 

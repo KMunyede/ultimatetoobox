@@ -34,7 +34,7 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-2 max-w-4xl">
       <Breadcrumbs items={breadcrumbItems} />
 
       <Link

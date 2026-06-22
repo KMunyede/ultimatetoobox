@@ -108,9 +108,21 @@ const LIBRARY: Record<string, Equation[]> = {
   ],
 };
 
-export function EquationSolverClient() {
-  const [category, setCategory] = useState("Mechanics");
-  const [equation, setEquation] = useState<Equation>(LIBRARY["Mechanics"][0]);
+export function EquationSolverClient({
+  initialCategory,
+  initialEquationId
+}: {
+  initialCategory?: string,
+  initialEquationId?: string
+}) {
+  const [category, setCategory] = useState(initialCategory && LIBRARY[initialCategory] ? initialCategory : "Mechanics");
+  const [equation, setEquation] = useState<Equation>(() => {
+    if (initialEquationId) {
+      const eq = LIBRARY[category].find(e => e.id === initialEquationId);
+      if (eq) return eq;
+    }
+    return LIBRARY[category][0];
+  });
   const [target, setTarget] = useState<string>(equation.variables[0].id);
   const [inputs, setInputs] = useState<Record<string, number>>({});
   const [inputUnits, setInputUnits] = useState<Record<string, number>>({});

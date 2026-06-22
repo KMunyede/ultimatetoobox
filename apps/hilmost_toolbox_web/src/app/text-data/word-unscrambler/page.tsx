@@ -59,7 +59,7 @@ export default function WordUnscramblerPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -97,9 +97,9 @@ export default function WordUnscramblerPage() {
 
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Enter Letters</strong> - Type your scrambled letters into the main box.</li>
-          <li><strong>Step 2: Apply Filters</strong> - Use advanced filters if you need words for a specific board position.</li>
-          <li><strong>Step 3: Pick &amp; Copy</strong> - Review the grouped results and click any word to copy.</li>
+          <li><strong>Step 1: Enter Letters</strong> - Type your jumbled characters; use `?` or `*` for blank tiles or wildcards.</li>
+          <li><strong>Step 2: Apply Filters</strong> - Narrow results by defining how words should start, end, or what they must contain.</li>
+          <li><strong>Step 3: Pick Your Word</strong> - Browse results grouped by length and click any word to copy it to your clipboard.</li>
         </ol>
       </ToolArticle>
 

@@ -62,11 +62,7 @@ export function DataStorageClient() {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="data_storage_converter" steps={tourSteps} buttonText="How to use" />
-      </div>
+    <div className="space-y-4">
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
           

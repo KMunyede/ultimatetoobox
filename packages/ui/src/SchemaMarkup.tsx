@@ -85,3 +85,36 @@ export function FAQSchema({ items }: { items: { question: string; answer: string
     />
   );
 }
+
+export function HowToSchema({
+  name,
+  description,
+  steps,
+}: {
+  name: string;
+  description: string;
+  steps: { name: string; text: string }[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    step: steps.map((step, index) => ({
+      "@type": "HowToStep",
+      url: `https://schema.org/HowToStep#${index + 1}`,
+      name: step.name,
+      itemListElement: [{
+        "@type": "HowToDirection",
+        text: step.text,
+      }],
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}

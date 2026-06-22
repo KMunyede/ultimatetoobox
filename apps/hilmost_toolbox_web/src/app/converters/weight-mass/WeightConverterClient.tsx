@@ -74,12 +74,8 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="weight_converter" steps={tourSteps} buttonText="How to use" />
-      </div>
 
       <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl">
         <div className="flex flex-col md:flex-row items-center gap-5 md:gap-5">

@@ -48,6 +48,7 @@ export function ScientificInput({
       if (preset) {
         onChange(preset.value);
         const p = preset.value.toExponential().split("e");
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setParts({
           coefficient: parseFloat(p[0]).toFixed(3).replace(/\.?0+$/, ""),
           exponent: p[1].replace("+", ""),

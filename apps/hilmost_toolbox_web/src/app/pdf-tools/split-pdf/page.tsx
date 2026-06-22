@@ -59,7 +59,7 @@ export default function SplitPDFPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -91,9 +91,9 @@ export default function SplitPDFPage() {
         </p>
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Upload PDF</strong> - Drag your document into the browser.</li>
-          <li><strong>Step 2: Choose Pages</strong> - Click the thumbnails or enter a numeric range.</li>
-          <li><strong>Step 3: Extract</strong> - Download your new, smaller PDF immediately.</li>
+          <li><strong>Step 1: Select PDF File</strong> - Choose the document you want to break down into smaller parts or individual pages.</li>
+          <li><strong>Step 2: Choose Split Mode</strong> - Select specific pages visually using thumbnails or enter a numeric page range.</li>
+          <li><strong>Step 3: Extract Pages</strong> - Download your new, smaller PDF files immediately without any data leaving your device.</li>
         </ol>
       </ToolArticle>
 

@@ -31,12 +31,8 @@ export function MD5HashClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-4"
     >
-      <div className="flex justify-end gap-4">
-        <ShareButton />
-        <ToolTutorial tourId="md5_generator" steps={tourSteps} buttonText="How to use" />
-      </div>
 
       <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl space-y-8">
         <div id="tour-md5-input" className="space-y-4">

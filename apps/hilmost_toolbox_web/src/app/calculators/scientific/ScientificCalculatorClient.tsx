@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { IconShare, IconCheck } from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 
 type AngleMode = "deg" | "rad" | "grad";
@@ -15,7 +15,6 @@ type AngleMode = "deg" | "rad" | "grad";
  * Uses CSS Grid with @container queries to handle Portrait vs Landscape transitions.
  */
 export function ScientificCalculatorClient() {
-  const router = useRouter();
   const pathname = usePathname();
 
   const [expression, setExpression] = useState("");
@@ -29,9 +28,11 @@ export function ScientificCalculatorClient() {
   const { history, addEntry, clearHistory } = useHistory("scientific");
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     const expr = params.get("expr");
     if (expr) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setExpression(decodeURIComponent(expr));
     }
   }, []);
@@ -43,6 +44,8 @@ export function ScientificCalculatorClient() {
       const math = create(all);
 
       let processedExpr = expression
+        .replace(/&pi;/g, "pi")
+        .replace(/&tau;/g, "tau")
         .replace(/π/g, "pi")
         .replace(/e/g, "e")
         .replace(/√\(/g, "sqrt(")

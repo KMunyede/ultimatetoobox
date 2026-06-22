@@ -50,7 +50,7 @@ export default function PercentagePage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -79,9 +79,9 @@ export default function PercentagePage() {
         
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Choose Scenario</strong> - Select the type of percentage problem you need to solve.</li>
-          <li><strong>Step 2: Enter Values</strong> - Input your numbers into the labeled fields.</li>
-          <li><strong>Step 3: Get Result</strong> - The answer appears immediately with a clear explanation of the logic.</li>
+          <li><strong>Step 1: Choose Scenario</strong> - Select the type of percentage problem (e.g., finding a discount or % change).</li>
+          <li><strong>Step 2: Enter Numeric Data</strong> - Input your values into the labeled fields for instant calculation.</li>
+          <li><strong>Step 3: Understand Logic</strong> - Read the clear explanation of how the result was derived mathematically.</li>
         </ol>
       </ToolArticle>
 

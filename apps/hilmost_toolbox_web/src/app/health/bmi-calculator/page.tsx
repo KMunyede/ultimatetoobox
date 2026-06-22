@@ -55,7 +55,7 @@ export default function BMIPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -85,9 +85,9 @@ export default function BMIPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Input Metrics</strong> - Enter your physical measurements accurately.</li>
-          <li><strong>Step 2: Select System</strong> - Toggle between metric or imperial units if required.</li>
-          <li><strong>Step 3: View Health Index</strong> - Review your calculated health indicators instantly.</li>
+          <li><strong>Step 1: Enter Metrics</strong> - Input your current height and weight accurately into the provided fields.</li>
+          <li><strong>Step 2: Select System</strong> - Toggle between Metric (cm/kg) or Imperial (ft/lbs) units depending on your preference.</li>
+          <li><strong>Step 3: Review Results</strong> - See your Body Mass Index score and its corresponding health category instantly.</li>
         </ol>
       </ToolArticle>
 

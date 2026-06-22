@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { ScientificInput } from "../../../components/calculators/ScientificInput";
 import { useHistory } from "../../../hooks/useHistory";
@@ -44,10 +44,7 @@ const DIST_PRESETS = [
   { label: "10 Parsecs", value: CONSTANTS.parsec * 10 },
 ];
 
-const LUM_PRESETS = [
-  { label: "Solar luminosity", value: CONSTANTS.solarLuminosity },
-  { label: "1 erg/s", value: 1e-7 },
-];
+type CalcType = "gravity" | "orbital" | "escape" | "luminosity" | "hubble";
 
 const MASS_UNITS = [
   { label: "kg", value: 1 },
@@ -63,8 +60,6 @@ const DIST_UNITS = [
   { label: "Light-years", value: CONSTANTS.lightYear },
   { label: "Parsecs", value: CONSTANTS.parsec },
 ];
-
-type CalcType = "gravity" | "orbital" | "escape" | "luminosity" | "hubble";
 
 function formatHumanReadable(val: number, unit: string) {
   if (val === 0) return "0 " + unit;
@@ -90,8 +85,12 @@ function formatHumanReadable(val: number, unit: string) {
   return `≈ ${val.toLocaleString()} ${unit}`;
 }
 
-export function AstrophysicsCalculatorClient() {
-  const [calcType, setCalcType] = useState<CalcType>("gravity");
+export function AstrophysicsCalculatorClient({
+  initialType
+}: {
+  initialType?: CalcType
+}) {
+  const [calcType, setCalcType] = useState<CalcType>(initialType || "gravity");
   const [val1, setVal1] = useState(CONSTANTS.earthMass);
   const [val2, setVal2] = useState(CONSTANTS.solarMass);
   const [val3, setVal3] = useState(CONSTANTS.earthSunDist);
@@ -145,7 +144,7 @@ export function AstrophysicsCalculatorClient() {
       animate={{ opacity: 1, y: 0 }}
       className="@container max-w-4xl mx-auto flex flex-col gap-6"
     >
-      <div className="bg-canvas-card border border-base rounded-3xl p-5 md:p-8 shadow-sm">
+      <div className="bg-canvas-card border border-border-base rounded-3xl p-5 md:p-8 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
 
           {/* Controls Column */}
@@ -155,7 +154,7 @@ export function AstrophysicsCalculatorClient() {
               <select
                 value={calcType}
                 onChange={(e) => setCalcType(e.target.value as CalcType)}
-                className="w-full bg-canvas-muted border border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer"
+                className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer"
               >
                 <option value="gravity">Gravitational Force</option>
                 <option value="orbital">Orbital Velocity</option>
@@ -192,7 +191,7 @@ export function AstrophysicsCalculatorClient() {
             {calcType === "luminosity" && (
               <>
                 <ScientificInput label="Star Radius (R)" value={val1} onChange={setVal1} presets={DIST_PRESETS} units={DIST_UNITS} />
-                <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-base rounded-2xl">
+                <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl">
                   <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
                   <div className="flex items-center gap-3">
                     <input
@@ -200,7 +199,7 @@ export function AstrophysicsCalculatorClient() {
                       inputMode="decimal"
                       value={val2}
                       onChange={(e) => setVal2(parseFloat(e.target.value))}
-                      className="flex-1 bg-canvas-card border border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
+                      className="flex-1 bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                       placeholder="5778"
                     />
                     <span className="text-xs font-bold text-text-muted uppercase">Kelvin</span>
@@ -209,7 +208,7 @@ export function AstrophysicsCalculatorClient() {
               </>
             )}
             {calcType === "hubble" && (
-              <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-base rounded-2xl">
+              <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl">
                 <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Recessional Velocity (v)</label>
                 <div className="flex items-center gap-3">
                   <input
@@ -217,7 +216,7 @@ export function AstrophysicsCalculatorClient() {
                     inputMode="decimal"
                     value={val1}
                     onChange={(e) => setVal1(parseFloat(e.target.value))}
-                    className="flex-1 bg-canvas-card border border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
+                    className="flex-1 bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                     placeholder="1000"
                   />
                   <span className="text-xs font-bold text-text-muted uppercase">km/s</span>

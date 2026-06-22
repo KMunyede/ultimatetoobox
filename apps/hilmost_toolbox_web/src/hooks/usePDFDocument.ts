@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import * as pdfjs from "pdfjs-dist";
 
 export function usePDFDocument(file: File | null) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [pdfProxy, setPdfProxy] = useState<any | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -11,7 +12,9 @@ export function usePDFDocument(file: File | null) {
 
   useEffect(() => {
     if (!file) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPdfProxy(null);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPageCount(0);
       return;
     }
@@ -52,6 +55,7 @@ export function usePDFDocument(file: File | null) {
         pdfProxy.destroy();
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
 
   return { pdfProxy, loading, error, pageCount };

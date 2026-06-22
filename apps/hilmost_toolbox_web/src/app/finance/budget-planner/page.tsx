@@ -50,7 +50,7 @@ export default function BudgetPlannerPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -86,9 +86,9 @@ export default function BudgetPlannerPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Add Income</strong> - Enter your total after-tax monthly income sources.</li>
-          <li><strong>Step 2: Track Expenses</strong> - Log your needs, wants, and savings contributions.</li>
-          <li><strong>Step 3: Review Breakdown</strong> - Monitor the visual progress bar to see if your spending aligns with targets.</li>
+          <li><strong>Step 1: Log Income</strong> - Add all your monthly after-tax income sources to establish your baseline.</li>
+          <li><strong>Step 2: Categorize Spending</strong> - Assign expenses to Fixed, Variable, or Savings categories using the 50/30/20 rule.</li>
+          <li><strong>Step 3: Analyze Balance</strong> - Use the visual breakdown to see if your spending aligns with your financial goals.</li>
         </ol>
       </ToolArticle>
 

@@ -50,7 +50,7 @@ export default function RetirementPlannerPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-6xl">
+    <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
         name={TOOL_NAME}
         description={TOOL_DESC}
@@ -80,9 +80,9 @@ export default function RetirementPlannerPage() {
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Input Current Status</strong> - Enter your current age, savings balance, and target retirement age.</li>
+          <li><strong>Step 2: Set Savings Strategy</strong> - Define your monthly contributions and expected investment return rate.</li>
+          <li><strong>Step 3: Track Trajectory</strong> - Visualize if your current path will meet your retirement income needs.</li>
         </ol>
       </ToolArticle>
 

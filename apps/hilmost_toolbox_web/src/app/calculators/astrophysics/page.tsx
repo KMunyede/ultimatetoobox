@@ -48,7 +48,7 @@ export default function AstrophysicsCalculatorPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -74,6 +74,13 @@ export default function AstrophysicsCalculatorPage() {
         <p>
           Astrophysics involves some of the most extreme scales in the universe, from the microscopic quantum fluctuations to the macroscopic expansion of space-time. Our calculator bridges these gaps by handling large-scale data with ease.
         </p>
+        <h3>How to Use This Tool</h3>
+        <ol>
+          <li><strong>Step 1: Select cosmic event</strong> - Choose from Gravitational Force, Orbital Velocity, Escape Velocity, and more.</li>
+          <li><strong>Step 2: Use Presets</strong> - Select celestial bodies like Earth or the Sun to avoid typing extreme scientific notation.</li>
+          <li><strong>Step 3: Review Results</strong> - See precision calculations in scientific notation with clear descriptions of the physics.</li>
+        </ol>
+
         <h3>Calculations Supported</h3>
         <ul>
           <li><strong>Gravitational Force:</strong> Determine the pull between any two masses across space.</li>

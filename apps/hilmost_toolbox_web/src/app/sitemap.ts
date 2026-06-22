@@ -70,8 +70,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 6. Fixed Programmatic Slugs (Calculators, Text-Data, Finance)
   const FIXED_PROGRAMMATIC: Record<string, string[]> = {
-    'calculators/equation-solver': ["kinematics", "force", "ideal-gas-law"],
-    'calculators/astrophysics': ["escape-velocity", "schwarzschild-radius", "orbital-speed"],
+    'calculators/equation-solver': ["newtons-second-law", "kinetic-energy", "ideal-gas-law", "ohms-law"],
+    'calculators/astrophysics': ["gravitational-force", "orbital-velocity", "escape-velocity", "luminosity-calculator", "hubble-distance"],
     'finance/salary-converter': ["hourly-to-salary", "salary-to-hourly", "monthly-to-hourly", "weekly-to-salary", "daily-rate-calculator"],
     'text-data/base64-encode': ["base64-encode", "base64-decode"],
   };
@@ -81,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   // Helper to map paths to Sitemap format
-  const mapToSitemap = (paths: string[], priority: number, changeFrequency: any): MetadataRoute.Sitemap =>
+  const mapToSitemap = (paths: string[], priority: number, changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly'): MetadataRoute.Sitemap =>
     paths.map((p) => ({
       url: `${baseUrl}${p}`,
       lastModified,

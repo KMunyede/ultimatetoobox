@@ -84,11 +84,7 @@ export function TimeZoneClient() {
   ];
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-end gap-2 mb-4">
-        <ShareButton />
-        <ToolTutorial tourId="time_zone" steps={tourSteps} buttonText="How to use" />
-      </div>
+    <div className="space-y-4">
 
       <div className="grid md:grid-cols-12 gap-8">
         {/* Source Configuration */}

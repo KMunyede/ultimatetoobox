@@ -20,6 +20,8 @@ export function useUrlState<T extends Record<string, string | number>>(
 
   // Sync state from URL on mount only (client-side)
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const params = new URLSearchParams(window.location.search);
     const newState = { ...initialState };
     let hasChanges = false;
@@ -30,19 +32,22 @@ export function useUrlState<T extends Record<string, string | number>>(
         if (typeof initialState[key] === "number") {
           const parsed = Number(urlVal);
           if (!isNaN(parsed)) {
-            (newState as any)[key] = parsed;
+            (newState as Record<string, string | number>)[key] = parsed;
             hasChanges = true;
           }
         } else {
-          (newState as any)[key] = urlVal;
+          (newState as Record<string, string | number>)[key] = urlVal;
           hasChanges = true;
         }
       }
     });
 
     if (hasChanges) {
+      // Use functional update or timeout if needed, but here we just want to sync once.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState(newState);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Run once on mount
 
   const setUrlState = useCallback(
@@ -68,8 +73,10 @@ export function useUrlState<T extends Record<string, string | number>>(
           params.set(key, String(merged[key]));
         });
 
-        // Use window.history.replaceState to update URL without triggerring a full page reload or Next.js router overhead
-        window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
+        // Use window.history.replaceState to update URL without triggering a full page reload
+        if (typeof window !== "undefined") {
+          window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
+        }
         
         return merged;
       });

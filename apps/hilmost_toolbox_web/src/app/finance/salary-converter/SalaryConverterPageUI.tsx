@@ -43,7 +43,7 @@ export function SalaryConverterPageUI({
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={title.split(" | ")[0]}
         description={description}
@@ -75,9 +75,9 @@ export function SalaryConverterPageUI({
         <h3>How to Use This Tool</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Financial Data</strong> - Input your principal amounts, interest rates, or currency values.</li>
-          <li><strong>Step 2: Adjust Parameters</strong> - Modify timelines, frequencies, or tax rates as needed.</li>
-          <li><strong>Step 3: View Projection</strong> - Instantly see the calculated financial projection, total costs, or exchange amounts.</li>
+          <li><strong>Step 1: Enter Current Wage</strong> - Type in your salary and select how often you are paid (e.g., Hourly or Monthly).</li>
+          <li><strong>Step 2: Define Work Week</strong> - Adjust your average working hours per week for a precise conversion.</li>
+          <li><strong>Step 3: Compare Timeframes</strong> - See how your pay translates across daily, weekly, monthly, and annual intervals.</li>
         </ol>
       </ToolArticle>
 

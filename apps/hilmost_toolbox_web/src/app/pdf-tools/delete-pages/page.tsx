@@ -59,7 +59,7 @@ export default function DeletePagesPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -91,9 +91,9 @@ export default function DeletePagesPage() {
         </p>
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Select File</strong> - Upload the PDF you want to edit.</li>
-          <li><strong>Step 2: Pick Pages</strong> - Click on the thumbnails of the pages you wish to discard.</li>
-          <li><strong>Step 3: Download</strong> - Generate your cleaned PDF instantly.</li>
+          <li><strong>Step 1: Import Document</strong> - Upload the PDF you want to clean up or remove sensitive information from.</li>
+          <li><strong>Step 2: Pick Pages</strong> - Click on the thumbnails of the pages you wish to discard to highlight them for removal.</li>
+          <li><strong>Step 3: Generate Clean PDF</strong> - Download the updated document with your selected pages permanently deleted.</li>
         </ol>
       </ToolArticle>
 

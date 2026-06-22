@@ -48,7 +48,7 @@ export default function ScientificCalculatorPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost Toolbox`}
         description={TOOL_DESC}
@@ -74,11 +74,18 @@ export default function ScientificCalculatorPage() {
         <p>
           Our Scientific Calculator provides the power of a dedicated handheld device directly in your browser. From trigonometric identities to logarithmic transformations, it handles complex expressions with precision and speed.
         </p>
+        <h3>How to Use This Tool</h3>
+        <ol>
+          <li><strong>Step 1: Select Functions</strong> - Access trigonometry, logarithms, and roots using the advanced mathematical grid.</li>
+          <li><strong>Step 2: Set Angle Mode</strong> - Choose between Degrees (DEG) and Radians (RAD) for precise scientific calculations.</li>
+          <li><strong>Step 3: Solve Complex Math</strong> - Enter multi-step expressions and use constants like Pi (&pi;) and Euler&apos;s number (e).</li>
+        </ol>
+
         <h3>Advanced Functionality</h3>
         <ul>
           <li><strong>Trigonometry:</strong> Support for Sine, Cosine, Tangent, and their inverses in multiple angle modes.</li>
           <li><strong>Logarithms:</strong> Calculate natural logs (ln) and base-10 logs (log) with ease.</li>
-          <li><strong>Constants:</strong> Built-in values for Pi (π) and Euler&apos;s number (e).</li>
+          <li><strong>Constants:</strong> Built-in values for Pi (&pi;) and Euler&apos;s number (e).</li>
           <li><strong>URL Sharing:</strong> Collaborate by sharing direct links to your complex calculations.</li>
         </ul>
       </ToolArticle>

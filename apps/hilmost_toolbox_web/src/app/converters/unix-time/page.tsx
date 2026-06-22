@@ -50,7 +50,7 @@ export default function UnixTimePage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-5xl">
+    <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
         name={`${TOOL_NAME} | Hilmost`}
         description={TOOL_DESC}
@@ -79,9 +79,9 @@ export default function UnixTimePage() {
         
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Input Data</strong> - Enter a Unix timestamp (seconds or milliseconds) or pick a calendar date.</li>
-          <li><strong>Step 2: Instant Sync</strong> - The other field updates immediately with the corresponding value.</li>
-          <li><strong>Step 3: Copy & Use</strong> - Click the value to copy it to your clipboard for use in code or databases.</li>
+          <li><strong>Step 1: Paste Timestamp</strong> - Enter a 10-digit Unix epoch to see the human-readable date and time.</li>
+          <li><strong>Step 2: Pick Calendar Date</strong> - Use the date picker to generate the corresponding Unix timestamp instantly.</li>
+          <li><strong>Step 3: Copy to Clipboard</strong> - Click any result to copy it for use in your code, database, or logs.</li>
         </ol>
       </ToolArticle>
 
