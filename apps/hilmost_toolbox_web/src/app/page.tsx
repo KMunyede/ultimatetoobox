@@ -63,6 +63,7 @@ export default function Home() {
       icon: <Banknote className="w-6 h-6 text-amber-500" />,
       colorClass: "bg-amber-500/10",
       links: [
+        { name: "WACC Calculator", href: "/finance/wacc-calculator" },
         { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator" },
         { name: "Currency Converter", href: "/finance/currency" },
         { name: "Loan Calculator", href: "/finance/loan-calculator" },

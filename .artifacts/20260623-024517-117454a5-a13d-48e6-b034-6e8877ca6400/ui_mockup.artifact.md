@@ -1,43 +1,49 @@
-# EPS Calculator UI Layout Description
+# WACC Calculator (Professional+) UI Layout
 
-Since I cannot generate a direct image file in this environment, I have detailed the visual layout below in plain language, describing exactly how it will look on your screen.
+This tool uses a "Dashboard" approach, organizing complex financial inputs into logical zones to prevent user overwhelm.
 
 ## Visual Representation
 
 ```text
 +----------------------------------------------------------------------------------+
-| [Breadcrumbs: Finance > EPS Calculator]                                 [Share]  |
+| [Breadcrumbs: Finance > WACC Calculator]                                [Share]  |
 |                                                                                  |
-| EARNINGS PER SHARE (EPS) CALCULATOR                                              |
-| Analyze company profitability and dilution impacts instantly.                    |
+| WEIGHTED AVERAGE COST OF CAPITAL (WACC)                                          |
+| Determine your company's hurdle rate and capital structure efficiency.           |
 |                                                                                  |
 | +-----------------------------------------+ +----------------------------------+ |
-| | INPUTS (Compact)                        | | RESULTS (Highlighted)            | |
+| | 1. EQUITY & CAPM (Blue Zone)            | |       WACC DASHBOARD             | |
 | |                                         | |                                  | |
-| | NET INCOME ($)                          | |           BASIC EPS              | |
-| | [ 1,000,000              ]              | |            $4.75                 | |
+| | MARKET CAP ($)        BETA              | |          TOTAL WACC              | |
+| | [ 500,000,000  ]      [ 1.2    ]        | |            8.42%                 | |
+| |                                         | |        (Optimal Range)           | |
+| | RISK-FREE RATE (%)    EQUITY RISK PREM  | |                                  | |
+| | [ 4.2      ]          [ 5.5    ]        | |                                  | |
+| |                                         | | COST OF EQUITY    COST OF DEBT   | |
+| | 2. DEBT & TAXES (Red Zone)              | |     10.80%            4.50%      | |
 | |                                         | |                                  | |
-| | PREFERRED DIVIDENDS ($)                 | |                                  | |
-| | [ 50,000                 ]              | |          DILUTED EPS             | |
-| |                                         | |            $4.42                 | |
-| | WEIGHTED AVG SHARES                     | |                                  | |
-| | [ 200,000                ]              | | -------------------------------- | |
-| |                                         | | Net Profit     Total Diluted Sh. | |
-| | DILUTIVE POTENTIAL SHARES               | |   $950k             215k         | |
-| | [ 15,000                 ]              | |                                  | |
+| | TOTAL DEBT ($)        INTEREST RATE (%) | | -------------------------------- | |
+| | [ 250,000,000  ]      [ 6.0    ]        | |    TAX SHIELD SAVINGS (YEARLY)   | |
+| |                                         | |            $3,750,000            | |
+| | TAX RATE (%)                            | |                                  | |
+| | [ 25.0     ]                            | |                                  | |
 | +-----------------------------------------+ +----------------------------------+ |
 |                                                                                  |
-| ARTICLE: Understanding Basic vs. Diluted EPS                                     |
-| FAQ: What is dilution? How do preferred dividends affect EPS?                    |
+| [!] INSIGHT: Your capital structure is 67% Equity and 33% Debt.                  |
+|                                                                                  |
+| ARTICLE: How to use WACC to evaluate new business projects.                      |
 +----------------------------------------------------------------------------------+
 ```
 
-## Aesthetic Details
-- **Background**: Clean, crisp white with a very light gray page background (Slate 50).
-- **Cards**: The Input and Result sections are contained in rounded cards with a subtle shadow to make them "pop."
-- **Typography**:
-    - Labels are small, bold, and uppercase for a professional "Finance Terminal" feel.
-    - The big numbers ($4.75) use a thick, black font to grab attention immediately.
-- **Colors**: Primary blue for the main results, slate grays for text and borders.
-- **Interactivity**: When you hover over labels like "Dilutive Potential Shares," a small helpful bubble appears to explain the term.
+## Unique "Beneficial" Features:
+1.  **CAPM Integration**: The "Cost of Equity" (10.80%) is calculated *for* the user based on their Beta and Risk-Free inputs.
+2.  **Tax Shield Counter**: A dedicated result showing the dollar amount saved in taxes due to debt interest—this is a "Lightbulb" moment for many business owners.
+3.  **Color Zoning**:
+    - **Blue Section**: Equity/Shareholder focus.
+    - **Red Section**: Debt/Lender focus.
+    - **Green/Gold Results**: The final weighted average.
+4.  **Smart Insights**: A small text area below the calculator that explains *why* the number is what it is (e.g., "Your high Beta is driving up your cost of equity").
+
+---
+**Does this 3-zone dashboard layout meet your expectations for a "professional+" tool?**
 

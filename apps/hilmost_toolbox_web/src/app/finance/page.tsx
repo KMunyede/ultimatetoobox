@@ -75,6 +75,11 @@ const links = [
     href: "/finance/earnings-per-share-calculator",
     description: "Analyze company profitability by calculating Basic and Diluted Earnings Per Share (EPS)."
   },
+  {
+    name: "WACC Calculator",
+    href: "/finance/wacc-calculator",
+    description: "Determine your company's hurdle rate and capital structure efficiency with integrated CAPM logic."
+  },
 ];
 
 export default function FinanceHub() {

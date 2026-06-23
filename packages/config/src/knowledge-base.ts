@@ -63,5 +63,13 @@ export const KNOWLEDGE_BASE: KBArticle[] = [
     excerpt: "Understand how company profitability is measured and why dilution matters for shareholders.",
     relatedTools: ["/finance/earnings-per-share-calculator"],
     content: "Earnings Per Share (EPS) is a critical indicator of a company's profitability, representing the portion of profit allocated to each outstanding share of common stock. **Basic EPS** is calculated by subtracting preferred dividends from net income and dividing by the weighted average of shares outstanding. **Diluted EPS** goes further by including 'convertible' securities—such as stock options, warrants, and convertible bonds—that could become shares in the future. Dilution is vital for investors to track because it reveals the 'worst-case' scenario for their ownership stake if all potential shares were issued."
+  },
+  {
+    slug: "weighted-average-cost-of-capital-guide",
+    title: "Weighted Average Cost of Capital (WACC): A Beginner's Guide",
+    category: "finance",
+    excerpt: "Learn how to calculate your company's hurdle rate and why it determines which projects are worth your time.",
+    relatedTools: ["/finance/wacc-calculator"],
+    content: "The Weighted Average Cost of Capital (WACC) is the average rate a company expects to pay to finance its assets. It is calculated by weighting the cost of each capital component (equity and debt) by its proportion in the company's total capital structure. For business owners, WACC acts as the 'Hurdle Rate'—if a new project doesn't earn a return higher than the WACC, it is actually destroying value. Understanding your WACC helps you make smarter decisions about taking on debt, issuing stock, or expanding your operations."
   }
 ];
