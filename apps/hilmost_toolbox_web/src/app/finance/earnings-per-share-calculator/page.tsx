@@ -5,14 +5,14 @@ import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
-const TOOL_NAME = "Earnings Per Share (EPS) Calculator";
-const TOOL_DESC = "Calculate Basic and Diluted EPS to measure company profitability. Understand how dividends and share dilution impact your investment returns.";
+const TOOL_NAME = "EPS Analysis Engine";
+const TOOL_DESC = "Professional-grade basic and diluted EPS calculations. Analyze company profitability and share dilution impact instantly.";
 const PATH = "/finance/earnings-per-share-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `EPS Calculator | Basic & Diluted`,
+    title: `EPS Analysis Engine | Basic & Diluted Calculations | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
@@ -52,7 +52,7 @@ export default function EPSCalculatorPage() {
   return (
     <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
-        name="EPS Calculator"
+        name={TOOL_NAME}
         description={TOOL_DESC}
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
