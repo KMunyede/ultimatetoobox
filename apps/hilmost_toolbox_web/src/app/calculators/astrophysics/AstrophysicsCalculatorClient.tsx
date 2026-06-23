@@ -222,10 +222,10 @@ export function AstrophysicsCalculatorClient({
       `}</style>
 
       <div className="bg-canvas-card border border-border-base rounded-3xl p-5 md:p-8 shadow-sm">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8">
 
-          {/* Controls Column */}
-          <div className="flex flex-col gap-5">
+          {/* Controls Column (25% width) */}
+          <div className="lg:col-span-1 flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Calculation Type</label>
               <Tooltip content="Select the astrophysical law or formula you want to compute" position="top" className="w-full">
@@ -233,14 +233,14 @@ export function AstrophysicsCalculatorClient({
                   value={calcType}
                   title="Astrophysics Calculation Type"
                   onChange={(e) => setCalcType(e.target.value as CalcType)}
-                  className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer shadow-inner"
+                  className="w-full max-w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-base md:text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer shadow-inner"
                 >
                   <option value="gravity">Gravitational Force</option>
                   <option value="orbital">Orbital Velocity</option>
                   <option value="escape">Escape Velocity</option>
                   <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
                   <option value="hubble">Hubble Distance</option>
-                  <option value="schwarzschild">Schwarzschild Radius (Black Holes)</option>
+                  <option value="schwarzschild">Schwarzschild Radius</option>
                   <option value="redshift">Redshift to Velocity</option>
                 </select>
               </Tooltip>
@@ -257,8 +257,8 @@ export function AstrophysicsCalculatorClient({
             </Tooltip>
           </div>
 
-          {/* Dynamic Inputs Column */}
-          <div className="flex flex-col gap-4">
+          {/* Dynamic Inputs Column (75% width) */}
+          <div className="lg:col-span-3 flex flex-col gap-4">
             {calcType === "gravity" && (
               <>
                 <ScientificInput label="Mass 1 (m1)" value={val1} onChange={setVal1} presets={MASS_PRESETS} units={MASS_UNITS} />
@@ -337,36 +337,36 @@ export function AstrophysicsCalculatorClient({
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-brand-primary rounded-[2.5rem] p-8 md:p-10 text-white shadow-2xl relative overflow-hidden"
+            className="bg-brand-primary rounded-[2.5rem] p-4 md:p-5 text-white shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24 pointer-events-none" />
             <div className="relative z-10">
-              <div className="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-3">Calculated Result</div>
-              <div className="text-4xl md:text-6xl font-mono font-black mb-4 tracking-tighter leading-none">
+              <div className="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-1">Calculated Result</div>
+              <div className="text-3xl md:text-5xl font-mono font-black mb-1 tracking-tighter leading-none">
                 <ScientificNumber value={parseFloat(result)} className="text-white" />
               </div>
-              <div className="text-lg font-medium opacity-90 italic">
+              <div className="text-base font-medium opacity-90 italic">
                 {humanResult}
               </div>
             </div>
           </motion.div>
 
           {/* Research Export Actions */}
-          <div className="flex flex-wrap gap-3">
-            <Tooltip content="Copy formula and result for a research paper (LaTeX format)" position="bottom">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Tooltip content="Copy formula and result for a research paper (LaTeX format)" position="bottom" className="w-full">
               <button
                 onClick={() => copyToClipboard(lastLaTeX, 'latex')}
-                className="flex-1 min-w-[180px] h-12 flex items-center justify-center gap-2.5 bg-white dark:bg-slate-900 border border-border-base rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-primary transition-all active:scale-95 shadow-sm"
+                className="w-full h-12 flex items-center justify-center gap-2.5 bg-white dark:bg-slate-900 border border-border-base rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-primary transition-all active:scale-95 shadow-sm"
               >
                 {copiedType === 'latex' ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
                 {copiedType === 'latex' ? 'LaTeX Copied!' : 'Copy for Paper (LaTeX)'}
               </button>
             </Tooltip>
 
-            <Tooltip content="Copy code snippet for Python (AstroPy compatible)" position="bottom">
+            <Tooltip content="Copy code snippet for Python (AstroPy compatible)" position="bottom" className="w-full">
               <button
                 onClick={() => copyToClipboard(lastPython, 'python')}
-                className="flex-1 min-w-[180px] h-12 flex items-center justify-center gap-2.5 bg-white dark:bg-slate-900 border border-border-base rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-primary transition-all active:scale-95 shadow-sm"
+                className="w-full h-12 flex items-center justify-center gap-2.5 bg-white dark:bg-slate-900 border border-border-base rounded-xl text-xs font-black uppercase tracking-widest hover:border-brand-primary transition-all active:scale-95 shadow-sm"
               >
                 {copiedType === 'python' ? <Check size={14} className="text-green-600" /> : <Terminal size={14} />}
                 {copiedType === 'python' ? 'Python Copied!' : 'Copy as Python'}
