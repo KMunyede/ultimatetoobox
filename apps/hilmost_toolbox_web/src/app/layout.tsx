@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider, Header, Footer, AdSenseScript, AdLayout, AutoBreadcrumbs } from "@utilitiessite/ui";
 import "./globals.css";
 
@@ -62,6 +63,18 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-637S0R8TMZ"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-toolbox" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-637S0R8TMZ');
+          `}
+        </Script>
       </body>
     </html>
   );
