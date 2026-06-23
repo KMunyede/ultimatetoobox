@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { ScientificInput } from "../../../components/calculators/ScientificInput";
 import { useHistory } from "../../../hooks/useHistory";
 import { ScientificNumber, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
-import { Copy, Terminal, FileJson, Check, MoonStar } from "lucide-react";
+import { Copy, Terminal, FileJson, Check, MoonStar, ChevronDown } from "lucide-react";
 
 const CONSTANTS = {
   G: 6.67430e-11,
@@ -62,6 +62,16 @@ const DIST_UNITS = [
 
 type CalcType = "gravity" | "orbital" | "escape" | "luminosity" | "hubble" | "schwarzschild" | "redshift";
 
+const CALC_OPTIONS = [
+  { value: "gravity", label: "Gravitational Force" },
+  { value: "orbital", label: "Orbital Velocity" },
+  { value: "escape", label: "Escape Velocity" },
+  { value: "luminosity", label: "Luminosity (Stefan-Boltzmann)" },
+  { value: "hubble", label: "Hubble Distance" },
+  { value: "schwarzschild", label: "Schwarzschild Radius (Black Holes)" },
+  { value: "redshift", label: "Redshift to Velocity" },
+];
+
 function formatHumanReadable(val: number, unit: string) {
   if (val === 0) return "0 " + unit;
   const absVal = Math.abs(val);
@@ -102,6 +112,18 @@ export function AstrophysicsCalculatorClient({
   const [lastPython, setLastPython] = useState("");
   const [copiedType, setCopiedType] = useState<string | null>(null);
   const [isAstronomerMode, setIsAstronomerMode] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const { history, addEntry, clearHistory } = useHistory("astrophysics");
 
@@ -228,22 +250,51 @@ export function AstrophysicsCalculatorClient({
           <div className="lg:col-span-1 flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Calculation Type</label>
-              <Tooltip content="Select the astrophysical law or formula you want to compute" position="top" className="w-full">
-                <select
-                  value={calcType}
-                  title="Astrophysics Calculation Type"
-                  onChange={(e) => setCalcType(e.target.value as CalcType)}
-                  className="w-full max-w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 text-base md:text-lg font-bold text-text-primary focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none cursor-pointer shadow-inner"
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="w-full bg-canvas-muted border border-border-base rounded-2xl px-4 py-3 flex items-center justify-between gap-2 text-left focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none shadow-inner group"
                 >
-                  <option value="gravity">Gravitational Force</option>
-                  <option value="orbital">Orbital Velocity</option>
-                  <option value="escape">Escape Velocity</option>
-                  <option value="luminosity">Luminosity (Stefan-Boltzmann)</option>
-                  <option value="hubble">Hubble Distance</option>
-                  <option value="schwarzschild">Schwarzschild Radius</option>
-                  <option value="redshift">Redshift to Velocity</option>
-                </select>
-              </Tooltip>
+                  <span className="text-base md:text-lg font-bold text-text-primary line-clamp-2 leading-tight">
+                    {CALC_OPTIONS.find(opt => opt.value === calcType)?.label}
+                  </span>
+                  <ChevronDown size={20} className={`text-text-muted shrink-0 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-full left-0 right-0 mt-2 z-50 bg-canvas-card border border-border-base rounded-2xl shadow-2xl overflow-hidden"
+                    >
+                      <div className="max-h-80 overflow-y-auto custom-scrollbar">
+                        {CALC_OPTIONS.map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => {
+                              setCalcType(option.value as CalcType);
+                              setIsDropdownOpen(false);
+                            }}
+                            className={`w-full px-4 py-3 text-left transition-colors flex items-center gap-3 border-b border-border-base/50 last:border-0 ${
+                              calcType === option.value
+                                ? "bg-brand-primary/10 text-brand-primary"
+                                : "text-text-secondary hover:bg-canvas-muted"
+                            }`}
+                          >
+                            <span className="text-sm md:text-base font-bold whitespace-normal leading-snug">
+                              {option.label}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             <Tooltip content="Instantly compute the astrophysical result based on inputs" position="bottom" className="w-full">
