@@ -73,6 +73,7 @@ export default function Home() {
         { name: "Retirement Planner", href: "/finance/retirement-planner" },
         { name: "Inflation Calculator", href: "/finance/inflation" },
         { name: "Budget Planner", href: "/finance/budget-planner" },
+        { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator" },
       ],
     },
     {
