@@ -63,6 +63,7 @@ export default function Home() {
       icon: <Banknote className="w-6 h-6 text-amber-500" />,
       colorClass: "bg-amber-500/10",
       links: [
+        { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator" },
         { name: "Currency Converter", href: "/finance/currency" },
         { name: "Loan Calculator", href: "/finance/loan-calculator" },
         { name: "Income Tax", href: "/finance/income-tax" },
@@ -73,7 +74,6 @@ export default function Home() {
         { name: "Retirement Planner", href: "/finance/retirement-planner" },
         { name: "Inflation Calculator", href: "/finance/inflation" },
         { name: "Budget Planner", href: "/finance/budget-planner" },
-        { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator" },
       ],
     },
     {
