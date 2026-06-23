@@ -55,5 +55,13 @@ export const KNOWLEDGE_BASE: KBArticle[] = [
     excerpt: "Why understanding percentage increase and decrease is vital for tracking inflation and market growth.",
     relatedTools: ["/converters/percentage", "/finance/inflation"],
     content: "Percentages allow us to standardize comparisons across different scales. In economics, the ability to calculate percentage change is the difference between understanding growth and being misled by raw numbers. Whether tracking the Consumer Price Index (CPI) for inflation or evaluating the yield of a bond, percentage math provides the relative context needed for sound financial decision-making..."
+  },
+  {
+    slug: "earnings-per-share-basic-vs-diluted",
+    title: "Earnings Per Share (EPS): Basic vs. Diluted Explained",
+    category: "finance",
+    excerpt: "Understand how company profitability is measured and why dilution matters for shareholders.",
+    relatedTools: ["/finance/earnings-per-share-calculator"],
+    content: "Earnings Per Share (EPS) is a critical indicator of a company's profitability, representing the portion of profit allocated to each outstanding share of common stock. **Basic EPS** is calculated by subtracting preferred dividends from net income and dividing by the weighted average of shares outstanding. **Diluted EPS** goes further by including 'convertible' securities—such as stock options, warrants, and convertible bonds—that could become shares in the future. Dilution is vital for investors to track because it reveals the 'worst-case' scenario for their ownership stake if all potential shares were issued."
   }
 ];

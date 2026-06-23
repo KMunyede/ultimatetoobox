@@ -70,6 +70,11 @@ const links = [
     href: "/finance/budget-planner",
     description: "Track income and expenses to create a balanced financial plan for your household."
   },
+  {
+    name: "EPS Calculator",
+    href: "/finance/earnings-per-share-calculator",
+    description: "Analyze company profitability by calculating Basic and Diluted Earnings Per Share (EPS)."
+  },
 ];
 
 export default function FinanceHub() {
