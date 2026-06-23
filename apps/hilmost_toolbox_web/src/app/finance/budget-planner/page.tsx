@@ -12,8 +12,8 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Budget Planner | Monthly Expense & Income Tracker | Hilmost`,
-    description: "Track your income, needs, wants, and savings with our free online budget planner.",
+    title: `Budget Planner | Monthly Expense Tracker | Hilmost`,
+    description: "Track your income and savings with our free online 50/30/20 budget planner.",
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
@@ -52,7 +52,7 @@ export default function BudgetPlannerPage() {
   return (
     <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
-        name={TOOL_NAME}
+        name="Budget Planner"
         description={TOOL_DESC}
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
