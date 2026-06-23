@@ -12,7 +12,7 @@ const PATH = "/text-data/word-unscrambler";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
+  const title = `Word Unscrambler | Solve Anagrams & Word Puzzles | Hilmost`;
   const description = `Unscramble letters and solve anagrams instantly. Free online tool for Scrabble, Words with Friends, and crossword puzzles.`;
   const canonical = getCanonicalUrl(PATH);
 

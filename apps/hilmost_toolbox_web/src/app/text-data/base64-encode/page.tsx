@@ -9,8 +9,8 @@ const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII fo
 const PATH = "/text-data/base64-encode";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
-  const description = `Safely encode and decode text strings to Base64 format instantly. Free online developer tool for URL-safe data transformation with high precision.`;
+  const title = `Base64 Encoder & Decoder | Online Developer Tool | Hilmost`;
+  const description = `Safely encode and decode text strings to Base64 format instantly. Free online developer tool for URL-safe data transformation.`;
   const canonical = getCanonicalUrl(PATH);
 
   return {

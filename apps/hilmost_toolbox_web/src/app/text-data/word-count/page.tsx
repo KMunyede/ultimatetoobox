@@ -12,7 +12,7 @@ const PATH = "/text-data/word-count";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
+  const title = `Word Count Tool | Real-time Character & Text Counter | Hilmost`;
   const description = `Analyze your text with precision. Free online word counter to track word density and character counts instantly.`;
   const canonical = getCanonicalUrl(PATH);
 

@@ -12,8 +12,8 @@ const PATH = "/text-data/md5-hash";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
-  const description = `Generate MD5 hashes instantly. Free online tool to verify data integrity and checksums. Secure, local browser-based hashing.`;
+  const title = `MD5 Hash Generator | Secure Online Checksum Tool | Hilmost`;
+  const description = `Generate MD5 hashes instantly. Free online tool to verify data integrity. Secure, local browser-based hashing.`;
   const canonical = getCanonicalUrl(PATH);
 
   return {
