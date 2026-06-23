@@ -185,18 +185,8 @@ export function ScientificCalculatorClient() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container max-w-4xl mx-auto space-y-6"
+      className="@container max-w-4xl mx-auto"
     >
-      <div className="flex justify-end gap-2">
-        <button
-          onClick={handleShare}
-          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:border-blue-500 transition-all shadow-sm active:scale-95"
-        >
-          {copying ? <IconCheck size={18} className="text-green-600" /> : <i className="lucide-share-2 w-4 h-4" />}
-          {copying ? "Link Copied!" : "Share"}
-        </button>
-      </div>
-
       <div className="flex flex-col gap-5">
         <CalculatorDisplay
           expression={expression}
