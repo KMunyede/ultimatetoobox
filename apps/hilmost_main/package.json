@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "indexnow": "node ../../packages/config/src/scripts/submit-indexnow.mjs --host hilmost.net --key 4e24174360e241858852e1f2536c6411"
   },
   "dependencies": {
     "@utilitiessite/ui": "*",

@@ -4,7 +4,7 @@ import { KNOWLEDGE_BASE } from "@utilitiessite/config";
 import { Lightbulb } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Knowledge Base — Deep Insights into Utility Engineering | Hilmost Digital Labs",
+  title: "Knowledge Base — Utility Engineering Insights | Hilmost Labs",
   description: "Explore the theory behind the tools. In-depth articles on financial modeling, health metrics, data science, and physics from the Hilmost Digital Labs research team.",
 };
 

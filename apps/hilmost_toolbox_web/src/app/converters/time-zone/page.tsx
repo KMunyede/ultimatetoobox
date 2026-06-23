@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Time Zone Converter & Global Clock — Compare Multiple Cities | Hilmost Toolbox",
+    title: "Time Zone Converter & Global Clock | Hilmost Toolbox",
     description: "Free online time zone converter. Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly.",
     alternates: {
       canonical: getCanonicalUrl("/converters/time-zone"),

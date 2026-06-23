@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Time Converter — Convert Hours, Days, Weeks Instantly | Hilmost Toolbox",
+    title: "Time Converter — Instant Unit Conversions | Hilmost Toolbox",
     description: "Free online time converter. Instantly convert between seconds, minutes, hours, days, weeks, months, and years with high precision.",
     alternates: {
       canonical: getCanonicalUrl("/converters/time"),

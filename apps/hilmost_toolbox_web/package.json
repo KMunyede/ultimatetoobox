@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "indexnow": "node ../../packages/config/src/scripts/submit-indexnow.mjs --host hilmost-toolbox.hilmost.net --key 97f26d8330774a38b58406f0e4b75249"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.44.0",
