@@ -6,6 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { BackButton } from "./BackButton";
 import { GlobalSearch } from "./GlobalSearch";
 import { Tooltip } from "./Tooltip";
+import { NavigationMenu } from "./NavigationMenu";
 
 
 export function Header() {
@@ -28,7 +29,7 @@ export function Header() {
   const wisdomUrl = `${domains.toolbox}/health/daily-wisdom`;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-base bg-canvas-card/80 backdrop-blur supports-[backdrop-filter]:bg-canvas-card/60">
+    <header className="sticky top-0 z-[60] w-full border-b border-base bg-canvas-card/80 backdrop-blur supports-[backdrop-filter]:bg-canvas-card/60">
       {/* Top accent bar with White, Light Green, and Red */}
       <div className="h-1 w-full bg-gradient-to-r from-red-500 via-white to-brand-primary opacity-90"></div>
       
@@ -47,28 +48,7 @@ export function Header() {
               </Link>
             </Tooltip>
             
-            <nav className="hidden md:flex items-center justify-evenly flex-1 px-8 text-sm font-medium text-text-secondary">
-              <Tooltip content="Explore apps, games and tools" position="bottom">
-                <Link href={`${domains.corporate}/softwarehub`} className="hover:text-brand-primary transition-colors">
-                  Software Hub
-                </Link>
-              </Tooltip>
-              <Tooltip content="Back to Corporate homepage" position="bottom">
-                <Link href={domains.corporate} className="hover:text-red-500 transition-colors">
-                  Corporate
-                </Link>
-              </Tooltip>
-              <Tooltip content="Explore wisdom & wellness journal" position="bottom">
-                <Link href={wisdomUrl} className="hover:text-blue-500 transition-colors">
-                  Daily Wisdom
-                </Link>
-              </Tooltip>
-              <Tooltip content="Read about our team & story" position="bottom">
-                <Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">
-                  About Us
-                </Link>
-              </Tooltip>
-            </nav>
+            <NavigationMenu />
           </div>
 
           {/* Right Side: Actions */}
