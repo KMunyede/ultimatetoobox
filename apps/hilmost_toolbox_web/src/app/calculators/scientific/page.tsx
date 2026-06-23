@@ -11,7 +11,7 @@ const PATH = "/calculators/scientific";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: `Scientific Calculator | Advanced Math & Physics | Hilmost`,
+  title: `Scientific Calculator | Precision Math & Trigonometry | Hilmost`,
   description: TOOL_DESC,
   alternates: {
     canonical: getCanonicalUrl(PATH),
@@ -65,7 +65,7 @@ export default function ScientificCalculatorPage() {
   return (
     <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema
-        name={`${TOOL_NAME} | Hilmost Toolbox`}
+        name="Scientific Calculator"
         description={TOOL_DESC}
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
