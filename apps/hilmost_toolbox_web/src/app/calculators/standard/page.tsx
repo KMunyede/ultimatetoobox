@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Free Online Everyday Arithmetic | Hilmost Toolbox`,
+    title: `Standard Calculator | Quick & Simple Math | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

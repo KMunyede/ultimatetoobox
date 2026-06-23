@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/calculators/equation-solver/${resolvedParams.slug}`);
 
   return {
-    title: `${config.title} — Free Online Physics Tool | Hilmost Toolbox`,
+    title: `${config.title} | Equation Solver | Hilmost`,
     description: config.desc,
     alternates: { canonical },
     openGraph: {

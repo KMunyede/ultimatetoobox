@@ -11,7 +11,7 @@ const PATH = "/calculators/scientific";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: `${TOOL_NAME} — Free Online Advanced Math Tool | Hilmost Toolbox`,
+  title: `Scientific Calculator | Advanced Math & Physics | Hilmost`,
   description: TOOL_DESC,
   alternates: {
     canonical: getCanonicalUrl(PATH),

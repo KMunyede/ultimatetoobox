@@ -11,7 +11,7 @@ const PATH = "/calculators/equation-solver";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: `${TOOL_NAME} — Physics Formula Calculator | Hilmost Toolbox`,
+  title: `Equation Solver | Physics & Science Formulas | Hilmost`,
   description: TOOL_DESC,
   alternates: {
     canonical: getCanonicalUrl(PATH),

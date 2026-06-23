@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/calculators/astrophysics/${resolvedParams.slug}`);
 
   return {
-    title: `${config.title} — Free Online Cosmic Tool | Hilmost Toolbox`,
+    title: `${config.title} | Astrophysics | Hilmost`,
     description: config.desc,
     alternates: { canonical },
     openGraph: {

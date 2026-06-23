@@ -11,7 +11,7 @@ const PATH = "/calculators/astrophysics";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export const metadata: Metadata = {
-  title: `${TOOL_NAME} — High-Precision Cosmic Calculations | Hilmost Toolbox`,
+  title: `Astrophysics Calculator | Space & Physics Tools | Hilmost`,
   description: TOOL_DESC,
   alternates: {
     canonical: getCanonicalUrl(PATH),
