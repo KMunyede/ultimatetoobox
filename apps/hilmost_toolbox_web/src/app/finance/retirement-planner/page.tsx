@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Track Your Financial Future | Hilmost Toolbox`,
+    title: `Retirement Planner | Savings & Future Growth | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

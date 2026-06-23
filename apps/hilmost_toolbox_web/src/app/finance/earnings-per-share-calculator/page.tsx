@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Basic & Diluted EPS Analysis | Hilmost Toolbox`,
+    title: `EPS Calculator | Basic & Diluted Profit Analysis | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

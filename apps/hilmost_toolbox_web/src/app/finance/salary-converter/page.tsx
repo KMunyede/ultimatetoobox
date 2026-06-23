@@ -5,7 +5,7 @@ import path from "path";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Salary Converter — Convert Hourly to Annual Pay | Hilmost Toolbox",
+    title: `Salary Converter | Hourly to Annual Wage Tool | Hilmost`,
     description: "Compare your wages instantly. Free online salary converter to translate hourly rates into daily, weekly, monthly, and annual earnings.",
     alternates: {
       canonical: getCanonicalUrl("/finance/salary-converter"),

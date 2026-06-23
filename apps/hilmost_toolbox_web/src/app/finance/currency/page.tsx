@@ -5,8 +5,8 @@ import path from "path";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Live Currency Converter — Real-Time Exchange Rates | Hilmost Toolbox",
-    description: "Convert global currencies instantly with real-time exchange rates. Free foreign exchange tool for USD, EUR, GBP, and 100+ other currencies.",
+    title: `Currency Converter | Real-Time Exchange Rates | Hilmost`,
+    description: "Convert global currencies instantly with real-time exchange rates.",
     alternates: {
       canonical: getCanonicalUrl("/finance/currency"),
     },

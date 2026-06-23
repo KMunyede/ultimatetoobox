@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Stop Guessing Your Tax Burden | Hilmost Toolbox`,
+    title: `Income Tax Calculator | Take-Home Pay Estimator | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

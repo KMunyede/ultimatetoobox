@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Cost of Capital & CAPM Dashboard | Hilmost Toolbox`,
+    title: `WACC Calculator | Cost of Capital & CAPM | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

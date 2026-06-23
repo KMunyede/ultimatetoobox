@@ -12,8 +12,8 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — 50/30/20 Rule Calculator | Hilmost Toolbox`,
-    description: "Track your income, needs, wants, and savings with our free online budget planner. Uses the 50/30/20 rule to help you manage your finances.",
+    title: `Budget Planner | Monthly Expense & Income Tracker | Hilmost`,
+    description: "Track your income, needs, wants, and savings with our free online budget planner.",
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
