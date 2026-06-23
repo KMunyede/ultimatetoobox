@@ -4,7 +4,7 @@ import React, { useState, useCallback, useMemo } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { ScientificInput } from "../../../components/calculators/ScientificInput";
 import { useHistory } from "../../../hooks/useHistory";
-import { ScientificNumber, Tooltip } from "@utilitiessite/ui";
+import { ScientificNumber, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Terminal, FileJson, Check, MoonStar } from "lucide-react";
 
@@ -281,12 +281,10 @@ export function AstrophysicsCalculatorClient({
                   <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
                   <div className="flex items-center gap-3">
                     <Tooltip content="The effective temperature of the stellar body" position="top" className="flex-1">
-                      <input
-                        type="number"
-                        inputMode="decimal"
+                      <NumericInput
                         title="Surface Temperature Input"
                         value={val2}
-                        onChange={(e) => setVal2(parseFloat(e.target.value))}
+                        onChange={val => setVal2(parseFloat(val) || 0)}
                         className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                         placeholder="5778"
                       />
@@ -301,12 +299,10 @@ export function AstrophysicsCalculatorClient({
                 <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Recessional Velocity (v)</label>
                 <div className="flex items-center gap-3">
                   <Tooltip content="The speed at which the object is moving away from the observer" position="top" className="flex-1">
-                    <input
-                      type="number"
-                      inputMode="decimal"
+                    <NumericInput
                       title="Recessional Velocity Input"
                       value={val1}
-                      onChange={(e) => setVal1(parseFloat(e.target.value))}
+                      onChange={val => setVal1(parseFloat(val) || 0)}
                       className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                       placeholder="1000"
                     />
@@ -320,12 +316,10 @@ export function AstrophysicsCalculatorClient({
                 <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Redshift (z)</label>
                 <div className="flex items-center gap-3">
                   <Tooltip content="The cosmological redshift value" position="top" className="flex-1">
-                    <input
-                      type="number"
-                      inputMode="decimal"
+                    <NumericInput
                       title="Redshift Input"
                       value={val1}
-                      onChange={(e) => setVal1(parseFloat(e.target.value))}
+                      onChange={val => setVal1(parseFloat(val) || 0)}
                       className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                       placeholder="0.1"
                     />

@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker, Tooltip as TooltipUI } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip as TooltipUI, NumericInput } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useState, useEffect, useMemo } from "react";
@@ -282,13 +282,11 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
                     <div className="relative flex-1 sm:w-32">
                         <span className="absolute left-3 top-3 text-text-muted font-bold text-sm">$</span>
                         <TooltipUI content={`Amount for ${item.name || 'this item'}`} position="top">
-                          <input
-                              type="number"
+                          <NumericInput
                               title="Item Amount"
-                              inputMode="decimal"
                               className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
                               value={item.amount || ""}
-                              onChange={(e) => onUpdate(item.id, { amount: parseFloat(e.target.value) || 0 })}
+                              onChange={val => onUpdate(item.id, { amount: parseFloat(val) || 0 })}
                           />
                         </TooltipUI>
                     </div>

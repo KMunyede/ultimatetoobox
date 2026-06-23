@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -76,12 +76,10 @@ export function RetirementPlannerClient() {
               <div>
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Current Age</label>
                 <Tooltip content="Your current age today" position="top">
-                  <input
-                    type="number"
+                  <NumericInput
                     title="Your Current Age"
-                    inputMode="numeric"
                     value={currentAge}
-                    onChange={(e) => setState({ currentAge: e.target.value })}
+                    onChange={val => setState({ currentAge: val })}
                     className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                   />
                 </Tooltip>
@@ -89,12 +87,10 @@ export function RetirementPlannerClient() {
               <div>
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Retire Age</label>
                 <Tooltip content="The age at which you plan to stop working" position="top">
-                  <input
-                    type="number"
+                  <NumericInput
                     title="Planned Retirement Age"
-                    inputMode="numeric"
                     value={retireAge}
-                    onChange={(e) => setState({ retireAge: e.target.value })}
+                    onChange={val => setState({ retireAge: val })}
                     className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                   />
                 </Tooltip>
@@ -104,39 +100,33 @@ export function RetirementPlannerClient() {
             <div>
               <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Current Savings ($)</label>
               <Tooltip content="The total amount you have already saved for retirement" position="top">
-                <input
-                  type="number"
+                <NumericInput
                   title="Existing Retirement Savings"
-                  inputMode="decimal"
-                  value={currentSavings}
-                  onChange={(e) => setState({ currentSavings: e.target.value })}
                   className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  value={currentSavings}
+                  onChange={val => setState({ currentSavings: val })}
                 />
               </Tooltip>
             </div>
             <div>
               <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Monthly Contribution ($)</label>
               <Tooltip content="How much you plan to save every month until retirement" position="top">
-                <input
-                  type="number"
+                <NumericInput
                   title="Monthly Savings Amount"
-                  inputMode="decimal"
-                  value={monthlyContribution}
-                  onChange={(e) => setState({ monthlyContribution: e.target.value })}
                   className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  value={monthlyContribution}
+                  onChange={val => setState({ monthlyContribution: val })}
                 />
               </Tooltip>
             </div>
             <div>
               <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Expected Return (%)</label>
               <Tooltip content="The estimated annual growth rate of your investments" position="top">
-                <input
-                  type="number"
+                <NumericInput
                   title="Estimated Annual ROI Percentage"
-                  inputMode="decimal"
-                  value={expectedReturn}
-                  onChange={(e) => setState({ expectedReturn: e.target.value })}
                   className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
+                  value={expectedReturn}
+                  onChange={val => setState({ expectedReturn: val })}
                 />
               </Tooltip>
             </div>

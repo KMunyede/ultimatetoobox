@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -42,12 +42,11 @@ export function InflationClient() {
           <div className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Historical Amount ($)</label>
             <Tooltip content="The amount of money in the starting year" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Historical Monetary Amount"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={amount}
-                onChange={e => setState({ amount: e.target.value })}
+                onChange={val => setState({ amount: val })}
               />
             </Tooltip>
           </div>
@@ -57,12 +56,11 @@ export function InflationClient() {
                     <Calendar size={12} /> Start Year
                 </label>
                 <Tooltip content="The year the money was originally held" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Starting Year"
                   className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
                   value={startYear}
-                  onChange={e => setState({ startYear: e.target.value })}
+                  onChange={val => setState({ startYear: val })}
                   />
                 </Tooltip>
             </div>
@@ -71,12 +69,11 @@ export function InflationClient() {
                     <Calendar size={12} /> End Year
                 </label>
                 <Tooltip content="The target year for comparison" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Target Comparison Year"
                   className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
                   value={endYear}
-                  onChange={e => setState({ endYear: e.target.value })}
+                  onChange={val => setState({ endYear: val })}
                   />
                 </Tooltip>
             </div>
@@ -86,12 +83,11 @@ export function InflationClient() {
                 <TrendingUp size={12} /> Avg. Inflation Rate (%)
             </label>
             <Tooltip content="The average annual inflation rate over the period" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Average Annual Inflation Rate Percentage"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={rate}
-                onChange={e => setState({ rate: e.target.value })}
+                onChange={val => setState({ rate: val })}
               />
             </Tooltip>
           </div>

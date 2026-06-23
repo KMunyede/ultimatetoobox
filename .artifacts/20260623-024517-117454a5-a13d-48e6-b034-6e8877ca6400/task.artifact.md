@@ -1,5 +1,26 @@
 # Task Management
 
+- [/] Implement Thousand Separator Formatting
+    - [/] Create `NumericInput` component in `packages/ui`
+    - [ ] Update Finance tools
+        - [ ] EPS Calculator
+        - [ ] Loan Calculator
+        - [ ] Income Tax
+        - [ ] Compound Interest
+        - [ ] VAT & Tax
+        - [ ] Salary Converter
+        - [ ] Tip Calculator
+        - [ ] Retirement Planner
+        - [ ] Inflation Calculator
+        - [ ] Budget Planner
+        - [ ] WACC Calculator
+        - [ ] Currency Converter
+    - [ ] Update Calculator tools
+        - [ ] Standard Calculator
+        - [ ] Scientific Calculator
+        - [ ] Astrophysics Calculator
+        - [ ] Equation Solver
+    - [ ] Verify all tools
 - [x] Research existing tool architecture and components
 - [x] Scaffold EPS Calculator tool
     - [x] Create `page.tsx` with Metadata and Schema
@@ -8,3 +29,10 @@
 - [x] Create Knowledge Base article for EPS
 - [x] Integrate new tool into the toolbox navigation/category
 - [x] Verify implementation with build and lint
+- [x] Implement WACC Calculator (Professional+)
+    - [x] Create `WACCCalculatorClient.tsx` with CAPM & Tax Shield logic
+    - [x] Create `page.tsx` with Beginner's Guide & SEO
+    - [x] Add Knowledge Base article for WACC
+    - [x] Integrate into homepage and finance category
+    - [x] Perform full build and multi-target deployment
+    - [x] Backup code to GitHub

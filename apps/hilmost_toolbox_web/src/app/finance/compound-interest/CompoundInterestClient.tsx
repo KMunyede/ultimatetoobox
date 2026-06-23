@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
-import { NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -79,13 +79,11 @@ export function CompoundInterestClient() {
               Initial Principal ($)
             </label>
             <Tooltip content="The starting balance of your investment" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Initial Investment Principal"
-                inputMode="decimal"
                 className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                 value={principal}
-                onChange={e => setState({ principal: e.target.value })}
+                onChange={val => setState({ principal: val })}
               />
             </Tooltip>
           </div>
@@ -95,13 +93,11 @@ export function CompoundInterestClient() {
               Monthly Contribution ($)
             </label>
             <Tooltip content="How much you add to your investment each month" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Monthly Contribution Amount"
-                inputMode="decimal"
                 className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                 value={monthly}
-                onChange={e => setState({ monthly: e.target.value })}
+                onChange={val => setState({ monthly: val })}
               />
             </Tooltip>
           </div>
@@ -110,26 +106,22 @@ export function CompoundInterestClient() {
             <div className="space-y-3">
                 <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">Annual Rate (%)</label>
                 <Tooltip content="The estimated yearly return rate" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Annual Interest Rate Percentage"
-                  inputMode="decimal"
                   className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                   value={rate}
-                  onChange={e => setState({ rate: e.target.value })}
+                  onChange={val => setState({ rate: val })}
                   />
                 </Tooltip>
             </div>
             <div className="space-y-3">
                 <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">Years</label>
                 <Tooltip content="The duration of your investment in years" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Duration in Years"
-                  inputMode="numeric"
                   className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                   value={years}
-                  onChange={e => setState({ years: e.target.value })}
+                  onChange={val => setState({ years: val })}
                   />
                 </Tooltip>
             </div>

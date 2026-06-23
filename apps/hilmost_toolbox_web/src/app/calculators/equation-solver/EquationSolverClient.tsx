@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { ScientificNumber, Tooltip } from "@utilitiessite/ui";
+import { ScientificNumber, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { motion } from "framer-motion";
 
 const CONSTANTS = {
@@ -237,12 +237,10 @@ export function EquationSolverClient({
                     <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">{v.label}</label>
                     <div className="flex gap-2">
                       <Tooltip content={`Enter the value for ${v.label}`} position="top" className="flex-1">
-                        <input
-                          type="number"
-                          inputMode="decimal"
+                        <NumericInput
                           title={`${v.label} Input`}
                           value={inputs[v.id] || ""}
-                          onChange={(e) => setInputs(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
+                          onChange={val => setInputs(prev => ({ ...prev, [v.id]: parseFloat(val) || 0 }))}
                           className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 font-mono font-bold text-lg text-text-primary outline-none focus:border-brand-primary transition-colors"
                           placeholder="0.00"
                         />

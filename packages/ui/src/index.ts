@@ -21,6 +21,7 @@ export { QuoteCard } from "./QuoteCard";
 export type { QuoteData } from "./QuoteCard";
 export { DateTimePicker } from "./DateTimePicker";
 export { ScientificNumber } from "./ScientificNumber";
+export { NumericInput } from "./NumericInput";
 export { ConstantSelector } from "./ConstantSelector";
 export type { UniversalConstant } from "./ConstantSelector";
 export { RelatedTools } from "./RelatedTools";

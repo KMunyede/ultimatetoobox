@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -47,12 +47,11 @@ export function LoanCalculatorClient() {
           <div id="tour-loan-amount" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Loan Amount ($)</label>
             <Tooltip content="The total principal amount of the loan" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Loan Principal Amount"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={amount}
-                onChange={e => setState({ amount: e.target.value })}
+                onChange={val => setState({ amount: val })}
                 placeholder="e.g. 250000"
               />
             </Tooltip>
@@ -60,12 +59,11 @@ export function LoanCalculatorClient() {
           <div id="tour-loan-rate" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Interest Rate (%)</label>
             <Tooltip content="The annual interest rate (nominal) for this loan" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Annual Interest Percentage"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={rate}
-                onChange={e => setState({ rate: e.target.value })}
+                onChange={val => setState({ rate: val })}
                 placeholder="e.g. 6.5"
               />
             </Tooltip>
@@ -73,12 +71,11 @@ export function LoanCalculatorClient() {
           <div id="tour-loan-term" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Loan Term (Years)</label>
             <Tooltip content="The duration of the loan in years" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Loan Duration in Years"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={years}
-                onChange={e => setState({ years: e.target.value })}
+                onChange={val => setState({ years: val })}
                 placeholder="e.g. 30"
               />
             </Tooltip>

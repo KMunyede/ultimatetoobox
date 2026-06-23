@@ -13,6 +13,17 @@ interface CalculatorDisplayProps {
   onRestore: (entry: HistoryEntry) => void;
 }
 
+function formatValue(str: string) {
+  if (!str || str === "Error") return str;
+  // If it's already in scientific notation, leave it
+  if (str.includes("e")) return str;
+
+  const parts = str.split(".");
+  // Add commas to integer part
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
+
 export function CalculatorDisplay({
   expression,
   result,
@@ -33,7 +44,7 @@ export function CalculatorDisplay({
           </div>
           {/* Result Line */}
           <div className="text-3xl md:text-4xl font-mono font-bold text-slate-900 dark:text-white break-all text-right w-full pr-8 mt-1">
-            {result || "0"}
+            {formatValue(result) || "0"}
           </div>
         </div>
 
@@ -100,7 +111,7 @@ export function CalculatorDisplay({
                           {entry.expression}
                         </div>
                         <div className="text-base font-mono font-bold text-slate-900 dark:text-white break-all">
-                          = {entry.result}
+                          = {formatValue(entry.result)}
                         </div>
 
                         {/* Restore Icon on Hover */}

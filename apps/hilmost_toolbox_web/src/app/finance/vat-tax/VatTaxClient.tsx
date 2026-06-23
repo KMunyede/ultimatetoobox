@@ -1,6 +1,6 @@
 "use client";
 
-import { NumberTicker, ToolTutorial, Tooltip } from "@utilitiessite/ui";
+import { NumberTicker, ToolTutorial, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -73,13 +73,11 @@ export function VatTaxClient() {
                   {mode === 'add' ? 'Net Amount (Before Tax)' : 'Gross Amount (Total Price)'} ($)
                 </label>
                 <Tooltip content={mode === 'add' ? "The price before tax is added" : "The total price including tax"} position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Monetary Amount"
-                  inputMode="decimal"
                   className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                   value={amount}
-                  onChange={e => setState({ amount: e.target.value })}
+                  onChange={val => setState({ amount: val })}
                   />
                 </Tooltip>
             </div>
@@ -88,13 +86,11 @@ export function VatTaxClient() {
                   VAT / Sales Tax Rate (%)
                 </label>
                 <Tooltip content="The tax percentage to be applied or removed" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Tax Rate Percentage"
-                  inputMode="decimal"
                   className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                   value={rate}
-                  onChange={e => setState({ rate: e.target.value })}
+                  onChange={val => setState({ rate: val })}
                   />
                 </Tooltip>
             </div>

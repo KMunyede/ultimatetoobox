@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -33,12 +33,11 @@ export function EPSCalculatorClient() {
           <div className="space-y-1.5">
             <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Net Income ($)</label>
             <Tooltip content="The company's total earnings after all expenses and taxes." position="top">
-              <input
-                type="number"
+              <NumericInput
                 className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={state.netIncome}
-                onChange={e => setState({ netIncome: e.target.value })}
-                placeholder="e.g. 1000000"
+                onChange={val => setState({ netIncome: val })}
+                placeholder="e.g. 1,000,000"
               />
             </Tooltip>
           </div>
@@ -46,12 +45,11 @@ export function EPSCalculatorClient() {
           <div className="space-y-1.5">
             <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Preferred Dividends ($)</label>
             <Tooltip content="Dividends promised to preferred shareholders, subtracted from net income." position="top">
-              <input
-                type="number"
+              <NumericInput
                 className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={state.preferredDividends}
-                onChange={e => setState({ preferredDividends: e.target.value })}
-                placeholder="e.g. 50000"
+                onChange={val => setState({ preferredDividends: val })}
+                placeholder="e.g. 50,000"
               />
             </Tooltip>
           </div>
@@ -59,12 +57,11 @@ export function EPSCalculatorClient() {
           <div className="space-y-1.5">
             <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Weighted Avg Shares</label>
             <Tooltip content="The average number of common shares outstanding during the period." position="top">
-              <input
-                type="number"
+              <NumericInput
                 className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={state.weightedShares}
-                onChange={e => setState({ weightedShares: e.target.value })}
-                placeholder="e.g. 200000"
+                onChange={val => setState({ weightedShares: val })}
+                placeholder="e.g. 200,000"
               />
             </Tooltip>
           </div>
@@ -72,12 +69,11 @@ export function EPSCalculatorClient() {
           <div className="space-y-1.5">
             <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Dilutive Potential Shares</label>
             <Tooltip content="Convertible securities like stock options that could become common shares." position="top">
-              <input
-                type="number"
+              <NumericInput
                 className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={state.dilutiveShares}
-                onChange={e => setState({ dilutiveShares: e.target.value })}
-                placeholder="e.g. 15000"
+                onChange={val => setState({ dilutiveShares: val })}
+                placeholder="e.g. 15,000"
               />
             </Tooltip>
           </div>

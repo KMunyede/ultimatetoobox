@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -51,12 +51,11 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                 <div className="space-y-2">
                     <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Amount ($)</label>
                     <Tooltip content="The base pay amount to convert" position="top">
-                        <input
-                            type="number"
+                        <NumericInput
                             title="Base Pay Amount"
                             className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                             value={amount}
-                            onChange={e => setState({ amount: e.target.value })}
+                            onChange={val => setState({ amount: val })}
                         />
                     </Tooltip>
                 </div>
@@ -82,12 +81,11 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
             <div id="tour-salary-hours" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-2 shadow-sm">
                 <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Hours Per Week</label>
                 <Tooltip content="The average number of hours you work each week" position="top">
-                    <input
-                        type="number"
+                    <NumericInput
                         title="Weekly Work Hours"
                         className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                         value={hoursPerWeek}
-                        onChange={e => setState({ hoursPerWeek: e.target.value })}
+                        onChange={val => setState({ hoursPerWeek: val })}
                     />
                 </Tooltip>
             </div>

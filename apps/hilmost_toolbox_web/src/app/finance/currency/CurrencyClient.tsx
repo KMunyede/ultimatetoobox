@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ArrowRightLeft, RefreshCw, Globe } from "lucide-react";
-import { Tooltip } from "@utilitiessite/ui";
+import { Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -163,13 +163,11 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
             <div className="space-y-3">
               <Tooltip content="The amount you want to convert" position="top">
-                <input
-                  type="number"
+                <NumericInput
                   title="Source Currency Amount"
-                  inputMode="decimal"
                   className="w-full h-14 px-5 text-2xl font-bold border border-border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                   value={val1}
-                  onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
+                  onChange={val => setState({ activeInput: 1, val1: val })}
                 />
               </Tooltip>
               <Tooltip content="Select the currency you are converting from" position="bottom">
@@ -196,13 +194,11 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
             <div className="space-y-3">
               <Tooltip content="The resulting amount after conversion" position="top">
-                <input
-                  type="number"
+                <NumericInput
                   title="Resulting Currency Amount"
-                  inputMode="decimal"
                   className="w-full h-14 px-5 text-2xl font-bold border border-border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
                   value={val2}
-                  onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
+                  onChange={val => setState({ activeInput: 2, val2: val })}
                 />
               </Tooltip>
               <Tooltip content="Select the currency you want to convert to" position="bottom">

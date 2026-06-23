@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 
@@ -61,47 +61,40 @@ export function WACCCalculatorClient() {
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Market Cap ($)</label>
                 <Tooltip content="The total market value of all company shares. (Market Price x Total Shares)" position="top">
-                  <input
-                    type="number"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
                     value={state.marketCap}
-                    onChange={e => setState({ marketCap: e.target.value })}
+                    onChange={val => setState({ marketCap: val })}
                   />
                 </Tooltip>
               </div>
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Beta (Risk)</label>
                 <Tooltip content="Measure of stock volatility compared to the market. Average is 1.0. High risk is > 1.0." position="top">
-                  <input
-                    type="number"
-                    step="0.1"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
                     value={state.beta}
-                    onChange={e => setState({ beta: e.target.value })}
+                    onChange={val => setState({ beta: val })}
                   />
                 </Tooltip>
               </div>
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Risk-Free Rate (%)</label>
                 <Tooltip content="The return on investment with zero risk, typically the 10-year Treasury Bond rate." position="top">
-                  <input
-                    type="number"
-                    step="0.1"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
                     value={state.riskFreeRate}
-                    onChange={e => setState({ riskFreeRate: e.target.value })}
+                    onChange={val => setState({ riskFreeRate: val })}
                   />
                 </Tooltip>
               </div>
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Equity Risk Prem (%)</label>
                 <Tooltip content="The extra return investors demand for choosing stocks over risk-free bonds. Usually 5-6%." position="top">
-                  <input
-                    type="number"
-                    step="0.1"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
                     value={state.equityPremium}
-                    onChange={e => setState({ equityPremium: e.target.value })}
+                    onChange={val => setState({ equityPremium: val })}
                   />
                 </Tooltip>
               </div>
@@ -119,35 +112,30 @@ export function WACCCalculatorClient() {
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Total Debt ($)</label>
                 <Tooltip content="All interest-bearing debt (Short-term + Long-term loans)." position="top">
-                  <input
-                    type="number"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                     value={state.totalDebt}
-                    onChange={e => setState({ totalDebt: e.target.value })}
+                    onChange={val => setState({ totalDebt: val })}
                   />
                 </Tooltip>
               </div>
               <div className="space-y-1.5">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Interest Rate (%)</label>
                 <Tooltip content="The average annual interest rate the company pays on its debt." position="top">
-                  <input
-                    type="number"
-                    step="0.1"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                     value={state.interestRate}
-                    onChange={e => setState({ interestRate: e.target.value })}
+                    onChange={val => setState({ interestRate: val })}
                   />
                 </Tooltip>
               </div>
               <div className="space-y-1.5 sm:col-span-2">
                 <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Corporate Tax Rate (%)</label>
                 <Tooltip content="The percentage of profit paid in taxes. Debt interest is tax-deductible!" position="top">
-                  <input
-                    type="number"
-                    step="0.1"
+                  <NumericInput
                     className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                     value={state.taxRate}
-                    onChange={e => setState({ taxRate: e.target.value })}
+                    onChange={val => setState({ taxRate: val })}
                   />
                 </Tooltip>
               </div>

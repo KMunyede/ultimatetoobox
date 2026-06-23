@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -43,12 +43,11 @@ export function TipCalculatorClient() {
                 <DollarSign size={12} /> Bill Amount
             </label>
             <Tooltip content="The total amount of the bill before adding a tip" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Total Bill Amount"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={bill}
-                onChange={e => setState({ bill: e.target.value })}
+                onChange={val => setState({ bill: val })}
               />
             </Tooltip>
           </div>
@@ -58,12 +57,11 @@ export function TipCalculatorClient() {
                     <Percent size={12} /> Tip %
                 </label>
                 <Tooltip content="The percentage you want to tip (e.g. 15, 18, 20)" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Tip Percentage"
                   className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
                   value={tipPerc}
-                  onChange={e => setState({ tipPerc: e.target.value })}
+                  onChange={val => setState({ tipPerc: val })}
                   />
                 </Tooltip>
             </div>
@@ -72,12 +70,11 @@ export function TipCalculatorClient() {
                     <Users size={12} /> Split
                 </label>
                 <Tooltip content="The number of people splitting the bill" position="top">
-                  <input
-                  type="number"
+                  <NumericInput
                   title="Number of People"
                   className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none"
                   value={people}
-                  onChange={e => setState({ people: e.target.value })}
+                  onChange={val => setState({ people: val })}
                   />
                 </Tooltip>
             </div>

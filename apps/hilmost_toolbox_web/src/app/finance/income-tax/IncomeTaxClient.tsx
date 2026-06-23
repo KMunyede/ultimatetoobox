@@ -1,5 +1,5 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip } from "@utilitiessite/ui";
+import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
@@ -42,12 +42,11 @@ export function IncomeTaxClient() {
           <div id="tour-tax-salary" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Gross Salary ($)</label>
             <Tooltip content="Your total yearly income before any taxes or deductions" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Annual Gross Income"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={salary}
-                onChange={e => setState({ salary: e.target.value })}
+                onChange={val => setState({ salary: val })}
                 placeholder="e.g. 85000"
               />
             </Tooltip>
@@ -55,12 +54,11 @@ export function IncomeTaxClient() {
           <div id="tour-tax-deductions" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Deductions ($)</label>
             <Tooltip content="Expenses or contributions that reduce your taxable income" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Total Annual Deductions"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={deductions}
-                onChange={e => setState({ deductions: e.target.value })}
+                onChange={val => setState({ deductions: val })}
                 placeholder="e.g. 13850"
               />
             </Tooltip>
@@ -68,12 +66,11 @@ export function IncomeTaxClient() {
           <div id="tour-tax-rate" className="space-y-2">
             <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Estimated Tax Rate (%)</label>
             <Tooltip content="The average percentage of your income paid in taxes" position="top">
-              <input
-                type="number"
+              <NumericInput
                 title="Estimated Effective Tax Rate"
                 className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
                 value={taxRate}
-                onChange={e => setState({ taxRate: e.target.value })}
+                onChange={val => setState({ taxRate: val })}
                 placeholder="e.g. 22"
               />
             </Tooltip>
