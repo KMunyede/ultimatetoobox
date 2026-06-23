@@ -42,11 +42,6 @@ export function VatTaxClient() {
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-4"
     >
-      {/* Internal Tutorial Row */}
-      <div className="flex justify-end mb-2">
-        <ToolTutorial tourId="vat_calc_internal" steps={tourSteps} />
-      </div>
-
       <div className="grid grid-cols-1 @[640px]:grid-cols-2 gap-5 md:gap-8">
         {/* Form Column */}
         <div className="bg-canvas-card border border-border-base rounded-[2rem] p-6 @[400px]:p-8 space-y-8 shadow-sm hover:shadow-md transition-all">
