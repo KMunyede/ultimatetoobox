@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `VAT & Tax Calculator | Simple Sales Tax Tool | Hilmost`,
+    title: `VAT & Tax Calculator | Easy Sales Tax Tool | Hilmost`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
@@ -59,7 +59,7 @@ export default function VatTaxPage() {
   return (
     <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
-        name={TOOL_NAME}
+        name="VAT & Tax Calculator"
         description={TOOL_DESC}
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
