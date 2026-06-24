@@ -5,7 +5,7 @@ import path from "path";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Weight & Mass Converter — Grams, Pounds, Kilograms | Hilmost Toolbox",
+    title: `Weight & Mass Converter — Grams, Pounds, Kilograms`,
     description: "Convert between grams, kilograms, pounds, ounces, and metric tons instantly. Accurate weight and mass conversion for kitchen, lab, or shipping.",
     alternates: {
       canonical: getCanonicalUrl("/converters/weight-mass"),

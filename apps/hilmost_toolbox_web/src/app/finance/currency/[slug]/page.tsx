@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/finance/currency/${slug}`);
 
   return {
-    title: `Convert ${from} to ${to} | Live Exchange Rate — Free Online Converter | Hilmost Toolbox`,
+    title: `Convert ${from} to ${to} | Live Exchange Rate — Free Online Converter`,
     description: `Free online currency converter. Instantly convert ${from} to ${to} using live mid-market exchange rates. Perfect for travelers, freelancers, and global businesses — no signup required.`,
     alternates: { canonical },
     openGraph: {

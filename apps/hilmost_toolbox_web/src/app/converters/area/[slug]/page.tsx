@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/converters/area/${slug}`);
 
   return {
-    title: `Convert ${fromUnit} to ${toUnit} | Area Calculator — Free Online Converter | Hilmost Toolbox`,
+    title: `Convert ${fromUnit} to ${toUnit} | Area Calculator — Free Online Converter`,
     description: `Free online area converter. Instantly convert ${fromUnit} to ${toUnit} using our free area calculator. Perfect for real estate, landscaping, and construction — no signup required.`,
     alternates: { canonical },
     openGraph: {

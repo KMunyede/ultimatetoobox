@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/converters/weight-mass/${slug}`);
 
   return {
-    title: `Convert ${fromUnit} to ${toUnit} | Weight Calculator — Free Online Converter | Hilmost Toolbox`,
+    title: `Convert ${fromUnit} to ${toUnit} | Weight Calculator — Free Online Converter`,
     description: `Free online weight converter. Instantly convert ${fromUnit} to ${toUnit} using our free mass calculator. Precise for kitchen, laboratory, and shipping — no signup required.`,
     alternates: { canonical },
     openGraph: {

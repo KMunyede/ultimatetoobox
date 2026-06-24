@@ -5,7 +5,7 @@ import path from "path";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Area Converter — Square Feet, Meters, Acres & More | Hilmost Toolbox",
+    title: `Area Converter — Square Feet, Meters, Acres & More`,
     description: "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more for real estate, farming, and construction.",
     alternates: {
       canonical: getCanonicalUrl("/converters/area"),

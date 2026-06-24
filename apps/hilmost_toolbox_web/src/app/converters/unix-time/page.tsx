@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Epoch Time Calculator | Hilmost Toolbox`,
+    title: `${TOOL_NAME} — Epoch Time Calculator`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

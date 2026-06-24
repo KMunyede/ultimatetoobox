@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/text-data/base64-encode/${resolvedParams.slug}`);
 
   return {
-    title: `${config.title} — Free Online Utility | Hilmost Toolbox`,
+    title: `${config.title} — Free Online Utility`,
     description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based data transformation.`,
     alternates: { canonical },
     openGraph: {

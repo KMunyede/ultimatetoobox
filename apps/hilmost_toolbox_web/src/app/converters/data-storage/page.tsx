@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Data Storage Converter — Convert MB to GB Instantly | Hilmost Toolbox",
+    title: `Data Storage Converter — Convert MB to GB Instantly`,
     description: "Free online data storage converter. Instantly convert between bits, bytes, kilobytes, megabytes, gigabytes, and more with high precision.",
     alternates: {
       canonical: getCanonicalUrl("/converters/data-storage"),

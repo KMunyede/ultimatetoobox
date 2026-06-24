@@ -9,12 +9,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://hilmost-toolbox.hilmost.net'),
   title: {
-    default: "Hilmost | Software Built For the Modern Era",
+    default: "Hilmost Toolbox | Free Online Calculators & Converters",
     template: "%s | Hilmost Toolbox"
   },
   description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
   openGraph: {
-    title: "Hilmost Toolbox | Free Online Utilities",
+    title: "Hilmost Toolbox | Free Online Calculators & Converters",
     description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
     url: "/",
     siteName: "Hilmost Toolbox",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hilmost Toolbox | Free Online Utilities",
+    title: "Hilmost Toolbox | Free Online Calculators & Converters",
     description: "Work smarter with our free online calculators and converters.",
     images: ["/og/main.png"],
   },

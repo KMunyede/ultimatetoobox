@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/converters/length/${slug}`);
 
   return {
-    title: `Convert ${fromUnit} to ${toUnit} | Length Calculator — Free Online Converter | Hilmost Toolbox`,
+    title: `Convert ${fromUnit} to ${toUnit} | Length Calculator — Free Online Converter`,
     description: `Free online length converter. Instantly convert ${fromUnit} to ${toUnit} using our free distance calculator. High precision for engineering, craft, and travel — no signup required.`,
     alternates: { canonical },
     openGraph: {

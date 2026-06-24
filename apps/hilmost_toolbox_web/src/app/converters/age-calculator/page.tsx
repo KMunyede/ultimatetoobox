@@ -12,7 +12,7 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TOOL_NAME} — Exact Years, Months & Days | Hilmost Toolbox`,
+    title: `${TOOL_NAME} — Exact Years, Months & Days`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),

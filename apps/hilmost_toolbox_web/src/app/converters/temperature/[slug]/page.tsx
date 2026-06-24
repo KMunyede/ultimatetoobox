@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/converters/temperature/${slug}`);
 
   return {
-    title: `Convert ${fromUnit} to ${toUnit} | Temperature Calculator — Free Online Converter | Hilmost Toolbox`,
+    title: `Convert ${fromUnit} to ${toUnit} | Temperature Calculator — Free Online Converter`,
     description: `Free online temperature converter. Instantly convert ${fromUnit} to ${toUnit} using our free thermal calculator. Accurate for science, cooking, and weather — no signup required.`,
     alternates: { canonical },
     openGraph: {

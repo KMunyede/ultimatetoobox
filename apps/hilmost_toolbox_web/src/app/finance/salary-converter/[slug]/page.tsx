@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonical = getCanonicalUrl(`/finance/salary-converter/${resolvedParams.slug}`);
 
   return {
-    title: `${config.title} — Free Online Calculator | Hilmost Toolbox`,
+    title: `${config.title} — Free Online Calculator`,
     description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based financial calculations.`,
     alternates: { canonical },
     openGraph: {
