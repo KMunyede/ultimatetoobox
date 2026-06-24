@@ -1,99 +1,50 @@
-import https from 'https';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import fetch from 'node-fetch';
+import { parseStringPromise } from 'xml2js';
 
-/**
- * IndexNow Submission Script
- * Automatically fetches sitemap.xml and submits all URLs to Bing.
- */
+const CONFIG = {
+  host: 'hilmost-toolbox.hilmost.net',
+  key: '9e7f4c9c1b3d4a2b8e0f6d8c9a7b5e4d',
+  keyLocation: 'https://hilmost-toolbox.hilmost.net/9e7f4c9c1b3d4a2b8e0f6d8c9a7b5e4d.txt',
+  sitemap: 'https://hilmost-toolbox.hilmost.net/sitemap.xml'
+};
 
-const args = process.argv.slice(2);
-const hostArg = args.indexOf('--host');
-const keyArg = args.indexOf('--key');
+async function submitToIndexNow() {
+  console.log(`[${new Date().toISOString()}] Starting IndexNow submission for ${CONFIG.host}...`);
 
-if (hostArg === -1 || keyArg === -1) {
-    console.error('❌ Error: Missing --host or --key arguments.');
-    process.exit(1);
-}
+  try {
+    // 1. Fetch and parse sitemap
+    const sitemapRes = await fetch(CONFIG.sitemap);
+    const sitemapXml = await sitemapRes.text();
+    const parsed = await parseStringPromise(sitemapXml);
 
-const host = args[hostArg + 1];
-const key = args[keyArg + 1];
-const sitemapUrl = `https://${host}/sitemap.xml`;
+    const urls = parsed.urlset.url.map(entry => entry.loc[0]);
+    console.log(`Found ${urls.length} URLs in sitemap.`);
 
-console.log(`\n🚀 Starting IndexNow submission for: ${host}`);
-console.log(`📄 Fetching sitemap: ${sitemapUrl}`);
-
-async function getSitemapUrls(url) {
-    return new Promise((resolve, reject) => {
-        https.get(url, (res) => {
-            let data = '';
-            res.on('data', (chunk) => data += chunk);
-            res.on('end', () => {
-                const urls = [];
-                const regex = /<loc>(.*?)<\/loc>/g;
-                let match;
-                while ((match = regex.exec(data)) !== null) {
-                    urls.push(match[1]);
-                }
-                resolve(urls);
-            });
-        }).on('error', reject);
-    });
-}
-
-async function submitToIndexNow(host, key, urlList) {
-    const data = JSON.stringify({
-        host: host,
-        key: key,
-        keyLocation: `https://${host}/${key}.txt`,
-        urlList: urlList
-    });
-
-    const options = {
-        hostname: 'www.bing.com',
-        path: '/indexnow',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'Content-Length': data.length
-        }
+    // 2. Prepare payload
+    const payload = {
+      host: CONFIG.host,
+      key: CONFIG.key,
+      keyLocation: CONFIG.keyLocation,
+      urlList: urls
     };
 
-    return new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
-            let body = '';
-            res.on('data', (chunk) => body += chunk);
-            res.on('end', () => {
-                if (res.statusCode >= 200 && res.statusCode < 300) {
-                    resolve({ status: res.statusCode, body });
-                } else {
-                    reject(new Error(`HTTP ${res.statusCode}: ${body}`));
-                }
-            });
-        });
-
-        req.on('error', reject);
-        req.write(data);
-        req.end();
+    // 3. Submit to IndexNow
+    const response = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
+
+    if (response.ok) {
+      console.log(`✅ Success! Submitted ${urls.length} URLs to IndexNow.`);
+    } else {
+      const errorText = await response.text();
+      console.error(`❌ IndexNow Submission Failed: ${response.status} ${response.statusText}`);
+      console.error(`Reason: ${errorText}`);
+    }
+  } catch (error) {
+    console.error('❌ Critical Error during IndexNow submission:', error);
+  }
 }
 
-(async () => {
-    try {
-        const urls = await getSitemapUrls(sitemapUrl);
-
-        if (urls.length === 0) {
-            console.warn('⚠️ No URLs found in sitemap. Ensure the site is built and deployed.');
-            return;
-        }
-
-        console.log(`🔗 Found ${urls.length} URLs. Submitting to IndexNow...`);
-
-        const result = await submitToIndexNow(host, key, urls);
-        console.log(`✅ Success! Bing accepted ${urls.length} URLs (Status: ${result.status})`);
-
-    } catch (error) {
-        console.error(`❌ IndexNow Error: ${error.message}`);
-        // Don't fail the build if IndexNow fails, just log it.
-    }
-})();
+submitToIndexNow();

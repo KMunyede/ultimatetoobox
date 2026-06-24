@@ -1,0 +1,29 @@
+name: Automated Index Submission
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  submit-to-engines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install googleapis xml2js node-fetch
+
+      - name: Run IndexNow Submission
+        run: node packages/config/src/scripts/submit-indexnow.mjs
+
+      - name: Run Google Indexing API
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_INDEXING_CREDENTIALS }}
+        run: node packages/config/src/scripts/submit-google-indexing.mjs
