@@ -5,7 +5,7 @@ import { Lightbulb } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Knowledge Base — Utility Engineering Insights | Hilmost Labs",
-  description: "Explore the theory behind the tools. In-depth articles on financial modeling, health metrics, data science, and physics from the Hilmost Digital Labs research team.",
+  description: "Explore the theory behind our tools. In-depth articles on financial modeling, health metrics, data science, and physics from the Hilmost Digital Labs team.",
 };
 
 export default function KnowledgeBasePage() {

@@ -48,7 +48,15 @@ export function Header() {
               </Link>
             </Tooltip>
             
-            <NavigationMenu />
+            <div className="hidden lg:flex items-center gap-6">
+              <NavigationMenu />
+              <Link href={`${domains.corporate}/about`} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
+                About
+              </Link>
+              <Link href={`${domains.corporate}/contact`} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
+                Contact
+              </Link>
+            </div>
           </div>
 
           {/* Right Side: Actions */}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Code2, HeartPulse, ShieldCheck, Utensils, Wrench, Sparkles, Zap, Binary, Microchip } from "lucide-react";
+import { ArrowRight, Code2, HeartPulse, ShieldCheck, Utensils, Wrench, Sparkles, Zap, Binary, Microchip, Banknote, FileText, Replace } from "lucide-react";
 
 export default function Home() {
   return (
@@ -22,82 +22,85 @@ export default function Home() {
           </div>
 
 
-          {/* Core Research Hubs */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Subsidiary 1 */}
-            <Link href="https://hilmost-toolbox.hilmost.net" className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 md:p-10 shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-primary/30 overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-blue-500/10 transition-colors" />
+          {/* Core Tool Categories - Flattened Navigation */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                name: "Money & Tax",
+                description: "Professional calculators for currency, loans, interest, and taxes.",
+                href: "https://hilmost-toolbox.hilmost.net/finance",
+                icon: <Banknote size={32} />,
+                color: "blue",
+                count: 12
+              },
+              {
+                name: "PDF Tools",
+                description: "Securely merge, split, and manage PDF files 100% in your browser.",
+                href: "https://hilmost-toolbox.hilmost.net/pdf-tools",
+                icon: <FileText size={32} />,
+                color: "red",
+                count: 4
+              },
+              {
+                name: "Unit Converters",
+                description: "Quickly convert length, weight, temperature, and data storage units.",
+                href: "https://hilmost-toolbox.hilmost.net/converters",
+                icon: <Replace size={32} />,
+                color: "amber",
+                count: 10
+              },
+              {
+                name: "Text & Formatting",
+                description: "Clean up text, count words, and encode data with ease.",
+                href: "https://hilmost-toolbox.hilmost.net/text-data",
+                icon: <Binary size={32} />,
+                color: "green",
+                count: 4
+              },
+              {
+                name: "Math & Science",
+                description: "From standard math to astrophysics and science equation solvers.",
+                href: "https://hilmost-toolbox.hilmost.net/calculators",
+                icon: <Wrench size={32} />,
+                color: "indigo",
+                count: 4
+              },
+              {
+                name: "Health & Wellness",
+                description: "Simple tools for BMI tracking and daily wellness check-ins.",
+                href: "https://hilmost-toolbox.hilmost.net/health",
+                icon: <HeartPulse size={32} />,
+                color: "rose",
+                count: 2
+              }
+            ].map((cat) => (
+              <Link
+                key={cat.name}
+                href={cat.href}
+                className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-primary/30 overflow-hidden"
+              >
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-${cat.color}-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-${cat.color}-500/10 transition-colors`} />
                 <div className="relative z-10">
-                    <div className="h-16 w-16 flex items-center justify-center rounded-2xl bg-blue-500/10 text-blue-600 transition-transform group-hover:scale-110 duration-500 mb-8">
-                        <Binary size={32} />
+                    <div className={`h-16 w-16 flex items-center justify-center rounded-2xl bg-${cat.color}-500/10 text-${cat.color}-600 transition-transform group-hover:scale-110 duration-500 mb-8`}>
+                        {cat.icon}
                     </div>
-                    <h2 className="text-2xl font-black text-text-primary tracking-tight mb-4">Ultimate Toolbox</h2>
-                    <p className="text-text-secondary font-medium leading-relaxed mb-10">
-                        Our flagship utility engine. Over 260+ high-precision tools for finance, physics, and data science, running 100% locally in your browser.
+                    <h2 className="text-2xl font-black text-text-primary tracking-tight mb-4">{cat.name}</h2>
+                    <p className="text-text-secondary font-medium leading-relaxed mb-8">
+                        {cat.description}
                     </p>
-                    <span className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-blue-600 group-hover:gap-4 transition-all">
-                        Open the Toolbox <ArrowRight size={16} />
-                    </span>
-                </div>
-            </Link>
-
-            {/* Subsidiary 2 */}
-            <Link href="https://hilmost-toolbox.hilmost.net/health/daily-wisdom" className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 md:p-10 shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-primary/30 overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-rose-500/10 transition-colors" />
-                <div className="relative z-10">
-                    <div className="h-16 w-16 flex items-center justify-center rounded-2xl bg-rose-500/10 text-rose-600 transition-transform group-hover:scale-110 duration-500 mb-8">
-                        <HeartPulse size={32} />
+                    <div className="flex items-center justify-between mt-auto">
+                      <span className={`inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-${cat.color}-600 group-hover:gap-4 transition-all`}>
+                          Open Tools <ArrowRight size={16} />
+                      </span>
+                      <span className="text-[10px] font-black text-text-muted uppercase tracking-widest bg-canvas-muted px-3 py-1 rounded-full">
+                        {cat.count} Utilities
+                      </span>
                     </div>
-                    <h2 className="text-2xl font-black text-text-primary tracking-tight mb-4">Daily Wisdom Project</h2>
-                    <p className="text-text-secondary font-medium leading-relaxed mb-10">
-                        An experimental vertical focusing on health informatics and psychological grounding through modern mindfulness technologies.
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-rose-600 group-hover:gap-4 transition-all">
-                        View Research <ArrowRight size={16} />
-                    </span>
                 </div>
-            </Link>
+              </Link>
+            ))}
           </div>
 
-          {/* Active Research Frontiers */}
-          <div className="mt-32">
-            <div className="flex flex-col items-center text-center mb-12">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted mb-4 font-mono">Development Pipeline</span>
-                <h2 className="text-3xl md:text-4xl font-black text-text-primary tracking-tight uppercase">Active Research Frontiers</h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                {/* Engineering */}
-                <div className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:border-brand-primary/50 duration-500">
-                    <div className="absolute top-6 right-6 px-2 py-0.5 rounded-md bg-green-500/10 border border-green-500/20 text-[8px] font-black uppercase tracking-widest text-green-600">Active</div>
-                    <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-canvas-muted text-brand-primary mb-6">
-                        <Microchip size={24} />
-                    </div>
-                    <h3 className="text-lg font-bold text-text-primary mb-2">Utility Engineering</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed font-medium">Developing high-precision conversion engines and physical constant solvers for global standards.</p>
-                </div>
-
-                {/* Finance */}
-                <div className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:border-brand-primary/50 duration-500">
-                    <div className="absolute top-6 right-6 px-2 py-0.5 rounded-md bg-green-500/10 border border-green-500/20 text-[8px] font-black uppercase tracking-widest text-green-600">Active</div>
-                    <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-canvas-muted text-brand-primary mb-6">
-                        <Zap size={24} />
-                    </div>
-                    <h3 className="text-lg font-bold text-text-primary mb-2">Financial Modeling</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed font-medium">Researching tax algorithms, compound growth projections, and currency exchange arbitrage logic.</p>
-                </div>
-
-                {/* Privacy */}
-                <div className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:border-brand-primary/50 duration-500">
-                    <div className="absolute top-6 right-6 px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-[8px] font-black uppercase tracking-widest text-amber-600">Drafting</div>
-                    <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-canvas-muted text-brand-primary mb-6">
-                        <ShieldCheck size={24} />
-                    </div>
-                    <h3 className="text-lg font-bold text-text-primary mb-2">Data Security</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed font-medium">Local cryptographic research focusing on browser-side MD5, SHA, and Base64 manipulation.</p>
-                </div>
-            </div>
-          </div>
 
           {/* Core Web Vitals Banner */}
           <div className="mt-32 p-8 md:p-12 bg-text-primary dark:bg-canvas-card rounded-[2.5rem] relative overflow-hidden shadow-2xl">
@@ -117,7 +120,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col items-center gap-4">
                         <Link href="https://hilmost-toolbox.hilmost.net" className="px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-brand-primary/20 hover:scale-105 active:scale-95 transition-all text-sm">
-                            Open Lab Hub
+                            Open All Tools
                         </Link>
                         <span className="text-[10px] font-mono font-bold text-text-muted uppercase">SYSTEMS OPERATIONAL v2.4.0</span>
                     </div>

@@ -61,11 +61,19 @@ export default function AboutPage() {
           <div>
             <h3 className="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">The Lab Founder</h3>
             <h4 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Keepy Munyede</h4>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-              With 15+ years of experience across the IT landscape—specializing in large-scale financial platforms—Keepy founded
-              Hilmost Software Corporation to democratize access to precise, enterprise-quality digital tools.
-              His vision is to transform the "Hilmost" monorepo into a global standard for utility engineering.
-            </p>
+            <div className="prose prose-slate dark:prose-invert max-w-none text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              <p>
+                With 15+ years of experience across the IT landscape—specializing in large-scale financial platforms—Keepy founded
+                Hilmost Software Corporation to democratize access to precise, enterprise-quality digital tools.
+              </p>
+              <h5 className="text-slate-900 dark:text-white font-bold uppercase text-sm tracking-widest mt-6">Founder's Vision</h5>
+              <p className="italic border-l-4 border-blue-500 pl-4 my-4">
+                "I believe that precision tools shouldn't just be for big banks or laboratories. My goal is to build a digital sanctuary where anyone can access banking-grade accuracy and 100% privacy for their everyday digital tasks. We are building the global standard for browser-side utility engineering."
+              </p>
+              <p>
+                His vision is to transform the "Hilmost" monorepo into a global standard for utility engineering, ensuring that data privacy is never compromised for convenience.
+              </p>
+            </div>
             <div className="flex flex-wrap gap-4">
                <span className="px-4 py-1.5 bg-white dark:bg-slate-900 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 shadow-sm">FinTech Architect</span>
                <span className="px-4 py-1.5 bg-white dark:bg-slate-900 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 shadow-sm">15+ Years Experience</span>

@@ -4,62 +4,8 @@ import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles
 export default function Home() {
   const categories = [
     {
-      title: "Text & Data",
-      description: "Word count, unscramblers, hashing, and encoding utilities.",
-      icon: <FileText className="w-6 h-6 text-brand-primary" />,
-      colorClass: "bg-brand-primary/10",
-      links: [
-        { name: "Word Unscrambler", href: "/text-data/word-unscrambler" },
-        { name: "Base64 Text Encoder", href: "/text-data/base64-encode" },
-        { name: "MD5 Hash", href: "/text-data/md5-hash" },
-        { name: "Word Count", href: "/text-data/word-count" },
-      ],
-    },
-    {
-      title: "PDF Tools",
-      description: "Merge, split, rotate, and delete pages from PDF files.",
-      icon: <FileText className="w-6 h-6 text-red-500" />,
-      colorClass: "bg-red-500/10",
-      links: [
-        { name: "Merge PDF", href: "/pdf-tools/merge-pdf" },
-        { name: "Split PDF", href: "/pdf-tools/split-pdf" },
-        { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf" },
-        { name: "Delete Pages", href: "/pdf-tools/delete-pages" },
-      ],
-    },
-    {
-      title: "Converters",
-      description: "Convert units of length, weight, temperature, data, time, and more.",
-      icon: <Replace className="w-6 h-6 text-blue-500" />,
-      colorClass: "bg-blue-500/10",
-      links: [
-        { name: "Age Calculator", href: "/converters/age-calculator" },
-        { name: "Percentage Calculator", href: "/converters/percentage" },
-        { name: "Unix Time", href: "/converters/unix-time" },
-        { name: "Length Converter", href: "/converters/length" },
-        { name: "Weight/Mass Converter", href: "/converters/weight-mass" },
-        { name: "Temperature Converter", href: "/converters/temperature" },
-        { name: "Time Converter", href: "/converters/time" },
-        { name: "Time Zone Converter", href: "/converters/time-zone" },
-        { name: "Data Storage", href: "/converters/data-storage" },
-        { name: "Area Converter", href: "/converters/area" },
-      ],
-    },
-    {
-      title: "Calculators",
-      description: "Standard, scientific, and specialized math calculators.",
-      icon: <Calculator className="w-6 h-6 text-indigo-500" />,
-      colorClass: "bg-indigo-500/10",
-      links: [
-        { name: "Standard Calculator", href: "/calculators/standard" },
-        { name: "Scientific Calculator", href: "/calculators/scientific" },
-        { name: "Astrophysics Calculator", href: "/calculators/astrophysics" },
-        { name: "Science Equation Solver", href: "/calculators/equation-solver" },
-      ],
-    },
-    {
-      title: "Finance",
-      description: "Currency exchange, loans, compound interest, taxes, and inflation.",
+      title: "Money & Tax",
+      description: "Currency, loans, compound interest, taxes, and inflation.",
       icon: <Banknote className="w-6 h-6 text-amber-500" />,
       colorClass: "bg-amber-500/10",
       links: [
@@ -78,7 +24,61 @@ export default function Home() {
       ],
     },
     {
-      title: "Health & Wisdom",
+      title: "PDF Tools",
+      description: "Merge, split, rotate, and delete pages from PDF files.",
+      icon: <FileText className="w-6 h-6 text-red-500" />,
+      colorClass: "bg-red-500/10",
+      links: [
+        { name: "Merge PDF", href: "/pdf-tools/merge-pdf" },
+        { name: "Split PDF", href: "/pdf-tools/split-pdf" },
+        { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf" },
+        { name: "Delete Pages", href: "/pdf-tools/delete-pages" },
+      ],
+    },
+    {
+      title: "Unit Converters",
+      description: "Convert units of length, weight, temperature, data, time, and more.",
+      icon: <Replace className="w-6 h-6 text-blue-500" />,
+      colorClass: "bg-blue-500/10",
+      links: [
+        { name: "Age Calculator", href: "/converters/age-calculator" },
+        { name: "Percentage Calculator", href: "/converters/percentage" },
+        { name: "Unix Time", href: "/converters/unix-time" },
+        { name: "Length Converter", href: "/converters/length" },
+        { name: "Weight/Mass Converter", href: "/converters/weight-mass" },
+        { name: "Temperature Converter", href: "/converters/temperature" },
+        { name: "Time Converter", href: "/converters/time" },
+        { name: "Time Zone Converter", href: "/converters/time-zone" },
+        { name: "Data Storage", href: "/converters/data-storage" },
+        { name: "Area Converter", href: "/converters/area" },
+      ],
+    },
+    {
+      title: "Text & Formatting",
+      description: "Word count, unscramblers, hashing, and encoding utilities.",
+      icon: <FileText className="w-6 h-6 text-brand-primary" />,
+      colorClass: "bg-brand-primary/10",
+      links: [
+        { name: "Word Unscrambler", href: "/text-data/word-unscrambler" },
+        { name: "Base64 Text Encoder", href: "/text-data/base64-encode" },
+        { name: "MD5 Hash", href: "/text-data/md5-hash" },
+        { name: "Word Count", href: "/text-data/word-count" },
+      ],
+    },
+    {
+      title: "Math & Science",
+      description: "Standard, scientific, and specialized math calculators.",
+      icon: <Calculator className="w-6 h-6 text-indigo-500" />,
+      colorClass: "bg-indigo-500/10",
+      links: [
+        { name: "Standard Calculator", href: "/calculators/standard" },
+        { name: "Scientific Calculator", href: "/calculators/scientific" },
+        { name: "Astrophysics Calculator", href: "/calculators/astrophysics" },
+        { name: "Science Equation Solver", href: "/calculators/equation-solver" },
+      ],
+    },
+    {
+      title: "Health & Wellness",
       description: "Daily wellness, BMI tracking, and stoic philosophy.",
       icon: <Activity className="w-6 h-6 text-rose-500" />,
       colorClass: "bg-rose-500/10",
@@ -98,10 +98,10 @@ export default function Home() {
             The fastest, versatile toolbox
         </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight text-text-primary mb-6">
-          The <span className="text-brand-primary">Ultimate</span> Toolbox
+          Free Tools & <span className="text-brand-primary">Calculators</span>
         </h1>
         <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium">
-          A high-performance digital sanctuary for your daily workflow. <br className="hidden md:block" /> Fast, accurate, and optimized for the modern era.
+          A high-performance digital sanctuary for your daily workflow. <br className="hidden md:block" /> Fast, accurate, and secure.
         </p>
       </div>
 
