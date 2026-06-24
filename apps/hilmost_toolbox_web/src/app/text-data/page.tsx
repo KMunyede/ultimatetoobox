@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -110,27 +110,9 @@ export default function TextDataHub() {
         </h1>
       </div>
 
-      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
-        <p className="text-lg leading-relaxed">
-          Welcome to the Hilmost lab for <strong>free online text tools</strong> and data utilities. In the modern digital landscape, the ability to quickly analyze, transform, and secure text-based data is crucial for everyone from creative writers to systems engineers. We have built a high-performance suite of tools designed to provide instant results without compromising your data privacy.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Essential Analysis and Formatting Utilities</h2>
-        <p>
-          Whether you are drafting an article, a social media post, or a technical report, our <strong>Word Count</strong> tool provides real-time statistics on your content. We go beyond simple counts, offering insights into sentence structure and character density. For word-game enthusiasts and crossword solvers, our <strong>Word Unscrambler</strong> uses a comprehensive dictionary engine to find hidden anagrams in seconds, helping you break through linguistic bottlenecks.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure Hashing and Encoding for Developers</h2>
-        <p>
-          Data security and transport are at the heart of our technical utility suite. Our <strong>MD5 Hash Generator</strong> provides a reliable way to verify the integrity of your data strings, while the <strong>Base64 Text Encoder</strong> is a staple for developers needing to move binary data through text-only protocols. We ensure that these tools follow RFC standards, providing outputs that are compatible with any system or programming language.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Privacy by Architecture</h2>
-        <p>
-          The primary risk with online text tools is the &quot;leakage&quot; of sensitive information to remote servers. At Hilmost Digital Labs, we have solved this through a <strong>browser-side architecture</strong>. When you use our text tools, your data never leaves your device. This &quot;zero-server&quot; approach makes our platform a safe digital sanctuary for processing private keys, sensitive logs, or confidential drafts.
-        </p>
-      </section>
-
+      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+        Secure and high-performance utilities for text analysis, data transformation, and cryptographic hashing. All processing happens locally in your browser for 100% privacy.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
@@ -145,6 +127,29 @@ export default function TextDataHub() {
           </Link>
         ))}
       </div>
+
+      <CollapsibleSection title="About Text & Data Tools">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <p className="text-lg leading-relaxed">
+            Welcome to the Hilmost lab for <strong>free online text tools</strong> and data utilities. In the modern digital landscape, the ability to quickly analyze, transform, and secure text-based data is crucial for everyone from creative writers to systems engineers. We have built a high-performance suite of tools designed to provide instant results without compromising your data privacy.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Essential Analysis and Formatting Utilities</h2>
+          <p>
+            Whether you are drafting an article, a social media post, or a technical report, our <strong>Word Count</strong> tool provides real-time statistics on your content. We go beyond simple counts, offering insights into sentence structure and character density. For word-game enthusiasts and crossword solvers, our <strong>Word Unscrambler</strong> uses a comprehensive dictionary engine to find hidden anagrams in seconds, helping you break through linguistic bottlenecks.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure Hashing and Encoding for Developers</h2>
+          <p>
+            Data security and transport are at the heart of our technical utility suite. Our <strong>MD5 Hash Generator</strong> provides a reliable way to verify the integrity of your data strings, while the <strong>Base64 Text Encoder</strong> is a staple for developers needing to move binary data through text-only protocols. We ensure that these tools follow RFC standards, providing outputs that are compatible with any system or programming language.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Privacy by Architecture</h2>
+          <p>
+            The primary risk with online text tools is the &quot;leakage&quot; of sensitive information to remote servers. At Hilmost Digital Labs, we have solved this through a <strong>browser-side architecture</strong>. When you use our text tools, your data never leaves your device. This &quot;zero-server&quot; approach makes our platform a safe digital sanctuary for processing private keys, sensitive logs, or confidential drafts.
+          </p>
+        </section>
+      </CollapsibleSection>
 
       <ToolArticle title="Engineering Faster Workflows">
         <p>

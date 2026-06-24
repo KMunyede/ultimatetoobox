@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -150,26 +150,9 @@ export default function FinanceHub() {
         </h1>
       </div>
 
-      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
-        <p className="text-lg leading-relaxed">
-          Mastering your money requires more than just a spreadsheet; it requires the right data at the right time. Our suite of <strong>free online finance tools</strong> is built to give you the clarity needed to make informed decisions about your personal wealth and business operations. From daily currency checks to multi-year retirement projections, we provide professional-grade accuracy without the professional-grade price tag.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Comprehensive Debt and Loan Management</h2>
-        <p>
-          Managing debt is the first step toward financial freedom. Our <strong>Loan Calculator</strong> and <strong>Amortization Solver</strong> help you break down monthly payments and visualize exactly how much interest you will pay over the life of a loan. Whether you are looking at a 30-year mortgage or a short-term personal credit line, our tools expose the &quot;hidden costs&quot; of borrowing, allowing you to plan payoff strategies that save you thousands.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Tax Optimization and Earnings Analysis</h2>
-        <p>
-          Taxes are often the largest expense for any individual or business. We offer specialized tools like the <strong>VAT & Tax Calculator</strong> and <strong>Income Tax Estimator</strong> to help you understand your net take-home pay. For entrepreneurs and employees alike, our <strong>Salary Converter</strong> translates annual earnings into hourly or monthly rates, providing a realistic view of your earning power and helping you negotiate better compensation.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Investment Growth and Inflation Realities</h2>
-        <p>
-          Building wealth is about understanding compounding and the purchasing power of money. Our <strong>Compound Interest Calculator</strong> demonstrates the exponential growth of reinvested returns, while our <strong>Inflation Calculator</strong> reveals how the value of your currency shifts over time. For corporate analysis, we even include advanced metrics like <strong>WACC (Weighted Average Cost of Capital)</strong> and <strong>EPS (Earnings Per Share)</strong> to help you evaluate company performance like a seasoned Wall Street analyst.
-        </p>
-      </section>
+      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+        Master your money with professional-grade accuracy. Our free online finance tools help you manage debt, optimize taxes, and project investment growth with 100% privacy.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
@@ -184,6 +167,29 @@ export default function FinanceHub() {
           </Link>
         ))}
       </div>
+
+      <CollapsibleSection title="About Money & Tax Tools">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <p className="text-lg leading-relaxed">
+            Welcome to the Hilmost hub for <strong>free online finance tools</strong>. In today&apos;s economy, having access to reliable, accurate, and fast data is essential for making informed financial decisions. Our suite is engineered to provide banking-grade precision for your personal wealth and business operations, from daily currency checks to multi-year retirement projections.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Comprehensive Debt and Loan Management</h2>
+          <p>
+            Managing debt is the first step toward financial freedom. Our <strong>Loan Calculator</strong> and <strong>Amortization Solver</strong> help you break down monthly payments and visualize exactly how much interest you will pay over the life of a loan. Whether you are looking at a 30-year mortgage or a short-term personal credit line, our tools expose the &quot;hidden costs&quot; of borrowing, allowing you to plan payoff strategies that save you thousands.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Tax Optimization and Earnings Analysis</h2>
+          <p>
+            Taxes are often the largest expense for any individual or business. We offer specialized tools like the <strong>VAT & Tax Calculator</strong> and <strong>Income Tax Estimator</strong> to help you understand your net take-home pay. For entrepreneurs and employees alike, our <strong>Salary Converter</strong> translates annual earnings into hourly or monthly rates, providing a realistic view of your earning power and helping you negotiate better compensation.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Investment Growth and Inflation Realities</h2>
+          <p>
+            Building wealth is about understanding compounding and the purchasing power of money. Our <strong>Compound Interest Calculator</strong> demonstrates the exponential growth of reinvested returns, while our <strong>Inflation Calculator</strong> reveals how the value of your currency shifts over time. For corporate analysis, we even include advanced metrics like <strong>WACC (Weighted Average Cost of Capital)</strong> and <strong>EPS (Earnings Per Share)</strong> to help you evaluate company performance like a seasoned Wall Street analyst.
+          </p>
+        </section>
+      </CollapsibleSection>
 
       <ToolArticle title="Why Banking-Grade Precision Matters">
         <p>

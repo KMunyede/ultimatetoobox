@@ -34,3 +34,4 @@ export { SourceReference } from "./SourceReference";
 export { AuthorBio } from "./AuthorBio";
 export { DidYouKnow } from "./DidYouKnow";
 export { PrivacyBadge } from "./PrivacyBadge";
+export { CollapsibleSection } from "./CollapsibleSection";

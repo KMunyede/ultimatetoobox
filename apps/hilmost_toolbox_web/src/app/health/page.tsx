@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Activity, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -100,26 +100,9 @@ export default function HealthHub() {
         </h1>
       </div>
 
-      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
-        <p className="text-lg leading-relaxed">
-          Welcome to the Hilmost sanctuary for <strong>free online health calculators</strong> and wellness tracking. In the pursuit of a balanced life, understanding your body&apos;s core metrics is a vital first step. We have developed a suite of high-precision tools designed to help you monitor your physical health and mental well-being with complete privacy and scientific accuracy.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Track Your BMI and Body Metrics Safely</h2>
-        <p>
-          Maintaining a healthy weight is about more than just numbers; it&apos;s about long-term wellness. Our <strong>BMI Calculator</strong> provides an instant analysis of your Body Mass Index, helping you understand your weight category relative to your height. We use standard medical formulas to ensure that your results are reliable, whether you are using Metric or Imperial measurements. By tracking these metrics regularly, you can make more informed decisions about your diet and exercise routines.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Daily Wisdom and Mental Well-being</h2>
-        <p>
-          At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Wisdom & Wellness</strong> project—a digital space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;digital sanctuary&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Health Monitoring</h2>
-        <p>
-          Health data is incredibly sensitive. Unlike other wellness platforms that track your information for advertising purposes, Hilmost Toolbox operates with a <strong>privacy-first architecture</strong>. Your metrics are processed entirely within your browser and are never stored on our servers. This ensures that your weight, height, and personal reflections remain entirely yours, providing you with a secure environment to focus on what truly matters: your health.
-        </p>
-      </section>
+      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+        Precision tools for your physical and mental well-being. Track body metrics and explore wellness resources with our secure, privacy-focused health utilities.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
@@ -134,6 +117,29 @@ export default function HealthHub() {
           </Link>
         ))}
       </div>
+
+      <CollapsibleSection title="About Health & Wellness Tools">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <p className="text-lg leading-relaxed">
+            Welcome to the Hilmost sanctuary for <strong>free online health calculators</strong> and wellness tracking. In the pursuit of a balanced life, understanding your body&apos;s core metrics is a vital first step. We have developed a suite of high-precision tools designed to help you monitor your physical health and mental well-being with complete privacy and scientific accuracy.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Track Your BMI and Body Metrics Safely</h2>
+          <p>
+            Maintaining a healthy weight is about more than just numbers; it&apos;s about long-term wellness. Our <strong>BMI Calculator</strong> provides an instant analysis of your Body Mass Index, helping you understand your weight category relative to your height. We use standard medical formulas to ensure that your results are reliable, whether you are using Metric or Imperial measurements. By tracking these metrics regularly, you can make more informed decisions about your diet and exercise routines.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Daily Wisdom and Mental Well-being</h2>
+          <p>
+            At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Wisdom & Wellness</strong> project—a digital space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;digital sanctuary&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Health Monitoring</h2>
+          <p>
+            Health data is incredibly sensitive. Unlike other wellness platforms that track your information for advertising purposes, Hilmost Toolbox operates with a <strong>privacy-first architecture</strong>. Your metrics are processed entirely within your browser and are never stored on our servers. This ensures that your weight, height, and personal reflections remain entirely yours, providing you with a secure environment to focus on what truly matters: your health.
+          </p>
+        </section>
+      </CollapsibleSection>
 
       <ToolArticle title="The Importance of Informed Wellness">
         <p>

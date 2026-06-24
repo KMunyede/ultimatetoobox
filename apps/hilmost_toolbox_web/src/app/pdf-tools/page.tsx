@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArticle, PrivacyBadge, FAQSchema, FAQAccordion } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArticle, PrivacyBadge, FAQSchema, FAQAccordion, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -109,26 +109,9 @@ export default function PDFToolsHub() {
         </h1>
       </div>
 
-      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
-        <p className="text-lg leading-relaxed">
-          Welcome to the Hilmost lab for <strong>free online PDF tools</strong> and document management. In an era where digital documentation is the global standard for business and law, having access to professional-grade PDF manipulation software is essential. We have designed a suite of high-performance utilities that bring the power of expensive desktop software directly into your web browser, with zero cost and maximum security.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional PDF Manipulation in Your Browser</h2>
-        <p>
-          Managing your documents should be frictionless. Our <strong>Merge PDF</strong> tool allows you to combine multiple reports, invoices, or academic papers into a single, organized file with simple drag-and-drop reordering. Conversely, our <strong>Split PDF</strong> utility gives you the precision to extract specific ranges or individual pages, creating new documents tailored to your exact requirements. We use lossless processing engines to ensure that your text and images remain sharp and searchable.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Document Processing</h2>
-        <p>
-          The most significant risk with standard &quot;online&quot; PDF tools is the privacy of your data. Most sites require you to upload your sensitive bank statements or legal contracts to their servers for processing. At Hilmost Digital Labs, we have eliminated this risk through a <strong>browser-side first architecture</strong>. Every operation—from rotation to page deletion—happens locally on your device. Your files never touch our servers, making our platform a safe digital sanctuary for your most confidential data.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Fast, Lossless, and Watermark-Free</h2>
-        <p>
-          We believe in utility without compromise. Our tools are optimized for speed, leveraging your device&apos;s local hardware to process files instantly without waiting for slow server uploads or queues. Furthermore, we promise a &quot;clean&quot; output: we never add watermarks to your documents, and we don&apos;t limit the number of downloads. Whether you are correcting the orientation of a scan with our <strong>Rotate PDF</strong> tool or cleaning up a file by <strong>Deleting Pages</strong>, you get professional results every time.
-        </p>
-      </section>
+      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+        Professional PDF management tools that respect your privacy. Merge, split, rotate, and delete pages securely in your browser—your documents never touch our servers.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
@@ -143,6 +126,29 @@ export default function PDFToolsHub() {
           </Link>
         ))}
       </div>
+
+      <CollapsibleSection title="About PDF Tools">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <p className="text-lg leading-relaxed">
+            Welcome to the Hilmost lab for <strong>free online PDF tools</strong> and document management. In an era where digital documentation is the global standard for business and law, having access to professional-grade PDF manipulation software is essential. We have designed a suite of high-performance utilities that bring the power of expensive desktop software directly into your web browser, with zero cost and maximum security.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional PDF Manipulation in Your Browser</h2>
+          <p>
+            Managing your documents should be frictionless. Our <strong>Merge PDF</strong> tool allows you to combine multiple reports, invoices, or academic papers into a single, organized file with simple drag-and-drop reordering. Conversely, our <strong>Split PDF</strong> utility gives you the precision to extract specific ranges or individual pages, creating new documents tailored to your exact requirements. We use lossless processing engines to ensure that your text and images remain sharp and searchable.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Document Processing</h2>
+          <p>
+            The most significant risk with standard &quot;online&quot; PDF tools is the privacy of your data. Most sites require you to upload your sensitive bank statements or legal contracts to their servers for processing. At Hilmost Digital Labs, we have eliminated this risk through a <strong>browser-side first architecture</strong>. Every operation—from rotation to page deletion—happens locally on your device. Your files never touch our servers, making our platform a safe digital sanctuary for your most confidential data.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Fast, Lossless, and Watermark-Free</h2>
+          <p>
+            We believe in utility without compromise. Our tools are optimized for speed, leveraging your device&apos;s local hardware to process files instantly without waiting for slow server uploads or queues. Furthermore, we promise a &quot;clean&quot; output: we never add watermarks to your documents, and we don&apos;t limit the number of downloads. Whether you are correcting the orientation of a scan with our <strong>Rotate PDF</strong> tool or cleaning up a file by <strong>Deleting Pages</strong>, you get professional results every time.
+          </p>
+        </section>
+      </CollapsibleSection>
 
       <PrivacyBadge />
 

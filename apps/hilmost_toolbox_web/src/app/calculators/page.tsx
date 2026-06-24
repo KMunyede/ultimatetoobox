@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Calculator, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -110,26 +110,9 @@ export default function CalculatorsHub() {
         </h1>
       </div>
 
-      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
-        <p className="text-lg leading-relaxed">
-          Welcome to the <strong>free online calculators</strong> hub at Hilmost Toolbox. In today&apos;s fast-paced digital world, having access to reliable, accurate, and fast computing tools is essential. Whether you are a student tackling homework, an engineer performing site calculations, or a scientist exploring the depths of the cosmos, our suite of calculators is engineered to meet your needs with banking-grade precision.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Precision Engineering for Every Equation</h2>
-        <p>
-          At Hilmost, we believe that math should be accessible and frictionless. Our collection spans from the essential <strong>Standard Calculator</strong> for everyday budgeting and simple sums to advanced <strong>Scientific Calculators</strong> capable of handling complex trigonometry and logarithmic functions. We focus on a clean, &quot;enterprise-calm&quot; interface that eliminates distractions, allowing you to focus entirely on the numbers that matter.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Advanced Science and Astrophysics Solvers</h2>
-        <p>
-          Beyond basic arithmetic, we offer specialized tools for the scientific community. Our <strong>Astrophysics Calculator</strong> allows you to compute physical constants and cosmic trajectories, such as escape velocity and gravitational attraction, using the latest astronomical data models. For chemistry and physics students, our <strong>Science Equation Solver</strong> provides instant answers to common kinematics, force, and thermodynamics problems, saving you time and reducing manual errors.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost Calculators?</h2>
-        <p>
-          Unlike many other utility sites, Hilmost Toolbox is built with a <strong>privacy-first architecture</strong>. We utilize client-side processing, meaning your calculations happen locally in your browser. Your data is never uploaded to a server, ensuring 100% privacy for sensitive financial or academic work. Furthermore, our tools are optimized for Core Web Vitals, ensuring they load instantly on both high-speed desktop connections and mobile networks.
-        </p>
-      </section>
+      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+        Precision engineering for every equation. Our free online calculators provide banking-grade accuracy for math, science, and astrophysics, all running locally in your browser.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
@@ -144,6 +127,29 @@ export default function CalculatorsHub() {
           </Link>
         ))}
       </div>
+
+      <CollapsibleSection title="About Mathematics & Science Tools">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <p className="text-lg leading-relaxed">
+            Welcome to the <strong>free online calculators</strong> hub at Hilmost Toolbox. In today&apos;s fast-paced digital world, having access to reliable, accurate, and fast computing tools is essential. Whether you are a student tackling homework, an engineer performing site calculations, or a scientist exploring the depths of the cosmos, our suite of calculators is engineered to meet your needs with banking-grade precision.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Precision Engineering for Every Equation</h2>
+          <p>
+            At Hilmost, we believe that math should be accessible and frictionless. Our collection spans from the essential <strong>Standard Calculator</strong> for everyday budgeting and simple sums to advanced <strong>Scientific Calculators</strong> capable of handling complex trigonometry and logarithmic functions. We focus on a clean, &quot;enterprise-calm&quot; interface that eliminates distractions, allowing you to focus entirely on the numbers that matter.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Advanced Science and Astrophysics Solvers</h2>
+          <p>
+            Beyond basic arithmetic, we offer specialized tools for the scientific community. Our <strong>Astrophysics Calculator</strong> allows you to compute physical constants and cosmic trajectories, such as escape velocity and gravitational attraction, using the latest astronomical data models. For chemistry and physics students, our <strong>Science Equation Solver</strong> provides instant answers to common kinematics, force, and thermodynamics problems, saving you time and reducing manual errors.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost Calculators?</h2>
+          <p>
+            Unlike many other utility sites, Hilmost Toolbox is built with a <strong>privacy-first architecture</strong>. We utilize client-side processing, meaning your calculations happen locally in your browser. Your data is never uploaded to a server, ensuring 100% privacy for sensitive financial or academic work. Furthermore, our tools are optimized for Core Web Vitals, ensuring they load instantly on both high-speed desktop connections and mobile networks.
+          </p>
+        </section>
+      </CollapsibleSection>
 
       <ToolArticle title="Mastering Mathematical Accuracy">
         <p>

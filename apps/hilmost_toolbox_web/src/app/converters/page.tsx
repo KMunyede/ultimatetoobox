@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Replace, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -140,26 +140,9 @@ export default function ConvertersHub() {
         </h1>
       </div>
 
-      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
-        <p className="text-lg leading-relaxed">
-          Welcome to the Hilmost hub for <strong>free online unit converters</strong>. In a globalized world, the ability to translate measurements between different systems is a daily requirement for professionals and hobbyists alike. Whether you are an engineer working with international blueprints, a traveler checking local temperatures, or a developer managing digital data, our suite of converters provides instant, high-precision results.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional Measurement Transformations</h2>
-        <p>
-          Accuracy is the cornerstone of our engineering philosophy. Our <strong>Length Converter</strong> and <strong>Weight/Mass Converter</strong> allow you to switch between Metric (meters, kilograms) and Imperial (feet, pounds) systems with zero friction. We use the latest conversion factors to ensure that every result is reliable for even the most sensitive tasks, such as aerospace calculations or medical dosages.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Specialized Time and Data Utilities</h2>
-        <p>
-          Modern workflows often require specialized conversions beyond simple physical dimensions. Our <strong>Unix Time Converter</strong> is a vital tool for software developers, while our <strong>Data Storage Converter</strong> helps IT professionals manage everything from bits and bytes to terabytes. We also offer a <strong>Time Zone Converter</strong> to help global teams synchronize meetings across different continents without the headache of manual math.
-        </p>
-
-        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Everyday Math Made Simple</h2>
-        <p>
-          Beyond professional use, our hub includes tools for common daily tasks. The <strong>Percentage Calculator</strong> is perfect for retail discounts or tax estimates, while the <strong>Age Calculator</strong> provides exact milestones in years, months, and days. By housing all these tools in one &quot;enterprise-calm&quot; dashboard, we eliminate the need to search multiple websites, saving you time and reducing digital clutter.
-        </p>
-      </section>
+      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+        Precision measurement transformations for everyday tasks. Convert units of length, weight, temperature, and data storage instantly with our high-accuracy online tools.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
@@ -174,6 +157,29 @@ export default function ConvertersHub() {
           </Link>
         ))}
       </div>
+
+      <CollapsibleSection title="About Unit Conversion Tools">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <p className="text-lg leading-relaxed">
+            Welcome to the Hilmost hub for <strong>free online unit converters</strong>. In a globalized world, the ability to translate measurements between different systems is a daily requirement for professionals and hobbyists alike. Whether you are an engineer working with international blueprints, a traveler checking local temperatures, or a developer managing digital data, our suite of converters provides instant, high-precision results.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional Measurement Transformations</h2>
+          <p>
+            Accuracy is the cornerstone of our engineering philosophy. Our <strong>Length Converter</strong> and <strong>Weight/Mass Converter</strong> allow you to switch between Metric (meters, kilograms) and Imperial (feet, pounds) systems with zero friction. We use the latest conversion factors to ensure that every result is reliable for even the most sensitive tasks, such as aerospace calculations or medical dosages.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Specialized Time and Data Utilities</h2>
+          <p>
+            Modern workflows often require specialized conversions beyond simple physical dimensions. Our <strong>Unix Time Converter</strong> is a vital tool for software developers, while our <strong>Data Storage Converter</strong> helps IT professionals manage everything from bits and bytes to terabytes. We also offer a <strong>Time Zone Converter</strong> to help global teams synchronize meetings across different continents without the headache of manual math.
+          </p>
+
+          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Everyday Math Made Simple</h2>
+          <p>
+            Beyond professional use, our hub includes tools for common daily tasks. The <strong>Percentage Calculator</strong> is perfect for retail discounts or tax estimates, while the <strong>Age Calculator</strong> provides exact milestones in years, months, and days. By housing all these tools in one &quot;enterprise-calm&quot; dashboard, we eliminate the need to search multiple websites, saving you time and reducing digital clutter.
+          </p>
+        </section>
+      </CollapsibleSection>
 
       <ToolArticle title="The Hilmost Commitment to Quality">
         <p>
