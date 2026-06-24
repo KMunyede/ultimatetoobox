@@ -11,11 +11,17 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Calculators — Standard, Scientific & Specialized Tools | Hilmost`,
-    description: "Master complex math with ease. Free online calculators for standard arithmetic, scientific computing, astrophysics, and physics equation solving.",
+    title: "Scientific & Standard Calculators | Hilmost",
+    description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title: "Scientific & Standard Calculators | Hilmost",
+      description: DESC,
+      url: PATH,
+      type: "website",
+    }
   };
 }
 

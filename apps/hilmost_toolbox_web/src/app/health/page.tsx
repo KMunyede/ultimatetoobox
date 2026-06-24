@@ -11,11 +11,17 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TITLE} — Free Online Wellness Calculators | Hilmost Toolbox`,
-    description: "Monitor your fitness and wellness with precision. Free online tools including BMI calculators, body metrics, and daily wellness resources.",
+    title: "Health & Wellness Tools: BMI & Metric Trackers | Hilmost",
+    description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title: "Health & Wellness Tools: BMI & Metric Trackers | Hilmost",
+      description: DESC,
+      url: PATH,
+      type: "website",
+    }
   };
 }
 

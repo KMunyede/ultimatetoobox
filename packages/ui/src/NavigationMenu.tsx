@@ -2,13 +2,24 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const TOOLBOX_DATA = {
   name: "Free Tools",
   href: "/", // Toolbox root
   categories: [
+    {
+      name: "Developer Experience",
+      description: "JSON, Regex, JWT, and developer utilities.",
+      href: "/dx",
+      icon: "Code2",
+      tools: [
+        { name: "JSON Formatter", href: "/dx/json-formatter", tooltip: "Pretty-print and validate JSON data." },
+        { name: "Regex Tester", href: "/dx/regex-tester", tooltip: "Real-time regular expression testing." },
+        { name: "JWT Decoder", href: "/dx/jwt-decoder", tooltip: "Decode JSON Web Tokens instantly." },
+      ]
+    },
     {
       name: "Money & Tax",
       description: "Currency, loans, interest, and tax calculators.",
@@ -97,6 +108,7 @@ const TOOLBOX_DATA = {
 };
 
 const ICON_MAP: Record<string, React.ReactNode> = {
+  Code2: <Code2 size={16} />,
   Banknote: <Banknote size={16} />,
   FileText: <FileText size={16} />,
   Replace: <Replace size={16} />,

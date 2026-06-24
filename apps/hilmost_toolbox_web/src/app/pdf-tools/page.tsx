@@ -11,11 +11,17 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TITLE} — Merge, Split, Rotate & Delete PDF Pages | Hilmost Toolbox`,
-    description: "Manage PDF documents with ease. Fast, free online tools to merge PDFs, split pages, rotate, and delete pages. 100% private, browser-side processing.",
+    title: "PDF Tools: Merge, Split & Rotate PDF Online | Hilmost",
+    description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title: "PDF Tools: Merge, Split & Rotate PDF Online | Hilmost",
+      description: DESC,
+      url: PATH,
+      type: "website",
+    }
   };
 }
 

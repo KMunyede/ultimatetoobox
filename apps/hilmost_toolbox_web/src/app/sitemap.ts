@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
-import { KNOWLEDGE_BASE } from '@utilitiessite/config';
+import { KNOWLEDGE_BASE, GUIDES } from '@utilitiessite/config';
 
 export const dynamic = "force-static";
 
@@ -114,10 +114,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${toolboxUrl}/knowledge-base`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
   ];
 
+  // 1.5 GUIDES ARTICLES
+  const guidePages: MetadataRoute.Sitemap = [
+    { url: `${toolboxUrl}/guides`, lastModified, changeFrequency: 'daily' as const, priority: 0.9 },
+    ...GUIDES.map(guide => ({
+      url: `${toolboxUrl}/guides/${guide.slug}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8
+    }))
+  ];
+
   return [
     ...corporatePages,
     ...toolboxHome,
     ...categoryPages,
+    ...guidePages,
     ...toolPages,
     ...kbPages,
     ...programmaticSitemap,

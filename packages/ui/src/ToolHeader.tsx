@@ -33,12 +33,6 @@ export function ToolHeader({
         <h1 className="text-[17px] md:text-[19px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
           {title}
         </h1>
-        {lastUpdated && (
-          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase bg-slate-50 dark:bg-slate-800/30 px-1.5 py-0.5 rounded border border-slate-100 dark:border-slate-800 shrink-0">
-            <Calendar size={9} />
-            {lastUpdated}
-          </span>
-        )}
       </div>
 
       {/* Subtitle - Single line, smaller text */}

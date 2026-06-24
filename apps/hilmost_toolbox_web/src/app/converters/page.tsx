@@ -11,11 +11,17 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TITLE} — Free Online Measurement Tools | Hilmost Toolbox`,
-    description: "Convert units of length, weight, temperature, data storage, and time instantly. Free online converters with precision results and no signup required.",
+    title: "Unit Converters: Metric to Imperial & Data Tools | Hilmost",
+    description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title: "Unit Converters: Metric to Imperial & Data Tools | Hilmost",
+      description: DESC,
+      url: PATH,
+      type: "website",
+    }
   };
 }
 

@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles } from "lucide-react";
 
+export const metadata = {
+  title: "Hilmost Toolbox | Free Calculators & Finance Tools",
+  description: "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters.",
+};
+
 export default function Home() {
   const categories = [
     {

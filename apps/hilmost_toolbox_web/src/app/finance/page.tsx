@@ -11,11 +11,17 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${TITLE} — Free Online Finance Tools | Hilmost Toolbox`,
-    description: "Manage your money with precision. Free online calculators for loans, compound interest, income tax, salary conversion, and retirement planning.",
+    title: "Financial Calculators & Tax Tools | Hilmost",
+    description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title: "Financial Calculators & Tax Tools | Hilmost",
+      description: DESC,
+      url: PATH,
+      type: "website",
+    }
   };
 }
 

@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, BreadcrumbSchema, RelatedTools } from "@utilitiessite/ui";
-import { GUIDES } from "@utilitiessite/config";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { GUIDES, getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { Calendar } from "lucide-react";
+import path from "path";
 
 export function generateStaticParams() {
   return GUIDES.map((guide) => ({
@@ -38,6 +39,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const resolvedParams = await params;
   const guide = GUIDES.find((g) => g.slug === resolvedParams.slug);
   if (!guide) return notFound();
+
+  const filePath = path.join(process.cwd(), `src/app/guides/[slug]/page.tsx`);
+  const lastUpdated = getFileLastUpdated(filePath);
 
   const breadcrumbItems = [
     { label: "Guides", href: "/guides" },
@@ -80,9 +84,15 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
       <article className="mt-8">
         <header className="mb-12">
-            <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary mb-4 block">
-                {guide.category.replace("-", " ")} Deep Dive
-            </span>
+            <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary block">
+                    {guide.category.replace("-", " ")} Deep Dive
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+                    <Calendar size={10} />
+                    {lastUpdated}
+                </span>
+            </div>
             <h1 className="text-3xl md:text-5xl font-black text-text-primary tracking-tight leading-tight">
                 {guide.title}
             </h1>

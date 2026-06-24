@@ -1,16 +1,29 @@
 import { Metadata } from "next";
 import { Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
-import { GUIDES } from "@utilitiessite/config";
+import { GUIDES, getFileLastUpdated } from "@utilitiessite/config";
 import Link from "next/link";
-import { BookOpen, ArrowRight } from "lucide-react";
+import { BookOpen, ArrowRight, Calendar } from "lucide-react";
+import path from "path";
 
 export const metadata: Metadata = {
-  title: "Ecosystem Guides & Learning Center | Hilmost Digital Labs",
-  description: "Master our suite of free online tools with in-depth guides on financial planning, health metrics, and data management. Real-world examples and precision math.",
+  title: "Tool Guides & Learning Center | Hilmost",
+  description: "Master our free online tools with in-depth guides on financial planning, health metrics, and data management. Real-world examples and precision math.",
+  alternates: {
+    canonical: "https://hilmost-toolbox.hilmost.net/guides",
+  },
+  openGraph: {
+    title: "Tool Guides & Learning Center | Hilmost",
+    description: "Master our free online tools with in-depth guides on financial planning, health metrics, and data management.",
+    url: "/guides",
+    type: "website",
+  }
 };
 
 export default function GuidesIndex() {
   const breadcrumbItems = [{ label: "Guides", href: "/guides" }];
+
+  const filePath = path.join(process.cwd(), "src/app/guides/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -58,9 +71,15 @@ export default function GuidesIndex() {
             href={`/guides/${guide.slug}`}
             className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:shadow-xl hover:border-brand-primary/30"
           >
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary mb-4 block">
-              {guide.category.replace("-", " ")}
-            </span>
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary block">
+                {guide.category.replace("-", " ")}
+              </span>
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-400 uppercase">
+                <Calendar size={10} />
+                {lastUpdated}
+              </span>
+            </div>
             <h2 className="text-2xl font-black text-text-primary mb-4 group-hover:text-brand-primary transition-colors">
               {guide.title}
             </h2>
