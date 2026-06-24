@@ -2,25 +2,27 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 
 const TITLE = "Financial Calculators";
 const DESC = "A complete collection of robust financial tools. Manage your wealth, compute compounding returns, estimate taxes, and convert global currencies with ease.";
 const PATH = "/finance";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = sanitizeTitle(TITLE);
   return {
-    title: "Financial Calculators",
+    title,
     description: DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
-      title: "Financial Calculators | Hilmost Toolbox",
+      title,
       description: DESC,
-      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
+      url: CANONICAL_URL,
       type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }
   };
 }

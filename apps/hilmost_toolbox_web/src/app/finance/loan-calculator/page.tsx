@@ -1,27 +1,27 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { LoanCalculatorClient } from "./LoanCalculatorClient";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated, getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Loan Calculator";
 const TOOL_DESC = "Calculate your monthly loan payments, total interest, and exact amortization schedule instantly. Free online tool to uncover the true cost of your loan.";
 const PATH = "/finance/loan-calculator";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `Loan Calculator | Monthly Payments & Amortization | Hilmost`;
+  const title = sanitizeTitle(`${TOOL_NAME} | Monthly Payments & Amortization`);
   return {
     title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
       title,
       description: TOOL_DESC,
-      url: getCanonicalUrl(PATH),
+      url: CANONICAL_URL,
       type: "website",
       images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },

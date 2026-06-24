@@ -1,27 +1,27 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated, getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Compound Interest Calculator";
 const TOOL_DESC = "Discover the power of compounding. Free online calculator to project investment growth, monthly contributions, and long-term wealth accumulation.";
 const PATH = "/finance/compound-interest";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `Compound Interest Calculator | Investment Growth | Hilmost`;
+  const title = sanitizeTitle(`${TOOL_NAME} | Investment Growth`);
   return {
     title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
       title,
       description: TOOL_DESC,
-      url: getCanonicalUrl(PATH),
+      url: CANONICAL_URL,
       type: "website",
       images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },

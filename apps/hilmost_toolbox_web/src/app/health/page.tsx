@@ -2,25 +2,27 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { Activity, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 
-const TITLE = "Health & Fitness Tools";
+const TITLE = "Health & Wellness Tools";
 const DESC = "Free online health and fitness tools including BMI calculators and metric trackers. Monitor your health metrics and maintain your well-being with precision.";
 const PATH = "/health";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = sanitizeTitle(TITLE);
   return {
-    title: "Health & Wellness Tools",
+    title,
     description: DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
-      title: "Health & Wellness Tools | Hilmost Toolbox",
+      title,
       description: DESC,
-      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
+      url: CANONICAL_URL,
       type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }
   };
 }

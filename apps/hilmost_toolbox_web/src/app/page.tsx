@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles } from "lucide-react";
+import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2 } from "lucide-react";
 
 export const metadata = {
+  title: "Hilmost Toolbox | Free Online Calculators & Converters",
   description: "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters.",
   openGraph: {
-    title: "Hilmost Toolbox | Free Online Calculators",
+    title: "Hilmost Toolbox | Free Online Calculators & Converters",
   },
 };
 
@@ -114,7 +115,20 @@ export default function Home() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {categories.map((category) => (
+        {[
+          {
+            title: "Developer Experience",
+            description: "JSON, Regex, JWT, and developer utilities.",
+            icon: <Code2 className="w-6 h-6 text-slate-500" />,
+            colorClass: "bg-slate-500/10",
+            links: [
+              { name: "JSON Formatter", href: "/dx/json-formatter" },
+              { name: "Regex Tester", href: "/dx/regex-tester" },
+              { name: "JWT Decoder", href: "/dx/jwt-decoder" },
+            ],
+          },
+          ...categories
+        ].map((category) => (
           <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300">
             <div className="flex items-center gap-x-4 mb-4">
               <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>

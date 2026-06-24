@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, ToolArticle, RelatedTools, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "../AstrophysicsCalculatorClient";
-import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated, sanitizeTitle } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return { title: "Astrophysics Calculator" };
 
-  const title = `${config.title} | Astrophysics | Hilmost`;
+  const title = sanitizeTitle(`${config.title} | Astrophysics`);
   const canonical = getCanonicalUrl(`/calculators/astrophysics/${resolvedParams.slug}`);
 
   return {

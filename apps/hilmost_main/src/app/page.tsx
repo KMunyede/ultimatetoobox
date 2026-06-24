@@ -77,6 +77,14 @@ export default function Home() {
                 icon: <HeartPulse size={32} />,
                 color: "rose",
                 count: 2
+              },
+              {
+                name: "Developer Experience",
+                description: "JSON, Regex, and JWT utilities built for modern engineering workflows.",
+                href: "https://hilmost-toolbox.hilmost.net/dx",
+                icon: <Code2 size={32} />,
+                color: "slate",
+                count: 3
               }
             ].map((cat) => (
               <Link

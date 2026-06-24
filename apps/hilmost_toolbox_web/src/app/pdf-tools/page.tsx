@@ -2,25 +2,27 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArt
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 
 const TITLE = "PDF Tools";
 const DESC = "A complete suite of private, browser-side PDF manipulation tools. Merge, split, rotate, and delete pages without uploading your files to any server.";
 const PATH = "/pdf-tools";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = sanitizeTitle(TITLE);
   return {
-    title: "PDF Tools",
+    title,
     description: DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
-      title: "PDF Tools | Hilmost Toolbox",
+      title,
       description: DESC,
-      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
+      url: CANONICAL_URL,
       type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }
   };
 }

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, BreadcrumbSchema, RelatedTools } from "@utilitiessite/ui";
-import { GUIDES, getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { GUIDES, getCanonicalUrl, getFileLastUpdated, sanitizeTitle } from "@utilitiessite/config";
 import { Calendar } from "lucide-react";
 import path from "path";
 
@@ -16,21 +16,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const guide = GUIDES.find((g) => g.slug === resolvedParams.slug);
   if (!guide) return { title: "Guide Not Found" };
 
+  const title = sanitizeTitle(guide.metaTitle);
   const canonical = getCanonicalUrl(`/guides/${resolvedParams.slug}`);
 
   return {
-    title: guide.metaTitle,
+    title,
     description: guide.metaDesc,
     alternates: { canonical },
     openGraph: {
-      title: guide.metaTitle,
+      title,
       description: guide.metaDesc,
       url: canonical,
       type: "article",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
     twitter: {
-      title: guide.metaTitle,
+      title,
       description: guide.metaDesc,
+      images: ["/og/main.png"],
     }
   };
 }

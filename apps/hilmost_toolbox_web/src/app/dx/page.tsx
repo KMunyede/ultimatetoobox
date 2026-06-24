@@ -2,25 +2,27 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { Code2, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 
-const TITLE = "Developer Experience (DX) Tools";
+const TITLE = "Developer Experience Tools";
 const DESC = "High-performance developer utilities for modern workflows. Free online tools for JSON formatting, Regex testing, and JWT decoding with 100% privacy.";
 const PATH = "/dx";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = sanitizeTitle(TITLE);
   return {
-    title: "Developer Experience Tools",
+    title,
     description: DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
-      title: "Developer Experience Tools | Hilmost Toolbox",
+      title,
       description: DESC,
-      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
+      url: CANONICAL_URL,
       type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }
   };
 }

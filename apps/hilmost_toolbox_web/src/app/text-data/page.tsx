@@ -2,25 +2,27 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 
 const TITLE = "Text & Data Tools";
 const DESC = "Analyze, encode, and transform text and data instantly. Free online tools for word count, MD5 hashing, Base64 encoding, and unscrambling.";
 const PATH = "/text-data";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = sanitizeTitle(TITLE);
   return {
-    title: "Text & Data Tools",
+    title,
     description: DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: CANONICAL_URL,
     },
     openGraph: {
-      title: "Text & Data Tools | Hilmost Toolbox",
+      title,
       description: DESC,
-      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
+      url: CANONICAL_URL,
       type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }
   };
 }
