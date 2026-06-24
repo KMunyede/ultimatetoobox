@@ -7,18 +7,23 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           
           {/* Hero Section */}
-          <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-6 font-mono">
-                <Sparkles size={14} className="animate-pulse" />
-                HILMOST DIGITAL LABS
+          <div className="max-w-6xl mx-auto mb-12 md:mb-20">
+            <div className="text-center md:text-left mb-8 md:mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest font-mono">
+                  <Sparkles size={14} className="animate-pulse" />
+                  HILMOST DIGITAL LABS
+              </div>
             </div>
-            <h1 className="font-black tracking-tighter text-text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6">
-              Engineering the <br className="hidden md:block" />
-              <span className="text-brand-primary">Everyday Utility.</span>
-            </h1>
-            <p className="text-base md:text-xl text-text-secondary leading-relaxed font-medium max-w-2xl mx-auto">
-              A specialized software research and development unit building high-precision digital tools. We bridge the gap between complex enterprise logic and secure, browser-first solutions.
-            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+              <h1 className="font-black tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-7xl leading-[0.95] text-left">
+                Engineering the <br />
+                <span className="text-brand-primary">Everyday Utility.</span>
+              </h1>
+              <p className="text-lg md:text-2xl text-text-secondary leading-relaxed font-medium text-left">
+                A specialized software research and development unit building high-precision digital tools. We bridge the gap between complex enterprise logic and secure, browser-first solutions.
+              </p>
+            </div>
           </div>
 
 
