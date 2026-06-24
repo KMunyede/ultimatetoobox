@@ -6,15 +6,15 @@ import { BookOpen, ArrowRight, Calendar } from "lucide-react";
 import path from "path";
 
 export const metadata: Metadata = {
-  title: "Tool Guides & Learning Center | Hilmost",
-  description: "Master our free online tools with in-depth guides on financial planning, health metrics, and data management. Real-world examples and precision math.",
+  title: "Utility Guides",
+  description: "In-depth guides on finance, health, and unit conversion tools. Master our free online utilities with real-world examples and precision math.",
   alternates: {
     canonical: "https://hilmost-toolbox.hilmost.net/guides",
   },
   openGraph: {
-    title: "Tool Guides & Learning Center | Hilmost",
-    description: "Master our free online tools with in-depth guides on financial planning, health metrics, and data management.",
-    url: "/guides",
+    title: "Utility Guides | Hilmost Toolbox",
+    description: "In-depth guides on finance, health, and unit conversion tools.",
+    url: "https://hilmost-toolbox.hilmost.net/guides",
     type: "website",
   }
 };

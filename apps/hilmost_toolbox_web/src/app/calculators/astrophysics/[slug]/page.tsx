@@ -25,18 +25,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return { title: "Astrophysics Calculator" };
 
+  const title = `${config.title} | Astrophysics | Hilmost`;
   const canonical = getCanonicalUrl(`/calculators/astrophysics/${resolvedParams.slug}`);
 
   return {
-    title: `${config.title} | Astrophysics | Hilmost`,
+    title,
     description: config.desc,
     alternates: { canonical },
     openGraph: {
-      title: config.title,
+      title,
       description: config.desc,
       url: canonical,
+      type: "website",
       images: ["/og/calculators.png"],
     },
+    twitter: {
+      title,
+      description: config.desc,
+      images: ["/og/calculators.png"],
+    }
   };
 }
 

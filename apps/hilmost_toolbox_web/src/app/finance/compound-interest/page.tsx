@@ -11,12 +11,25 @@ const PATH = "/finance/compound-interest";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = `Compound Interest Calculator | Investment Growth | Hilmost`;
   return {
-    title: `Compound Interest Calculator | Investment Growth | Hilmost`,
+    title,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: getCanonicalUrl(PATH),
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

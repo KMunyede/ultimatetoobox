@@ -11,15 +11,15 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Health & Wellness Tools: BMI & Metric Trackers | Hilmost",
+    title: "Health & Wellness Tools",
     description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
     openGraph: {
-      title: "Health & Wellness Tools: BMI & Metric Trackers | Hilmost",
+      title: "Health & Wellness Tools | Hilmost Toolbox",
       description: DESC,
-      url: PATH,
+      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
       type: "website",
     }
   };

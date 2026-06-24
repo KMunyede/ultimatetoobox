@@ -252,15 +252,15 @@ export function NavigationMenu() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          <Link
+            href={resolveHref("/guides")}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight text-text-secondary hover:text-brand-primary transition-all"
+          >
+            Guides
+          </Link>
         </div>
       </nav>
-
-      <Link
-        href={resolveHref("/guides")}
-        className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight text-text-secondary hover:text-brand-primary transition-all"
-      >
-        Guides
-      </Link>
 
       {/* Ad-Safe Mobile Drawer (Slides from Right) */}
       <AnimatePresence>

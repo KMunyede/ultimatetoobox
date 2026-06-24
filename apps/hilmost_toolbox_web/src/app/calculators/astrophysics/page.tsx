@@ -10,13 +10,28 @@ const TOOL_DESC = "Compute the mechanics of the cosmos. High-precision astrophys
 const PATH = "/calculators/astrophysics";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
-export const metadata: Metadata = {
-  title: `Astrophysics Calculator | Space & Physics Tools | Hilmost`,
-  description: TOOL_DESC,
-  alternates: {
-    canonical: getCanonicalUrl(PATH),
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const title = `Astrophysics Calculator | Space & Physics Tools | Hilmost`;
+  return {
+    title,
+    description: TOOL_DESC,
+    alternates: {
+      canonical: getCanonicalUrl(PATH),
+    },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: getCanonicalUrl(PATH),
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
+  };
+}
 
 const faqs = [
   {

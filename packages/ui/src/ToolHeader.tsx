@@ -1,7 +1,6 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { Calendar } from "lucide-react";
 import { ToolTutorial } from "./ToolTutorial";
 import { DriveStep } from "driver.js";
 

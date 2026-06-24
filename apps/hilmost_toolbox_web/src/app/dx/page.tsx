@@ -11,15 +11,15 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Developer Experience Tools: JSON, Regex & JWT | Hilmost",
+    title: "Developer Experience Tools",
     description: DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
     openGraph: {
-      title: "Developer Experience Tools: JSON, Regex & JWT | Hilmost",
+      title: "Developer Experience Tools | Hilmost Toolbox",
       description: DESC,
-      url: PATH,
+      url: `https://hilmost-toolbox.hilmost.net${PATH}`,
       type: "website",
     }
   };

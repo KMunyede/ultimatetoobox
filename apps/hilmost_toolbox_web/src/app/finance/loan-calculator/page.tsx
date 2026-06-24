@@ -11,20 +11,24 @@ const PATH = "/finance/loan-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = `Loan Calculator | Monthly Payments & Amortization | Hilmost`;
   return {
-    title: `Loan Calculator | Monthly Payments & Amortization`,
+    title,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
     openGraph: {
-      title: `Loan Calculator | Monthly Payments & Amortization | Hilmost`,
+      title,
       description: TOOL_DESC,
       url: getCanonicalUrl(PATH),
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
     twitter: {
-      title: `Loan Calculator | Monthly Payments & Amortization | Hilmost`,
+      title,
       description: TOOL_DESC,
+      images: ["/og/main.png"],
     }
   };
 }
