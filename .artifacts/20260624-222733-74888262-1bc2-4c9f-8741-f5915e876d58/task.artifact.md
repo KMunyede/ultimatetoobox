@@ -1,15 +1,17 @@
 # Task Management
 
 - [x] Project Exploration and Planning
-- [/] Draft Implementation Plan
-- [ ] Implement Metadata Fixes
-	- [ ] Fix Homepage Metadata
-	- [ ] Fix Category Hubs Metadata
-	- [ ] Fix Guides Index Metadata
-	- [ ] Fix Tool Pages Metadata Overrides
-- [ ] Implement UI Fixes
-	- [ ] Fix Navbar/Footer Guides Link
-	- [ ] Remove Date Stamps from Tool/Category Pages
-- [ ] Verification
-	- [ ] Run build and check for errors
-	- [ ] Manual verification of metadata and UI
+- [x] Draft Implementation Plan
+- [x] Implement Metadata Fixes
+	- [x] Fix Homepage Metadata
+	- [x] Fix Category Hubs Metadata (including DX)
+	- [x] Fix Guides Index Metadata
+	- [x] Fix Tool Pages Metadata Overrides
+- [x] Implement UI Fixes
+	- [x] Fix Navbar/Footer Guides Link
+	- [x] Remove Date Stamps from Tool/Category Pages
+- [x] Verification
+	- [x] Run build and check for errors
+	- [x] Deploy to TEST (Staging)
+	- [x] Deploy to LIVE (Production)
+	- [x] Backup to GitHub
