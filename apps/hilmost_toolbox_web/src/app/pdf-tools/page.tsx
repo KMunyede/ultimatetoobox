@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArticle, PrivacyBadge } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArticle, PrivacyBadge, FAQSchema, FAQAccordion } from "@utilitiessite/ui";
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -42,11 +42,55 @@ const links = [
   },
 ];
 
+const faqs = [
+  {
+    question: "Are my PDF files uploaded to your server?",
+    answer: "No. Hilmost PDF Tools use a 'Zero-Upload' architecture. All document processing—merging, splitting, and rotating—happens entirely within your web browser using local computing power. Your sensitive documents never touch our servers, ensuring 100% privacy."
+  },
+  {
+    question: "Is there a limit on the file size or number of PDFs I can process?",
+    answer: "Since processing happens on your local device, the limit is typically determined by your computer's RAM and browser capabilities. Generally, we support large files up to several hundred megabytes without issue. There are no daily limits on the number of documents you can process."
+  },
+  {
+    question: "Can I use these free online PDF tools on my mobile phone?",
+    answer: "Yes, our tools are fully responsive and work on modern mobile browsers. You can select files from your phone's storage or cloud drives (like iCloud or Google Drive) and manage your documents on the go."
+  },
+  {
+    question: "Do I need to pay or create an account to download my files?",
+    answer: "No. All PDF operations and downloads are 100% free. We do not require account registration, and we do not add watermarks to your documents."
+  },
+  {
+    question: "Are the resulting PDFs compatible with professional software like Adobe Acrobat?",
+    answer: "Yes. Our engine generates standard-compliant PDF files that are fully compatible with all major PDF viewers, including Adobe Acrobat, macOS Preview, Chrome, and various mobile apps."
+  }
+];
+
 export default function PDFToolsHub() {
   const breadcrumbItems = [{ label: "PDF Tools", href: PATH }];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Free Online PDF Tools | Hilmost Toolbox",
+    "description": "A private, browser-side suite of free online PDF tools for merging, splitting, and rotating documents.",
+    "url": CANONICAL_URL,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": links.map((link, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://hilmost-toolbox.hilmost.net${link.href}`,
+        "name": link.name
+      }))
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-2 max-w-5xl">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <WebApplicationSchema
         name={`${TITLE} | Hilmost Ultimate Toolbox`}
         description={DESC}
@@ -61,14 +105,32 @@ export default function PDFToolsHub() {
           <FileText className="w-5 h-5" />
         </div>
         <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
-          {TITLE}
+          Free Online PDF Tools
         </h1>
       </div>
-      <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">
-        Professional-grade PDF management tools that respect your privacy. All processing happens 100% on your device—your sensitive documents never touch our servers.
-      </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="prose prose-slate dark:prose-invert max-w-none mb-12">
+        <p className="text-lg leading-relaxed">
+          Welcome to the Hilmost lab for <strong>free online PDF tools</strong> and document management. In an era where digital documentation is the global standard for business and law, having access to professional-grade PDF manipulation software is essential. We have designed a suite of high-performance utilities that bring the power of expensive desktop software directly into your web browser, with zero cost and maximum security.
+        </p>
+
+        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional PDF Manipulation in Your Browser</h2>
+        <p>
+          Managing your documents should be frictionless. Our <strong>Merge PDF</strong> tool allows you to combine multiple reports, invoices, or academic papers into a single, organized file with simple drag-and-drop reordering. Conversely, our <strong>Split PDF</strong> utility gives you the precision to extract specific ranges or individual pages, creating new documents tailored to your exact requirements. We use lossless processing engines to ensure that your text and images remain sharp and searchable.
+        </p>
+
+        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Document Processing</h2>
+        <p>
+          The most significant risk with standard &quot;online&quot; PDF tools is the privacy of your data. Most sites require you to upload your sensitive bank statements or legal contracts to their servers for processing. At Hilmost Digital Labs, we have eliminated this risk through a <strong>browser-side first architecture</strong>. Every operation—from rotation to page deletion—happens locally on your device. Your files never touch our servers, making our platform a safe digital sanctuary for your most confidential data.
+        </p>
+
+        <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Fast, Lossless, and Watermark-Free</h2>
+        <p>
+          We believe in utility without compromise. Our tools are optimized for speed, leveraging your device&apos;s local hardware to process files instantly without waiting for slow server uploads or queues. Furthermore, we promise a &quot;clean&quot; output: we never add watermarks to your documents, and we don&apos;t limit the number of downloads. Whether you are correcting the orientation of a scan with our <strong>Rotate PDF</strong> tool or cleaning up a file by <strong>Deleting Pages</strong>, you get professional results every time.
+        </p>
+      </section>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-red-500/50">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
@@ -86,21 +148,14 @@ export default function PDFToolsHub() {
 
       <ToolArticle title="The Future of Private Document Management">
         <p>
-          Portable Document Format (PDF) has become the universal standard for business, legal, and academic communication. However, managing these files usually requires expensive desktop software or risky online converters that compromise your privacy. Our <strong>PDF Tools Suite</strong> is designed to solve this by bringing professional document manipulation directly into your browser.
+          By utilizing advanced JavaScript libraries like <code>pdf-lib</code> and <code>pdf.js</code>, we ensure that your document tasks are performed with the highest standards of reliability. Our goal is to provide a comprehensive laboratory of tools that eliminate productivity bottlenecks while upholding the strictest standards of data privacy and mathematical precision.
         </p>
-
-        <h3>Security by Architecture</h3>
-        <p>
-          The primary concern with online PDF tools is data security. When you upload a bank statement or a legal contract to a standard website, that file is stored on a server you don&apos;t control. We have eliminated this risk. By utilizing the <code>pdf-lib</code> and <code>pdf.js</code> JavaScript frameworks, our tools perform every operation locally. Your browser processes the bytes, generates the new file, and hands it back to you. We have zero serverside storage for your documents.
-        </p>
-
-        <h3>Why Hilmost Tools Stand Out</h3>
-        <ul>
-          <li><strong>Zero Upload Time:</strong> Since files stay on your machine, there is no waiting for slow server uploads.</li>
-          <li><strong>Offline Capability:</strong> Once the page is loaded, you can perform PDF tasks even if your internet connection drops.</li>
-          <li><strong>Universal Compatibility:</strong> Our lossless engine ensures that the PDFs you generate here are compatible with all major viewers, including Adobe Acrobat, Google Chrome, and macOS Preview.</li>
-        </ul>
       </ToolArticle>
+
+      <div className="mt-16">
+        <h2 className="text-2xl font-black mb-8 uppercase tracking-tight">Frequently Asked Questions</h2>
+        <FAQAccordion items={faqs} />
+      </div>
 
       <AuthorBio />
     </div>

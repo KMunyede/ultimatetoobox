@@ -6,23 +6,39 @@ import { KNOWLEDGE_BASE } from '@utilitiessite/config';
 export const dynamic = "force-static";
 
 /**
- * Automated Sitemap Generator for Hilmost Toolbox.
- * Dynamically discovers static tools and generates programmatic conversion routes.
- * Updated to reflect 264+ tool inventory and Knowledge Base articles.
+ * Optimized Sitemap Generator for Hilmost Ecosystem.
+ * Next.js App Router (app/sitemap.ts)
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://hilmost-toolbox.hilmost.net';
+  const toolboxUrl = 'https://hilmost-toolbox.hilmost.net';
+  const mainUrl = 'https://hilmost.net';
   const lastModified = new Date();
 
-  // 1. Root & Legal Pages
-  const staticPages = ['', '/privacy-policy', '/terms-of-service', '/cookie-policy', '/knowledge-base'];
+  // 1. CORPORATE PAGES (Main Domain)
+  const corporatePages: MetadataRoute.Sitemap = [
+    { url: `${mainUrl}`, lastModified, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${mainUrl}/about`, lastModified, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${mainUrl}/contact`, lastModified, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${mainUrl}/privacy-policy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${mainUrl}/terms-of-service`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
+  ];
 
-  // 2. Main Categories
-  const CATEGORIES = ['converters', 'calculators', 'finance', 'text-data', 'health', 'pdf-tools'];
-  const categoryPages = CATEGORIES.map(cat => `/${cat}`);
+  // 2. TOOLBOX CORE & CATEGORIES
+  const CATEGORIES = ['calculators', 'converters', 'finance', 'text-data', 'pdf-tools', 'health'];
 
-  // 3. Discover Individual Tools (Filesystem based)
-  const discoverToolRoutes = (category: string): string[] => {
+  const toolboxHome: MetadataRoute.Sitemap = [
+    { url: `${toolboxUrl}`, lastModified, changeFrequency: 'daily', priority: 1.0 }
+  ];
+
+  const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map(cat => ({
+    url: `${toolboxUrl}/${cat}`,
+    lastModified,
+    changeFrequency: 'daily',
+    priority: 0.8
+  }));
+
+  // 3. DYNAMIC TOOL DISCOVERY (Filesystem based)
+  const getToolRoutes = (category: string): string[] => {
     try {
       const dirPath = path.join(process.cwd(), 'src/app', category);
       if (!fs.existsSync(dirPath)) return [];
@@ -30,49 +46,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
       return fs.readdirSync(dirPath, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory() && !dirent.name.startsWith('_') && !dirent.name.startsWith('[') && dirent.name !== 'api')
         .map(dirent => `/${category}/${dirent.name}`);
-    } catch (error) {
-      console.error(`Error discovering tools in ${category}:`, error);
+    } catch {
       return [];
     }
   };
 
-  const discoveredToolPages = CATEGORIES.flatMap(discoverToolRoutes);
+  const discoveredTools = CATEGORIES.flatMap(getToolRoutes);
+  const toolPages: MetadataRoute.Sitemap = discoveredTools.map(route => ({
+    url: `${toolboxUrl}${route}`,
+    lastModified,
+    changeFrequency: 'weekly',
+    priority: 0.6
+  }));
 
-  // 4. Knowledge Base Articles
-  const kbPages = KNOWLEDGE_BASE.map(article => `/knowledge-base/${article.slug}`);
+  // 4. KNOWLEDGE BASE ARTICLES
+  const kbPages: MetadataRoute.Sitemap = KNOWLEDGE_BASE.map(article => ({
+    url: `${toolboxUrl}/knowledge-base/${article.slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.5
+  }));
 
-  // 5. Programmatic Conversion Routes
+  // 5. PROGRAMMATIC ROUTES (e.g., meters-to-kilometers)
+  // We include these with lower priority to prevent index bloat while maintaining SEO
   const programmaticPages: string[] = [];
-  
   const UNITS_CONFIG: Record<string, string[]> = {
     'converters/length': ["meters", "kilometers", "centimeters", "millimeters", "miles", "yards", "feet", "inches"],
     'converters/weight-mass': ["kilograms", "grams", "milligrams", "metric-tons", "pounds", "ounces", "stones"],
     'converters/temperature': ["celsius", "fahrenheit", "kelvin"],
-    'converters/area': ["square-meter", "square-kilometer", "square-centimeter", "square-millimeter", "hectare", "acre", "square-foot", "square-inch", "square-yard", "square-mile"],
-    'finance/currency': ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "INR", "ZAR", "NZD"],
+    'converters/area': ["square-meter", "square-kilometer", "hectare", "acre"],
+    'finance/currency': ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "ZAR"],
   };
 
   Object.entries(UNITS_CONFIG).forEach(([pathPrefix, units]) => {
     for (const from of units) {
       for (const to of units) {
         if (from !== to) {
-          // Special filtering for Area to keep build times sane
-          if (pathPrefix === 'converters/area') {
-             if (!(["acre", "hectare", "square-foot", "square-meter"].includes(from) || ["acre", "hectare", "square-foot", "square-meter"].includes(to))) {
-               continue;
-             }
-          }
           programmaticPages.push(`/${pathPrefix}/${from.toLowerCase()}-to-${to.toLowerCase()}`);
         }
       }
     }
   });
 
-  // 6. Fixed Programmatic Slugs (Calculators, Text-Data, Finance)
   const FIXED_PROGRAMMATIC: Record<string, string[]> = {
     'calculators/equation-solver': ["newtons-second-law", "kinetic-energy", "ideal-gas-law", "ohms-law"],
     'calculators/astrophysics': ["gravitational-force", "orbital-velocity", "escape-velocity", "luminosity-calculator", "hubble-distance"],
-    'finance/salary-converter': ["hourly-to-salary", "salary-to-hourly", "monthly-to-hourly", "weekly-to-salary", "daily-rate-calculator"],
+    'finance/salary-converter': ["hourly-to-salary", "salary-to-hourly", "monthly-to-hourly", "weekly-to-salary"],
     'text-data/base64-encode': ["base64-encode", "base64-decode"],
   };
 
@@ -80,21 +99,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     slugs.forEach(slug => programmaticPages.push(`/${pathPrefix}/${slug}`));
   });
 
-  // Helper to map paths to Sitemap format
-  const mapToSitemap = (paths: string[], priority: number, changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly'): MetadataRoute.Sitemap =>
-    paths.map((p) => ({
-      url: `${baseUrl}${p}`,
-      lastModified,
-      changeFrequency,
-      priority,
-    }));
+  const programmaticSitemap: MetadataRoute.Sitemap = programmaticPages.map(route => ({
+    url: `${toolboxUrl}${route}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.4
+  }));
+
+  // 6. LEGAL & MISC
+  const legalPages: MetadataRoute.Sitemap = [
+    { url: `${toolboxUrl}/privacy-policy`, lastModified, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${toolboxUrl}/terms-of-service`, lastModified, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${toolboxUrl}/cookie-policy`, lastModified, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${toolboxUrl}/knowledge-base`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
+  ];
 
   return [
-    ...mapToSitemap([''], 1.0, 'daily'),
-    ...mapToSitemap(categoryPages, 0.9, 'weekly'),
-    ...mapToSitemap(kbPages, 0.8, 'monthly'),
-    ...mapToSitemap(discoveredToolPages, 0.8, 'monthly'),
-    ...mapToSitemap(programmaticPages, 0.7, 'monthly'),
-    ...mapToSitemap(staticPages.filter(p => p !== '' && p !== '/knowledge-base'), 0.3, 'yearly'),
+    ...corporatePages,
+    ...toolboxHome,
+    ...categoryPages,
+    ...toolPages,
+    ...kbPages,
+    ...programmaticSitemap,
+    ...legalPages,
   ];
 }

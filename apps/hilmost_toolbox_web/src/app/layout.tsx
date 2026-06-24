@@ -8,12 +8,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hilmost-toolbox.hilmost.net'),
-  title: "Hilmost | Software Built For the Modern Era",
+  title: {
+    default: "Hilmost | Software Built For the Modern Era",
+    template: "%s | Hilmost Toolbox"
+  },
   description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
   openGraph: {
     title: "Hilmost Toolbox | Free Online Utilities",
     description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
-    url: "https://hilmost-toolbox.hilmost.net",
+    url: "/",
     siteName: "Hilmost Toolbox",
     type: "website",
     images: [

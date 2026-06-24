@@ -243,6 +243,13 @@ export function NavigationMenu() {
         </div>
       </nav>
 
+      <Link
+        href={resolveHref("/guides")}
+        className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight text-text-secondary hover:text-brand-primary transition-all"
+      >
+        Guides
+      </Link>
+
       {/* Ad-Safe Mobile Drawer (Slides from Right) */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -297,9 +304,9 @@ export function NavigationMenu() {
               <div className="p-6 bg-canvas-muted border-t border-base">
                 <p className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-4">Quick Navigation</p>
                 <div className="grid grid-cols-2 gap-4">
-                  <Link href={domains.corporate} className="text-xs font-bold text-text-primary">Home</Link>
-                  <Link href={`${domains.corporate}/about`} className="text-xs font-bold text-text-primary">About</Link>
-                  <Link href={`${domains.corporate}/contact`} className="text-xs font-bold text-text-primary">Contact</Link>
+                  <Link href={resolveHref("/guides")} onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-text-primary">Guides</Link>
+                  <Link href={`${domains.corporate}/about`} onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-text-primary">About</Link>
+                  <Link href={`${domains.corporate}/contact`} onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-text-primary">Contact</Link>
                 </div>
               </div>
             </motion.div>

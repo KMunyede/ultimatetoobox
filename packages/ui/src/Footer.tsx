@@ -54,6 +54,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-text-secondary font-medium">
               <li><Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">About</Link></li>
               <li><Link href={`${domains.corporate}/contact`} className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
+              <li><Link href={`${domains.toolbox}/guides`} className="hover:text-brand-primary transition-colors">Utility Guides</Link></li>
               <li><div className="flex items-center gap-2 text-[10px] text-text-muted mt-4 font-mono">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 SYSTEMS OPERATIONAL v2.4

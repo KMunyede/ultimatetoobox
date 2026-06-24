@@ -12,11 +12,20 @@ const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Loan Calculator | Monthly Payments & Amortization | Hilmost`,
+    title: `Loan Calculator | Monthly Payments & Amortization`,
     description: TOOL_DESC,
     alternates: {
       canonical: getCanonicalUrl(PATH),
     },
+    openGraph: {
+      title: `Loan Calculator | Monthly Payments & Amortization | Hilmost`,
+      description: TOOL_DESC,
+      url: getCanonicalUrl(PATH),
+    },
+    twitter: {
+      title: `Loan Calculator | Monthly Payments & Amortization | Hilmost`,
+      description: TOOL_DESC,
+    }
   };
 }
 
