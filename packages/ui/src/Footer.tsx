@@ -40,19 +40,20 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-text-primary mb-6 uppercase tracking-widest text-[10px]">Research Verticals</h3>
             <ul className="space-y-3 text-sm text-text-secondary font-medium">
-              <li><Link href={domains.toolbox} className="hover:text-brand-primary transition-colors">Utility Engineering</Link></li>
-              <li><Link href={`${domains.toolbox}/finance`} className="hover:text-brand-primary transition-colors">Financial Modeling</Link></li>
-              <li><Link href={`${domains.toolbox}/health`} className="hover:text-brand-primary transition-colors">Health Informatics</Link></li>
-              <li><Link href={`${domains.toolbox}/text-data`} className="hover:text-brand-primary transition-colors">Data Privacy & Security</Link></li>
+              <li><Link href={`${domains.toolbox}/text-data`} className="hover:text-brand-primary transition-colors">Text & Data</Link></li>
+              <li><Link href={`${domains.toolbox}/finance`} className="hover:text-brand-primary transition-colors">Financial</Link></li>
+              <li><Link href={`${domains.toolbox}/converters`} className="hover:text-brand-primary transition-colors">Converters</Link></li>
+              <li><Link href={`${domains.toolbox}/calculators`} className="hover:text-brand-primary transition-colors">Calculators</Link></li>
+              <li><Link href={`${domains.toolbox}/health`} className="hover:text-brand-primary transition-colors">Health & Wisdom</Link></li>
+              <li><Link href={`${domains.toolbox}/pdf-tools`} className="hover:text-brand-primary transition-colors">PDF Tools</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-bold text-text-primary mb-6 uppercase tracking-widest text-[10px]">Platform</h3>
             <ul className="space-y-3 text-sm text-text-secondary font-medium">
-              <li><Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">About the Lab</Link></li>
-              <li><Link href={domains.wisdom} className="hover:text-brand-primary transition-colors">Daily Wisdom Project</Link></li>
-              <li><Link href={`${domains.corporate}/contact`} className="hover:text-brand-primary transition-colors">Collaborate</Link></li>
+              <li><Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">About</Link></li>
+              <li><Link href={`${domains.corporate}/contact`} className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
               <li><div className="flex items-center gap-2 text-[10px] text-text-muted mt-4 font-mono">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 SYSTEMS OPERATIONAL v2.4
