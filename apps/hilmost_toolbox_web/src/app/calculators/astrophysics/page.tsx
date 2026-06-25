@@ -4,7 +4,8 @@ import { AstrophysicsCalculatorClient } from "./AstrophysicsCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
-import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+
 
 const TOOL_NAME = "Astrophysics Calculator Suite";
 const TOOL_DESC = "Compute the mechanics of the cosmos. High-precision astrophysics calculator for gravitational force, orbital velocity, escape velocity, and stellar luminosity.";
@@ -12,7 +13,7 @@ const PATH = "/calculators/astrophysics";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = generatePageTitle("Astrophysics Calculator | Space & Physics Tools");
+  const title = formatTitle(TOOL_NAME);
   return {
     metadataBase: new URL(METADATA_BASE_URL),
     title,

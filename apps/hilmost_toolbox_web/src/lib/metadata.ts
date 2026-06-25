@@ -30,25 +30,28 @@ export function formatTitle(pageTitle: string): string {
   const suffix = "Hilmost Toolbox";
   const separator = " | ";
 
-  // 1. Remove suffix if it exists (case-insensitive, handles various spacing)
+  // 1. Remove suffix if it exists
   let clean = pageTitle.replace(new RegExp(`\\s*\\|?\\s*${suffix}`, 'gi'), '').trim();
 
-  // 2. Enforce length < 60 (subtracting suffix length)
+  // 2. SEO "Sweet Spot" is 50-60 chars
   const suffixFull = `${separator}${suffix}`;
   const maxLength = 60 - suffixFull.length;
 
+  // 3. Intelligent Shortening:
+  // If the title is too long, we try to preserve the first few words (The "Money" Keywords)
   if (clean.length > maxLength) {
-    clean = clean.substring(0, maxLength - 3).trim() + "...";
+    // If there's a separator in the prefix (like "Tool | Description"),
+    // we drop the description and just keep the Tool Name.
+    if (clean.includes(separator)) {
+      clean = clean.split(separator)[0].trim();
+    }
+
+    // If still too long, hard truncate
+    if (clean.length > maxLength) {
+      clean = clean.substring(0, maxLength - 3).trim() + "...";
+    }
   }
 
-  // 3. Return the specific page title part only
-  // NOTE: If using Next.js template: '%s | Hilmost Toolbox',
-  // we return JUST the 'clean' part.
-  // But the request says "Append ' | Hilmost Toolbox' only once" in the utility.
-  // So I will return the full string, and we will update layout.tsx to NOT use a template
-  // OR we return just the prefix and let layout handle it.
-
-  // Given the instruction "Append ... only once", I'll make the utility return the FULL string.
   return `${clean}${suffixFull}`;
 }
 

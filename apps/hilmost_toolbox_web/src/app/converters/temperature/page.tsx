@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { TemperaturePageUI } from "./TemperaturePageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Temperature Converter";
 const TOOL_TYPE = "Temperature Converter";
@@ -8,19 +9,26 @@ const TOOL_DESC = "Convert seamlessly between Celsius, Fahrenheit, and Kelvin in
 const PATH = "/converters/temperature";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `${TOOL_NAME} — Free Online ${TOOL_TYPE} | Hilmost Toolbox`;
-  const description = `Free online ${TOOL_NAME.toLowerCase()}. ${TOOL_DESC}`;
-  const canonical = getCanonicalUrl(PATH);
-
+  const title = formatTitle(TOOL_NAME);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
-    description,
-    alternates: { canonical },
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
     openGraph: {
       title,
-      description,
-      url: canonical,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

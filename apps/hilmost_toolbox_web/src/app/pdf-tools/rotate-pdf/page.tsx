@@ -4,6 +4,7 @@ import { RotatePDFClient } from "../../../components/pdf/RotatePDFClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Rotate PDF Pages";
 const TOOL_DESC = "Rotate individual or all pages of a PDF document instantly. Secure, browser-side rotation with live visual previews. Fix scans with no uploads.";
@@ -11,21 +12,26 @@ const PATH = "/pdf-tools/rotate-pdf";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Rotate PDF Files — Free Online Document Rotator | Hilmost Toolbox";
-  const description = "Rotate your PDF documents or specific pages instantly. Free online tool to fix orientation issues in your PDF files. 100% private and secure.";
-  const canonical = getCanonicalUrl(PATH);
-
+  const title = formatTitle(TOOL_NAME);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
-    description,
-    alternates: { canonical },
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
     openGraph: {
       title,
-      description,
-      url: canonical,
+      description: TOOL_DESC,
+      url: PATH,
       type: "website",
-      images: ["/og/pdf-tools.png"],
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

@@ -4,6 +4,7 @@ import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { Metadata } from "next";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Budget Planner";
 const TOOL_DESC = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Private and secure.";
@@ -11,12 +12,26 @@ const PATH = "/finance/budget-planner";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
   return {
-    title: `Budget Planner | Monthly Expense Tracker | Hilmost`,
-    description: "Track your income and savings with our free online 50/30/20 budget planner.",
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
+    description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

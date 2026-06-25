@@ -4,6 +4,7 @@ import { PercentageClient } from "./PercentageClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Percentage Calculator";
 const TOOL_DESC = "Free online percentage calculator. Instantly calculate percentages, find percentage increase/decrease, and solve ratio problems.";
@@ -11,12 +12,26 @@ const PATH = "/converters/percentage";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
   return {
-    title: `${TOOL_NAME} — Find % Increase & Decrease`,
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

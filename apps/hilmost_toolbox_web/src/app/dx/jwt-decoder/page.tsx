@@ -4,6 +4,7 @@ import { JWTDecoderClient } from "./JWTDecoderClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "JWT Decoder & Inspector";
 const TOOL_DESC = "Decode JSON Web Tokens (JWT) safely. Secure, browser-side JWT decoder to inspect headers, payloads, and signatures with 100% privacy.";
@@ -11,12 +12,26 @@ const PATH = "/dx/jwt-decoder";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
   return {
-    title: "JWT Decoder | Inspect JSON Web Tokens Safely Online | Hilmost",
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

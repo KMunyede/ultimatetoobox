@@ -4,6 +4,7 @@ import { WACCCalculatorClient } from "./WACCCalculatorClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "WACC Calculator (Professional+)";
 const TOOL_DESC = "Calculate your Weighted Average Cost of Capital (WACC) and CAPM Cost of Equity. Understand your company's hurdle rate and tax shield savings instantly.";
@@ -11,12 +12,26 @@ const PATH = "/finance/wacc-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
   return {
-    title: `WACC Calculator | Cost of Capital & CAPM | Hilmost`,
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

@@ -12,7 +12,7 @@ const PATH = "/finance/loan-calculator";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = formatTitle(`${TOOL_NAME} | Monthly Payments & Amortization`);
+  const title = formatTitle(TOOL_NAME);
   return {
     metadataBase: new URL(METADATA_BASE_URL),
     title,

@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Word Unscrambler";
 const TOOL_TYPE = "Anagram Solver";
@@ -12,20 +13,26 @@ const PATH = "/text-data/word-unscrambler";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `Word Unscrambler | Solve Anagrams & Word Puzzles | Hilmost`;
-  const description = `Unscramble letters and solve anagrams instantly. Free online tool for Scrabble, Words with Friends, and crossword puzzles.`;
-  const canonical = getCanonicalUrl(PATH);
-
+  const title = formatTitle(TOOL_NAME);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
-    description,
-    alternates: { canonical },
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
     openGraph: {
       title,
-      description,
-      url: canonical,
-      images: ["/og/text-data.png"],
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

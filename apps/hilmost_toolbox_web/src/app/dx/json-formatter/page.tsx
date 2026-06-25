@@ -4,6 +4,7 @@ import { JSONFormatterClient } from "./JSONFormatterClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "JSON Formatter & Validator";
 const TOOL_DESC = "Pretty-print, validate, and minify JSON data instantly. Secure, browser-side JSON formatter with syntax highlighting and error detection.";
@@ -11,12 +12,26 @@ const PATH = "/dx/json-formatter";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
   return {
-    title: "JSON Formatter & Validator | Pretty-Print JSON Online | Hilmost",
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

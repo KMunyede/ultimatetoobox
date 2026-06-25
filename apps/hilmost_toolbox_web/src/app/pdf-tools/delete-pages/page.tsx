@@ -4,6 +4,7 @@ import { DeletePagesClient } from "../../../components/pdf/DeletePagesClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Delete PDF Pages";
 const TOOL_DESC = "Remove unwanted pages from your PDF document instantly. Secure, browser-side deletion with visual page selection. 100% private.";
@@ -11,21 +12,26 @@ const PATH = "/pdf-tools/delete-pages";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Delete PDF Pages Free Online — Remove PDF Pages | Hilmost Toolbox";
-  const description = "Remove specific pages from your PDF document instantly. Free online tool to delete unwanted PDF pages with visual selection. 100% private and secure.";
-  const canonical = getCanonicalUrl(PATH);
-
+  const title = formatTitle(TOOL_NAME);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
-    description,
-    alternates: { canonical },
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
     openGraph: {
       title,
-      description,
-      url: canonical,
+      description: TOOL_DESC,
+      url: PATH,
       type: "website",
-      images: ["/og/pdf-tools.png"],
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

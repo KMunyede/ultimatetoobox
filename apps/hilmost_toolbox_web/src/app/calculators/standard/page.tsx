@@ -4,6 +4,7 @@ import { StandardCalculatorClient } from "./StandardCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Standard Calculator";
 const TOOL_DESC = "Free online standard calculator for fast everyday arithmetic. Instantly add, subtract, multiply, and divide with precision. No software required.";
@@ -11,12 +12,26 @@ const PATH = "/calculators/standard";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
   return {
-    title: `Standard Calculator | Quick & Simple Math | Hilmost`,
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
     description: TOOL_DESC,
     alternates: {
-      canonical: getCanonicalUrl(PATH),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

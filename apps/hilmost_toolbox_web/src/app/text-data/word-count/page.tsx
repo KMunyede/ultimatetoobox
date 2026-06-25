@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { WordCountClient } from "./WordCountClient";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Word Count Tool";
 const TOOL_TYPE = "Word Counter";
@@ -12,20 +13,26 @@ const PATH = "/text-data/word-count";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `Word Count Tool | Real-time Character & Text Counter | Hilmost`;
-  const description = `Analyze your text with precision. Free online word counter to track word density and character counts instantly.`;
-  const canonical = getCanonicalUrl(PATH);
-
+  const title = formatTitle(TOOL_NAME);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
-    description,
-    alternates: { canonical },
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
     openGraph: {
       title,
-      description,
-      url: canonical,
-      images: ["/og/text-data.png"],
+      description: TOOL_DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["/og/main.png"],
+    }
   };
 }
 

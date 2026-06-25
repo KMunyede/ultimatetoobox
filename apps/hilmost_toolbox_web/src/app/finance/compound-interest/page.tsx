@@ -4,6 +4,7 @@ import { CompoundInterestClient } from "./CompoundInterestClient";
 import { getFileLastUpdated, getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Compound Interest Calculator";
 const TOOL_DESC = "Discover the power of compounding. Free online calculator to project investment growth, monthly contributions, and long-term wealth accumulation.";
@@ -11,17 +12,18 @@ const PATH = "/finance/compound-interest";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = sanitizeTitle(`${TOOL_NAME} | Investment Growth`);
+  const title = formatTitle(TOOL_NAME);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: TOOL_DESC,
     alternates: {
-      canonical: CANONICAL_URL,
+      canonical: PATH,
     },
     openGraph: {
       title,
       description: TOOL_DESC,
-      url: CANONICAL_URL,
+      url: PATH,
       type: "website",
       images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },
