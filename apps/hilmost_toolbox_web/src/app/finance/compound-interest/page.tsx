@@ -1,7 +1,8 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
-import { getFileLastUpdated, getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
+import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";

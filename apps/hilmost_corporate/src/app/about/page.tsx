@@ -1,5 +1,6 @@
 ﻿import { Metadata } from "next";
 import { User, ShieldCheck, Code, Zap } from "lucide-react";
+import { CategoryGrid } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
   title: "About the Lab | Hilmost Digital Labs",
@@ -86,20 +87,7 @@ export default function AboutPage() {
       {/* Research Frontiers */}
       <div className="mt-20">
         <h2 className="text-center text-3xl font-black text-slate-900 dark:text-white mb-12 uppercase tracking-tight">Active Research Frontiers</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { title: "Financial Modeling", desc: "Compound growth, tax burden analysis, and loan amortization engines." },
-            { title: "Health Informatics", desc: "Standardized biological metrics and wellness tracking algorithms." },
-            { title: "Data Privacy", desc: "Local cryptographic hashing and secure text manipulation." },
-            { title: "Utility Engineering", desc: "High-precision physical constant conversions and scientific solvers." }
-          ].map((item, i) => (
-            <div key={i} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 transition-all group">
-              <Zap size={20} className="text-blue-500 mb-4 group-hover:scale-110 transition-transform" />
-              <h5 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h5>
-              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
+        <CategoryGrid limit={6} />
       </div>
     </div>
   );

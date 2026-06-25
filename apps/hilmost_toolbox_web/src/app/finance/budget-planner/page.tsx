@@ -1,6 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { Metadata } from "next";
 import { ShareButton } from "@/components/ShareButton";

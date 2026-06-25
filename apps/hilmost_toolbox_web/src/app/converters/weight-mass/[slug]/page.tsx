@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WeightMassPageUI } from "../WeightMassPageUI";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 
 const WEIGHT_UNITS = ["kilograms", "grams", "milligrams", "metric tons", "pounds", "ounces", "stones"];

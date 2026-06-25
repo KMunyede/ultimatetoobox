@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, FAQSchema, ToolHeader, AuthorBio, DidYouKnow, PrivacyBadge, HowToSchema, SourceReference } from "@utilitiessite/ui";
 import { RotatePDFClient } from "../../../components/pdf/RotatePDFClient";
-import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";

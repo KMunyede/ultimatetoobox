@@ -1,5 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
 import path from "path";

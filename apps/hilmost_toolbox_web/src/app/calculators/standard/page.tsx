@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, FAQSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
 import { StandardCalculatorClient } from "./StandardCalculatorClient";
-import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Base64PageUI } from "../Base64PageUI";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 
 const SLUGS = [

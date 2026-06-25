@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AreaPageUI } from "../AreaPageUI";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 
 const AREA_UNITS = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Hectare", "Acre", "Square Foot", "Square Inch", "Square Yard", "Square Mile"];

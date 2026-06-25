@@ -1,6 +1,7 @@
 ﻿import { Metadata } from "next";
 import Link from "next/link";
 import { GitBranch, Mail, Globe, MapPin, Phone } from "lucide-react";
+import { CategoryGrid } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
   title: "About Hilmost | Innovation in Utility Engineering",
@@ -30,14 +31,7 @@ export default function AboutPage() {
           <p className="mb-6 text-slate-600 dark:text-slate-400 font-medium">
             Our portfolio spans multiple categories, each designed to address real-world needs:
           </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose list-none p-0">
-            <PortfolioItem title="Text & Data" desc="Tools for parsing, analyzing, and transforming information for academic use." />
-            <PortfolioItem title="Financial" desc="Calculators that simplify complex modeling for analysts and businesses." />
-            <PortfolioItem title="Converters" desc="Utilities that bridge formats, ensuring seamless workflows across platforms." />
-            <PortfolioItem title="Calculators" desc="From scientific to everyday math, providing accuracy and ease of use." />
-            <PortfolioItem title="Health & Wisdom" desc="Resources that promote well-being, blending technology with human insight." />
-            <PortfolioItem title="PDF Tools" desc="Streamlined solutions for document management, editing, and conversion." />
-          </ul>
+          <CategoryGrid limit={6} />
         </section>
 
         <section className="mb-16">
@@ -104,14 +98,5 @@ export default function AboutPage() {
         </section>
       </div>
     </div>
-  );
-}
-
-function PortfolioItem({ title, desc }: { title: string, desc: string }) {
-  return (
-    <li className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-      <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-1 uppercase tracking-tight">{title}</h3>
-      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{desc}</p>
-    </li>
   );
 }

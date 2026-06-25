@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { CurrencyPageUI } from "./CurrencyPageUI";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 
 export async function generateMetadata(): Promise<Metadata> {

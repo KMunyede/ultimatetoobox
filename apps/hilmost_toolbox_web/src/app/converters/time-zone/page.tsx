@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { WebApplicationSchema, FAQSchema, ToolArticle , RelatedTools, Breadcrumbs, ToolHeader, FAQAccordion } from "@utilitiessite/ui";
 import { TimeZoneClient } from "./TimeZoneClient";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 

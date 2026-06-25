@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, ToolHeader } from "@utilitiessite/ui";
 import { EquationSolverClient } from "../EquationSolverClient";
-import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 

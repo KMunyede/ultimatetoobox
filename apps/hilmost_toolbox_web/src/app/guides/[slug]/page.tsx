@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, RelatedTools } from "@utilitiessite/ui";
-import { GUIDES, getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
+import { GUIDES, getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import { Calendar } from "lucide-react";
 import path from "path";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";

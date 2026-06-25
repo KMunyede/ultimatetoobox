@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
 import { RelatedTools, Breadcrumbs, WebApplicationSchema, ToolHeader, ToolArticle } from "@utilitiessite/ui";
-import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 

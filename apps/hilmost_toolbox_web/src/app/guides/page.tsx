@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Breadcrumbs } from "@utilitiessite/ui";
-import { GUIDES, getFileLastUpdated } from "@utilitiessite/config";
+import { GUIDES } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import Link from "next/link";
 import { BookOpen, ArrowRight, Calendar } from "lucide-react";
 import path from "path";
