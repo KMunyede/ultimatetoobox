@@ -144,41 +144,46 @@ export function ScientificCalculatorClient() {
   }, [handleInput, calculate]);
 
   const buttons = [
-    { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func", tip: isSecond ? "Inverse Sine" : "Sine Function" },
-    { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func", tip: isSecond ? "Inverse Cosine" : "Cosine Function" },
-    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", tip: isSecond ? "Inverse Tangent" : "Tangent Function" },
-    { label: "ln", type: "func", tip: "Natural Logarithm (base e)" },
-    { label: "log", type: "func", tip: "Common Logarithm (base 10)" },
-    { label: "x²", type: "operator", val: "^2", tip: "Square (Power of 2)" },
-    { label: "x³", type: "operator", val: "^3", tip: "Cube (Power of 3)" },
-    { label: "√x", type: "func", val: "√", tip: "Square Root" },
-    { label: "π", type: "number", tip: "Pi Constant (≈3.14159)" },
-    { label: "e", type: "number", tip: "Euler's Number (≈2.71828)" },
+    // Standard Row 1: Modes & Main Actions
+    { label: "2nd", type: "mode", active: isSecond, tip: "Shift: Toggles Inverse Functions", className: "bg-slate-100 dark:bg-slate-800" },
     { label: "DEG", type: "mode", active: angleMode === "deg", tip: "Degrees Mode (360°)" },
     { label: "RAD", type: "mode", active: angleMode === "rad", tip: "Radians Mode (2π)" },
-    { label: "GRAD", type: "mode", active: angleMode === "grad", tip: "Gradians Mode (400)" },
-    { label: "2nd", type: "mode", active: isSecond, tip: "Shift: Toggles Inverse Functions" },
-    { label: "HYP", type: "mode", active: isHyp, tip: "Hyperbolic Function Mode" },
-    { label: "7", type: "number" },
-    { label: "8", type: "number" },
-    { label: "9", type: "number" },
-    { label: "(", type: "operator" },
-    { label: ")", type: "operator" },
-    { label: "4", type: "number" },
-    { label: "5", type: "number" },
-    { label: "6", type: "number" },
-    { label: "×", type: "operator", val: "×" },
-    { label: "÷", type: "operator", val: "÷" },
-    { label: "1", type: "number" },
-    { label: "2", type: "number" },
-    { label: "3", type: "number" },
-    { label: "+", type: "operator" },
-    { label: "−", type: "operator", val: "−" },
-    { label: "AC", type: "clear", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "All Clear" },
-    { label: "0", type: "number" },
-    { label: ".", type: "number" },
-    { label: "^", type: "operator", tip: "Power Function (x to the power of y)" },
-    { label: "=", type: "equals", className: "bg-blue-600 text-white", tip: "Calculate Result" },
+    { label: "(", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: ")", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "AC", type: "clear", className: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-900/50", tip: "All Clear" },
+
+    // Scientific Functions (Left) & Numbers (Right)
+    { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func", tip: isSecond ? "Inverse Sine" : "Sine Function", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func", tip: isSecond ? "Inverse Cosine" : "Cosine Function", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", tip: isSecond ? "Inverse Tangent" : "Tangent Function", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "7", type: "number", className: "font-black" },
+    { label: "8", type: "number", className: "font-black" },
+    { label: "9", type: "number", className: "font-black" },
+    { label: "÷", type: "operator", val: "÷", className: "text-brand-primary bg-brand-primary/5" },
+
+    { label: "ln", type: "func", tip: "Natural Logarithm (base e)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "log", type: "func", tip: "Common Logarithm (base 10)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "√x", type: "func", val: "√", tip: "Square Root", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "4", type: "number", className: "font-black" },
+    { label: "5", type: "number", className: "font-black" },
+    { label: "6", type: "number", className: "font-black" },
+    { label: "×", type: "operator", val: "×", className: "text-brand-primary bg-brand-primary/5" },
+
+    { label: "x²", type: "operator", val: "^2", tip: "Square (Power of 2)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "x³", type: "operator", val: "^3", tip: "Cube (Power of 3)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "^", type: "operator", tip: "Power Function (x to the power of y)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "1", type: "number", className: "font-black" },
+    { label: "2", type: "number", className: "font-black" },
+    { label: "3", type: "number", className: "font-black" },
+    { label: "−", type: "operator", val: "−", className: "text-brand-primary bg-brand-primary/5" },
+
+    { label: "HYP", type: "mode", active: isHyp, tip: "Hyperbolic Function Mode", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "π", type: "number", tip: "Pi Constant (≈3.14159)", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "e", type: "number", tip: "Euler's Number (≈2.71828)", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "0", type: "number", className: "font-black" },
+    { label: ".", type: "number", className: "font-black" },
+    { label: "=", type: "equals", className: "bg-brand-primary text-white hover:bg-brand-hover shadow-lg shadow-brand-primary/20", tip: "Calculate Result" },
+    { label: "+", type: "operator", className: "text-brand-primary bg-brand-primary/5" },
   ];
 
   return (
@@ -200,18 +205,22 @@ export function ScientificCalculatorClient() {
           }}
         />
 
-        {/* Adaptive Button Grid: 5 columns in Portrait, 10 columns in Wide Landscape */}
-        <div className="grid grid-cols-5 @[600px]:grid-cols-7 @[900px]:grid-cols-10 gap-2 md:gap-3">
+        {/* Industry Standard Layout: 5 columns on Mobile, 7 columns on Desktop */}
+        <div className="grid grid-cols-5 @[700px]:grid-cols-7 gap-2 md:gap-3">
           {buttons.map((btn, i) => {
             const buttonNode = (
               <button
                 key={i}
-                onClick={() => onButtonClick(btn.label, btn.type)}
+                onClick={() => onButtonClick(btn.val || btn.label, btn.type)}
                 className={`
-                  w-full h-12 md:h-14 @[600px]:h-16 rounded-xl md:rounded-2xl text-sm md:text-base font-bold transition-all active:scale-95
-                  ${btn.className || (btn.type === "mode"
-                    ? (btn.active ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-100 dark:border-slate-800")
-                    : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-blue-500")}
+                  w-full h-12 md:h-14 @[600px]:h-16 rounded-xl md:rounded-2xl text-sm md:text-base font-bold transition-all active:scale-95 border
+                  ${btn.className || ""}
+                  ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-500" : ""}
+                  ${btn.type === "mode" && btn.active ? "bg-brand-primary/10 border-brand-primary/30 text-brand-primary" : ""}
+                  ${btn.type === "number" && !btn.className?.includes('bg-') ? "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
+                  ${btn.type === "operator" && !btn.className?.includes('bg-') ? "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
+                  ${btn.type === "func" && !btn.className?.includes('bg-') ? "bg-blue-50/50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-800/50 text-blue-600 dark:text-blue-400" : ""}
+                  hover:border-brand-primary/50
                 `}
               >
                 {btn.label}
