@@ -1,8 +1,10 @@
 "use client";
 
 import React, { ReactNode } from "react";
+import { Calendar } from "lucide-react";
 import { ToolTutorial } from "./ToolTutorial";
 import { DriveStep } from "driver.js";
+import { usePathname } from "next/navigation";
 
 interface ToolHeaderProps {
   title: string;
@@ -20,10 +22,14 @@ interface ToolHeaderProps {
 export function ToolHeader({
   title,
   subtitle,
+  lastUpdated,
   tourId,
   tourSteps,
   shareButton
 }: ToolHeaderProps) {
+  const pathname = usePathname();
+  const showDate = pathname?.includes('/guides/');
+
   return (
     <div className="w-full mb-3">
       {/* Title Line - Tightened further */}
@@ -31,6 +37,12 @@ export function ToolHeader({
         <h1 className="text-[17px] md:text-[19px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
           {title}
         </h1>
+        {showDate && lastUpdated && (
+          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-1.5 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+            <Calendar size={10} />
+            {lastUpdated}
+          </span>
+        )}
       </div>
 
       {/* Subtitle - Single line, smaller text */}

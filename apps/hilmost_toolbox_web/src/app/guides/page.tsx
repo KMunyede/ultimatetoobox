@@ -4,18 +4,21 @@ import { GUIDES, getFileLastUpdated } from "@utilitiessite/config";
 import Link from "next/link";
 import { BookOpen, ArrowRight, Calendar } from "lucide-react";
 import path from "path";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "Utility Guides",
+  metadataBase: new URL(METADATA_BASE_URL),
+  title: generatePageTitle("Utility Guides"),
   description: "In-depth guides on finance, health, and unit conversion tools. Master our free online utilities with real-world examples and precision math.",
   alternates: {
-    canonical: "https://hilmost-toolbox.hilmost.net/guides",
+    canonical: "/guides",
   },
   openGraph: {
-    title: "Utility Guides | Hilmost Toolbox",
+    title: generatePageTitle("Utility Guides"),
     description: "In-depth guides on finance, health, and unit conversion tools.",
-    url: "https://hilmost-toolbox.hilmost.net/guides",
+    url: "/guides",
     type: "website",
+    images: [{ url: "/og/main.png", width: 1200, height: 630 }],
   }
 };
 

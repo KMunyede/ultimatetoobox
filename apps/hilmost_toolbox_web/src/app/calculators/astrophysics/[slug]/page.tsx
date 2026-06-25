@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, ToolArticle, RelatedTools, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "../AstrophysicsCalculatorClient";
-import { getCanonicalUrl, getFileLastUpdated, sanitizeTitle } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const SLUGS = [
   { slug: "gravitational-force", type: "gravity", title: "Gravitational Force Calculator", desc: "Calculate the gravitational attraction between two objects using Newton's Law of Universal Gravitation." },
@@ -25,10 +26,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return { title: "Astrophysics Calculator" };
 
-  const title = sanitizeTitle(`${config.title} | Astrophysics`);
-  const canonical = getCanonicalUrl(`/calculators/astrophysics/${resolvedParams.slug}`);
+  const title = generatePageTitle(`${config.title} | Astrophysics`);
+  const canonical = `/calculators/astrophysics/${resolvedParams.slug}`;
 
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: config.desc,
     alternates: { canonical },

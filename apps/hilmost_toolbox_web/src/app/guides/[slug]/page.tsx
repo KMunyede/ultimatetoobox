@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, BreadcrumbSchema, RelatedTools } from "@utilitiessite/ui";
-import { GUIDES, getCanonicalUrl, getFileLastUpdated, sanitizeTitle } from "@utilitiessite/config";
+import { GUIDES, getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import { Calendar } from "lucide-react";
 import path from "path";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return GUIDES.map((guide) => ({
@@ -16,10 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const guide = GUIDES.find((g) => g.slug === resolvedParams.slug);
   if (!guide) return { title: "Guide Not Found" };
 
-  const title = sanitizeTitle(guide.metaTitle);
-  const canonical = getCanonicalUrl(`/guides/${resolvedParams.slug}`);
+  const title = generatePageTitle(guide.metaTitle);
+  const canonical = `/guides/${resolvedParams.slug}`;
 
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: guide.metaDesc,
     alternates: { canonical },

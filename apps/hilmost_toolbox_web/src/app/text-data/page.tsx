@@ -2,7 +2,8 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Text & Data Tools";
 const DESC = "Analyze, encode, and transform text and data instantly. Free online tools for word count, MD5 hashing, Base64 encoding, and unscrambling.";
@@ -10,17 +11,18 @@ const PATH = "/text-data";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = sanitizeTitle(TITLE);
+  const title = generatePageTitle(TITLE);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: DESC,
     alternates: {
-      canonical: CANONICAL_URL,
+      canonical: PATH,
     },
     openGraph: {
       title,
       description: DESC,
-      url: CANONICAL_URL,
+      url: PATH,
       type: "website",
       images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }

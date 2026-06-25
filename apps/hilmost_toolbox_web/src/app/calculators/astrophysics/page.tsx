@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "./AstrophysicsCalculatorClient";
-import { getCanonicalUrl, getFileLastUpdated, sanitizeTitle } from "@utilitiessite/config";
+import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Astrophysics Calculator Suite";
 const TOOL_DESC = "Compute the mechanics of the cosmos. High-precision astrophysics calculator for gravitational force, orbital velocity, escape velocity, and stellar luminosity.";
@@ -11,17 +12,18 @@ const PATH = "/calculators/astrophysics";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = sanitizeTitle("Astrophysics Calculator | Space & Physics Tools");
+  const title = generatePageTitle("Astrophysics Calculator | Space & Physics Tools");
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: TOOL_DESC,
     alternates: {
-      canonical: CANONICAL_URL,
+      canonical: PATH,
     },
     openGraph: {
       title,
       description: TOOL_DESC,
-      url: CANONICAL_URL,
+      url: PATH,
       type: "website",
       images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     },

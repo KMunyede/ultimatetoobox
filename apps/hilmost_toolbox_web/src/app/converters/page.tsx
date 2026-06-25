@@ -2,7 +2,8 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { Replace, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Unit Converters";
 const DESC = "A complete collection of precision conversion tools. Easily convert units of length, weight, temperature, digital storage, and time with instant results.";
@@ -10,17 +11,18 @@ const PATH = "/converters";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = sanitizeTitle(TITLE);
+  const title = generatePageTitle(TITLE);
   return {
+    metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: DESC,
     alternates: {
-      canonical: CANONICAL_URL,
+      canonical: PATH,
     },
     openGraph: {
       title,
       description: DESC,
-      url: CANONICAL_URL,
+      url: PATH,
       type: "website",
       images: [{ url: "/og/main.png", width: 1200, height: 630 }],
     }
