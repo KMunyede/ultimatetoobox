@@ -16,11 +16,20 @@ export const metadata: Metadata = {
     url: "https://hilmost.net",
     siteName: "Hilmost",
     type: "website",
+    images: [
+      {
+        url: "https://hilmost.net/og-home.png",
+        width: 1200,
+        height: 630,
+        alt: "Hilmost | Engineering the Everyday Utility",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hilmost | The Digital Workshop",
     description: "Hilmost provides powerful, instant web tools and utilities.",
+    images: ["https://hilmost.net/og-home.png"],
   },
 };
 

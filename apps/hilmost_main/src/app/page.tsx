@@ -1,5 +1,27 @@
 import Link from "next/link";
 import { ArrowRight, Code2, HeartPulse, ShieldCheck, Utensils, Wrench, Sparkles, Zap, Binary, Microchip, Banknote, FileText, Replace } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Hilmost | Engineering the Everyday Utility",
+  description: "A specialized software R&D unit building high-precision digital tools. Fast, secure, and privacy-focused utilities for your daily workflow.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Hilmost | Engineering the Everyday Utility",
+    description: "High-precision digital tools and utilities for your daily workflow.",
+    url: "https://hilmost.net",
+    images: [
+      {
+        url: "https://hilmost.net/og-home.png",
+        width: 1200,
+        height: 630,
+        alt: "Hilmost | Engineering the Everyday Utility",
+      },
+    ],
+  },
+};
 
 export default function Home() {
   return (
