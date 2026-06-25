@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
-import { RelatedTools, Breadcrumbs, WebApplicationSchema, BreadcrumbSchema, ToolHeader, ToolArticle } from "@utilitiessite/ui";
+import { RelatedTools, Breadcrumbs, WebApplicationSchema, ToolHeader, ToolArticle } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
@@ -50,8 +50,7 @@ export default function Home() {
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/health.png"
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <Breadcrumbs items={breadcrumbItems} />
+            <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title="Wisdom & Reflection"

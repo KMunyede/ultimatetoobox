@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
 import { ShareButton } from "@/components/ShareButton";
@@ -76,8 +76,7 @@ export function TemperaturePageUI({
         description="A technical guide to translating thermal measurements across weather, laboratory, and scientific standards."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <Breadcrumbs items={breadcrumbItems} />
+            <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={TOOL_NAME}

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Breadcrumbs, BreadcrumbSchema, RelatedTools } from "@utilitiessite/ui";
+import { Breadcrumbs, RelatedTools } from "@utilitiessite/ui";
 import { GUIDES, getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import { Calendar } from "lucide-react";
 import path from "path";
@@ -84,7 +84,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <article className="mt-8">

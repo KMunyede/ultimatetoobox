@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, FAQSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
 import { StandardCalculatorClient } from "./StandardCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
@@ -93,7 +93,7 @@ export default function StandardCalculatorPage() {
         description="A simple, four-step guide to mastering everyday arithmetic using our optimized web interface."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
       
       <ToolHeader

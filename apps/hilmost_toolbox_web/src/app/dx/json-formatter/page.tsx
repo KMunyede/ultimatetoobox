@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { JSONFormatterClient } from "./JSONFormatterClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -85,7 +85,7 @@ export default function JSONFormatterPage() {
         description="Follow these four simple steps to clean up and verify your JSON data using our high-performance engine."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

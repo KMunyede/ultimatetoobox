@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { IncomeTaxClient } from "./IncomeTaxClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -73,7 +73,7 @@ export default function IncomeTaxPage() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

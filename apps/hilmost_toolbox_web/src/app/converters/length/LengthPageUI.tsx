@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
 import { LengthConverterClient } from "./LengthConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -71,8 +71,7 @@ export function LengthPageUI({
         description="A professional guide to switching between metric and imperial length measurements with high precision."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <Breadcrumbs items={breadcrumbItems} />
+            <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={title.split(' — ')[0]}

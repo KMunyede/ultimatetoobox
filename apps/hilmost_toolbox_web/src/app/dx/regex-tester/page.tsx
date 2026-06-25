@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RegexTesterClient } from "./RegexTesterClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -85,7 +85,7 @@ export default function RegexTesterPage() {
         description="Follow these four simple steps to build and debug complex regex patterns using our real-time testing engine."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

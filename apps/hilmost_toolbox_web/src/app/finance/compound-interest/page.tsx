@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CompoundInterestClient } from "./CompoundInterestClient";
 import { getFileLastUpdated, getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
@@ -85,7 +85,7 @@ export default function CompoundInterestPage() {
         description="Follow these four simple steps to project your future wealth using our compounding engine."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -148,8 +148,7 @@ export default function FinanceHub() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <Breadcrumbs items={breadcrumbItems} />
+            <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">

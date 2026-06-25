@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -85,7 +85,7 @@ export default function VatTaxPage() {
         description="Follow our four-step guide to accurately calculate taxes for your business invoices or personal purchases."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

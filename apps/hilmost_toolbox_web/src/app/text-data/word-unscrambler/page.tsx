@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
@@ -74,8 +74,7 @@ export default function WordUnscramblerPage() {
         image="https://hilmost-toolbox.hilmost.net/og/text-data.png"
       />
       <FAQSchema items={faqs} />
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <Breadcrumbs items={breadcrumbItems} />
+            <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title="Word Anagram Solver"

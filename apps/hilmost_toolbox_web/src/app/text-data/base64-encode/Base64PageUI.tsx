@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { Base64Client } from "./Base64Client";
 import { ShareButton } from "@/components/ShareButton";
@@ -50,8 +50,7 @@ export function Base64PageUI({
         image="https://hilmost-toolbox.hilmost.net/og/text-data.png"
       />
       <FAQSchema items={faqs} />
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <Breadcrumbs items={breadcrumbItems} />
+            <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={title.split(' — ')[0]}

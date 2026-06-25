@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Breadcrumbs, BreadcrumbSchema } from "@utilitiessite/ui";
+import { Breadcrumbs } from "@utilitiessite/ui";
 import { GUIDES, getFileLastUpdated } from "@utilitiessite/config";
 import Link from "next/link";
 import { BookOpen, ArrowRight, Calendar } from "lucide-react";
@@ -51,7 +51,7 @@ export default function GuidesIndex() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center mb-16">

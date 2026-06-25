@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, AuthorBio, ToolArticle, PrivacyBadge, FAQSchema, FAQAccordion, CollapsibleSection } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, AuthorBio, ToolArticle, PrivacyBadge, FAQSchema, FAQAccordion, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -107,7 +107,7 @@ export default function PDFToolsHub() {
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">

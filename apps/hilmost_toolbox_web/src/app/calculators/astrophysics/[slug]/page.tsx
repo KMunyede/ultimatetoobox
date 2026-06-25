@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Breadcrumbs, ToolArticle, RelatedTools, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import { Breadcrumbs, ToolArticle, RelatedTools, ToolHeader } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "../AstrophysicsCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
@@ -65,7 +65,7 @@ export default async function AstroProgrammaticPage({ params }: { params: Promis
 
   return (
     <div className="container mx-auto px-4 py-2 max-w-5xl">
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

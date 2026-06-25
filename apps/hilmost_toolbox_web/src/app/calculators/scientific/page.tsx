@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, BreadcrumbSchema, FAQSchema, ToolHeader, SourceReference, HowToSchema, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, FAQSchema, ToolHeader, SourceReference, HowToSchema, AuthorBio, DidYouKnow } from "@utilitiessite/ui";
 import { ScientificCalculatorClient } from "./ScientificCalculatorClient";
 import { getCanonicalUrl, getFileLastUpdated } from "@utilitiessite/config";
 import path from "path";
@@ -76,7 +76,7 @@ export default function ScientificCalculatorPage() {
         description="Master advanced mathematics with this comprehensive guide to our online scientific computing engine."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
       
       <ToolHeader

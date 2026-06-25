@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { JWTDecoderClient } from "./JWTDecoderClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
@@ -85,7 +85,7 @@ export default function JWTDecoderPage() {
         description="Follow these four simple steps to securely inspect the contents of your JWT tokens using our private decoding engine."
         steps={howToSteps}
       />
-      <BreadcrumbSchema items={breadcrumbItems} />
+      
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
