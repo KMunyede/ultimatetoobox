@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2 } from "lucide-react";
-import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 export const metadata = {
   metadataBase: new URL(METADATA_BASE_URL),
-  title: generatePageTitle("Free Online Calculators & Converters"),
+  title: formatTitle("Free Online Calculators & Converters"),
   description: "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters.",
   openGraph: {
-    title: generatePageTitle("Free Online Calculators & Converters"),
+    title: formatTitle("Free Online Calculators & Converters"),
     url: "/",
     images: [{ url: "/og/main.png", width: 1200, height: 630 }],
   },

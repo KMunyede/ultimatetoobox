@@ -4,7 +4,7 @@ import { LoanCalculatorClient } from "./LoanCalculatorClient";
 import { getFileLastUpdated, getCanonicalUrl } from "@utilitiessite/config";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
-import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Loan Calculator";
 const TOOL_DESC = "Calculate your monthly loan payments, total interest, and exact amortization schedule instantly. Free online tool to uncover the true cost of your loan.";
@@ -12,7 +12,7 @@ const PATH = "/finance/loan-calculator";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = generatePageTitle(`${TOOL_NAME} | Monthly Payments & Amortization`);
+  const title = formatTitle(`${TOOL_NAME} | Monthly Payments & Amortization`);
   return {
     metadataBase: new URL(METADATA_BASE_URL),
     title,

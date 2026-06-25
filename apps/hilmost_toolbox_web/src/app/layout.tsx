@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://hilmost-toolbox.hilmost.net'),
   title: {
     default: "Hilmost Toolbox | Free Online Calculators & Converters",
-    template: "%s | Hilmost Toolbox"
+    template: "%s"
   },
   description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
   openGraph: {

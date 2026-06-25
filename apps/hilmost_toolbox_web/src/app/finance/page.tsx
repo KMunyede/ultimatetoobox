@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Financial Calculators";
 const DESC = "A complete collection of robust financial tools. Manage your wealth, compute compounding returns, estimate taxes, and convert global currencies with ease.";
@@ -11,7 +11,7 @@ const PATH = "/finance";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = generatePageTitle(TITLE);
+  const title = formatTitle(TITLE);
   return {
     metadataBase: new URL(METADATA_BASE_URL),
     title,
