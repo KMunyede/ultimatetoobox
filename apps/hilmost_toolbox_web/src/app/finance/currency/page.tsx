@@ -17,8 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title,
-      images: ["/og/finance.png"],
+      url: getCanonicalUrl(PATH),
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/finance.png", width: 1200, height: 630, alt: "Hilmost Currency Converter" }],
     },
+    twitter: {
+      title,
+      images: ["https://hilmost-toolbox.hilmost.net/og/finance.png"],
+    }
   };
 }
 

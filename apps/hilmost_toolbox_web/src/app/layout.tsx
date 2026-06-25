@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og/main.png",
+        url: "https://hilmost-toolbox.hilmost.net/og/main.png",
         width: 1200,
         height: 630,
         alt: "Hilmost Toolbox",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Hilmost Toolbox | Free Online Calculators",
     description: "Work smarter with our free online calculators and converters.",
-    images: ["/og/main.png"],
+    images: ["https://hilmost-toolbox.hilmost.net/og/main.png"],
   },
 };
 

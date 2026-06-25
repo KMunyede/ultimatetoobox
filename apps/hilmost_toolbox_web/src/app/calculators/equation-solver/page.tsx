@@ -6,18 +6,36 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+
 const TOOL_NAME = "Science Equation Solver";
 const TOOL_DESC = "Free online physics equation solver. Solve for any variable in mechanics, thermodynamics, electromagnetism, quantum, relativity, and optics equations.";
 const PATH = "/calculators/equation-solver";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
-export const metadata: Metadata = {
-  title: `Equation Solver | Physics & Science Formulas | Hilmost`,
-  description: TOOL_DESC,
-  alternates: {
-    canonical: getCanonicalUrl(PATH),
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
+  return {
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: CANONICAL_URL,
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/calculators.png", width: 1200, height: 630, alt: `Hilmost ${TOOL_NAME}` }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/calculators.png"],
+    }
+  };
+}
 
 const faqs = [
   {

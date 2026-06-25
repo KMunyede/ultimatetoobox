@@ -6,13 +6,33 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
+import { formatTitle } from "@/lib/metadata";
+
+const TITLE = "Data Storage Converter — Convert MB to GB Instantly";
+const DESC = "Free online data storage converter. Instantly convert between bits, bytes, kilobytes, megabytes, gigabytes, and more with high precision.";
+const PATH = "/converters/data-storage";
+const CANONICAL_URL = getCanonicalUrl(PATH);
+
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TITLE);
   return {
-    title: `Data Storage Converter — Convert MB to GB Instantly`,
-    description: "Free online data storage converter. Instantly convert between bits, bytes, kilobytes, megabytes, gigabytes, and more with high precision.",
+    title,
+    description: DESC,
     alternates: {
-      canonical: getCanonicalUrl("/converters/data-storage"),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: DESC,
+      url: CANONICAL_URL,
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/converters.png", width: 1200, height: 630, alt: "Hilmost Data Storage Converter" }],
+    },
+    twitter: {
+      title,
+      description: DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/converters.png"],
+    }
   };
 }
 

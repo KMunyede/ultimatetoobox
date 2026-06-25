@@ -9,6 +9,7 @@ const TOOL_NAME = "Base64 Text Encoder & Decoder";
 const TOOL_TYPE = "Base64 Converter";
 const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII format — no signup required.";
 const PATH = "/text-data/base64-encode";
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle(TOOL_NAME);
@@ -22,14 +23,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description: TOOL_DESC,
-      url: PATH,
+      url: CANONICAL_URL,
       type: "website",
-      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/text-data.png", width: 1200, height: 630, alt: "Hilmost Base64 Encoder" }],
     },
     twitter: {
       title,
       description: TOOL_DESC,
-      images: ["/og/main.png"],
+      images: ["https://hilmost-toolbox.hilmost.net/og/text-data.png"],
     }
   };
 }

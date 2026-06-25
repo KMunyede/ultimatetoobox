@@ -24,14 +24,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description: TOOL_DESC,
-      url: PATH,
+      url: CANONICAL_URL,
       type: "website",
-      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/pdf-tools.png", width: 1200, height: 630, alt: `Hilmost ${TOOL_NAME}` }],
     },
     twitter: {
       title,
       description: TOOL_DESC,
-      images: ["/og/main.png"],
+      images: ["https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"],
     }
   };
 }

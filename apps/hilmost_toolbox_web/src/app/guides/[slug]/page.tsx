@@ -29,14 +29,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title,
       description: guide.metaDesc,
-      url: canonical,
+      url: getCanonicalUrl(canonical),
       type: "article",
-      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/main.png", width: 1200, height: 630, alt: guide.title }],
     },
     twitter: {
       title,
       description: guide.metaDesc,
-      images: ["/og/main.png"],
+      images: ["https://hilmost-toolbox.hilmost.net/og/main.png"],
     }
   };
 }

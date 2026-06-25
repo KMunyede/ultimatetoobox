@@ -38,14 +38,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title,
       description: config.desc,
-      url: canonical,
+      url: getCanonicalUrl(canonical),
       type: "website",
-      images: ["/og/calculators.png"],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/calculators.png", width: 1200, height: 630, alt: config.title }],
     },
     twitter: {
       title,
       description: config.desc,
-      images: ["/og/calculators.png"],
+      images: ["https://hilmost-toolbox.hilmost.net/og/calculators.png"],
     }
   };
 }

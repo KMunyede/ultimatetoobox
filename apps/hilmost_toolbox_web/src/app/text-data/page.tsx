@@ -22,9 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description: DESC,
-      url: PATH,
+      url: CANONICAL_URL,
       type: "website",
-      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/text-data.png", width: 1200, height: 630 }],
     }
   };
 }

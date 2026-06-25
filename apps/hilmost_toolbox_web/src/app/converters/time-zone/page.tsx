@@ -6,13 +6,33 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
+import { formatTitle } from "@/lib/metadata";
+
+const TITLE = "Time Zone Converter & Global Clock";
+const DESC = "Free online time zone converter. Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly.";
+const PATH = "/converters/time-zone";
+const CANONICAL_URL = getCanonicalUrl(PATH);
+
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TITLE);
   return {
-    title: `Time Zone Converter & Global Clock`,
-    description: "Free online time zone converter. Instantly compare meeting times across global cities, check current UTC time, and schedule across borders effortlessly.",
+    title,
+    description: DESC,
     alternates: {
-      canonical: getCanonicalUrl("/converters/time-zone"),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: DESC,
+      url: CANONICAL_URL,
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/converters.png", width: 1200, height: 630, alt: "Hilmost Time Zone Converter" }],
+    },
+    twitter: {
+      title,
+      description: DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/converters.png"],
+    }
   };
 }
 

@@ -24,8 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: CANONICAL_URL,
       siteName: "Hilmost Toolbox",
       type: "article",
-      images: ["/og/health.png"],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/health.png", width: 1200, height: 630, alt: "Hilmost Daily Wisdom" }],
     },
+    twitter: {
+      title: TITLE,
+      description: DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/health.png"],
+    }
   };
 }
 

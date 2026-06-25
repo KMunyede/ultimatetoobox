@@ -28,8 +28,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: config.title,
       description: config.desc,
       url: canonical,
-      images: ["/og/text-data.png"],
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/text-data.png", width: 1200, height: 630, alt: config.title }],
     },
+    twitter: {
+      title: config.title,
+      description: config.desc,
+      images: ["https://hilmost-toolbox.hilmost.net/og/text-data.png"],
+    }
   };
 }
 

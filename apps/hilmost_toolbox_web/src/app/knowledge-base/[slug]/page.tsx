@@ -4,6 +4,8 @@ import { KNOWLEDGE_BASE } from "@utilitiessite/config";
 import { Breadcrumbs, RelatedTools, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ArrowLeft, Wrench } from "lucide-react";
+import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { getCanonicalUrl } from "@utilitiessite/config";
 
 export async function generateStaticParams() {
   return KNOWLEDGE_BASE.map((article) => ({
@@ -16,9 +18,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const article = KNOWLEDGE_BASE.find((a) => a.slug === resolvedParams.slug);
   if (!article) return { title: "Article Not Found" };
 
+  const title = generatePageTitle(`${article.title} | Knowledge Base`);
+  const canonical = `/knowledge-base/${article.slug}`;
+
   return {
-    title: `${article.title} | Hilmost Digital Labs Knowledge Base`,
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
     description: article.excerpt,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description: article.excerpt,
+      url: getCanonicalUrl(canonical),
+      type: "article",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/main.png", width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      title,
+      description: article.excerpt,
+      images: ["https://hilmost-toolbox.hilmost.net/og/main.png"],
+    }
   };
 }
 

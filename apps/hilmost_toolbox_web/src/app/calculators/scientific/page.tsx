@@ -6,18 +6,36 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
+import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+
 const TOOL_NAME = "Scientific Calculator";
 const TOOL_DESC = "Free online scientific calculator with trigonometry, logarithms, and constants. Solve advanced math instantly in your browser with high precision.";
 const PATH = "/calculators/scientific";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
-export const metadata: Metadata = {
-  title: `Scientific Calculator | Precision Math & Trigonometry | Hilmost`,
-  description: TOOL_DESC,
-  alternates: {
-    canonical: getCanonicalUrl(PATH),
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TOOL_NAME);
+  return {
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
+    description: TOOL_DESC,
+    alternates: {
+      canonical: PATH,
+    },
+    openGraph: {
+      title,
+      description: TOOL_DESC,
+      url: CANONICAL_URL,
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/calculators.png", width: 1200, height: 630, alt: `Hilmost ${TOOL_NAME}` }],
+    },
+    twitter: {
+      title,
+      description: TOOL_DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/calculators.png"],
+    }
+  };
+}
 
 const faqs = [
   {

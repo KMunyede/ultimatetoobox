@@ -37,8 +37,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `Convert ${from} to ${to} | Live Exchange Rate`,
       description: `Instantly convert ${from} to ${to} using live mid-market exchange rates.`,
       url: canonical,
-      images: ["/og/finance.png"],
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/finance.png", width: 1200, height: 630, alt: `Convert ${from} to ${to}` }],
     },
+    twitter: {
+      title: `Convert ${from} to ${to} | Live Exchange Rate`,
+      description: `Instantly convert ${from} to ${to} using live mid-market exchange rates.`,
+      images: ["https://hilmost-toolbox.hilmost.net/og/finance.png"],
+    }
   };
 }
 

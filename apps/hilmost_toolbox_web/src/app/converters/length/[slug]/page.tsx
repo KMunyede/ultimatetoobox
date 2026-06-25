@@ -38,8 +38,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `Convert ${fromUnit} to ${toUnit} | Length Calculator`,
       description: `Instantly convert ${fromUnit} to ${toUnit} using our free length calculator.`,
       url: canonical,
-      images: ["/og/converters.png"],
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/converters.png", width: 1200, height: 630, alt: `Convert ${fromUnit} to ${toUnit}` }],
     },
+    twitter: {
+      title: `Convert ${fromUnit} to ${toUnit} | Length Calculator`,
+      description: `Instantly convert ${fromUnit} to ${toUnit} using our free length calculator.`,
+      images: ["https://hilmost-toolbox.hilmost.net/og/converters.png"],
+    }
   };
 }
 

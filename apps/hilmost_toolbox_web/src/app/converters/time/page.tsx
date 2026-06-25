@@ -6,13 +6,33 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
+import { formatTitle } from "@/lib/metadata";
+
+const TITLE = "Time Converter — Instant Unit Conversions";
+const DESC = "Free online time converter. Instantly convert between seconds, minutes, hours, days, weeks, months, and years with high precision.";
+const PATH = "/converters/time";
+const CANONICAL_URL = getCanonicalUrl(PATH);
+
 export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TITLE);
   return {
-    title: `Time Converter — Instant Unit Conversions`,
-    description: "Free online time converter. Instantly convert between seconds, minutes, hours, days, weeks, months, and years with high precision.",
+    title,
+    description: DESC,
     alternates: {
-      canonical: getCanonicalUrl("/converters/time"),
+      canonical: PATH,
     },
+    openGraph: {
+      title,
+      description: DESC,
+      url: CANONICAL_URL,
+      type: "website",
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/converters.png", width: 1200, height: 630, alt: "Hilmost Time Converter" }],
+    },
+    twitter: {
+      title,
+      description: DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/converters.png"],
+    }
   };
 }
 

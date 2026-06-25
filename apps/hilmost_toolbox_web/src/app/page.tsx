@@ -22,10 +22,15 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description: DESC,
-      url: PATH,
+      url: CANONICAL_URL,
       type: "website",
-      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/main.png", width: 1200, height: 630, alt: "Hilmost Ultimate Toolbox" }],
     },
+    twitter: {
+      title,
+      description: DESC,
+      images: ["https://hilmost-toolbox.hilmost.net/og/main.png"],
+    }
   };
 }
 
