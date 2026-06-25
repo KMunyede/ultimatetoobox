@@ -2,8 +2,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Tooltip } from './Tooltip';
 
 const TOOLBOX_DATA = {
   name: "Free Tools",
@@ -123,6 +125,9 @@ export function NavigationMenu() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pathname = usePathname();
+
+  const isGuidesPage = pathname?.includes('/guides');
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -166,15 +171,15 @@ export function NavigationMenu() {
       </button>
 
       {/* Desktop Navigation (Fly-out) */}
-      <nav
-        className="hidden lg:flex items-center h-full"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="relative h-full flex items-center">
+      <nav className="hidden lg:flex items-center h-full">
+        <div
+          className="relative h-full flex items-center"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <button
             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight transition-all ${
-              hubOpen ? 'text-brand-primary bg-brand-primary/5' : 'text-text-secondary hover:text-brand-primary'
+              hubOpen || (!isGuidesPage && pathname !== '/') ? 'text-brand-primary bg-brand-primary/5' : 'text-text-secondary hover:text-brand-primary'
             }`}
             title="Explore our library of free digital utilities."
           >
@@ -252,14 +257,18 @@ export function NavigationMenu() {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
 
+        <Tooltip content="Master our tools with expert guides and precision math." position="bottom">
           <Link
             href={resolveHref("/guides")}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight text-text-secondary hover:text-brand-primary transition-all"
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight transition-all ${
+              isGuidesPage ? 'text-brand-primary bg-brand-primary/5' : 'text-text-secondary hover:text-brand-primary'
+            }`}
           >
             Guides
           </Link>
-        </div>
+        </Tooltip>
       </nav>
 
       {/* Ad-Safe Mobile Drawer (Slides from Right) */}
