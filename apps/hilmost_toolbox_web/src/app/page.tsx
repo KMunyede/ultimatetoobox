@@ -1,17 +1,33 @@
 import Link from "next/link";
 import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2 } from "lucide-react";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { WebApplicationSchema, OrganizationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { Metadata } from "next";
 
-export const metadata = {
-  metadataBase: new URL(METADATA_BASE_URL),
-  title: formatTitle("Free Online Calculators & Converters"),
-  description: "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters.",
-  openGraph: {
-    title: formatTitle("Free Online Calculators & Converters"),
-    url: "/",
-    images: [{ url: "/og/main.png", width: 1200, height: 630 }],
-  },
-};
+const TITLE = "Free Online Calculators & Converters";
+const DESC = "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters.";
+const PATH = "/";
+const CANONICAL_URL = getCanonicalUrl(PATH);
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = formatTitle(TITLE);
+  return {
+    metadataBase: new URL(METADATA_BASE_URL),
+    title,
+    description: DESC,
+    alternates: {
+      canonical: PATH,
+    },
+    openGraph: {
+      title,
+      description: DESC,
+      url: PATH,
+      type: "website",
+      images: [{ url: "/og/main.png", width: 1200, height: 630 }],
+    },
+  };
+}
 
 export default function Home() {
   const categories = [
@@ -101,8 +117,19 @@ export default function Home() {
     },
   ];
 
+  const breadcrumbItems = [{ label: "Home", href: PATH }];
+
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+      <WebApplicationSchema
+        name={`${TITLE} | Hilmost Ultimate Toolbox`}
+        description={DESC}
+        url={CANONICAL_URL}
+        image="https://hilmost-toolbox.hilmost.net/og/main.png"
+      />
+      <OrganizationSchema />
+      <BreadcrumbSchema items={breadcrumbItems} />
+
       {/* Hero Section */}
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-6">

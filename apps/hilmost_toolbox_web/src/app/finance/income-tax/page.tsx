@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { IncomeTaxClient } from "./IncomeTaxClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -10,7 +10,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 const TOOL_NAME = "Income Tax Calculator";
 const TOOL_DESC = "Calculate your exact net take-home pay after deductions and estimated taxes instantly. Free online income tax calculator.";
 const PATH = "/finance/income-tax";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle(TOOL_NAME);
@@ -74,7 +74,7 @@ export default function IncomeTaxPage() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-      
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

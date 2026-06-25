@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { TipCalculatorClient } from "./TipCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -10,7 +10,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 const TOOL_NAME = "Tip & Split Calculator";
 const TOOL_DESC = "Calculate the perfect tip amount and split the restaurant bill evenly among friends instantly. Free online tip calculator.";
 const PATH = "/finance/tip-calculator";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle(TOOL_NAME);
@@ -74,7 +74,7 @@ export default function TipCalculatorPage() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-      
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

@@ -30,14 +30,14 @@
 
     /* Text */
     --color-text-primary: #f8fafc; /* slate-50 */
-    --color-text-secondary: #94a3b8; /* slate-400 */
-    --color-text-muted: #64748b; /* slate-500 */
+    --color-text-secondary: #cbd5e1; /* slate-300 - Brightened from slate-400 for WCAG AA contrast */
+    --color-text-muted: #94a3b8; /* slate-400 - Brightened from slate-500 for better legibility */
     --color-text-inverse: #0f172a;
 
     /* Brand / Action */
-    --color-brand-primary: #10b981; /* emerald-500 */
-    --color-brand-hover: #34d399; /* emerald-400 */
-    --color-brand-alpha: rgba(16, 185, 129, 0.1);
+    --color-brand-primary: #34d399; /* emerald-400 - Increased brightness from emerald-500 for dark mode contrast */
+    --color-brand-hover: #6ee7b7; /* emerald-300 */
+    --color-brand-alpha: rgba(52, 211, 153, 0.1);
 
     /* UI Elements */
     --color-border-base: #1e293b; /* slate-800 */

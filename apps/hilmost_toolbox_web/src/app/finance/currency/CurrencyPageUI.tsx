@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, SourceReference } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, SourceReference, BreadcrumbSchema } from "@utilitiessite/ui";
 import { CurrencyClient } from "./CurrencyClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -51,7 +51,8 @@ export function CurrencyPageUI({
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={title.split(' | ')[0]}

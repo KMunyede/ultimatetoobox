@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RetirementPlannerClient } from "./RetirementPlannerClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -10,7 +10,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 const TOOL_NAME = "Retirement Planner";
 const TOOL_DESC = "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts.";
 const PATH = "/finance/retirement-planner";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle(TOOL_NAME);
@@ -74,7 +74,8 @@ export default function RetirementPlannerPage() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title="Retirement Savings Planner"

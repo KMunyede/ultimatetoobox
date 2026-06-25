@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { InflationClient } from "./InflationClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -10,7 +10,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 const TOOL_NAME = "Inflation Calculator";
 const TOOL_DESC = "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power.";
 const PATH = "/finance/inflation";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle(TOOL_NAME);
@@ -74,7 +74,8 @@ export default function InflationPage() {
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title="Purchasing Power Calculator"

@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider, Header, Footer } from "@utilitiessite/ui";
 import "./globals.css";
 
@@ -25,6 +26,18 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-SZH56NFNQP"
+          strategy="lazyOnload"
+        />
+        <Script id="ga4-corporate" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-SZH56NFNQP');
+          `}
+        </Script>
       </body>
     </html>
   );

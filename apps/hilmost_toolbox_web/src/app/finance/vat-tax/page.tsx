@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -10,7 +10,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 const TOOL_NAME = "VAT & Sales Tax Calculator";
 const TOOL_DESC = "Perfect your business invoices. Free online VAT and GST calculator. Instantly add tax to a net price, or reverse-calculate the tax.";
 const PATH = "/finance/vat-tax";
-const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+const CANONICAL_URL = getCanonicalUrl(PATH);
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle(TOOL_NAME);
@@ -86,7 +86,7 @@ export default function VatTaxPage() {
         description="Follow our four-step guide to accurately calculate taxes for your business invoices or personal purchases."
         steps={howToSteps}
       />
-      
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

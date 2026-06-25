@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
 import { SalaryConverterClient } from "./SalaryConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -51,7 +51,8 @@ export function SalaryConverterPageUI({
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
       />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={title.split(' — ')[0]}

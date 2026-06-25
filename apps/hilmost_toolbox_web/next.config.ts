@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
   transpilePackages: ["@utilitiessite/ui", "@utilitiessite/config"],
+  trailingSlash: true,
   // Note: headers() are not supported with 'output: export'.
   // Cache-Control for static exports must be handled by the hosting provider (Firebase).
 };

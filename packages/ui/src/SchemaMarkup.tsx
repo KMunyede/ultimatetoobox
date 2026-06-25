@@ -38,6 +38,32 @@ export function WebApplicationSchema({
   );
 }
 
+export function OrganizationSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Hilmost Software Corporation",
+    "alternateName": "HSC",
+    "url": "https://hilmost.net",
+    "logo": "https://hilmost.net/logo.png",
+    "sameAs": [
+      "https://github.com/KMunyede"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "support@hilmost.net"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function BreadcrumbSchema({
   items,
 }: {
