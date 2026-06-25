@@ -51,9 +51,6 @@ export function Header() {
             <div className="flex items-center gap-6">
               <NavigationMenu />
               <div className="hidden lg:flex items-center gap-6">
-                <Link href={`${domains.toolbox}/guides`} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
-                  Guides
-                </Link>
                 <Link href={`${domains.corporate}/about`} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
                   About
                 </Link>

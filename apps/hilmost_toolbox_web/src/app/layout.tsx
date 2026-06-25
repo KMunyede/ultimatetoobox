@@ -58,7 +58,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <AutoBreadcrumbs />
           <main className="flex-1">
             <AdLayout publisherId="ca-pub-5650522247882745">
               {children}
