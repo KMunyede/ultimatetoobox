@@ -172,13 +172,17 @@ export function NavigationMenu() {
 
   return (
     <>
-      {/* Mobile Toggle Button - Hidden on Desktop */}
+      {/* Mobile Toggle Button - Full Width "Browse" Button */}
       <button
         onClick={() => setMobileMenuOpen(true)}
-        className="lg:hidden flex items-center justify-center p-2 rounded-xl bg-canvas-muted text-text-primary hover:text-brand-primary transition-all"
+        className="lg:hidden w-full flex items-center justify-between px-5 py-3.5 rounded-2xl bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-brand-hover transition-all"
         aria-label="Open Navigation Menu"
       >
-        <Menu size={20} />
+        <div className="flex items-center gap-3">
+          <Menu size={20} />
+          <span className="text-xs font-black uppercase tracking-widest">Browse 370+ Free Tools</span>
+        </div>
+        <ChevronRight size={18} className="opacity-60" />
       </button>
 
       {/* Desktop Navigation (Fly-out) */}
