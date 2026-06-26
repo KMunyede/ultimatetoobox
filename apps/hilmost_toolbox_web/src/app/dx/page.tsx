@@ -36,6 +36,11 @@ const links = [
     description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors."
   },
   {
+    name: "Password Generator",
+    href: "/dx/password-generator",
+    description: "Generate secure random passwords with custom rules. Cryptographically secure, browser-side generation for maximum privacy."
+  },
+  {
     name: "Regex Tester",
     href: "/dx/regex-tester",
     description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting."
