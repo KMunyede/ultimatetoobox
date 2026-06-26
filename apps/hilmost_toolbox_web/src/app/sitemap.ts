@@ -11,17 +11,7 @@ export const dynamic = "force-static";
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const toolboxUrl = 'https://hilmost-toolbox.hilmost.net';
-  const mainUrl = 'https://hilmost.net';
   const lastModified = new Date();
-
-  // 1. CORPORATE PAGES (Main Domain)
-  const corporatePages: MetadataRoute.Sitemap = [
-    { url: `${mainUrl}`, lastModified, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${mainUrl}/about`, lastModified, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${mainUrl}/contact`, lastModified, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${mainUrl}/privacy-policy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${mainUrl}/terms-of-service`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
-  ];
 
   // 2. TOOLBOX CORE & CATEGORIES
   const CATEGORIES = ['calculators', 'converters', 'finance', 'text-data', 'pdf-tools', 'health'];
@@ -126,7 +116,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
-    ...corporatePages,
     ...toolboxHome,
     ...categoryPages,
     ...guidePages,
