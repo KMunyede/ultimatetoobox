@@ -21,11 +21,35 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hilmost | Engineering the Everyday Utility",
+    description: "A specialized software R&D unit building high-precision digital tools. Fast, secure, and privacy-focused utilities for your daily workflow.",
+    images: ["https://hilmost.net/og-home.png"],
+  },
 };
 
 export default function Home() {
   return (
     <main className="flex-1 bg-canvas-base">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Hilmost Software Corporation",
+          "alternateName": "HSC",
+          "url": "https://hilmost.net",
+          "logo": "https://hilmost.net/logo.png",
+          "description": "A specialized software R&D unit building high-precision digital tools for finance, health, and data science.",
+          "sameAs": ["https://github.com/KMunyede"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "support@hilmost.net"
+          }
+        })}}
+      />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
           
           {/* Hero Section */}
