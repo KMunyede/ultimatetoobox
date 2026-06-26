@@ -71,26 +71,50 @@ export default function PasswordGeneratorPage() {
 
       <PasswordGeneratorTool />
 
-      <ToolArticle title="The Anatomy of a Strong Password">
-        <p>
-          In an era of sophisticated brute-force attacks and credential stuffing, a strong password is your first line of defense. But what exactly makes a password secure? At Hilmost Digital Labs, we follow industry standards to help you create credentials that are mathematically difficult to crack.
-        </p>
+      <div className="max-w-4xl mx-auto my-16 space-y-16">
+        <section className="prose prose-slate dark:prose-invert max-w-none">
+          <h2 className="text-3xl font-black tracking-tight uppercase text-slate-900 dark:text-white">Why use a password generator?</h2>
 
-        <h3>Entropy: The Secret to Security</h3>
-        <p>
-          Entropy is a measure of randomness. The more characters and the wider the variety of character sets (uppercase, lowercase, numbers, and symbols) you use, the higher the entropy. For instance, a 16-character password using all four sets has significantly more combinations than an 8-character one, making it exponentially harder for attackers to guess.
-        </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-brand-primary uppercase tracking-wide">The Risk of Weak Passwords</h3>
+              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Most security breaches occur not through complex hacks, but through the exploitation of weak or reused passwords. When you use common words or personal information, automated brute-force tools can crack your credentials in seconds. By using a generator, you eliminate human patterns and create a unique, complex shield for every account, ensuring that a breach at one site doesn&apos;t compromise your entire digital identity.
+              </p>
+            </div>
 
-        <h3>Cryptographically Secure Randomness</h3>
-        <p>
-          Most online generators use <code>Math.random()</code>, which is not truly random and can be predicted. Our tool utilizes the <strong>Web Crypto API</strong> (<code>crypto.getRandomValues</code>), which provides hardware-based, cryptographically secure random numbers. This ensures that every password generated is unique and unpredictable.
-        </p>
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-brand-primary uppercase tracking-wide">True Cryptographic Randomness</h3>
+              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Not all &quot;random&quot; strings are created equal. Standard software functions often use pseudo-random algorithms that can be predicted by sophisticated attackers. Our laboratory utilizes the <strong>Web Crypto API</strong> (<code>crypto.getRandomValues</code>), which hooks into your device&apos;s hardware entropy. This ensures your passwords are mathematically unpredictable and meet the highest cryptographic standards required for banking and enterprise-grade security.
+              </p>
+            </div>
 
-        <h3>Why Browser-Side Generation Matters</h3>
-        <p>
-          Your security is our priority. Most password generators send your generated password over the internet to a server. Even with HTTPS, this creates a point of failure. Our <strong>Zero-Server Architecture</strong> ensures the generation happens entirely within your browser&apos;s memory. Your password never touches our servers, never enters a log file, and is never visible to anyone but you.
-        </p>
-      </ToolArticle>
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-brand-primary uppercase tracking-wide">Best Practices for 2026</h3>
+              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                For maximum security, we recommend generating passwords of at least <strong>16 characters</strong> using a mix of all character types. Never reuse passwords across different platforms. Instead, use our generator in tandem with a trusted password manager. This allows you to maintain &quot;unbreakable&quot; credentials without the burden of memorization, keeping your financial, health, and personal data safe from the evolving landscape of cyber threats.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <ToolArticle title="Advanced Security Features">
+          <p>
+            Our Secure Password Laboratory offers advanced features designed for precision and usability. The <strong>&quot;Exclude Ambiguous Characters&quot;</strong> option removes confusing characters like <code>0</code> (zero) and <code>O</code> (uppercase o), preventing entry errors on sensitive logins.
+          </p>
+
+          <h3>Guaranteeing Complexity</h3>
+          <p>
+            Unlike basic generators that might randomly skip a character type even if selected, our <strong>&quot;Guarantee All Types&quot;</strong> logic ensures that at least one character from every enabled set (Uppercase, Lowercase, Numbers, Symbols) is present in your result. This guarantees that your password always meets the strict complexity requirements of modern enterprise systems.
+          </p>
+
+          <h3>Zero-Server Security</h3>
+          <p>
+            The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost Digital Labs, we use a 100% browser-side architecture. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
+          </p>
+        </ToolArticle>
+      </div>
     </div>
   );
 }
