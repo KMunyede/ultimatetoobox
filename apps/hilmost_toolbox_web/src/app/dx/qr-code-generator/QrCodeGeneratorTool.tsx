@@ -13,7 +13,10 @@ import {
   Settings2,
   Lock,
   RefreshCw,
-  ChevronDown
+  ChevronDown,
+  Check,
+  Copy,
+  AlertCircle
 } from "lucide-react";
 
 type QRType = 'URL' | 'Text' | 'Email' | 'Phone' | 'Wi-Fi';
@@ -34,6 +37,7 @@ export function QrCodeGeneratorTool() {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isGenerated, setIsGenerated] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">("idle");
 
   const getEncodedData = useCallback(() => {
     switch (type) {
@@ -113,6 +117,29 @@ export function QrCodeGeneratorTool() {
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const copyToClipboard = () => {
+    if (!canvasRef.current) return;
+    try {
+      canvasRef.current.toBlob(async (blob) => {
+        if (!blob) return;
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({ 'image/png': blob })
+          ]);
+          setCopyStatus("success");
+          setTimeout(() => setCopyStatus("idle"), 2000);
+        } catch (err) {
+          console.error(err);
+          setCopyStatus("error");
+          setTimeout(() => setCopyStatus("idle"), 3000);
+        }
+      }, 'image/png');
+    } catch (err) {
+      console.error(err);
+      setCopyStatus("error");
     }
   };
 
@@ -355,20 +382,34 @@ export function QrCodeGeneratorTool() {
             </div>
 
             <div className="w-full space-y-4">
-              <div className="grid grid-cols-2 gap-4 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
                 <button
                   onClick={downloadQR}
                   disabled={!isGenerated}
-                  className="flex items-center justify-center gap-3 px-4 py-5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 px-3 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
                 >
-                  <Download size={18} /> Download PNG
+                  <Download size={16} /> Download PNG
                 </button>
                 <button
                   onClick={downloadSVG}
                   disabled={!isGenerated}
-                  className="flex items-center justify-center gap-3 px-4 py-5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 px-3 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
                 >
-                  <Download size={18} /> Download SVG
+                  <Download size={16} /> Download SVG
+                </button>
+                <button
+                  onClick={copyToClipboard}
+                  disabled={!isGenerated}
+                  className={`flex items-center justify-center gap-2 px-3 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl transition-all active:scale-95 ${
+                    copyStatus === 'success'
+                    ? 'bg-blue-600 text-white shadow-blue-500/20'
+                    : copyStatus === 'error'
+                    ? 'bg-red-600 text-white shadow-red-500/20'
+                    : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
+                >
+                  {copyStatus === 'success' ? <Check size={16} /> : copyStatus === 'error' ? <AlertCircle size={16} /> : <Copy size={16} />}
+                  {copyStatus === 'success' ? '✓ Copied!' : copyStatus === 'error' ? 'Copy failed — use Download' : 'Copy to Clipboard'}
                 </button>
               </div>
 
