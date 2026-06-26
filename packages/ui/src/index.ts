@@ -4,6 +4,7 @@ export { ThemeProvider } from "./ThemeProvider";
 export { ThemeToggle } from "./ThemeToggle";
 export { BackButton } from "./BackButton";
 export { PrivacyPolicyContent } from "./legal/PrivacyPolicyContent";
+export { EditorialPolicyContent } from "./legal/EditorialPolicyContent";
 export { TermsOfServiceContent } from "./legal/TermsOfServiceContent";
 export { CookiePolicyContent } from "./legal/CookiePolicyContent";
 export { AdSenseScript } from "./AdSenseScript";

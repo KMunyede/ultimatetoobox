@@ -1,11 +1,13 @@
 import React from "react";
-import { ShieldCheck, Award } from "lucide-react";
+import { ShieldCheck, Award, FileText, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 interface AuthorBioProps {
   name?: string;
   role?: string;
   experience?: string;
   className?: string;
+  category?: "finance" | "health" | "math" | "generic";
 }
 
 /**
@@ -16,7 +18,8 @@ export function AuthorBio({
   name = "Keepy Munyede",
   role = "Founder & Principal Engineer",
   experience = "15+ years in Banking Systems & Software Architecture",
-  className = ""
+  className = "",
+  category = "generic"
 }: AuthorBioProps) {
   return (
     <div className={`mt-16 p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 shadow-sm ${className}`}>
@@ -34,6 +37,12 @@ export function AuthorBio({
             <ShieldCheck size={12} />
             Verified Expert
           </div>
+          {category === "math" && (
+            <div className="inline-flex items-center self-center md:self-start gap-1.5 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-200 dark:border-blue-800/50">
+              <CheckCircle2 size={12} />
+              Scientific Accuracy
+            </div>
+          )}
         </div>
 
         <p className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
@@ -44,11 +53,18 @@ export function AuthorBio({
           With {experience}, Keepy leads the Hilmost Software Corporation with a mission to build a &quot;digital sanctuary&quot; of high-performance tools. This tool has been mathematically verified and architected for extreme precision and professional reliability.
         </p>
 
-        <div className="flex items-center justify-center md:justify-start gap-6 pt-2 border-t border-slate-200 dark:border-slate-800 mt-4">
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-8 pt-4 border-t border-slate-200 dark:border-slate-800 mt-4">
            <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-tighter">
              <Award size={14} className="text-brand-primary" />
              Fact-Checked for 2026
            </div>
+           <Link
+             href="/editorial-policy"
+             className="flex items-center gap-2 text-[10px] font-black text-brand-primary uppercase tracking-widest hover:underline transition-all"
+           >
+             <FileText size={14} />
+             View Editorial Policy
+           </Link>
         </div>
       </div>
     </div>

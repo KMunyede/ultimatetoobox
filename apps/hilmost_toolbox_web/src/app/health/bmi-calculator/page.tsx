@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, AuthorBio, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { BMIClient } from "./BMIClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -74,7 +74,8 @@ export default function BMIPage() {
         image="https://hilmost-toolbox.hilmost.net/og/health.png"
       />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={TOOL_NAME}
@@ -102,6 +103,7 @@ export default function BMIPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+      <AuthorBio category="health" />
       <RelatedTools category="health" currentPath={PATH} />
     </div>
   );

@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { EPSCalculatorClient } from "./EPSCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -106,6 +106,7 @@ export default function EPSCalculatorPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+      <AuthorBio category="finance" />
       <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );

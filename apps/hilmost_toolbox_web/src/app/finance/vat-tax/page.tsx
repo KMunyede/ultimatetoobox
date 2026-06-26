@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -148,6 +148,7 @@ export default function VatTaxPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+      <AuthorBio category="finance" />
       <RelatedTools category="finance" currentPath={PATH} />
     </div>
   );

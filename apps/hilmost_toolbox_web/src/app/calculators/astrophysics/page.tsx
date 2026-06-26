@@ -142,7 +142,7 @@ export default function AstrophysicsCalculatorPage() {
 
       <FAQAccordion items={faqs} />
 
-      <AuthorBio />
+      <AuthorBio category="math" />
 
       <RelatedTools category="calculators" currentPath={PATH} />
     </div>

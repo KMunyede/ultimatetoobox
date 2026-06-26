@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { DailyQuoteClient } from "./DailyQuoteClient";
-import { RelatedTools, Breadcrumbs, WebApplicationSchema, ToolHeader, ToolArticle } from "@utilitiessite/ui";
+import { RelatedTools, Breadcrumbs, WebApplicationSchema, ToolHeader, ToolArticle, AuthorBio } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -108,6 +108,8 @@ export default function Home() {
           My Profile (Soon)
         </span>
       </div>
+
+      <AuthorBio category="health" />
 
       <RelatedTools category="health" currentPath="/health/daily-wisdom" />
     </div>

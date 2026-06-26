@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -109,6 +109,7 @@ export default function BudgetPlannerPage() {
       </ToolArticle>
 
         <FAQAccordion items={faqs} />
+        <AuthorBio category="finance" />
         <RelatedTools category="finance" currentPath={PATH} />
       </div>
     </div>

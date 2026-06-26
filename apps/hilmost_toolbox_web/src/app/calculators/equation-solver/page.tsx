@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, FAQSchema, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, FAQSchema, ToolHeader, AuthorBio } from "@utilitiessite/ui";
 import { EquationSolverClient } from "./EquationSolverClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -110,6 +110,7 @@ export default function EquationSolverPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+      <AuthorBio category="math" />
       <RelatedTools category="calculators" currentPath={PATH} />
     </div>
   );

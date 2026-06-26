@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { SalaryConverterClient } from "./SalaryConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -82,6 +82,7 @@ export function SalaryConverterPageUI({
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
+      <AuthorBio category="finance" />
       <RelatedTools category="finance" currentPath={canonicalUrl.replace("https://hilmost-toolbox.hilmost.net", "")} />
     </div>
   );
