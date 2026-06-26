@@ -1,0 +1,13 @@
+# Hilmost Software Corporation
+> Specialized software R&D unit building high-precision digital tools. Banking-grade engineering for everyday utility challenges.
+
+## Products
+- [Hilmost Ultimate Toolbox](https://hilmost-toolbox.hilmost.net): Free online calculators, converters, PDF tools, developer utilities
+
+## About
+Founded by Keepy Munyede. Based in Harare, Zimbabwe.
+Background: 15+ years banking IT and payments systems (ISO 8583, PCI DSS, SWIFT).
+Focus: Finance, health, data science, AI wellness tools.
+
+## Contact
+support@hilmost.net

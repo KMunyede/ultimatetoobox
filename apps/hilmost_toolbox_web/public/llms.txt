@@ -1,0 +1,15 @@
+# Hilmost Ultimate Toolbox
+> Free online calculators and converters. Banking-grade precision. 100% browser-based. Zero data collection.
+
+## Tool Categories
+- [Finance Tools](https://hilmost-toolbox.hilmost.net/finance): Currency, loans, compound interest, VAT, salary, retirement, WACC, EPS, inflation, budget
+- [Unit Converters](https://hilmost-toolbox.hilmost.net/converters): Length, weight, temperature, time, timezone, area, data storage, age, percentage, unix time
+- [Math & Science](https://hilmost-toolbox.hilmost.net/calculators): Standard, scientific, astrophysics, science equation solver
+- [PDF Tools](https://hilmost-toolbox.hilmost.net/pdf-tools): Merge, split, rotate, delete pages — client-side only
+- [Developer Tools](https://hilmost-toolbox.hilmost.net/dx): JSON formatter, Regex tester, JWT decoder
+- [Text & Data](https://hilmost-toolbox.hilmost.net/text-data): Word count, Base64, MD5, word unscrambler
+- [Health & Wellness](https://hilmost-toolbox.hilmost.net/health): BMI calculator, daily wisdom
+
+## About
+Built by Hilmost Software Corporation (Harare, Zimbabwe). Launched June 2026.
+Engineering-grade tools for everyday problems.
