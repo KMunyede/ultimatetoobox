@@ -38,7 +38,7 @@ const links = [
   {
     name: "Password Generator",
     href: "/dx/password-generator",
-    description: "Generate secure random passwords with custom rules. Cryptographically secure, browser-side generation for maximum privacy."
+    description: "Generate secure random passwords with custom length, character sets, and strength indicator."
   },
   {
     name: "Regex Tester",

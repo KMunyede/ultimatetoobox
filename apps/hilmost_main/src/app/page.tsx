@@ -126,11 +126,11 @@ export default function Home() {
               },
               {
                 name: "Developer Experience",
-                description: "JSON, Regex, and JWT utilities built for modern engineering workflows.",
+                description: "JSON, Regex, Password, and JWT utilities built for modern engineering workflows.",
                 href: "https://hilmost-toolbox.hilmost.net/dx",
                 icon: <Code2 size={32} />,
                 color: "slate",
-                count: 3
+                count: 4
               }
             ].map((cat) => (
               <Link
