@@ -5,6 +5,12 @@
 
 @source "../../../../packages/ui/src/**/*.{js,ts,jsx,tsx}";
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 

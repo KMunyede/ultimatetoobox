@@ -29,7 +29,7 @@ export function Header() {
   const wisdomUrl = `${domains.toolbox}/health/daily-wisdom`;
 
   return (
-    <header className="sticky top-0 z-[60] w-full border-b border-base bg-canvas-card/80 backdrop-blur supports-[backdrop-filter]:bg-canvas-card/60">
+    <header className="sticky top-0 z-[60] w-full border-b border-base bg-canvas-card/80 backdrop-blur supports-[backdrop-filter]:bg-canvas-card/60 overflow-x-hidden">
       {/* Top accent bar with White, Light Green, and Red */}
       <div className="h-1 w-full bg-gradient-to-r from-red-500 via-white to-brand-primary opacity-90"></div>
       

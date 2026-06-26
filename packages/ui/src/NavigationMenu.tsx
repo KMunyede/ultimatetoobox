@@ -138,6 +138,17 @@ export function NavigationMenu() {
     }
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const domains = {
     corporate: isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net",
     toolbox: isStaging ? "https://hilmost-toolbox-staging.web.app" : "https://hilmost-toolbox.hilmost.net",
@@ -280,14 +291,14 @@ export function NavigationMenu() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] lg:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] lg:hidden touch-none"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-canvas-card border-l border-base shadow-2xl z-[110] lg:hidden flex flex-col"
+              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-canvas-card border-l border-base shadow-2xl z-[110] lg:hidden flex flex-col overflow-x-hidden"
             >
               <div className="flex items-center justify-between p-6 border-b border-base">
                 <span className="text-lg font-black text-brand-primary tracking-tighter">HILMOST HUB</span>
