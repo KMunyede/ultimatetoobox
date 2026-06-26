@@ -41,6 +41,11 @@ const links = [
     description: "Generate secure random passwords with custom length, character sets, and strength indicator."
   },
   {
+    name: "QR Code Generator",
+    href: "/dx/qr-code-generator",
+    description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up."
+  },
+  {
     name: "Regex Tester",
     href: "/dx/regex-tester",
     description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting."

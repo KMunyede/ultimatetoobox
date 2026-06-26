@@ -130,7 +130,7 @@ export default function Home() {
                 href: "https://hilmost-toolbox.hilmost.net/dx",
                 icon: <Code2 size={32} />,
                 color: "slate",
-                count: 4
+                count: 5
               }
             ].map((cat) => (
               <Link
