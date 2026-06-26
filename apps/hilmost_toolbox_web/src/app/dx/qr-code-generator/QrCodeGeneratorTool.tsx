@@ -90,6 +90,32 @@ export function QrCodeGeneratorTool() {
     link.click();
   };
 
+  const downloadSVG = async () => {
+    const data = getEncodedData();
+    try {
+      const svgString = await QRCode.toString(data, {
+        type: 'svg',
+        width: size,
+        margin: 2,
+        errorCorrectionLevel: errorLevel,
+        color: {
+          dark: fgColor,
+          light: bgColor,
+        },
+      });
+      const blob = new Blob([svgString], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const timestamp = new Date().getTime();
+      link.download = `hilmost-qr-${type.toLowerCase()}-${timestamp}.svg`;
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto my-8 space-y-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -329,13 +355,22 @@ export function QrCodeGeneratorTool() {
             </div>
 
             <div className="w-full space-y-4">
-              <button
-                onClick={downloadQR}
-                disabled={!isGenerated}
-                className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
-              >
-                <Download size={20} /> Download PNG
-              </button>
+              <div className="grid grid-cols-2 gap-4 w-full">
+                <button
+                  onClick={downloadQR}
+                  disabled={!isGenerated}
+                  className="flex items-center justify-center gap-3 px-4 py-5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
+                >
+                  <Download size={18} /> Download PNG
+                </button>
+                <button
+                  onClick={downloadSVG}
+                  disabled={!isGenerated}
+                  className="flex items-center justify-center gap-3 px-4 py-5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
+                >
+                  <Download size={18} /> Download SVG
+                </button>
+              </div>
 
               <div className="flex items-center justify-center gap-2 text-slate-500 select-none pt-2">
                 <Lock size={12} />
