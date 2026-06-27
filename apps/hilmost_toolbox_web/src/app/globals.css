@@ -44,4 +44,7 @@ html, body {
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-slate-400 dark:bg-slate-500;
   }
+  .scrollbar-visible::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-600;
+  }
 }
