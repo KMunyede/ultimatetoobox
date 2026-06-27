@@ -9,6 +9,7 @@ import {
   Mail,
   Phone,
   Wifi,
+  UserCircle,
   Download,
   Settings2,
   Lock,
@@ -19,7 +20,7 @@ import {
   AlertCircle
 } from "lucide-react";
 
-type QRType = 'URL' | 'Text' | 'Email' | 'Phone' | 'Wi-Fi';
+type QRType = 'URL' | 'Text' | 'Email' | 'Phone' | 'Wi-Fi' | 'Contact';
 type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
 
 export function QrCodeGeneratorTool() {
@@ -28,6 +29,18 @@ export function QrCodeGeneratorTool() {
   const [email, setEmail] = useState({ to: "", subject: "", body: "" });
   const [phone, setPhone] = useState("");
   const [wifi, setWifi] = useState({ ssid: "", password: "", security: "WPA", hidden: false });
+  const [contact, setContact] = useState({
+    firstName: "",
+    lastName: "",
+    org: "",
+    jobTitle: "",
+    phone: "",
+    email: "",
+    website: "",
+    street: "",
+    city: "",
+    country: ""
+  });
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [size, setSize] = useState(256);
@@ -51,10 +64,27 @@ export function QrCodeGeneratorTool() {
         return `tel:${phone}`;
       case 'Wi-Fi':
         return `WIFI:S:${wifi.ssid};T:${wifi.security === 'None' ? 'nopass' : wifi.security};P:${wifi.password};H:${wifi.hidden};;`;
+      case 'Contact': {
+        const lines = ["BEGIN:VCARD", "VERSION:3.0"];
+        if (contact.lastName || contact.firstName) {
+          lines.push(`N:${contact.lastName};${contact.firstName};;;`);
+          lines.push(`FN:${contact.firstName} ${contact.lastName}`.trim());
+        }
+        if (contact.org) lines.push(`ORG:${contact.org}`);
+        if (contact.jobTitle) lines.push(`TITLE:${contact.jobTitle}`);
+        if (contact.phone) lines.push(`TEL;TYPE=CELL:${contact.phone}`);
+        if (contact.email) lines.push(`EMAIL:${contact.email}`);
+        if (contact.website) lines.push(`URL:${contact.website}`);
+        if (contact.street || contact.city || contact.country) {
+          lines.push(`ADR;TYPE=WORK:;;${contact.street};${contact.city};;${contact.country};`);
+        }
+        lines.push("END:VCARD");
+        return lines.join("\n");
+      }
       default:
         return "";
     }
-  }, [type, input, email, phone, wifi]);
+  }, [type, input, email, phone, wifi, contact]);
 
   const generateQR = useCallback(async () => {
     if (!canvasRef.current) return;
@@ -159,6 +189,7 @@ export function QrCodeGeneratorTool() {
                 { id: 'Email', icon: <Mail size={14} /> },
                 { id: 'Phone', icon: <Phone size={14} /> },
                 { id: 'Wi-Fi', icon: <Wifi size={14} /> },
+                { id: 'Contact', icon: <UserCircle size={14} /> },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -297,6 +328,120 @@ export function QrCodeGeneratorTool() {
                     />
                     <span className="text-sm font-bold text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Hidden Network</span>
                   </label>
+                </div>
+              )}
+
+              {type === 'Contact' && (
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">First Name *</label>
+                      <input
+                        type="text"
+                        placeholder="John"
+                        value={contact.firstName}
+                        onChange={(e) => setContact({ ...contact, firstName: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Last Name</label>
+                      <input
+                        type="text"
+                        placeholder="Doe"
+                        value={contact.lastName}
+                        onChange={(e) => setContact({ ...contact, lastName: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Organization</label>
+                      <input
+                        type="text"
+                        placeholder="Hilmost Software"
+                        value={contact.org}
+                        onChange={(e) => setContact({ ...contact, org: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Job Title</label>
+                      <input
+                        type="text"
+                        placeholder="Solo Founder"
+                        value={contact.jobTitle}
+                        onChange={(e) => setContact({ ...contact, jobTitle: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Phone</label>
+                      <input
+                        type="tel"
+                        placeholder="+1 234 567 890"
+                        value={contact.phone}
+                        onChange={(e) => setContact({ ...contact, phone: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Email</label>
+                      <input
+                        type="email"
+                        placeholder="john@example.com"
+                        value={contact.email}
+                        onChange={(e) => setContact({ ...contact, email: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Website</label>
+                    <input
+                      type="url"
+                      placeholder="https://hilmost.net"
+                      value={contact.website}
+                      onChange={(e) => setContact({ ...contact, website: e.target.value })}
+                      className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="space-y-2 sm:col-span-1">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Street</label>
+                      <input
+                        type="text"
+                        placeholder="84 Broughton Dr"
+                        value={contact.street}
+                        onChange={(e) => setContact({ ...contact, street: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">City</label>
+                      <input
+                        type="text"
+                        placeholder="Harare"
+                        value={contact.city}
+                        onChange={(e) => setContact({ ...contact, city: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Country</label>
+                      <input
+                        type="text"
+                        placeholder="Zimbabwe"
+                        value={contact.country}
+                        onChange={(e) => setContact({ ...contact, country: e.target.value })}
+                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
