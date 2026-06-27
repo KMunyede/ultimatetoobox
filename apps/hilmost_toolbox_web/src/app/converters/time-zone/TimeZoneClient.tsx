@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ShareButton } from "@/components/ShareButton";
 import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { Plus, X, ArrowRight, Clock, Search } from "lucide-react";
+import { Plus, X, ArrowRight, Clock, Search, Users, ChevronDown, User, Copy, Check } from "lucide-react";
 import { Tooltip } from "@utilitiessite/ui";
 
 const formatZoneName = (zone: string) => {
@@ -50,6 +50,13 @@ function isDST(timezone: string): boolean {
   } catch {
     return false;
   }
+}
+
+function getAvailability(timezone: string, now: Date) {
+  const localHour = Number(formatInTimeZone(now, timezone, "H"));
+  if (localHour >= 9 && localHour < 17) return { label: "Available", color: "bg-emerald-100 text-emerald-700 border-emerald-200" };
+  if ((localHour >= 7 && localHour < 9) || (localHour >= 17 && localHour < 20)) return { label: "Early/Late", color: "bg-yellow-100 text-yellow-700 border-yellow-200" };
+  return { label: "Offline", color: "bg-red-100 text-red-700 border-red-200" };
 }
 
 interface SearchableSelectProps {
@@ -136,6 +143,14 @@ export function TimeZoneClient() {
   const [availableZones, setAvailableZones] = useState<string[]>([]);
   const [newZone, setNewZone] = useState("");
   const [now, setNow] = useState(new Date());
+
+  // Team Clocks State
+  const [teamMembers, setTeamMembers] = useState<{ name: string; timezone: string }[]>([]);
+  const [newMemberName, setNewMemberName] = useState("");
+  const [newMemberTZ, setNewMemberTZ] = useState("");
+  const [isTeamOpen, setIsTeamOpen] = useState(false);
+  const [shareStatus, setShareStatus] = useState(false);
+
   const targets = targetZones ? targetZones.split(",") : [];
 
   useEffect(() => {
@@ -146,6 +161,27 @@ export function TimeZoneClient() {
   }, []);
 
   useEffect(() => {
+    // Load team from localStorage
+    const saved = localStorage.getItem("hilmost_team_clocks");
+    if (saved) {
+      try { setTeamMembers(JSON.parse(saved)); } catch (e) { console.error("Failed to parse team clocks", e); }
+    }
+
+    // Load team from URL if present
+    const params = new URLSearchParams(window.location.search);
+    const teamParam = params.get("team");
+    if (teamParam) {
+      const parts = teamParam.split(",");
+      const loadedTeam = parts.map(p => {
+        const [name, timezone] = p.split(":");
+        return { name: decodeURIComponent(name), timezone: decodeURIComponent(timezone) };
+      }).filter(p => p.name && p.timezone);
+      if (loadedTeam.length > 0) {
+        setTeamMembers(loadedTeam);
+        setIsTeamOpen(true);
+      }
+    }
+
     // Populate available time zones natively supported by the browser
     try {
       const zones = Intl.supportedValuesOf("timeZone");
@@ -173,6 +209,11 @@ export function TimeZoneClient() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Save team to localStorage
+  useEffect(() => {
+    localStorage.setItem("hilmost_team_clocks", JSON.stringify(teamMembers));
+  }, [teamMembers]);
 
   const handleAddZone = () => {
     if (newZone && !targets.includes(newZone)) {
@@ -209,6 +250,28 @@ export function TimeZoneClient() {
     }
     return date;
   }, [sourceTime, sourceZone, now]);
+
+  const handleAddMember = () => {
+    if (newMemberName && newMemberTZ) {
+      setTeamMembers([...teamMembers, { name: newMemberName, timezone: newMemberTZ }]);
+      setNewMemberName("");
+      setNewMemberTZ("");
+    }
+  };
+
+  const handleRemoveMember = (idx: number) => {
+    setTeamMembers(teamMembers.filter((_, i) => i !== idx));
+  };
+
+  const shareTeamBoard = () => {
+    const params = new URLSearchParams(window.location.search);
+    const teamString = teamMembers.map(m => `${encodeURIComponent(m.name)}:${encodeURIComponent(m.timezone)}`).join(",");
+    params.set("team", teamString);
+    const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+    navigator.clipboard.writeText(url);
+    setShareStatus(true);
+    setTimeout(() => setShareStatus(false), 2000);
+  };
 
   const tourSteps = [
     { element: '#tour-tz-source', popover: { title: '1. Source Time', description: 'Select your starting time and time zone.' } },
@@ -346,6 +409,132 @@ export function TimeZoneClient() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Team Clocks Section */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm mt-8">
+        <button
+          onClick={() => setIsTeamOpen(!isTeamOpen)}
+          className="w-full flex items-center justify-between p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <Users className="text-brand-primary w-6 h-6" />
+            <div className="text-left">
+              <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">My Team Clocks</h2>
+              {isTeamOpen && <p className="text-xs font-medium text-slate-400">Add team members to track their local time instantly</p>}
+            </div>
+          </div>
+          <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isTeamOpen ? 'rotate-180' : ''}`} />
+        </button>
+
+        <AnimatePresence>
+          {isTeamOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              <div className="p-6 pt-0 space-y-6 border-t border-slate-100 dark:border-slate-800 mt-0">
+                {/* Add Member Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-6">
+                  <div className="sm:col-span-4">
+                    <input
+                      type="text"
+                      placeholder="e.g. Keepy"
+                      value={newMemberName}
+                      onChange={(e) => setNewMemberName(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                    />
+                  </div>
+                  <div className="sm:col-span-5">
+                    <SearchableSelect
+                      value={newMemberTZ}
+                      options={availableZones}
+                      onChange={(val) => setNewMemberTZ(val)}
+                      placeholder="Search city/timezone..."
+                    />
+                  </div>
+                  <div className="sm:col-span-3">
+                    <button
+                      onClick={handleAddMember}
+                      disabled={!newMemberName || !newMemberTZ}
+                      className="w-full h-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-emerald-500/20 active:scale-95"
+                    >
+                      Add Member
+                    </button>
+                  </div>
+                </div>
+
+                {/* Team List */}
+                <div className="space-y-3">
+                  {teamMembers.length > 0 ? (
+                    teamMembers.map((member, i) => {
+                      const availability = getAvailability(member.timezone, now);
+                      return (
+                        <div key={`${member.name}-${i}`} className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl group transition-all hover:border-brand-primary/30">
+                          {/* Avatar */}
+                          <div className="h-12 w-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-black text-lg shrink-0 shadow-sm">
+                            {member.name.charAt(0).toUpperCase()}
+                          </div>
+
+                          <div className="flex-1 w-full text-center sm:text-left">
+                            <div className="flex flex-col">
+                              <span className="font-bold text-slate-800 dark:text-slate-100">{member.name}</span>
+                              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{formatZoneName(member.timezone)}</span>
+                            </div>
+                          </div>
+
+                          <div className="flex-1 text-center">
+                            <p className="text-2xl font-mono font-black text-slate-800 dark:text-slate-100">
+                              {formatInTimeZone(now, member.timezone, "HH:mm:ss")}
+                            </p>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                              {formatInTimeZone(now, member.timezone, "EEE, MMM d")}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-3 shrink-0">
+                            {isDST(member.timezone) && (
+                              <span className="text-[9px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+                            )}
+                            <div className={`text-[10px] font-black px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
+                              {availability.label}
+                            </div>
+                            <button
+                              onClick={() => handleRemoveMember(i)}
+                              className="p-2 text-slate-300 hover:text-red-500 transition-colors"
+                            >
+                              <X size={18} />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="py-12 border-2 border-dashed border-slate-100 dark:border-slate-800 rounded-3xl flex flex-col items-center justify-center text-slate-400">
+                      <User size={32} className="mb-2 opacity-20" />
+                      <p className="text-sm font-medium">No team members yet. Add your first one above.</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Share Row */}
+                {teamMembers.length >= 2 && (
+                  <div className="flex justify-center pt-4 border-t border-slate-50 dark:border-slate-800/50">
+                    <button
+                      onClick={shareTeamBoard}
+                      className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm"
+                    >
+                      {shareStatus ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
+                      {shareStatus ? "✓ Copied!" : "Share Team Board"}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
