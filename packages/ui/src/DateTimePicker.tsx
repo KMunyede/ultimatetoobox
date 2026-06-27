@@ -63,18 +63,6 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Sync scroll positions when popover opens
-  useEffect(() => {
-    if (isOpen) {
-      setViewMode("month"); // Reset to month view on open
-      setTimeout(() => {
-        if (hoursRef.current) hoursRef.current.scrollTop = currentDate.getHours() * itemHeight;
-        if (minutesRef.current) minutesRef.current.scrollTop = currentDate.getMinutes() * itemHeight;
-        if (secondsRef.current) secondsRef.current.scrollTop = currentDate.getSeconds() * itemHeight;
-      }, 50);
-    }
-  }, [isOpen]);
-
   const applyChange = (newDate: Date) => {
     setCurrentDate(newDate);
     setInputValue(formatForInput(newDate));
@@ -292,12 +280,24 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
     );
   };
 
-  // Time Logic
+  const hoursList = Array.from({ length: 24 * 3 }, (_, i) => i % 24);
+  const minutesList = Array.from({ length: 60 * 3 }, (_, i) => i % 60);
+  const secondsList = Array.from({ length: 60 * 3 }, (_, i) => i % 60);
+
   const handleScroll = (type: "hour" | "minute" | "second", e: React.UIEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
+    const max = type === "hour" ? 24 : 60;
+
+    // Silent loop logic
+    if (el.scrollTop <= itemHeight) {
+      el.scrollTop += max * itemHeight;
+    } else if (el.scrollTop >= (max * 2 - 1) * itemHeight) {
+      el.scrollTop -= max * itemHeight;
+    }
+
     clearTimeout((el as any).scrollTimeout);
     (el as any).scrollTimeout = setTimeout(() => {
-      const index = Math.round(el.scrollTop / itemHeight);
+      const index = Math.round(el.scrollTop / itemHeight) % max;
       const newDate = new Date(currentDate);
       if (type === "hour") newDate.setHours(index);
       else if (type === "minute") newDate.setMinutes(index);
@@ -307,14 +307,38 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
   };
 
   const clickDialItem = (type: "hour" | "minute" | "second", index: number) => {
-    if (type === "hour" && hoursRef.current) hoursRef.current.scrollTo({ top: index * itemHeight, behavior: "smooth" });
-    if (type === "minute" && minutesRef.current) minutesRef.current.scrollTo({ top: index * itemHeight, behavior: "smooth" });
-    if (type === "second" && secondsRef.current) secondsRef.current.scrollTo({ top: index * itemHeight, behavior: "smooth" });
+    const max = type === "hour" ? 24 : 60;
+    const targetScroll = (index + max) * itemHeight;
+    if (type === "hour" && hoursRef.current) hoursRef.current.scrollTo({ top: targetScroll, behavior: "smooth" });
+    if (type === "minute" && minutesRef.current) minutesRef.current.scrollTo({ top: targetScroll, behavior: "smooth" });
+    if (type === "second" && secondsRef.current) secondsRef.current.scrollTo({ top: targetScroll, behavior: "smooth" });
   };
 
-  const hoursList = Array.from({ length: 24 }, (_, i) => i);
-  const minutesList = Array.from({ length: 60 }, (_, i) => i);
-  const secondsList = Array.from({ length: 60 }, (_, i) => i);
+  useEffect(() => {
+    if (isOpen) {
+      setViewMode("month");
+      setTimeout(() => {
+        const h = currentDate.getHours();
+        const m = currentDate.getMinutes();
+        const s = currentDate.getSeconds();
+        if (hoursRef.current) hoursRef.current.scrollTop = (h + 24) * itemHeight;
+        if (minutesRef.current) minutesRef.current.scrollTop = (m + 60) * itemHeight;
+        if (secondsRef.current) secondsRef.current.scrollTop = (s + 60) * itemHeight;
+      }, 50);
+    }
+  }, [isOpen]);
+
+  // Sync scroll positions when typed input changes
+  useEffect(() => {
+    if (isOpen) {
+      const h = currentDate.getHours();
+      const m = currentDate.getMinutes();
+      const s = currentDate.getSeconds();
+      if (hoursRef.current) hoursRef.current.scrollTo({ top: (h + 24) * itemHeight, behavior: "smooth" });
+      if (minutesRef.current) minutesRef.current.scrollTo({ top: (m + 60) * itemHeight, behavior: "smooth" });
+      if (secondsRef.current) secondsRef.current.scrollTo({ top: (s + 60) * itemHeight, behavior: "smooth" });
+    }
+  }, [inputValue]);
 
   return (
     <div className="relative w-full" ref={containerRef}>
@@ -387,13 +411,13 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
                 className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                <div className="h-[60px]" />
-                {hoursList.map(h => (
-                  <div key={h} onClick={() => clickDialItem("hour", h)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
+                <div className="h-[40px]" />
+                {hoursList.map((h, i) => (
+                  <div key={i} onClick={() => clickDialItem("hour", h)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
                     {h.toString().padStart(2, '0')}
                   </div>
                 ))}
-                <div className="h-[60px]" />
+                <div className="h-[40px]" />
               </div>
               
               <div className="h-full flex items-center font-bold text-slate-400 z-10">:</div>
@@ -405,13 +429,13 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
                 className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                <div className="h-[60px]" />
-                {minutesList.map(m => (
-                  <div key={m} onClick={() => clickDialItem("minute", m)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
+                <div className="h-[40px]" />
+                {minutesList.map((m, i) => (
+                  <div key={i} onClick={() => clickDialItem("minute", m)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
                     {m.toString().padStart(2, '0')}
                   </div>
                 ))}
-                <div className="h-[60px]" />
+                <div className="h-[40px]" />
               </div>
 
               <div className="h-full flex items-center font-bold text-slate-400 z-10">:</div>
@@ -423,13 +447,13 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
                 className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                <div className="h-[60px]" />
-                {secondsList.map(s => (
-                  <div key={s} onClick={() => clickDialItem("second", s)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
+                <div className="h-[40px]" />
+                {secondsList.map((s, i) => (
+                  <div key={i} onClick={() => clickDialItem("second", s)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
                     {s.toString().padStart(2, '0')}
                   </div>
                 ))}
-                <div className="h-[60px]" />
+                <div className="h-[40px]" />
               </div>
             </div>
             

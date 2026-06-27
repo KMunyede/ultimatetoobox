@@ -1,15 +1,100 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { formatInTimeZone, toDate } from "date-fns-tz";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShareButton } from "@/components/ShareButton";
 import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { Plus, X, ArrowRight, Clock } from "lucide-react";
+import { Plus, X, ArrowRight, Clock, Search } from "lucide-react";
 import { Tooltip } from "@utilitiessite/ui";
 
-const formatZoneName = (zone: string) => zone.replace(/[_-]/g, " ");
+const formatZoneName = (zone: string) => {
+  const name = zone.replace(/[_-]/g, " ");
+  try {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: zone,
+      timeZoneName: 'shortOffset'
+    });
+    const parts = formatter.formatToParts(new Date());
+    const offset = parts.find(p => p.type === 'timeZoneName')?.value || '';
+    return `${name} (${offset})`;
+  } catch {
+    return name;
+  }
+};
+
+interface SearchableSelectProps {
+  value: string;
+  options: string[];
+  onChange: (val: string) => void;
+  placeholder?: string;
+  className?: string;
+}
+
+function SearchableSelect({ value, options, onChange, placeholder, className }: SearchableSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const filtered = useMemo(() => {
+    const s = search.toLowerCase();
+    return options
+      .filter(o => o.toLowerCase().includes(s))
+      .sort((a, b) => a.localeCompare(b));
+  }, [options, search]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className={`relative ${className}`} ref={containerRef}>
+      <div className="relative group">
+        <input
+          type="text"
+          value={isOpen ? search : formatZoneName(value)}
+          placeholder={placeholder}
+          onFocus={() => {
+            setIsOpen(true);
+            setSearch("");
+          }}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+        />
+        <Search size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500" />
+      </div>
+
+      {isOpen && (
+        <div className="absolute z-[70] mt-2 w-full max-h-60 overflow-y-auto bg-white dark:bg-slate-900 border border-base rounded-xl shadow-2xl custom-scrollbar animate-in fade-in zoom-in-95 duration-200">
+          {filtered.length > 0 ? (
+            filtered.map(opt => (
+              <button
+                key={opt}
+                onClick={() => {
+                  onChange(opt);
+                  setIsOpen(false);
+                  setSearch("");
+                }}
+                className={`w-full text-left px-4 py-2.5 text-sm hover:bg-emerald-500/10 hover:text-emerald-600 transition-colors ${opt === value ? 'bg-emerald-500/5 text-emerald-500 font-bold' : 'text-slate-600 dark:text-slate-300'}`}
+              >
+                {formatZoneName(opt)}
+              </button>
+            ))
+          ) : (
+            <div className="p-4 text-xs text-slate-400 italic text-center">No matching time zones</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function TimeZoneClient() {
   const [state, setState] = useUrlState({
@@ -103,18 +188,12 @@ export function TimeZoneClient() {
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Time Zone
               </label>
-              <Tooltip content="Select the starting time zone" position="top" className="w-full">
-                <select
-                  value={sourceZone}
-                  title="Source Time Zone"
-                  onChange={(e) => setState({ sourceZone: e.target.value })}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500"
-                >
-                  {availableZones.map(z => (
-                    <option key={z} value={z}>{formatZoneName(z)}</option>
-                  ))}
-                </select>
-              </Tooltip>
+              <SearchableSelect
+                value={sourceZone}
+                options={availableZones}
+                onChange={(val) => setState({ sourceZone: val })}
+                placeholder="Search city or region..."
+              />
             </div>
             
             <DateTimePicker
@@ -188,29 +267,21 @@ export function TimeZoneClient() {
               Add Time Zone
             </label>
             <div className="flex gap-2">
-              <Tooltip content="Choose a city or region to add to your dashboard" position="top" className="flex-1">
-                <select
-                  value={newZone}
-                  title="Select Time Zone to Add"
-                  onChange={(e) => setNewZone(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500"
-                >
-                  <option value="">Select a region/city...</option>
-                  {availableZones.filter(z => !targets.includes(z)).map(z => (
-                    <option key={z} value={z}>{formatZoneName(z)}</option>
-                  ))}
-                </select>
-              </Tooltip>
-              <Tooltip content="Add this zone to your list" position="top">
-                <button
-                  onClick={handleAddZone}
-                  disabled={!newZone}
-                  title="Add Zone"
-                  className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white p-3 rounded-xl transition"
-                >
-                  <Plus className="w-6 h-6" />
-                </button>
-              </Tooltip>
+              <SearchableSelect
+                value={newZone}
+                options={availableZones.filter(z => !targets.includes(z))}
+                onChange={(val) => setNewZone(val)}
+                placeholder="Select region/city..."
+                className="flex-1"
+              />
+              <button
+                onClick={handleAddZone}
+                disabled={!newZone}
+                title="Add Zone"
+                className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white px-4 rounded-xl transition shadow-lg shadow-emerald-500/20 active:scale-95"
+              >
+                <Plus className="w-6 h-6" />
+              </button>
             </div>
           </div>
         </div>
