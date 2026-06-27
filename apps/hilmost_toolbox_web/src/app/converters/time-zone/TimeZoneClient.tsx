@@ -28,6 +28,30 @@ const formatZoneName = (zone: string) => {
   }
 };
 
+function isDST(timezone: string): boolean {
+  try {
+    const year = new Date().getFullYear();
+    const jan = new Date(year, 0, 1);
+    const jul = new Date(year, 6, 1);
+    const janOffset = new Intl.DateTimeFormat('en', {
+      timeZone: timezone, timeZoneName: 'short'
+    }).format(jan);
+    const julOffset = new Intl.DateTimeFormat('en', {
+      timeZone: timezone, timeZoneName: 'short'
+    }).format(jul);
+    const nowOffset = new Intl.DateTimeFormat('en', {
+      timeZone: timezone, timeZoneName: 'short'
+    }).format(new Date());
+
+    // DST detection logic: if Jan and Jul offsets differ, DST exists.
+    // In Northern Hemisphere, DST is usually Jul. In Southern, Jan.
+    // The provided logic assumes Jul is DST.
+    return janOffset !== julOffset && nowOffset === julOffset;
+  } catch {
+    return false;
+  }
+}
+
 interface SearchableSelectProps {
   value: string;
   options: string[];
@@ -111,7 +135,15 @@ export function TimeZoneClient() {
   
   const [availableZones, setAvailableZones] = useState<string[]>([]);
   const [newZone, setNewZone] = useState("");
+  const [now, setNow] = useState(new Date());
   const targets = targetZones ? targetZones.split(",") : [];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // Populate available time zones natively supported by the browser
@@ -156,17 +188,27 @@ export function TimeZoneClient() {
   };
 
   const parseSourceDate = () => {
-    if (!sourceTime) return new Date();
-    // Reconstruct date object from local input string in the selected sourceZone
+    if (!sourceTime) return now;
     try {
-      // Date-fns-tz toDate can parse an ISO string assuming the provided timeZone
       return toDate(sourceTime, { timeZone: sourceZone });
     } catch {
-      return new Date();
+      return now;
     }
   };
 
   const sourceDateObj = parseSourceDate();
+
+  // If sourceTime hasn't been set or is essentially "now", we follow the ticking clock
+  const effectiveDate = useMemo(() => {
+    if (!sourceTime) return now;
+    const date = toDate(sourceTime, { timeZone: sourceZone });
+
+    // If the difference between now and sourceTime is less than 2 seconds, assume "Live" mode
+    if (Math.abs(date.getTime() - now.getTime()) < 2000) {
+      return now;
+    }
+    return date;
+  }, [sourceTime, sourceZone, now]);
 
   const tourSteps = [
     { element: '#tour-tz-source', popover: { title: '1. Source Time', description: 'Select your starting time and time zone.' } },
@@ -184,7 +226,17 @@ export function TimeZoneClient() {
             <div className="bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-2xl text-emerald-600 dark:text-emerald-400">
               <Clock className="w-6 h-6" />
             </div>
-            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Source Time</h2>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Source Time</h2>
+                {isDST(sourceZone) && (
+                  <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+                )}
+              </div>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                {formatInTimeZone(effectiveDate, sourceZone, "HH:mm:ss")}
+              </p>
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -224,8 +276,8 @@ export function TimeZoneClient() {
                 let formattedTime = "";
                 let formattedDate = "";
                 try {
-                  formattedTime = formatInTimeZone(sourceDateObj, zone, "hh:mm a zzz").replace('GMT', 'UTC');
-                  formattedDate = formatInTimeZone(sourceDateObj, zone, "EEEE, MMM d, yyyy");
+                  formattedTime = formatInTimeZone(effectiveDate, zone, "HH:mm:ss zzz").replace('GMT', 'UTC');
+                  formattedDate = formatInTimeZone(effectiveDate, zone, "EEEE, MMM d, yyyy");
                 } catch {
                   formattedTime = "Invalid Date";
                 }
@@ -240,7 +292,12 @@ export function TimeZoneClient() {
                     className="flex items-center justify-between bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm"
                   >
                     <div>
-                      <h3 className="font-semibold text-slate-800 dark:text-slate-200">{formatZoneName(zone)}</h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-slate-800 dark:text-slate-200">{formatZoneName(zone)}</h3>
+                        {isDST(zone) && (
+                          <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+                        )}
+                      </div>
                       <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{formattedTime}</p>
                       <p className="text-sm text-slate-500">{formattedDate}</p>
                     </div>
