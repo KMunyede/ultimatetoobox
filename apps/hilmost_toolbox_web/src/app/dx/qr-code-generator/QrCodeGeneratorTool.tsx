@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import QRCode from "qrcode";
 import {
   QrCode,
@@ -51,6 +51,63 @@ export function QrCodeGeneratorTool() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isGenerated, setIsGenerated] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const getLuminance = (hex: string) => {
+    const rgb = hex.match(/\w\w/g)?.map(x => parseInt(x, 16) / 255) || [0, 0, 0];
+    const [r, g, b] = rgb.map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+
+  const scannability = useMemo(() => {
+    if (!isGenerated) return null;
+
+    let score = 100;
+    let hint = "";
+    const lumFg = getLuminance(fgColor);
+    const lumBg = getLuminance(bgColor);
+
+    const L1 = Math.max(lumFg, lumBg);
+    const L2 = Math.min(lumFg, lumBg);
+    const contrast = (L1 + 0.05) / (L2 + 0.05);
+
+    // Checks
+    const isInverted = lumBg < lumFg;
+    const isSmall = size < 128;
+    const isLowEC = errorLevel === 'L';
+
+    if (contrast < 3.0) {
+      score -= 40;
+      hint = "Low contrast: try darker foreground or lighter background";
+    } else if (contrast < 4.5) {
+      score -= 20;
+      hint = "Low contrast: try darker foreground or lighter background";
+    }
+
+    if (isInverted) {
+      score -= 20;
+      if (!hint) hint = "Inverted colors detected: swap foreground and background";
+    }
+
+    if (isSmall) {
+      score -= 20;
+      if (!hint) hint = "QR code size is very small, may be hard to scan when printed";
+    }
+
+    if (isLowEC) {
+      score -= 20;
+      if (!hint) hint = "Error correction too low for print use: recommend M or H";
+    }
+
+    score = Math.max(0, score);
+
+    let status: { label: string, color: string, iconColor: string };
+    if (score >= 80) status = { label: "Excellent — highly scanneable", color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20", iconColor: "text-emerald-500" };
+    else if (score >= 60) status = { label: "Good — should scan reliably", color: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-500 border-yellow-500/20", iconColor: "text-yellow-500" };
+    else if (score >= 40) status = { label: "Fair — may struggle in poor lighting", color: "bg-orange-500/10 text-orange-700 dark:text-orange-500 border-orange-500/20", iconColor: "text-orange-500" };
+    else status = { label: "Poor — likely to fail scanning", color: "bg-red-500/10 text-red-600 border-red-500/20", iconColor: "text-red-500" };
+
+    return { score, hint, ...status };
+  }, [isGenerated, fgColor, bgColor, size, errorLevel]);
 
   const getEncodedData = useCallback(() => {
     switch (type) {
@@ -525,6 +582,28 @@ export function QrCodeGeneratorTool() {
                  </div>
                )}
             </div>
+
+            {scannability && (
+              <div className={`w-full mb-6 p-4 rounded-2xl border ${scannability.color} transition-all duration-500 animate-in fade-in slide-in-from-bottom-2`}>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className={`h-2.5 w-2.5 rounded-full ${scannability.iconColor} bg-current shadow-[0_0_8px_currentColor]`} />
+                  <span className="text-[11px] font-black uppercase tracking-widest">{scannability.label}</span>
+                  <span className="ml-auto text-[10px] font-mono font-bold opacity-60">Score: {scannability.score}/100</span>
+                </div>
+                {scannability.hint && (
+                  <p className="text-[10px] font-bold leading-tight opacity-80 flex items-start gap-1.5 mt-1">
+                    <AlertCircle size={10} className="mt-0.5 shrink-0" />
+                    Fix: {scannability.hint}
+                  </p>
+                )}
+                <div className="mt-3 h-1 w-full bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
+                   <div
+                    className={`h-full transition-all duration-1000 ${scannability.iconColor} bg-current`}
+                    style={{ width: `${scannability.score}%` }}
+                   />
+                </div>
+              </div>
+            )}
 
             <div className="w-full space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
