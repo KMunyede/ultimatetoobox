@@ -247,32 +247,32 @@ export function PasswordGeneratorTool() {
 
       </div>
 
-      <section className="max-w-3xl mx-auto px-4 py-8 text-gray-300">
-        <h2 className="text-xl font-semibold text-white mb-3 mt-6">Why Use a Password Generator?</h2>
-        <p className="text-sm leading-relaxed mb-4">
+      <section className="max-w-3xl mx-auto px-4 py-8 text-gray-800">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Why Use a Password Generator?</h2>
+        <p className="text-sm text-gray-700 leading-relaxed mb-4">
           Weak and reused passwords are the leading cause of account breaches. A single compromised password can expose multiple accounts, leading to a domino effect that compromises your entire digital identity. Human-chosen passwords almost always follow predictable patterns—like using names, dates, or common keyboard sequences—that automated brute-force attacks exploit in mere seconds.
         </p>
-        <p className="text-sm leading-relaxed mb-4">
+        <p className="text-sm text-gray-700 leading-relaxed mb-4">
           This tool works by utilizing your browser&apos;s built-in <code>crypto.getRandomValues()</code> API. This is the same high-level cryptographic standard used in professional banking and enterprise security software to guarantee true randomness. Because the generation happens entirely on your device, no passwords are ever transmitted to any server, ensuring that your new credentials are never intercepted or logged.
         </p>
-        <p className="text-sm leading-relaxed mb-4">
+        <p className="text-sm text-gray-700 leading-relaxed mb-4">
           For maximum security, we recommend a minimum of 16 characters for standard accounts and 24+ characters for critical gateways like email, banking, and administrative portals. Always use a unique password per account and enable all character sets for maximum entropy. For the best defense, store your generated passwords in a reputable password manager rather than plain text, and rotate them regularly.
         </p>
 
-        <h3 className="text-lg font-semibold text-white mb-3 mt-6">Frequently Asked Questions</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Frequently Asked Questions</h3>
         <dl>
-          <dt className="font-medium text-white">Is it safe to use an online password generator?</dt>
-          <dd className="text-sm text-gray-400 mb-4 ml-4">
+          <dt className="font-medium text-gray-900">Is it safe to use an online password generator?</dt>
+          <dd className="text-sm text-gray-700 mb-4 ml-4">
             Yes, when generation happens client-side. This tool never transmits your password across the internet. You can verify this by checking the &quot;Network&quot; tab in your browser&apos;s Developer Tools; you will see zero traffic leaving your device when a password is forged.
           </dd>
 
-          <dt className="font-medium text-white">How long should my password be?</dt>
-          <dd className="text-sm text-gray-400 mb-4 ml-4">
+          <dt className="font-medium text-gray-900">How long should my password be?</dt>
+          <dd className="text-sm text-gray-700 mb-4 ml-4">
             We recommend a minimum of 16 characters for standard social or entertainment accounts. For critical services like your primary email, banking, or admin accounts, you should use 24 to 64 characters to ensure your credentials remain uncrackable for centuries.
           </dd>
 
-          <dt className="font-medium text-white">Can I use the generated password immediately?</dt>
-          <dd className="text-sm text-gray-400 mb-4 ml-4">
+          <dt className="font-medium text-gray-900">Can I use the generated password immediately?</dt>
+          <dd className="text-sm text-gray-700 mb-4 ml-4">
             Absolutely. Once generated, you can copy the password directly into your application or password manager. We recommend securing it in a manager before closing this tab, as the forged password exists only in your browser&apos;s temporary memory.
           </dd>
         </dl>

@@ -741,46 +741,46 @@ export function QrCodeGeneratorTool() {
           <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 Generated in your browser. Never sent to any server.</span>
         </div>
 
-        <section className="max-w-3xl mx-auto px-4 py-8 text-gray-300 border-t border-slate-100 dark:border-slate-800">
-          <h1 className="text-3xl font-black text-white mb-6 uppercase tracking-tight">Free QR Code Generator</h1>
+        <section className="max-w-3xl mx-auto px-4 py-8 text-gray-800 border-t border-slate-100 dark:border-slate-800">
+          <h1 className="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">Free QR Code Generator</h1>
 
-          <h2 className="text-xl font-semibold text-white mb-3 mt-8">What can you encode in a QR code?</h2>
-          <p className="text-sm leading-relaxed mb-4">
+          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8">What can you encode in a QR code?</h2>
+          <p className="text-sm text-gray-700 leading-relaxed mb-4">
             Quick Response (QR) codes are incredibly versatile digital bridges between the physical and digital worlds. With this generator, you can encode standard <strong>Website URLs</strong> for instant browsing, or share <strong>Plain Text</strong> messages without needing an internet connection. Businesses frequently use them for digital business cards or menus to minimize physical contact and maximize efficiency.
           </p>
-          <p className="text-sm leading-relaxed mb-4">
+          <p className="text-sm text-gray-700 leading-relaxed mb-4">
             One of the most practical uses is <strong>Wi-Fi Sharing</strong>. Instead of typing complex passwords, your guests can simply scan a code to join your secure network instantly. We also support specialized encoding for <strong>Emails</strong> (including pre-filled subjects and bodies) and <strong>Phone Numbers</strong>, making it easier than ever for customers or friends to reach out with a single tap.
           </p>
-          <p className="text-sm leading-relaxed mb-4">
+          <p className="text-sm text-gray-700 leading-relaxed mb-4">
             At Hilmost Digital Labs, we ensure that your QR codes are generated using the highest standards of the ISO/IEC 18004 specification. This means your codes will be readable by every modern smartphone camera and dedicated QR scanner application, regardless of the device or operating system.
           </p>
 
-          <h2 className="text-xl font-semibold text-white mb-3 mt-8">Frequently Asked Questions</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8">Frequently Asked Questions</h2>
           <dl className="space-y-6">
             <div>
-              <dt className="font-medium text-white">Is this QR code generator free?</dt>
-              <dd className="text-sm text-gray-400 mt-2 ml-4 leading-relaxed">
+              <dt className="font-medium text-gray-900">Is this QR code generator free?</dt>
+              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
                 Yes, our QR laboratory is 100% free to use for both personal and commercial projects. There are no hidden fees, no subscriptions, and we do not place any watermarks or expiration dates on the generated codes.
               </dd>
             </div>
 
             <div>
-              <dt className="font-medium text-white">Do you store the data I enter?</dt>
-              <dd className="text-sm text-gray-400 mt-2 ml-4 leading-relaxed">
+              <dt className="font-medium text-gray-900">Do you store the data I enter?</dt>
+              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
                 Never. Security is a core pillar of the Hilmost monorepo. This tool uses a <strong>Zero-Server Architecture</strong>, meaning the QR generation happens entirely within your browser&apos;s memory. Your Wi-Fi passwords, emails, and URLs never touch our servers.
               </dd>
             </div>
 
             <div>
-              <dt className="font-medium text-white">What error correction level should I use?</dt>
-              <dd className="text-sm text-gray-400 mt-2 ml-4 leading-relaxed">
+              <dt className="font-medium text-gray-900">What error correction level should I use?</dt>
+              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
                 Our tool defaults to &quot;Medium&quot; (15% recovery), which is ideal for most digital and print uses. If you plan to print the QR code on a surface that might get damaged or obscured (like an outdoor poster), choose &quot;High&quot; (30% recovery) for maximum durability.
               </dd>
             </div>
 
             <div>
-              <dt className="font-medium text-white">Can I use the QR code commercially?</dt>
-              <dd className="text-sm text-gray-400 mt-2 ml-4 leading-relaxed">
+              <dt className="font-medium text-gray-900">Can I use the QR code commercially?</dt>
+              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
                 Absolutely. The QR codes you forge here are yours to keep. You can use them on business cards, marketing materials, packaging, or digital advertisements without needing to attribute Hilmost Software Corporation.
               </dd>
             </div>
