@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, BreadcrumbSchema, AuthorBio, SourceReference } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { VatTaxClient } from "./VatTaxClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -111,12 +111,12 @@ export default function VatTaxPage() {
         </p>
         <ul>
           <li><strong>Add VAT:</strong> Typically used when quoting a price to a customer. You start with your net service fee (the amount you want to keep) and add the government mandated tax rate to get the final gross total that the customer pays.</li>
-          <li><strong>Remove VAT (Reverse Calculation):</strong> Used when you have a total receipt or "Inclusive" price and need to separate the tax for bookkeeping purposes. This is common when claiming back business expenses.</li>
+          <li><strong>Remove VAT (Reverse Calculation):</strong> Used when you have a total receipt or &quot;Inclusive&quot; price and need to separate the tax for bookkeeping purposes. This is common when claiming back business expenses.</li>
         </ul>
 
         <h3>Common Global Tax Rates</h3>
         <p>
-          While tax rates vary by jurisdiction, common values include 20% (United Kingdom), 15% (New Zealand/South Africa), and various GST rates in Canada and Australia. Always verify the current legal rate for your specific region before finalizing official documents. In many countries, certain items like books, children's clothes, or basic groceries may be "Zero-rated" or exempt.
+          While tax rates vary by jurisdiction, common values include 20% (United Kingdom), 15% (New Zealand/South Africa), and various GST rates in Canada and Australia. Always verify the current legal rate for your specific region before finalizing official documents. In many countries, certain items like books, children&apos;s clothes, or basic groceries may be &quot;Zero-rated&quot; or exempt.
         </p>
 
         <h3>The Math Behind the Calculation</h3>
@@ -133,7 +133,7 @@ export default function VatTaxPage() {
 
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Select Mode</strong> - Use the toggle at the top to switch between "Add VAT" or "Remove VAT." This changes the logic of the entire calculation instantly.</li>
+          <li><strong>Step 1: Select Mode</strong> - Use the toggle at the top to switch between &quot;Add VAT&quot; or &quot;Remove VAT.&quot; This changes the logic of the entire calculation instantly.</li>
           <li><strong>Step 2: Enter Amount</strong> - Input the price you want to work with. Our high-impact display updates in real-time as you type.</li>
           <li><strong>Step 3: Set Tax Rate</strong> - Enter the custom percentage applicable to your specific region or product category.</li>
           <li><strong>Step 4: Breakdown</strong> - Review the result card for a clear split between the base price and the tax component.</li>

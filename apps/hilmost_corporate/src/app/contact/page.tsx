@@ -11,7 +11,7 @@ export default function ContactPage() {
       <div className="prose prose-slate dark:prose-invert max-w-none mb-8">
         <h1>Contact Us</h1>
         <p className="lead">
-          Have a question or need support? We'd love to hear from you.
+          Have a question or need support? We&apos;d love to hear from you.
         </p>
       </div>
 

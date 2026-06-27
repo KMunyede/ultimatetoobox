@@ -1,37 +1,31 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { Search, Flag, Trash2, CheckCircle2, AlertCircle, List } from "lucide-react";
+import React, { useState, useMemo, useCallback } from "react";
+import { Search, Trash2, AlertCircle } from "lucide-react";
 
 export function RegexTesterClient() {
   const [pattern, setPattern] = useState("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
   const [testString, setTestString] = useState("Contact us at support@hilmost.net or hello@example.com");
   const [flags, setFlags] = useState({ g: true, i: true, m: false });
-  const [matches, setMatches] = useState<RegExpMatchArray[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   const flagString = useMemo(() => {
     return Object.entries(flags)
       .filter(([_, active]) => active)
-      .map(([f, _]) => f)
+      .map(([f]) => f)
       .join("");
   }, [flags]);
 
-  useEffect(() => {
+  const { matches, error } = useMemo(() => {
     if (!pattern) {
-      setMatches([]);
-      setError(null);
-      return;
+      return { matches: [], error: null };
     }
 
     try {
       const regex = new RegExp(pattern, flagString);
       const allMatches = Array.from(testString.matchAll(regex));
-      setMatches(allMatches);
-      setError(null);
-    } catch (e: any) {
-      setError(e.message);
-      setMatches([]);
+      return { matches: allMatches, error: null };
+    } catch (e: unknown) {
+      return { matches: [], error: e instanceof Error ? e.message : String(e) };
     }
   }, [pattern, testString, flagString]);
 
@@ -42,7 +36,7 @@ export function RegexTesterClient() {
   const highlightedText = useMemo(() => {
     if (!pattern || error || matches.length === 0) return testString;
 
-    let result = [];
+    const result = [];
     let lastIndex = 0;
 
     // Sort matches by index to handle them sequentially
@@ -73,6 +67,8 @@ export function RegexTesterClient() {
     return result;
   }, [testString, matches, error, pattern]);
 
+  const handleClearTestString = useCallback(() => setTestString(""), []);
+
   return (
     <div className="space-y-6 my-8">
       {/* Pattern Input */}
@@ -82,11 +78,11 @@ export function RegexTesterClient() {
                 <Search size={14} className="text-blue-600" /> Pattern
             </label>
             <div className="flex items-center gap-2">
-                {['g', 'i', 'm'].map((f) => (
+                {(['g', 'i', 'm'] as const).map((f) => (
                     <button
                         key={f}
-                        onClick={() => toggleFlag(f as any)}
-                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black transition-all ${flags[f as keyof typeof flags] ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
+                        onClick={() => toggleFlag(f)}
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black transition-all ${flags[f] ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
                         title={`Toggle ${f} flag`}
                     >
                         {f}
@@ -103,7 +99,7 @@ export function RegexTesterClient() {
                 value={pattern}
                 onChange={(e) => setPattern(e.target.value)}
                 placeholder="Enter regex pattern..."
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-base rounded-xl py-3 pl-8 pr-12 font-mono text-sm focus:border-blue-500 outline-none transition-all shadow-inner"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-base rounded-xl py-3 pl-8 pr-12 font-mono text-sm focus:border-blue-500 outline-none transition-all shadow-inner"
             />
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-mono select-none">/{flagString}</span>
         </div>
@@ -123,7 +119,7 @@ export function RegexTesterClient() {
                     Test String
                 </label>
                 <button
-                    onClick={() => setTestString("")}
+                    onClick={handleClearTestString}
                     className="text-slate-400 hover:text-red-500 transition-colors p-1"
                 >
                     <Trash2 size={14} />
@@ -134,7 +130,7 @@ export function RegexTesterClient() {
                 value={testString}
                 onChange={(e) => setTestString(e.target.value)}
                 placeholder="Enter text to test against..."
-                className="flex-1 w-full bg-slate-50 dark:bg-slate-900 border-2 border-base rounded-2xl p-4 font-mono text-sm focus:border-blue-500 outline-none transition-all resize-none shadow-inner"
+                className="flex-1 w-full bg-slate-50 dark:bg-slate-950 border-2 border-base rounded-2xl p-4 font-mono text-sm focus:border-blue-500 outline-none transition-all resize-none shadow-inner"
             />
         </div>
 
@@ -158,7 +154,7 @@ export function RegexTesterClient() {
                             {matches.slice(0, 10).map((m, i) => (
                                 <div key={i} className="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-800 pb-1">
                                     <span className="font-bold text-blue-500">Match {i + 1}</span>
-                                    <span className="font-mono bg-slate-800 px-1.5 rounded">"{m[0]}"</span>
+                                    <span className="font-mono bg-slate-800 px-1.5 rounded">&quot;{m[0]}&quot;</span>
                                     <span>Index: {m.index}</span>
                                 </div>
                             ))}

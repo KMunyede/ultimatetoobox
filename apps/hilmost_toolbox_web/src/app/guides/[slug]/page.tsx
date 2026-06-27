@@ -112,7 +112,10 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
       <div className="mt-20 pt-12 border-t border-base">
         <h2 className="text-2xl font-black text-text-primary uppercase tracking-tight mb-8">Related Utilities</h2>
-        <RelatedTools category={guide.category as any} currentPath={`/guides/${guide.slug}`} />
+        <RelatedTools
+          category={guide.category as "converters" | "calculators" | "finance" | "text-data" | "health" | "pdf-tools"}
+          currentPath={`/guides/${guide.slug}`}
+        />
       </div>
     </div>
   );

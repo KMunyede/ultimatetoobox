@@ -1,25 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { Shield, Key, Eye, AlertCircle, Copy, CheckCircle2, Clock } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { Shield, Key, Eye, AlertCircle, CheckCircle2, Clock } from "lucide-react";
 
 export function JWTDecoderClient() {
   const [input, setInput] = useState("");
-  const [decoded, setDecoded] = useState<{ header: any; payload: any; signature: string } | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
-  const decodeJWT = (token: string) => {
-    if (!token.trim()) {
-      setDecoded(null);
-      setError(null);
-      return;
+  const { decoded, error } = useMemo(() => {
+    if (!input.trim()) {
+      return { decoded: null, error: null };
     }
 
-    const parts = token.split(".");
+    const parts = input.split(".");
     if (parts.length !== 3) {
-      setError("Invalid JWT format. A token must have 3 parts separated by dots.");
-      setDecoded(null);
-      return;
+      return { decoded: null, error: "Invalid JWT format. A token must have 3 parts separated by dots." };
     }
 
     try {
@@ -27,16 +21,10 @@ export function JWTDecoderClient() {
       const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
       const signature = parts[2];
 
-      setDecoded({ header, payload, signature });
-      setError(null);
-    } catch (e: any) {
-      setError("Failed to decode token. Ensure it is a valid Base64-encoded JWT.");
-      setDecoded(null);
+      return { decoded: { header, payload, signature }, error: null };
+    } catch {
+      return { decoded: null, error: "Failed to decode token. Ensure it is a valid Base64-encoded JWT." };
     }
-  };
-
-  useEffect(() => {
-    decodeJWT(input);
   }, [input]);
 
   const formatTimestamp = (ts: number) => {

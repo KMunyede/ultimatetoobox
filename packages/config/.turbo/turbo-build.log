@@ -1,0 +1,5 @@
+
+> @utilitiessite/config@1.0.0 build
+> echo 'No build step needed for config package'
+
+'No build step needed for config package'

@@ -1,7 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RegexTesterClient } from "./RegexTesterClient";
-import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
@@ -68,7 +67,7 @@ export default function RegexTesterPage() {
   const lastUpdated = getFileLastUpdated(filePath);
 
   const tourSteps = [
-    { element: '#tour-regex-pattern', popover: { title: '1. Pattern', description: 'Enter your regular expression here. Don\'t forget the slashes are handled for you!' } },
+    { element: '#tour-regex-pattern', popover: { title: '1. Pattern', description: 'Enter your regular expression here. Don&apos;t forget the slashes are handled for you!' } },
     { element: '#tour-regex-test', popover: { title: '2. Test String', description: 'Paste the content you want to search through. We will highlight matches in real-time.' } },
   ];
 
@@ -100,19 +99,19 @@ export default function RegexTesterPage() {
 
       <RegexTesterClient />
 
-      <ToolArticle title="The Developer's Rosetta Stone: Mastering Regex">
+      <ToolArticle title="The Developer&apos;s Rosetta Stone: Mastering Regex">
         <p>
           Regular Expressions (Regex) are one of the most powerful—and intimidating—tools in a developer&apos;s arsenal. From validating email addresses to scraping data from complex HTML, regex allows you to perform sophisticated string manipulation with just a few characters.
         </p>
 
         <h3>Why Real-Time Testing is Essential</h3>
         <p>
-          Because regex is so dense, it is incredibly easy to make a small error that leads to catastrophic "catastrophic backtracking" or incorrect matches. Our <strong>Regex Tester</strong> provides an instant feedback loop. As you type your pattern, the tool highlights matches in your test string, allowing you to see exactly how your logic is being interpreted.
+          Because regex is so dense, it is incredibly easy to make a small error that leads to catastrophic &quot;catastrophic backtracking&quot; or incorrect matches. Our <strong>Regex Tester</strong> provides an instant feedback loop. As you type your pattern, the tool highlights matches in your test string, allowing you to see exactly how your logic is being interpreted.
         </p>
 
         <h3>Understanding Flags (g, i, m)</h3>
         <p>
-          Flags change the "behavior" of your search pattern. The <strong>global (g)</strong> flag ensures you find all matches rather than just the first one. The <strong>ignore case (i)</strong> flag makes your pattern case-insensitive. The <strong>multiline (m)</strong> flag changes how anchors like <code>^</code> and <code>$</code> behave. Our tool provides simple toggles for these flags so you can experiment without needing to remember the syntax.
+          Flags change the &quot;behavior&quot; of your search pattern. The <strong>global (g)</strong> flag ensures you find all matches rather than just the first one. The <strong>ignore case (i)</strong> flag makes your pattern case-insensitive. The <strong>multiline (m)</strong> flag changes how anchors like <code>^</code> and <code>$</code> behave. Our tool provides simple toggles for these flags so you can experiment without needing to remember the syntax.
         </p>
 
         <h3>Privacy-First Debugging</h3>

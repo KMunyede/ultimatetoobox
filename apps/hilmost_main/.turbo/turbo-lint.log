@@ -1,0 +1,17 @@
+
+> hilmost_main@0.1.0 lint
+> eslint
+
+
+M:\techprojects\UtilitiesSite\apps\hilmost_main\src\app\about\page.tsx
+  3:27  warning  'Globe' is defined but never used  @typescript-eslint/no-unused-vars
+  3:42  warning  'Phone' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_main\src\app\page.tsx
+  2:41  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  2:54  warning  'Utensils' is defined but never used     @typescript-eslint/no-unused-vars
+  2:82  warning  'Zap' is defined but never used          @typescript-eslint/no-unused-vars
+  2:95  warning  'Microchip' is defined but never used    @typescript-eslint/no-unused-vars
+
+✖ 6 problems (0 errors, 6 warnings)
+

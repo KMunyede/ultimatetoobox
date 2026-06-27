@@ -1,4 +1,3 @@
-import { Header, Footer } from "@utilitiessite/ui";
 import { Gamepad2, Rocket } from "lucide-react";
 import { Metadata } from "next";
 

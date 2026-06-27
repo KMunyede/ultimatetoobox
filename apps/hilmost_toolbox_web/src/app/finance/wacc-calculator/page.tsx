@@ -89,16 +89,16 @@ export default function WACCCalculatorPage() {
 
       <WACCCalculatorClient />
 
-      <ToolArticle title="Mastering the Hurdle Rate: A Beginner's Guide to WACC">
+      <ToolArticle title="Mastering the Hurdle Rate: A Beginner&apos;s Guide to WACC">
         <p>
-          If you've ever wondered how big corporations decide which projects to fund, the answer is almost always <strong>WACC</strong>. It is the yardstick used to measure if an investment is actually making money or just treading water.
+          If you&apos;ve ever wondered how big corporations decide which projects to fund, the answer is almost always <strong>WACC</strong>. It is the yardstick used to measure if an investment is actually making money or just treading water.
         </p>
 
         <h3>Simplistic 3-Step Usage Guide</h3>
         <ol className="space-y-4 my-6">
           <li className="bg-white p-4 rounded-xl border border-base shadow-sm">
             <span className="font-black text-blue-600 mr-2">Step 1: Equity Data</span>
-            Input your <strong>Market Cap</strong> (Total value of your shares) and <strong>Beta</strong>. If you aren't sure about Beta, 1.0 is a safe "average" starting point.
+            Input your <strong>Market Cap</strong> (Total value of your shares) and <strong>Beta</strong>. If you aren&apos;t sure about Beta, 1.0 is a safe &quot;average&quot; starting point.
           </li>
           <li className="bg-white p-4 rounded-xl border border-base shadow-sm">
             <span className="font-black text-red-600 mr-2">Step 2: Debt Data</span>
@@ -106,13 +106,13 @@ export default function WACCCalculatorPage() {
           </li>
           <li className="bg-white p-4 rounded-xl border border-base shadow-sm">
             <span className="font-black text-amber-600 mr-2">Step 3: Analyze the Dashboard</span>
-            Look at the <strong>Total WACC</strong>. This is your "Hurdle Rate." Any new project you start should earn a return HIGHER than this number.
+            Look at the <strong>Total WACC</strong>. This is your &quot;Hurdle Rate.&quot; Any new project you start should earn a return HIGHER than this number.
           </li>
         </ol>
 
         <h3>Why the Tax Shield is Your Secret Weapon</h3>
         <p>
-          One of the most misunderstood parts of finance is that <strong>debt can be cheaper than it looks</strong>. Because interest payments are tax-deductible, a 6% interest rate might only cost you 4.5% after taxes. Our dashboard calculates this "Tax Shield Savings" automatically to show you the hidden benefit of your capital structure.
+          One of the most misunderstood parts of finance is that <strong>debt can be cheaper than it looks</strong>. Because interest payments are tax-deductible, a 6% interest rate might only cost you 4.5% after taxes. Our dashboard calculates this &quot;Tax Shield Savings&quot; automatically to show you the hidden benefit of your capital structure.
         </p>
       </ToolArticle>
 

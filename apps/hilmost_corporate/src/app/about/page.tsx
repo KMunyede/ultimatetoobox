@@ -1,5 +1,5 @@
 ﻿import { Metadata } from "next";
-import { User, ShieldCheck, Code, Zap } from "lucide-react";
+import { User, ShieldCheck, Code } from "lucide-react";
 import { CategoryGrid, AdLayout } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function AboutPage() {
             </p>
             <p>
               Your sensitive financial data, health metrics, and private documents never touch our servers.
-              This "Client-Side First" philosophy is our commitment to data privacy in the modern era.
+              This &quot;Client-Side First&quot; philosophy is our commitment to data privacy in the modern era.
             </p>
           </div>
           <div className="prose prose-slate dark:prose-invert max-w-none">
@@ -47,7 +47,7 @@ export default function AboutPage() {
               as we do to complex financial modeling tools.
             </p>
             <p>
-              We don't just build links; we build software. Every tool is optimized for performance,
+              We don&apos;t just build links; we build software. Every tool is optimized for performance,
               accessibility (WCAG 2.1), and complete device adaptability.
             </p>
           </div>
@@ -68,12 +68,12 @@ export default function AboutPage() {
                   With 15+ years of experience across the IT landscape—specializing in large-scale financial platforms—Keepy founded
                   Hilmost Software Corporation to democratize access to precise, enterprise-quality digital tools.
                 </p>
-                <h5 className="text-slate-900 dark:text-white font-bold uppercase text-sm tracking-widest mt-6">Founder's Vision</h5>
+                <h5 className="text-slate-900 dark:text-white font-bold uppercase text-sm tracking-widest mt-6">Founder&apos;s Vision</h5>
                 <p className="italic border-l-4 border-blue-500 pl-4 my-4">
-                  "I believe that precision tools shouldn't just be for big banks or laboratories. My goal is to build a digital sanctuary where anyone can access banking-grade accuracy and 100% privacy for their everyday digital tasks. We are building the global standard for browser-side utility engineering."
+                  &quot;I believe that precision tools shouldn&apos;t just be for big banks or laboratories. My goal is to build a digital sanctuary where anyone can access banking-grade accuracy and 100% privacy for their everyday digital tasks. We are building the global standard for browser-side utility engineering.&quot;
                 </p>
                 <p>
-                  His vision is to transform the "Hilmost" monorepo into a global standard for utility engineering, ensuring that data privacy is never compromised for convenience.
+                  His vision is to transform the &quot;Hilmost&quot; monorepo into a global standard for utility engineering, ensuring that data privacy is never compromised for convenience.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">

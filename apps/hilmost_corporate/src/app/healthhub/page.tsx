@@ -1,4 +1,3 @@
-import { Header, Footer } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ArrowRight, HeartPulse, Sparkles } from "lucide-react";
 

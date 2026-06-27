@@ -1,4 +1,3 @@
-import { Header, Footer } from "@utilitiessite/ui";
 import Link from "next/link";
 import { AppWindow, Gamepad2, Wrench, ArrowRight } from "lucide-react";
 import { Metadata } from "next";

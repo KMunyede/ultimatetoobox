@@ -1,41 +1,29 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Copy, Trash2, Maximize2, Minimize2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { Trash2, Maximize2, Minimize2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
 import { CopyButton } from "@utilitiessite/ui";
 
 export function JSONFormatterClient() {
   const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [isPretty, setIsPretty] = useState(true);
 
-  const processJSON = (val: string, pretty: boolean) => {
-    if (!val.trim()) {
-      setOutput("");
-      setError(null);
-      return;
+  const { output, error } = useMemo(() => {
+    if (!input.trim()) {
+      return { output: "", error: null };
     }
 
     try {
-      const parsed = JSON.parse(val);
-      const result = pretty ? JSON.stringify(parsed, null, 2) : JSON.stringify(parsed);
-      setOutput(result);
-      setError(null);
-    } catch (e: any) {
-      setError(e.message);
-      setOutput("");
+      const parsed = JSON.parse(input);
+      const result = isPretty ? JSON.stringify(parsed, null, 2) : JSON.stringify(parsed);
+      return { output: result, error: null };
+    } catch (e: unknown) {
+      return { output: "", error: e instanceof Error ? e.message : String(e) };
     }
-  };
-
-  useEffect(() => {
-    processJSON(input, isPretty);
   }, [input, isPretty]);
 
   const handleClear = () => {
     setInput("");
-    setOutput("");
-    setError(null);
   };
 
   const handleSample = () => {
@@ -84,7 +72,7 @@ export function JSONFormatterClient() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder='Paste your JSON here... e.g. {"key": "value"}'
-          className="flex-1 w-full bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-blue-500 outline-none transition-all resize-none shadow-inner"
+          className="flex-1 w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-blue-500 outline-none transition-all resize-none shadow-inner"
         />
         {error && (
             <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl text-[11px] text-red-600 dark:text-red-400 font-mono leading-relaxed">

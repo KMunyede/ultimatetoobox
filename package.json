@@ -2,17 +2,27 @@
   "name": "utilitiessite",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "npm@10.9.3",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "deploy:all": "firebase deploy --only hosting:hilmost-toolbox,hosting:hilmost-toolbox-staging,hosting:hsc-platform-core,hosting:hsc-platform-core-staging"
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "deploy:test": "npm run build && firebase deploy --only hosting:hilmost-toolbox-staging,hosting:hsc-platform-core-staging,hosting:hilmost-staging,hosting:wisdom-staging",
+    "deploy:live": "npm run build && firebase deploy --only hosting:hilmost-toolbox,hosting:hsc-platform-core,hosting:wisdom-prod",
+    "deploy:all": "npm run build && firebase deploy",
+    "ship": "npm run build && npm run deploy:all && git add . && git commit -m \"chore: build, deploy and backup\" && git push",
+    "ship:test": "npm run build && npm run deploy:test && git add . && git commit -m \"chore: build, deploy to test and backup\" && git push"
   },
   "dependencies": {
     "firebase": "^12.15.0",
     "googleapis": "^173.0.0",
     "node-fetch": "^3.3.2",
     "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "turbo": "^2.10.0"
   }
 }

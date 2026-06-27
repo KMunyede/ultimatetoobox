@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import { Copy, RefreshCw, Shield, ShieldCheck, ShieldAlert, Lock, Sparkles, Download, Check, AlertCircle } from "lucide-react";
+import React, { useState, useMemo, useCallback } from "react";
+import { RefreshCw, Download } from "lucide-react";
 import { CopyButton } from "@utilitiessite/ui";
 
 type StrengthInfo = {
@@ -21,10 +21,10 @@ export function PasswordGeneratorTool() {
   const [excludeAmbiguous, setExcludeAmbiguous] = useState(false);
   const [guaranteeEachType, setGuaranteeEachType] = useState(true);
 
-  const [passwords, setPasswords] = useState<string[]>([]);
-  const [strength, setStrength] = useState<StrengthInfo>({ label: 'Strong', color: 'bg-blue-500', percent: 75, crackTime: '3 trillion years' });
+  // We use a seed to trigger regeneration manually
+  const [seed, setSeed] = useState(0);
 
-  const generatePassword = useCallback(() => {
+  const { passwords, strength } = useMemo(() => {
     const sets = [
       { chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", active: includeUppercase },
       { chars: "abcdefghijklmnopqrstuvwxyz", active: includeLowercase },
@@ -44,9 +44,8 @@ export function PasswordGeneratorTool() {
 
     const charset = activeSets.join('');
 
-    if (!charset) {
-      setPasswords([]);
-      return;
+    if (!charset || typeof window === 'undefined') {
+      return { passwords: [], strength: { label: 'Weak', color: 'bg-red-500', percent: 25, crackTime: 'Minutes' } };
     }
 
     const newPasswords: string[] = [];
@@ -91,8 +90,6 @@ export function PasswordGeneratorTool() {
       newPasswords.push(generated);
     }
 
-    setPasswords(newPasswords);
-
     // Calculate Strength & Crack Time
     const poolSize = charset.length;
     const entropy = length * Math.log2(poolSize);
@@ -103,12 +100,13 @@ export function PasswordGeneratorTool() {
     else if (entropy < 80) info = { label: 'Strong', color: 'bg-blue-500', percent: 75, crackTime: '3,000 years' };
     else info = { label: 'Very Strong', color: 'bg-emerald-500', percent: 100, crackTime: 'Trillions of centuries' };
 
-    setStrength(info);
-  }, [length, count, includeUppercase, includeLowercase, includeNumbers, includeSymbols, excludeAmbiguous, guaranteeEachType]);
+    return { passwords: newPasswords, strength: info };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seed, length, count, includeUppercase, includeLowercase, includeNumbers, includeSymbols, excludeAmbiguous, guaranteeEachType]);
 
-  useEffect(() => {
-    generatePassword();
-  }, [generatePassword]);
+  const handleRegenerate = useCallback(() => {
+    setSeed(s => s + 1);
+  }, []);
 
   const downloadTxt = () => {
     const element = document.createElement("a");
@@ -155,7 +153,7 @@ export function PasswordGeneratorTool() {
 
           <div className="mt-6 flex flex-wrap items-center gap-4">
              <button
-              onClick={generatePassword}
+              onClick={handleRegenerate}
               className="flex items-center gap-2 px-8 py-4 bg-brand-primary hover:bg-brand-hover text-white rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl shadow-brand-primary/20 transition-all active:scale-95"
             >
               <RefreshCw size={18} /> Regenerate

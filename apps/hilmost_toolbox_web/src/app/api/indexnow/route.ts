@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       const err = await response.text();
       return NextResponse.json({ error: 'IndexNow API Error', details: err }, { status: 500 });
     }
-  } catch (error: any) {
-    return NextResponse.json({ error: 'Critical Error', details: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ error: 'Critical Error', details: error instanceof Error ? error.message : String(error) }, { status: 500 });
   }
 }

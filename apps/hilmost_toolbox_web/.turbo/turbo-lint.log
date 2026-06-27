@@ -1,0 +1,206 @@
+
+> hilmost_toolbox_web@0.1.0 lint
+> eslint
+
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\astrophysics\AstrophysicsCalculatorClient.tsx
+  3:40  warning  'useMemo' is defined but never used   @typescript-eslint/no-unused-vars
+  9:26  warning  'FileJson' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\equation-solver\EquationSolverClient.tsx
+   43:7   warning  'DIST_UNITS' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  146:14  warning  'e' is defined but never used                    @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\equation-solver\[slug]\page.tsx
+  3:10  warning  'WebApplicationSchema' is defined but never used  @typescript-eslint/no-unused-vars
+  3:58  warning  'FAQAccordion' is defined but never used          @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\scientific\ScientificCalculatorClient.tsx
+   7:10  warning  'IconCheck' is defined but never used             @typescript-eslint/no-unused-vars
+  27:10  warning  'copying' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  74:14  warning  'e' is defined but never used                     @typescript-eslint/no-unused-vars
+  94:9   warning  'handleShare' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\standard\StandardCalculatorClient.tsx
+  53:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  86:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  99:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\standard\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\age-calculator\AgeCalculatorClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   2:24  warning  'DateTimePicker' is defined but never used      @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+   6:26  warning  'Hourglass' is defined but never used           @typescript-eslint/no-unused-vars
+   7:10  warning  'differenceInYears' is defined but never used   @typescript-eslint/no-unused-vars
+   7:29  warning  'differenceInMonths' is defined but never used  @typescript-eslint/no-unused-vars
+   7:49  warning  'differenceInDays' is defined but never used    @typescript-eslint/no-unused-vars
+  38:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\age-calculator\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\area\AreaClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  71:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\data-storage\DataStorageClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used                                                                     @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used                                                                      @typescript-eslint/no-unused-vars
+  43:6   warning  React Hook useEffect has a missing dependency: 'setState'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  57:6   warning  React Hook useEffect has a missing dependency: 'setState'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  59:9   warning  'tourSteps' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\length\LengthConverterClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  61:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\percentage\PercentageClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  23:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\percentage\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\TemperatureConverterClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  62:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\TemperaturePageUI.tsx
+  13:3  warning  'title' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\page.tsx
+  7:7  warning  'TOOL_TYPE' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\time-zone\TimeZoneClient.tsx
+   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+   7:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+  41:16  warning  'e' is defined but never used                   @typescript-eslint/no-unused-vars
+  81:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\time\TimeConverterClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  61:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\unix-time\UnixTimeClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used                                                                                                      @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used                                                                                                       @typescript-eslint/no-unused-vars
+  35:6   warning  React Hook useEffect has missing dependencies: 'dateStr', 'setState', and 'timestampStr'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  66:9   warning  'tourSteps' is assigned a value but never used                                                                                                @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\unix-time\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\weight-mass\WeightConverterClient.tsx
+   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  68:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\json-formatter\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\jwt-decoder\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\qr-code-generator\QrCodeGeneratorTool.tsx
+  15:3  warning  'RefreshCw' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\regex-tester\RegexTesterClient.tsx
+  13:17  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\regex-tester\page.tsx
+  1:56  warning  'FAQAccordion' is defined but never used     @typescript-eslint/no-unused-vars
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\budget-planner\BudgetClient.tsx
+  48:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  56:5  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\compound-interest\page.tsx
+  4:27  warning  'sanitizeTitle' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\currency\CurrencyClient.tsx
+  50:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  52:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  54:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  56:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  68:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  70:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  72:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  74:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  79:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  81:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  83:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  85:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  88:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\income-tax\IncomeTaxClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  25:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\inflation\InflationClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  27:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\loan-calculator\LoanCalculatorClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  30:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\salary-converter\SalaryConverterClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  34:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\tip-calculator\TipCalculatorClient.tsx
+   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
+  25:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\vat-tax\VatTaxClient.tsx
+   3:24  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
+  33:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\vat-tax\page.tsx
+  142:10  error  'SourceReference' is not defined  react/jsx-no-undef
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\health\bmi-calculator\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\health\daily-wisdom\DailyQuoteClient.tsx
+  5:10  warning  'ChevronLeft' is defined but never used   @typescript-eslint/no-unused-vars
+  5:23  warning  'ChevronRight' is defined but never used  @typescript-eslint/no-unused-vars
+  6:28  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\knowledge-base\[slug]\page.tsx
+  4:23  warning  'RelatedTools' is defined but never used  @typescript-eslint/no-unused-vars
+  4:37  warning  'ToolArticle' is defined but never used   @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\layout.tsx
+  4:66  warning  'AutoBreadcrumbs' is defined but never used  @typescript-eslint/no-unused-vars
+npm error Lifecycle script `lint` failed with error:
+
+npm error code 1
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\delete-pages\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+npm error path M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\merge-pdf\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\page.tsx
+npm error workspace hilmost_toolbox_web@0.1.0
+  1:83  warning  'FAQSchema' is defined but never used  @typescript-eslint/no-unused-vars
+
+npm error location M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\rotate-pdf\page.tsx
+  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars

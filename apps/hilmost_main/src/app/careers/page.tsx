@@ -29,7 +29,7 @@ export default function CareersPage() {
             <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-6">Open Positions</h2>
             <div className="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 text-center">
               <p className="text-slate-600 dark:text-slate-400 mb-0">
-                We currently don't have any open positions, but we are always interested in connecting with talented professionals.
+                We currently don&apos;t have any open positions, but we are always interested in connecting with talented professionals.
               </p>
             </div>
           </section>
@@ -37,7 +37,7 @@ export default function CareersPage() {
           <section>
             <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-6">Speculative Applications</h2>
             <p>
-              If you believe you'd be a great fit for Hilmost but don't see a relevant role, we'd still love to hear from you. Send your resume and a brief introduction to our team.
+              If you believe you&apos;d be a great fit for Hilmost but don&apos;t see a relevant role, we&apos;d still love to hear from you. Send your resume and a brief introduction to our team.
             </p>
             <p className="mt-4">
               <strong>Email us at:</strong> <a href="mailto:k.munyede@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>

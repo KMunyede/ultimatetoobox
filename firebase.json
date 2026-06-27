@@ -37,6 +37,10 @@
             {
               "key": "X-Frame-Options",
               "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -79,6 +83,10 @@
             {
               "key": "X-Frame-Options",
               "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -121,6 +129,10 @@
             {
               "key": "X-Frame-Options",
               "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -163,6 +175,10 @@
             {
               "key": "X-Frame-Options",
               "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -205,6 +221,10 @@
             {
               "key": "X-Frame-Options",
               "value": "SAMEORIGIN"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -238,6 +258,10 @@
             {
               "key": "Access-Control-Allow-Origin",
               "value": "*"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -278,6 +302,10 @@
             {
               "key": "Access-Control-Allow-Origin",
               "value": "*"
+            },
+            {
+              "key": "Link",
+              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }

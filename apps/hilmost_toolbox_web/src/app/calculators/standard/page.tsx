@@ -127,7 +127,7 @@ export default function StandardCalculatorPage() {
 
         <h3>Why Accessibility Matters</h3>
         <p>
-          We have prioritized <strong>"Enterprise-Calm"</strong> design principles to reduce visual noise. Every button has a minimum 44px tap target to comply with modern accessibility standards, ensuring that users with varying physical needs can calculate with confidence. The integrated <strong>History Tape</strong> allows you to scroll back through your work, effectively eliminating the need for scratch paper in your daily workflow.
+          We have prioritized <strong>&quot;Enterprise-Calm&quot;</strong> design principles to reduce visual noise. Every button has a minimum 44px tap target to comply with modern accessibility standards, ensuring that users with varying physical needs can calculate with confidence. The integrated <strong>History Tape</strong> allows you to scroll back through your work, effectively eliminating the need for scratch paper in your daily workflow.
         </p>
 
         <SourceReference

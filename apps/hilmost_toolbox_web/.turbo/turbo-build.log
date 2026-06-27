@@ -1,0 +1,149 @@
+
+> hilmost_toolbox_web@0.1.0 build
+> next build
+
+⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
+▲ Next.js 16.2.9 (Turbopack)
+
+  Creating an optimized production build ...
+⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
+✓ Compiled successfully in 37.8s
+  Running TypeScript ...
+  Finished TypeScript in 9.0s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/372) ...
+Warning: Please use the `legacy` build in Node.js environments.
+  Generating static pages using 11 workers (93/372) 
+  Generating static pages using 11 workers (186/372) 
+  Generating static pages using 11 workers (279/372) 
+✓ Generating static pages using 11 workers (372/372) in 15.7s
+  Finalizing page optimization ...
+⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/indexnow
+├ ○ /calculators
+├ ○ /calculators/astrophysics
+├ ● /calculators/astrophysics/[slug]
+│ ├ /calculators/astrophysics/gravitational-force
+│ ├ /calculators/astrophysics/orbital-velocity
+│ ├ /calculators/astrophysics/escape-velocity
+│ └ [+2 more paths]
+├ ○ /calculators/equation-solver
+├ ● /calculators/equation-solver/[slug]
+│ ├ /calculators/equation-solver/newtons-second-law
+│ ├ /calculators/equation-solver/kinetic-energy
+│ ├ /calculators/equation-solver/ideal-gas-law
+│ └ /calculators/equation-solver/ohms-law
+├ ○ /calculators/scientific
+├ ○ /calculators/standard
+├ ○ /converters
+├ ○ /converters/age-calculator
+├ ○ /converters/area
+├ ● /converters/area/[slug]
+│ ├ /converters/area/square-meter-to-square-kilometer
+│ ├ /converters/area/square-meter-to-square-centimeter
+│ ├ /converters/area/square-meter-to-square-millimeter
+│ └ [+57 more paths]
+├ ○ /converters/data-storage
+├ ○ /converters/length
+├ ● /converters/length/[slug]
+│ ├ /converters/length/meters-to-kilometers
+│ ├ /converters/length/meters-to-centimeters
+│ ├ /converters/length/meters-to-millimeters
+│ └ [+53 more paths]
+├ ○ /converters/percentage
+├ ○ /converters/temperature
+├ ● /converters/temperature/[slug]
+│ ├ /converters/temperature/celsius-to-fahrenheit
+│ ├ /converters/temperature/celsius-to-kelvin
+│ ├ /converters/temperature/fahrenheit-to-celsius
+│ └ [+3 more paths]
+├ ○ /converters/time
+├ ○ /converters/time-zone
+├ ○ /converters/unix-time
+├ ○ /converters/weight-mass
+├ ● /converters/weight-mass/[slug]
+│ ├ /converters/weight-mass/kilograms-to-grams
+│ ├ /converters/weight-mass/kilograms-to-milligrams
+│ ├ /converters/weight-mass/kilograms-to-metric-tons
+│ └ [+39 more paths]
+├ ○ /cookie-policy
+├ ○ /dx
+├ ○ /dx/json-formatter
+├ ○ /dx/jwt-decoder
+├ ○ /dx/password-generator
+├ ○ /dx/qr-code-generator
+├ ○ /dx/regex-tester
+├ ○ /editorial-policy
+├ ○ /finance
+├ ○ /finance/budget-planner
+├ ○ /finance/compound-interest
+├ ○ /finance/currency
+├ ● /finance/currency/[slug]
+│ ├ /finance/currency/usd-to-eur
+│ ├ /finance/currency/usd-to-gbp
+│ ├ /finance/currency/usd-to-jpy
+│ └ [+107 more paths]
+├ ○ /finance/earnings-per-share-calculator
+├ ○ /finance/income-tax
+├ ○ /finance/inflation
+├ ○ /finance/loan-calculator
+├ ○ /finance/retirement-planner
+├ ○ /finance/salary-converter
+├ ● /finance/salary-converter/[slug]
+│ ├ /finance/salary-converter/hourly-to-salary
+│ ├ /finance/salary-converter/salary-to-hourly
+│ ├ /finance/salary-converter/monthly-to-hourly
+│ └ [+2 more paths]
+├ ○ /finance/tip-calculator
+├ ○ /finance/vat-tax
+├ ○ /finance/wacc-calculator
+├ ○ /guides
+├ ● /guides/[slug]
+│ ├ /guides/calculate-monthly-loan-repayments
+│ ├ /guides/how-compound-interest-works
+│ ├ /guides/bmi-calculator-score-meaning
+│ └ [+3 more paths]
+├ ○ /health
+├ ○ /health/bmi-calculator
+├ ○ /health/daily-wisdom
+├ ○ /health/daily-wisdom/admin/seed
+├ ○ /health/daily-wisdom/cookie-policy
+├ ○ /health/daily-wisdom/favorites
+├ ○ /health/daily-wisdom/journal
+├ ○ /health/daily-wisdom/library
+├ ○ /health/daily-wisdom/privacy-policy
+├ ○ /health/daily-wisdom/profile
+├ ○ /health/daily-wisdom/terms-of-service
+├ ○ /icon.svg
+├ ○ /knowledge-base
+├ ● /knowledge-base/[slug]
+│ ├ /knowledge-base/understanding-compound-interest
+│ ├ /knowledge-base/what-is-body-mass-index
+│ ├ /knowledge-base/unix-epoch-time-explained
+│ └ [+5 more paths]
+├ ○ /pdf-tools
+├ ○ /pdf-tools/delete-pages
+├ ○ /pdf-tools/merge-pdf
+├ ○ /pdf-tools/rotate-pdf
+├ ○ /pdf-tools/split-pdf
+├ ○ /privacy-policy
+├ ○ /sitemap.xml
+├ ○ /terms-of-service
+├ ○ /text-data
+├ ○ /text-data/base64-encode
+├ ● /text-data/base64-encode/[slug]
+│ ├ /text-data/base64-encode/base64-encode
+│ └ /text-data/base64-encode/base64-decode
+├ ○ /text-data/md5-hash
+├ ○ /text-data/word-count
+└ ○ /text-data/word-unscrambler
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

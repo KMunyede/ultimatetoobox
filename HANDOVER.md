@@ -1,5 +1,5 @@
 # Hilmost Handover & Continuation Document
-**Date:** June 24, 2026
+**Date:** June 26, 2026
 **Project:** UtilitiesSite Monorepo
 
 ---
@@ -9,42 +9,42 @@
 ### SEO & Metadata Engine
 - **Utility:** `apps/hilmost_toolbox_web/src/lib/metadata.ts`
 - **Function:** `formatTitle(TOOL_NAME)` intelligently removes duplicate suffixes, prioritizes keywords, and enforces a < 60 character limit for SERP visibility.
-- **Freshness:** `firebase.json` is configured with `max-age=0, must-revalidate`. This forces Cloudflare/Firebase to serve fresh metadata to crawlers immediately on every deployment.
+- **AI Discoverability:** `llms.txt` files created in both `/apps/hilmost_main/public` and `/apps/hilmost_toolbox_web/public` for modern AI crawler optimization.
 
-### Navigation Standards
-- **Breadcrumbs:** Misleading icons have been replaced with the text **"Hilmost Toolbox"**. The path is normalized across all pages: `Hilmost Toolbox > [Category] > [Tool Name]`.
-- **Consistency:** `AutoBreadcrumbs` has been removed in favor of page-level specific breadcrumbs to prevent double-rendering. Redundant JSON-LD schema has been purged globally (46+ pages).
+### Navigation & UI Standards
+- **Breadcrumbs:** Path is normalized: `Hilmost Toolbox > [Category] > [Tool Name]`.
+- **Mobile Navigation:** High-impact 3-row stacked Header in `packages/ui/src/Header.tsx`.
+    - Row 1: Brand + Search + Theme.
+    - Row 2: Quick Link Pills (Guides, About, Contact).
+    - Row 3: Full-width "Browse Tools" button.
+- **Scroll Stability:** Global `overflow-x: hidden` in `globals.css` and smart body-lock during mobile menu usage.
 
-### Dynamic Configuration
-- **Categories:** `packages/config/src/categories.ts` is the single source of truth.
-- **Automation:** The `CategoryGrid` component (`packages/ui`) dynamically renders categories on the "About" pages of both `hilmost.net` and `hilmost-toolbox.hilmost.net`. It includes "Smart Truncation" (shows 6, then a "View All" link).
-
-### Monetization Strategy
-- **Strategy:** "Sidebar-First".
-- **Implementation:** Uses the `AdLayout` component. On desktop, ads are sticky sidebars to keep the central "Trust" column readable. On mobile, they use bottom-anchored safe placements. This preserves E-E-A-T (Trust) signals for SEO while maximizing revenue.
+### Tool Implementation Pattern
+- **Route:** `app/[category]/[tool-name]/page.tsx` (Metadata + Structural SEO).
+- **Client:** `app/[category]/[tool-name]/[ToolName]Tool.tsx` (Business Logic + React State).
+- **Security:** 100% Client-Side processing (Zero-Server Architecture). Uses `crypto.getRandomValues()` for randomness.
 
 ---
 
 ## 🚀 2. Active Development State
 
+### Latest Major Updates
+- **QR Code Generator:** Live at `/dx/qr-code-generator`. Supports URL, Text, Email, Phone, Wi-Fi. Features PNG/SVG download and Copy to Clipboard.
+- **Password Generator (Upgraded):** Entropy-based strength meter, bulk generation (up to 10), ambiguous character filtering, and long-form SEO content block.
+- **DX Category:** Expanded to 5 tools (JSON Formatter, Password Gen, QR Code Gen, Regex Tester, JWT Decoder).
+
 ### Key Locations
 - **Toolbox App:** `apps/hilmost_toolbox_web/`
 - **Main App:** `apps/hilmost_main/`
-- **Corporate App:** `apps/hilmost_corporate/`
-- **Shared Config:** `packages/config/`
 - **Shared UI:** `packages/ui/`
-
-### Deployment Targets
-- **LIVE:** `https://hilmost-toolbox.hilmost.net` (Mapped to target `hilmost-toolbox`)
-- **TEST:** `https://hilmost-toolbox-staging.web.app` (Mapped to target `hilmost-toolbox-staging`)
-- **Git Repo:** `https://github.com/KMunyede/ultimatetoobox.git`
+- **Shared Config:** `packages/config/`
 
 ---
 
 ## 🛠 3. Technical Constraints & Styles
-- **Design Language:** "Enterprise-Calm" (Clean sans-serif, White/Neutral bg, Slate text, Brand blue accents).
-- **Architecture:** Client-Side First (100% browser-side processing for privacy).
-- **Communication:** Explain manual terminal or console steps in plain language for Keepy (Founder/Product Owner).
+- **Design Language:** "Enterprise-Calm" (Clean, Slate/Neutral, Emerald/Brand Blue accents).
+- **Automation:** Use `npm run deploy:all` from the monorepo root to push everything to Firebase (Live & Staging) in one step.
+- **Privacy:** NO data uploads. All tool processing must happen in the browser.
 
 ---
 *Reference this document and AGENTS.md at the start of every new session.*

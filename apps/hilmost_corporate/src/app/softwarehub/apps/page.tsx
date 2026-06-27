@@ -1,4 +1,3 @@
-import { Header, Footer } from "@utilitiessite/ui";
 import { AppWindow, MonitorSmartphone } from "lucide-react";
 import { Metadata } from "next";
 
