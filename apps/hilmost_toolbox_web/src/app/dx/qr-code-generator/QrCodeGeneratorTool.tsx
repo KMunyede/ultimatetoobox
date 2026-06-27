@@ -48,6 +48,9 @@ export function QrCodeGeneratorTool() {
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
 
+  const [showFrame, setShowFrame] = useState(false);
+  const [frameLabel, setFrameLabel] = useState("Scan Me");
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isGenerated, setIsGenerated] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">("idle");
@@ -147,9 +150,16 @@ export function QrCodeGeneratorTool() {
     if (!canvasRef.current) return;
 
     const data = getEncodedData();
+    const qrSize = size;
+    const labelHeight = showFrame ? Math.round(qrSize * 0.15) : 0;
+    const totalWidth = qrSize;
+    const totalHeight = qrSize + labelHeight;
+
     try {
-      await QRCode.toCanvas(canvasRef.current, data, {
-        width: size,
+      // 1. Create temporary canvas for the QR part
+      const tempCanvas = document.createElement('canvas');
+      await QRCode.toCanvas(tempCanvas, data, {
+        width: qrSize,
         margin: 2,
         errorCorrectionLevel: errorLevel,
         color: {
@@ -157,12 +167,36 @@ export function QrCodeGeneratorTool() {
           light: bgColor,
         },
       });
+
+      // 2. Adjust main canvas dimensions
+      canvasRef.current.width = totalWidth;
+      canvasRef.current.height = totalHeight;
+      const ctx = canvasRef.current.getContext('2d');
+      if (!ctx) return;
+
+      // 3. Draw background
+      ctx.fillStyle = "#ffffff"; // Forced white background as per requirement
+      ctx.fillRect(0, 0, totalWidth, totalHeight);
+
+      // 4. Draw QR
+      ctx.drawImage(tempCanvas, 0, 0);
+
+      // 5. Draw Label if enabled
+      if (showFrame && frameLabel) {
+        const fontSize = Math.max(12, Math.round(qrSize * 0.06));
+        ctx.fillStyle = fgColor;
+        ctx.font = `bold ${fontSize}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(frameLabel, totalWidth / 2, qrSize + (labelHeight / 2));
+      }
+
       setIsGenerated(true);
     } catch (err) {
       console.error(err);
       setIsGenerated(false);
     }
-  }, [getEncodedData, size, errorLevel, fgColor, bgColor]);
+  }, [getEncodedData, size, errorLevel, fgColor, bgColor, showFrame, frameLabel]);
 
   // Debounce generation
   useEffect(() => {
@@ -183,10 +217,14 @@ export function QrCodeGeneratorTool() {
 
   const downloadSVG = async () => {
     const data = getEncodedData();
+    const qrSize = size;
+    const labelHeight = showFrame ? Math.round(qrSize * 0.15) : 0;
+    const totalHeight = qrSize + labelHeight;
+
     try {
-      const svgString = await QRCode.toString(data, {
+      let svgString = await QRCode.toString(data, {
         type: 'svg',
-        width: size,
+        width: qrSize,
         margin: 2,
         errorCorrectionLevel: errorLevel,
         color: {
@@ -194,6 +232,22 @@ export function QrCodeGeneratorTool() {
           light: bgColor,
         },
       });
+
+      if (showFrame && frameLabel) {
+        const fontSize = Math.max(12, Math.round(qrSize * 0.06));
+        // Simple SVG wrapping to add text
+        // Note: qrcode-svg output is already an <svg> tag.
+        // We'll wrap it in another SVG or modify the viewBox
+        const textElement = `<text x="50%" y="${qrSize + (labelHeight / 2)}" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="${fontSize}" fill="${fgColor}">${frameLabel}</text>`;
+
+        // Remove the closing </svg> tag, add our text and a new closing tag
+        // Also adjust the height attribute
+        svgString = svgString
+          .replace(/height="(\d+)"/, `height="${totalHeight}"`)
+          .replace(/viewBox="0 0 (\d+) (\d+)"/, `viewBox="0 0 $1 ${totalHeight}"`)
+          .replace(/<\/svg>$/, `${textElement}</svg>`);
+      }
+
       const blob = new Blob([svgString], { type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -562,6 +616,40 @@ export function QrCodeGeneratorTool() {
                           <span className="text-xs font-bold text-slate-600 dark:text-slate-400">Background</span>
                           <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-8 w-12 bg-transparent cursor-pointer" />
                         </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Frame Label</label>
+                      <div className="space-y-3">
+                        <label className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 cursor-pointer group">
+                          <div className="flex items-center gap-2">
+                            <Type size={14} className="text-brand-primary" />
+                            <span className="text-xs font-bold text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Enable Label</span>
+                          </div>
+                          <div className="relative inline-flex items-center cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={showFrame}
+                              onChange={(e) => setShowFrame(e.target.checked)}
+                              className="sr-only peer"
+                            />
+                            <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-primary"></div>
+                          </div>
+                        </label>
+
+                        {showFrame && (
+                          <div className="animate-in fade-in zoom-in-95 duration-200">
+                            <input
+                              type="text"
+                              maxLength={30}
+                              placeholder="Label (e.g. Scan Me)"
+                              value={frameLabel}
+                              onChange={(e) => setFrameLabel(e.target.value)}
+                              className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-bold focus:border-brand-primary outline-none transition-all shadow-sm"
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
