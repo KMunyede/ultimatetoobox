@@ -28,19 +28,20 @@ export function TimeZoneClient() {
     // Populate available time zones natively supported by the browser
     try {
       const zones = Intl.supportedValuesOf("timeZone");
-      setTimeout(() => setAvailableZones(zones), 0);
-      
-      // Auto-detect local zone if sourceZone is not set to a "real" intent
-      if (sourceZone === "UTC" && !sourceTime) {
-        const local = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        if (local) {
-          setTimeout(() => setState({ sourceZone: local }), 0);
-        }
-      }
+      setAvailableZones(zones);
+    } catch (e) {
+      console.warn("Intl.supportedValuesOf not supported");
+    }
 
-      } catch (e) {
-        console.warn("Intl.supportedValuesOf not supported");
-      }
+    // Detect user's local timezone and set it as default if not already in URL
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+
+    // Only auto-detect if the URL state doesn't have an explicit sourceZone from a previous share/session
+    // or if it's currently at the default 'UTC'
+    const hasSourceZoneInUrl = window.location.search.includes("sourceZone");
+    if (!hasSourceZoneInUrl) {
+      setState({ sourceZone: userTimezone });
+    }
 
     // Auto-populate sourceTime if empty
     if (!sourceTime && !window.location.search.includes("sourceTime")) {
