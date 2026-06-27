@@ -31,6 +31,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const links = [
   {
+    name: "Text Case Converter",
+    href: "/text-data/text-case-converter",
+    description: "Convert text between camelCase, snake_case, Title Case, and 9 other formats instantly. Essential for developers and professional writers."
+  },
+  {
     name: "Word Unscrambler",
     href: "/text-data/word-unscrambler",
     description: "Instantly untangle any anagram and find hidden words for Scrabble or crossword puzzles. Perfect for language enthusiasts and competitive gamers looking for a quick edge."
