@@ -17,7 +17,11 @@ const formatZoneName = (zone: string) => {
       timeZoneName: 'shortOffset'
     });
     const parts = formatter.formatToParts(new Date());
-    const offset = parts.find(p => p.type === 'timeZoneName')?.value || '';
+    let offset = parts.find(p => p.type === 'timeZoneName')?.value || '';
+
+    // Convert GMT to UTC for official standards
+    offset = offset.replace('GMT', 'UTC');
+
     return `${name} (${offset})`;
   } catch {
     return name;
@@ -220,7 +224,7 @@ export function TimeZoneClient() {
                 let formattedTime = "";
                 let formattedDate = "";
                 try {
-                  formattedTime = formatInTimeZone(sourceDateObj, zone, "hh:mm a zzz");
+                  formattedTime = formatInTimeZone(sourceDateObj, zone, "hh:mm a zzz").replace('GMT', 'UTC');
                   formattedDate = formatInTimeZone(sourceDateObj, zone, "EEEE, MMM d, yyyy");
                 } catch {
                   formattedTime = "Invalid Date";
