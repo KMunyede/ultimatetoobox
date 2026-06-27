@@ -306,30 +306,30 @@ export function NavigationMenu() {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-canvas-card border-l border-base shadow-2xl z-[110] lg:hidden flex flex-col overflow-x-hidden"
             >
-              <div className="flex items-center justify-between p-6 border-b border-base">
-                <span className="text-lg font-black text-brand-primary tracking-tighter">HILMOST HUB</span>
+              <div className="flex items-center justify-between py-3 px-6 border-b border-base">
+                <span className="text-sm font-black text-brand-primary tracking-widest uppercase">HILMOST HUB</span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg bg-canvas-muted text-text-primary"
+                  className="p-1.5 rounded-lg bg-canvas-muted text-text-primary"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6 space-y-8">
+              <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
                 {TOOLBOX_DATA.categories.map((cat) => (
-                  <div key={cat.name} className="space-y-4">
-                    <div className="flex items-center gap-3 text-brand-primary">
+                  <div key={cat.name} className="space-y-3">
+                    <div className="flex items-center gap-2 text-brand-primary">
                       {ICON_MAP[cat.icon]}
-                      <span className="text-xs font-black uppercase tracking-widest">{cat.name}</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em]">{cat.name}</span>
                     </div>
-                    <div className="grid grid-cols-1 gap-2 pl-7">
+                    <div className="grid grid-cols-2 gap-2">
                       {cat.tools.map((tool) => (
                         <Link
                           key={tool.href}
                           href={resolveHref(tool.href)}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="text-sm font-bold text-text-secondary py-2 border-b border-base/50"
+                          className="flex items-center justify-center text-center text-[11px] font-bold text-text-secondary bg-canvas-muted/50 rounded-xl py-3 px-2 border border-base/30 active:bg-brand-primary/10 active:text-brand-primary transition-all"
                         >
                           {tool.name}
                         </Link>
@@ -339,12 +339,12 @@ export function NavigationMenu() {
                 ))}
               </div>
 
-              <div className="p-6 bg-canvas-muted border-t border-base">
-                <p className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-4">Quick Navigation</p>
-                <div className="grid grid-cols-2 gap-4">
-                  <Link href={resolveHref("/guides")} onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-text-primary">Guides</Link>
-                  <Link href={`${domains.corporate}/about`} onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-text-primary">About</Link>
-                  <Link href={`${domains.corporate}/contact`} onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-text-primary">Contact</Link>
+              <div className="p-4 bg-canvas-muted border-t border-base">
+                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-text-muted mb-3">Quick Navigation</p>
+                <div className="grid grid-cols-3 gap-2">
+                  <Link href={resolveHref("/guides")} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center py-2 bg-canvas-card rounded-lg text-[10px] font-bold text-text-primary border border-base/50">Guides</Link>
+                  <Link href={`${domains.corporate}/about`} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center py-2 bg-canvas-card rounded-lg text-[10px] font-bold text-text-primary border border-base/50">About</Link>
+                  <Link href={`${domains.corporate}/contact`} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center py-2 bg-canvas-card rounded-lg text-[10px] font-bold text-text-primary border border-base/50">Contact</Link>
                 </div>
               </div>
             </motion.div>
