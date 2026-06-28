@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "serverInfo": {
+    "name": "Hilmost Toolbox",
+    "version": "1.0.0",
+    "description": "Free, privacy-first browser-side utility tools for developers and everyday users. No sign-up, no servers, no data collection.",
+    "url": "https://hilmost-toolbox.hilmost.net",
+    "contact": "keepymunyede"
+  },
+  "capabilities": {
+    "tools": [
+      {
+        "name": "password-generator",
+        "description": "Generate cryptographically secure passwords using crypto.getRandomValues(). Supports custom length, character types, bulk generation.",
+        "url": "https://hilmost-toolbox.hilmost.net/dx/password-generator"
+      },
+      {
+        "name": "qr-code-generator",
+        "description": "Generate QR codes for URLs, Wi-Fi, email, phone and vCard contacts. PNG and SVG export. Real-time scannability scoring.",
+        "url": "https://hilmost-toolbox.hilmost.net/dx/qr-code-generator"
+      },
+      {
+        "name": "text-case-converter",
+        "description": "Convert text between 12 case formats: camelCase, snake_case, kebab-case, UPPERCASE, Title Case and more.",
+        "url": "https://hilmost-toolbox.hilmost.net/text-data/text-case-converter"
+      },
+      {
+        "name": "time-zone-converter",
+        "description": "Convert times across timezones with DST indicators, meeting overlap grid and team clock board.",
+        "url": "https://hilmost-toolbox.hilmost.net/converters/time-zone"
+      }
+    ]
+  },
+  "privacy": {
+    "data_collection": false,
+    "server_side_processing": false,
+    "accounts_required": false
+  }
+}
