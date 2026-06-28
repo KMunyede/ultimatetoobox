@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Link",
-            value: '</llms.txt>; rel="ai-instructions", </sitemap.xml>; rel="sitemap"',
+            value: '</llms.txt>; rel="ai-instructions", </sitemap.xml>; rel="sitemap", </.well-known/agent-skills/index.json>; rel="agent-skills"',
           },
         ],
       },
