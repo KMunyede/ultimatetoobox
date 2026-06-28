@@ -494,6 +494,28 @@ export function TimeZoneClient() {
                             </p>
                           </div>
 
+                          {/* 24-Hour Slider */}
+                          <div className="hidden lg:flex flex-1 overflow-x-auto no-scrollbar">
+                            <div className="flex gap-1 items-center px-2 py-1 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
+                              {Array.from({ length: 24 }).map((_, hour) => {
+                                const isCurrent = Number(formatInTimeZone(now, member.timezone, "H")) === hour;
+                                let color = "bg-slate-200 dark:bg-slate-800 text-slate-400"; // Offline
+                                if (hour >= 9 && hour < 17) color = "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"; // Available
+                                else if ((hour >= 7 && hour < 9) || (hour >= 17 && hour < 20)) color = "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400"; // Early/Late
+
+                                return (
+                                  <div
+                                    key={hour}
+                                    className={`w-6 h-8 flex flex-col items-center justify-center rounded transition-all shrink-0 ${color} ${isCurrent ? 'ring-2 ring-brand-primary scale-110 shadow-sm z-10' : 'opacity-60'}`}
+                                  >
+                                    <span className="text-[8px] font-black">{hour.toString().padStart(2, '0')}</span>
+                                    {isCurrent && <div className="w-1 h-1 bg-brand-primary rounded-full mt-0.5" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+
                           <div className="flex items-center gap-3 shrink-0">
                             {isDST(member.timezone) && (
                               <span className="text-[9px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
