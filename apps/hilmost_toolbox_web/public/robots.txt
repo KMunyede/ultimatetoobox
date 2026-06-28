@@ -43,4 +43,7 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
+User-agent: *
+Disallow: /cdn-cgi/
+
 Sitemap: https://hilmost-toolbox.hilmost.net/sitemap.xml
