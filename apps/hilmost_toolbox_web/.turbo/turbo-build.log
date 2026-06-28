@@ -7,16 +7,16 @@
 
   Creating an optimized production build ...
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
-✓ Compiled successfully in 34.7s
+✓ Compiled successfully in 31.7s
   Running TypeScript ...
-  Finished TypeScript in 15.0s ...
+  Finished TypeScript in 10.8s ...
   Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/373) ...
+  Generating static pages using 11 workers (0/374) ...
 Warning: Please use the `legacy` build in Node.js environments.
-  Generating static pages using 11 workers (93/373) 
-  Generating static pages using 11 workers (186/373) 
-  Generating static pages using 11 workers (279/373) 
-✓ Generating static pages using 11 workers (373/373) in 22.0s
+  Generating static pages using 11 workers (93/374) 
+  Generating static pages using 11 workers (186/374) 
+  Generating static pages using 11 workers (280/374) 
+✓ Generating static pages using 11 workers (374/374) in 11.8s
   Finalizing page optimization ...
 ⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 
@@ -72,6 +72,7 @@ Route (app)
 │ └ [+39 more paths]
 ├ ○ /cookie-policy
 ├ ○ /dx
+├ ○ /dx/color-picker
 ├ ○ /dx/json-formatter
 ├ ○ /dx/jwt-decoder
 ├ ○ /dx/password-generator

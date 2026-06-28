@@ -55,6 +55,11 @@ const links = [
     href: "/dx/jwt-decoder",
     description: "Inspect JSON Web Tokens (JWT) safely. Decode headers and payloads without ever sending your sensitive tokens to a server."
   },
+  {
+    name: "Color Picker",
+    href: "/dx/color-picker",
+    description: "Visually pick colors and convert between HEX, RGB, and HSL. Includes WCAG contrast checker and palette generator."
+  },
 ];
 
 const faqs = [

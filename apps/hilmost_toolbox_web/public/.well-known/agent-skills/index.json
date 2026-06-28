@@ -36,6 +36,12 @@
       "type": "tool",
       "description": "Convert text between 15 case formats including Title Case, camelCase, snake_case, Slugify and more, with Find & Replace and Custom Terms Override.",
       "url": "https://hilmost-toolbox.hilmost.net/text-data/text-case-converter"
+    },
+    {
+      "name": "color-picker",
+      "type": "tool",
+      "description": "Visually pick colors and convert between HEX, RGB, and HSL. Includes WCAG contrast checker and palette generator.",
+      "url": "https://hilmost-toolbox.hilmost.net/dx/color-picker"
     }
   ]
 }
