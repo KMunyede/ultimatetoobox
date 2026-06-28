@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/index.json",
+  "skills": [
+    {
+      "name": "password-generator",
+      "type": "tool",
+      "description": "Generate cryptographically secure passwords in the browser. Supports length, character types, bulk generation, and ambiguous character exclusion.",
+      "url": "https://hilmost-toolbox.hilmost.net/dx/password-generator"
+    },
+    {
+      "name": "qr-code-generator",
+      "type": "tool",
+      "description": "Generate QR codes for URLs, Wi-Fi, email, phone, and vCard contacts. Outputs PNG and SVG. Includes real-time scannability scoring.",
+      "url": "https://hilmost-toolbox.hilmost.net/dx/qr-code-generator"
+    },
+    {
+      "name": "text-case-converter",
+      "type": "tool",
+      "description": "Convert text between 12 case formats including camelCase, snake_case, kebab-case, Title Case and more.",
+      "url": "https://hilmost-toolbox.hilmost.net/text-data/text-case-converter"
+    },
+    {
+      "name": "time-zone-converter",
+      "type": "tool",
+      "description": "Convert times across multiple timezones with DST indicators, meeting overlap grid, and shareable team clock board.",
+      "url": "https://hilmost-toolbox.hilmost.net/converters/time-zone"
+    }
+  ]
+}
