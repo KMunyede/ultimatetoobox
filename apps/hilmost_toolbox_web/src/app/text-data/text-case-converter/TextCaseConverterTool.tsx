@@ -1,19 +1,28 @@
 "use client";
 
 import React, { useState, useCallback, useMemo } from "react";
-import { X, Copy, Check, Download, AlertCircle, Type } from "lucide-react";
+import { X, Copy, Check, Download, AlertCircle, Type, Search, ChevronDown, ChevronUp } from "lucide-react";
 import { FAQAccordion } from "@utilitiessite/ui";
 
 type CaseType =
   | "UPPERCASE" | "lowercase" | "Title Case" | "Sentence case"
   | "camelCase" | "PascalCase" | "snake_case" | "SCREAMING_SNAKE"
-  | "kebab-case" | "COBOL-CASE" | "dot.case" | "Toggle Case";
+  | "kebab-case" | "COBOL-CASE" | "dot.case" | "Toggle Case"
+  | "Alternating Case" | "Slugify" | "Normalize Whitespace";
 
 export function TextCaseConverterTool() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [lastCase, setLastCase] = useState<CaseType | null>(null);
   const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // Find & Replace State
+  const [isFindReplaceOpen, setIsFindReplaceOpen] = useState(false);
+  const [findText, setFindText] = useState("");
+  const [replaceText, setReplaceText] = useState("");
+  const [matchCase, setMatchCase] = useState(false);
+  const [wholeWord, setWholeWord] = useState(false);
+  const [replacementCount, setReplacementCount] = useState<number | null>(null);
 
   const getStats = (text: string) => {
     const chars = text.length;
@@ -33,22 +42,29 @@ export function TextCaseConverterTool() {
       .filter(w => w.length > 0);
   };
 
-  const convert = (type: CaseType) => {
+  const convert = useCallback((type: CaseType, targetInput?: string) => {
+    const source = targetInput ?? input;
+    if (!source) {
+        setOutput("");
+        setLastCase(type);
+        return;
+    }
+
     let result = "";
-    const words = splitWords(input);
+    const words = splitWords(source);
 
     switch (type) {
       case "UPPERCASE":
-        result = input.toUpperCase();
+        result = source.toUpperCase();
         break;
       case "lowercase":
-        result = input.toLowerCase();
+        result = source.toLowerCase();
         break;
       case "Title Case":
         result = words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(" ");
         break;
       case "Sentence case":
-        result = input.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
+        result = source.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
         break;
       case "camelCase":
         result = words.map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join("");
@@ -72,12 +88,60 @@ export function TextCaseConverterTool() {
         result = words.map(w => w.toLowerCase()).join(".");
         break;
       case "Toggle Case":
-        result = input.split("").map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join("");
+        result = source.split("").map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join("");
+        break;
+      case "Alternating Case":
+        let upper = true;
+        result = source.split("").map(c => {
+          if (/\s/.test(c)) return c;
+          const res = upper ? c.toUpperCase() : c.toLowerCase();
+          upper = !upper;
+          return res;
+        }).join("");
+        break;
+      case "Slugify":
+        result = source.toLowerCase()
+          .replace(/[\s_]+/g, "-")
+          .replace(/[^a-z0-9-]/g, "")
+          .replace(/-+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        break;
+      case "Normalize Whitespace":
+        result = source.trim()
+          .replace(/\s+/g, " ")
+          .replace(/([.!?])\s*(?=[a-zA-Z0-9])/g, "$1 ")
+          .replace(/\s+([,.!? :;])/g, "$1");
         break;
     }
 
     setOutput(result);
     setLastCase(type);
+  }, [input]);
+
+  const handleReplaceAll = () => {
+    if (!findText) return;
+
+    let escapedFind = findText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (wholeWord) escapedFind = `\\b${escapedFind}\\b`;
+
+    const flags = matchCase ? "g" : "gi";
+    const regex = new RegExp(escapedFind, flags);
+
+    const count = (input.match(regex) || []).length;
+    const newInput = input.replace(regex, replaceText);
+
+    setInput(newInput);
+    setReplacementCount(count);
+
+    if (lastCase) {
+        convert(lastCase, newInput);
+    }
+  };
+
+  const handleClearFindReplace = () => {
+    setFindText("");
+    setReplaceText("");
+    setReplacementCount(null);
   };
 
   const handleCopy = async () => {
@@ -150,8 +214,8 @@ export function TextCaseConverterTool() {
         </div>
 
         {/* Buttons Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 py-8 border-y border-slate-100 dark:border-slate-800 my-8">
-          {(["UPPERCASE", "lowercase", "Title Case", "Sentence case", "camelCase", "PascalCase", "snake_case", "SCREAMING_SNAKE", "kebab-case", "COBOL-CASE", "dot.case", "Toggle Case"] as CaseType[]).map((t) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 py-8 border-y border-slate-100 dark:border-slate-800 my-8">
+          {(["UPPERCASE", "lowercase", "Title Case", "Sentence case", "camelCase", "PascalCase", "snake_case", "SCREAMING_SNAKE", "kebab-case", "COBOL-CASE", "dot.case", "Toggle Case", "Alternating Case", "Slugify", "Normalize Whitespace"] as CaseType[]).map((t) => (
             <button
               key={t}
               onClick={() => convert(t)}
@@ -160,6 +224,83 @@ export function TextCaseConverterTool() {
               {t}
             </button>
           ))}
+        </div>
+
+        {/* Find & Replace Panel */}
+        <div className="mb-8 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden">
+          <button
+            onClick={() => setIsFindReplaceOpen(!isFindReplaceOpen)}
+            className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+              <Search size={16} />
+              <span className="text-xs font-bold uppercase tracking-widest">Find & Replace</span>
+            </div>
+            {isFindReplaceOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
+
+          {isFindReplaceOpen && (
+            <div className="p-4 space-y-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 animate-in slide-in-from-top-2 duration-200">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Find..."
+                  value={findText}
+                  onChange={(e) => setFindText(e.target.value)}
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-brand-primary transition-all"
+                />
+                <input
+                  type="text"
+                  placeholder="Replace with..."
+                  value={replaceText}
+                  onChange={(e) => setReplaceText(e.target.value)}
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-brand-primary transition-all"
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center gap-6">
+                <label className="flex items-center gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={matchCase}
+                    onChange={(e) => setMatchCase(e.target.checked)}
+                    className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
+                  />
+                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Match case</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={wholeWord}
+                    onChange={(e) => setWholeWord(e.target.checked)}
+                    className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
+                  />
+                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Whole word</span>
+                </label>
+              </div>
+
+              <div className="flex items-center gap-3 pt-2">
+                <button
+                  onClick={handleReplaceAll}
+                  disabled={!findText}
+                  className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-emerald-500/20"
+                >
+                  Replace All
+                </button>
+                <button
+                  onClick={handleClearFindReplace}
+                  className="px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-black uppercase tracking-widest rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+                >
+                  Clear
+                </button>
+                {replacementCount !== null && (
+                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest animate-in fade-in duration-300">
+                    {replacementCount} replacements made
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Stats Bar */}
