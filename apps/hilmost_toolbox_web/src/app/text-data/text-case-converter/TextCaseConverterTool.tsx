@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useMemo } from "react";
-import { X, Copy, Check, Download, AlertCircle, Type, Search, ChevronDown, ChevronUp } from "lucide-react";
+import { X, Copy, Check, Download, AlertCircle, Type, Search, ChevronDown, ChevronUp, ShieldCheck, Plus } from "lucide-react";
 import { FAQAccordion } from "@utilitiessite/ui";
 
 type CaseType =
@@ -9,6 +9,8 @@ type CaseType =
   | "camelCase" | "PascalCase" | "snake_case" | "SCREAMING_SNAKE"
   | "kebab-case" | "COBOL-CASE" | "dot.case" | "Toggle Case"
   | "Alternating Case" | "Slugify" | "Normalize Whitespace";
+
+const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 export function TextCaseConverterTool() {
   const [input, setInput] = useState("");
@@ -23,6 +25,11 @@ export function TextCaseConverterTool() {
   const [matchCase, setMatchCase] = useState(false);
   const [wholeWord, setWholeWord] = useState(false);
   const [replacementCount, setReplacementCount] = useState<number | null>(null);
+
+  // Custom Terms State
+  const [isCustomTermsOpen, setIsCustomTermsOpen] = useState(false);
+  const [customTerms, setCustomTerms] = useState<string[]>([]);
+  const [termInput, setTermInput] = useState("");
 
   const getStats = (text: string) => {
     const chars = text.length;
@@ -114,9 +121,19 @@ export function TextCaseConverterTool() {
         break;
     }
 
+    // Post-processing: Restore Custom Terms
+    if (customTerms.length > 0) {
+      const sortedTerms = [...customTerms].sort((a, b) => b.length - a.length);
+      sortedTerms.forEach(term => {
+        const escaped = escapeRegex(term);
+        const regex = new RegExp(escaped, 'gi');
+        result = result.replace(regex, term);
+      });
+    }
+
     setOutput(result);
     setLastCase(type);
-  }, [input]);
+  }, [input, customTerms]);
 
   const handleReplaceAll = () => {
     if (!findText) return;
@@ -142,6 +159,17 @@ export function TextCaseConverterTool() {
     setFindText("");
     setReplaceText("");
     setReplacementCount(null);
+  };
+
+  const handleAddTerm = () => {
+    if (termInput.trim() && !customTerms.includes(termInput.trim())) {
+      setCustomTerms([...customTerms, termInput.trim()]);
+      setTermInput("");
+    }
+  };
+
+  const handleRemoveTerm = (term: string) => {
+    setCustomTerms(customTerms.filter(t => t !== term));
   };
 
   const handleCopy = async () => {
@@ -299,6 +327,68 @@ export function TextCaseConverterTool() {
                   </span>
                 )}
               </div>
+            </div>
+          )}
+        </div>
+
+        {/* Custom Terms Panel */}
+        <div className="mb-8 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden">
+          <button
+            onClick={() => setIsCustomTermsOpen(!isCustomTermsOpen)}
+            className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+              <ShieldCheck size={16} />
+              <span className="text-xs font-bold uppercase tracking-widest">Custom Terms Override</span>
+            </div>
+            {isCustomTermsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
+
+          {isCustomTermsOpen && (
+            <div className="p-4 space-y-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 animate-in slide-in-from-top-2 duration-200">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="e.g. iPhone, JavaScript, HSC"
+                  value={termInput}
+                  onChange={(e) => setTermInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAddTerm()}
+                  className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-brand-primary transition-all"
+                />
+                <button
+                  onClick={handleAddTerm}
+                  disabled={!termInput.trim()}
+                  className="px-6 py-2 bg-brand-primary text-white text-xs font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all disabled:opacity-50"
+                >
+                  <Plus size={16} />
+                </button>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {customTerms.map((term) => (
+                  <span
+                    key={term}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold uppercase rounded-lg border border-slate-200 dark:border-slate-700"
+                  >
+                    {term}
+                    <button
+                      onClick={() => handleRemoveTerm(term)}
+                      className="text-slate-400 hover:text-red-500 transition-colors"
+                    >
+                      <X size={12} />
+                    </button>
+                  </span>
+                ))}
+              </div>
+
+              {customTerms.length > 0 && (
+                <button
+                  onClick={() => setCustomTerms([])}
+                  className="text-[10px] font-bold text-slate-400 hover:text-red-500 underline transition-colors"
+                >
+                  Clear all
+                </button>
+              )}
             </div>
           )}
         </div>
