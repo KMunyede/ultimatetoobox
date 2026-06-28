@@ -14,8 +14,20 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Link",
-            value: '</llms.txt>; rel="ai-instructions", </sitemap.xml>; rel="sitemap", </.well-known/agent-skills/index.json>; rel="agent-skills"',
+            value: [
+              '</.well-known/agent-skills/index.json>; rel="agent-skills"',
+              '</llms.txt>; rel="describedby"',
+              '</sitemap.xml>; rel="sitemap"'
+            ].join(', '),
           },
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          }
         ],
       },
     ];

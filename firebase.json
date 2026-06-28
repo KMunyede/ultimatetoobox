@@ -39,8 +39,16 @@
               "value": "SAMEORIGIN"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -85,8 +93,16 @@
               "value": "SAMEORIGIN"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -131,8 +147,16 @@
               "value": "SAMEORIGIN"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -177,8 +201,16 @@
               "value": "SAMEORIGIN"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -223,8 +255,16 @@
               "value": "SAMEORIGIN"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -260,8 +300,16 @@
               "value": "*"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
@@ -304,8 +352,16 @@
               "value": "*"
             },
             {
+              "key": "X-Robots-Tag",
+              "value": "index, follow"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
               "key": "Link",
-              "value": "</llms.txt>; rel=\"ai-instructions\", </sitemap.xml>; rel=\"sitemap\", </.well-known/agent-skills/index.json>; rel=\"agent-skills\""
+              "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
         }
