@@ -21,32 +21,17 @@
       },
       {
         "name": "text-case-converter",
-        "description": "Convert text between 12 case formats: camelCase, snake_case, kebab-case, UPPERCASE, Title Case and more.",
-        "url": "https://hilmost-toolbox.hilmost.net/text-data/text-case-converter"
-      },
-      {
-        "name": "time-zone-converter",
-        "description": "Convert times across timezones with DST indicators, meeting overlap grid and team clock board.",
-        "url": "https://hilmost-toolbox.hilmost.net/converters/time-zone"
-      },
-      {
-        "name": "Time Zone Converter",
-        "description": "Convert times across multiple time zones with DST awareness, meeting overlap grid, and shareable team clock URLs.",
-        "url": "https://hilmost-toolbox.hilmost.net/converters/time-zone"
-      },
-      {
-        "name": "Text Case Converter",
         "description": "Convert text between 15 case formats including Title Case, camelCase, snake_case, Slugify and more, with Find & Replace and Custom Terms Override.",
         "url": "https://hilmost-toolbox.hilmost.net/text-data/text-case-converter"
       },
       {
-        "name": "color-picker",
-        "description": "Visually pick colors and convert between HEX, RGB, and HSL. Includes WCAG contrast checker and palette generator.",
-        "url": "https://hilmost-toolbox.hilmost.net/dx/color-picker"
+        "name": "time-zone-converter",
+        "description": "Convert times across multiple time zones with DST awareness, meeting overlap grid, and shareable team clock URLs.",
+        "url": "https://hilmost-toolbox.hilmost.net/converters/time-zone"
       },
       {
-        "name": "Color Picker & HEX RGB HSL Converter",
-        "description": "Convert between HEX, RGB and HSL color formats. Generate harmonious palettes, check WCAG contrast ratios, and save color history.",
+        "name": "color-picker",
+        "description": "Visually pick colors and convert between HEX, RGB and HSL. Generate harmonious palettes, check WCAG contrast ratios, and save color history.",
         "url": "https://hilmost-toolbox.hilmost.net/dx/color-picker"
       }
     ]
