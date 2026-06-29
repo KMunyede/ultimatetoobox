@@ -30,6 +30,12 @@
       "type": "tool",
       "description": "Visually pick colors and convert between HEX, RGB and HSL. Generate harmonious palettes, check WCAG contrast ratios, and save color history.",
       "url": "https://hilmost-toolbox.hilmost.net/dx/color-picker"
+    },
+    {
+      "name": "gpa-calculator",
+      "type": "tool",
+      "description": "Calculate semester and cumulative GPA using letter grades, percentages or grade points. Supports 4.0 and 5.0 weighted scales.",
+      "url": "https://hilmost-toolbox.hilmost.net/education/gpa-calculator"
     }
   ]
 }
