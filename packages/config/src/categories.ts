@@ -58,5 +58,13 @@ export const TOOL_CATEGORIES = [
     count: 2,
     color: "rose",
     icon: "HeartPulse"
+  },
+  {
+    name: "Education",
+    slug: "education",
+    description: "GPA calculators and professional academic tracking tools.",
+    count: 1,
+    color: "orange",
+    icon: "GraduationCap"
   }
 ];

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2 } from "lucide-react";
+import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2, GraduationCap } from "lucide-react";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 import { WebApplicationSchema, OrganizationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -118,6 +118,15 @@ export default function Home() {
       links: [
         { name: "Daily Wisdom", href: "/health/daily-wisdom" },
         { name: "BMI Calculator", href: "/health/bmi-calculator" },
+      ],
+    },
+    {
+      title: "Education",
+      description: "GPA calculators and academic tracking tools.",
+      icon: <GraduationCap className="w-6 h-6 text-orange-500" />,
+      colorClass: "bg-orange-500/10",
+      links: [
+        { name: "GPA Calculator", href: "/education/gpa-calculator" },
       ],
     },
   ];
