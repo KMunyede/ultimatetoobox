@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2 } from 'lucide-react';
+import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from './Tooltip';
 
@@ -107,6 +107,15 @@ const TOOLBOX_DATA = {
         { name: "Daily Wisdom", href: "/health/daily-wisdom", tooltip: "Stoic quotes and daily guidance." },
         { name: "BMI Calculator", href: "/health/bmi-calculator", tooltip: "Calculate Body Mass Index safely." },
       ]
+    },
+    {
+      name: "Education",
+      description: "GPA calculators and academic tools.",
+      href: "/education",
+      icon: "GraduationCap",
+      tools: [
+        { name: "GPA Calculator", href: "/education/gpa-calculator", tooltip: "Calculate semester and cumulative GPA." },
+      ]
     }
   ]
 };
@@ -119,6 +128,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   Binary: <Binary size={16} />,
   Calculator: <Calculator size={16} />,
   HeartPulse: <HeartPulse size={16} />,
+  GraduationCap: <GraduationCap size={16} />,
 };
 
 export function NavigationMenu() {

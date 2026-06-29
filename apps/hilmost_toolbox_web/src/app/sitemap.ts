@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   // 2. TOOLBOX CORE & CATEGORIES
-  const CATEGORIES = ['calculators', 'converters', 'finance', 'text-data', 'pdf-tools', 'health', 'dx'];
+  const CATEGORIES = ['calculators', 'converters', 'finance', 'text-data', 'pdf-tools', 'health', 'dx', 'education'];
 
   const toolboxHome: MetadataRoute.Sitemap = [
     { url: `${toolboxUrl}`, lastModified, changeFrequency: 'daily', priority: 1.0 }
