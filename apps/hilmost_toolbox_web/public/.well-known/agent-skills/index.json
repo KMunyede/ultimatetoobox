@@ -42,6 +42,12 @@
       "type": "tool",
       "description": "Visually pick colors and convert between HEX, RGB, and HSL. Includes WCAG contrast checker and palette generator.",
       "url": "https://hilmost-toolbox.hilmost.net/dx/color-picker"
+    },
+    {
+      "name": "Color Picker & HEX RGB HSL Converter",
+      "type": "tool",
+      "description": "Convert between HEX, RGB and HSL color formats. Generate harmonious palettes, check WCAG contrast ratios, and save color history.",
+      "url": "https://hilmost-toolbox.hilmost.net/dx/color-picker"
     }
   ]
 }
