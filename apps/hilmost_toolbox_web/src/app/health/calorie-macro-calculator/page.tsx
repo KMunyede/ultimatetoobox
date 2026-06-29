@@ -6,13 +6,13 @@ import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
-const TOOL_NAME = "Calorie & Macro Calculator";
-const TOOL_DESC = "Calculate your BMR, TDEE, and ideal macronutrient split for weight loss, maintenance, or muscle gain. Features custom macro balancing.";
+const TOOL_NAME = "Free Calorie & Macro Calculator";
+const TOOL_DESC = "Calculate your BMR, TDEE and daily macro targets for weight loss, maintenance or muscle gain. Supports metric and imperial units with custom macro splits.";
 const PATH = "/health/calorie-macro-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = formatTitle(`${TOOL_NAME} — BMR & TDEE Lab | Hilmost`);
+  const title = formatTitle(`${TOOL_NAME} — BMR, TDEE & Macros | Hilmost`);
   return {
     metadataBase: new URL(METADATA_BASE_URL),
     title,
@@ -47,7 +47,7 @@ export default function CalorieMacroCalculatorPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": TOOL_NAME,
+    "name": "Calorie & Macro Calculator",
     "description": TOOL_DESC,
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Web Browser",
@@ -60,11 +60,10 @@ export default function CalorieMacroCalculatorPage() {
   };
 
   const tourSteps = [
-    { element: '#unit-toggle', popover: { title: '1. Choose Units', description: 'Switch between Metric and Imperial systems.' } },
-    { element: '#body-inputs', popover: { title: '2. Enter Metrics', description: 'Provide your age, weight, and height for accurate BMR calculation.' } },
-    { element: '#activity-level', popover: { title: '3. Activity Level', description: 'Select your weekly activity level to calculate your TDEE.' } },
-    { element: '#goal-selector', popover: { title: '4. Set Your Goal', description: 'Choose whether you want to lose, maintain, or gain weight.' } },
-    { element: '#macro-breakdown', popover: { title: '5. Macro Split', description: 'View your grams of protein, carbs, and fats. Toggle "Custom" to adjust the ratios.' } },
+    { element: '#unit-toggle', popover: { title: '1. Units', description: 'Switch between Metric and Imperial measurements.' } },
+    { element: '#body-details', popover: { title: '2. Body Stats', description: 'Enter your age, gender, weight, and height.' } },
+    { element: '#activity-level', popover: { title: '3. Activity', description: 'Select your weekly activity intensity.' } },
+    { element: '#goal-selector', popover: { title: '4. Fitness Goal', description: 'Choose your desired weight trajectory.' } },
   ];
 
   return (
@@ -83,10 +82,10 @@ export default function CalorieMacroCalculatorPage() {
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
-        title="Precision Nutrition Lab"
-        subtitle="Scientific calorie and macronutrient tracking. Calculate your metabolic burn and optimize your nutrition for any fitness goal."
+        title="Metabolic Intelligence Lab"
+        subtitle="Precision nutrition planning. Calculate your maintenance calories and optimize your macronutrient ratios instantly."
         lastUpdated={lastUpdated}
-        tourId="calorie_calculator"
+        tourId="calorie_lab"
         tourSteps={tourSteps}
         shareButton={<ShareButton />}
       />
