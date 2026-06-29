@@ -42,6 +42,12 @@
       "type": "tool",
       "description": "Calculate BMR, TDEE, and daily macronutrient targets (Protein/Carbs/Fats) for weight loss, maintenance, or gain. Supports custom macro splits.",
       "url": "https://hilmost-toolbox.hilmost.net/health/calorie-macro-calculator"
+    },
+    {
+      "name": "sleep-cycle-calculator",
+      "type": "tool",
+      "description": "Calculate optimal wake up and bed times based on 90-minute sleep cycles to avoid sleep inertia and wake up refreshed.",
+      "url": "https://hilmost-toolbox.hilmost.net/health/sleep-cycle-calculator"
     }
   ]
 }

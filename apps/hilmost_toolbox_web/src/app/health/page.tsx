@@ -41,6 +41,11 @@ const links = [
     description: "Calculate your BMR, TDEE, and optimal macronutrient split. Optimize your daily intake for weight loss, maintenance, or muscle gain."
   },
   {
+    name: "Sleep Cycle Calculator",
+    href: "/health/sleep-cycle-calculator",
+    description: "Find the best times to wake up or go to sleep based on 90-minute sleep cycles. Avoid sleep inertia and wake up refreshed every morning."
+  },
+  {
     name: "BMI Calculator",
     href: "/health/bmi-calculator",
     description: "Calculate your Body Mass Index (BMI) instantly. Understand your weight category and track your fitness trajectory with ease."
