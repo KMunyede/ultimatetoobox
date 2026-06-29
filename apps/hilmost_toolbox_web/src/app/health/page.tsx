@@ -36,6 +36,11 @@ const links = [
     description: "A digital sanctuary for mental well-being. Access daily quotes, journaling tools, and library resources to elevate your mindset."
   },
   {
+    name: "Calorie & Macro Calculator",
+    href: "/health/calorie-macro-calculator",
+    description: "Calculate your BMR, TDEE, and optimal macronutrient split. Optimize your daily intake for weight loss, maintenance, or muscle gain."
+  },
+  {
     name: "BMI Calculator",
     href: "/health/bmi-calculator",
     description: "Calculate your Body Mass Index (BMI) instantly. Understand your weight category and track your fitness trajectory with ease."

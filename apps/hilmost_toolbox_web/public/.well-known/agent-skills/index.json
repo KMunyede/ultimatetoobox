@@ -36,6 +36,12 @@
       "type": "tool",
       "description": "Calculate semester and cumulative GPA using letter grades, percentages or grade points. Supports 4.0 and 5.0 weighted scales.",
       "url": "https://hilmost-toolbox.hilmost.net/education/gpa-calculator"
+    },
+    {
+      "name": "calorie-macro-calculator",
+      "type": "tool",
+      "description": "Calculate BMR, TDEE, and daily macronutrient targets (Protein/Carbs/Fats) for weight loss, maintenance, or gain. Supports custom macro splits.",
+      "url": "https://hilmost-toolbox.hilmost.net/health/calorie-macro-calculator"
     }
   ]
 }
