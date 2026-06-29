@@ -1,6 +1,6 @@
 import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
-import { Code2, ArrowRight } from "lucide-react";
+import { Code2, ArrowRight, FileJson, Lock, QrCode, Search, ShieldCheck, Palette } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -33,32 +33,38 @@ const links = [
   {
     name: "JSON Formatter",
     href: "/dx/json-formatter",
+    icon: <FileJson size={20} />,
     description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors."
   },
   {
     name: "Password Generator",
     href: "/dx/password-generator",
+    icon: <Lock size={20} />,
     description: "Generate secure random passwords with custom length, character sets, and strength indicator."
   },
   {
     name: "QR Code Generator",
     href: "/dx/qr-code-generator",
+    icon: <QrCode size={20} />,
     description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up."
   },
   {
     name: "Regex Tester",
     href: "/dx/regex-tester",
+    icon: <Search size={20} />,
     description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting."
   },
   {
     name: "JWT Decoder",
     href: "/dx/jwt-decoder",
+    icon: <ShieldCheck size={20} />,
     description: "Inspect JSON Web Tokens (JWT) safely. Decode headers and payloads without ever sending your sensitive tokens to a server."
   },
   {
     name: "Color Picker",
     href: "/dx/color-picker",
-    description: "Visually pick colors and convert between HEX, RGB, and HSL. Includes WCAG contrast checker and palette generator."
+    icon: <Palette size={20} />,
+    description: "Convert HEX, RGB & HSL instantly. Generate palettes, check WCAG contrast, and save your color history."
   },
 ];
 
@@ -129,7 +135,12 @@ export default function DXHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-blue-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-slate-400 group-hover:text-blue-600 transition-colors">
+                {link.icon}
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
+            </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>
