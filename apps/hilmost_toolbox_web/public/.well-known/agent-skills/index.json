@@ -46,7 +46,7 @@
     {
       "name": "sleep-cycle-calculator",
       "type": "tool",
-      "description": "Calculate optimal wake up and bed times based on 90-minute sleep cycles to avoid sleep inertia and wake up refreshed.",
+      "description": "Calculate optimal sleep and wake times based on 90-minute sleep cycles to avoid sleep inertia.",
       "url": "https://hilmost-toolbox.hilmost.net/health/sleep-cycle-calculator"
     }
   ]

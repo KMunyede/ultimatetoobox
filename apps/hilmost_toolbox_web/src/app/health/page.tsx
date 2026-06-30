@@ -1,6 +1,6 @@
 import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
-import { Activity, ArrowRight, Apple } from "lucide-react";
+import { Activity, ArrowRight, Apple, Moon } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -43,7 +43,8 @@ const links = [
   {
     name: "Sleep Cycle Calculator",
     href: "/health/sleep-cycle-calculator",
-    description: "Find the best times to wake up or go to sleep based on 90-minute sleep cycles. Avoid sleep inertia and wake up refreshed every morning."
+    description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Wake up refreshed, not groggy.",
+    icon: <Moon className="w-5 h-5" />
   },
   {
     name: "BMI Calculator",
@@ -126,7 +127,14 @@ export default function HealthHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-rose-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <div className="flex items-center gap-3 mb-3">
+              {link.icon && (
+                <div className="text-rose-500 group-hover:scale-110 transition-transform">
+                  {link.icon}
+                </div>
+              )}
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
+            </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>

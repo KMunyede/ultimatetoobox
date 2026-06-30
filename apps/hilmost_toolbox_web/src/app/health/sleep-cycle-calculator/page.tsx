@@ -4,35 +4,18 @@ import { SleepCycleCalculatorTool } from "./SleepCycleCalculatorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
-import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Free Sleep Cycle Calculator";
-const TOOL_DESC = "Find the best times to wake up or go to sleep based on 90-minute sleep cycles. Avoid sleep inertia and wake up refreshed every morning.";
+const TOOL_DESC = "Find the best times to wake up or go to sleep based on 90-minute sleep cycles. Avoid sleep inertia and wake up refreshed.";
 const PATH = "/health/sleep-cycle-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const title = formatTitle(`Free Sleep Cycle Calculator — Best Wake Up Times | Hilmost`);
-  return {
-    metadataBase: new URL(METADATA_BASE_URL),
-    title,
-    description: TOOL_DESC,
-    alternates: {
-      canonical: PATH,
-    },
-    openGraph: {
-      title,
-      description: TOOL_DESC,
-      url: CANONICAL_URL,
-      type: "website",
-      images: [{ url: "https://hilmost-toolbox.hilmost.net/og/health.png", width: 1200, height: 630, alt: `Hilmost ${TOOL_NAME}` }],
-    },
-    twitter: {
-      title,
-      description: TOOL_DESC,
-      images: ["https://hilmost-toolbox.hilmost.net/og/health.png"],
-    }
-  };
+export const metadata: Metadata = {
+  title: 'Free Sleep Cycle Calculator — Best Wake Up Times | Hilmost',
+  description: TOOL_DESC,
+  alternates: {
+    canonical: CANONICAL_URL
+  }
 }
 
 export default function SleepCycleCalculatorPage() {
@@ -47,7 +30,7 @@ export default function SleepCycleCalculatorPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Sleep Cycle Calculator",
+    "name": TOOL_NAME,
     "description": TOOL_DESC,
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Web Browser",
