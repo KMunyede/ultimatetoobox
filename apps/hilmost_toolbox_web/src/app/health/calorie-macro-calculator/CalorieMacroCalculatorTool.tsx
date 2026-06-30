@@ -48,13 +48,12 @@ const GOAL_CONFIG: Record<Goal, { label: string, offset: number, p: number, c: n
 export function CalorieMacroCalculatorTool() {
   // --- State ---
   const [unit, setUnit] = useState<Unit>('metric');
-  const [age, setAge] = useState<number>(30);
-  const [ageInput, setAgeInput] = useState<string>("30");
+  const [age, setAge] = useState<string>("30");
   const [gender, setGender] = useState<Gender>('male');
-  const [weight, setWeight] = useState<number>(75);
-  const [heightCm, setHeightCm] = useState<number>(175);
-  const [heightFt, setHeightFt] = useState<number>(5);
-  const [heightIn, setHeightIn] = useState<number>(9);
+  const [weight, setWeight] = useState<string>("75");
+  const [heightCm, setHeightCm] = useState<string>("175");
+  const [heightFt, setHeightFt] = useState<string>("5");
+  const [heightIn, setHeightIn] = useState<string>("9");
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('sedentary');
   const [goal, setGoal] = useState<Goal>('maintain');
 
@@ -68,23 +67,28 @@ export function CalorieMacroCalculatorTool() {
 
   // --- Logic ---
   const calculate = useCallback(() => {
-    const parsedAge = parseInt(ageInput);
-    if (isNaN(parsedAge) || parsedAge < 15 || parsedAge > 100) return;
-    if (weight <= 0) return;
+    const a = age === '' ? 0 : parseInt(age);
+    const w = weight === '' ? 0 : parseFloat(weight);
+    const hCm = heightCm === '' ? 0 : parseFloat(heightCm);
+    const hFt = heightFt === '' ? 0 : parseFloat(heightFt);
+    const hIn = heightIn === '' ? 0 : parseFloat(heightIn);
 
-    let h = heightCm;
+    if (isNaN(a) || a < 15 || a > 100) return;
+    if (w <= 0) return;
+
+    let h = hCm;
     if (unit === 'imperial') {
-      h = (heightFt * 12 + heightIn) * 2.54;
+      h = (hFt * 12 + hIn) * 2.54;
     }
     if (h <= 0) return;
 
-    let w = weight;
+    let weightKg = w;
     if (unit === 'imperial') {
-      w = weight * 0.453592;
+      weightKg = w * 0.453592;
     }
 
     // Mifflin-St Jeor
-    let bmr = (10 * w) + (6.25 * h) - (5 * parsedAge);
+    let bmr = (10 * weightKg) + (6.25 * h) - (5 * a);
     bmr = gender === 'male' ? bmr + 5 : bmr - 161;
 
     const tdee = bmr * ACTIVITY_CONFIG[activityLevel].mult;
@@ -103,7 +107,7 @@ export function CalorieMacroCalculatorTool() {
       carbs: Math.round((targetCalories * (cPct / 100)) / 4),
       fat: Math.round((targetCalories * (fPct / 100)) / 9),
     });
-  }, [ageInput, weight, unit, heightCm, heightFt, heightIn, gender, activityLevel, goal, useCustomMacros, customProtein, customCarbs, customFat]);
+  }, [age, weight, unit, heightCm, heightFt, heightIn, gender, activityLevel, goal, useCustomMacros, customProtein, customCarbs, customFat]);
 
   // Auto-calculate
   useEffect(() => {
@@ -111,11 +115,34 @@ export function CalorieMacroCalculatorTool() {
   }, [calculate]);
 
   const handleAgeBlur = () => {
-    let val = parseInt(ageInput);
+    let val = parseInt(age);
     if (isNaN(val)) val = 30;
     const clamped = Math.min(100, Math.max(15, val));
-    setAge(clamped);
-    setAgeInput(clamped.toString());
+    setAge(clamped.toString());
+  };
+
+  const handleWeightBlur = () => {
+    let val = parseFloat(weight);
+    if (isNaN(val) || val <= 0) val = 75;
+    setWeight(val.toString());
+  };
+
+  const handleHeightCmBlur = () => {
+    let val = parseFloat(heightCm);
+    if (isNaN(val) || val <= 0) val = 175;
+    setHeightCm(val.toString());
+  };
+
+  const handleHeightFtBlur = () => {
+    let val = parseFloat(heightFt);
+    if (isNaN(val) || val < 0) val = 5;
+    setHeightFt(val.toString());
+  };
+
+  const handleHeightInBlur = () => {
+    let val = parseFloat(heightIn);
+    if (isNaN(val) || val < 0) val = 0;
+    setHeightIn(val.toString());
   };
 
   const handleCustomMacroChange = (type: 'p' | 'c' | 'f', val: number) => {
@@ -176,8 +203,8 @@ Macros:
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Age (15-100)</label>
               <input
                 type="number"
-                value={ageInput}
-                onChange={e => setAgeInput(e.target.value)}
+                value={age}
+                onChange={e => setAge(e.target.value)}
                 onBlur={handleAgeBlur}
                 placeholder="25"
                 className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none"
@@ -195,24 +222,48 @@ Macros:
 
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Weight ({unit === 'metric' ? 'kg' : 'lbs'})</label>
-            <input type="number" value={weight} onChange={e => setWeight(parseFloat(e.target.value) || 0)} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none" />
+            <input
+              type="number"
+              value={weight}
+              onChange={e => setWeight(e.target.value)}
+              onBlur={handleWeightBlur}
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none"
+            />
           </div>
 
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Height</label>
             {unit === 'metric' ? (
               <div className="relative">
-                <input type="number" value={heightCm} onChange={e => setHeightCm(parseInt(e.target.value) || 0)} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none" />
+                <input
+                  type="number"
+                  value={heightCm}
+                  onChange={e => setHeightCm(e.target.value)}
+                  onBlur={handleHeightCmBlur}
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none"
+                />
                 <span className="absolute right-4 top-3 text-xs font-bold text-slate-400">cm</span>
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative">
-                  <input type="number" value={heightFt} onChange={e => setHeightFt(parseInt(e.target.value) || 0)} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none" />
+                  <input
+                    type="number"
+                    value={heightFt}
+                    onChange={e => setHeightFt(e.target.value)}
+                    onBlur={handleHeightFtBlur}
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none"
+                  />
                   <span className="absolute right-4 top-3 text-xs font-bold text-slate-400">ft</span>
                 </div>
                 <div className="relative">
-                  <input type="number" value={heightIn} onChange={e => setHeightIn(parseInt(e.target.value) || 0)} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none" />
+                  <input
+                    type="number"
+                    value={heightIn}
+                    onChange={e => setHeightIn(e.target.value)}
+                    onBlur={handleHeightInBlur}
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none"
+                  />
                   <span className="absolute right-4 top-3 text-xs font-bold text-slate-400">in</span>
                 </div>
               </div>

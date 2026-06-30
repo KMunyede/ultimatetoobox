@@ -15,7 +15,7 @@ export function SleepCycleCalculatorTool() {
   // --- State ---
   const [mode, setMode] = useState<Mode>("wake_up");
   const [inputTime, setInputTime] = useState("07:00");
-  const [fallAsleepMins, setFallAsleepMins] = useState(14);
+  const [fallAsleepMins, setFallAsleepMins] = useState<string>("14");
   const [results, setResults] = useState<SleepTime[] | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [copyStatus, setCopyStatus] = useState(false);
@@ -34,6 +34,8 @@ export function SleepCycleCalculatorTool() {
     const baseDate = new Date();
     baseDate.setHours(hours, minutes, 0, 0);
 
+    const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
+
     const cycleCounts = [6, 5, 4, 3];
     const calculated: SleepTime[] = cycleCounts.map((cycles) => {
       const totalMinutes = cycles * 90;
@@ -41,10 +43,10 @@ export function SleepCycleCalculatorTool() {
 
       if (mode === "wake_up") {
         // bedTime = wakeTime - (cycles * 90) - fallAsleepMins
-        resultDate.setMinutes(resultDate.getMinutes() - totalMinutes - fallAsleepMins);
+        resultDate.setMinutes(resultDate.getMinutes() - totalMinutes - fMins);
       } else {
         // wakeTime = bedTime + fallAsleepMins + (cycles * 90)
-        resultDate.setMinutes(resultDate.getMinutes() + totalMinutes + fallAsleepMins);
+        resultDate.setMinutes(resultDate.getMinutes() + totalMinutes + fMins);
       }
 
       const timeStr = resultDate.toLocaleTimeString([], {
@@ -77,9 +79,10 @@ export function SleepCycleCalculatorTool() {
 
   const handleCopy = () => {
     if (!results) return;
+    const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
     const header = mode === "wake_up"
-      ? `Optimal Bedtimes for waking at ${inputTime}:`
-      : `Optimal Wakeup Times for sleeping at ${inputTime}:`;
+      ? `Optimal Bedtimes for waking at ${inputTime} (with ${fMins}m fall asleep):`
+      : `Optimal Wakeup Times for sleeping at ${inputTime} (with ${fMins}m fall asleep):`;
 
     const body = results
       .map(r => `- ${r.time} (${r.cycles} cycles, ${r.duration}) [${r.quality.toUpperCase()}]`)
@@ -161,9 +164,9 @@ export function SleepCycleCalculatorTool() {
           {[5, 10, 14, 20, 30].map((mins) => (
             <button
               key={mins}
-              onClick={() => setFallAsleepMins(mins)}
+              onClick={() => setFallAsleepMins(mins.toString())}
               className={`px-6 py-2 rounded-full text-xs font-black transition-all ${
-                fallAsleepMins === mins
+                fallAsleepMins === mins.toString()
                   ? "bg-rose-600 text-white shadow-lg shadow-rose-500/30 scale-105"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
