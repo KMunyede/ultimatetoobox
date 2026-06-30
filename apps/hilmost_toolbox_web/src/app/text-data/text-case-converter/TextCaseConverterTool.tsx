@@ -460,7 +460,6 @@ export function TextCaseConverterTool() {
             Additionally, our tool is perfect for SEO professionals who need to generate clean URL slugs. Using the <code>kebab-case</code> or <code>dot.case</code> functions, you can instantly turn a page title into a search-engine-friendly address without worrying about illegal characters or inconsistent capitalization.
           </p>
 
-          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8">Frequently Asked Questions</h2>
           <FAQAccordion items={faqs} />
         </section>
       </div>

@@ -102,9 +102,9 @@ export function AstrophysicsCalculatorClient({
   initialType?: CalcType
 }) {
   const [calcType, setCalcType] = useState<CalcType>(initialType || "gravity");
-  const [val1, setVal1] = useState(CONSTANTS.earthMass);
-  const [val2, setVal2] = useState(CONSTANTS.solarMass);
-  const [val3, setVal3] = useState(CONSTANTS.earthSunDist);
+  const [val1, setVal1] = useState(CONSTANTS.earthMass.toString());
+  const [val2, setVal2] = useState(CONSTANTS.solarMass.toString());
+  const [val3, setVal3] = useState(CONSTANTS.earthSunDist.toString());
 
   const [result, setResult] = useState("");
   const [humanResult, setHumanResult] = useState("");
@@ -134,56 +134,60 @@ export function AstrophysicsCalculatorClient({
     let latex = "";
     let python = "";
 
+    const v1 = parseFloat(val1) || 0;
+    const v2 = parseFloat(val2) || 0;
+    const v3 = parseFloat(val3) || 0;
+
     switch (calcType) {
       case "gravity":
-        res = (CONSTANTS.G * val1 * val2) / Math.pow(val3, 2);
-        expr = `G(${val1.toExponential(2)} * ${val2.toExponential(2)}) / ${val3.toExponential(2)}²`;
+        res = (CONSTANTS.G * v1 * v2) / Math.pow(v3, 2);
+        expr = `G(${v1.toExponential(2)} * ${v2.toExponential(2)}) / ${v3.toExponential(2)}²`;
         unit = "newtons";
         latex = `F = G \\frac{m_1 m_2}{r^2} = ${res.toExponential(4)} \\text{ N}`;
-        python = `G = 6.67430e-11\nm1 = ${val1}\nm2 = ${val2}\nr = ${val3}\nF = (G * m1 * m2) / (r**2)`;
+        python = `G = 6.67430e-11\nm1 = ${v1}\nm2 = ${v2}\nr = ${v3}\nF = (G * m1 * m2) / (r**2)`;
         break;
       case "orbital":
-        res = Math.sqrt((CONSTANTS.G * val1) / val3);
-        expr = `√(G * ${val1.toExponential(2)} / ${val3.toExponential(2)})`;
+        res = Math.sqrt((CONSTANTS.G * v1) / v3);
+        expr = `√(G * ${v1.toExponential(2)} / ${v3.toExponential(2)})`;
         unit = "m/s";
         latex = `v_o = \\sqrt{\\frac{GM}{r}} = ${res.toExponential(4)} \\text{ m/s}`;
-        python = `G = 6.67430e-11\nM = ${val1}\nr = ${val3}\nv_o = (G * M / r)**0.5`;
+        python = `G = 6.67430e-11\nM = ${v1}\nr = ${v3}\nv_o = (G * M / r)**0.5`;
         break;
       case "escape":
-        res = Math.sqrt((2 * CONSTANTS.G * val1) / val3);
-        expr = `√(2 * G * ${val1.toExponential(2)} / ${val3.toExponential(2)})`;
+        res = Math.sqrt((2 * CONSTANTS.G * v1) / v3);
+        expr = `√(2 * G * ${v1.toExponential(2)} / ${v3.toExponential(2)})`;
         unit = "m/s";
         latex = `v_e = \\sqrt{\\frac{2GM}{r}} = ${res.toExponential(4)} \\text{ m/s}`;
-        python = `G = 6.67430e-11\nM = ${val1}\nr = ${val3}\nv_e = (2 * G * M / r)**0.5`;
+        python = `G = 6.67430e-11\nM = ${v1}\nr = ${v3}\nv_e = (2 * G * M / r)**0.5`;
         break;
       case "luminosity":
-        res = 4 * Math.PI * Math.pow(val1, 2) * CONSTANTS.sigma * Math.pow(val2, 4);
-        expr = `4π * ${val1.toExponential(2)}² * σ * ${val2}⁴`;
+        res = 4 * Math.PI * Math.pow(v1, 2) * CONSTANTS.sigma * Math.pow(v2, 4);
+        expr = `4π * ${v1.toExponential(2)}² * σ * ${v2}⁴`;
         unit = "watts";
         latex = `L = 4\\pi R^2 \\sigma T^4 = ${res.toExponential(4)} \\text{ W}`;
-        python = `import math\nsigma = 5.67037e-8\nR = ${val1}\nT = ${val2}\nL = 4 * math.pi * (R**2) * sigma * (T**4)`;
+        python = `import math\nsigma = 5.67037e-8\nR = ${v1}\nT = ${v2}\nL = 4 * math.pi * (R**2) * sigma * (T**4)`;
         break;
       case "hubble":
-        res = val1 / CONSTANTS.H0;
-        expr = `${val1} / H0`;
+        res = v1 / CONSTANTS.H0;
+        expr = `${v1} / H0`;
         unit = "megaparsecs";
         latex = `d = \\frac{v}{H_0} = ${res.toExponential(4)} \\text{ Mpc}`;
-        python = `v = ${val1}\nH0 = 70\nd = v / H0`;
+        python = `v = ${v1}\nH0 = 70\nd = v / H0`;
         break;
       case "schwarzschild":
-        res = (2 * CONSTANTS.G * val1) / Math.pow(CONSTANTS.c, 2);
-        expr = `(2 * G * ${val1.toExponential(2)}) / c²`;
+        res = (2 * CONSTANTS.G * v1) / Math.pow(CONSTANTS.c, 2);
+        expr = `(2 * G * ${v1.toExponential(2)}) / c²`;
         unit = "meters";
         latex = `R_s = \\frac{2GM}{c^2} = ${res.toExponential(4)} \\text{ m}`;
-        python = `G = 6.67430e-11\nc = 299792458\nM = ${val1}\nRs = (2 * G * M) / (c**2)`;
+        python = `G = 6.67430e-11\nc = 299792458\nM = ${v1}\nRs = (2 * G * M) / (c**2)`;
         break;
       case "redshift":
         // simple v = c*z for low z
-        res = val1 * CONSTANTS.c;
-        expr = `${val1} * c`;
+        res = v1 * CONSTANTS.c;
+        expr = `${v1} * c`;
         unit = "m/s";
         latex = `v \\approx cz = ${res.toExponential(4)} \\text{ m/s}`;
-        python = `c = 299792458\nz = ${val1}\nv = c * z`;
+        python = `c = 299792458\nz = ${v1}\nv = c * z`;
         break;
     }
 
@@ -312,22 +316,22 @@ export function AstrophysicsCalculatorClient({
           <div className="lg:col-span-3 flex flex-col gap-4">
             {calcType === "gravity" && (
               <>
-                <ScientificInput label="Mass 1 (m1)" value={val1} onChange={setVal1} presets={MASS_PRESETS} units={MASS_UNITS} />
-                <ScientificInput label="Mass 2 (m2)" value={val2} onChange={setVal2} presets={MASS_PRESETS} units={MASS_UNITS} />
-                <ScientificInput label="Distance (r)" value={val3} onChange={setVal3} presets={DIST_PRESETS} units={DIST_UNITS} />
+                <ScientificInput label="Mass 1 (m1)" value={parseFloat(val1) || 0} onChange={v => setVal1(v.toString())} presets={MASS_PRESETS} units={MASS_UNITS} />
+                <ScientificInput label="Mass 2 (m2)" value={parseFloat(val2) || 0} onChange={v => setVal2(v.toString())} presets={MASS_PRESETS} units={MASS_UNITS} />
+                <ScientificInput label="Distance (r)" value={parseFloat(val3) || 0} onChange={v => setVal3(v.toString())} presets={DIST_PRESETS} units={DIST_UNITS} />
               </>
             )}
             {(calcType === "orbital" || calcType === "escape" || calcType === "schwarzschild") && (
               <>
-                <ScientificInput label="Central Mass (M)" value={val1} onChange={setVal1} presets={MASS_PRESETS} units={MASS_UNITS} />
+                <ScientificInput label="Central Mass (M)" value={parseFloat(val1) || 0} onChange={v => setVal1(v.toString())} presets={MASS_PRESETS} units={MASS_UNITS} />
                 {calcType !== "schwarzschild" && (
-                   <ScientificInput label="Radius/Distance (r)" value={val3} onChange={setVal3} presets={DIST_PRESETS} units={DIST_UNITS} />
+                   <ScientificInput label="Radius/Distance (r)" value={parseFloat(val3) || 0} onChange={v => setVal3(v.toString())} presets={DIST_PRESETS} units={DIST_UNITS} />
                 )}
               </>
             )}
             {calcType === "luminosity" && (
               <>
-                <ScientificInput label="Star Radius (R)" value={val1} onChange={setVal1} presets={DIST_PRESETS} units={DIST_UNITS} />
+                <ScientificInput label="Star Radius (R)" value={parseFloat(val1) || 0} onChange={v => setVal1(v.toString())} presets={DIST_PRESETS} units={DIST_UNITS} />
                 <div className="flex flex-col gap-2 p-4 bg-canvas-muted border border-border-base rounded-2xl shadow-inner">
                   <label className="text-[11px] font-black text-text-muted uppercase tracking-widest ml-1">Surface Temperature (T)</label>
                   <div className="flex items-center gap-3">
@@ -335,7 +339,7 @@ export function AstrophysicsCalculatorClient({
                       <NumericInput
                         title="Surface Temperature Input"
                         value={val2}
-                        onChange={val => setVal2(parseFloat(val) || 0)}
+                        onChange={val => setVal2(val)}
                         className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                         placeholder="5778"
                       />
@@ -353,7 +357,7 @@ export function AstrophysicsCalculatorClient({
                     <NumericInput
                       title="Recessional Velocity Input"
                       value={val1}
-                      onChange={val => setVal1(parseFloat(val) || 0)}
+                      onChange={val => setVal1(val)}
                       className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                       placeholder="1000"
                     />
@@ -370,7 +374,7 @@ export function AstrophysicsCalculatorClient({
                     <NumericInput
                       title="Redshift Input"
                       value={val1}
-                      onChange={val => setVal1(parseFloat(val) || 0)}
+                      onChange={val => setVal1(val)}
                       className="w-full bg-canvas-card border border-border-base rounded-xl px-4 py-2.5 text-lg font-mono font-bold text-text-primary outline-none focus:border-brand-primary transition-colors"
                       placeholder="0.1"
                     />

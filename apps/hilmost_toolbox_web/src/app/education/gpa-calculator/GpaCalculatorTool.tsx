@@ -18,7 +18,7 @@ import { FAQAccordion } from "@utilitiessite/ui";
 interface Course {
   id: string;
   name: string;
-  credits: number;
+  credits: string;
   grade: string;
 }
 
@@ -45,9 +45,9 @@ export function GpaCalculatorTool() {
   const [inputMode, setInputMode] = useState<'letter' | 'percentage' | 'points'>('letter');
 
   const initialCourses: Course[] = [
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: 3, grade: "A" },
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: 3, grade: "A" },
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: 3, grade: "A" },
+    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
   ];
 
   const [semesterCourses, setSemesterCourses] = useState<Course[]>(initialCourses);
@@ -102,8 +102,9 @@ export function GpaCalculatorTool() {
 
     semesterCourses.forEach(c => {
       const gp = getPointsFromGrade(c.grade, inputMode, scale);
-      totalPoints += gp * c.credits;
-      totalCredits += c.credits;
+      const creditsNum = parseFloat(c.credits) || 0;
+      totalPoints += gp * creditsNum;
+      totalCredits += creditsNum;
     });
 
     const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
@@ -134,7 +135,7 @@ export function GpaCalculatorTool() {
     const newCourse: Course = {
       id: Math.random().toString(36).substr(2, 9),
       name: "",
-      credits: 3,
+      credits: "3",
       grade: inputMode === 'letter' ? "A" : inputMode === 'percentage' ? "95" : "4.0"
     };
     setSemesterCourses([...semesterCourses, newCourse]);
@@ -246,7 +247,12 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                       min={1}
                       max={6}
                       value={course.credits}
-                      onChange={(e) => updateCourse(course.id, { credits: parseInt(e.target.value) || 0 })}
+                      onChange={(e) => updateCourse(course.id, { credits: e.target.value })}
+                      onBlur={() => {
+                        const val = parseInt(course.credits);
+                        const clamped = isNaN(val) ? 3 : Math.min(20, Math.max(0, val));
+                        updateCourse(course.id, { credits: clamped.toString() });
+                      }}
                       className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm text-center focus:border-brand-primary outline-none"
                     />
                   </div>
@@ -385,7 +391,6 @@ Total Credits: ${cumulativeResults.totalCredits}`;
             Strategic academic forecasting becomes simple with our <strong>Cumulative GPA</strong> mode. By inputting your previous overall GPA and total credit hours, you can see exactly how your current semester performance will shift your long-term average. Best of all, following the Hilmost "Zero-Server" commitment, your academic data is processed entirely on your device and is never stored on our servers.
           </p>
 
-          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8 uppercase tracking-tight">Frequently Asked Questions</h2>
           <FAQAccordion items={faqs} />
         </section>
       </div>

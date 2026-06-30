@@ -17,7 +17,7 @@ type Category = 'income' | 'fixed' | 'variable' | 'savings';
 interface BudgetItem {
   id: string;
   name: string;
-  amount: number;
+  amount: string;
   category: Category;
 }
 
@@ -47,10 +47,10 @@ export function BudgetClient() {
         // Initial defaults
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems([
-            { id: '1', name: 'Monthly Salary', amount: 5000, category: 'income' },
-            { id: '2', name: 'Rent/Mortgage', amount: 1500, category: 'fixed' },
-            { id: '3', name: 'Groceries', amount: 400, category: 'variable' },
-            { id: '4', name: 'Savings', amount: 500, category: 'savings' },
+            { id: '1', name: 'Monthly Salary', amount: '5000', category: 'income' },
+            { id: '2', name: 'Rent/Mortgage', amount: '1500', category: 'fixed' },
+            { id: '3', name: 'Groceries', amount: '400', category: 'variable' },
+            { id: '4', name: 'Savings', amount: '500', category: 'savings' },
         ]);
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -67,8 +67,9 @@ export function BudgetClient() {
   const totals = useMemo(() => {
     const res = { income: 0, fixed: 0, variable: 0, savings: 0, expenses: 0 };
     items.forEach(item => {
-      res[item.category] += item.amount;
-      if (item.category !== 'income') res.expenses += item.amount;
+      const amountNum = parseFloat(item.amount) || 0;
+      res[item.category] += amountNum;
+      if (item.category !== 'income') res.expenses += amountNum;
     });
     return res;
   }, [items]);
@@ -79,7 +80,7 @@ export function BudgetClient() {
     const newItem: BudgetItem = {
       id: Date.now().toString(),
       name: "",
-      amount: 0,
+      amount: "",
       category
     };
     setItems([...items, newItem]);
@@ -285,8 +286,8 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
                           <NumericInput
                               title="Item Amount"
                               className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
-                              value={item.amount || ""}
-                              onChange={val => onUpdate(item.id, { amount: parseFloat(val) || 0 })}
+                              value={item.amount}
+                              onChange={val => onUpdate(item.id, { amount: val })}
                           />
                         </TooltipUI>
                     </div>

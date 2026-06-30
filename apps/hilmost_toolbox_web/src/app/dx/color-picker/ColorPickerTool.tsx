@@ -106,8 +106,8 @@ const generatePalette = (h: number, s: number, l: number) => {
 
 export function ColorPickerTool() {
   const [hex, setHex] = useState("#3B82F6");
-  const [rgb, setRgb] = useState({ r: 59, g: 130, b: 246 });
-  const [hsl, setHsl] = useState({ h: 217, s: 91, l: 60 });
+  const [rgb, setRgb] = useState({ r: "59", g: "130", b: "246" });
+  const [hsl, setHsl] = useState({ h: "217", s: "91", l: "60" });
   const [contrastColor, setContrastColor] = useState("#FFFFFF");
   const [savedColors, setSavedColors] = useState<string[]>([]);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
@@ -129,21 +129,29 @@ export function ColorPickerTool() {
     if (!/^#[0-9A-F]{6}$/i.test(newHex)) return;
     setHex(newHex);
     const newRgb = hexToRgb(newHex);
-    setRgb(newRgb);
-    setHsl(rgbToHsl(newRgb.r, newRgb.g, newRgb.b));
+    setRgb({ r: newRgb.r.toString(), g: newRgb.g.toString(), b: newRgb.b.toString() });
+    const newHsl = rgbToHsl(newRgb.r, newRgb.g, newRgb.b);
+    setHsl({ h: newHsl.h.toString(), s: newHsl.s.toString(), l: newHsl.l.toString() });
   };
 
-  const updateFromRgb = (newRgb: { r: number, g: number, b: number }) => {
-    setRgb(newRgb);
-    const newHex = rgbToHex(newRgb.r, newRgb.g, newRgb.b);
+  const updateFromRgb = (newRgbStrings: { r: string, g: string, b: string }) => {
+    setRgb(newRgbStrings);
+    const r = parseInt(newRgbStrings.r) || 0;
+    const g = parseInt(newRgbStrings.g) || 0;
+    const b = parseInt(newRgbStrings.b) || 0;
+    const newHex = rgbToHex(r, g, b);
     setHex(newHex);
-    setHsl(rgbToHsl(newRgb.r, newRgb.g, newRgb.b));
+    const newHsl = rgbToHsl(r, g, b);
+    setHsl({ h: newHsl.h.toString(), s: newHsl.s.toString(), l: newHsl.l.toString() });
   };
 
-  const updateFromHsl = (newHsl: { h: number, s: number, l: number }) => {
-    setHsl(newHsl);
-    const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
-    setRgb(newRgb);
+  const updateFromHsl = (newHslStrings: { h: string, s: string, l: string }) => {
+    setHsl(newHslStrings);
+    const h = parseInt(newHslStrings.h) || 0;
+    const s = parseInt(newHslStrings.s) || 0;
+    const l = parseInt(newHslStrings.l) || 0;
+    const newRgb = hslToRgb(h, s, l);
+    setRgb({ r: newRgb.r.toString(), g: newRgb.g.toString(), b: newRgb.b.toString() });
     setHex(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
   };
 
@@ -165,13 +173,34 @@ export function ColorPickerTool() {
   };
 
   const contrastRatio = useMemo(() => {
-    const lum1 = getRelativeLuminance(rgb.r, rgb.g, rgb.b);
+    const r = parseInt(rgb.r) || 0;
+    const g = parseInt(rgb.g) || 0;
+    const b = parseInt(rgb.b) || 0;
+    const lum1 = getRelativeLuminance(r, g, b);
     const rgb2 = hexToRgb(contrastColor);
     const lum2 = getRelativeLuminance(rgb2.r, rgb2.g, rgb2.b);
     return getContrastRatio(lum1, lum2);
   }, [rgb, contrastColor]);
 
-  const palette = useMemo(() => generatePalette(hsl.h, hsl.s, hsl.l), [hsl]);
+  const palette = useMemo(() => {
+    const h = parseInt(hsl.h) || 0;
+    const s = parseInt(hsl.s) || 0;
+    const l = parseInt(hsl.l) || 0;
+    return generatePalette(h, s, l);
+  }, [hsl]);
+
+  const handleRgbBlur = (k: keyof typeof rgb) => {
+    const val = parseInt(rgb[k]);
+    const clamped = isNaN(val) ? 0 : Math.min(255, Math.max(0, val));
+    updateFromRgb({ ...rgb, [k]: clamped.toString() });
+  };
+
+  const handleHslBlur = (k: keyof typeof hsl) => {
+    const val = parseInt(hsl[k]);
+    const max = k === 'h' ? 360 : 100;
+    const clamped = isNaN(val) ? 0 : Math.min(max, Math.max(0, val));
+    updateFromHsl({ ...hsl, [k]: clamped.toString() });
+  };
 
   const faqs = [
     {
@@ -247,7 +276,8 @@ export function ColorPickerTool() {
                     min={0}
                     max={255}
                     value={rgb[k]}
-                    onChange={(e) => updateFromRgb({ ...rgb, [k]: Math.min(255, Math.max(0, parseInt(e.target.value) || 0)) })}
+                    onChange={(e) => updateFromRgb({ ...rgb, [k]: e.target.value })}
+                    onBlur={() => handleRgbBlur(k)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 px-2 text-center font-mono text-sm focus:border-brand-primary outline-none transition-all"
                   />
                   <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8px] font-black uppercase text-slate-400">{k}</span>
@@ -267,7 +297,8 @@ export function ColorPickerTool() {
                     min={0}
                     max={k === 'h' ? 360 : 100}
                     value={hsl[k]}
-                    onChange={(e) => updateFromHsl({ ...hsl, [k]: Math.min(k === 'h' ? 360 : 100, Math.max(0, parseInt(e.target.value) || 0)) })}
+                    onChange={(e) => updateFromHsl({ ...hsl, [k]: e.target.value })}
+                    onBlur={() => handleHslBlur(k)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 px-2 text-center font-mono text-sm focus:border-brand-primary outline-none transition-all"
                   />
                   <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8px] font-black uppercase text-slate-400">{k}</span>
@@ -283,8 +314,8 @@ export function ColorPickerTool() {
             <div className="flex items-center gap-4">
               <span className="w-4 text-xs font-black text-red-500">R</span>
               <input
-                type="range" min={0} max={255} value={rgb.r}
-                onChange={(e) => updateFromRgb({ ...rgb, r: parseInt(e.target.value) })}
+                type="range" min={0} max={255} value={parseInt(rgb.r) || 0}
+                onChange={(e) => updateFromRgb({ ...rgb, r: e.target.value })}
                 className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-red-500"
               />
               <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.r}</span>
@@ -292,8 +323,8 @@ export function ColorPickerTool() {
             <div className="flex items-center gap-4">
               <span className="w-4 text-xs font-black text-emerald-500">G</span>
               <input
-                type="range" min={0} max={255} value={rgb.g}
-                onChange={(e) => updateFromRgb({ ...rgb, g: parseInt(e.target.value) })}
+                type="range" min={0} max={255} value={parseInt(rgb.g) || 0}
+                onChange={(e) => updateFromRgb({ ...rgb, g: e.target.value })}
                 className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
               />
               <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.g}</span>
@@ -301,8 +332,8 @@ export function ColorPickerTool() {
             <div className="flex items-center gap-4">
               <span className="w-4 text-xs font-black text-blue-500">B</span>
               <input
-                type="range" min={0} max={255} value={rgb.b}
-                onChange={(e) => updateFromRgb({ ...rgb, b: parseInt(e.target.value) })}
+                type="range" min={0} max={255} value={parseInt(rgb.b) || 0}
+                onChange={(e) => updateFromRgb({ ...rgb, b: e.target.value })}
                 className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
               />
               <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.b}</span>
@@ -320,24 +351,34 @@ export function ColorPickerTool() {
             {copyStatus === 'hex' ? "Copied!" : "Copy HEX"}
           </button>
           <button
-            onClick={() => handleCopy(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'rgb')}
+            onClick={() => {
+              const r = parseInt(rgb.r) || 0;
+              const g = parseInt(rgb.g) || 0;
+              const b = parseInt(rgb.b) || 0;
+              handleCopy(`rgb(${r}, ${g}, ${b})`, 'rgb');
+            }}
             className="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 hover:bg-brand-primary/10 hover:text-brand-primary rounded-xl text-xs font-black uppercase transition-all"
           >
             {copyStatus === 'rgb' ? <Check size={14} /> : <Copy size={14} />}
             {copyStatus === 'rgb' ? "Copied!" : "Copy RGB"}
           </button>
           <button
-            onClick={() => handleCopy(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'hsl')}
+            onClick={() => {
+              const h = parseInt(hsl.h) || 0;
+              const s = parseInt(hsl.s) || 0;
+              const l = parseInt(hsl.l) || 0;
+              handleCopy(`hsl(${h}, ${s}%, ${l}%)`, 'hsl');
+            }}
             className="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 hover:bg-brand-primary/10 hover:text-brand-primary rounded-xl text-xs font-black uppercase transition-all"
           >
             {copyStatus === 'hsl' ? <Check size={14} /> : <Copy size={14} />}
             {copyStatus === 'hsl' ? "Copied!" : "Copy HSL"}
-          </button> section
+          </button>
         </section>
 
         {/* 5. Color Preview */}
         <section className="relative h-32 rounded-3xl shadow-inner flex items-center justify-center overflow-hidden border-2 border-slate-100 dark:border-slate-800" style={{ backgroundColor: hex }}>
-          <span className="text-2xl font-black font-mono tracking-tighter" style={{ color: hsl.l > 60 ? '#000000' : '#FFFFFF' }}>
+          <span className="text-2xl font-black font-mono tracking-tighter" style={{ color: (parseInt(hsl.l) || 0) > 60 ? '#000000' : '#FFFFFF' }}>
             {hex}
           </span>
         </section>
@@ -482,7 +523,6 @@ export function ColorPickerTool() {
             Harmony is another key aspect of design. Using our <strong>Palette Generator</strong>, you can instantly discover complementary, analogous, and triadic color schemes based on your primary selection. Best of all, at Hilmost Software Corporation, we prioritize your security. This tool runs entirely in your browser using pure TypeScript logic — meaning your colors and data are never sent to a server.
           </p>
 
-          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8 uppercase tracking-tight">Frequently Asked Questions</h2>
           <FAQAccordion items={faqs} />
         </section>
       </div>

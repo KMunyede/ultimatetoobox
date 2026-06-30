@@ -124,7 +124,7 @@ export function EquationSolverClient({
     return LIBRARY[category][0];
   });
   const [target, setTarget] = useState<string>(equation.variables[0].id);
-  const [inputs, setInputs] = useState<Record<string, number>>({});
+  const [inputs, setInputs] = useState<Record<string, string>>({});
   const [inputUnits, setInputUnits] = useState<Record<string, number>>({});
   const [result, setResult] = useState("");
 
@@ -134,7 +134,8 @@ export function EquationSolverClient({
     const values: Record<string, number> = {};
     equation.variables.forEach(v => {
       if (v.id !== target) {
-        values[v.id] = (inputs[v.id] || 0) * (inputUnits[v.id] || v.units[0].value);
+        const rawVal = inputs[v.id] || "";
+        values[v.id] = (parseFloat(rawVal) || 0) * (inputUnits[v.id] || v.units[0].value);
       }
     });
 
@@ -240,7 +241,7 @@ export function EquationSolverClient({
                         <NumericInput
                           title={`${v.label} Input`}
                           value={inputs[v.id] || ""}
-                          onChange={val => setInputs(prev => ({ ...prev, [v.id]: parseFloat(val) || 0 }))}
+                          onChange={val => setInputs(prev => ({ ...prev, [v.id]: val }))}
                           className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 font-mono font-bold text-lg text-text-primary outline-none focus:border-brand-primary transition-colors"
                           placeholder="0.00"
                         />

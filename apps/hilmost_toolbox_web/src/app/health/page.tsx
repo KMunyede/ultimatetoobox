@@ -175,7 +175,6 @@ export default function HealthHub() {
       </ToolArticle>
 
       <div className="mt-16">
-        <h2 className="text-2xl font-black mb-8 uppercase tracking-tight">Frequently Asked Questions</h2>
         <FAQAccordion items={faqs} />
       </div>
     </div>
