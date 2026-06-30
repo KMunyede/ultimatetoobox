@@ -1,6 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { Button } from "../../../components/ui/Button";
+import { PillSelector } from "../../../components/ui/PillSelector";
+import { NumberInput } from "../../../components/ui/NumberInput";
+import { Input } from "../../../components/ui/Input";
+import {
+  RotateCcw,
+  Copy,
+  Check,
+} from "lucide-react";
 
 type Mode = "wake_up" | "bed_time";
 
@@ -98,29 +107,15 @@ export function SleepCycleCalculatorTool() {
     <div className="max-w-4xl mx-auto my-8 space-y-12">
 
       {/* 1. Mode Toggle Pills */}
-      <div className="flex justify-center">
-        <div className="inline-flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl">
-          <button
-            onClick={() => { setMode("wake_up"); setResults(null); }}
-            className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-              mode === "wake_up"
-                ? "bg-white dark:bg-slate-700 text-rose-600 shadow-sm"
-                : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
-            }`}
-          >
-            Wake Up At
-          </button>
-          <button
-            onClick={() => { setMode("bed_time"); setResults(null); }}
-            className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-              mode === "bed_time"
-                ? "bg-white dark:bg-slate-700 text-rose-600 shadow-sm"
-                : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
-            }`}
-          >
-            Go To Bed At
-          </button>
-        </div>
+      <div className="flex justify-center" id="mode-toggle">
+        <PillSelector
+          value={mode}
+          onChange={(m) => { setMode(m); setResults(null); }}
+          options={[
+            { label: "Wake Up At", value: "wake_up" },
+            { label: "Go To Bed At", value: "bed_time" },
+          ]}
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -144,47 +139,38 @@ export function SleepCycleCalculatorTool() {
         </div>
 
         {/* 3. Time Input Section */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-4">
-          <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400">
-            {mode === "wake_up" ? "I want to wake up at..." : "I'm going to bed at..."}
-          </label>
-          <input
+        <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 flex items-center" id="time-input-section">
+          <Input
             type="time"
+            label={mode === "wake_up" ? "I want to wake up at..." : "I'm going to bed at..."}
             value={inputTime}
             onChange={(e) => setInputTime(e.target.value)}
-            className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-100 dark:border-slate-800 rounded-2xl p-4 text-3xl font-black text-center focus:border-rose-500 outline-none transition-all"
+            className="text-3xl font-black text-center p-4 h-auto"
           />
         </div>
       </div>
 
       {/* 4. Fall Asleep Pills */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-6">
-        <h3 className="text-center text-[10px] font-black uppercase tracking-widest text-slate-400">How long does it take you to fall asleep?</h3>
-        <div className="flex flex-wrap justify-center gap-3">
-          {[5, 10, 14, 20, 30].map((mins) => (
-            <button
-              key={mins}
-              onClick={() => setFallAsleepMins(mins.toString())}
-              className={`px-6 py-2 rounded-full text-xs font-black transition-all ${
-                fallAsleepMins === mins.toString()
-                  ? "bg-rose-600 text-white shadow-lg shadow-rose-500/30 scale-105"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700"
-              }`}
-            >
-              {mins} min{mins === 14 && " (Avg)"}
-            </button>
-          ))}
-        </div>
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8" id="fall-asleep-section">
+        <PillSelector
+          label="How long does it take you to fall asleep?"
+          value={fallAsleepMins}
+          onChange={setFallAsleepMins}
+          options={[
+            { label: "5 min", value: "5" },
+            { label: "10 min", value: "10" },
+            { label: "14 min (Avg)", value: "14" },
+            { label: "20 min", value: "20" },
+            { label: "30 min", value: "30" },
+          ]}
+        />
       </div>
 
       {/* 5. Calculate Button */}
-      <div className="flex justify-center">
-        <button
-          onClick={calculate}
-          className="px-12 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl text-xs font-black uppercase tracking-[0.3em] shadow-2xl hover:scale-105 transition-all active:scale-95"
-        >
+      <div className="flex justify-center" id="calculate-btn">
+        <Button onClick={calculate}>
           Calculate Results
-        </button>
+        </Button>
       </div>
 
       {/* 6. Results Section */}
@@ -202,7 +188,7 @@ export function SleepCycleCalculatorTool() {
               >
                 <div className="flex justify-between items-start mb-6">
                   <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{res.cycles} Cycles</span>
-                  <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest ${
+                  <span className={`px-2 py-0.5 rounded-full text-[8.5px] font-black uppercase tracking-widest ${
                     res.quality === "optimal" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
                     res.quality === "good" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
                     "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
@@ -214,7 +200,7 @@ export function SleepCycleCalculatorTool() {
                 <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{res.duration} sleep</div>
 
                 {res.quality === "optimal" && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[8.5px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
                     Optimal
                   </div>
                 )}
@@ -223,11 +209,8 @@ export function SleepCycleCalculatorTool() {
           </div>
 
           {/* 8. Copy Results Button */}
-          <div className="flex justify-center">
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-2 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
-            >
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button variant="pill" onClick={handleCopy}>
               <svg className={`w-4 h-4 ${copyStatus ? 'text-emerald-500' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {copyStatus ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
@@ -236,7 +219,10 @@ export function SleepCycleCalculatorTool() {
                 )}
               </svg>
               {copyStatus ? "Copied!" : "Copy Results"}
-            </button>
+            </Button>
+            <Button variant="secondary" onClick={() => setResults(null)}>
+              <RotateCcw size={16} /> Reset
+            </Button>
           </div>
         </div>
       )}

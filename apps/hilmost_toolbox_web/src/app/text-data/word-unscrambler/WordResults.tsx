@@ -83,7 +83,7 @@ export default function WordResults({ results }: WordResultsProps) {
                       {word}
                     </span>
                     <div className="flex items-center gap-1 mt-0.5">
-                      <span className="text-[9px] font-black text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
+                      <span className="text-[10px] font-black text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
                         {score} Points
                       </span>
                     </div>

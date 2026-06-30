@@ -101,11 +101,11 @@ export function EPSCalculatorClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-base">
             <div className="text-center space-y-1">
-                <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest">Net Profit</span>
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Net Profit</span>
                 <p className="text-sm font-bold text-text-primary">${netProfit.toLocaleString()}</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest">Total Diluted Sh.</span>
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Diluted Sh.</span>
                 <p className="text-sm font-bold text-text-primary">{totalDilutedShares.toLocaleString()}</p>
             </div>
           </div>

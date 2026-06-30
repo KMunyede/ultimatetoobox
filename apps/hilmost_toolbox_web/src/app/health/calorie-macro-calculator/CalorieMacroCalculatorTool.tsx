@@ -286,7 +286,7 @@ Macros:
               >
                 <div className="flex justify-between items-center">
                   <span className={`text-xs font-bold ${activityLevel === key ? 'text-rose-600' : 'text-slate-600'}`}>{ACTIVITY_CONFIG[key].label}</span>
-                  <span className="text-[9px] opacity-40 font-black">{ACTIVITY_CONFIG[key].desc}</span>
+                  <span className="text-[10px] opacity-40 font-black">{ACTIVITY_CONFIG[key].desc}</span>
                 </div>
               </button>
             ))}
@@ -363,15 +363,15 @@ Macros:
                <div className="grid grid-cols-3 gap-4">
                   <div className="bg-white/10 p-3 rounded-2xl">
                     <p className="text-xl font-black">{results.protein}g</p>
-                    <p className="text-[9px] font-bold opacity-60 uppercase">{useCustomMacros ? customProtein : GOAL_CONFIG[goal].p}%</p>
+                    <p className="text-[10px] font-bold opacity-60 uppercase">{useCustomMacros ? customProtein : GOAL_CONFIG[goal].p}%</p>
                   </div>
                   <div className="bg-white/10 p-3 rounded-2xl">
                     <p className="text-xl font-black">{results.carbs}g</p>
-                    <p className="text-[9px] font-bold opacity-60 uppercase">{useCustomMacros ? customCarbs : GOAL_CONFIG[goal].c}%</p>
+                    <p className="text-[10px] font-bold opacity-60 uppercase">{useCustomMacros ? customCarbs : GOAL_CONFIG[goal].c}%</p>
                   </div>
                   <div className="bg-white/10 p-3 rounded-2xl">
                     <p className="text-xl font-black">{results.fat}g</p>
-                    <p className="text-[9px] font-bold opacity-60 uppercase">{useCustomMacros ? customFat : GOAL_CONFIG[goal].f}%</p>
+                    <p className="text-[10px] font-bold opacity-60 uppercase">{useCustomMacros ? customFat : GOAL_CONFIG[goal].f}%</p>
                   </div>
                </div>
             </div>

@@ -280,7 +280,7 @@ export function ColorPickerTool() {
                     onBlur={() => handleRgbBlur(k)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 px-2 text-center font-mono text-sm focus:border-brand-primary outline-none transition-all"
                   />
-                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8px] font-black uppercase text-slate-400">{k}</span>
+                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8.5px] font-black uppercase text-slate-400">{k}</span>
                 </div>
               ))}
             </div>
@@ -301,7 +301,7 @@ export function ColorPickerTool() {
                     onBlur={() => handleHslBlur(k)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 px-2 text-center font-mono text-sm focus:border-brand-primary outline-none transition-all"
                   />
-                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8px] font-black uppercase text-slate-400">{k}</span>
+                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8.5px] font-black uppercase text-slate-400">{k}</span>
                 </div>
               ))}
             </div>
@@ -416,13 +416,13 @@ export function ColorPickerTool() {
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Contrast Ratio</p>
 
               <div className="grid grid-cols-2 gap-2 mt-6">
-                {[
+                {([
                   { label: "AA Normal", pass: contrastRatio >= 4.5 },
                   { label: "AA Large", pass: contrastRatio >= 3 },
                   { label: "AAA Normal", pass: contrastRatio >= 7 },
                   { label: "AAA Large", pass: contrastRatio >= 4.5 },
-                ].map((check) => (
-                  <div key={check.label} className={`py-1.5 px-2 rounded-lg text-[9px] font-black uppercase border-2 flex items-center justify-center gap-1.5 ${check.pass ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-red-500/20 bg-red-500/10 text-red-600 opacity-40'}`}>
+                ] as const).map((check) => (
+                  <div key={check.label} className={`py-1.5 px-2 rounded-lg text-[10px] font-black uppercase border-2 flex items-center justify-center gap-1.5 ${check.pass ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-red-500/20 bg-red-500/10 text-red-600 opacity-40'}`}>
                     {check.pass ? <Check size={10} /> : <X size={10} />}
                     {check.label}
                   </div>
@@ -479,7 +479,7 @@ export function ColorPickerTool() {
                 className="w-16 aspect-square rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-all group"
             >
                 <Plus size={20} className="group-active:scale-125 transition-transform" />
-                <span className="text-[8px] font-black uppercase mt-1">Save</span>
+                <span className="text-[8.5px] font-black uppercase mt-1">Save</span>
             </button>
 
             {savedColors.map((c, i) => (

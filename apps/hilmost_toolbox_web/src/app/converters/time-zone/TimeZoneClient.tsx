@@ -508,7 +508,7 @@ export function TimeZoneClient() {
                                     key={hour}
                                     className={`w-6 h-8 flex flex-col items-center justify-center rounded transition-all shrink-0 ${color} ${isCurrent ? 'ring-2 ring-brand-primary scale-110 shadow-sm z-10' : 'opacity-60'}`}
                                   >
-                                    <span className="text-[8px] font-black">{hour.toString().padStart(2, '0')}</span>
+                                    <span className="text-[8.5px] font-black">{hour.toString().padStart(2, '0')}</span>
                                     {isCurrent && <div className="w-1 h-1 bg-brand-primary rounded-full mt-0.5" />}
                                   </div>
                                 );
@@ -518,9 +518,9 @@ export function TimeZoneClient() {
 
                           <div className="flex items-center gap-3 shrink-0">
                             {isDST(member.timezone) && (
-                              <span className="text-[9px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+                              <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
                             )}
-                            <div className={`text-[10px] font-black px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
+                            <div className={`text-[11px] font-black px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
                               {availability.label}
                             </div>
                             <button
