@@ -56,10 +56,7 @@ export function Header() {
           </div>
 
           {/* Row 2: Quick Links Pills (Mobile Only) */}
-          <div className="lg:hidden grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <Link href={domains.toolbox + "/education"} className="flex items-center justify-center gap-1.5 py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
-              <GraduationCap size={12} /> Education
-            </Link>
+          <div className="lg:hidden grid grid-cols-1 sm:grid-cols-3 gap-2">
             <Link href={domains.toolbox + "/guides"} className="flex items-center justify-center py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Guides
             </Link>
@@ -77,13 +74,6 @@ export function Header() {
 
             {/* Desktop-only Navigation Links */}
             <div className="hidden lg:flex items-center gap-6">
-              <Link href={domains.toolbox + "/education"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors flex items-center gap-1.5">
-                <GraduationCap size={16} />
-                Education
-              </Link>
-              <Link href={domains.toolbox + "/guides"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
-                Guides
-              </Link>
               <Link href={domains.corporate + "/about"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
                 About
               </Link>

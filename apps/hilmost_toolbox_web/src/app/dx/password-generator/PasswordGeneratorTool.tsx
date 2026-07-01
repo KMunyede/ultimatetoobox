@@ -3,6 +3,9 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { RefreshCw, Download } from "lucide-react";
 import { CopyButton } from "@utilitiessite/ui";
+import { Button } from "../../../components/ui/Button";
+import { NumberInput } from "../../../components/ui/NumberInput";
+import { PillSelector } from "../../../components/ui/PillSelector";
 
 type StrengthInfo = {
   label: string;
@@ -12,8 +15,8 @@ type StrengthInfo = {
 };
 
 export function PasswordGeneratorTool() {
-  const [length, setLength] = useState(16);
-  const [count, setCount] = useState(1);
+  const [length, setLength] = useState("16");
+  const [count, setCount] = useState("1");
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
@@ -44,13 +47,16 @@ export function PasswordGeneratorTool() {
 
     const charset = activeSets.join('');
 
-    if (!charset || typeof window === 'undefined') {
+    const len = length === "" ? 0 : parseInt(length);
+    const cnt = count === "" ? 0 : parseInt(count);
+
+    if (!charset || typeof window === 'undefined' || len <= 0) {
       return { passwords: [], strength: { label: 'Weak', color: 'bg-red-500', percent: 25, crackTime: 'Minutes' } };
     }
 
     const newPasswords: string[] = [];
 
-    for (let c = 0; c < count; c++) {
+    for (let c = 0; c < cnt; c++) {
       let generated = "";
 
       if (guaranteeEachType) {
@@ -62,7 +68,7 @@ export function PasswordGeneratorTool() {
         });
 
         // Fill the rest
-        const remainingLength = length - generated.length;
+        const remainingLength = len - generated.length;
         if (remainingLength > 0) {
           const remainingArray = new Uint32Array(remainingLength);
           window.crypto.getRandomValues(remainingArray);
@@ -81,9 +87,9 @@ export function PasswordGeneratorTool() {
         }
         generated = shuffleArray.join('');
       } else {
-        const array = new Uint32Array(length);
+        const array = new Uint32Array(len);
         window.crypto.getRandomValues(array);
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < len; i++) {
           generated += charset[array[i] % charset.length];
         }
       }
@@ -92,7 +98,7 @@ export function PasswordGeneratorTool() {
 
     // Calculate Strength & Crack Time
     const poolSize = charset.length;
-    const entropy = length * Math.log2(poolSize);
+    const entropy = len * Math.log2(poolSize);
 
     let info: StrengthInfo;
     if (entropy < 40) info = { label: 'Weak', color: 'bg-red-500', percent: 25, crackTime: 'Minutes' };
@@ -117,6 +123,8 @@ export function PasswordGeneratorTool() {
     element.click();
   };
 
+  const parsedCount = count === "" ? 0 : parseInt(count);
+
   return (
     <div className="max-w-4xl mx-auto my-8 space-y-6">
       <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl">
@@ -139,7 +147,7 @@ export function PasswordGeneratorTool() {
           </div>
 
           <div className="space-y-3">
-            {passwords.map((pw, idx) => (
+            {passwords.length > 0 ? passwords.map((pw, idx) => (
               <div key={idx} className="relative group">
                 <div className="w-full bg-slate-950 border-2 border-slate-800 rounded-2xl p-5 pr-14 font-mono text-lg md:text-xl text-emerald-400 break-all min-h-[64px] flex items-center shadow-inner selection:bg-emerald-500/30">
                   {pw}
@@ -148,27 +156,25 @@ export function PasswordGeneratorTool() {
                   <CopyButton value={pw} />
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center gap-4">
-             <button
-              onClick={handleRegenerate}
-              className="flex items-center gap-2 px-8 py-4 bg-brand-primary hover:bg-brand-hover text-white rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl shadow-brand-primary/20 transition-all active:scale-95"
-            >
-              <RefreshCw size={18} /> Regenerate
-            </button>
-            {count > 1 && (
-              <button
-                onClick={downloadTxt}
-                className="flex items-center gap-2 px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl text-sm font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
-              >
-                <Download size={18} /> Download .txt
-              </button>
+            )) : (
+              <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-2xl p-5 text-center text-slate-500 italic">
+                Adjust settings to generate passwords
+              </div>
             )}
           </div>
 
-          <p className="text-xs text-gray-400 text-center mt-2 mb-4">
+          <div className="mt-6 flex flex-wrap items-center gap-4 justify-center">
+            <Button onClick={handleRegenerate}>
+              <RefreshCw size={18} /> Regenerate
+            </Button>
+            {parsedCount > 1 && (
+              <Button variant="secondary" onClick={downloadTxt}>
+                <Download size={18} /> Download .txt
+              </Button>
+            )}
+          </div>
+
+          <p className="text-xs text-gray-400 text-center mt-4 mb-4">
             🔒 Generated in your browser. Never sent to any server.
           </p>
         </div>
@@ -179,41 +185,37 @@ export function PasswordGeneratorTool() {
           {/* Controls Left */}
           <div className="space-y-10">
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-black uppercase tracking-tight text-slate-900 dark:text-white">Password Length</label>
-                <span className="px-3 py-1 bg-brand-primary/10 rounded-lg font-mono text-brand-primary font-black">{length}</span>
-              </div>
+              <NumberInput
+                label="Password Length"
+                value={length}
+                onChange={setLength}
+                min={4}
+                max={128}
+              />
               <input
                 type="range"
-                min="8"
-                max="64"
-                value={length}
-                onChange={(e) => setLength(parseInt(e.target.value))}
+                min="4"
+                max="128"
+                value={length || 4}
+                onChange={(e) => setLength(e.target.value)}
                 className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-primary"
               />
               <div className="flex justify-between text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                <span>Short (8)</span>
-                <span>Ultra Secure (64)</span>
+                <span>Short (4)</span>
+                <span>Ultra Secure (128)</span>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-black uppercase tracking-tight text-slate-900 dark:text-white">Quantity (Bulk)</label>
-                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Up to 10 passwords</span>
-              </div>
-              <div className="flex gap-2">
-                {[1, 5, 10].map(n => (
-                  <button
-                    key={n}
-                    onClick={() => setCount(n)}
-                    className={`flex-1 py-3 rounded-xl border-2 font-black transition-all ${count === n ? 'border-brand-primary bg-brand-primary/5 text-brand-primary shadow-inner' : 'border-slate-100 dark:border-slate-800 text-slate-400 hover:border-slate-200 dark:hover:border-slate-700'}`}
-                  >
-                    {n}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <PillSelector
+              label="Quantity (Bulk)"
+              value={count}
+              onChange={setCount}
+              options={[
+                { label: "1", value: "1" },
+                { label: "5", value: "5" },
+                { label: "10", value: "10" },
+              ]}
+            />
           </div>
 
           {/* Controls Right - Toggles */}
@@ -258,24 +260,6 @@ export function PasswordGeneratorTool() {
         <p className="text-sm text-gray-700 leading-relaxed mb-4">
           For maximum security, we recommend a minimum of 16 characters for standard accounts and 24+ characters for critical gateways like email, banking, and administrative portals. Always use a unique password per account and enable all character sets for maximum entropy. For the best defense, store your generated passwords in a reputable password manager rather than plain text, and rotate them regularly.
         </p>
-
-        <h3 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Frequently Asked Questions</h3>
-        <dl>
-          <dt className="font-medium text-gray-900">Is it safe to use an online password generator?</dt>
-          <dd className="text-sm text-gray-700 mb-4 ml-4">
-            Yes, when generation happens client-side. This tool never transmits your password across the internet. You can verify this by checking the &quot;Network&quot; tab in your browser&apos;s Developer Tools; you will see zero traffic leaving your device when a password is forged.
-          </dd>
-
-          <dt className="font-medium text-gray-900">How long should my password be?</dt>
-          <dd className="text-sm text-gray-700 mb-4 ml-4">
-            We recommend a minimum of 16 characters for standard social or entertainment accounts. For critical services like your primary email, banking, or admin accounts, you should use 24 to 64 characters to ensure your credentials remain uncrackable for centuries.
-          </dd>
-
-          <dt className="font-medium text-gray-900">Can I use the generated password immediately?</dt>
-          <dd className="text-sm text-gray-700 mb-4 ml-4">
-            Absolutely. Once generated, you can copy the password directly into your application or password manager. We recommend securing it in a manager before closing this tab, as the forged password exists only in your browser&apos;s temporary memory.
-          </dd>
-        </dl>
       </section>
     </div>
   );

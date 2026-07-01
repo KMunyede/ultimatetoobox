@@ -19,8 +19,10 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  if (!items || items.length === 0) return null;
+
   return (
-    <div className="mt-16 max-w-4xl mx-auto">
+    <div className="mt-16 max-w-4xl mx-auto px-4 sm:px-0">
       {title && (
         <h2 className="text-[20px] md:text-2xl font-black text-slate-900 dark:text-white mb-8 uppercase tracking-tight">
           {title}
@@ -30,7 +32,10 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
         {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
-            <div key={index} className="border border-slate-200 dark:border-slate-800 rounded-[1.25rem] overflow-hidden bg-white dark:bg-slate-900 transition-all shadow-sm hover:shadow-md">
+            <div
+              key={index}
+              className="border border-slate-200 dark:border-slate-800 rounded-[1.25rem] overflow-hidden bg-white dark:bg-slate-900 transition-all shadow-sm hover:shadow-md"
+            >
               <button
                 onClick={() => toggle(index)}
                 className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
@@ -47,11 +52,16 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
                   )}
                 </div>
               </button>
+
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+                className={`grid transition-all duration-300 ease-in-out ${
+                  isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
               >
-                <div className="px-6 pb-6 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-800/50 pt-4">
-                  {item.answer}
+                <div className="overflow-hidden">
+                  <div className="px-6 pb-6 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-800/50 pt-4">
+                    {item.answer}
+                  </div>
                 </div>
               </div>
             </div>

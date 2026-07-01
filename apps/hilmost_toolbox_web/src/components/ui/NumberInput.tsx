@@ -42,9 +42,9 @@ export function NumberInput({
   };
 
   return (
-    <div className="space-y-2 w-full">
+    <div className="space-y-1.5 w-full">
       {label && (
-        <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+        <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">
           {label}
         </label>
       )}
@@ -57,7 +57,7 @@ export function NumberInput({
         min={min}
         max={max}
         step={step}
-        className={`w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm focus:border-rose-500 outline-none transition-all ${className}`}
+        className={`w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-3 text-sm focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all ${className}`}
       />
     </div>
   );

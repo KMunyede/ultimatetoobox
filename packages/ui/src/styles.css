@@ -1,13 +1,13 @@
 ﻿@layer base {
   :root {
     /* Backgrounds */
-    --color-canvas-base: #f8fafc; /* slate-50 */
-    --color-canvas-card: #ffffff;
-    --color-canvas-muted: #f1f5f9; /* slate-100 */
+    --color-canvas-base: #F3F4F6; /* light neutral grey */
+    --color-canvas-card: #FAFAFA; /* even lighter grey for card separation */
+    --color-canvas-muted: #FFFFFF; /* white for contrast inside controls */
 
     /* Text */
     --color-text-primary: #0f172a; /* slate-900 */
-    --color-text-secondary: #475569; /* slate-600 */
+    --color-text-secondary: #57544C; /* softer dark for labels */
     --color-text-muted: #94a3b8; /* slate-400 */
     --color-text-inverse: #ffffff;
 
@@ -17,7 +17,7 @@
     --color-brand-alpha: rgba(5, 150, 105, 0.1);
 
     /* UI Elements */
-    --color-border-base: #e2e8f0; /* slate-200 */
+    --color-border-base: #D8D6CF; /* visible control edges */
     --color-border-focus: #10b981; /* emerald-500 */
     --color-shadow: rgba(15, 23, 42, 0.05); /* slate-900/5 */
   }

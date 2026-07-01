@@ -1,4 +1,4 @@
-import { WebApplicationSchema, ToolArticle, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, ToolArticle, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { PasswordGeneratorTool } from "./PasswordGeneratorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -10,6 +10,21 @@ const TOOL_NAME = "Strong Password Generator";
 const TOOL_DESC = "Generate secure random passwords instantly. Customize length and character sets. Banking-grade security with 100% browser-side generation.";
 const PATH = "/dx/password-generator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
+
+const faqs = [
+  {
+    question: "Is it safe to use an online password generator?",
+    answer: "Yes, when generation happens client-side. This tool never transmits your password across the internet. You can verify this by checking the \"Network\" tab in your browser's Developer Tools; you will see zero traffic leaving your device when a password is forged."
+  },
+  {
+    question: "How long should my password be?",
+    answer: "We recommend a minimum of 16 characters for standard social or entertainment accounts. For critical services like your primary email, banking, or admin accounts, you should use 24 to 64 characters to ensure your credentials remain uncrackable for centuries."
+  },
+  {
+    question: "Can I use the generated password immediately?",
+    answer: "Absolutely. Once generated, you can copy the password directly into your application or password manager. We recommend securing it in a manager before closing this tab, as the forged password exists only in your browser's temporary memory."
+  }
+];
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle("Password Generator – Free Strong Password Tool");
@@ -57,6 +72,7 @@ export default function PasswordGeneratorPage() {
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/main.png"
       />
+      <FAQSchema items={faqs} />
 
       <Breadcrumbs items={breadcrumbItems} />
 
@@ -87,6 +103,8 @@ export default function PasswordGeneratorPage() {
             The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost Digital Labs, we use a 100% browser-side architecture. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
           </p>
         </ToolArticle>
+
+        <FAQAccordion items={faqs} />
       </div>
     </div>
   );

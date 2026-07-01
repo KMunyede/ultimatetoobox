@@ -14,12 +14,12 @@ export function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const baseStyles = "flex items-center justify-center gap-2 transition-all active:scale-95 font-black uppercase tracking-widest";
+  const baseStyles = "flex items-center justify-center gap-2 transition-all active:scale-95 font-black uppercase tracking-widest border";
 
   const variants = {
-    primary: "px-12 py-4 bg-rose-600 text-white rounded-[2rem] text-sm shadow-xl shadow-rose-500/20 hover:scale-105",
-    secondary: "px-10 py-5 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-[2rem] text-xs hover:bg-slate-200 dark:hover:bg-slate-700",
-    pill: "px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-[2rem] text-xs shadow-xl",
+    primary: "px-12 py-4 bg-brand-primary text-white border-brand-primary rounded-lg text-sm shadow-xl shadow-brand-primary/20 hover:scale-105",
+    secondary: "px-10 py-5 bg-white dark:bg-slate-800 border-[#D8D6CF] dark:border-slate-700 text-[#57544C] dark:text-slate-300 rounded-lg text-xs hover:bg-slate-50 dark:hover:bg-slate-700",
+    pill: "px-10 py-5 bg-slate-900 dark:bg-white border-slate-900 dark:border-white text-white dark:text-slate-900 rounded-lg text-xs shadow-xl",
   };
 
   return (

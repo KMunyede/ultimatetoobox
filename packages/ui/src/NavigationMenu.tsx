@@ -106,6 +106,8 @@ const TOOLBOX_DATA = {
       tools: [
         { name: "Daily Wisdom", href: "/health/daily-wisdom", tooltip: "Stoic quotes and daily guidance." },
         { name: "BMI Calculator", href: "/health/bmi-calculator", tooltip: "Calculate Body Mass Index safely." },
+        { name: "Calorie & Macro", href: "/health/calorie-macro-calculator", tooltip: "Precision nutrition and macro ratios." },
+        { name: "Sleep Cycle", href: "/health/sleep-cycle-calculator", tooltip: "Optimal wake-up and bed times." },
       ]
     },
     {

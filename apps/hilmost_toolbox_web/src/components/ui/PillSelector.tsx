@@ -27,19 +27,19 @@ export function PillSelector<T extends string | number>({
   return (
     <div className={`space-y-4 w-full ${className}`}>
       {label && (
-        <h3 className="text-center text-[10px] font-black uppercase tracking-widest text-slate-400">
+        <h3 className="text-center text-[10px] font-medium uppercase tracking-widest text-[#57544C] mb-1.5">
           {label}
         </h3>
       )}
       <div className="flex flex-wrap justify-center gap-2">
-        <div className="inline-flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl shadow-inner">
+        <div className="inline-flex bg-white dark:bg-slate-800 p-1 rounded-lg border border-[#D8D6CF] dark:border-slate-700 shadow-inner">
           {options.map((opt) => (
             <button
               key={opt.value}
               onClick={() => onChange(opt.value)}
-              className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+              className={`px-6 py-2.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all ${
                 value === opt.value
-                  ? "bg-white dark:bg-slate-700 text-rose-600 shadow-sm"
+                  ? "bg-brand-primary text-white shadow-sm"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
               } ${pillClassName}`}
             >
