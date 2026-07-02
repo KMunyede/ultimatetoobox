@@ -52,6 +52,7 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-text-primary mb-6 uppercase tracking-widest text-[10px]">Platform</h3>
             <ul className="space-y-3 text-sm text-text-secondary font-medium">
+              <li><Link href={`${domains.corporate}/blog`} className="hover:text-brand-primary transition-colors">Blog</Link></li>
               <li><Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">About</Link></li>
               <li><Link href={`${domains.corporate}/contact`} className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
               <li><Link href={`${domains.toolbox}/guides`} className="hover:text-brand-primary transition-colors">Utility Guides</Link></li>
