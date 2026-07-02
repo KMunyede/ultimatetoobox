@@ -1,8 +1,8 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 export function IncomeTaxClient() {
   const [state, setState] = useUrlState({
@@ -11,91 +11,73 @@ export function IncomeTaxClient() {
     deductions: "13850",
   });
 
-  const { salary, taxRate, deductions } = state;
+  const { salary, taxRate, deductions } = state as Record<string, string>;
 
-  const gross = parseFloat(salary as string) || 0;
-  const rate = parseFloat(taxRate as string) || 0;
-  const deduct = parseFloat(deductions as string) || 0;
+  const gross = parseFloat(salary) || 0;
+  const rate = parseFloat(taxRate) || 0;
+  const deduct = parseFloat(deductions) || 0;
 
   const taxable = Math.max(0, gross - deduct);
   const taxAmount = taxable * (rate / 100);
   const netAnnual = gross - taxAmount;
   const netMonthly = netAnnual / 12;
 
-  const tourSteps = [
-    { element: '#tour-tax-salary', popover: { title: '1. Gross Salary', description: 'Enter your total annual income before any taxes or deductions.' } },
-    { element: '#tour-tax-deductions', popover: { title: '2. Total Deductions', description: 'Enter your total annual deductions (e.g. Standard Deduction, 401k).' } },
-    { element: '#tour-tax-rate', popover: { title: '3. Effective Rate', description: 'Enter your estimated effective tax rate as a percentage.' } },
-    { element: '#tour-tax-results', popover: { title: '4. Net Pay', description: 'Your estimated take-home pay is calculated instantly here.' } },
-  ];
-
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Form */}
-        <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 space-y-6 shadow-sm hover:shadow-md transition-shadow">
-          <div id="tour-tax-salary" className="space-y-2">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Gross Salary ($)</label>
-            <Tooltip content="Your total yearly income before any taxes or deductions" position="top">
-              <NumericInput
-                title="Annual Gross Income"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={salary}
-                onChange={val => setState({ salary: val })}
-                placeholder="e.g. 85000"
-              />
-            </Tooltip>
-          </div>
-          <div id="tour-tax-deductions" className="space-y-2">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Annual Deductions ($)</label>
-            <Tooltip content="Expenses or contributions that reduce your taxable income" position="top">
-              <NumericInput
-                title="Total Annual Deductions"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={deductions}
-                onChange={val => setState({ deductions: val })}
-                placeholder="e.g. 13850"
-              />
-            </Tooltip>
-          </div>
-          <div id="tour-tax-rate" className="space-y-2">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Estimated Tax Rate (%)</label>
-            <Tooltip content="The average percentage of your income paid in taxes" position="top">
-              <NumericInput
-                title="Estimated Effective Tax Rate"
-                className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={taxRate}
-                onChange={val => setState({ taxRate: val })}
-                placeholder="e.g. 22"
-              />
-            </Tooltip>
-          </div>
+        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm h-fit">
+          <NumberInput
+            label="Annual Gross Salary ($)"
+            value={salary}
+            onChange={val => setState({ salary: val })}
+            placeholder="e.g. 85000"
+            min={0}
+            className="text-lg font-bold"
+          />
+          <NumberInput
+            label="Annual Deductions ($)"
+            value={deductions}
+            onChange={val => setState({ deductions: val })}
+            placeholder="e.g. 13850"
+            min={0}
+            className="text-lg font-bold"
+          />
+          <NumberInput
+            label="Estimated Tax Rate (%)"
+            value={taxRate}
+            onChange={val => setState({ taxRate: val })}
+            placeholder="e.g. 22"
+            min={0}
+            max={100}
+            step={0.1}
+            className="text-lg font-bold"
+          />
         </div>
 
         {/* Results Dashboard */}
-        <div id="tour-tax-results" className="bg-canvas-card border border-base rounded-2xl p-5 flex flex-col justify-between shadow-xl relative overflow-hidden">
+        <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
-          <div className="relative z-10 text-center space-y-2">
-            <span className="text-sm font-bold text-text-muted uppercase tracking-widest">Monthly Take-Home</span>
-            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-brand-primary tracking-tighter">
+          <div className="relative z-10 text-center space-y-2 py-4">
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Monthly Take-Home</span>
+            <div className="text-5xl md:text-6xl font-black text-brand-primary tracking-tighter">
               $<NumberTicker value={netMonthly} decimals={2} />
             </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-base">
+          <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Annual Net</span>
-                <p className="text-xl font-bold text-text-primary">$<NumberTicker value={netAnnual} decimals={0} /></p>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Annual Net</span>
+                <p className="text-2xl font-black text-slate-900 dark:text-white">$<NumberTicker value={netAnnual} decimals={0} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Tax Paid</span>
-                <p className="text-xl font-bold text-red-500">$<NumberTicker value={taxAmount} decimals={0} /></p>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Tax Paid</span>
+                <p className="text-2xl font-black text-rose-500">$<NumberTicker value={taxAmount} decimals={0} /></p>
             </div>
           </div>
         </div>

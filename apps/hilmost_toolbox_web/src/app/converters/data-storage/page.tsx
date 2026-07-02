@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, BreadcrumbSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { DataStorageClient } from "./DataStorageClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -69,6 +69,7 @@ export default function DataStoragePage() {
     <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Data Storage Converter | Hilmost" description="Free online data storage converter. Convert between bits, bytes, kilobytes, megabytes, gigabytes, and more." url="https://hilmost-toolbox.hilmost.net/converters/data-storage" />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

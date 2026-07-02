@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
 import { ShareButton } from "@/components/ShareButton";
@@ -13,7 +13,8 @@ export function TemperaturePageUI({
   title = TOOL_NAME,
   description = "Effortlessly switch between global weather scales. Instant conversions for Celsius, Fahrenheit, and Kelvin.",
   canonicalUrl = getCanonicalUrl(PATH),
-  lastUpdated
+  lastUpdated,
+  breadcrumbItems: customBreadcrumbItems
 }: {
   defaultUnit1?: string;
   defaultUnit2?: string;
@@ -21,11 +22,14 @@ export function TemperaturePageUI({
   description?: string;
   canonicalUrl?: string;
   lastUpdated?: string;
+  breadcrumbItems?: { label: string; href: string }[];
 }) {
-  const breadcrumbItems = [
+  const defaultBreadcrumbItems = [
     { label: "Converters", href: "/converters" },
     { label: "Temperature", href: PATH },
   ];
+
+  const breadcrumbItems = customBreadcrumbItems || defaultBreadcrumbItems;
 
   const faqs = [
     {
@@ -71,12 +75,13 @@ export function TemperaturePageUI({
         image="https://hilmost-toolbox.hilmost.net/og/converters.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <HowToSchema
         name="How to Convert Between Temperature Scales"
         description="A technical guide to translating thermal measurements across weather, laboratory, and scientific standards."
         steps={howToSteps}
       />
-            <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={TOOL_NAME}

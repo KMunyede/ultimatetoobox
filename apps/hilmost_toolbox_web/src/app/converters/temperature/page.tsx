@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { TemperaturePageUI } from "./TemperaturePageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";;
+import path from "path";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Temperature Converter";
@@ -34,5 +36,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function TemperatureConverterPage() {
-  return <TemperaturePageUI />;
+  const filePath = path.join(process.cwd(), "src/app/converters/temperature/page.tsx");
+  const lastUpdated = getFileLastUpdated(filePath);
+
+  return <TemperaturePageUI lastUpdated={lastUpdated} />;
 }

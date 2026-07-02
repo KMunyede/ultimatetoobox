@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, BreadcrumbSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { TimeConverterClient } from "./TimeConverterClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
@@ -69,6 +69,7 @@ export default function TimeConverterPage() {
     <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name="Time Converter | Hilmost" description="Free online time converter. Instantly convert between seconds, minutes, hours, days, weeks, months, and years." url="https://hilmost-toolbox.hilmost.net/converters/time" />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

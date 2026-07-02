@@ -1,10 +1,11 @@
 "use client";
-import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
+import { Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
-import { ArrowRightLeft, Copy, Check } from "lucide-react";
+import { Copy, Check } from "lucide-react";
 import { useState } from "react";
+import { PillSelector } from "../../../components/ui/PillSelector";
+import { Button } from "../../../components/ui/Button";
 
 export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode" }) {
   const [state, setState] = useUrlState({
@@ -13,7 +14,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
   });
   const [copied, setCopied] = useState(false);
 
-  const { input, mode } = state;
+  const { input, mode } = state as { input: string; mode: "encode" | "decode" };
 
   let output = "";
   let error = "";
@@ -21,9 +22,9 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
   try {
     if (input) {
       if (mode === "encode") {
-        output = btoa(input as string);
+        output = btoa(input);
       } else {
-        output = atob(input as string);
+        output = atob(input);
       }
     }
   } catch (e) {
@@ -36,75 +37,54 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const tourSteps = [
-    { element: '#tour-b64-mode', popover: { title: '1. Select Mode', description: 'Choose between Encoding text to Base64 or Decoding Base64 back to plain text.' } },
-    { element: '#tour-b64-input', popover: { title: '2. Input', description: 'Enter your text or Base64 string here.' } },
-    { element: '#tour-b64-output', popover: { title: '3. Instant Result', description: 'The result updates in real-time. Click to copy it to your clipboard.' } },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-8">
+        <PillSelector
+          value={mode}
+          onChange={(val) => setState({ mode: val })}
+          options={[
+            { label: "Encode", value: "encode" },
+            { label: "Decode", value: "decode" },
+          ]}
+          className="max-w-sm mx-auto"
+        />
 
-      <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl space-y-8">
-
-        <div id="tour-b64-mode" className="flex p-1 bg-canvas-muted rounded-2xl border border-base max-w-sm mx-auto">
-          <Tooltip content="Transform plain text into Base64 format" position="top" className="flex-1">
-            <button
-              onClick={() => setState({ mode: "encode" })}
-              className={`w-full py-3 text-sm font-bold rounded-xl transition-all ${mode === "encode" ? "bg-canvas-card text-text-primary shadow-md" : "text-text-muted hover:text-text-secondary"}`}
-            >
-              Encode
-            </button>
-          </Tooltip>
-          <Tooltip content="Transform Base64 strings back into plain text" position="top" className="flex-1">
-            <button
-              onClick={() => setState({ mode: "decode" })}
-              className={`w-full py-3 text-sm font-bold rounded-xl transition-all ${mode === "decode" ? "bg-canvas-card text-text-primary shadow-md" : "text-text-muted hover:text-text-secondary"}`}
-            >
-              Decode
-            </button>
-          </Tooltip>
-        </div>
-
-        <div className="grid grid-cols-1 @[800px]:grid-cols-2 gap-5 items-stretch">
+        <div className="grid grid-cols-1 @[800px]:grid-cols-2 gap-8 items-stretch">
           {/* Input */}
-          <div id="tour-b64-input" className="space-y-4">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Input Text</label>
-            <Tooltip content="Enter the content you wish to transform" position="top" className="w-full">
-              <textarea
-                className="w-full h-48 @[800px]:h-64 p-5 bg-canvas-muted border border-base rounded-2xl text-text-primary font-mono text-lg outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all resize-none"
-                placeholder={mode === 'encode' ? 'Enter plain text...' : 'Enter Base64 string...'}
-                title="Base64 Input Content"
-                value={input}
-                onChange={e => setState({ input: e.target.value })}
-              />
-            </Tooltip>
+          <div id="tour-b64-input" className="space-y-1.5 w-full">
+            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5">Input Text</label>
+            <textarea
+              className="w-full h-48 @[800px]:h-64 p-4 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl text-slate-900 dark:text-white font-mono text-sm outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
+              placeholder={mode === 'encode' ? 'Enter plain text...' : 'Enter Base64 string...'}
+              value={input}
+              onChange={e => setState({ input: e.target.value })}
+            />
           </div>
 
           {/* Output */}
-          <div id="tour-b64-output" className="space-y-4 relative">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Result</label>
-            <Tooltip content="The transformed content appears here instantly" position="top" className="w-full">
-              <div className={`w-full h-48 @[800px]:h-64 p-5 rounded-2xl border font-mono text-lg break-all overflow-y-auto custom-scrollbar relative ${error ? 'bg-red-500/5 border-red-500/20 text-red-500' : 'bg-canvas-card border-base text-brand-primary font-bold shadow-inner'}`}>
-                {error || output || <span className="opacity-20 italic">Waiting for input...</span>}
+          <div id="tour-b64-output" className="space-y-1.5 w-full relative">
+            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1 mb-1.5">Result</label>
+            <div className={`w-full h-48 @[800px]:h-64 p-4 rounded-xl border font-mono text-sm break-all overflow-y-auto custom-scrollbar relative ${error ? 'bg-rose-50 dark:bg-rose-900/10 border-rose-200 dark:border-rose-800 text-rose-600' : 'bg-white dark:bg-slate-950 border-[#D8D6CF] dark:border-slate-800 text-brand-primary font-bold shadow-inner'}`}>
+              {error || output || <span className="opacity-20 font-normal italic">Waiting for input...</span>}
 
-                {output && !error && (
-                  <Tooltip content="Copy result to clipboard" position="left">
-                    <button
-                      onClick={handleCopy}
-                      className="absolute bottom-4 right-4 p-3 bg-brand-primary text-white rounded-xl shadow-lg hover:scale-105 active:scale-95 transition-all"
-                      title="Copy result"
-                    >
-                      {copied ? <Check size={20} /> : <Copy size={20} />}
-                    </button>
-                  </Tooltip>
-                )}
-              </div>
-            </Tooltip>
+              {output && !error && (
+                <div className="absolute bottom-4 right-4">
+                  <Button
+                    onClick={handleCopy}
+                    variant={copied ? "primary" : "pill"}
+                    className="!px-4 !py-3 shadow-lg"
+                    title="Copy result"
+                  >
+                    {copied ? <Check size={18} /> : <Copy size={18} />}
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

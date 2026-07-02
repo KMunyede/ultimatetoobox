@@ -2,6 +2,8 @@
 import { NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
+import { PillSelector } from "../../../components/ui/PillSelector";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 export function BMIClient() {
   const [state, setState] = useUrlState({
@@ -13,19 +15,26 @@ export function BMIClient() {
     lbs: "154",
   });
 
-  const { unitSystem, cm, kg, ft, inch, lbs } = state;
+  const { unitSystem, cm, kg, ft, inch, lbs } = state as {
+    unitSystem: "metric" | "imperial";
+    cm: string;
+    kg: string;
+    ft: string;
+    inch: string;
+    lbs: string;
+  };
 
   let bmi: number | null = null;
 
   if (unitSystem === "metric") {
-    const h = parseFloat(cm as string) / 100;
-    const w = parseFloat(kg as string);
+    const h = parseFloat(cm) / 100;
+    const w = parseFloat(kg);
     if (h > 0 && w > 0) {
       bmi = w / (h * h);
     }
   } else {
-    const hInches = (parseFloat(ft as string) || 0) * 12 + (parseFloat(inch as string) || 0);
-    const w = parseFloat(lbs as string);
+    const hInches = (parseFloat(ft) || 0) * 12 + (parseFloat(inch) || 0);
+    const w = parseFloat(lbs);
     if (hInches > 0 && w > 0) {
       bmi = (w / (hInches * hInches)) * 703;
     }
@@ -43,113 +52,76 @@ export function BMIClient() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Inputs */}
-        <div id="tour-bmi-inputs" className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 shadow-sm space-y-6 hover:shadow-md transition-shadow">
+        <div id="tour-bmi-inputs" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-8">
         
-        {/* Unit Toggle */}
-        <div className="flex p-1 bg-canvas-muted rounded-xl border border-base">
-          <Tooltip content="Use Metric units (cm, kg)" position="top" className="flex-1">
-            <button
-              onClick={() => setState({ unitSystem: "metric" })}
-              className={`w-full py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "metric" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
-            >
-              Metric
-            </button>
-          </Tooltip>
-          <Tooltip content="Use Imperial units (ft, in, lbs)" position="top" className="flex-1">
-            <button
-              onClick={() => setState({ unitSystem: "imperial" })}
-              className={`w-full py-2 text-sm font-bold rounded-lg transition-all ${unitSystem === "imperial" ? "bg-canvas-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary"}`}
-            >
-              Imperial
-            </button>
-          </Tooltip>
-        </div>
+        <PillSelector
+          value={unitSystem}
+          onChange={(val) => setState({ unitSystem: val })}
+          options={[
+            { label: "Metric", value: "metric" },
+            { label: "Imperial", value: "imperial" },
+          ]}
+        />
 
         {unitSystem === "metric" ? (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height (cm)</label>
-              <Tooltip content="Enter your height in centimeters" position="top" className="w-full">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  title="Height in Centimeters"
-                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                  value={cm}
-                  onChange={e => setState({ cm: e.target.value })}
-                  placeholder="e.g. 175"
-                />
-              </Tooltip>
-            </div>
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (kg)</label>
-              <Tooltip content="Enter your weight in kilograms" position="top" className="w-full">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  title="Weight in Kilograms"
-                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                  value={kg}
-                  onChange={e => setState({ kg: e.target.value })}
-                  placeholder="e.g. 70"
-                />
-              </Tooltip>
-            </div>
+          <div className="space-y-6">
+            <NumberInput
+              label="Height (cm)"
+              value={cm}
+              onChange={(val) => setState({ cm: val })}
+              placeholder="e.g. 175"
+              min={50}
+              max={250}
+            />
+            <NumberInput
+              label="Weight (kg)"
+              value={kg}
+              onChange={(val) => setState({ kg: val })}
+              placeholder="e.g. 70"
+              min={10}
+              max={500}
+            />
           </div>
         ) : (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Height</label>
+          <div className="space-y-6">
+            <div className="space-y-1.5 w-full">
+              <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Height</label>
               <div className="flex gap-4">
                 <div className="flex-1 relative">
-                  <Tooltip content="Enter feet" position="top" className="w-full">
-                    <input
-                       type="number"
-                       inputMode="decimal"
-                       title="Height in Feet"
-                       className="w-full h-12 px-4 pr-8 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                       value={ft}
-                       onChange={e => setState({ ft: e.target.value })}
-                       placeholder="ft"
-                    />
-                  </Tooltip>
-                  <span className="absolute right-4 top-4 text-text-muted font-bold text-sm">ft</span>
+                  <NumberInput
+                     value={ft}
+                     onChange={(val) => setState({ ft: val })}
+                     placeholder="ft"
+                     min={2}
+                     max={8}
+                  />
+                  <span className="absolute right-4 bottom-3 text-slate-400 font-bold text-xs">ft</span>
                 </div>
                 <div className="flex-1 relative">
-                  <Tooltip content="Enter inches" position="top" className="w-full">
-                    <input
-                       type="number"
-                       inputMode="decimal"
-                       title="Height in Inches"
-                       className="w-full h-12 px-4 pr-10 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                       value={inch}
-                       onChange={e => setState({ inch: e.target.value })}
-                       placeholder="in"
-                    />
-                  </Tooltip>
-                  <span className="absolute right-4 top-4 text-text-muted font-bold text-sm">in</span>
+                  <NumberInput
+                     value={inch}
+                     onChange={(val) => setState({ inch: val })}
+                     placeholder="in"
+                     min={0}
+                     max={11}
+                  />
+                  <span className="absolute right-4 bottom-3 text-slate-400 font-bold text-xs">in</span>
                 </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-wider">Weight (lbs)</label>
-              <Tooltip content="Enter your weight in pounds" position="top" className="w-full">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  title="Weight in Pounds"
-                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all font-medium text-lg"
-                  value={lbs}
-                  onChange={e => setState({ lbs: e.target.value })}
-                  placeholder="e.g. 150"
-                />
-              </Tooltip>
-            </div>
+            <NumberInput
+              label="Weight (lbs)"
+              value={lbs}
+              onChange={(val) => setState({ lbs: val })}
+              placeholder="e.g. 150"
+              min={20}
+              max={1000}
+            />
           </div>
         )}
       </div>
@@ -159,12 +131,12 @@ export function BMIClient() {
         layout
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         id="tour-bmi-results" 
-        className="bg-canvas-card border border-base rounded-2xl p-5 md:p-5 shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow min-h-[250px]"
+        className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col items-center justify-center text-center min-h-[250px]"
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
-            <div className="text-text-secondary font-medium mb-2">Your BMI is</div>
-            <div className="text-5xl md:text-6xl font-black text-text-primary mb-8 tracking-tighter">
+            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Your BMI Score</div>
+            <div className="text-6xl md:text-7xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">
               <NumberTicker value={bmi} decimals={1} duration={0.8} />
             </div>
             {(() => {
@@ -173,7 +145,7 @@ export function BMIClient() {
                 <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className={`px-8 py-3 rounded-full border ${cat.bg} ${cat.border} ${cat.color} font-bold text-xl md:text-2xl shadow-sm`}
+                  className={`px-8 py-3 rounded-full border-2 ${cat.bg} ${cat.border} ${cat.color} font-black text-xl md:text-2xl uppercase tracking-widest shadow-sm`}
                 >
                   {cat.label}
                 </motion.div>
@@ -181,11 +153,11 @@ export function BMIClient() {
             })()}
           </>
         ) : (
-          <div className="flex flex-col items-center gap-4 text-text-muted">
-            <div className="w-16 h-14 rounded-full bg-canvas-muted flex items-center justify-center border border-base">
-                <span className="text-2xl font-bold">?</span>
+          <div className="flex flex-col items-center gap-4 text-slate-300">
+            <div className="w-20 h-20 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border-2 border-slate-100 dark:border-slate-700">
+                <span className="text-4xl font-black">?</span>
             </div>
-            <p className="max-w-[200px]">Enter your height and weight to see your BMI.</p>
+            <p className="max-w-[200px] text-xs font-bold uppercase tracking-widest">Enter height and weight to reveal your BMI</p>
           </div>
         )}
       </motion.div>

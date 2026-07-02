@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
 import { LengthConverterClient } from "./LengthConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -8,7 +8,8 @@ export function LengthPageUI({
   title = "Length & Distance Converter",
   description = "Bridge the gap between Metric and Imperial systems. Convert any distance measurement instantly.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/length",
-  lastUpdated
+  lastUpdated,
+  breadcrumbItems: customBreadcrumbItems
 }: {
   defaultUnit1?: string;
   defaultUnit2?: string;
@@ -16,11 +17,14 @@ export function LengthPageUI({
   description?: string;
   canonicalUrl?: string;
   lastUpdated?: string;
+  breadcrumbItems?: { label: string; href: string }[];
 }) {
-  const breadcrumbItems = [
+  const defaultBreadcrumbItems = [
     { label: "Converters", href: "/converters" },
     { label: "Length", href: "/converters/length" },
   ];
+
+  const breadcrumbItems = customBreadcrumbItems || defaultBreadcrumbItems;
 
   const faqs = [
     {
@@ -66,6 +70,7 @@ export function LengthPageUI({
         image="https://hilmost-toolbox.hilmost.net/og/converters.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <HowToSchema
         name={`How to Convert Length & Distance`}
         description="A professional guide to switching between metric and imperial length measurements with high precision."

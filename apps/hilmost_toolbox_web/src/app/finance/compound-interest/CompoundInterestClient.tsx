@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
-import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 // Lazy load Recharts for massive bundle size reduction on landing
 const ResponsiveContainer = dynamic(() => import("recharts").then(mod => mod.ResponsiveContainer), { ssr: false });
@@ -25,18 +26,17 @@ export function CompoundInterestClient() {
   });
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
   }, []);
 
-  const { principal, rate, years, monthly } = state;
+  const { principal, rate, years, monthly } = state as Record<string, string>;
 
   // Memoize calculations to prevent main-thread lag during re-renders
   const { chartData, finalBalance, totalInterest } = useMemo(() => {
-    const P = parseFloat(principal as string) || 0;
-    const r = (parseFloat(rate as string) || 0) / 100 / 12;
-    const t = parseFloat(years as string) || 0;
-    const PMT = parseFloat(monthly as string) || 0;
+    const P = parseFloat(principal) || 0;
+    const r = (parseFloat(rate) || 0) / 100 / 12;
+    const t = parseFloat(years) || 0;
+    const PMT = parseFloat(monthly) || 0;
 
     const data = [];
     let currentBalance = P;
@@ -69,80 +69,59 @@ export function CompoundInterestClient() {
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8">
-        {/* Input Column - Refined for Enterprise-Calm */}
-        <div id="tour-ci-inputs" className="bg-canvas-card border border-border-base rounded-3xl p-6 md:p-8 space-y-8 shadow-sm hover:shadow-md transition-all h-fit">
-          <div className="space-y-3">
-            <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">
-              Initial Principal ($)
-            </label>
-            <Tooltip content="The starting balance of your investment" position="top">
-              <NumericInput
-                title="Initial Investment Principal"
-                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={principal}
-                onChange={val => setState({ principal: val })}
-              />
-            </Tooltip>
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Input Column */}
+        <div id="tour-ci-inputs" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm h-fit">
+          <NumberInput
+            label="Initial Principal ($)"
+            value={principal}
+            onChange={val => setState({ principal: val })}
+            min={0}
+          />
 
-          <div className="space-y-3">
-            <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">
-              Monthly Contribution ($)
-            </label>
-            <Tooltip content="How much you add to your investment each month" position="top">
-              <NumericInput
-                title="Monthly Contribution Amount"
-                className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                value={monthly}
-                onChange={val => setState({ monthly: val })}
-              />
-            </Tooltip>
-          </div>
+          <NumberInput
+            label="Monthly Contribution ($)"
+            value={monthly}
+            onChange={val => setState({ monthly: val })}
+            min={0}
+          />
 
           <div className="grid grid-cols-1 @[300px]:grid-cols-2 gap-5">
-            <div className="space-y-3">
-                <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">Annual Rate (%)</label>
-                <Tooltip content="The estimated yearly return rate" position="top">
-                  <NumericInput
-                  title="Annual Interest Rate Percentage"
-                  className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                  value={rate}
-                  onChange={val => setState({ rate: val })}
-                  />
-                </Tooltip>
-            </div>
-            <div className="space-y-3">
-                <label className="block text-[11px] font-black text-text-muted uppercase tracking-[0.15em] ml-1">Years</label>
-                <Tooltip content="The duration of your investment in years" position="top">
-                  <NumericInput
-                  title="Duration in Years"
-                  className="w-full h-14 px-5 border border-border-base rounded-2xl bg-canvas-muted text-text-primary text-xl font-bold focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all shadow-inner"
-                  value={years}
-                  onChange={val => setState({ years: val })}
-                  />
-                </Tooltip>
-            </div>
+            <NumberInput
+              label="Annual Rate (%)"
+              value={rate}
+              onChange={val => setState({ rate: val })}
+              min={0}
+              max={100}
+              step={0.1}
+            />
+            <NumberInput
+              label="Years"
+              value={years}
+              onChange={val => setState({ years: val })}
+              min={1}
+              max={100}
+            />
           </div>
         </div>
 
-        {/* Chart/Result Column - High Impact Visualization */}
+        {/* Chart/Result Column */}
         <div className="lg:col-span-2 space-y-6">
-            <div id="tour-ci-chart" className="bg-canvas-card border border-border-base rounded-[2.5rem] p-6 md:p-10 shadow-xl overflow-hidden relative">
+            <div id="tour-ci-chart" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-6 md:p-10 shadow-sm overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-6 relative z-10">
                     <div>
-                        <span className="text-xs font-black text-text-muted uppercase tracking-[0.2em]">Estimated Future Balance</span>
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Estimated Future Balance</span>
                         <div className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mt-1">
                             $<NumberTicker value={finalBalance} decimals={0} />
                         </div>
                     </div>
                     <div className="sm:text-right">
-                        <span className="text-xs font-black text-text-muted uppercase tracking-[0.2em]">Total Interest Earned</span>
-                        <div className="text-2xl font-black text-text-primary mt-1">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Total Interest Earned</span>
+                        <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">
                           +<NumberTicker value={totalInterest} decimals={0} />
                         </div>
                     </div>
@@ -159,20 +138,20 @@ export function CompoundInterestClient() {
                                   </linearGradient>
                               </defs>
                               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148, 163, 184, 0.1)" />
-                              <XAxis dataKey="year" stroke="var(--color-text-muted)" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tick={{dy: 10}} />
-                              <YAxis stroke="var(--color-text-muted)" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tickFormatter={(v) => `$${v/1000}k`} />
+                              <XAxis dataKey="year" stroke="#94a3b8" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tick={{dy: 10}} />
+                              <YAxis stroke="#94a3b8" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tickFormatter={(v) => `$${v/1000}k`} />
                               <ChartTooltip
                                   contentStyle={{
-                                    backgroundColor: 'var(--color-canvas-card)',
+                                    backgroundColor: 'white',
                                     borderRadius: '16px',
-                                    border: '1px solid var(--color-border-base)',
+                                    border: '1px solid #e2e8f0',
                                     boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
                                     padding: '12px'
                                   }}
-                                  itemStyle={{ fontWeight: '800', fontSize: '12px', textTransform: 'uppercase' }}
+                                  itemStyle={{ fontWeight: '800', fontSize: '10px', textTransform: 'uppercase' }}
                               />
                               <Area type="monotone" dataKey="balance" stroke="var(--color-brand-primary)" strokeWidth={4} fillOpacity={1} fill="url(#colorBalance)" />
-                              <Area type="monotone" dataKey="contributions" stroke="var(--color-text-muted)" strokeWidth={2} fill="transparent" strokeDasharray="6 6" />
+                              <Area type="monotone" dataKey="contributions" stroke="#94a3b8" strokeWidth={2} fill="transparent" strokeDasharray="6 6" />
                           </AreaChart>
                       </ResponsiveContainer>
                     )}
@@ -181,11 +160,11 @@ export function CompoundInterestClient() {
                 <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-10 relative z-10">
                     <div className="flex items-center gap-2.5">
                         <div className="w-3.5 h-3.5 rounded-full bg-brand-primary shadow-sm" />
-                        <span className="text-[10px] font-black text-text-muted uppercase tracking-widest whitespace-nowrap">Total Portfolio</span>
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Portfolio</span>
                     </div>
                     <div className="flex items-center gap-2.5">
-                        <div className="w-3.5 h-3.5 rounded-full border-2 border-dashed border-text-muted" />
-                        <span className="text-[10px] font-black text-text-muted uppercase tracking-widest whitespace-nowrap">Total Contributions</span>
+                        <div className="w-3.5 h-3.5 rounded-full border-2 border-dashed border-slate-300" />
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Contributions</span>
                     </div>
                 </div>
             </div>

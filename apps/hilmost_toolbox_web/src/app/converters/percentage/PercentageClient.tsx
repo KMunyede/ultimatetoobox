@@ -1,8 +1,7 @@
 "use client";
-import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 export function PercentageClient() {
   const [state, setState] = useUrlState({
@@ -14,116 +13,97 @@ export function PercentageClient() {
     v3_2: "75",
   });
 
-  const { p1, v1, p2_1, p2_2, v3_1, v3_2 } = state;
+  const { p1, v1, p2_1, p2_2, v3_1, v3_2 } = state as Record<string, string>;
 
-  const res1 = (parseFloat(p1 as string) / 100) * parseFloat(v1 as string);
-  const res2 = (parseFloat(p2_1 as string) / parseFloat(p2_2 as string)) * 100;
-  const res3 = ((parseFloat(v3_2 as string) - parseFloat(v3_1 as string)) / parseFloat(v3_1 as string)) * 100;
-
-  const tourSteps = [
-    { element: '#tour-perc-1', popover: { title: '1. Basic Percentage', description: 'Find a percentage of a number (e.g. 20% of 150).' } },
-    { element: '#tour-perc-2', popover: { title: '2. Percentage Value', description: 'Find what percentage one number is of another.' } },
-    { element: '#tour-perc-3', popover: { title: '3. Percentage Change', description: 'Calculate the increase or decrease between two values.' } },
-  ];
+  const res1 = (parseFloat(p1) / 100) * parseFloat(v1);
+  const res2 = (parseFloat(p2_1) / parseFloat(p2_2)) * 100;
+  const res3 = ((parseFloat(v3_2) - parseFloat(v3_1)) / parseFloat(v3_1)) * 100;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-8">
         {/* Section 1: X% of Y */}
-        <div id="tour-perc-1" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all">
-          <h2 className="text-sm font-bold text-text-muted uppercase tracking-widest mb-6">What is X% of Y?</h2>
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="text-lg font-medium text-text-secondary">What is</span>
-            <Tooltip content="The percentage you want to find (e.g. 20)" position="top">
-              <input
-                type="number"
-                title="Percentage Value"
-                className="w-24 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+        <div id="tour-perc-1" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+          <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">What is X% of Y?</h2>
+          <div className="flex flex-wrap items-end gap-4">
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">What is</span>
+            <div className="w-28">
+              <NumberInput
                 value={p1}
-                onChange={e => setState({ p1: e.target.value })}
+                onChange={v => setState({ p1: v })}
+                className="text-xl font-black text-center"
               />
-            </Tooltip>
-            <span className="text-lg font-medium text-text-secondary">% of</span>
-            <Tooltip content="The total amount to calculate from" position="top">
-              <input
-                type="number"
-                title="Total Amount"
-                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+            </div>
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">% of</span>
+            <div className="w-36">
+              <NumberInput
                 value={v1}
-                onChange={e => setState({ v1: e.target.value })}
+                onChange={v => setState({ v1: v })}
+                className="text-xl font-black text-center"
               />
-            </Tooltip>
-            <span className="text-lg font-medium text-text-secondary">?</span>
-            <div className="flex-1 min-w-[120px] h-14 flex items-center justify-center bg-brand-primary/10 border border-brand-primary/20 rounded-xl">
-              <span className="text-2xl font-black text-brand-primary">{!isNaN(res1) ? res1.toFixed(2).replace(/\.?0+$/, '') : "0"}</span>
+            </div>
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">?</span>
+            <div className="flex-1 min-w-[120px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
+              <span className="text-xl font-black text-brand-primary">{!isNaN(res1) ? res1.toFixed(2).replace(/\.?0+$/, '') : "0"}</span>
             </div>
           </div>
         </div>
 
         {/* Section 2: X is what % of Y? */}
-        <div id="tour-perc-2" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all">
-          <h2 className="text-sm font-bold text-text-muted uppercase tracking-widest mb-6">X is what % of Y?</h2>
-          <div className="flex flex-wrap items-center gap-4">
-            <Tooltip content="The smaller amount to compare" position="top">
-              <input
-                type="number"
-                title="Part Value"
-                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+        <div id="tour-perc-2" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+          <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">X is what % of Y?</h2>
+          <div className="flex flex-wrap items-end gap-4">
+            <div className="w-36">
+              <NumberInput
                 value={p2_1}
-                onChange={e => setState({ p2_1: e.target.value })}
+                onChange={v => setState({ p2_1: v })}
+                className="text-xl font-black text-center"
               />
-            </Tooltip>
-            <span className="text-lg font-medium text-text-secondary">is what % of</span>
-            <Tooltip content="The base or total amount" position="top">
-              <input
-                type="number"
-                title="Base Value"
-                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+            </div>
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">is what % of</span>
+            <div className="w-36">
+              <NumberInput
                 value={p2_2}
-                onChange={e => setState({ p2_2: e.target.value })}
+                onChange={v => setState({ p2_2: v })}
+                className="text-xl font-black text-center"
               />
-            </Tooltip>
-            <span className="text-lg font-medium text-text-secondary">?</span>
-            <div className="flex-1 min-w-[120px] h-14 flex items-center justify-center bg-brand-primary/10 border border-brand-primary/20 rounded-xl">
-              <span className="text-2xl font-black text-brand-primary">{!isNaN(res2) && isFinite(res2) ? res2.toFixed(2).replace(/\.?0+$/, '') + "%" : "0%"}</span>
+            </div>
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">?</span>
+            <div className="flex-1 min-w-[120px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
+              <span className="text-xl font-black text-brand-primary">{!isNaN(res2) && isFinite(res2) ? res2.toFixed(2).replace(/\.?0+$/, '') + "%" : "0%"}</span>
             </div>
           </div>
         </div>
 
         {/* Section 3: Percentage Change */}
-        <div id="tour-perc-3" className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all">
-          <h2 className="text-sm font-bold text-text-muted uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="text-lg font-medium text-text-secondary">From</span>
-            <Tooltip content="The original starting value" position="top">
-              <input
-                type="number"
-                title="Starting Value"
-                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+        <div id="tour-perc-3" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+          <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
+          <div className="flex flex-wrap items-end gap-4">
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">From</span>
+            <div className="w-36">
+              <NumberInput
                 value={v3_1}
-                onChange={e => setState({ v3_1: e.target.value })}
+                onChange={v => setState({ v3_1: v })}
+                className="text-xl font-black text-center"
               />
-            </Tooltip>
-            <span className="text-lg font-medium text-text-secondary">to</span>
-            <Tooltip content="The new or target value" position="top">
-              <input
-                type="number"
-                title="New Value"
-                className="w-32 h-14 px-3 text-xl font-bold border border-base rounded-xl bg-canvas-muted text-text-primary text-center focus:ring-2 focus:ring-brand-primary/20 outline-none"
+            </div>
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">to</span>
+            <div className="w-36">
+              <NumberInput
                 value={v3_2}
-                onChange={e => setState({ v3_2: e.target.value })}
+                onChange={v => setState({ v3_2: v })}
+                className="text-xl font-black text-center"
               />
-            </Tooltip>
-            <span className="text-lg font-medium text-text-secondary">is a</span>
-            <div className={`flex-1 min-w-[150px] h-14 flex items-center justify-center rounded-xl border ${res3 >= 0 ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600" : "bg-red-500/10 border-red-500/20 text-red-600"}`}>
-              <span className="text-2xl font-black uppercase tracking-tighter">
+            </div>
+            <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">is a</span>
+            <div className={`flex-1 min-w-[180px] h-[46px] flex items-center justify-center rounded-lg border-2 mb-0.5 ${res3 >= 0 ? "bg-emerald-50 dark:bg-emerald-900/10 border-emerald-100 dark:border-emerald-800/50 text-emerald-600" : "bg-rose-50 dark:bg-rose-900/10 border-rose-100 dark:border-rose-800/50 text-rose-600"}`}>
+              <span className="text-xl font-black uppercase tracking-tight">
                 {!isNaN(res3) && isFinite(res3) ? `${res3 > 0 ? "+" : ""}${res3.toFixed(2).replace(/\.?0+$/, '')}%` : "0%"}
-                <span className="ml-2 text-xs font-bold">{res3 >= 0 ? "Increase" : "Decrease"}</span>
+                <span className="ml-2 text-[10px] font-black uppercase">{res3 >= 0 ? "Increase" : "Decrease"}</span>
               </span>
             </div>
           </div>

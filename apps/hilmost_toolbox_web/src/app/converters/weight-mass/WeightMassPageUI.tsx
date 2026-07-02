@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
 import { WeightConverterClient } from "./WeightConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -8,7 +8,8 @@ export function WeightMassPageUI({
   title = "Weight & Mass Converter",
   description = "Drop the heavy math. Effortlessly calculate metric and imperial weight units without the guesswork.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/weight-mass",
-  lastUpdated
+  lastUpdated,
+  breadcrumbItems: customBreadcrumbItems
 }: {
   defaultUnit1?: string;
   defaultUnit2?: string;
@@ -16,11 +17,14 @@ export function WeightMassPageUI({
   description?: string;
   canonicalUrl?: string;
   lastUpdated?: string;
+  breadcrumbItems?: { label: string; href: string }[];
 }) {
-  const breadcrumbItems = [
+  const defaultBreadcrumbItems = [
     { label: "Converters", href: "/converters" },
     { label: "Weight & Mass", href: "/converters/weight-mass" },
   ];
+
+  const breadcrumbItems = customBreadcrumbItems || defaultBreadcrumbItems;
 
   const faqs = [
     {
@@ -61,6 +65,7 @@ export function WeightMassPageUI({
     <div className="container mx-auto px-4 py-1 max-w-5xl">
       <WebApplicationSchema name={title + " | Hilmost"} description={description} url={canonicalUrl} />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <HowToSchema
         name="How to Convert Weight & Mass Units"
         description="A comprehensive guide to translating mass measurements between metric and imperial standards with surgical precision."

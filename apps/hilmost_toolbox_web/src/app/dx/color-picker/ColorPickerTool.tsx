@@ -4,18 +4,17 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   Copy,
   Check,
-  RotateCcw,
   Trash2,
   Palette,
-  Zap,
-  Info,
   ShieldCheck,
   History,
   Eye,
   Plus,
   X
 } from "lucide-react";
-import { FAQAccordion } from "@utilitiessite/ui";
+import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/ui/Input";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 // --- Math Helpers ---
 
@@ -189,51 +188,19 @@ export function ColorPickerTool() {
     return generatePalette(h, s, l);
   }, [hsl]);
 
-  const handleRgbBlur = (k: keyof typeof rgb) => {
-    const val = parseInt(rgb[k]);
-    const clamped = isNaN(val) ? 0 : Math.min(255, Math.max(0, val));
-    updateFromRgb({ ...rgb, [k]: clamped.toString() });
-  };
-
-  const handleHslBlur = (k: keyof typeof hsl) => {
-    const val = parseInt(hsl[k]);
-    const max = k === 'h' ? 360 : 100;
-    const clamped = isNaN(val) ? 0 : Math.min(max, Math.max(0, val));
-    updateFromHsl({ ...hsl, [k]: clamped.toString() });
-  };
-
-  const faqs = [
-    {
-      question: "What is HEX color format?",
-      answer: "HEX (Hexadecimal) is a 6-digit code representing colors in web design. It combines Red, Green, and Blue values from 00 to FF. For example, #FF0000 is pure Red."
-    },
-    {
-      question: "How do I convert HEX to RGB?",
-      answer: "To convert HEX to RGB, you take each pair of the 6-digit code and convert it from base-16 to base-10. #3B82F6 becomes R: 59, G: 130, B: 246."
-    },
-    {
-      question: "What is WCAG contrast ratio?",
-      answer: "The WCAG (Web Content Accessibility Guidelines) contrast ratio measures the difference in perceived luminance between two colors. A ratio of 4.5:1 is required for standard text (AA level)."
-    },
-    {
-      question: "What is HSL color format?",
-      answer: "HSL stands for Hue, Saturation, and Lightness. It is often more intuitive than RGB because it aligns with how humans perceive color: the base tint (Hue), how vibrant it is (Saturation), and how bright it is (Lightness)."
-    }
-  ];
-
   return (
     <div className="max-w-4xl mx-auto my-8 space-y-12">
       <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl space-y-10">
 
         {/* 1. Visual Picker */}
         <section id="main-picker" className="space-y-4">
-          <label className="text-xs font-black uppercase tracking-widest text-slate-500 block">Visual Color Picker</label>
-          <div className="relative group">
+          <label className="text-[10px] font-black uppercase tracking-widest text-[#57544C] ml-1 mb-1.5 block">Visual Color Picker</label>
+          <div className="relative group h-24">
             <input
               type="color"
               value={hex}
               onChange={(e) => updateFromHex(e.target.value)}
-              className="w-full h-24 rounded-2xl cursor-pointer border-none bg-transparent"
+              className="absolute inset-0 w-full h-full rounded-2xl cursor-pointer border-none bg-transparent"
             />
             <div className="absolute inset-0 pointer-events-none rounded-2xl border-4 border-white/20 ring-1 ring-black/5" />
           </div>
@@ -242,67 +209,59 @@ export function ColorPickerTool() {
         {/* 2. Format Inputs */}
         <section id="format-inputs" className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* HEX */}
-          <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">HEX Code</label>
+          <div className="space-y-1.5 w-full">
+            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HEX Code</label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-mono font-bold">#</span>
-              <input
+              <Input
                 type="text"
                 value={hex.replace("#", "")}
                 maxLength={6}
                 onChange={(e) => {
                     const val = e.target.value.toUpperCase().replace(/[^0-9A-F]/g, "");
                     if (val.length === 6) updateFromHex(`#${val}`);
-                    else setHex(`#${val}`); // Allow partial typing for UX but logic won't trigger until 6
+                    else setHex(`#${val}`);
                 }}
                 onBlur={() => {
                     if (!/^#[0-9A-F]{6}$/i.test(hex)) {
-                        updateFromRgb(rgb); // Reset to last valid
+                        updateFromRgb(rgb);
                     }
                 }}
-                className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 pl-8 pr-4 font-mono text-sm focus:border-brand-primary outline-none transition-all"
+                className="pl-8"
               />
             </div>
           </div>
 
           {/* RGB */}
-          <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">RGB Values</label>
+          <div className="space-y-1.5 w-full">
+            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">RGB Values</label>
             <div className="grid grid-cols-3 gap-2">
               {(['r', 'g', 'b'] as const).map(k => (
-                <div key={k} className="relative">
-                  <input
-                    type="number"
-                    min={0}
-                    max={255}
-                    value={rgb[k]}
-                    onChange={(e) => updateFromRgb({ ...rgb, [k]: e.target.value })}
-                    onBlur={() => handleRgbBlur(k)}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 px-2 text-center font-mono text-sm focus:border-brand-primary outline-none transition-all"
-                  />
-                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8.5px] font-black uppercase text-slate-400">{k}</span>
-                </div>
+                <NumberInput
+                  key={k}
+                  value={rgb[k]}
+                  onChange={(val) => updateFromRgb({ ...rgb, [k]: val })}
+                  min={0}
+                  max={255}
+                  className="text-center"
+                />
               ))}
             </div>
           </div>
 
           {/* HSL */}
-          <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">HSL Values</label>
+          <div className="space-y-1.5 w-full">
+            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HSL Values</label>
             <div className="grid grid-cols-3 gap-2">
               {(['h', 's', 'l'] as const).map(k => (
-                <div key={k} className="relative">
-                  <input
-                    type="number"
-                    min={0}
-                    max={k === 'h' ? 360 : 100}
-                    value={hsl[k]}
-                    onChange={(e) => updateFromHsl({ ...hsl, [k]: e.target.value })}
-                    onBlur={() => handleHslBlur(k)}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl py-3 px-2 text-center font-mono text-sm focus:border-brand-primary outline-none transition-all"
-                  />
-                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-1 text-[8.5px] font-black uppercase text-slate-400">{k}</span>
-                </div>
+                <NumberInput
+                  key={k}
+                  value={hsl[k]}
+                  onChange={(val) => updateFromHsl({ ...hsl, [k]: val })}
+                  min={0}
+                  max={k === 'h' ? 360 : 100}
+                  className="text-center"
+                />
               ))}
             </div>
           </div>
@@ -343,37 +302,40 @@ export function ColorPickerTool() {
 
         {/* 4. Copy Buttons Row */}
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <button
+          <Button
+            variant="secondary"
             onClick={() => handleCopy(hex, 'hex')}
-            className="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 hover:bg-brand-primary/10 hover:text-brand-primary rounded-xl text-xs font-black uppercase transition-all"
+            className="!py-3"
           >
             {copyStatus === 'hex' ? <Check size={14} /> : <Copy size={14} />}
             {copyStatus === 'hex' ? "Copied!" : "Copy HEX"}
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="secondary"
             onClick={() => {
               const r = parseInt(rgb.r) || 0;
               const g = parseInt(rgb.g) || 0;
               const b = parseInt(rgb.b) || 0;
               handleCopy(`rgb(${r}, ${g}, ${b})`, 'rgb');
             }}
-            className="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 hover:bg-brand-primary/10 hover:text-brand-primary rounded-xl text-xs font-black uppercase transition-all"
+            className="!py-3"
           >
             {copyStatus === 'rgb' ? <Check size={14} /> : <Copy size={14} />}
             {copyStatus === 'rgb' ? "Copied!" : "Copy RGB"}
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="secondary"
             onClick={() => {
               const h = parseInt(hsl.h) || 0;
               const s = parseInt(hsl.s) || 0;
               const l = parseInt(hsl.l) || 0;
               handleCopy(`hsl(${h}, ${s}%, ${l}%)`, 'hsl');
             }}
-            className="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 hover:bg-brand-primary/10 hover:text-brand-primary rounded-xl text-xs font-black uppercase transition-all"
+            className="!py-3"
           >
             {copyStatus === 'hsl' ? <Check size={14} /> : <Copy size={14} />}
             {copyStatus === 'hsl' ? "Copied!" : "Copy HSL"}
-          </button>
+          </Button>
         </section>
 
         {/* 5. Color Preview */}
@@ -392,19 +354,21 @@ export function ColorPickerTool() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
-              <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Compare With (Background)</label>
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-end">
+                <div className="space-y-1.5 flex-1">
+                  <Input
+                    label="Compare With (Background)"
+                    type="text"
+                    value={contrastColor}
+                    onChange={(e) => setContrastColor(e.target.value.toUpperCase())}
+                    className="font-mono"
+                  />
+                </div>
                 <input
                   type="color"
                   value={contrastColor}
                   onChange={(e) => setContrastColor(e.target.value.toUpperCase())}
-                  className="h-12 w-24 rounded-xl cursor-pointer bg-transparent border-2 border-slate-100 dark:border-slate-800"
-                />
-                <input
-                  type="text"
-                  value={contrastColor}
-                  onChange={(e) => setContrastColor(e.target.value.toUpperCase())}
-                  className="flex-1 bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-xl px-4 font-mono text-sm focus:border-brand-primary outline-none"
+                  className="h-[46px] w-16 rounded-lg cursor-pointer bg-transparent border border-[#D8D6CF] dark:border-slate-800"
                 />
               </div>
             </div>
@@ -500,31 +464,11 @@ export function ColorPickerTool() {
             )}
           </div>
         </section>
-
       </div>
 
-      {/* SEO Content Block */}
-      <div className="mt-16 space-y-16">
-        <div className="flex items-center justify-center gap-2 text-slate-400 select-none">
-          <ShieldCheck size={12} />
-          <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
-        </div>
-
-        <section className="max-w-3xl mx-auto px-4 py-8 text-gray-800 border-t border-slate-100 dark:border-slate-800">
-          <h1 className="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">Free Color Picker & HEX RGB HSL Converter</h1>
-
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Color is the heartbeat of visual communication. Whether you are a web developer fine-tuning a CSS theme, a UI designer building a brand palette, or a digital artist, having access to an accurate <strong>Color Picker</strong> is vital. This tool is designed to be your all-in-one laboratory for spectrum analysis, providing instant conversions between <strong>HEX</strong>, <strong>RGB</strong>, and <strong>HSL</strong> formats.
-          </p>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Modern web development requires more than just picking a "pretty" color. It requires mathematical precision for accessibility. Our built-in <strong>WCAG Contrast Checker</strong> allows you to compare your foreground text color against a background to ensure your site meets the official AA and AAA accessibility standards. This ensures that users with visual impairments can interact with your digital products effortlessly.
-          </p>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Harmony is another key aspect of design. Using our <strong>Palette Generator</strong>, you can instantly discover complementary, analogous, and triadic color schemes based on your primary selection. Best of all, at Hilmost Software Corporation, we prioritize your security. This tool runs entirely in your browser using pure TypeScript logic — meaning your colors and data are never sent to a server.
-          </p>
-
-          <FAQAccordion items={faqs} />
-        </section>
+      <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
+        <ShieldCheck size={12} />
+        <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
       </div>
     </div>
   );

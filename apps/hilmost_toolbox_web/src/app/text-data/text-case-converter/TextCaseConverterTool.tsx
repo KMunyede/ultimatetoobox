@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useCallback, useMemo } from "react";
-import { X, Copy, Check, Download, AlertCircle, Type, Search, ChevronDown, ChevronUp, ShieldCheck, Plus } from "lucide-react";
-import { FAQAccordion } from "@utilitiessite/ui";
+import { X, Copy, Check, Download, AlertCircle, Search, ChevronDown, ChevronUp, ShieldCheck, Plus } from "lucide-react";
+import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/ui/Input";
 
 type CaseType =
   | "UPPERCASE" | "lowercase" | "Title Case" | "Sentence case"
@@ -41,7 +42,6 @@ export function TextCaseConverterTool() {
   const outputStats = useMemo(() => getStats(output), [output]);
 
   const splitWords = (str: string) => {
-    // Split on spaces, hyphens, underscores, and camelCase boundaries
     return str
       .replace(/([a-z])([A-Z])/g, "$1 $2")
       .replace(/[_-]/g, " ")
@@ -121,7 +121,6 @@ export function TextCaseConverterTool() {
         break;
     }
 
-    // Post-processing: Restore Custom Terms
     if (customTerms.length > 0) {
       const sortedTerms = [...customTerms].sort((a, b) => b.length - a.length);
       sortedTerms.forEach(term => {
@@ -194,33 +193,16 @@ export function TextCaseConverterTool() {
     document.body.removeChild(element);
   };
 
-  const faqs = [
-    {
-      question: "What is camelCase used for?",
-      answer: "camelCase is a naming convention commonly used in programming languages like JavaScript and Java for naming variables and functions. The first letter is lowercase, and each subsequent word starts with a capital letter."
-    },
-    {
-      question: "What is snake_case used for?",
-      answer: "snake_case uses underscores to separate words and is standard in languages like Python and for database column names. SCREAMING_SNAKE_CASE (all caps) is often used for global constants."
-    },
-    {
-      question: "Does this tool store my text?",
-      answer: "No. Hilmost Digital Labs follows a 'Zero-Server' architecture. All text transformations happen directly in your browser's memory. Your content is never sent to our servers or stored anywhere."
-    },
-    {
-      question: "Can I convert large amounts of text?",
-      answer: "Yes. The tool is optimized to handle large blocks of text efficiently using local browser processing. Performance depends on your device's memory, but typical documents are processed instantly."
-    }
-  ];
+  const buttons: CaseType[] = ["UPPERCASE", "lowercase", "Title Case", "Sentence case", "camelCase", "PascalCase", "snake_case", "SCREAMING_SNAKE", "kebab-case", "COBOL-CASE", "dot.case", "Toggle Case", "Alternating Case", "Slugify", "Normalize Whitespace"];
 
   return (
-    <div className="max-w-4xl mx-auto my-8 space-y-8">
+    <div className="max-w-6xl mx-auto my-8 space-y-8">
       <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl">
 
         {/* Input Section */}
-        <div className="space-y-4">
+        <div className="space-y-4" id="text-converter-input">
           <div className="flex items-center justify-between px-1">
-            <label className="text-xs font-black uppercase tracking-widest text-slate-500">Input Text</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Input Text</label>
             <button
               onClick={() => { setInput(""); setOutput(""); setLastCase(null); }}
               className="text-slate-400 hover:text-red-500 transition-colors"
@@ -233,235 +215,200 @@ export function TextCaseConverterTool() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste or type your text here..."
-            className="w-full h-48 bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
+            className="w-full h-48 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
           />
           <div className="flex gap-4 px-1 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            <span>Characters: {inputStats.chars}</span>
+            <span>Chars: {inputStats.chars}</span>
             <span>Words: {inputStats.words}</span>
           </div>
         </div>
 
         {/* Buttons Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 py-8 border-y border-slate-100 dark:border-slate-800 my-8">
-          {(["UPPERCASE", "lowercase", "Title Case", "Sentence case", "camelCase", "PascalCase", "snake_case", "SCREAMING_SNAKE", "kebab-case", "COBOL-CASE", "dot.case", "Toggle Case", "Alternating Case", "Slugify", "Normalize Whitespace"] as CaseType[]).map((t) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 py-8 border-y border-slate-100 dark:border-slate-800 my-8" id="text-converter-buttons">
+          {buttons.map((t) => (
             <button
               key={t}
               onClick={() => convert(t)}
-              className={`py-2 px-3 rounded-xl text-[10px] font-black uppercase tracking-tighter transition-all border-2 ${lastCase === t ? 'bg-brand-primary text-white border-brand-primary shadow-lg shadow-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-transparent hover:border-slate-200 dark:hover:border-slate-700'}`}
+              className={`py-2.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all border ${lastCase === t ? 'bg-brand-primary text-white border-brand-primary shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-[#D8D6CF] dark:border-slate-700 hover:border-brand-primary hover:text-brand-primary'}`}
             >
               {t}
             </button>
           ))}
         </div>
 
-        {/* Find & Replace Panel */}
-        <div className="mb-8 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden">
-          <button
-            onClick={() => setIsFindReplaceOpen(!isFindReplaceOpen)}
-            className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          >
-            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-              <Search size={16} />
-              <span className="text-xs font-bold uppercase tracking-widest">Find & Replace</span>
-            </div>
-            {isFindReplaceOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-          </button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Find & Replace Panel */}
+            <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden h-fit">
+              <button
+                onClick={() => setIsFindReplaceOpen(!isFindReplaceOpen)}
+                className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                  <Search size={16} className="text-brand-primary" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Find & Replace</span>
+                </div>
+                {isFindReplaceOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
 
-          {isFindReplaceOpen && (
-            <div className="p-4 space-y-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 animate-in slide-in-from-top-2 duration-200">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="Find..."
-                  value={findText}
-                  onChange={(e) => setFindText(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-brand-primary transition-all"
-                />
-                <input
-                  type="text"
-                  placeholder="Replace with..."
-                  value={replaceText}
-                  onChange={(e) => setReplaceText(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-brand-primary transition-all"
-                />
-              </div>
+              {isFindReplaceOpen && (
+                <div className="p-4 space-y-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 animate-in slide-in-from-top-2 duration-200">
+                  <div className="grid grid-cols-1 gap-4">
+                    <Input
+                      placeholder="Find..."
+                      value={findText}
+                      onChange={(e) => setFindText(e.target.value)}
+                    />
+                    <Input
+                      placeholder="Replace with..."
+                      value={replaceText}
+                      onChange={(e) => setReplaceText(e.target.value)}
+                    />
+                  </div>
 
-              <div className="flex flex-wrap items-center gap-6">
-                <label className="flex items-center gap-2 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={matchCase}
-                    onChange={(e) => setMatchCase(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
-                  />
-                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Match case</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={wholeWord}
-                    onChange={(e) => setWholeWord(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
-                  />
-                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Whole word</span>
-                </label>
-              </div>
+                  <div className="flex flex-wrap items-center gap-6">
+                    <label className="flex items-center gap-2 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={matchCase}
+                        onChange={(e) => setMatchCase(e.target.checked)}
+                        className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
+                      />
+                      <span className="text-[10px] font-black uppercase text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Match case</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={wholeWord}
+                        onChange={(e) => setWholeWord(e.target.checked)}
+                        className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
+                      />
+                      <span className="text-[10px] font-black uppercase text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Whole word</span>
+                    </label>
+                  </div>
 
-              <div className="flex items-center gap-3 pt-2">
-                <button
-                  onClick={handleReplaceAll}
-                  disabled={!findText}
-                  className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-emerald-500/20"
-                >
-                  Replace All
-                </button>
-                <button
-                  onClick={handleClearFindReplace}
-                  className="px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-black uppercase tracking-widest rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
-                >
-                  Clear
-                </button>
-                {replacementCount !== null && (
-                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest animate-in fade-in duration-300">
-                    {replacementCount} replacements made
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Custom Terms Panel */}
-        <div className="mb-8 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden">
-          <button
-            onClick={() => setIsCustomTermsOpen(!isCustomTermsOpen)}
-            className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          >
-            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-              <ShieldCheck size={16} />
-              <span className="text-xs font-bold uppercase tracking-widest">Custom Terms Override</span>
-            </div>
-            {isCustomTermsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-          </button>
-
-          {isCustomTermsOpen && (
-            <div className="p-4 space-y-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 animate-in slide-in-from-top-2 duration-200">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="e.g. iPhone, JavaScript, HSC"
-                  value={termInput}
-                  onChange={(e) => setTermInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleAddTerm()}
-                  className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-brand-primary transition-all"
-                />
-                <button
-                  onClick={handleAddTerm}
-                  disabled={!termInput.trim()}
-                  className="px-6 py-2 bg-brand-primary text-white text-xs font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all disabled:opacity-50"
-                >
-                  <Plus size={16} />
-                </button>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {customTerms.map((term) => (
-                  <span
-                    key={term}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold uppercase rounded-lg border border-slate-200 dark:border-slate-700"
-                  >
-                    {term}
-                    <button
-                      onClick={() => handleRemoveTerm(term)}
-                      className="text-slate-400 hover:text-red-500 transition-colors"
+                  <div className="flex items-center gap-3 pt-2">
+                    <Button
+                      onClick={handleReplaceAll}
+                      disabled={!findText}
+                      className="!px-6 !py-2 !text-[10px]"
                     >
-                      <X size={12} />
-                    </button>
-                  </span>
-                ))}
-              </div>
-
-              {customTerms.length > 0 && (
-                <button
-                  onClick={() => setCustomTerms([])}
-                  className="text-[10px] font-bold text-slate-400 hover:text-red-500 underline transition-colors"
-                >
-                  Clear all
-                </button>
+                      Replace All
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      onClick={handleClearFindReplace}
+                      className="!px-6 !py-2 !text-[10px]"
+                    >
+                      Clear
+                    </Button>
+                    {replacementCount !== null && (
+                      <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest animate-in fade-in duration-300">
+                        {replacementCount} fixed
+                      </span>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
-          )}
+
+            {/* Custom Terms Panel */}
+            <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden h-fit">
+              <button
+                onClick={() => setIsCustomTermsOpen(!isCustomTermsOpen)}
+                className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                  <ShieldCheck size={16} className="text-brand-primary" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Terms Override</span>
+                </div>
+                {isCustomTermsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+
+              {isCustomTermsOpen && (
+                <div className="p-4 space-y-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 animate-in slide-in-from-top-2 duration-200">
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="e.g. iPhone, HSC"
+                      value={termInput}
+                      onChange={(e) => setTermInput(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleAddTerm()}
+                    />
+                    <Button
+                      onClick={handleAddTerm}
+                      disabled={!termInput.trim()}
+                      className="!px-4 !py-2"
+                    >
+                      <Plus size={16} />
+                    </Button>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {customTerms.map((term) => (
+                      <span
+                        key={term}
+                        className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase rounded-lg border border-slate-200 dark:border-slate-700"
+                      >
+                        {term}
+                        <button
+                          onClick={() => handleRemoveTerm(term)}
+                          className="text-slate-400 hover:text-red-500 transition-colors"
+                        >
+                          <X size={12} />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+
+                  {customTerms.length > 0 && (
+                    <button
+                      onClick={() => setCustomTerms([])}
+                      className="text-[10px] font-black text-slate-400 hover:text-red-500 underline transition-colors uppercase tracking-widest"
+                    >
+                      Clear all
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
         </div>
 
-        {/* Stats Bar */}
-        {output && (
-          <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 animate-in fade-in zoom-in-95 duration-300">
-            <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
-              <div className="flex flex-col">
-                <span className="opacity-50">Original</span>
-                <span>{inputStats.chars} Chars | {inputStats.words} Words</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="opacity-50">Converted</span>
-                <span>{outputStats.chars} Chars | {outputStats.words} Words</span>
-              </div>
-            </div>
-            <div className="text-[10px] font-black uppercase bg-emerald-500 text-white px-3 py-1 rounded-full shadow-sm">
-              Diff: {outputStats.chars - inputStats.chars >= 0 ? "+" : ""}{outputStats.chars - inputStats.chars} Chars
-            </div>
-          </div>
-        )}
-
         {/* Output Section */}
-        <div className="space-y-4 mt-8">
+        <div className="space-y-4 mt-8" id="text-converter-output">
           <div className="flex items-center justify-between px-1">
-            <label className="text-xs font-black uppercase tracking-widest text-slate-500">Converted Output</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Converted Output</label>
             {lastCase && <span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">Case: {lastCase}</span>}
           </div>
           <textarea
             readOnly
             value={output}
             placeholder="Result will appear here..."
-            className="w-full h-48 bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm outline-none transition-all resize-none shadow-inner text-brand-primary"
+            className="w-full h-48 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-4 font-mono text-sm outline-none transition-all resize-none shadow-inner text-brand-primary"
           />
           <div className="flex flex-wrap gap-3">
-            <button
+            <Button
               onClick={handleCopy}
               disabled={!output}
-              className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-xl active:scale-95 disabled:opacity-50 ${copyStatus === 'success' ? 'bg-blue-600 text-white shadow-blue-500/20' : copyStatus === 'error' ? 'bg-red-600 text-white shadow-red-500/20' : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'}`}
+              className={`flex-1 !py-4 ${copyStatus === 'error' ? 'bg-red-600' : ''}`}
+              variant={copyStatus === 'success' ? 'primary' : 'pill'}
             >
               {copyStatus === 'success' ? <Check size={16} /> : copyStatus === 'error' ? <AlertCircle size={16} /> : <Copy size={16} />}
-              {copyStatus === 'success' ? "✓ Copied!" : copyStatus === 'error' ? "Copy failed" : "Copy to Clipboard"}
-            </button>
-            <button
+              {copyStatus === 'success' ? "Copied!" : copyStatus === 'error' ? "Copy failed" : "Copy to Clipboard"}
+            </Button>
+            <Button
               onClick={handleDownload}
               disabled={!output}
-              className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all disabled:opacity-50 active:scale-95"
+              variant="secondary"
+              className="!py-4"
             >
               <Download size={16} /> Download .txt
-            </button>
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* SEO Content Block */}
-      <div className="mt-16 space-y-16">
-        <section className="max-w-3xl mx-auto px-4 py-8 text-gray-800 border-t border-slate-100 dark:border-slate-800">
-          <h1 className="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">Free Text Case Converter</h1>
-
-          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8">What is text case conversion?</h2>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Text case conversion is the process of changing the capitalization pattern of a string of text. For developers, this is an essential part of the workflow when transforming variable names between different programming languages or formatting data for database entries. For example, moving a JSON key from <code>camelCase</code> to <code>snake_case</code> is a common task that can be tedious to do manually.
-          </p>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Writers and editors also rely on case conversion to quickly fix text that was accidentally typed with the Caps Lock on, or to normalize headlines into <code>Title Case</code> or <code>Sentence case</code>. Our tool ensures that these transformations are handled with precision, following the linguistic and technical rules for each specific case type.
-          </p>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Additionally, our tool is perfect for SEO professionals who need to generate clean URL slugs. Using the <code>kebab-case</code> or <code>dot.case</code> functions, you can instantly turn a page title into a search-engine-friendly address without worrying about illegal characters or inconsistent capitalization.
-          </p>
-
-          <FAQAccordion items={faqs} />
-        </section>
+      <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
+        <ShieldCheck size={12} />
+        <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
       </div>
     </div>
   );

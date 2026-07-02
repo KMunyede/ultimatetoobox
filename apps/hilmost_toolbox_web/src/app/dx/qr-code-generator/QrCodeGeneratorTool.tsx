@@ -13,12 +13,16 @@ import {
   Download,
   Settings2,
   Lock,
-  RefreshCw,
   ChevronDown,
   Check,
   Copy,
   AlertCircle
 } from "lucide-react";
+import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/ui/Input";
+import { Select } from "../../../components/ui/Select";
+import { PillSelector } from "../../../components/ui/PillSelector";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 type QRType = 'URL' | 'Text' | 'Email' | 'Phone' | 'Wi-Fi' | 'Contact';
 type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
@@ -43,7 +47,7 @@ export function QrCodeGeneratorTool() {
   });
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [size, setSize] = useState(256);
+  const [size, setSize] = useState("256");
   const [errorLevel, setErrorLevel] = useState<ErrorCorrectionLevel>('M');
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#ffffff");
@@ -61,6 +65,8 @@ export function QrCodeGeneratorTool() {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
 
+  const parsedSize = parseInt(size) || 256;
+
   const scannability = useMemo(() => {
     if (!isGenerated) return null;
 
@@ -75,7 +81,7 @@ export function QrCodeGeneratorTool() {
 
     // Checks
     const isInverted = lumBg < lumFg;
-    const isSmall = size < 128;
+    const isSmall = parsedSize < 128;
     const isLowEC = errorLevel === 'L';
 
     if (contrast < 3.0) {
@@ -110,7 +116,7 @@ export function QrCodeGeneratorTool() {
     else status = { label: "Poor — likely to fail scanning", color: "bg-red-500/10 text-red-600 border-red-500/20", iconColor: "text-red-500" };
 
     return { score, hint, ...status };
-  }, [isGenerated, fgColor, bgColor, size, errorLevel]);
+  }, [isGenerated, fgColor, bgColor, parsedSize, errorLevel]);
 
   const getEncodedData = useCallback(() => {
     switch (type) {
@@ -150,13 +156,12 @@ export function QrCodeGeneratorTool() {
     if (!canvasRef.current) return;
 
     const data = getEncodedData();
-    const qrSize = size;
+    const qrSize = parsedSize;
     const labelHeight = showFrame ? Math.round(qrSize * 0.15) : 0;
     const totalWidth = qrSize;
     const totalHeight = qrSize + labelHeight;
 
     try {
-      // 1. Create temporary canvas for the QR part
       const tempCanvas = document.createElement('canvas');
       await QRCode.toCanvas(tempCanvas, data, {
         width: qrSize,
@@ -168,20 +173,15 @@ export function QrCodeGeneratorTool() {
         },
       });
 
-      // 2. Adjust main canvas dimensions
       canvasRef.current.width = totalWidth;
       canvasRef.current.height = totalHeight;
       const ctx = canvasRef.current.getContext('2d');
       if (!ctx) return;
 
-      // 3. Draw background
-      ctx.fillStyle = "#ffffff"; // Forced white background as per requirement
+      ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, totalWidth, totalHeight);
-
-      // 4. Draw QR
       ctx.drawImage(tempCanvas, 0, 0);
 
-      // 5. Draw Label if enabled
       if (showFrame && frameLabel) {
         const fontSize = Math.max(12, Math.round(qrSize * 0.06));
         ctx.fillStyle = fgColor;
@@ -196,9 +196,8 @@ export function QrCodeGeneratorTool() {
       console.error(err);
       setIsGenerated(false);
     }
-  }, [getEncodedData, size, errorLevel, fgColor, bgColor, showFrame, frameLabel]);
+  }, [getEncodedData, parsedSize, errorLevel, fgColor, bgColor, showFrame, frameLabel]);
 
-  // Debounce generation
   useEffect(() => {
     const timer = setTimeout(() => {
       generateQR();
@@ -217,7 +216,7 @@ export function QrCodeGeneratorTool() {
 
   const downloadSVG = async () => {
     const data = getEncodedData();
-    const qrSize = size;
+    const qrSize = parsedSize;
     const labelHeight = showFrame ? Math.round(qrSize * 0.15) : 0;
     const totalHeight = qrSize + labelHeight;
 
@@ -235,13 +234,8 @@ export function QrCodeGeneratorTool() {
 
       if (showFrame && frameLabel) {
         const fontSize = Math.max(12, Math.round(qrSize * 0.06));
-        // Simple SVG wrapping to add text
-        // Note: qrcode-svg output is already an <svg> tag.
-        // We'll wrap it in another SVG or modify the viewBox
         const textElement = `<text x="50%" y="${qrSize + (labelHeight / 2)}" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="${fontSize}" fill="${fgColor}">${frameLabel}</text>`;
 
-        // Remove the closing </svg> tag, add our text and a new closing tag
-        // Also adjust the height attribute
         svgString = svgString
           .replace(/height="(\d+)"/, `height="${totalHeight}"`)
           .replace(/viewBox="0 0 (\d+) (\d+)"/, `viewBox="0 0 $1 ${totalHeight}"`)
@@ -285,151 +279,117 @@ export function QrCodeGeneratorTool() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto my-8 space-y-12">
+    <div className="max-w-6xl mx-auto my-8 space-y-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         {/* Left: Input Controls */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="lg:col-span-7 space-y-6" id="qr-generator-controls">
           <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
 
             {/* Tabs */}
-            <div className="flex flex-wrap gap-2 mb-8 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl">
-              {[
-                { id: 'URL', icon: <LinkIcon size={14} /> },
-                { id: 'Text', icon: <Type size={14} /> },
-                { id: 'Email', icon: <Mail size={14} /> },
-                { id: 'Phone', icon: <Phone size={14} /> },
-                { id: 'Wi-Fi', icon: <Wifi size={14} /> },
-                { id: 'Contact', icon: <UserCircle size={14} /> },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setType(tab.id as QRType)}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
-                    type === tab.id
-                    ? 'bg-white dark:bg-slate-900 text-brand-primary shadow-sm ring-1 ring-slate-200 dark:ring-slate-700'
-                    : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  {tab.icon}
-                  <span className="hidden sm:inline">{tab.id}</span>
-                </button>
-              ))}
-            </div>
+            <PillSelector
+              value={type}
+              onChange={setType}
+              options={[
+                { label: 'URL', value: 'URL' },
+                { label: 'Text', value: 'Text' },
+                { label: 'Email', value: 'Email' },
+                { label: 'Phone', value: 'Phone' },
+                { label: 'Wi-Fi', value: 'Wi-Fi' },
+                { label: 'Contact', value: 'Contact' },
+              ]}
+              className="mb-8"
+            />
 
             {/* Dynamic Fields */}
             <div className="space-y-4 min-h-[160px]">
               {type === 'URL' && (
-                <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Website URL</label>
-                  <input
-                    type="url"
-                    placeholder="https://example.com"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                  />
-                </div>
+                <Input
+                  label="Website URL"
+                  type="url"
+                  placeholder="https://example.com"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                />
               )}
 
               {type === 'Text' && (
-                <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Plain Text</label>
+                <div className="space-y-1.5 w-full">
+                  <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">
+                    Plain Text
+                  </label>
                   <textarea
                     placeholder="Enter your message here..."
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    className="w-full h-32 bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
+                    className="w-full h-32 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-3 text-sm focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all resize-none"
                   />
                 </div>
               )}
 
               {type === 'Email' && (
                 <div className="grid grid-cols-1 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Recipient Email</label>
-                    <input
-                      type="email"
-                      placeholder="hello@hilmost.net"
-                      value={email.to}
-                      onChange={(e) => setEmail({ ...email, to: e.target.value })}
-                      className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                    />
-                  </div>
+                  <Input
+                    label="Recipient Email"
+                    type="email"
+                    placeholder="hello@hilmost.net"
+                    value={email.to}
+                    onChange={(e) => setEmail({ ...email, to: e.target.value })}
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Subject</label>
-                      <input
-                        type="text"
-                        placeholder="Inquiry"
-                        value={email.subject}
-                        onChange={(e) => setEmail({ ...email, subject: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Message Body</label>
-                      <input
-                        type="text"
-                        placeholder="Hello team..."
-                        value={email.body}
-                        onChange={(e) => setEmail({ ...email, body: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
+                    <Input
+                      label="Subject"
+                      placeholder="Inquiry"
+                      value={email.subject}
+                      onChange={(e) => setEmail({ ...email, subject: e.target.value })}
+                    />
+                    <Input
+                      label="Message Body"
+                      placeholder="Hello team..."
+                      value={email.body}
+                      onChange={(e) => setEmail({ ...email, body: e.target.value })}
+                    />
                   </div>
                 </div>
               )}
 
               {type === 'Phone' && (
-                <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Phone Number</label>
-                  <input
-                    type="tel"
-                    placeholder="+1 234 567 890"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                  />
-                </div>
+                <Input
+                  label="Phone Number"
+                  type="tel"
+                  placeholder="+1 234 567 890"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
               )}
 
               {type === 'Wi-Fi' && (
                 <div className="grid grid-cols-1 gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Network SSID</label>
-                      <input
-                        type="text"
-                        placeholder="Home-WiFi"
-                        value={wifi.ssid}
-                        onChange={(e) => setWifi({ ...wifi, ssid: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Security</label>
-                      <select
-                        value={wifi.security}
-                        onChange={(e) => setWifi({ ...wifi, security: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner appearance-none cursor-pointer"
-                      >
-                        <option value="WPA">WPA/WPA2</option>
-                        <option value="WEP">WEP</option>
-                        <option value="None">None (Open)</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Password</label>
-                    <input
-                      type="password"
-                      placeholder="••••••••"
-                      value={wifi.password}
-                      onChange={(e) => setWifi({ ...wifi, password: e.target.value })}
-                      className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                    <Input
+                      label="Network SSID"
+                      placeholder="Home-WiFi"
+                      value={wifi.ssid}
+                      onChange={(e) => setWifi({ ...wifi, ssid: e.target.value })}
+                    />
+                    <Select
+                      label="Security"
+                      value={wifi.security}
+                      onChange={(e) => setWifi({ ...wifi, security: e.target.value })}
+                      options={[
+                        { label: "WPA/WPA2", value: "WPA" },
+                        { label: "WEP", value: "WEP" },
+                        { label: "None (Open)", value: "None" },
+                      ]}
                     />
                   </div>
+                  <Input
+                    label="Password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={wifi.password}
+                    onChange={(e) => setWifi({ ...wifi, password: e.target.value })}
+                  />
                   <label className="flex items-center gap-3 cursor-pointer group w-fit ml-1">
                     <input
                       type="checkbox"
@@ -445,113 +405,76 @@ export function QrCodeGeneratorTool() {
               {type === 'Contact' && (
                 <div className="grid grid-cols-1 gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">First Name *</label>
-                      <input
-                        type="text"
-                        placeholder="John"
-                        value={contact.firstName}
-                        onChange={(e) => setContact({ ...contact, firstName: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Last Name</label>
-                      <input
-                        type="text"
-                        placeholder="Doe"
-                        value={contact.lastName}
-                        onChange={(e) => setContact({ ...contact, lastName: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Organization</label>
-                      <input
-                        type="text"
-                        placeholder="Hilmost Software"
-                        value={contact.org}
-                        onChange={(e) => setContact({ ...contact, org: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Job Title</label>
-                      <input
-                        type="text"
-                        placeholder="Solo Founder"
-                        value={contact.jobTitle}
-                        onChange={(e) => setContact({ ...contact, jobTitle: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Phone</label>
-                      <input
-                        type="tel"
-                        placeholder="+1 234 567 890"
-                        value={contact.phone}
-                        onChange={(e) => setContact({ ...contact, phone: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Email</label>
-                      <input
-                        type="email"
-                        placeholder="john@example.com"
-                        value={contact.email}
-                        onChange={(e) => setContact({ ...contact, email: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Website</label>
-                    <input
-                      type="url"
-                      placeholder="https://hilmost.net"
-                      value={contact.website}
-                      onChange={(e) => setContact({ ...contact, website: e.target.value })}
-                      className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
+                    <Input
+                      label="First Name *"
+                      placeholder="John"
+                      value={contact.firstName}
+                      onChange={(e) => setContact({ ...contact, firstName: e.target.value })}
+                      required
+                    />
+                    <Input
+                      label="Last Name"
+                      placeholder="Doe"
+                      value={contact.lastName}
+                      onChange={(e) => setContact({ ...contact, lastName: e.target.value })}
                     />
                   </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Organization"
+                      placeholder="Hilmost Software"
+                      value={contact.org}
+                      onChange={(e) => setContact({ ...contact, org: e.target.value })}
+                    />
+                    <Input
+                      label="Job Title"
+                      placeholder="Solo Founder"
+                      value={contact.jobTitle}
+                      onChange={(e) => setContact({ ...contact, jobTitle: e.target.value })}
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Phone"
+                      type="tel"
+                      placeholder="+1 234 567 890"
+                      value={contact.phone}
+                      onChange={(e) => setContact({ ...contact, phone: e.target.value })}
+                    />
+                    <Input
+                      label="Email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={contact.email}
+                      onChange={(e) => setContact({ ...contact, email: e.target.value })}
+                    />
+                  </div>
+                  <Input
+                    label="Website"
+                    type="url"
+                    placeholder="https://hilmost.net"
+                    value={contact.website}
+                    onChange={(e) => setContact({ ...contact, website: e.target.value })}
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="space-y-2 sm:col-span-1">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Street</label>
-                      <input
-                        type="text"
-                        placeholder="84 Broughton Dr"
-                        value={contact.street}
-                        onChange={(e) => setContact({ ...contact, street: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">City</label>
-                      <input
-                        type="text"
-                        placeholder="Harare"
-                        value={contact.city}
-                        onChange={(e) => setContact({ ...contact, city: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-slate-500 ml-1">Country</label>
-                      <input
-                        type="text"
-                        placeholder="Zimbabwe"
-                        value={contact.country}
-                        onChange={(e) => setContact({ ...contact, country: e.target.value })}
-                        className="w-full bg-slate-50 dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all shadow-inner"
-                      />
-                    </div>
+                    <Input
+                      label="Street"
+                      placeholder="84 Broughton Dr"
+                      value={contact.street}
+                      onChange={(e) => setContact({ ...contact, street: e.target.value })}
+                    />
+                    <Input
+                      label="City"
+                      placeholder="Harare"
+                      value={contact.city}
+                      onChange={(e) => setContact({ ...contact, city: e.target.value })}
+                    />
+                    <Input
+                      label="Country"
+                      placeholder="Zimbabwe"
+                      value={contact.country}
+                      onChange={(e) => setContact({ ...contact, country: e.target.value })}
+                    />
                   </div>
                 </div>
               )}
@@ -572,47 +495,50 @@ export function QrCodeGeneratorTool() {
 
               {optionsOpen && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Resolution (px)</label>
-                      <div className="grid grid-cols-4 gap-2">
-                        {[128, 256, 512, 1024].map(s => (
-                          <button
-                            key={s}
-                            onClick={() => setSize(s)}
-                            className={`py-2 rounded-lg text-[10px] font-black border-2 transition-all ${size === s ? 'border-brand-primary bg-brand-primary/5 text-brand-primary' : 'border-slate-100 dark:border-slate-800 text-slate-400'}`}
-                          >
-                            {s}
-                          </button>
-                        ))}
-                      </div>
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <NumberInput
+                        label="Resolution (px)"
+                        value={size}
+                        onChange={setSize}
+                        min={128}
+                        max={2048}
+                      />
+                      <PillSelector
+                        value={size}
+                        onChange={setSize}
+                        options={[
+                          { label: '128', value: '128' },
+                          { label: '256', value: '256' },
+                          { label: '512', value: '512' },
+                          { label: '1024', value: '1024' },
+                        ]}
+                      />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Error Correction</label>
-                      <div className="grid grid-cols-4 gap-2">
-                        {['L', 'M', 'Q', 'H'].map(l => (
-                          <button
-                            key={l}
-                            onClick={() => setErrorLevel(l as ErrorCorrectionLevel)}
-                            className={`py-2 rounded-lg text-xs font-black border-2 transition-all ${errorLevel === l ? 'border-brand-primary bg-brand-primary/5 text-brand-primary' : 'border-slate-100 dark:border-slate-800 text-slate-400'}`}
-                            title={l === 'H' ? 'Highest recovery (30%)' : 'Standard recovery'}
-                          >
-                            {l}
-                          </button>
-                        ))}
-                      </div>
+                      <PillSelector
+                        label="Error Correction"
+                        value={errorLevel}
+                        onChange={setErrorLevel}
+                        options={[
+                          { label: 'L', value: 'L' },
+                          { label: 'M', value: 'M' },
+                          { label: 'Q', value: 'Q' },
+                          { label: 'H', value: 'H' },
+                        ]}
+                      />
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Colors</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Colors</label>
                       <div className="grid grid-cols-1 gap-3">
-                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800">
+                        <div className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800">
                           <span className="text-xs font-bold text-slate-600 dark:text-slate-400">QR Code</span>
                           <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="h-8 w-12 bg-transparent cursor-pointer" />
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800">
+                        <div className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800">
                           <span className="text-xs font-bold text-slate-600 dark:text-slate-400">Background</span>
                           <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-8 w-12 bg-transparent cursor-pointer" />
                         </div>
@@ -620,9 +546,9 @@ export function QrCodeGeneratorTool() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Frame Label</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Frame Label</label>
                       <div className="space-y-3">
-                        <label className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 cursor-pointer group">
+                        <label className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800 cursor-pointer group">
                           <div className="flex items-center gap-2">
                             <Type size={14} className="text-brand-primary" />
                             <span className="text-xs font-bold text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Enable Label</span>
@@ -640,13 +566,11 @@ export function QrCodeGeneratorTool() {
 
                         {showFrame && (
                           <div className="animate-in fade-in zoom-in-95 duration-200">
-                            <input
-                              type="text"
+                            <Input
                               maxLength={30}
                               placeholder="Label (e.g. Scan Me)"
                               value={frameLabel}
                               onChange={(e) => setFrameLabel(e.target.value)}
-                              className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-bold focus:border-brand-primary outline-none transition-all shadow-sm"
                             />
                           </div>
                         )}
@@ -660,7 +584,7 @@ export function QrCodeGeneratorTool() {
         </div>
 
         {/* Right: Preview & Actions */}
-        <div className="lg:col-span-5 sticky top-24">
+        <div className="lg:col-span-5 sticky top-24" id="qr-generator-preview">
           <div className="bg-slate-900 border-2 border-slate-800 rounded-[2.5rem] p-8 shadow-2xl flex flex-col items-center">
             <div className="bg-white p-6 rounded-[2rem] shadow-inner mb-8 w-full aspect-square flex items-center justify-center relative overflow-hidden group">
                <canvas ref={canvasRef} className="max-w-full h-auto" style={{ imageRendering: 'pixelated' }} />
@@ -694,35 +618,32 @@ export function QrCodeGeneratorTool() {
             )}
 
             <div className="w-full space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
-                <button
-                  onClick={downloadQR}
-                  disabled={!isGenerated}
-                  className="flex items-center justify-center gap-2 px-3 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
-                >
-                  <Download size={16} /> Download PNG
-                </button>
-                <button
-                  onClick={downloadSVG}
-                  disabled={!isGenerated}
-                  className="flex items-center justify-center gap-2 px-3 py-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all active:scale-95"
-                >
-                  <Download size={16} /> Download SVG
-                </button>
-                <button
+              <div className="grid grid-cols-1 gap-3 w-full">
+                <div className="grid grid-cols-2 gap-3">
+                  <Button
+                    onClick={downloadQR}
+                    disabled={!isGenerated}
+                    className="flex-1 !px-4"
+                  >
+                    <Download size={16} /> PNG
+                  </Button>
+                  <Button
+                    onClick={downloadSVG}
+                    disabled={!isGenerated}
+                    className="flex-1 !px-4"
+                  >
+                    <Download size={16} /> SVG
+                  </Button>
+                </div>
+                <Button
                   onClick={copyToClipboard}
                   disabled={!isGenerated}
-                  className={`flex items-center justify-center gap-2 px-3 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl transition-all active:scale-95 ${
-                    copyStatus === 'success'
-                    ? 'bg-blue-600 text-white shadow-blue-500/20'
-                    : copyStatus === 'error'
-                    ? 'bg-red-600 text-white shadow-red-500/20'
-                    : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  variant={copyStatus === 'success' ? 'primary' : 'pill'}
+                  className={`w-full ${copyStatus === 'error' ? 'bg-red-600' : ''}`}
                 >
                   {copyStatus === 'success' ? <Check size={16} /> : copyStatus === 'error' ? <AlertCircle size={16} /> : <Copy size={16} />}
-                  {copyStatus === 'success' ? '✓ Copied!' : copyStatus === 'error' ? 'Copy failed — use Download' : 'Copy to Clipboard'}
-                </button>
+                  {copyStatus === 'success' ? 'Copied!' : copyStatus === 'error' ? 'Copy failed' : 'Copy to Clipboard'}
+                </Button>
               </div>
 
               <div className="flex items-center justify-center gap-2 text-slate-500 select-none pt-2">
@@ -734,58 +655,9 @@ export function QrCodeGeneratorTool() {
         </div>
       </div>
 
-      {/* SEO & Trust Footer */}
-      <div className="mt-16 space-y-16">
-        <div className="flex items-center justify-center gap-2 text-slate-400 select-none">
-          <Lock size={12} />
-          <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 Generated in your browser. Never sent to any server.</span>
-        </div>
-
-        <section className="max-w-3xl mx-auto px-4 py-8 text-gray-800 border-t border-slate-100 dark:border-slate-800">
-          <h1 className="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">Free QR Code Generator</h1>
-
-          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8">What can you encode in a QR code?</h2>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            Quick Response (QR) codes are incredibly versatile digital bridges between the physical and digital worlds. With this generator, you can encode standard <strong>Website URLs</strong> for instant browsing, or share <strong>Plain Text</strong> messages without needing an internet connection. Businesses frequently use them for digital business cards or menus to minimize physical contact and maximize efficiency.
-          </p>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            One of the most practical uses is <strong>Wi-Fi Sharing</strong>. Instead of typing complex passwords, your guests can simply scan a code to join your secure network instantly. We also support specialized encoding for <strong>Emails</strong> (including pre-filled subjects and bodies) and <strong>Phone Numbers</strong>, making it easier than ever for customers or friends to reach out with a single tap.
-          </p>
-          <p className="text-sm text-gray-700 leading-relaxed mb-4">
-            At Hilmost Digital Labs, we ensure that your QR codes are generated using the highest standards of the ISO/IEC 18004 specification. This means your codes will be readable by every modern smartphone camera and dedicated QR scanner application, regardless of the device or operating system.
-          </p>
-
-          <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-8">Frequently Asked Questions</h2>
-          <dl className="space-y-6">
-            <div>
-              <dt className="font-medium text-gray-900">Is this QR code generator free?</dt>
-              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
-                Yes, our QR laboratory is 100% free to use for both personal and commercial projects. There are no hidden fees, no subscriptions, and we do not place any watermarks or expiration dates on the generated codes.
-              </dd>
-            </div>
-
-            <div>
-              <dt className="font-medium text-gray-900">Do you store the data I enter?</dt>
-              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
-                Never. Security is a core pillar of the Hilmost monorepo. This tool uses a <strong>Zero-Server Architecture</strong>, meaning the QR generation happens entirely within your browser&apos;s memory. Your Wi-Fi passwords, emails, and URLs never touch our servers.
-              </dd>
-            </div>
-
-            <div>
-              <dt className="font-medium text-gray-900">What error correction level should I use?</dt>
-              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
-                Our tool defaults to &quot;Medium&quot; (15% recovery), which is ideal for most digital and print uses. If you plan to print the QR code on a surface that might get damaged or obscured (like an outdoor poster), choose &quot;High&quot; (30% recovery) for maximum durability.
-              </dd>
-            </div>
-
-            <div>
-              <dt className="font-medium text-gray-900">Can I use the QR code commercially?</dt>
-              <dd className="text-sm text-gray-700 mt-2 ml-4 leading-relaxed">
-                Absolutely. The QR codes you forge here are yours to keep. You can use them on business cards, marketing materials, packaging, or digital advertisements without needing to attribute Hilmost Software Corporation.
-              </dd>
-            </div>
-          </dl>
-        </section>
+      <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
+        <Lock size={12} />
+        <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 Generated in your browser. Never sent to any server.</span>
       </div>
     </div>
   );

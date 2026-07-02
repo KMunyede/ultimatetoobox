@@ -63,6 +63,16 @@ export default async function LengthDynamicPage({ params }: { params: Promise<{ 
     return notFound();
   }
 
+  const fromUnit = fromUnitStr.charAt(0).toUpperCase() + fromUnitStr.slice(1);
+  const toUnit = toUnitStr.charAt(0).toUpperCase() + toUnitStr.slice(1);
+  const displayTitle = `Convert ${fromUnit} to ${toUnit} | Length Calculator`;
+
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Length", href: "/converters/length" },
+    { label: `${fromUnit} to ${toUnit}`, href: `/converters/length/${slug}` },
+  ];
+
   const filePath = path.join(process.cwd(), "src/app/converters/length/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
@@ -70,10 +80,11 @@ export default async function LengthDynamicPage({ params }: { params: Promise<{ 
     <LengthPageUI 
       defaultUnit1={fromUnitStr}
       defaultUnit2={toUnitStr}
-      title={`Convert ${fromUnitStr.charAt(0).toUpperCase() + fromUnitStr.slice(1)} to ${toUnitStr.charAt(0).toUpperCase() + toUnitStr.slice(1)} | Length Calculator`}
+      title={displayTitle}
       description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free distance calculator.`}
       canonicalUrl={getCanonicalUrl(`/converters/length/${slug}`)}
       lastUpdated={lastUpdated}
+      breadcrumbItems={breadcrumbItems}
     />
   );
 }

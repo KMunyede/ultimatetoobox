@@ -3,8 +3,11 @@
 import React, { useState, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { ScientificNumber, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { ScientificNumber } from "@utilitiessite/ui";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
+import { Select } from "../../../components/ui/Select";
+import { Button } from "../../../components/ui/Button";
 
 const CONSTANTS = {
   h: 6.626e-34,
@@ -38,13 +41,6 @@ const MASS_UNITS = [
   { label: "g", value: 0.001 },
   { label: "Earth masses", value: CONSTANTS.earthMass },
   { label: "Solar masses", value: CONSTANTS.solarMass },
-];
-
-const DIST_UNITS = [
-  { label: "m", value: 1 },
-  { label: "cm", value: 0.01 },
-  { label: "mm", value: 0.001 },
-  { label: "km", value: 1000 },
 ];
 
 const LIBRARY: Record<string, Equation[]> = {
@@ -171,18 +167,17 @@ export function EquationSolverClient({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container max-w-5xl mx-auto space-y-6"
+      className="@container max-w-5xl mx-auto space-y-8 my-8"
     >
-      {/* Category Selection: Scrollable on mobile, flex on desktop */}
-      <div className="flex overflow-x-auto pb-2 scrollbar-hide md:flex-wrap gap-2">
+      <div className="flex overflow-x-auto pb-2 scrollbar-hide md:flex-wrap gap-3">
         {Object.keys(LIBRARY).map((cat) => (
           <button
             key={cat}
             onClick={() => handleCategoryChange(cat)}
-            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+            className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border-2 ${
               category === cat
-                ? "bg-brand-primary text-white shadow-md"
-                : "bg-canvas-card border border-base text-text-muted hover:border-brand-primary hover:text-text-primary"
+                ? "bg-brand-primary text-white border-brand-primary shadow-sm"
+                : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-400 hover:border-brand-primary hover:text-brand-primary"
             }`}
           >
             {cat}
@@ -190,90 +185,68 @@ export function EquationSolverClient({
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
 
-        {/* Equation Sidebar: Horizontal on mobile, Vertical on Desktop */}
         <div className="md:col-span-4 lg:col-span-3 flex md:flex-col gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
           {LIBRARY[category].map((eq) => (
             <button
               key={eq.id}
               onClick={() => handleEquationChange(eq)}
-              className={`p-4 rounded-2xl border text-left transition-all min-w-[200px] md:min-w-0 ${
+              className={`p-4 rounded-2xl border-2 text-left transition-all min-w-[200px] md:min-w-0 ${
                 equation.id === eq.id
                   ? "bg-brand-primary/5 border-brand-primary shadow-sm"
-                  : "bg-canvas-card border-base hover:border-brand-primary/50 shadow-sm"
+                  : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 hover:border-brand-primary/50 shadow-sm"
               }`}
             >
-              <div className="font-bold text-text-primary mb-1 truncate">{eq.name}</div>
-              <div className="text-xs font-mono text-brand-primary">{eq.formula}</div>
+              <div className="font-black text-slate-900 dark:text-white mb-1 truncate uppercase text-xs tracking-tight">{eq.name}</div>
+              <div className="text-[10px] font-mono text-brand-primary font-bold">{eq.formula}</div>
             </button>
           ))}
         </div>
 
-        {/* Solver Panel */}
-        <div className="md:col-span-8 lg:col-span-9 bg-canvas-card border border-base rounded-[2rem] p-5 md:p-8 shadow-sm">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="md:col-span-8 lg:col-span-9 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2rem] p-6 md:p-8 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
             {/* Left: Input Selection */}
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Solve for</label>
-                <Tooltip content="Choose which variable you want the calculator to find" position="top" className="w-full">
-                  <select
-                    value={target}
-                    title="Target Variable to Solve"
-                    onChange={(e) => setTarget(e.target.value)}
-                    className="w-full bg-canvas-muted border border-base rounded-2xl px-4 py-3 text-lg font-black text-text-primary outline-none focus:ring-4 focus:ring-brand-primary/10 transition-all cursor-pointer"
-                  >
-                    {equation.variables.map(v => (
-                      <option key={v.id} value={v.id}>{v.label}</option>
-                    ))}
-                  </select>
-                </Tooltip>
-              </div>
+            <div className="space-y-8">
+              <Select
+                label="Solve for"
+                value={target}
+                onChange={(e) => setTarget(e.target.value)}
+                options={equation.variables.map(v => ({ label: v.label, value: v.id }))}
+              />
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {equation.variables.filter(v => v.id !== target).map(v => (
-                  <div key={v.id} className="space-y-2">
-                    <label className="text-xs font-bold text-text-muted uppercase tracking-widest ml-1">{v.label}</label>
-                    <div className="flex gap-2">
-                      <Tooltip content={`Enter the value for ${v.label}`} position="top" className="flex-1">
-                        <NumericInput
-                          title={`${v.label} Input`}
-                          value={inputs[v.id] || ""}
-                          onChange={val => setInputs(prev => ({ ...prev, [v.id]: val }))}
-                          className="w-full bg-canvas-muted border border-base rounded-xl px-4 py-3 font-mono font-bold text-lg text-text-primary outline-none focus:border-brand-primary transition-colors"
-                          placeholder="0.00"
-                        />
-                      </Tooltip>
-                      {v.units.length > 1 && (
-                        <Tooltip content="Choose unit of measurement" position="top">
-                          <select
-                            value={inputUnits[v.id] || v.units[0].value}
-                            title={`${v.label} Unit Selection`}
-                            onChange={(e) => setInputUnits(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
-                            className="bg-canvas-card border border-base rounded-xl px-3 py-3 text-sm font-bold text-text-secondary outline-none cursor-pointer"
-                          >
-                            {v.units.map(u => (
-                              <option key={u.label} value={u.value}>{u.label}</option>
-                            ))}
-                          </select>
-                        </Tooltip>
-                      )}
+                  <div key={v.id} className="flex gap-3 items-end">
+                    <div className="flex-1">
+                      <NumberInput
+                        label={v.label}
+                        value={inputs[v.id] || ""}
+                        onChange={val => setInputs(prev => ({ ...prev, [v.id]: val }))}
+                        placeholder="0.00"
+                        className="text-lg font-mono font-bold"
+                      />
                     </div>
+                    {v.units.length > 1 && (
+                      <div className="w-28">
+                        <Select
+                          value={inputUnits[v.id] || v.units[0].value}
+                          onChange={(e) => setInputUnits(prev => ({ ...prev, [v.id]: parseFloat(e.target.value) }))}
+                          options={v.units.map(u => ({ label: u.label, value: u.value.toString() }))}
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
 
-              <Tooltip content="Solve the equation for the target variable" position="bottom" className="w-full">
-                <button
-                  onClick={solve}
-                  title="Run Solver"
-                  className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-black py-4 rounded-2xl text-xl shadow-lg transition-all active:scale-95 mt-2"
-                >
-                  SOLVE EQUATION
-                </button>
-              </Tooltip>
+              <Button
+                onClick={solve}
+                className="w-full !py-4 rounded-2xl"
+              >
+                SOLVE EQUATION
+              </Button>
             </div>
 
             {/* Right: Results Display */}
@@ -282,16 +255,16 @@ export function EquationSolverClient({
                 <motion.div
                   initial={{ scale: 0.95, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="bg-brand-primary/5 rounded-[1.5rem] p-6 border border-brand-primary/10 flex flex-col justify-center items-center text-center h-full min-h-[200px]"
+                  className="bg-brand-primary/5 rounded-[2rem] p-8 border border-brand-primary/10 flex flex-col justify-center items-center text-center h-full min-h-[250px] shadow-inner"
                 >
-                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-brand-primary mb-3">Calculated {target}</div>
-                  <div className="text-4xl md:text-5xl font-mono font-black text-text-primary tracking-tighter">
+                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary mb-4">Calculated {target}</div>
+                  <div className="text-5xl md:text-6xl font-mono font-black text-slate-900 dark:text-white tracking-tighter">
                     <ScientificNumber value={parseFloat(result)} suffix={equation.variables.find(v => v.id === target)?.unit} />
                   </div>
                 </motion.div>
               ) : (
-                <div className="bg-canvas-muted rounded-[1.5rem] p-6 border border-dashed border-base flex flex-col justify-center items-center text-center h-full min-h-[200px] text-text-muted">
-                  <p className="text-sm font-medium">Enter values to see results</p>
+                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-[2rem] p-8 border-2 border-dashed border-slate-100 dark:border-slate-800 flex flex-col justify-center items-center text-center h-full min-h-[250px] text-slate-400">
+                  <p className="text-[10px] font-black uppercase tracking-widest">Enter values to compute result</p>
                 </div>
               )}
             </div>

@@ -63,6 +63,16 @@ export default async function TemperatureDynamicPage({ params }: { params: Promi
     return notFound();
   }
 
+  const fromUnit = fromUnitStr.charAt(0).toUpperCase() + fromUnitStr.slice(1);
+  const toUnit = toUnitStr.charAt(0).toUpperCase() + toUnitStr.slice(1);
+  const displayTitle = `Convert ${fromUnit} to ${toUnit} | Temperature Calculator`;
+
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Temperature", href: "/converters/temperature" },
+    { label: `${fromUnit} to ${toUnit}`, href: `/converters/temperature/${slug}` },
+  ];
+
   const filePath = path.join(process.cwd(), "src/app/converters/temperature/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
@@ -70,10 +80,11 @@ export default async function TemperatureDynamicPage({ params }: { params: Promi
     <TemperaturePageUI 
       defaultUnit1={fromUnitStr}
       defaultUnit2={toUnitStr}
-      title={`Convert ${fromUnitStr.charAt(0).toUpperCase() + fromUnitStr.slice(1)} to ${toUnitStr.charAt(0).toUpperCase() + toUnitStr.slice(1)} | Temperature Calculator`}
+      title={displayTitle}
       description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free thermal calculator.`}
       canonicalUrl={getCanonicalUrl(`/converters/temperature/${slug}`)}
       lastUpdated={lastUpdated}
+      breadcrumbItems={breadcrumbItems}
     />
   );
 }

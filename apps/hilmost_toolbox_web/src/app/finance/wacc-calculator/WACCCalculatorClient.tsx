@@ -1,7 +1,8 @@
 "use client";
-import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 export function WACCCalculatorClient() {
   const [state, setState] = useUrlState({
@@ -14,17 +15,19 @@ export function WACCCalculatorClient() {
     taxRate: "25.0",
   });
 
+  const { marketCap, beta, riskFreeRate, equityPremium, totalDebt, interestRate, taxRate } = state as Record<string, string>;
+
   // Parse values
-  const E = parseFloat(state.marketCap as string) || 0;
-  const beta = parseFloat(state.beta as string) || 0;
-  const rf = parseFloat(state.riskFreeRate as string) / 100 || 0;
-  const erm = parseFloat(state.equityPremium as string) / 100 || 0;
-  const D = parseFloat(state.totalDebt as string) || 0;
-  const rd = parseFloat(state.interestRate as string) / 100 || 0;
-  const T = parseFloat(state.taxRate as string) / 100 || 0;
+  const E = parseFloat(marketCap) || 0;
+  const b = parseFloat(beta) || 0;
+  const rf = parseFloat(riskFreeRate) / 100 || 0;
+  const erm = parseFloat(equityPremium) / 100 || 0;
+  const D = parseFloat(totalDebt) || 0;
+  const rd = parseFloat(interestRate) / 100 || 0;
+  const T = parseFloat(taxRate) / 100 || 0;
 
   // 1. Cost of Equity (CAPM)
-  const Re = rf + beta * erm;
+  const Re = rf + b * erm;
 
   // 2. Cost of Debt (After-tax)
   const RdAfterTax = rd * (1 - T);
@@ -45,159 +48,139 @@ export function WACCCalculatorClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-8 my-8"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Input Sections */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Section 1: Equity & CAPM */}
-          <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-6 space-y-5 shadow-sm border-l-4 border-l-blue-500">
-            <h3 className="text-sm font-black text-blue-600 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px]">1</span>
+          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm border-l-4 border-l-brand-primary">
+            <h3 className="text-[10px] font-black text-brand-primary uppercase tracking-widest flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-brand-primary/10 flex items-center justify-center text-[10px]">1</span>
               Equity & CAPM Inputs
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Market Cap ($)</label>
-                <Tooltip content="The total market value of all company shares. (Market Price x Total Shares)" position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-                    value={state.marketCap}
-                    onChange={val => setState({ marketCap: val })}
-                  />
-                </Tooltip>
-              </div>
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Beta (Risk)</label>
-                <Tooltip content="Measure of stock volatility compared to the market. Average is 1.0. High risk is > 1.0." position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-                    value={state.beta}
-                    onChange={val => setState({ beta: val })}
-                  />
-                </Tooltip>
-              </div>
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Risk-Free Rate (%)</label>
-                <Tooltip content="The return on investment with zero risk, typically the 10-year Treasury Bond rate." position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-                    value={state.riskFreeRate}
-                    onChange={val => setState({ riskFreeRate: val })}
-                  />
-                </Tooltip>
-              </div>
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Equity Risk Prem (%)</label>
-                <Tooltip content="The extra return investors demand for choosing stocks over risk-free bonds. Usually 5-6%." position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-                    value={state.equityPremium}
-                    onChange={val => setState({ equityPremium: val })}
-                  />
-                </Tooltip>
-              </div>
+              <NumberInput
+                label="Market Cap ($)"
+                value={marketCap}
+                onChange={val => setState({ marketCap: val })}
+                min={0}
+              />
+              <NumberInput
+                label="Beta (Risk)"
+                value={beta}
+                onChange={val => setState({ beta: val })}
+                min={0}
+                step={0.01}
+              />
+              <NumberInput
+                label="Risk-Free Rate (%)"
+                value={riskFreeRate}
+                onChange={val => setState({ riskFreeRate: val })}
+                min={0}
+                max={100}
+                step={0.01}
+              />
+              <NumberInput
+                label="Equity Risk Prem (%)"
+                value={equityPremium}
+                onChange={val => setState({ equityPremium: val })}
+                min={0}
+                max={100}
+                step={0.01}
+              />
             </div>
           </div>
 
           {/* Section 2: Debt & Taxes */}
-          <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-6 space-y-5 shadow-sm border-l-4 border-l-red-500">
-            <h3 className="text-sm font-black text-red-600 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-[10px]">2</span>
+          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm border-l-4 border-l-rose-500">
+            <h3 className="text-[10px] font-black text-rose-500 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-rose-500/10 flex items-center justify-center text-[10px]">2</span>
               Debt & Taxes
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Total Debt ($)</label>
-                <Tooltip content="All interest-bearing debt (Short-term + Long-term loans)." position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                    value={state.totalDebt}
-                    onChange={val => setState({ totalDebt: val })}
-                  />
-                </Tooltip>
-              </div>
-              <div className="space-y-1.5">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Interest Rate (%)</label>
-                <Tooltip content="The average annual interest rate the company pays on its debt." position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                    value={state.interestRate}
-                    onChange={val => setState({ interestRate: val })}
-                  />
-                </Tooltip>
-              </div>
-              <div className="space-y-1.5 sm:col-span-2">
-                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">Corporate Tax Rate (%)</label>
-                <Tooltip content="The percentage of profit paid in taxes. Debt interest is tax-deductible!" position="top">
-                  <NumericInput
-                    className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                    value={state.taxRate}
-                    onChange={val => setState({ taxRate: val })}
-                  />
-                </Tooltip>
+              <NumberInput
+                label="Total Debt ($)"
+                value={totalDebt}
+                onChange={val => setState({ totalDebt: val })}
+                min={0}
+              />
+              <NumberInput
+                label="Interest Rate (%)"
+                value={interestRate}
+                onChange={val => setState({ interestRate: val })}
+                min={0}
+                max={100}
+                step={0.01}
+              />
+              <div className="sm:col-span-2">
+                <NumberInput
+                  label="Corporate Tax Rate (%)"
+                  value={taxRate}
+                  onChange={val => setState({ taxRate: val })}
+                  min={0}
+                  max={100}
+                  step={0.1}
+                />
               </div>
             </div>
           </div>
         </div>
 
         {/* Dashboard Results */}
-        <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-8 flex flex-col shadow-xl relative overflow-hidden bg-gradient-to-br from-white via-white to-amber-50/30">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full -mr-32 -mt-32 blur-3xl" />
+        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col shadow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center flex-1 flex flex-col justify-center py-8">
-            <span className="text-[11px] font-black text-amber-600 uppercase tracking-[0.3em] mb-2">Total WACC</span>
-            <div className="text-6xl md:text-7xl font-black text-slate-900 tracking-tighter">
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">Calculated WACC</span>
+            <div className="text-6xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter tabular-nums">
               <NumberTicker value={wacc * 100} decimals={2} />%
             </div>
-            <p className="mt-4 text-xs font-bold text-text-muted bg-white/50 inline-block px-4 py-2 rounded-full border border-base mx-auto">
-              {wacc < 0.1 ? "Efficient Capital Structure" : "High Risk / High Return Requirement"}
+            <p className="mt-6 text-[10px] font-black text-slate-500 uppercase tracking-widest bg-slate-50 dark:bg-slate-800 inline-block px-4 py-2 rounded-full border border-slate-100 dark:border-slate-700 mx-auto">
+              {wacc < 0.1 ? "Efficient Capital Structure" : "High Risk Required"}
             </p>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 gap-6 mt-8 pt-8 border-t border-base/50">
+          <div className="relative z-10 grid grid-cols-2 gap-6 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Cost of Equity</span>
-                <p className="text-xl font-black text-blue-600">{(Re * 100).toFixed(2)}%</p>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Cost of Equity</span>
+                <p className="text-xl font-black text-brand-primary">{(Re * 100).toFixed(2)}%</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Cost of Debt</span>
-                <p className="text-xl font-black text-red-600">{(RdAfterTax * 100).toFixed(2)}%</p>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Cost of Debt</span>
+                <p className="text-xl font-black text-rose-500">{(RdAfterTax * 100).toFixed(2)}%</p>
             </div>
           </div>
 
           <div className="relative z-10 mt-8 bg-brand-primary/5 rounded-2xl p-5 border border-brand-primary/10">
             <div className="flex justify-between items-center mb-1">
               <span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">Tax Shield Savings</span>
-              <span className="text-xs font-bold text-text-muted">Yearly Estimate</span>
+              <span className="text-[9px] font-black text-slate-400 uppercase">Yearly Est.</span>
             </div>
-            <div className="text-2xl font-black text-slate-800 tracking-tight">
+            <div className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
               $<NumberTicker value={taxShield} decimals={0} />
             </div>
-            <p className="text-[10px] text-text-muted mt-2 leading-relaxed">
-              *Because interest is tax-deductible, your debt actually saves you this much in taxes every year.
-            </p>
           </div>
         </div>
       </div>
 
       {/* Capital Structure Breakdown */}
-      <div className="bg-canvas-card border border-base rounded-2xl p-6 shadow-sm">
-        <h4 className="text-xs font-black text-text-primary uppercase tracking-widest mb-6">Capital Structure Breakdown</h4>
-        <div className="relative h-4 w-full bg-slate-100 rounded-full overflow-hidden flex">
-          <div style={{ width: `${equityWeight}%` }} className="h-full bg-blue-500 transition-all duration-1000" />
-          <div style={{ width: `${debtWeight}%` }} className="h-full bg-red-500 transition-all duration-1000" />
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+        <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-6">Capital Structure Breakdown</h4>
+        <div className="relative h-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
+          <div style={{ width: `${equityWeight}%` }} className="h-full bg-brand-primary transition-all duration-1000" />
+          <div style={{ width: `${debtWeight}%` }} className="h-full bg-rose-500 transition-all duration-1000" />
         </div>
         <div className="flex justify-between mt-4">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-500" />
-            <span className="text-xs font-bold text-text-secondary">Equity: {equityWeight.toFixed(1)}%</span>
+            <div className="w-3 h-3 rounded-full bg-brand-primary" />
+            <span className="text-[10px] font-black text-slate-600 dark:text-slate-400 uppercase tracking-widest">Equity: {equityWeight.toFixed(1)}%</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
-            <span className="text-xs font-bold text-text-secondary">Debt: {debtWeight.toFixed(1)}%</span>
+            <div className="w-3 h-3 rounded-full bg-rose-500" />
+            <span className="text-[10px] font-black text-slate-600 dark:text-slate-400 uppercase tracking-widest">Debt: {debtWeight.toFixed(1)}%</span>
           </div>
         </div>
       </div>

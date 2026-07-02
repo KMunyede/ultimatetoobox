@@ -3,204 +3,277 @@
 > eslint
 
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\astrophysics\AstrophysicsCalculatorClient.tsx
-  3:40  warning  'useMemo' is defined but never used   @typescript-eslint/no-unused-vars
-  9:26  warning  'FileJson' is defined but never used  @typescript-eslint/no-unused-vars
-
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\equation-solver\EquationSolverClient.tsx
-   43:7   warning  'DIST_UNITS' is assigned a value but never used  @typescript-eslint/no-unused-vars
-  146:14  warning  'e' is defined but never used                    @typescript-eslint/no-unused-vars
+  143:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\equation-solver\[slug]\page.tsx
   3:10  warning  'WebApplicationSchema' is defined but never used  @typescript-eslint/no-unused-vars
   3:58  warning  'FAQAccordion' is defined but never used          @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\scientific\ScientificCalculatorClient.tsx
-   7:10  warning  'IconCheck' is defined but never used             @typescript-eslint/no-unused-vars
-  27:10  warning  'copying' is assigned a value but never used      @typescript-eslint/no-unused-vars
-  74:14  warning  'e' is defined but never used                     @typescript-eslint/no-unused-vars
-  94:9   warning  'handleShare' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  17:9   warning  'pathname' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  33:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\scientific\ScientificCalculatorClient.tsx:33:7
+  31 |     const expr = params.get("expr");
+  32 |     if (expr) {
+> 33 |       setExpression(decodeURIComponent(expr));
+     |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |     }
+  35 |   }, []);
+  36 |  react-hooks/set-state-in-effect
+  70:14  warning  'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\standard\StandardCalculatorClient.tsx
-  53:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
-  86:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
-  99:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  51:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  84:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+  97:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\calculators\standard\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\age-calculator\AgeCalculatorClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   2:24  warning  'DateTimePicker' is defined but never used      @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-   6:26  warning  'Hourglass' is defined but never used           @typescript-eslint/no-unused-vars
-   7:10  warning  'differenceInYears' is defined but never used   @typescript-eslint/no-unused-vars
-   7:29  warning  'differenceInMonths' is defined but never used  @typescript-eslint/no-unused-vars
-   7:49  warning  'differenceInDays' is defined but never used    @typescript-eslint/no-unused-vars
-  38:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\age-calculator\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\area\AreaClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  71:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\data-storage\DataStorageClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used                                                                     @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used                                                                      @typescript-eslint/no-unused-vars
-  43:6   warning  React Hook useEffect has a missing dependency: 'setState'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-  57:6   warning  React Hook useEffect has a missing dependency: 'setState'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-  59:9   warning  'tourSteps' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
-
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\length\LengthConverterClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  61:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\percentage\PercentageClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  23:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\length\[slug]\page.tsx
+  5:10  warning  'getFileLastUpdated' is defined but never used  @typescript-eslint/no-unused-vars
+  6:8   warning  'path' is defined but never used                @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\percentage\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\TemperatureConverterClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  62:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\TemperaturePageUI.tsx
   13:3  warning  'title' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\[slug]\page.tsx
+  5:10  warning  'getFileLastUpdated' is defined but never used  @typescript-eslint/no-unused-vars
+  6:8   warning  'path' is defined but never used                @typescript-eslint/no-unused-vars
+
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\temperature\page.tsx
-  7:7  warning  'TOOL_TYPE' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  9:7  warning  'TOOL_TYPE' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\time-zone\TimeZoneClient.tsx
-   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-   7:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-  41:16  warning  'e' is defined but never used                   @typescript-eslint/no-unused-vars
-  81:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  164:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\time\TimeConverterClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  61:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\time-zone\TimeZoneClient.tsx:164:13
+  162 |     const saved = localStorage.getItem("hilmost_team_clocks");
+  163 |     if (saved) {
+> 164 |       try { setTeamMembers(JSON.parse(saved)); } catch (e) { console.error("Failed to parse team clocks", e); }
+      |             ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  165 |     }
+  166 |
+  167 |     const params = new URLSearchParams(window.location.search);  react-hooks/set-state-in-effect
+  184:14  warning  'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\unix-time\UnixTimeClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used                                                                                                      @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used                                                                                                       @typescript-eslint/no-unused-vars
-  35:6   warning  React Hook useEffect has missing dependencies: 'dateStr', 'setState', and 'timestampStr'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
-  66:9   warning  'tourSteps' is assigned a value but never used                                                                                                @typescript-eslint/no-unused-vars
+  23:5  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\unix-time\UnixTimeClient.tsx:23:5
+  21 |   useEffect(() => {
+  22 |     const now = Math.floor(Date.now() / 1000);
+> 23 |     setCurrentEpoch(now);
+     |     ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  24 |     
+  25 |     if (!timestampStr && !dateStr) {
+  26 |       setState({ timestampStr: now.toString() });  react-hooks/set-state-in-effect
+  36:6  warning  React Hook useEffect has missing dependencies: 'dateStr', 'setState', and 'timestampStr'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\unix-time\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\weight-mass\WeightConverterClient.tsx
-   3:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   6:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  68:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\converters\weight-mass\[slug]\page.tsx
+  5:10  warning  'getFileLastUpdated' is defined but never used  @typescript-eslint/no-unused-vars
+  6:8   warning  'path' is defined but never used                @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\color-picker\ColorPickerTool.tsx
+    3:38  warning  'useCallback' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+   37:17  error    'l' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              prefer-const
+  119:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\color-picker\ColorPickerTool.tsx:119:9
+  117 |     if (saved) {
+  118 |       try {
+> 119 |         setSavedColors(JSON.parse(saved));
+      |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  120 |       } catch (e) {
+  121 |         console.error("Failed to load color history");
+  122 |       }  react-hooks/set-state-in-effect
+  120:16  warning  'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\json-formatter\JSONFormatterClient.tsx
+  6:10  warning  'Button' is defined but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\json-formatter\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\jwt-decoder\JWTDecoderClient.tsx
+  5:10  warning  'CopyButton' is defined but never used  @typescript-eslint/no-unused-vars
+  6:10  warning  'Button' is defined but never used      @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\jwt-decoder\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\qr-code-generator\QrCodeGeneratorTool.tsx
-  15:3  warning  'RefreshCw' is defined but never used  @typescript-eslint/no-unused-vars
+   7:11  warning  'LinkIcon' is defined but never used    @typescript-eslint/no-unused-vars
+   9:3   warning  'Mail' is defined but never used        @typescript-eslint/no-unused-vars
+  10:3   warning  'Phone' is defined but never used       @typescript-eslint/no-unused-vars
+  11:3   warning  'Wifi' is defined but never used        @typescript-eslint/no-unused-vars
+  12:3   warning  'UserCircle' is defined but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\regex-tester\RegexTesterClient.tsx
-  13:17  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+   5:10  warning  'Button' is defined but never used  @typescript-eslint/no-unused-vars
+  15:17  warning  '_' is defined but never used       @typescript-eslint/no-unused-vars
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\dx\regex-tester\page.tsx
-  1:56  warning  'FAQAccordion' is defined but never used     @typescript-eslint/no-unused-vars
-  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\education\gpa-calculator\GpaCalculatorTool.tsx
+  51:11  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\education\gpa-calculator\GpaCalculatorTool.tsx:51:11
+  49 |
+  50 |   const initialCourses: Course[] = [
+> 51 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+     |           ^^^^^^^^^^^^^ Cannot call impure function
+  52 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+  53 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+  54 |   ];                                                 react-hooks/purity
+  52:11  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\education\gpa-calculator\GpaCalculatorTool.tsx:52:11
+  50 |   const initialCourses: Course[] = [
+  51 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+> 52 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+     |           ^^^^^^^^^^^^^ Cannot call impure function
+  53 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+  54 |   ];
+  55 |                                                 react-hooks/purity
+  53:11  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\education\gpa-calculator\GpaCalculatorTool.tsx:53:11
+  51 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+  52 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+> 53 |     { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+     |           ^^^^^^^^^^^^^ Cannot call impure function
+  54 |   ];
+  55 |
+  56 |   const [semesterCourses, setSemesterCourses] = useState<Course[]>(initialCourses);  react-hooks/purity
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\budget-planner\BudgetClient.tsx
-  48:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  56:5  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+   9:10  warning  'Button' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  43:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\budget-planner\BudgetClient.tsx:43:9
+  41 |     if (saved) {
+  42 |       try {
+> 43 |         setItems(JSON.parse(saved));
+     |         ^^^^^^^^ Avoid calling setState() directly within an effect
+  44 |       } catch (e) {
+  45 |         console.error("Failed to parse budget items", e);
+  46 |       }  react-hooks/set-state-in-effect
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\compound-interest\CompoundInterestClient.tsx
+  29:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\compound-interest\CompoundInterestClient.tsx:29:5
+  27 |
+  28 |   useEffect(() => {
+> 29 |     setIsClient(true);
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  30 |   }, []);
+  31 |
+  32 |   const { principal, rate, years, monthly } = state as Record<string, string>;  react-hooks/set-state-in-effect
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\compound-interest\page.tsx
   4:27  warning  'sanitizeTitle' is defined but never used  @typescript-eslint/no-unused-vars
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\currency\CurrencyClient.tsx
-  50:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  52:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  54:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  56:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  68:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  70:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  72:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  74:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  79:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  81:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  83:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  85:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
-  88:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  80:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\income-tax\IncomeTaxClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  25:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\inflation\InflationClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  27:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\loan-calculator\LoanCalculatorClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  30:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\currency\CurrencyClient.tsx:80:5
+  78 |
+  79 |   useEffect(() => {
+> 80 |     fetchRates();
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  81 |   }, [fetchRates]);
+  82 |
+  83 |  react-hooks/set-state-in-effect
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\salary-converter\SalaryConverterClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  34:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\retirement-planner\RetirementPlannerClient.tsx
+  29:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\tip-calculator\TipCalculatorClient.tsx
-   2:10  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-   4:10  warning  'ShareButton' is defined but never used         @typescript-eslint/no-unused-vars
-  25:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\vat-tax\VatTaxClient.tsx
-   3:24  warning  'ToolTutorial' is defined but never used        @typescript-eslint/no-unused-vars
-  33:9   warning  'tourSteps' is assigned a value but never used  @typescript-eslint/no-unused-vars
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\vat-tax\page.tsx
-  142:10  error  'SourceReference' is not defined  react/jsx-no-undef
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\finance\retirement-planner\RetirementPlannerClient.tsx:29:5
+  27 |
+  28 |   useEffect(() => {
+> 29 |     setIsClient(true);
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  30 |   }, []);
+  31 |
+  32 |   const { currentAge, retireAge, currentSavings, monthlyContribution, expectedReturn } = state as Record<string, string>;  react-hooks/set-state-in-effect
+npm error Lifecycle script `lint` failed with error:
+
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\health\bmi-calculator\BMIClient.tsx
+  2:24  warning  'Tooltip' is defined but never used  @typescript-eslint/no-unused-vars
+npm error code 1
 
 M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\health\bmi-calculator\page.tsx
   4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\health\daily-wisdom\DailyQuoteClient.tsx
-  5:10  warning  'ChevronLeft' is defined but never used   @typescript-eslint/no-unused-vars
-  5:23  warning  'ChevronRight' is defined but never used  @typescript-eslint/no-unused-vars
-  6:28  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
-
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\knowledge-base\[slug]\page.tsx
-  4:23  warning  'RelatedTools' is defined but never used  @typescript-eslint/no-unused-vars
-  4:37  warning  'ToolArticle' is defined but never used   @typescript-eslint/no-unused-vars
-
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\layout.tsx
-  4:66  warning  'AutoBreadcrumbs' is defined but never used  @typescript-eslint/no-unused-vars
-npm error Lifecycle script `lint` failed with error:
-
-npm error code 1
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\delete-pages\page.tsx
-  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
+M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\health\calorie-macro-calculator\CalorieMacroCalculatorTool.tsx
 npm error path M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web
+    3:27  warning  'useMemo' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   16:10  warning  'Input' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  115:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
 
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\merge-pdf\page.tsx
-  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars
-
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\page.tsx
 npm error workspace hilmost_toolbox_web@0.1.0
-  1:83  warning  'FAQSchema' is defined but never used  @typescript-eslint/no-unused-vars
-
-npm error location M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web
-M:\techprojects\UtilitiesSite\apps\hilmost_toolbox_web\src\app\pdf-tools\rotate-pdf\page.tsx
-  4:10  warning  'getCanonicalUrl' is defined but never used  @typescript-eslint/no-unused-vars

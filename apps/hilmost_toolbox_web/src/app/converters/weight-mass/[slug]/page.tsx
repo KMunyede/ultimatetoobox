@@ -63,6 +63,16 @@ export default async function WeightDynamicPage({ params }: { params: Promise<{ 
     return notFound();
   }
 
+  const fromUnit = fromUnitStr.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const toUnit = toUnitStr.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const displayTitle = `Convert ${fromUnit} to ${toUnit} | Weight Calculator`;
+
+  const breadcrumbItems = [
+    { label: "Converters", href: "/converters" },
+    { label: "Weight & Mass", href: "/converters/weight-mass" },
+    { label: `${fromUnit} to ${toUnit}`, href: `/converters/weight-mass/${slug}` },
+  ];
+
   const filePath = path.join(process.cwd(), "src/app/converters/weight-mass/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
@@ -70,10 +80,11 @@ export default async function WeightDynamicPage({ params }: { params: Promise<{ 
     <WeightMassPageUI 
       defaultUnit1={fromUnitStr}
       defaultUnit2={toUnitStr}
-      title={`Convert ${fromUnitStr.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} to ${toUnitStr.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} | Weight Calculator`}
+      title={displayTitle}
       description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free mass calculator.`}
       canonicalUrl={getCanonicalUrl(`/converters/weight-mass/${slug}`)}
       lastUpdated={lastUpdated}
+      breadcrumbItems={breadcrumbItems}
     />
   );
 }

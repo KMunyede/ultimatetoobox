@@ -1,7 +1,8 @@
 "use client";
-import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 export function EPSCalculatorClient() {
   const [state, setState] = useUrlState({
@@ -11,10 +12,12 @@ export function EPSCalculatorClient() {
     dilutiveShares: "15000",
   });
 
-  const income = parseFloat(state.netIncome as string) || 0;
-  const dividends = parseFloat(state.preferredDividends as string) || 0;
-  const shares = parseFloat(state.weightedShares as string) || 0;
-  const dilutive = parseFloat(state.dilutiveShares as string) || 0;
+  const { netIncome, preferredDividends, weightedShares, dilutiveShares } = state as Record<string, string>;
+
+  const income = parseFloat(netIncome) || 0;
+  const dividends = parseFloat(preferredDividends) || 0;
+  const shares = parseFloat(weightedShares) || 0;
+  const dilutive = parseFloat(dilutiveShares) || 0;
 
   const netProfit = income - dividends;
   const basicEps = shares > 0 ? netProfit / shares : 0;
@@ -25,88 +28,72 @@ export function EPSCalculatorClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Input Form */}
-        <div className="bg-canvas-card border border-base rounded-2xl p-5 space-y-5 shadow-sm">
-          <div className="space-y-1.5">
-            <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Net Income ($)</label>
-            <Tooltip content="The company's total earnings after all expenses and taxes." position="top">
-              <NumericInput
-                className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={state.netIncome}
-                onChange={val => setState({ netIncome: val })}
-                placeholder="e.g. 1,000,000"
-              />
-            </Tooltip>
-          </div>
+        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 shadow-sm">
+          <NumberInput
+            label="Net Income ($)"
+            value={netIncome}
+            onChange={val => setState({ netIncome: val })}
+            min={0}
+            className="text-lg font-bold"
+          />
 
-          <div className="space-y-1.5">
-            <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Preferred Dividends ($)</label>
-            <Tooltip content="Dividends promised to preferred shareholders, subtracted from net income." position="top">
-              <NumericInput
-                className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={state.preferredDividends}
-                onChange={val => setState({ preferredDividends: val })}
-                placeholder="e.g. 50,000"
-              />
-            </Tooltip>
-          </div>
+          <NumberInput
+            label="Preferred Dividends ($)"
+            value={preferredDividends}
+            onChange={val => setState({ preferredDividends: val })}
+            min={0}
+            className="text-lg font-bold"
+          />
 
-          <div className="space-y-1.5">
-            <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Weighted Avg Shares</label>
-            <Tooltip content="The average number of common shares outstanding during the period." position="top">
-              <NumericInput
-                className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={state.weightedShares}
-                onChange={val => setState({ weightedShares: val })}
-                placeholder="e.g. 200,000"
-              />
-            </Tooltip>
-          </div>
+          <NumberInput
+            label="Weighted Avg Shares"
+            value={weightedShares}
+            onChange={val => setState({ weightedShares: val })}
+            min={1}
+            className="text-lg font-bold"
+          />
 
-          <div className="space-y-1.5">
-            <label className="block text-[10px] font-bold text-text-muted uppercase tracking-[0.15em] ml-1">Dilutive Potential Shares</label>
-            <Tooltip content="Convertible securities like stock options that could become common shares." position="top">
-              <NumericInput
-                className="w-full h-11 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                value={state.dilutiveShares}
-                onChange={val => setState({ dilutiveShares: val })}
-                placeholder="e.g. 15,000"
-              />
-            </Tooltip>
-          </div>
+          <NumberInput
+            label="Dilutive Potential Shares"
+            value={dilutiveShares}
+            onChange={val => setState({ dilutiveShares: val })}
+            min={0}
+            className="text-lg font-bold"
+          />
         </div>
 
         {/* Results */}
-        <div className="bg-canvas-card border border-base rounded-2xl p-6 flex flex-col justify-center shadow-xl relative overflow-hidden bg-gradient-to-br from-white to-slate-50">
+        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-8 flex flex-col justify-center shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
-          <div className="relative z-10 text-center space-y-6">
+          <div className="relative z-10 text-center space-y-8">
             <div className="space-y-1">
-              <span className="text-[11px] font-bold text-text-muted uppercase tracking-[0.2em]">Basic EPS</span>
-              <div className="text-5xl font-black text-brand-primary tracking-tighter">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Basic EPS</span>
+              <div className="text-6xl font-black text-brand-primary tracking-tighter">
                 $<NumberTicker value={basicEps} decimals={2} />
               </div>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[11px] font-bold text-text-muted uppercase tracking-[0.2em]">Diluted EPS</span>
-              <div className="text-4xl font-black text-slate-800 tracking-tighter">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Diluted EPS</span>
+              <div className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">
                 $<NumberTicker value={dilutedEps} decimals={2} />
               </div>
             </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-base">
+          <div className="relative z-10 grid grid-cols-2 gap-4 mt-12 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Net Profit</span>
-                <p className="text-sm font-bold text-text-primary">${netProfit.toLocaleString()}</p>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Net Profit</span>
+                <p className="text-xl font-black text-slate-900 dark:text-white">${netProfit.toLocaleString()}</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Total Diluted Sh.</span>
-                <p className="text-sm font-bold text-text-primary">{totalDilutedShares.toLocaleString()}</p>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Diluted Sh.</span>
+                <p className="text-xl font-black text-slate-900 dark:text-white">{totalDilutedShares.toLocaleString()}</p>
             </div>
           </div>
         </div>

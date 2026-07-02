@@ -1,4 +1,4 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { AreaClient } from "./AreaClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -8,7 +8,8 @@ export function AreaPageUI({
   title = "Area Converter",
   description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area",
-  lastUpdated
+  lastUpdated,
+  breadcrumbItems: customBreadcrumbItems
 }: {
   defaultFrom?: string;
   defaultTo?: string;
@@ -16,11 +17,14 @@ export function AreaPageUI({
   description?: string;
   canonicalUrl?: string;
   lastUpdated?: string;
+  breadcrumbItems?: { label: string; href: string }[];
 }) {
-  const breadcrumbItems = [
+  const defaultBreadcrumbItems = [
     { label: "Converters", href: "/converters" },
     { label: "Area", href: "/converters/area" },
   ];
+
+  const breadcrumbItems = customBreadcrumbItems || defaultBreadcrumbItems;
 
   const faqs = [
     {
@@ -51,7 +55,8 @@ export function AreaPageUI({
         image="https://hilmost-toolbox.hilmost.net/og/converters.png"
       />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
         title={title.split(' | ')[0]}

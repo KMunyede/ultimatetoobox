@@ -1,11 +1,11 @@
 "use client";
-import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
+import { Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
 import CryptoJS from "crypto-js";
 import { Copy, Check, ShieldCheck } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../../../components/ui/Button";
 
 export function MD5HashClient() {
   const [state, setState] = useUrlState({
@@ -13,8 +13,8 @@ export function MD5HashClient() {
   });
   const [copied, setCopied] = useState(false);
 
-  const { text } = state;
-  const hash = text ? CryptoJS.MD5(text as string).toString() : "";
+  const { text } = state as { text: string };
+  const hash = text ? CryptoJS.MD5(text).toString() : "";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(hash);
@@ -22,59 +22,49 @@ export function MD5HashClient() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const tourSteps = [
-    { element: '#tour-md5-input', popover: { title: '1. Secure Input', description: 'Enter the text you want to hash. All processing happens entirely in your browser.' } },
-    { element: '#tour-md5-result', popover: { title: '2. Checksum', description: 'The 32-character hexadecimal MD5 hash is generated instantly.' } },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-
-      <div className="bg-canvas-card border border-base rounded-3xl p-6 md:p-10 shadow-xl space-y-8">
-        <div id="tour-md5-input" className="space-y-4">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-10 shadow-sm space-y-8">
+        <div id="tour-md5-input" className="space-y-1.5 w-full">
             <div className="flex items-center gap-2 mb-2 ml-1">
                 <ShieldCheck size={16} className="text-brand-primary" />
-                <label className="block text-xs font-bold text-text-muted uppercase tracking-widest">Input String</label>
+                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Input String</label>
             </div>
-            <Tooltip content="Enter text or raw data to generate its unique MD5 fingerprint" position="top" className="w-full">
-              <textarea
-                  className="w-full h-40 p-5 bg-canvas-muted border border-base rounded-2xl text-text-primary text-xl font-medium outline-none focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary transition-all resize-none"
-                  placeholder="Enter text to generate MD5 hash..."
-                  title="MD5 Input String"
-                  value={text}
-                  onChange={e => setState({ text: e.target.value })}
-              />
-            </Tooltip>
+            <textarea
+                className="w-full h-40 p-5 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-2xl text-slate-900 dark:text-white text-xl font-medium outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
+                placeholder="Enter text to generate MD5 hash..."
+                value={text}
+                onChange={e => setState({ text: e.target.value })}
+            />
         </div>
 
-        <div id="tour-md5-result" className="space-y-4">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Generated MD5 Hash</label>
+        <div id="tour-md5-result" className="space-y-1.5 w-full">
+            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Generated MD5 Hash</label>
             <div className="relative group">
-                <Tooltip content="The 32-character hexadecimal MD5 hash result" position="top" className="w-full">
-                  <div className="w-full min-h-20 p-6 bg-canvas-card border border-brand-primary/20 rounded-2xl flex items-center justify-center font-mono text-xl md:text-2xl font-black text-brand-primary break-all shadow-inner">
-                      {hash || <span className="opacity-10">00000000000000000000000000000000</span>}
-                  </div>
-                </Tooltip>
+                <div className="w-full min-h-20 p-6 bg-slate-50 dark:bg-slate-950 border border-brand-primary/20 rounded-2xl flex items-center justify-center font-mono text-xl md:text-2xl font-black text-brand-primary break-all shadow-inner">
+                    {hash || <span className="opacity-10">00000000000000000000000000000000</span>}
+                </div>
                 {hash && (
-                    <Tooltip content="Copy checksum to clipboard" position="left">
-                      <button
-                          onClick={handleCopy}
-                          className="absolute top-2 right-2 p-2 bg-canvas-muted text-text-muted rounded-lg hover:text-brand-primary transition-all"
-                          title="Copy hash"
-                      >
-                          {copied ? <Check size={18} /> : <Copy size={18} />}
-                      </button>
-                    </Tooltip>
+                  <div className="absolute top-2 right-2">
+                    <Button
+                        onClick={handleCopy}
+                        variant={copied ? "primary" : "secondary"}
+                        className="!px-3 !py-2"
+                        title="Copy hash"
+                    >
+                        {copied ? <Check size={18} /> : <Copy size={18} />}
+                    </Button>
+                  </div>
                 )}
             </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/10">
-            <p className="text-[10px] text-amber-600 font-medium leading-relaxed">
+        <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-800">
+            <p className="text-[10px] text-amber-700 dark:text-amber-500 font-bold uppercase tracking-widest leading-relaxed">
                 <strong>ARCHON SECURITY NOTE:</strong> MD5 is a cryptographic hash but should not be used for password hashing or high-security authentication. It is ideal for file integrity checks and non-sensitive data deduplication.
             </p>
         </div>

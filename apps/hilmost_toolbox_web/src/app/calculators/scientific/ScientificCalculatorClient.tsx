@@ -4,9 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { IconCheck } from "@tabler/icons-react";
 import { motion } from "framer-motion";
-import { Tooltip } from "@utilitiessite/ui";
 
 type AngleMode = "deg" | "rad" | "grad";
 
@@ -24,7 +22,6 @@ export function ScientificCalculatorClient() {
   const [angleMode, setAngleMode] = useState<AngleMode>("rad");
   const [isSecond, setIsSecond] = useState(false);
   const [isHyp, setIsHyp] = useState(false);
-  const [copying, setCopying] = useState(false);
 
   const { history, addEntry, clearHistory } = useHistory("scientific");
 
@@ -33,7 +30,6 @@ export function ScientificCalculatorClient() {
     const params = new URLSearchParams(window.location.search);
     const expr = params.get("expr");
     if (expr) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setExpression(decodeURIComponent(expr));
     }
   }, []);
@@ -91,15 +87,6 @@ export function ScientificCalculatorClient() {
     }
   }, [shouldReset, result]);
 
-  const handleShare = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("expr", encodeURIComponent(expression));
-    navigator.clipboard.writeText(url.toString());
-    setCopying(true);
-    setTimeout(() => setCopying(false), 2000);
-    window.history.replaceState(null, "", `${pathname}?${url.searchParams.toString()}`);
-  };
-
   const onButtonClick = (val: string, type: string) => {
     if (type === "number") handleInput(val);
     else if (type === "operator") handleInput(val);
@@ -144,45 +131,43 @@ export function ScientificCalculatorClient() {
   }, [handleInput, calculate]);
 
   const buttons = [
-    // Standard Row 1: Modes & Main Actions
-    { label: "2nd", type: "mode", active: isSecond, tip: "Shift: Toggles Inverse Functions", className: "bg-slate-100 dark:bg-slate-800" },
-    { label: "DEG", type: "mode", active: angleMode === "deg", tip: "Degrees Mode (360°)" },
-    { label: "RAD", type: "mode", active: angleMode === "rad", tip: "Radians Mode (2π)" },
+    { label: "2nd", type: "mode", active: isSecond, className: "bg-slate-100 dark:bg-slate-800" },
+    { label: "DEG", type: "mode", active: angleMode === "deg" },
+    { label: "RAD", type: "mode", active: angleMode === "rad" },
     { label: "(", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
     { label: ")", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "AC", type: "clear", className: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-900/50", tip: "All Clear" },
+    { label: "AC", type: "clear", className: "bg-rose-50 dark:bg-rose-900/20 text-rose-600 border-rose-100 dark:border-rose-900/50" },
 
-    // Scientific Functions (Left) & Numbers (Right)
-    { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func", tip: isSecond ? "Inverse Sine" : "Sine Function", className: "bg-blue-50/50 dark:bg-blue-900/20" },
-    { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func", tip: isSecond ? "Inverse Cosine" : "Cosine Function", className: "bg-blue-50/50 dark:bg-blue-900/20" },
-    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", tip: isSecond ? "Inverse Tangent" : "Tangent Function", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
     { label: "7", type: "number", className: "font-black" },
     { label: "8", type: "number", className: "font-black" },
     { label: "9", type: "number", className: "font-black" },
     { label: "÷", type: "operator", val: "÷", className: "text-brand-primary bg-brand-primary/5" },
 
-    { label: "ln", type: "func", tip: "Natural Logarithm (base e)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
-    { label: "log", type: "func", tip: "Common Logarithm (base 10)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
-    { label: "√x", type: "func", val: "√", tip: "Square Root", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "ln", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "log", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "√x", type: "func", val: "√", className: "bg-sky-50 dark:bg-sky-900/20" },
     { label: "4", type: "number", className: "font-black" },
     { label: "5", type: "number", className: "font-black" },
     { label: "6", type: "number", className: "font-black" },
     { label: "×", type: "operator", val: "×", className: "text-brand-primary bg-brand-primary/5" },
 
-    { label: "x²", type: "operator", val: "^2", tip: "Square (Power of 2)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
-    { label: "x³", type: "operator", val: "^3", tip: "Cube (Power of 3)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
-    { label: "^", type: "operator", tip: "Power Function (x to the power of y)", className: "bg-blue-50/50 dark:bg-blue-900/20" },
+    { label: "x²", type: "operator", val: "^2", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "x³", type: "operator", val: "^3", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "^", type: "operator", className: "bg-sky-50 dark:bg-sky-900/20" },
     { label: "1", type: "number", className: "font-black" },
     { label: "2", type: "number", className: "font-black" },
     { label: "3", type: "number", className: "font-black" },
     { label: "−", type: "operator", val: "−", className: "text-brand-primary bg-brand-primary/5" },
 
-    { label: "HYP", type: "mode", active: isHyp, tip: "Hyperbolic Function Mode", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "π", type: "number", tip: "Pi Constant (≈3.14159)", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "e", type: "number", tip: "Euler's Number (≈2.71828)", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "HYP", type: "mode", active: isHyp, className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "π", type: "number", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "e", type: "number", className: "bg-slate-50 dark:bg-slate-800/50" },
     { label: "0", type: "number", className: "font-black" },
     { label: ".", type: "number", className: "font-black" },
-    { label: "=", type: "equals", className: "bg-brand-primary text-white hover:bg-brand-hover shadow-lg shadow-brand-primary/20", tip: "Calculate Result" },
+    { label: "=", type: "equals", className: "bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg" },
     { label: "+", type: "operator", className: "text-brand-primary bg-brand-primary/5" },
   ];
 
@@ -190,9 +175,9 @@ export function ScientificCalculatorClient() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container max-w-4xl mx-auto"
+      className="@container max-w-4xl mx-auto my-8"
     >
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-6">
         <CalculatorDisplay
           expression={expression}
           result={result}
@@ -205,38 +190,25 @@ export function ScientificCalculatorClient() {
           }}
         />
 
-        {/* Industry Standard Layout: 5 columns on Mobile, 7 columns on Desktop */}
-        <div className="grid grid-cols-5 @[700px]:grid-cols-7 gap-2 md:gap-3">
-          {buttons.map((btn, i) => {
-            const buttonNode = (
-              <button
-                key={i}
-                onClick={() => onButtonClick(btn.val || btn.label, btn.type)}
-                className={`
-                  w-full h-12 md:h-14 @[600px]:h-16 rounded-xl md:rounded-2xl text-sm md:text-base font-bold transition-all active:scale-95 border
-                  ${btn.className || ""}
-                  ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-500" : ""}
-                  ${btn.type === "mode" && btn.active ? "bg-brand-primary/10 border-brand-primary/30 text-brand-primary" : ""}
-                  ${btn.type === "number" && !btn.className?.includes('bg-') ? "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
-                  ${btn.type === "operator" && !btn.className?.includes('bg-') ? "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
-                  ${btn.type === "func" && !btn.className?.includes('bg-') ? "bg-blue-50/50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-800/50 text-blue-600 dark:text-blue-400" : ""}
-                  hover:border-brand-primary/50
-                `}
-              >
-                {btn.label}
-              </button>
-            );
-
-            return btn.tip ? (
-              <Tooltip key={i} content={btn.tip} position="top">
-                {buttonNode}
-              </Tooltip>
-            ) : (
-              <React.Fragment key={i}>
-                {buttonNode}
-              </React.Fragment>
-            );
-          })}
+        <div className="grid grid-cols-5 @[700px]:grid-cols-7 gap-2 md:gap-4">
+          {buttons.map((btn, i) => (
+            <button
+              key={i}
+              onClick={() => onButtonClick(btn.val || btn.label, btn.type)}
+              className={`
+                w-full h-12 md:h-14 @[600px]:h-16 rounded-xl md:rounded-2xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all active:scale-95 border-2
+                ${btn.className || ""}
+                ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-400" : ""}
+                ${btn.type === "mode" && btn.active ? "bg-brand-primary/10 border-brand-primary/30 text-brand-primary" : ""}
+                ${btn.type === "number" && !btn.className?.includes('bg-') ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
+                ${btn.type === "operator" && !btn.className?.includes('bg-') ? "bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
+                ${btn.type === "func" && !btn.className?.includes('bg-') ? "bg-sky-50/50 dark:bg-sky-900/20 border-sky-100 dark:border-sky-800/50 text-sky-600 dark:text-sky-400" : ""}
+                hover:border-brand-primary/50
+              `}
+            >
+              {btn.label}
+            </button>
+          ))}
         </div>
       </div>
     </motion.div>

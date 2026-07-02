@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ToolTutorial, DateTimePicker, Tooltip } from "@utilitiessite/ui";
-import { Copy, Check } from "lucide-react";
+import { DateTimePicker } from "@utilitiessite/ui";
+import { Copy, Check, Clock } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
+import { motion } from "framer-motion";
+import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/ui/Input";
 
 export function UnixTimeClient() {
   const [currentEpoch, setCurrentEpoch] = useState<number>(0);
@@ -18,9 +20,8 @@ export function UnixTimeClient() {
 
   useEffect(() => {
     const now = Math.floor(Date.now() / 1000);
-    setTimeout(() => setCurrentEpoch(now), 0);
+    setCurrentEpoch(now);
     
-    // Initialize timestampStr and dateStr if they are empty
     if (!timestampStr && !dateStr) {
       setState({ timestampStr: now.toString() });
       const date = new Date();
@@ -44,7 +45,6 @@ export function UnixTimeClient() {
     if (!ts) return "";
     const num = parseInt(ts, 10);
     if (isNaN(num)) return "Invalid timestamp";
-    // Check if it's in ms instead of s (heuristic: if > 1e11)
     const ms = num > 1e11 ? num : num * 1000;
     try {
       return new Date(ms).toUTCString();
@@ -63,72 +63,66 @@ export function UnixTimeClient() {
     }
   };
 
-  const tourSteps = [
-    { element: '#tour-unix-current', popover: { title: '1. Current Epoch', description: 'This is the current Unix timestamp. You can click the copy icon to copy it.' } },
-    { element: '#tour-unix-ts2date', popover: { title: '2. Timestamp to Date', description: 'Enter a Unix timestamp to convert it into a human-readable date.' } },
-    { element: '#tour-unix-date2ts', popover: { title: '3. Date to Timestamp', description: 'Select a date and time to get its equivalent Unix timestamp.' } },
-  ];
-
   return (
-    <div className="space-y-4">
-      
-      {/* Current Epoch */}
-      <div id="tour-unix-current" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-5 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
-        <div>
-          <h2 className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-1 uppercase tracking-wider">Current Unix Epoch Time</h2>
-          <Tooltip content="The number of seconds since January 1, 1970 (UTC)" position="right">
-            <div className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 dark:text-white tracking-wider">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-8 my-8"
+    >
+      <div id="tour-unix-current" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
+        <div className="flex items-center gap-4">
+          <div className="h-14 w-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary">
+            <Clock size={28} />
+          </div>
+          <div>
+            <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Current Unix Epoch</h2>
+            <div className="text-3xl sm:text-4xl font-mono font-black text-slate-900 dark:text-white tracking-widest tabular-nums">
               {currentEpoch || "..."}
             </div>
-          </Tooltip>
+          </div>
         </div>
-        <Tooltip content="Copy the current Unix timestamp to your clipboard" position="left">
-          <button
-            onClick={handleCopy}
-            className="flex-shrink-0 flex items-center justify-center h-12 w-14 rounded-2xl bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:slate-700 transition-all shadow-sm active:scale-95"
-            title="Copy current epoch"
-          >
-            {copied ? <Check size={20} className="text-emerald-500" /> : <Copy size={20} />}
-          </button>
-        </Tooltip>
+        <Button
+          onClick={handleCopy}
+          variant={copied ? "primary" : "secondary"}
+          className="!px-5 !py-4"
+          title="Copy current epoch"
+        >
+          {copied ? <Check size={20} /> : <Copy size={20} />}
+        </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Timestamp to Date */}
-        <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-all hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-md">
-          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Timestamp to Date</h2>
+        <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+          <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Timestamp to Date</h2>
           <div className="space-y-4">
-            <Tooltip content="Paste a 10-digit (seconds) or 13-digit (ms) Unix timestamp" position="top" className="w-full">
-              <input
-                type="text"
-                className="w-full h-12 px-4 text-lg font-mono border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all hover:border-blue-400"
-                value={timestampStr}
-                onChange={e => setState({ timestampStr: e.target.value })}
-                placeholder="e.g. 1718000000"
-                title="Input Unix Timestamp"
-              />
-            </Tooltip>
-            <div className="h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-blue-700 dark:text-blue-400 font-medium break-words leading-tight">
+            <Input
+              type="text"
+              className="text-lg font-mono"
+              value={timestampStr}
+              onChange={e => setState({ timestampStr: e.target.value })}
+              placeholder="e.g. 1718000000"
+            />
+            <div className="min-h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-brand-primary font-bold text-sm break-words leading-relaxed shadow-inner">
               {getReadableDate(timestampStr)}
             </div>
           </div>
         </div>
 
         {/* Date to Timestamp */}
-        <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm transition-all hover:border-emerald-200 dark:hover:border-emerald-800 hover:shadow-md">
-          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Date to Timestamp</h2>
+        <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+          <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Date to Timestamp</h2>
           <div className="space-y-4">
             <DateTimePicker
               value={dateStr}
               onChange={(val) => setState({ dateStr: val })}
             />
-            <div className="h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-emerald-700 dark:text-emerald-400 font-mono text-2xl font-bold break-all">
+            <div className="min-h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-emerald-600 dark:text-emerald-400 font-mono text-2xl font-black break-all shadow-inner">
               {getTimestampFromDate(dateStr)}
             </div>
           </div>
         </div>
       </div>
-      
-    </div>
+    </motion.div>
   );
 }

@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
 import { Replace, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -33,52 +33,52 @@ const links = [
   {
     name: "Age Calculator",
     href: "/converters/age-calculator",
-    description: "Determine exact age in years, months, and days based on birth date."
+    description: "Determine exact age in years, months, and days based on birth date. Perfect for checking milestones and calculating precise duration since birth."
   },
   {
     name: "Percentage Calculator",
     href: "/converters/percentage",
-    description: "Calculate percentage increases, decreases, and common math ratios."
+    description: "Calculate percentage increases, decreases, and common math ratios. Essential for retail discounts, tax estimates, and financial analysis."
   },
   {
     name: "Unix Time",
     href: "/converters/unix-time",
-    description: "Convert between human-readable dates and Unix timestamps instantly."
+    description: "Convert between human-readable dates and Unix timestamps instantly. A vital tool for developers, database administrators, and system engineers."
   },
   {
     name: "Length Converter",
     href: "/converters/length",
-    description: "Transform measurements between meters, feet, inches, miles, and kilometers."
+    description: "Transform measurements between meters, feet, inches, miles, and kilometers. Supports both metric and imperial systems for global engineering tasks."
   },
   {
     name: "Weight/Mass Converter",
     href: "/converters/weight-mass",
-    description: "Convert between grams, kilograms, pounds, ounces, and metric tons."
+    description: "Convert between grams, kilograms, pounds, ounces, and metric tons. Reliable for shipping logistics, culinary recipes, and scientific experiments."
   },
   {
     name: "Temperature Converter",
     href: "/converters/temperature",
-    description: "Switch between Celsius, Fahrenheit, and Kelvin with precise calculations."
+    description: "Switch between Celsius, Fahrenheit, and Kelvin with precise calculations. Useful for travel planning, scientific research, and weather comparisons."
   },
   {
     name: "Time Converter",
     href: "/converters/time",
-    description: "Convert between seconds, minutes, hours, days, and weeks easily."
+    description: "Convert between seconds, minutes, hours, days, and weeks easily. High-precision results for project management and duration calculations."
   },
   {
     name: "Time Zone Converter",
     href: "/converters/time-zone",
-    description: "Compare times across global time zones and plan international meetings."
+    description: "Compare times across global time zones and plan international meetings. Automatically accounts for daylight saving time transitions worldwide."
   },
   {
     name: "Data Storage",
     href: "/converters/data-storage",
-    description: "Convert between bits, bytes, kilobytes, megabytes, and gigabytes."
+    description: "Convert between bits, bytes, kilobytes, megabytes, and gigabytes. Essential for IT professionals managing server capacity and file transfers."
   },
   {
     name: "Area Converter",
     href: "/converters/area",
-    description: "Calculate conversions for square meters, acres, hectares, and square feet."
+    description: "Calculate conversions for square meters, acres, hectares, and square feet. Crucial for real estate, landscaping, and construction projects."
   },
 ];
 
@@ -137,8 +137,9 @@ export default function ConvertersHub() {
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/converters.png"
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <FAQSchema items={faqs} />
-            <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">

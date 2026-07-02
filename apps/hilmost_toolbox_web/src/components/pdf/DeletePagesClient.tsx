@@ -3,10 +3,10 @@
 import React, { useState, useCallback } from "react";
 import { PDFDocument } from "pdf-lib";
 import { useDropzone } from "react-dropzone";
-import { IconUpload, IconTrash, IconDownload, IconAlertCircle, IconCheck, IconLoader2 } from "@tabler/icons-react";
-import { Tooltip } from "@utilitiessite/ui";
+import { IconUpload, IconTrash, IconDownload, IconAlertCircle, IconLoader2 } from "@tabler/icons-react";
 import { PDFThumbnail } from "./PDFThumbnail";
 import { usePDFDocument } from "../../hooks/usePDFDocument";
+import { Button } from "../ui/Button";
 
 export function DeletePagesClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -78,41 +78,39 @@ export function DeletePagesClient() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8 my-8">
       {!file ? (
-        <Tooltip content="Drag and drop a PDF file here to select and remove unwanted pages" position="top">
-          <div
-            {...getRootProps()}
-            className={`border-2 border-dashed rounded-3xl p-12 transition-all cursor-pointer text-center ${
-              isDragActive ? "border-red-500 bg-red-50 dark:bg-red-900/10" : "border-slate-200 dark:border-slate-800 hover:border-red-400 dark:hover:border-red-600"
-            }`}
-          >
-            <input {...getInputProps()} title="Upload PDF file" />
-            <div className="flex flex-col items-center gap-4">
-              <div className="h-16 w-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl flex items-center justify-center">
-                <IconUpload size={32} />
-              </div>
-              <div>
-                <p className="text-xl font-bold text-slate-900 dark:text-white">Click or drag PDF file here</p>
-                <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm font-medium uppercase tracking-wider">Select one PDF to clean</p>
-              </div>
+        <div
+          {...getRootProps()}
+          className={`border-2 border-dashed rounded-[2.5rem] p-12 transition-all cursor-pointer text-center bg-white dark:bg-slate-900 ${
+            isDragActive ? "border-brand-primary bg-brand-primary/5" : "border-slate-200 dark:border-slate-800 hover:border-brand-primary"
+          }`}
+        >
+          <input {...getInputProps()} title="Upload PDF file" />
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-16 w-16 bg-brand-primary/10 text-brand-primary rounded-2xl flex items-center justify-center">
+              <IconUpload size={32} />
+            </div>
+            <div>
+              <p className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
+              <p className="text-[10px] text-slate-400 mt-1 font-black uppercase tracking-widest">Select one PDF to clean</p>
             </div>
           </div>
-        </Tooltip>
+        </div>
       ) : (
-        <div className="flex flex-col gap-6">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
-            <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0" />
+        <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4">
+          <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
+            <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0 rounded border border-slate-100" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white truncate">{file.name}</h3>
-              <p className="text-slate-500 font-bold uppercase text-xs mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
-              <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-4">
-                <p className="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-widest bg-red-50 dark:bg-red-900/20 px-3 py-1 rounded-full text-center">
-                  {pagesToDelete.length} Pages Selected for deletion
-                </p>
+              <h3 className="text-xl font-black text-slate-900 dark:text-white truncate">{file.name}</h3>
+              <p className="text-slate-400 font-black uppercase text-[10px] tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-6">
+                <div className="text-[10px] font-black text-rose-500 uppercase tracking-widest bg-rose-50 dark:bg-rose-900/20 px-3 py-1.5 rounded-full border border-rose-100 dark:border-rose-800/50">
+                  {pagesToDelete.length} Selected
+                </div>
                 <button
                   onClick={() => setFile(null)}
-                  className="text-xs font-black text-slate-400 uppercase tracking-widest hover:underline"
+                  className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-rose-500 hover:underline"
                 >
                   Change File
                 </button>
@@ -121,25 +119,25 @@ export function DeletePagesClient() {
           </div>
 
           {loadingPdf && (
-            <div className="flex flex-col items-center gap-2 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
-              <IconLoader2 className="animate-spin text-red-500" size={32} />
-              <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">Scanning pages...</p>
+            <div className="flex flex-col items-center gap-4 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-100 dark:border-slate-800">
+              <IconLoader2 className="animate-spin text-brand-primary" size={32} />
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Scanning Pages...</p>
             </div>
           )}
 
           {!loadingPdf && pdfProxy && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar p-1">
               {Array.from({ length: pageCount }).map((_, i) => (
                 <button
                   key={i}
                   onClick={() => togglePageDeletion(i)}
                   className={`relative group rounded-2xl border-2 transition-all p-2 bg-white dark:bg-slate-900 ${
-                    pagesToDelete.includes(i) ? "border-red-500 ring-4 ring-red-500/10 grayscale opacity-50 scale-95" : "border-transparent hover:border-slate-300 dark:hover:border-slate-700"
+                    pagesToDelete.includes(i) ? "border-rose-500 ring-4 ring-rose-500/10 grayscale opacity-50 scale-95" : "border-slate-100 dark:border-slate-800 hover:border-brand-primary/50"
                   }`}
                 >
-                  <PDFThumbnail pdfProxy={pdfProxy} pageNumber={i + 1} className="w-full aspect-[3/4]" />
-                  <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center font-bold text-xs ${
-                    pagesToDelete.includes(i) ? "bg-red-500 text-white" : "bg-slate-200 dark:bg-slate-700 text-slate-500"
+                  <PDFThumbnail pdfProxy={pdfProxy} pageNumber={i + 1} className="w-full aspect-[3/4] rounded" />
+                  <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center font-black text-[10px] ${
+                    pagesToDelete.includes(i) ? "bg-rose-500 text-white" : "bg-slate-100 dark:bg-slate-800 text-slate-400"
                   }`}>
                     {pagesToDelete.includes(i) ? <IconTrash size={14} /> : i + 1}
                   </div>
@@ -149,34 +147,29 @@ export function DeletePagesClient() {
           )}
 
           {(error || pdfError) && (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-4 flex items-center gap-3 text-red-600 dark:text-red-400">
+            <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-2xl p-4 flex items-center gap-3 text-rose-600">
               <IconAlertCircle size={20} />
               <span className="font-bold text-sm">{error || pdfError}</span>
             </div>
           )}
 
-          <Tooltip content="Permanently remove selected pages and download the cleaned PDF" position="top" className="w-full">
-            <button
-              onClick={deletePagesAndDownload}
-              disabled={processing || loadingPdf || pagesToDelete.length === 0}
-              title="Delete Selected Pages and Download"
-              className={`w-full py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 transition-all shadow-lg active:scale-[0.98] ${
-                processing || loadingPdf ? "bg-slate-100 text-slate-400" : "bg-red-600 hover:bg-red-700 text-white"
-              }`}
-            >
-              {processing ? (
-                <>
-                  <div className="h-5 w-5 border-3 border-slate-300 border-t-slate-600 animate-spin rounded-full" />
-                  Deleting Pages...
-                </>
-              ) : (
-                <>
-                  <IconTrash size={24} />
-                  Delete Selected & Download
-                </>
-              )}
-            </button>
-          </Tooltip>
+          <Button
+            onClick={deletePagesAndDownload}
+            disabled={processing || loadingPdf || pagesToDelete.length === 0}
+            className="w-full !py-5 rounded-3xl"
+          >
+            {processing ? (
+              <>
+                <div className="h-5 w-5 border-3 border-white/30 border-t-white animate-spin rounded-full" />
+                Deleting Pages...
+              </>
+            ) : (
+              <>
+                <IconTrash size={24} />
+                Delete & Download
+              </>
+            )}
+          </Button>
         </div>
       )}
     </div>

@@ -1,9 +1,10 @@
 "use client";
 import { useMemo, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
 
 // Lazy load Recharts
 const AreaChart = dynamic(() => import("recharts").then(mod => mod.AreaChart), { ssr: false });
@@ -25,18 +26,17 @@ export function RetirementPlannerClient() {
   });
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
   }, []);
 
-  const { currentAge, retireAge, currentSavings, monthlyContribution, expectedReturn } = state;
+  const { currentAge, retireAge, currentSavings, monthlyContribution, expectedReturn } = state as Record<string, string>;
 
   const chartData = useMemo(() => {
-    const age = parseInt(currentAge as string) || 0;
-    const rAge = parseInt(retireAge as string) || 0;
-    const p = parseFloat(currentSavings as string) || 0;
-    const c = parseFloat(monthlyContribution as string) || 0;
-    const r = (parseFloat(expectedReturn as string) || 0) / 100;
+    const age = parseInt(currentAge) || 0;
+    const rAge = parseInt(retireAge) || 0;
+    const p = parseFloat(currentSavings) || 0;
+    const c = parseFloat(monthlyContribution) || 0;
+    const r = (parseFloat(expectedReturn) || 0) / 100;
 
     const years = Math.max(0, rAge - age);
     const data = [];
@@ -64,89 +64,69 @@ export function RetirementPlannerClient() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-
-      <div className="bg-canvas-card border border-border-base rounded-2xl p-5 md:p-6 shadow-sm">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
           {/* Inputs */}
-          <div id="tour-retire-inputs" className="space-y-5">
+          <div id="tour-retire-inputs" className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Current Age</label>
-                <Tooltip content="Your current age today" position="top">
-                  <NumericInput
-                    title="Your Current Age"
-                    value={currentAge}
-                    onChange={val => setState({ currentAge: val })}
-                    className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                  />
-                </Tooltip>
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Retire Age</label>
-                <Tooltip content="The age at which you plan to stop working" position="top">
-                  <NumericInput
-                    title="Planned Retirement Age"
-                    value={retireAge}
-                    onChange={val => setState({ retireAge: val })}
-                    className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                  />
-                </Tooltip>
-              </div>
+              <NumberInput
+                label="Current Age"
+                value={currentAge}
+                onChange={val => setState({ currentAge: val })}
+                min={0}
+                max={100}
+              />
+              <NumberInput
+                label="Retire Age"
+                value={retireAge}
+                onChange={val => setState({ retireAge: val })}
+                min={0}
+                max={110}
+              />
             </div>
 
-            <div>
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Current Savings ($)</label>
-              <Tooltip content="The total amount you have already saved for retirement" position="top">
-                <NumericInput
-                  title="Existing Retirement Savings"
-                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                  value={currentSavings}
-                  onChange={val => setState({ currentSavings: val })}
-                />
-              </Tooltip>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Monthly Contribution ($)</label>
-              <Tooltip content="How much you plan to save every month until retirement" position="top">
-                <NumericInput
-                  title="Monthly Savings Amount"
-                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                  value={monthlyContribution}
-                  onChange={val => setState({ monthlyContribution: val })}
-                />
-              </Tooltip>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-text-muted uppercase tracking-widest mb-1.5 ml-1">Expected Return (%)</label>
-              <Tooltip content="The estimated annual growth rate of your investments" position="top">
-                <NumericInput
-                  title="Estimated Annual ROI Percentage"
-                  className="w-full bg-canvas-muted border border-border-base rounded-xl px-4 py-3 text-text-primary font-bold text-lg focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                  value={expectedReturn}
-                  onChange={val => setState({ expectedReturn: val })}
-                />
-              </Tooltip>
-            </div>
+            <NumberInput
+              label="Current Savings ($)"
+              value={currentSavings}
+              onChange={val => setState({ currentSavings: val })}
+              min={0}
+              className="font-bold"
+            />
+            <NumberInput
+              label="Monthly Contribution ($)"
+              value={monthlyContribution}
+              onChange={val => setState({ monthlyContribution: val })}
+              min={0}
+              className="font-bold"
+            />
+            <NumberInput
+              label="Expected Return (%)"
+              value={expectedReturn}
+              onChange={val => setState({ expectedReturn: val })}
+              min={0}
+              max={50}
+              step={0.1}
+              className="font-bold"
+            />
           </div>
 
           {/* Results & Chart */}
-          <div className="lg:col-span-2 flex flex-col space-y-6">
-            <motion.div
-              layout
+          <div className="lg:col-span-2 flex flex-col space-y-8">
+            <div
               id="tour-retire-results"
-              className="bg-brand-primary/5 rounded-2xl p-6 border border-brand-primary/10 flex-shrink-0 transition-all hover:shadow-md"
+              className="bg-brand-primary/5 rounded-2xl p-6 border border-brand-primary/10 flex-shrink-0"
             >
-              <p className="text-xs font-bold text-brand-primary uppercase tracking-widest mb-1">Projected Savings at Age {retireAge}</p>
-              <div className="text-4xl md:text-5xl font-black text-text-primary tracking-tighter">
+              <p className="text-[10px] font-black text-brand-primary uppercase tracking-[0.2em] mb-1">Projected Savings at Age {retireAge}</p>
+              <div className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">
                 <NumberTicker value={finalBalance} prefix="$" duration={0.8} />
               </div>
-              <p className="text-sm text-text-muted mt-2">
-                Based on {Math.max(0, parseInt(retireAge as string) - parseInt(currentAge as string))} years of compounding.
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">
+                Based on {Math.max(0, parseInt(retireAge) - parseInt(currentAge))} years of compounding.
               </p>
-            </motion.div>
+            </div>
 
             <div id="tour-retire-chart" className="flex-1 min-h-[300px] w-full @lg:h-[350px]">
               {isClient && (
@@ -158,10 +138,11 @@ export function RetirementPlannerClient() {
                         <stop offset="95%" stopColor="var(--color-brand-primary)" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
-                    <XAxis dataKey="age" stroke="var(--color-text-muted)" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `Age ${val}`} />
+                    <XAxis dataKey="age" stroke="#94a3b8" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tickFormatter={(val) => `Age ${val}`} />
                     <YAxis
-                      stroke="var(--color-text-muted)"
+                      stroke="#94a3b8"
                       fontSize={10}
+                      fontWeight="bold"
                       tickLine={false}
                       axisLine={false}
                       tickFormatter={(value) => `$${value >= 1000 ? (value / 1000) + 'k' : value}`}
@@ -170,9 +151,10 @@ export function RetirementPlannerClient() {
                     <ChartTooltip
                       labelFormatter={(label) => `Age ${label}`}
                       formatter={(value: unknown) => formatCurrency(Number(value))}
-                      contentStyle={{ backgroundColor: 'var(--color-canvas-card)', borderRadius: '12px', border: '1px solid var(--color-border-base)', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
+                      contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
+                      itemStyle={{ fontWeight: '800', fontSize: '10px', textTransform: 'uppercase' }}
                     />
-                    <Area type="monotone" dataKey="balance" name="Projected Savings" stroke="var(--color-brand-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorBalanceRetire)" />
+                    <Area type="monotone" dataKey="balance" name="Savings" stroke="var(--color-brand-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorBalanceRetire)" />
                   </AreaChart>
                 </ResponsiveContainer>
               )}

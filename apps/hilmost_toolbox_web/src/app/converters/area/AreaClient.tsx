@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
-import { ToolTutorial, Tooltip } from "@utilitiessite/ui";
 import { ArrowRightLeft } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
+import { Select } from "../../../components/ui/Select";
 
 const UNITS = {
   "square-meter": 1,
@@ -68,89 +68,61 @@ export function AreaClient({ defaultFrom, defaultTo }: { defaultFrom?: string; d
 
   const formatUnitName = (u: string) => u.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-  const tourSteps = [
-    { element: '#tour-area-input1', popover: { title: '1. Initial Area', description: 'Enter the area value and select its unit (e.g. square meters).' } },
-    { element: '#tour-area-input2', popover: { title: '2. Result Area', description: 'The converted area appears here instantly.' } },
-  ];
+  const unitOptions = Object.keys(UNITS).map(u => ({ label: formatUnitName(u), value: u }));
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-
-      <div className="bg-canvas-card border border-base rounded-2xl p-5 md:p-8 shadow-xl">
-        <div className="flex flex-col @[600px]:flex-row items-center gap-5 @[600px]:gap-5">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div className="flex flex-col @[600px]:flex-row items-center gap-8">
 
           {/* Unit 1 */}
-          <div id="tour-area-input1" className="flex-1 w-full space-y-3">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">From</label>
-            <div className="space-y-3">
-              <Tooltip content="Enter the area value you want to convert" position="top">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  title="Source Area Value"
-                  className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                  value={val1}
-                  onChange={(e) => setState({ activeInput: 1, val1: e.target.value })}
-                />
-              </Tooltip>
-              <Tooltip content="Select the unit for the value above" position="bottom">
-                <select
-                  title="Select Source Unit"
-                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                  value={unit1}
-                  onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
-                >
-                  {Object.keys(UNITS).map(u => (
-                    <option key={u} value={u}>{formatUnitName(u)}</option>
-                  ))}
-                </select>
-              </Tooltip>
+          <div id="tour-area-input1" className="flex-1 w-full space-y-4">
+            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <div className="space-y-4">
+              <NumberInput
+                value={val1}
+                onChange={(v) => setState({ activeInput: 1, val1: v })}
+                className="text-2xl font-black"
+                min={0}
+              />
+              <Select
+                value={unit1}
+                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value as UnitType })}
+                options={unitOptions}
+              />
             </div>
           </div>
 
-          {/* Transfer Icon */}
           <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-inner">
             <ArrowRightLeft size={20} className="rotate-90 @[600px]:rotate-0" />
           </div>
 
           {/* Unit 2 */}
-          <div id="tour-area-input2" className="flex-1 w-full space-y-3">
-            <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">To</label>
-            <div className="space-y-3">
-              <Tooltip content="The resulting area value appears here" position="top">
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  title="Target Area Value"
-                  className="w-full h-14 px-5 text-2xl font-bold border border-base rounded-2xl bg-canvas-muted text-text-primary focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary outline-none transition-all"
-                  value={val2}
-                  onChange={(e) => setState({ activeInput: 2, val2: e.target.value })}
-                />
-              </Tooltip>
-              <Tooltip content="Select the unit you want to convert to" position="bottom">
-                <select
-                  title="Select Target Unit"
-                  className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-medium focus:ring-2 focus:ring-brand-primary/20 outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                  value={unit2}
-                  onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
-                >
-                  {Object.keys(UNITS).map(u => (
-                    <option key={u} value={u}>{formatUnitName(u)}</option>
-                  ))}
-                </select>
-              </Tooltip>
+          <div id="tour-area-input2" className="flex-1 w-full space-y-4">
+            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <div className="space-y-4">
+              <NumberInput
+                value={val2}
+                onChange={(v) => setState({ activeInput: 2, val2: v })}
+                className="text-2xl font-black"
+                min={0}
+              />
+              <Select
+                value={unit2}
+                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value as UnitType })}
+                options={unitOptions}
+              />
             </div>
           </div>
 
         </div>
 
-        {/* Quick Result Summary */}
-        <div className="mt-10 pt-8 border-t border-base text-center">
-            <p className="text-text-secondary font-medium italic">
+        <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
+            <p className="text-slate-500 dark:text-slate-400 font-bold italic uppercase tracking-widest text-sm">
                 {val1 || "0"} {formatUnitName(unit1)} equals <span className="text-brand-primary font-black not-italic text-xl">{val2 || "0"}</span> {formatUnitName(unit2)}
             </p>
         </div>

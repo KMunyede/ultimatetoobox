@@ -3,11 +3,12 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { formatInTimeZone, toDate } from "date-fns-tz";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShareButton } from "@/components/ShareButton";
-import { ToolTutorial, DateTimePicker } from "@utilitiessite/ui";
+import { DateTimePicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { Plus, X, ArrowRight, Clock, Search, Users, ChevronDown, User, Copy, Check } from "lucide-react";
 import { Tooltip } from "@utilitiessite/ui";
+import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/ui/Input";
 
 const formatZoneName = (zone: string) => {
   const name = zone.replace(/[_-]/g, " ");
@@ -43,9 +44,6 @@ function isDST(timezone: string): boolean {
       timeZone: timezone, timeZoneName: 'short'
     }).format(new Date());
 
-    // DST detection logic: if Jan and Jul offsets differ, DST exists.
-    // In Northern Hemisphere, DST is usually Jul. In Southern, Jan.
-    // The provided logic assumes Jul is DST.
     return janOffset !== julOffset && nowOffset === julOffset;
   } catch {
     return false;
@@ -65,9 +63,10 @@ interface SearchableSelectProps {
   onChange: (val: string) => void;
   placeholder?: string;
   className?: string;
+  label?: string;
 }
 
-function SearchableSelect({ value, options, onChange, placeholder, className }: SearchableSelectProps) {
+function SearchableSelect({ value, options, onChange, placeholder, className, label }: SearchableSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
@@ -92,7 +91,8 @@ function SearchableSelect({ value, options, onChange, placeholder, className }: 
   return (
     <div className={`relative ${className}`} ref={containerRef}>
       <div className="relative group">
-        <input
+        <Input
+          label={label}
           type="text"
           value={isOpen ? search : formatZoneName(value)}
           placeholder={placeholder}
@@ -101,13 +101,12 @@ function SearchableSelect({ value, options, onChange, placeholder, className }: 
             setSearch("");
           }}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
         />
-        <Search size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500" />
+        <Search size={14} className="absolute right-3 bottom-3.5 text-slate-400 group-focus-within:text-brand-primary pointer-events-none" />
       </div>
 
       {isOpen && (
-        <div className="absolute z-[70] mt-2 w-full max-h-60 overflow-y-auto bg-white dark:bg-slate-900 border border-base rounded-xl shadow-2xl custom-scrollbar animate-in fade-in zoom-in-95 duration-200">
+        <div className="absolute z-[70] mt-1 w-full max-h-60 overflow-y-auto bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-800 rounded-lg shadow-2xl custom-scrollbar animate-in fade-in zoom-in-95 duration-200">
           {filtered.length > 0 ? (
             filtered.map(opt => (
               <button
@@ -117,7 +116,7 @@ function SearchableSelect({ value, options, onChange, placeholder, className }: 
                   setIsOpen(false);
                   setSearch("");
                 }}
-                className={`w-full text-left px-4 py-2.5 text-sm hover:bg-emerald-500/10 hover:text-emerald-600 transition-colors ${opt === value ? 'bg-emerald-500/5 text-emerald-500 font-bold' : 'text-slate-600 dark:text-slate-300'}`}
+                className={`w-full text-left px-4 py-2.5 text-sm hover:bg-brand-primary/10 hover:text-brand-primary transition-colors ${opt === value ? 'bg-brand-primary/5 text-brand-primary font-bold' : 'text-slate-600 dark:text-slate-300'}`}
               >
                 {formatZoneName(opt)}
               </button>
@@ -134,7 +133,7 @@ function SearchableSelect({ value, options, onChange, placeholder, className }: 
 export function TimeZoneClient() {
   const [state, setState] = useUrlState({
     sourceZone: "UTC",
-    sourceTime: "", // ISO string or empty
+    sourceTime: "",
     targetZones: "America/New_York,Europe/London,Asia/Tokyo"
   });
 
@@ -144,7 +143,6 @@ export function TimeZoneClient() {
   const [newZone, setNewZone] = useState("");
   const [now, setNow] = useState(new Date());
 
-  // Team Clocks State
   const [teamMembers, setTeamMembers] = useState<{ name: string; timezone: string }[]>([]);
   const [newMemberName, setNewMemberName] = useState("");
   const [newMemberTZ, setNewMemberTZ] = useState("");
@@ -161,13 +159,11 @@ export function TimeZoneClient() {
   }, []);
 
   useEffect(() => {
-    // Load team from localStorage
     const saved = localStorage.getItem("hilmost_team_clocks");
     if (saved) {
       try { setTeamMembers(JSON.parse(saved)); } catch (e) { console.error("Failed to parse team clocks", e); }
     }
 
-    // Load team from URL if present
     const params = new URLSearchParams(window.location.search);
     const teamParam = params.get("team");
     if (teamParam) {
@@ -182,7 +178,6 @@ export function TimeZoneClient() {
       }
     }
 
-    // Populate available time zones natively supported by the browser
     try {
       const zones = Intl.supportedValuesOf("timeZone");
       setAvailableZones(zones);
@@ -190,17 +185,12 @@ export function TimeZoneClient() {
       console.warn("Intl.supportedValuesOf not supported");
     }
 
-    // Detect user's local timezone and set it as default if not already in URL
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-
-    // Only auto-detect if the URL state doesn't have an explicit sourceZone from a previous share/session
-    // or if it's currently at the default 'UTC'
     const hasSourceZoneInUrl = window.location.search.includes("sourceZone");
     if (!hasSourceZoneInUrl) {
       setState({ sourceZone: userTimezone });
     }
 
-    // Auto-populate sourceTime if empty
     if (!sourceTime && !window.location.search.includes("sourceTime")) {
       const d = new Date();
       const pad = (n: number) => n.toString().padStart(2, "0");
@@ -210,7 +200,6 @@ export function TimeZoneClient() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Save team to localStorage
   useEffect(() => {
     localStorage.setItem("hilmost_team_clocks", JSON.stringify(teamMembers));
   }, [teamMembers]);
@@ -228,23 +217,9 @@ export function TimeZoneClient() {
     setState({ targetZones: newTargets });
   };
 
-  const parseSourceDate = () => {
-    if (!sourceTime) return now;
-    try {
-      return toDate(sourceTime, { timeZone: sourceZone });
-    } catch {
-      return now;
-    }
-  };
-
-  const sourceDateObj = parseSourceDate();
-
-  // If sourceTime hasn't been set or is essentially "now", we follow the ticking clock
   const effectiveDate = useMemo(() => {
     if (!sourceTime) return now;
     const date = toDate(sourceTime, { timeZone: sourceZone });
-
-    // If the difference between now and sourceTime is less than 2 seconds, assume "Live" mode
     if (Math.abs(date.getTime() - now.getTime()) < 2000) {
       return now;
     }
@@ -273,18 +248,12 @@ export function TimeZoneClient() {
     setTimeout(() => setShareStatus(false), 2000);
   };
 
-  const tourSteps = [
-    { element: '#tour-tz-source', popover: { title: '1. Source Time', description: 'Select your starting time and time zone.' } },
-    { element: '#tour-tz-targets', popover: { title: '2. Target Zones', description: 'See the converted time in multiple cities instantly.' } },
-    { element: '#tour-tz-add', popover: { title: '3. Add Zones', description: 'Search and add any global time zone to your list.' } },
-  ];
-
   return (
     <div className="space-y-4">
 
       <div className="grid md:grid-cols-12 gap-8">
         {/* Source Configuration */}
-        <div id="tour-tz-source" className="md:col-span-5 space-y-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        <div id="tour-tz-source" className="md:col-span-5 space-y-6 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
           <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
             <div className="bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-2xl text-emerald-600 dark:text-emerald-400">
               <Clock className="w-6 h-6" />
@@ -303,17 +272,13 @@ export function TimeZoneClient() {
           </div>
 
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Time Zone
-              </label>
-              <SearchableSelect
-                value={sourceZone}
-                options={availableZones}
-                onChange={(val) => setState({ sourceZone: val })}
-                placeholder="Search city or region..."
-              />
-            </div>
+            <SearchableSelect
+              label="Source Time Zone"
+              value={sourceZone}
+              options={availableZones}
+              onChange={(val) => setState({ sourceZone: val })}
+              placeholder="Search city or region..."
+            />
             
             <DateTimePicker
               label="Date & Time"
@@ -328,7 +293,7 @@ export function TimeZoneClient() {
         </div>
 
         {/* Targets Configuration */}
-        <div id="tour-tz-targets" className="md:col-span-6 space-y-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        <div id="tour-tz-targets" className="md:col-span-6 space-y-6 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
             <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Converted Times</h2>
           </div>
@@ -352,24 +317,22 @@ export function TimeZoneClient() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="flex items-center justify-between bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm"
+                    className="flex items-center justify-between bg-white dark:bg-slate-800 border border-[#D8D6CF] dark:border-slate-700 rounded-2xl p-4 shadow-sm"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-slate-800 dark:text-slate-200">{formatZoneName(zone)}</h3>
+                        <h3 className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{formatZoneName(zone)}</h3>
                         {isDST(zone) && (
                           <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
                         )}
                       </div>
-                      <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{formattedTime}</p>
-                      <p className="text-sm text-slate-500">{formattedDate}</p>
+                      <p className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">{formattedTime}</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{formattedDate}</p>
                     </div>
-                    <Tooltip content={`Remove ${formatZoneName(zone)} from the comparison list`} position="left">
+                    <Tooltip content={`Remove ${formatZoneName(zone)} from list`} position="left">
                       <button
                         onClick={() => handleRemoveZone(zone)}
-                        className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition"
-                        aria-label={`Remove ${zone}`}
-                        title={`Remove ${formatZoneName(zone)}`}
+                        className="p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition"
                       >
                         <X className="w-5 h-5" />
                       </button>
@@ -380,39 +343,36 @@ export function TimeZoneClient() {
             </AnimatePresence>
 
             {targets.length === 0 && (
-              <div className="text-center py-8 text-slate-500">
+              <div className="text-center py-8 text-slate-500 font-bold italic text-sm">
                 No target time zones selected. Add one below!
               </div>
             )}
           </div>
 
           <div id="tour-tz-add" className="pt-4 border-t border-slate-100 dark:border-slate-800">
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Add Time Zone
-            </label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-end">
               <SearchableSelect
+                label="Add Time Zone"
                 value={newZone}
                 options={availableZones.filter(z => !targets.includes(z))}
                 onChange={(val) => setNewZone(val)}
                 placeholder="Select region/city..."
                 className="flex-1"
               />
-              <button
+              <Button
                 onClick={handleAddZone}
                 disabled={!newZone}
-                title="Add Zone"
-                className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white px-4 rounded-xl transition shadow-lg shadow-emerald-500/20 active:scale-95"
+                className="!px-6 !py-3 mb-0.5"
               >
                 <Plus className="w-6 h-6" />
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
       {/* Team Clocks Section */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm mt-8">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm mt-8">
         <button
           onClick={() => setIsTeamOpen(!isTeamOpen)}
           className="w-full flex items-center justify-between p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
@@ -421,7 +381,7 @@ export function TimeZoneClient() {
             <Users className="text-brand-primary w-6 h-6" />
             <div className="text-left">
               <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">My Team Clocks</h2>
-              {isTeamOpen && <p className="text-xs font-medium text-slate-400">Add team members to track their local time instantly</p>}
+              {isTeamOpen && <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Track your global team&apos;s availability instantly</p>}
             </div>
           </div>
           <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isTeamOpen ? 'rotate-180' : ''}`} />
@@ -436,19 +396,18 @@ export function TimeZoneClient() {
               className="overflow-hidden"
             >
               <div className="p-6 pt-0 space-y-6 border-t border-slate-100 dark:border-slate-800 mt-0">
-                {/* Add Member Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-6 items-end">
                   <div className="sm:col-span-4">
-                    <input
-                      type="text"
+                    <Input
+                      label="Member Name"
                       placeholder="e.g. Keepy"
                       value={newMemberName}
                       onChange={(e) => setNewMemberName(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
                     />
                   </div>
                   <div className="sm:col-span-5">
                     <SearchableSelect
+                      label="Time Zone"
                       value={newMemberTZ}
                       options={availableZones}
                       onChange={(val) => setNewMemberTZ(val)}
@@ -456,25 +415,23 @@ export function TimeZoneClient() {
                     />
                   </div>
                   <div className="sm:col-span-3">
-                    <button
+                    <Button
                       onClick={handleAddMember}
                       disabled={!newMemberName || !newMemberTZ}
-                      className="w-full h-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-emerald-500/20 active:scale-95"
+                      className="w-full !py-3 mb-0.5"
                     >
                       Add Member
-                    </button>
+                    </Button>
                   </div>
                 </div>
 
-                {/* Team List */}
                 <div className="space-y-3">
                   {teamMembers.length > 0 ? (
                     teamMembers.map((member, i) => {
                       const availability = getAvailability(member.timezone, now);
                       return (
-                        <div key={`${member.name}-${i}`} className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl group transition-all hover:border-brand-primary/30">
-                          {/* Avatar */}
-                          <div className="h-12 w-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-black text-lg shrink-0 shadow-sm">
+                        <div key={`${member.name}-${i}`} className="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-slate-800/50 border border-[#D8D6CF] dark:border-slate-800 p-4 rounded-2xl group transition-all hover:border-brand-primary/30">
+                          <div className="h-12 w-12 rounded-full bg-brand-primary flex items-center justify-center text-white font-black text-lg shrink-0 shadow-sm">
                             {member.name.charAt(0).toUpperCase()}
                           </div>
 
@@ -486,7 +443,7 @@ export function TimeZoneClient() {
                           </div>
 
                           <div className="flex-1 text-center">
-                            <p className="text-2xl font-mono font-black text-slate-800 dark:text-slate-100">
+                            <p className="text-2xl font-black text-slate-800 dark:text-slate-100">
                               {formatInTimeZone(now, member.timezone, "HH:mm:ss")}
                             </p>
                             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
@@ -494,19 +451,18 @@ export function TimeZoneClient() {
                             </p>
                           </div>
 
-                          {/* 24-Hour Slider */}
                           <div className="hidden lg:flex flex-1 overflow-x-auto no-scrollbar">
-                            <div className="flex gap-1 items-center px-2 py-1 bg-slate-100 dark:bg-slate-900/50 rounded-lg">
+                            <div className="flex gap-1 items-center px-2 py-1 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
                               {Array.from({ length: 24 }).map((_, hour) => {
                                 const isCurrent = Number(formatInTimeZone(now, member.timezone, "H")) === hour;
-                                let color = "bg-slate-200 dark:bg-slate-800 text-slate-400"; // Offline
-                                if (hour >= 9 && hour < 17) color = "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"; // Available
-                                else if ((hour >= 7 && hour < 9) || (hour >= 17 && hour < 20)) color = "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400"; // Early/Late
+                                let color = "bg-slate-100 dark:bg-slate-800 text-slate-300";
+                                if (hour >= 9 && hour < 17) color = "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400";
+                                else if ((hour >= 7 && hour < 9) || (hour >= 17 && hour < 20)) color = "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400";
 
                                 return (
                                   <div
                                     key={hour}
-                                    className={`w-6 h-8 flex flex-col items-center justify-center rounded transition-all shrink-0 ${color} ${isCurrent ? 'ring-2 ring-brand-primary scale-110 shadow-sm z-10' : 'opacity-60'}`}
+                                    className={`w-6 h-8 flex flex-col items-center justify-center rounded transition-all shrink-0 ${color} ${isCurrent ? 'ring-2 ring-brand-primary scale-110 shadow-sm z-10 bg-white dark:bg-slate-800' : 'opacity-60'}`}
                                   >
                                     <span className="text-[8.5px] font-black">{hour.toString().padStart(2, '0')}</span>
                                     {isCurrent && <div className="w-1 h-1 bg-brand-primary rounded-full mt-0.5" />}
@@ -520,7 +476,7 @@ export function TimeZoneClient() {
                             {isDST(member.timezone) && (
                               <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
                             )}
-                            <div className={`text-[11px] font-black px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
+                            <div className={`text-[9px] font-black px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
                               {availability.label}
                             </div>
                             <button
@@ -536,21 +492,21 @@ export function TimeZoneClient() {
                   ) : (
                     <div className="py-12 border-2 border-dashed border-slate-100 dark:border-slate-800 rounded-3xl flex flex-col items-center justify-center text-slate-400">
                       <User size={32} className="mb-2 opacity-20" />
-                      <p className="text-sm font-medium">No team members yet. Add your first one above.</p>
+                      <p className="text-sm font-bold italic">No team members yet. Add your first one above.</p>
                     </div>
                   )}
                 </div>
 
-                {/* Share Row */}
                 {teamMembers.length >= 2 && (
                   <div className="flex justify-center pt-4 border-t border-slate-50 dark:border-slate-800/50">
-                    <button
+                    <Button
+                      variant="secondary"
                       onClick={shareTeamBoard}
-                      className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm"
+                      className="!px-6 !py-3"
                     >
                       {shareStatus ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                      {shareStatus ? "✓ Copied!" : "Share Team Board"}
-                    </button>
+                      {shareStatus ? "Copied!" : "Share Team Board"}
+                    </Button>
                   </div>
                 )}
               </div>

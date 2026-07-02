@@ -3,28 +3,28 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
-import { Tooltip } from "@utilitiessite/ui";
+import { motion } from "framer-motion";
 
 const BUTTONS = [
-  { label: "AC", type: "clear", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "All Clear" },
-  { label: "+/−", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "Toggle Positive/Negative" },
-  { label: "%", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white", tip: "Percentage" },
-  { label: "÷", type: "operator", value: "/", className: "bg-blue-600 text-white", tip: "Division" },
+  { label: "AC", type: "clear", className: "bg-rose-50 dark:bg-rose-900/20 text-rose-600 border-rose-100 dark:border-rose-900/50" },
+  { label: "+/−", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
+  { label: "%", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
+  { label: "÷", type: "operator", value: "/", className: "bg-brand-primary text-white" },
   { label: "7", type: "number" },
   { label: "8", type: "number" },
   { label: "9", type: "number" },
-  { label: "×", type: "operator", value: "*", className: "bg-blue-600 text-white", tip: "Multiplication" },
+  { label: "×", type: "operator", value: "*", className: "bg-brand-primary text-white" },
   { label: "4", type: "number" },
   { label: "5", type: "number" },
   { label: "6", type: "number" },
-  { label: "−", type: "operator", value: "-", className: "bg-blue-600 text-white", tip: "Subtraction" },
+  { label: "−", type: "operator", value: "-", className: "bg-brand-primary text-white" },
   { label: "1", type: "number" },
   { label: "2", type: "number" },
   { label: "3", type: "number" },
-  { label: "+", type: "operator", value: "+", className: "bg-blue-600 text-white", tip: "Addition" },
+  { label: "+", type: "operator", value: "+", className: "bg-brand-primary text-white" },
   { label: "0", type: "number", span: 2 },
-  { label: ".", type: "number", tip: "Decimal Point" },
-  { label: "=", type: "equals", className: "bg-blue-600 text-white", tip: "Calculate Result" },
+  { label: ".", type: "number" },
+  { label: "=", type: "equals", className: "bg-brand-primary text-white" },
 ];
 
 export function StandardCalculatorClient() {
@@ -36,11 +36,9 @@ export function StandardCalculatorClient() {
   const calculate = useCallback(async () => {
     if (!expression) return;
     try {
-      // Lazy load mathjs
       const { create, all } = await import("mathjs");
       const math = create(all);
 
-      // Clean expression for mathjs
       const cleanExpr = expression.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
       const evalResult = math.evaluate(cleanExpr);
       const formattedResult = Number.isInteger(evalResult)
@@ -146,7 +144,11 @@ export function StandardCalculatorClient() {
   };
 
   return (
-    <div className="max-w-md mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="max-w-md mx-auto my-8"
+    >
       <CalculatorDisplay
         expression={expression}
         result={result}
@@ -155,33 +157,21 @@ export function StandardCalculatorClient() {
         onRestore={handleRestore}
       />
 
-      <div className="grid grid-cols-4 gap-2 mt-4">
-        {BUTTONS.map((btn, i) => {
-          const buttonNode = (
-            <button
-              key={i}
-              onClick={() => onButtonClick(btn)}
-              className={`
-                w-full h-12 md:h-14 rounded-2xl text-lg md:text-xl font-bold transition-all active:scale-95
-                ${btn.span === 2 ? "col-span-2" : "col-span-1"}
-                ${btn.className || "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-blue-500"}
-              `}
-            >
-              {btn.label}
-            </button>
-          );
-
-          return btn.tip ? (
-            <Tooltip key={i} content={btn.tip} position="top" className={btn.span === 2 ? "col-span-2" : "col-span-1"}>
-              {buttonNode}
-            </Tooltip>
-          ) : (
-            <React.Fragment key={i}>
-              {buttonNode}
-            </React.Fragment>
-          );
-        })}
+      <div className="grid grid-cols-4 gap-3 mt-6">
+        {BUTTONS.map((btn, i) => (
+          <button
+            key={i}
+            onClick={() => onButtonClick(btn)}
+            className={`
+              w-full h-14 md:h-16 rounded-2xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all active:scale-95 border-2
+              ${btn.span === 2 ? "col-span-2" : "col-span-1"}
+              ${btn.className || "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white hover:border-brand-primary"}
+            `}
+          >
+            {btn.label}
+          </button>
+        ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

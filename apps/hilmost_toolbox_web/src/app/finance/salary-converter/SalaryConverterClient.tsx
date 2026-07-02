@@ -1,8 +1,9 @@
 "use client";
-import { ToolTutorial, NumberTicker, Tooltip, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
-import { ShareButton } from "@/components/ShareButton";
 import { motion } from "framer-motion";
+import { NumberInput } from "../../../components/ui/NumberInput";
+import { Select } from "../../../components/ui/Select";
 
 export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: string }) {
   const [state, setState] = useUrlState({
@@ -11,10 +12,10 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
     hoursPerWeek: "40",
   });
 
-  const { amount, frequency, hoursPerWeek } = state;
+  const { amount, frequency, hoursPerWeek } = state as Record<string, string>;
 
-  const val = parseFloat(amount as string) || 0;
-  const hours = parseFloat(hoursPerWeek as string) || 40;
+  const val = parseFloat(amount) || 0;
+  const hours = parseFloat(hoursPerWeek) || 40;
 
   let annual = 0;
   if (frequency === "hourly") annual = val * hours * 52;
@@ -31,63 +32,46 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
     { label: "Hourly", value: annual / 52 / hours },
   ];
 
-  const tourSteps = [
-    { element: '#tour-salary-input', popover: { title: '1. Current Wage', description: 'Enter your current pay amount and how often you receive it (e.g. $25 Hourly).' } },
-    { element: '#tour-salary-hours', popover: { title: '2. Work Week', description: 'Adjust your average working hours per week for more accurate results.' } },
-    { element: '#tour-salary-results', popover: { title: '3. Full Breakdown', description: 'See how your wage translates across all timeframes instantly.' } },
-  ];
-
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-4"
+      className="@container space-y-8 my-8"
     >
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Sidebar Inputs */}
         <div className="space-y-6">
-            <div id="tour-salary-input" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-4 shadow-sm">
-                <div className="space-y-2">
-                    <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Amount ($)</label>
-                    <Tooltip content="The base pay amount to convert" position="top">
-                        <NumericInput
-                            title="Base Pay Amount"
-                            className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary text-lg font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                            value={amount}
-                            onChange={val => setState({ amount: val })}
-                        />
-                    </Tooltip>
-                </div>
-                <div className="space-y-2">
-                    <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Frequency</label>
-                    <Tooltip content="How often this amount is earned" position="top">
-                        <select
-                            title="Payment Frequency"
-                            className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-card text-text-primary font-bold outline-none cursor-pointer hover:bg-canvas-muted transition-all"
-                            value={frequency}
-                            onChange={e => setState({ frequency: e.target.value })}
-                        >
-                            <option value="hourly">Hourly</option>
-                            <option value="daily">Daily</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly">Monthly</option>
-                            <option value="annually">Annually</option>
-                        </select>
-                    </Tooltip>
-                </div>
+            <div id="tour-salary-input" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 shadow-sm h-fit">
+                <NumberInput
+                  label="Amount ($)"
+                  value={amount}
+                  onChange={val => setState({ amount: val })}
+                  min={0}
+                  className="text-lg font-bold"
+                />
+                <Select
+                  label="Frequency"
+                  value={frequency}
+                  onChange={e => setState({ frequency: e.target.value })}
+                  options={[
+                    { label: "Hourly", value: "hourly" },
+                    { label: "Daily", value: "daily" },
+                    { label: "Weekly", value: "weekly" },
+                    { label: "Monthly", value: "monthly" },
+                    { label: "Annually", value: "annually" },
+                  ]}
+                />
             </div>
 
-            <div id="tour-salary-hours" className="bg-canvas-card border border-base rounded-2xl p-5 space-y-2 shadow-sm">
-                <label className="block text-xs font-bold text-text-muted uppercase tracking-widest ml-1">Hours Per Week</label>
-                <Tooltip content="The average number of hours you work each week" position="top">
-                    <NumericInput
-                        title="Weekly Work Hours"
-                        className="w-full h-12 px-4 border border-base rounded-xl bg-canvas-muted text-text-primary font-bold focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all"
-                        value={hoursPerWeek}
-                        onChange={val => setState({ hoursPerWeek: val })}
-                    />
-                </Tooltip>
+            <div id="tour-salary-hours" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-2 shadow-sm">
+                <NumberInput
+                  label="Hours Per Week"
+                  value={hoursPerWeek}
+                  onChange={val => setState({ hoursPerWeek: val })}
+                  min={1}
+                  max={168}
+                  className="text-lg font-bold"
+                />
             </div>
         </div>
 
@@ -96,12 +80,12 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
             {results.map((res, idx) => (
                 <div
                     key={res.label}
-                    className={`p-5 rounded-2xl border transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-canvas-card border-base text-text-primary shadow-sm hover:shadow-md'}`}
+                    className={`p-6 rounded-2xl border-2 transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white shadow-sm hover:shadow-md'}`}
                 >
-                    <span className={`text-xs font-bold uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-text-muted'}`}>
+                    <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
                         {res.label} Pay
                     </span>
-                    <div className={`font-black tracking-tighter ${idx === 0 ? 'text-4xl md:text-5xl' : 'text-2xl'}`}>
+                    <div className={`font-black tracking-tighter ${idx === 0 ? 'text-5xl md:text-6xl' : 'text-2xl'}`}>
                         $<NumberTicker value={res.value} decimals={2} />
                     </div>
                 </div>

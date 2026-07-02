@@ -2,6 +2,8 @@
 
 import React, { useState, useMemo } from "react";
 import { Shield, Key, Eye, AlertCircle, CheckCircle2, Clock } from "lucide-react";
+import { CopyButton } from "@utilitiessite/ui";
+import { Button } from "../../../components/ui";
 
 export function JWTDecoderClient() {
   const [input, setInput] = useState("");
@@ -11,7 +13,7 @@ export function JWTDecoderClient() {
       return { decoded: null, error: null };
     }
 
-    const parts = input.split(".");
+    const parts = input.trim().split(".");
     if (parts.length !== 3) {
       return { decoded: null, error: "Invalid JWT format. A token must have 3 parts separated by dots." };
     }
@@ -40,12 +42,12 @@ export function JWTDecoderClient() {
   return (
     <div className="space-y-6 my-8">
       {/* Input Section */}
-      <div className="bg-canvas-card border-2 border-base rounded-2xl p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-            <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
                 <Key size={14} className="text-brand-primary" /> Paste Encoded Token
             </label>
-            {error && <span className="text-[10px] font-bold text-red-500 uppercase flex items-center gap-1"><AlertCircle size={12} /> {error}</span>}
+            {error && <span className="text-[10px] font-bold text-rose-500 uppercase flex items-center gap-1"><AlertCircle size={12} /> {error}</span>}
             {decoded && !error && <span className="text-[10px] font-bold text-emerald-500 uppercase flex items-center gap-1"><CheckCircle2 size={12} /> Decoded Successfully</span>}
         </div>
         <textarea
@@ -53,7 +55,7 @@ export function JWTDecoderClient() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-            className="w-full h-32 bg-slate-50 dark:bg-slate-900 border border-base rounded-xl p-4 font-mono text-xs focus:border-brand-primary outline-none transition-all shadow-inner break-all resize-none"
+            className="w-full h-32 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-xs focus:border-brand-primary outline-none transition-all shadow-inner break-all resize-none"
         />
       </div>
 
@@ -61,12 +63,12 @@ export function JWTDecoderClient() {
         {/* Header Section */}
         <div className="flex flex-col h-[450px]">
             <div className="flex items-center justify-between mb-3 px-1">
-                <label className="text-xs font-black uppercase tracking-widest text-red-500 flex items-center gap-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-rose-500 flex items-center gap-2">
                     <Shield size={14} /> Header
                 </label>
             </div>
-            <div className="flex-1 bg-slate-900 rounded-2xl border-2 border-red-500/20 shadow-xl overflow-hidden p-4">
-                <pre className="h-full w-full font-mono text-sm overflow-auto text-red-400 custom-scrollbar whitespace-pre-wrap">
+            <div className="flex-1 bg-slate-900 rounded-2xl border-2 border-rose-500/20 shadow-xl overflow-hidden p-4">
+                <pre className="h-full w-full font-mono text-sm overflow-auto text-rose-400 custom-scrollbar whitespace-pre-wrap">
                     {decoded ? JSON.stringify(decoded.header, null, 2) : "// Header data will appear here"}
                 </pre>
             </div>
@@ -75,7 +77,7 @@ export function JWTDecoderClient() {
         {/* Payload Section */}
         <div className="flex flex-col h-[450px]">
             <div className="flex items-center justify-between mb-3 px-1">
-                <label className="text-xs font-black uppercase tracking-widest text-purple-500 flex items-center gap-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-purple-500 flex items-center gap-2">
                     <Eye size={14} /> Payload
                 </label>
             </div>
@@ -95,14 +97,14 @@ export function JWTDecoderClient() {
       </div>
 
       {/* Signature Section - Minimalized */}
-      <div className="bg-canvas-card border-2 border-base rounded-2xl p-6 shadow-sm">
-         <label className="text-xs font-black uppercase tracking-widest text-blue-500 flex items-center gap-2 mb-3">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+         <label className="text-[10px] font-black uppercase tracking-widest text-brand-primary flex items-center gap-2 mb-3">
              Signature
          </label>
-         <div className="bg-slate-50 dark:bg-slate-900 border border-base rounded-xl p-4 font-mono text-[10px] text-blue-600/60 break-all select-none">
+         <div className="bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-[10px] text-slate-500 break-all select-none shadow-inner">
              {decoded ? `HMACSHA256( base64UrlEncode(header) + "." + base64UrlEncode(payload), [YOUR_SECRET_KEY] )` : "// Signature mechanism details"}
          </div>
-         <p className="mt-3 text-[10px] text-slate-400 italic">
+         <p className="mt-3 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
              Note: For security reasons, we do not perform signature verification. Your secret keys should never be entered into any website.
          </p>
       </div>

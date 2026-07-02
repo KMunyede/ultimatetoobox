@@ -1,9 +1,12 @@
 "use client";
-import { NumberTicker, Tooltip as TooltipUI, NumericInput } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useState, useEffect, useMemo } from "react";
 import { Plus, Trash2, Wallet, CreditCard, PiggyBank, ArrowDownCircle, ArrowUpCircle, Info } from "lucide-react";
+import { NumberInput } from "../../../components/ui/NumberInput";
+import { Input } from "../../../components/ui/Input";
+import { Button } from "../../../components/ui/Button";
 
 // Lazy load Recharts
 const PieChart = dynamic(() => import("recharts").then(mod => mod.PieChart), { ssr: false });
@@ -22,7 +25,7 @@ interface BudgetItem {
 }
 
 const CATEGORY_CONFIG: Record<Category, { label: string; color: string; icon: React.ElementType; placeholder: string }> = {
-  income: { label: "Income", color: "var(--color-brand-primary)", icon: Wallet, placeholder: "e.g. Salary, Freelance" },
+  income: { label: "Income", color: "#000000", icon: Wallet, placeholder: "e.g. Salary, Freelance" },
   fixed: { label: "Fixed Expenses", color: "#f43f5e", icon: ArrowDownCircle, placeholder: "e.g. Rent, Bills" },
   variable: { label: "Variable Expenses", color: "#fbbf24", icon: CreditCard, placeholder: "e.g. Food, Fun" },
   savings: { label: "Savings & Debt", color: "#3b82f6", icon: PiggyBank, placeholder: "e.g. Emergency Fund" },
@@ -32,20 +35,16 @@ export function BudgetClient() {
   const [items, setItems] = useState<BudgetItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load from LocalStorage
   useEffect(() => {
     if (typeof window === "undefined") return;
     const saved = localStorage.getItem("hsc_budget_items");
     if (saved) {
       try {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse budget items", e);
       }
     } else {
-        // Initial defaults
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems([
             { id: '1', name: 'Monthly Salary', amount: '5000', category: 'income' },
             { id: '2', name: 'Rent/Mortgage', amount: '1500', category: 'fixed' },
@@ -53,11 +52,9 @@ export function BudgetClient() {
             { id: '4', name: 'Savings', amount: '500', category: 'savings' },
         ]);
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoaded(true);
   }, []);
 
-  // Save to LocalStorage
   useEffect(() => {
     if (isLoaded) {
       localStorage.setItem("hsc_budget_items", JSON.stringify(items));
@@ -101,26 +98,18 @@ export function BudgetClient() {
     { name: "Remaining", value: Math.max(0, netBalance), color: "var(--color-brand-primary)" },
   ].filter(d => d.value > 0);
 
-  if (!isLoaded) return <div className="h-96 animate-pulse bg-canvas-muted rounded-2xl" />;
+  if (!isLoaded) return <div className="h-96 animate-pulse bg-slate-100 dark:bg-slate-800 rounded-3xl" />;
 
   return (
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-6"
+      className="@container space-y-8 my-8"
     >
-      <div className="flex justify-between items-center px-2">
-        <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
-            <span className="text-xs font-black text-text-muted uppercase tracking-[0.2em]">Live Budget Engine</span>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Entry Area */}
         <div className="lg:col-span-2 space-y-10">
 
-          {/* Income Section */}
           <Section
             id="tour-budget-income"
             category="income"
@@ -131,7 +120,6 @@ export function BudgetClient() {
             total={totals.income}
           />
 
-          {/* Expenses Group */}
           <div id="tour-budget-expenses" className="space-y-10">
             <Section
                 category="fixed"
@@ -162,33 +150,30 @@ export function BudgetClient() {
 
         {/* Sidebar Summary */}
         <div className="space-y-8">
-            <div id="tour-budget-summary" className="sticky top-24 bg-canvas-card border border-border-base rounded-[2.5rem] p-5 shadow-2xl overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-2 bg-brand-primary/20" />
-
-                <h3 className="text-xl font-black text-text-primary mb-8 flex items-center gap-3">
+            <div id="tour-budget-summary" className="sticky top-24 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-6 shadow-sm overflow-hidden">
+                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
                     <ArrowUpCircle className="text-brand-primary" />
-                    Financial Summary
+                    Summary
                 </h3>
 
                 <div className="space-y-6 mb-10">
                     <div className="flex justify-between items-end">
-                        <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total In</span>
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total In</span>
                         <span className="text-2xl font-black text-brand-primary">$<NumberTicker value={totals.income} /></span>
                     </div>
                     <div className="flex justify-between items-end">
-                        <span className="text-xs font-bold text-text-muted uppercase tracking-widest">Total Out</span>
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Out</span>
                         <span className="text-2xl font-black text-rose-500">$<NumberTicker value={totals.expenses} /></span>
                     </div>
-                    <div className="h-px bg-border-base" />
+                    <div className="h-px bg-slate-100 dark:bg-slate-800" />
                     <div className="flex justify-between items-end pt-2">
-                        <span className="text-xs font-black text-text-primary uppercase tracking-widest">Net Balance</span>
+                        <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest">Net Balance</span>
                         <span className={`text-2xl md:text-3xl font-black ${netBalance >= 0 ? 'text-brand-primary' : 'text-rose-600'}`}>
                             {netBalance < 0 && "-"}$<NumberTicker value={Math.abs(netBalance)} />
                         </span>
                     </div>
                 </div>
 
-                {/* Visualization */}
                 <div className="h-[250px] w-full relative mb-6">
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
@@ -205,22 +190,22 @@ export function BudgetClient() {
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{ backgroundColor: 'var(--color-canvas-card)', borderRadius: '12px', border: '1px solid var(--color-border-base)', fontSize: '12px', fontWeight: 'bold' }}
+                                contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: '10px', fontWeight: 'bold' }}
                             />
                         </PieChart>
                     </ResponsiveContainer>
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-xs font-bold text-text-muted uppercase tracking-tighter">Remaining</span>
-                        <span className="text-lg font-black text-text-primary">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Remaining</span>
+                        <span className="text-lg font-black text-slate-900 dark:text-white">
                             {totals.income > 0 ? Math.round((Math.max(0, netBalance) / totals.income) * 100) : 0}%
                         </span>
                     </div>
                 </div>
 
-                <div className="bg-canvas-muted rounded-2xl p-4 flex gap-3 items-start border border-border-base">
+                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 flex gap-3 items-start border border-slate-100 dark:border-slate-800">
                     <Info size={18} className="text-brand-primary shrink-0 mt-0.5" />
-                    <p className="text-[11px] text-text-secondary leading-relaxed font-medium">
-                        Your data is saved automatically to your device. Click the share icon above to send this budget to someone else.
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed font-bold uppercase tracking-widest">
+                        Your data is saved automatically to your device.
                     </p>
                 </div>
             </div>
@@ -248,18 +233,18 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
     <div id={id} className="space-y-4">
       <div className="flex items-center justify-between px-2">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-xl border`} style={{ backgroundColor: `${config.color}10`, color: config.color, borderColor: `${config.color}20` }}>
+          <div className={`p-2 rounded-xl border-2`} style={{ backgroundColor: `${config.color}10`, color: config.color, borderColor: `${config.color}20` }}>
             <Icon size={20} />
           </div>
-          <h2 className="text-lg font-black text-text-primary tracking-tight">{config.label}</h2>
+          <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight uppercase">{config.label}</h2>
         </div>
-        <div className="text-sm font-black text-text-muted">
-          Subtotal: <span className="text-text-primary">$<NumberTicker value={total} /></span>
+        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+          Subtotal: <span className="text-slate-900 dark:text-white">$<NumberTicker value={total} /></span>
         </div>
       </div>
 
-      <div className="bg-canvas-card border border-border-base rounded-[2rem] p-2 shadow-sm overflow-hidden">
-        <div className="divide-y divide-border-base/50">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2rem] p-2 shadow-sm overflow-hidden">
+        <div className="divide-y divide-slate-100 dark:divide-slate-800">
           <AnimatePresence initial={false}>
             {items.map((item) => (
               <motion.div
@@ -267,38 +252,32 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="group flex flex-col sm:flex-row items-center gap-4 p-4 hover:bg-canvas-muted/50 transition-colors"
+                className="group flex flex-col sm:flex-row items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
               >
-                <TooltipUI content={`Name of this ${category} item`} position="top" className="flex-1 w-full">
-                  <input
-                    type="text"
-                    title="Item Name"
+                <div className="flex-1 w-full">
+                  <Input
                     placeholder={config.placeholder}
-                    className="w-full h-12 bg-transparent text-sm font-bold text-text-primary placeholder:text-text-muted outline-none px-2"
+                    className="!bg-transparent !border-none !p-0 !text-sm !font-bold"
                     value={item.name}
                     onChange={(e) => onUpdate(item.id, { name: e.target.value })}
                   />
-                </TooltipUI>
+                </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
                     <div className="relative flex-1 sm:w-32">
-                        <span className="absolute left-3 top-3 text-text-muted font-bold text-sm">$</span>
-                        <TooltipUI content={`Amount for ${item.name || 'this item'}`} position="top">
-                          <NumericInput
-                              title="Item Amount"
-                              className="w-full h-12 pl-7 pr-4 bg-canvas-muted border border-border-base rounded-xl text-sm font-black text-text-primary outline-none focus:border-brand-primary transition-all"
-                              value={item.amount}
-                              onChange={val => onUpdate(item.id, { amount: val })}
-                          />
-                        </TooltipUI>
+                        <span className="absolute left-3 top-3 text-slate-400 font-bold text-sm">$</span>
+                        <NumberInput
+                            className="!pl-7"
+                            value={item.amount}
+                            onChange={val => onUpdate(item.id, { amount: val })}
+                        />
                     </div>
-                    <TooltipUI content="Delete this item" position="top">
-                      <button
-                          onClick={() => onDelete(item.id)}
-                          className="p-3 text-text-muted hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
-                      >
-                          <Trash2 size={18} />
-                      </button>
-                    </TooltipUI>
+                    <button
+                        onClick={() => onDelete(item.id)}
+                        className="p-3 text-slate-300 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-xl transition-all"
+                        title="Delete Item"
+                    >
+                        <Trash2 size={18} />
+                    </button>
                 </div>
               </motion.div>
             ))}
@@ -307,10 +286,10 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
 
         <button
           onClick={onAdd}
-          className="w-full p-4 flex items-center justify-center gap-2 text-xs font-black text-text-muted hover:text-brand-primary hover:bg-brand-primary/5 transition-all group"
+          className="w-full p-4 flex items-center justify-center gap-2 text-[10px] font-black text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all group uppercase tracking-widest"
         >
           <Plus size={16} className="group-hover:scale-125 transition-transform" />
-          ADD ITEM TO {config.label.toUpperCase()}
+          Add {config.label} Item
         </button>
       </div>
     </div>
