@@ -163,7 +163,7 @@ export function StandardCalculatorClient() {
             key={i}
             onClick={() => onButtonClick(btn)}
             className={`
-              w-full h-14 md:h-16 rounded-2xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all active:scale-95 border-2
+              w-full h-14 rounded-2xl text-xl font-black uppercase tracking-widest transition-all active:scale-95 border-2
               ${btn.span === 2 ? "col-span-2" : "col-span-1"}
               ${btn.className || "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white hover:border-brand-primary"}
             `}

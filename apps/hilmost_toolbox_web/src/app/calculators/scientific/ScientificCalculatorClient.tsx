@@ -131,44 +131,47 @@ export function ScientificCalculatorClient() {
   }, [handleInput, calculate]);
 
   const buttons = [
+    { label: "AC", type: "clear", className: "bg-rose-50 dark:bg-rose-900/20 text-rose-600 border-rose-100 dark:border-rose-900/50" },
     { label: "2nd", type: "mode", active: isSecond, className: "bg-slate-100 dark:bg-slate-800" },
     { label: "DEG", type: "mode", active: angleMode === "deg" },
     { label: "RAD", type: "mode", active: angleMode === "rad" },
     { label: "(", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: ")", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "AC", type: "clear", className: "bg-rose-50 dark:bg-rose-900/20 text-rose-600 border-rose-100 dark:border-rose-900/50" },
 
     { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "7", type: "number", className: "font-black text-xl" },
+    { label: "8", type: "number", className: "font-black text-xl" },
+    { label: "9", type: "number", className: "font-black text-xl" },
+    { label: ")", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
+
     { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "7", type: "number", className: "font-black" },
-    { label: "8", type: "number", className: "font-black" },
-    { label: "9", type: "number", className: "font-black" },
+    { label: "4", type: "number", className: "font-black text-xl" },
+    { label: "5", type: "number", className: "font-black text-xl" },
+    { label: "6", type: "number", className: "font-black text-xl" },
     { label: "÷", type: "operator", val: "÷", className: "text-brand-primary bg-brand-primary/5" },
 
-    { label: "ln", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "log", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "√x", type: "func", val: "√", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "4", type: "number", className: "font-black" },
-    { label: "5", type: "number", className: "font-black" },
-    { label: "6", type: "number", className: "font-black" },
+    { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "1", type: "number", className: "font-black text-xl" },
+    { label: "2", type: "number", className: "font-black text-xl" },
+    { label: "3", type: "number", className: "font-black text-xl" },
     { label: "×", type: "operator", val: "×", className: "text-brand-primary bg-brand-primary/5" },
 
+    { label: "log", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "0", type: "number", className: "font-black text-xl" },
+    { label: ".", type: "number", className: "font-black text-xl" },
+    { label: "=", type: "equals", className: "bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg" },
+    { label: "−", type: "operator", val: "−", className: "text-brand-primary bg-brand-primary/5" },
+
+    { label: "ln", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
+    { label: "π", type: "number", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "e", type: "number", className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "HYP", type: "mode", active: isHyp, className: "bg-slate-50 dark:bg-slate-800/50" },
+    { label: "+", type: "operator", className: "text-brand-primary bg-brand-primary/5" },
+
+    { label: "√x", type: "func", val: "√", className: "bg-sky-50 dark:bg-sky-900/20" },
     { label: "x²", type: "operator", val: "^2", className: "bg-sky-50 dark:bg-sky-900/20" },
     { label: "x³", type: "operator", val: "^3", className: "bg-sky-50 dark:bg-sky-900/20" },
     { label: "^", type: "operator", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "1", type: "number", className: "font-black" },
-    { label: "2", type: "number", className: "font-black" },
-    { label: "3", type: "number", className: "font-black" },
-    { label: "−", type: "operator", val: "−", className: "text-brand-primary bg-brand-primary/5" },
-
-    { label: "HYP", type: "mode", active: isHyp, className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "π", type: "number", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "e", type: "number", className: "bg-slate-50 dark:bg-slate-800/50" },
-    { label: "0", type: "number", className: "font-black" },
-    { label: ".", type: "number", className: "font-black" },
-    { label: "=", type: "equals", className: "bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg" },
-    { label: "+", type: "operator", className: "text-brand-primary bg-brand-primary/5" },
+    { label: "%", type: "operator", val: "%", className: "bg-sky-50 dark:bg-sky-900/20" },
   ];
 
   return (
@@ -190,13 +193,13 @@ export function ScientificCalculatorClient() {
           }}
         />
 
-        <div className="grid grid-cols-5 @[700px]:grid-cols-7 gap-2 md:gap-4">
+        <div className="grid grid-cols-5 gap-2 md:gap-3">
           {buttons.map((btn, i) => (
             <button
               key={i}
               onClick={() => onButtonClick(btn.val || btn.label, btn.type)}
               className={`
-                w-full h-12 md:h-14 @[600px]:h-16 rounded-xl md:rounded-2xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all active:scale-95 border-2
+                w-full h-12 md:h-14 rounded-xl md:rounded-2xl text-[16px] font-black uppercase tracking-widest transition-all active:scale-95 border-2
                 ${btn.className || ""}
                 ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-400" : ""}
                 ${btn.type === "mode" && btn.active ? "bg-brand-primary/10 border-brand-primary/30 text-brand-primary" : ""}
