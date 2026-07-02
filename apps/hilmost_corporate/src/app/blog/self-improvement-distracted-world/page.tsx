@@ -20,7 +20,7 @@ export default function BlogPost2() {
         </Link>
 
         <header className="mb-16">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">June 2024</div>
+          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">July 2026</div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase mb-6 leading-tight">
             Building Software for Self-Improvement in a <span className="text-brand-primary">Distracted World</span>
           </h1>

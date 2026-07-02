@@ -13,13 +13,13 @@ const posts = [
     title: "Why We Built the Hilmost Toolbox",
     slug: "why-we-built-the-toolbox",
     excerpt: "The Hilmost Toolbox started as a simple idea: what if a calculator, converter, or PDF tool just worked, instantly, without friction?",
-    date: "July 2024"
+    date: "July 2026"
   },
   {
     title: "Building Software for Self-Improvement in a Distracted World",
     slug: "self-improvement-distracted-world",
     excerpt: "At Hilmost, we're interested in how you build technology that helps people focus, reflect, and actually improve their lives.",
-    date: "June 2024"
+    date: "July 2026"
   }
 ];
 
