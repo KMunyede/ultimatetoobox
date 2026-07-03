@@ -37,3 +37,7 @@ node_modules/
 # Next.js build
 .next/
 out/
+
+# Turbo
+.turbo/
+*.log
