@@ -75,7 +75,7 @@ export default function VatTaxPage() {
   return (
     <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
-        name="VAT & Tax Calculator"
+        name={TOOL_NAME}
         description={TOOL_DESC}
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"

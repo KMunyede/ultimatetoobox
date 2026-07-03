@@ -73,7 +73,7 @@ export function CompoundInterestClient() {
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Input Column */}
-        <div id="tour-ci-inputs" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm h-fit">
+        <div id="tour-ci-inputs" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2rem] p-6 @md:p-8 space-y-8 shadow-sm h-fit">
           <NumberInput
             label="Initial Principal ($)"
             value={principal}
@@ -88,7 +88,7 @@ export function CompoundInterestClient() {
             min={0}
           />
 
-          <div className="grid grid-cols-1 @[300px]:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 @[400px]:grid-cols-2 gap-5">
             <NumberInput
               label="Annual Rate (%)"
               value={rate}
@@ -109,17 +109,17 @@ export function CompoundInterestClient() {
 
         {/* Chart/Result Column */}
         <div className="lg:col-span-2 space-y-6">
-            <div id="tour-ci-chart" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-6 md:p-10 shadow-sm overflow-hidden relative">
+            <div id="tour-ci-chart" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-6 @md:p-10 shadow-sm overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-6 relative z-10">
+                <div className="flex flex-col @md:flex-row justify-between items-start @md:items-center mb-10 gap-6 relative z-10">
                     <div>
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Estimated Future Balance</span>
-                        <div className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mt-1">
+                        <div className="text-4xl @md:text-5xl @lg:text-6xl font-black text-[var(--color-brand-primary)] tracking-tighter mt-1">
                             $<NumberTicker value={finalBalance} decimals={0} />
                         </div>
                     </div>
-                    <div className="sm:text-right">
+                    <div className="@md:text-right">
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Total Interest Earned</span>
                         <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">
                           +<NumberTicker value={totalInterest} decimals={0} />

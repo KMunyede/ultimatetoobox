@@ -93,6 +93,11 @@ export default function PasswordGeneratorPage() {
             Our Secure Password Laboratory offers advanced features designed for precision and usability. The <strong>&quot;Exclude Ambiguous Characters&quot;</strong> option removes confusing characters like <code>0</code> (zero) and <code>O</code> (uppercase o), preventing entry errors on sensitive logins.
           </p>
 
+          <h3>Why Use a Random Generator?</h3>
+          <p>
+            Weak and reused passwords are the leading cause of account breaches. A single compromised password can expose multiple accounts, leading to a domino effect that compromises your entire digital identity. Human-chosen passwords almost always follow predictable patterns—like using names, dates, or common keyboard sequences—that automated brute-force attacks exploit in mere seconds.
+          </p>
+
           <h3>Guaranteeing Complexity</h3>
           <p>
             Unlike basic generators that might randomly skip a character type even if selected, our <strong>&quot;Guarantee All Types&quot;</strong> logic ensures that at least one character from every enabled set (Uppercase, Lowercase, Numbers, Symbols) is present in your result. This guarantees that your password always meets the strict complexity requirements of modern enterprise systems.
@@ -100,7 +105,7 @@ export default function PasswordGeneratorPage() {
 
           <h3>Zero-Server Security</h3>
           <p>
-            The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost Digital Labs, we use a 100% browser-side architecture. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
+            The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost Digital Labs, we use a 100% browser-side architecture using the <code>crypto.getRandomValues()</code> API. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
           </p>
         </ToolArticle>
 

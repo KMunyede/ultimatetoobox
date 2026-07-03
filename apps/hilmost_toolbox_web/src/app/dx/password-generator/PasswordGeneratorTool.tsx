@@ -248,19 +248,6 @@ export function PasswordGeneratorTool() {
         </div>
 
       </div>
-
-      <section className="max-w-3xl mx-auto px-4 py-8 text-gray-800">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Why Use a Password Generator?</h2>
-        <p className="text-sm text-gray-700 leading-relaxed mb-4">
-          Weak and reused passwords are the leading cause of account breaches. A single compromised password can expose multiple accounts, leading to a domino effect that compromises your entire digital identity. Human-chosen passwords almost always follow predictable patterns—like using names, dates, or common keyboard sequences—that automated brute-force attacks exploit in mere seconds.
-        </p>
-        <p className="text-sm text-gray-700 leading-relaxed mb-4">
-          This tool works by utilizing your browser&apos;s built-in <code>crypto.getRandomValues()</code> API. This is the same high-level cryptographic standard used in professional banking and enterprise security software to guarantee true randomness. Because the generation happens entirely on your device, no passwords are ever transmitted to any server, ensuring that your new credentials are never intercepted or logged.
-        </p>
-        <p className="text-sm text-gray-700 leading-relaxed mb-4">
-          For maximum security, we recommend a minimum of 16 characters for standard accounts and 24+ characters for critical gateways like email, banking, and administrative portals. Always use a unique password per account and enable all character sets for maximum entropy. For the best defense, store your generated passwords in a reputable password manager rather than plain text, and rotate them regularly.
-        </p>
-      </section>
-    </div>
   );
 }
+

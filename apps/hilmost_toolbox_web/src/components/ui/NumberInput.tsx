@@ -44,21 +44,23 @@ export function NumberInput({
   return (
     <div className="space-y-1.5 w-full">
       {label && (
-        <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">
+        <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-secondary)] ml-1 mb-1.5">
           {label}
         </label>
       )}
       <input
         {...props}
         type="number"
+        inputMode="decimal"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onBlur={handleBlur}
         min={min}
         max={max}
         step={step}
-        className={`w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-3 text-sm focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all ${className}`}
+        className={`w-full bg-white dark:bg-slate-950 border border-[var(--color-border-base)] dark:border-slate-800 rounded-xl p-4 text-base focus:border-[var(--color-brand-primary)] focus:ring-4 focus:ring-[var(--color-brand-alpha)] outline-none transition-all ${className}`}
       />
     </div>
   );
 }
+

@@ -38,9 +38,9 @@ export function VatTaxClient() {
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-8 my-8"
     >
-      <div className="grid grid-cols-1 @[640px]:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 @lg:grid-cols-2 gap-8">
         {/* Form Column */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2rem] p-6 @[400px]:p-8 space-y-8 shadow-sm h-fit">
+        <div id="tour-vat-mode" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2rem] p-6 @md:p-8 space-y-8 shadow-sm h-fit">
 
           <PillSelector
             value={mode}
@@ -57,7 +57,6 @@ export function VatTaxClient() {
               value={amount}
               onChange={val => setState({ amount: val })}
               min={0}
-              className="text-xl font-bold"
             />
             <NumberInput
               label="VAT / Sales Tax Rate (%)"
@@ -66,23 +65,22 @@ export function VatTaxClient() {
               min={0}
               max={100}
               step={0.1}
-              className="text-xl font-bold"
             />
           </div>
         </div>
 
         {/* Results Column */}
-        <div id="tour-vat-results" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-center shadow-sm relative overflow-hidden">
+        <div id="tour-vat-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-8 @md:p-10 flex flex-col justify-center shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 w-48 h-48 bg-brand-primary/5 rounded-full -mr-24 -mt-24 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-3">
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Grand Total</span>
-            <div className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter">
+            <div className="text-5xl @md:text-6xl @lg:text-7xl font-black text-[var(--color-brand-primary)] tracking-tighter">
               $<NumberTicker value={gross} decimals={2} />
             </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 gap-8 mt-12 pt-10 border-t border-slate-100 dark:border-slate-800">
+          <div className="relative z-10 grid grid-cols-2 gap-8 mt-12 pt-10 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-2">
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Net Price</span>
                 <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -90,8 +88,8 @@ export function VatTaxClient() {
                 </p>
             </div>
             <div className="text-center space-y-2">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tax ({rate}%)</span>
-                <p className="text-2xl font-black text-emerald-600 tracking-tight">
+                <span className="text-[10px] font-black text-[var(--color-text-secondary)] dark:text-slate-400 uppercase tracking-widest">Tax ({rate}%)</span>
+                <p className="text-2xl font-black text-[var(--color-brand-primary)] tracking-tight">
                   +<NumberTicker value={vat} decimals={2} />
                 </p>
             </div>
@@ -99,5 +97,6 @@ export function VatTaxClient() {
         </div>
       </div>
     </motion.div>
+
   );
 }
