@@ -248,6 +248,7 @@ export function PasswordGeneratorTool() {
         </div>
 
       </div>
+    </div>
   );
 }
 
