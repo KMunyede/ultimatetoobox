@@ -186,11 +186,16 @@ export function IncomeTaxClient() {
                             onChange={e => setState({ country: e.target.value })}
                             options={countryOptions}
                         />
-                        <div className="flex items-center gap-1.5 px-1">
-                            <Clock size={10} className="text-slate-400" />
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                {yearConfig.taxYear} · Verified {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                            </span>
+                        <div className="space-y-2 px-1">
+                            <div className="flex items-center gap-1.5">
+                                <Clock size={10} className="text-slate-400" />
+                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                    {yearConfig.taxYear} · Verified {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                                </span>
+                            </div>
+                            <p className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-relaxed opacity-70">
+                                Tax rates shown are valid as verified on {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })} and are expected to remain accurate until 15 January {new Date(yearConfig.lastVerified).getFullYear() + 1}. Always confirm with the official source above before filing.
+                            </p>
                         </div>
                     </div>
 
