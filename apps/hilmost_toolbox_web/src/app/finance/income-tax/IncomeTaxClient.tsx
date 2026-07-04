@@ -81,12 +81,15 @@ export function IncomeTaxClient() {
     let annualTax = 0;
     let remainingIncome = taxableIncome;
     let lowerLimit = 0;
+    let marginalRate = 0;
 
     for (const bracket of config.brackets) {
       const upperLimit = bracket.upTo;
       const bracketIncome = upperLimit === null
         ? Math.max(0, remainingIncome)
         : Math.min(Math.max(0, remainingIncome), upperLimit - lowerLimit);
+
+      if (bracketIncome > 0) marginalRate = bracket.rate;
 
       annualTax += bracketIncome * (bracket.rate / 100);
       remainingIncome -= bracketIncome;
@@ -114,6 +117,7 @@ export function IncomeTaxClient() {
       grossAmount: annualSalary / factor,
       totalDeductions: totalDeductions / factor,
       effectiveRate: annualSalary > 0 ? (totalAnnualTax / annualSalary) * 100 : 0,
+      marginalRate,
       symbol: countryData.symbol,
     };
   };
@@ -237,41 +241,48 @@ export function IncomeTaxClient() {
 
         {/* Results Dashboard */}
         <div className="lg:col-span-2 space-y-6">
-            <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-between shadow-sm relative overflow-hidden h-full">
+            <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between shadow-sm relative overflow-hidden h-full">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
-                <div className="relative z-10 text-center space-y-4 py-6">
+                <div className="relative z-10 text-center pt-2 pb-4">
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Estimated {frequency === 'annually' ? 'Annual' : frequency === 'monthly' ? 'Monthly' : 'Weekly'} Net Pay</span>
-                    <div className="text-6xl md:text-8xl font-black text-[var(--color-brand-primary)] tracking-tighter tabular-nums">
+                    <div className="text-6xl md:text-7xl font-black text-[var(--color-brand-primary)] tracking-tighter tabular-nums leading-none mt-2">
                         {countryConfig.symbol}<NumberTicker value={currentResults.netAmount} decimals={0} />
-                    </div>
-                    <div className="flex justify-center gap-4">
-                        <span className="px-4 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black text-slate-500 uppercase tracking-widest border border-slate-200 dark:border-slate-700">
-                            Effective Rate: {currentResults.effectiveRate.toFixed(1)}%
-                        </span>
                     </div>
                 </div>
 
-                <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 pt-10 border-t border-[var(--color-border-base)] dark:border-slate-800">
-                    <div className="text-center space-y-2">
+                <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-2 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
+                    <div className="text-center space-y-1">
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Gross Pay</span>
-                        <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                        <p className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
                             {countryConfig.symbol}{Math.round(currentResults.grossAmount).toLocaleString()}
                         </p>
                     </div>
-                    <div className="text-center space-y-2">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Estimated Tax</span>
-                        <p className="text-2xl font-black text-rose-500 tracking-tight">
+                    <div className="text-center space-y-1">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Est. Tax</span>
+                        <p className="text-xl font-black text-rose-500 tracking-tight">
                             -{countryConfig.symbol}{Math.round(currentResults.taxAmount).toLocaleString()}
                         </p>
                         {currentResults.levyAmount > 0 && (
-                            <p className="text-[9px] font-bold text-slate-400 uppercase">Incl. {yearConfig.additionalLevy?.name}</p>
+                            <p className="text-[8px] font-bold text-slate-400 uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
                         )}
                     </div>
-                    <div className="text-center space-y-2">
+                    <div className="text-center space-y-1">
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Deductions</span>
-                        <p className="text-2xl font-black text-slate-500 tracking-tight">
+                        <p className="text-xl font-black text-slate-500 tracking-tight">
                             -{countryConfig.symbol}{Math.round(currentResults.totalDeductions).toLocaleString()}
+                        </p>
+                    </div>
+                    <div className="text-center space-y-1">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Effective</span>
+                        <p className="text-xl font-black text-brand-primary tracking-tight">
+                            {currentResults.effectiveRate.toFixed(1)}%
+                        </p>
+                    </div>
+                    <div className="text-center space-y-1">
+                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Marginal</span>
+                        <p className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                            {currentResults.marginalRate}%
                         </p>
                     </div>
                 </div>
