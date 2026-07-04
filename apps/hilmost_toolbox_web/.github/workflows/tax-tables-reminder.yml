@@ -1,0 +1,22 @@
+name: Annual Tax Table Update Reminder
+
+on:
+  schedule:
+    - cron: '0 8 15 1 *'   # 08:00 UTC, Jan 15, every year
+  workflow_dispatch:        # allows manual trigger to test it
+
+jobs:
+  create-reminder-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📅 Update Income Tax brackets for new tax year`,
+              body: `Time to verify and update tax bracket data in \`src/app/finance/income-tax/brackets.ts\`.\n\nFor each of the 16 countries:\n- [ ] Check official gov source (sourceUrl in brackets.ts) for new tax year rates\n- [ ] Add new year entry to brackets.ts\n- [ ] Update CURRENT_TAX_YEAR constant\n- [ ] Update lastVerified date\n- [ ] Deploy to staging → verify → deploy to production\n\nMost countries publish new budgets Jan–Apr, so some may not be ready yet — check back if a country hasn't updated.`,
+              labels: ['tax-data', 'annual-maintenance']
+            });
