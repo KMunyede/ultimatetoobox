@@ -165,129 +165,122 @@ export function IncomeTaxClient() {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-8 my-8"
+      className="@container space-y-6 my-8 max-w-4xl mx-auto"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Form Column */}
-        <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm">
-                <PillSelector
-                    label="Frequency"
-                    value={frequency}
-                    onChange={v => setState({ frequency: v })}
-                    options={[
-                        { label: "Annual", value: "annually" },
-                        { label: "Monthly", value: "monthly" },
-                        { label: "Weekly", value: "weekly" },
-                    ]}
-                />
+      {/* Form Section - Now Full Width */}
+      <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="w-full md:w-auto">
+                  <PillSelector
+                      label="Frequency"
+                      value={frequency}
+                      onChange={v => setState({ frequency: v })}
+                      options={[
+                          { label: "Annual", value: "annually" },
+                          { label: "Monthly", value: "monthly" },
+                          { label: "Weekly", value: "weekly" },
+                      ]}
+                  />
+              </div>
+              <div className="flex-1 max-w-sm">
+                  <Select
+                      label="Country / Jurisdiction"
+                      value={country}
+                      onChange={e => setState({ country: e.target.value })}
+                      options={countryOptions}
+                  />
+                  <div className="space-y-1 mt-2 px-1">
+                      <div className="flex items-center gap-1.5">
+                          <Clock size={10} className="text-slate-400" />
+                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                              {yearConfig.taxYear} · Verified {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                          </span>
+                      </div>
+                      <p className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-relaxed opacity-70">
+                          Verified on {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}. Accurate until 15 Jan {new Date(yearConfig.lastVerified).getFullYear() + 1}.
+                      </p>
+                  </div>
+              </div>
+          </div>
 
-                <div className="space-y-4">
-                    <div className="space-y-2">
-                        <Select
-                            label="Country / Jurisdiction"
-                            value={country}
-                            onChange={e => setState({ country: e.target.value })}
-                            options={countryOptions}
-                        />
-                        <div className="space-y-2 px-1">
-                            <div className="flex items-center gap-1.5">
-                                <Clock size={10} className="text-slate-400" />
-                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                    {yearConfig.taxYear} · Verified {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                                </span>
-                            </div>
-                            <p className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-relaxed opacity-70">
-                                Tax rates shown are valid as verified on {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })} and are expected to remain accurate until 15 January {new Date(yearConfig.lastVerified).getFullYear() + 1}. Always confirm with the official source above before filing.
-                            </p>
-                        </div>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <NumberInput
+                  label={`${frequency.charAt(0).toUpperCase() + frequency.slice(1, -2)} Gross Salary (${countryConfig.symbol})`}
+                  value={salary}
+                  onChange={val => setState({ salary: val })}
+                  min={0}
+              />
 
-                    <NumberInput
-                        label={`${frequency.charAt(0).toUpperCase() + frequency.slice(1, -2)} Gross Salary (${countryConfig.symbol})`}
-                        value={salary}
-                        onChange={val => setState({ salary: val })}
-                        min={0}
-                    />
+              <NumberInput
+                  label={`Other Deductions (${countryConfig.symbol})`}
+                  value={deductions}
+                  onChange={val => setState({ deductions: val })}
+                  min={0}
+              />
+          </div>
 
-                    <NumberInput
-                        label={`Other Deductions (${countryConfig.symbol})`}
-                        value={deductions}
-                        onChange={val => setState({ deductions: val })}
-                        min={0}
-                    />
-                </div>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Button onClick={handleSave} className="w-full sm:w-auto flex items-center justify-center gap-2" variant="secondary">
+                  <Save size={18} />
+                  Save Scenario
+              </Button>
 
-                <Button onClick={handleSave} className="w-full flex items-center justify-center gap-2" variant="secondary">
-                    <Save size={18} />
-                    Save Scenario
-                </Button>
-            </div>
+              <div className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 px-4 py-2.5 rounded-xl flex items-center gap-3">
+                  <Info size={16} className="text-brand-primary shrink-0" />
+                  <p className="text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest leading-none">
+                      Source: <span className="text-brand-primary">{yearConfig.source}</span>
+                      {yearConfig.disclaimer && <span className="ml-2 opacity-60 italic">* {yearConfig.disclaimer}</span>}
+                  </p>
+              </div>
+          </div>
+      </div>
 
-            <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl flex gap-3">
-                <Info size={18} className="text-brand-primary shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest leading-relaxed">
-                        Data Source: <span className="text-brand-primary">{yearConfig.source}</span>
-                    </p>
-                    {yearConfig.disclaimer && (
-                        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest leading-relaxed italic">
-                            * {yearConfig.disclaimer}
-                        </p>
-                    )}
-                </div>
-            </div>
-        </div>
+      {/* Results Dashboard - Now Below */}
+      <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2rem] p-6 md:p-8 shadow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
-        {/* Results Dashboard */}
-        <div className="lg:col-span-2 space-y-6">
-            <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between shadow-sm relative overflow-hidden h-full">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
+          <div className="relative z-10 text-center py-2">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Estimated {frequency === 'annually' ? 'Annual' : frequency === 'monthly' ? 'Monthly' : 'Weekly'} Net Pay</span>
+              <div className="text-6xl md:text-7xl font-black text-[var(--color-brand-primary)] tracking-tighter tabular-nums leading-none mt-2">
+                  {countryConfig.symbol}<NumberTicker value={currentResults.netAmount} decimals={0} />
+              </div>
+          </div>
 
-                <div className="relative z-10 text-center pt-2 pb-4">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Estimated {frequency === 'annually' ? 'Annual' : frequency === 'monthly' ? 'Monthly' : 'Weekly'} Net Pay</span>
-                    <div className="text-6xl md:text-7xl font-black text-[var(--color-brand-primary)] tracking-tighter tabular-nums leading-none mt-2">
-                        {countryConfig.symbol}<NumberTicker value={currentResults.netAmount} decimals={0} />
-                    </div>
-                </div>
-
-                <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-2 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
-                    <div className="text-center space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Gross Pay</span>
-                        <p className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                            {countryConfig.symbol}{Math.round(currentResults.grossAmount).toLocaleString()}
-                        </p>
-                    </div>
-                    <div className="text-center space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Est. Tax</span>
-                        <p className="text-xl font-black text-rose-500 tracking-tight">
-                            -{countryConfig.symbol}{Math.round(currentResults.taxAmount).toLocaleString()}
-                        </p>
-                        {currentResults.levyAmount > 0 && (
-                            <p className="text-[8px] font-bold text-slate-400 uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
-                        )}
-                    </div>
-                    <div className="text-center space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Deductions</span>
-                        <p className="text-xl font-black text-slate-500 tracking-tight">
-                            -{countryConfig.symbol}{Math.round(currentResults.totalDeductions).toLocaleString()}
-                        </p>
-                    </div>
-                    <div className="text-center space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Effective</span>
-                        <p className="text-xl font-black text-brand-primary tracking-tight">
-                            {currentResults.effectiveRate.toFixed(1)}%
-                        </p>
-                    </div>
-                    <div className="text-center space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Marginal</span>
-                        <p className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                            {currentResults.marginalRate}%
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6 pt-6 border-t border-[var(--color-border-base)] dark:border-slate-800">
+              <div className="text-center space-y-1">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Gross Pay</span>
+                  <p className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                      {countryConfig.symbol}{Math.round(currentResults.grossAmount).toLocaleString()}
+                  </p>
+              </div>
+              <div className="text-center space-y-1">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Est. Tax</span>
+                  <p className="text-xl font-black text-rose-500 tracking-tight">
+                      -{countryConfig.symbol}{Math.round(currentResults.taxAmount).toLocaleString()}
+                  </p>
+                  {currentResults.levyAmount > 0 && (
+                      <p className="text-[8px] font-bold text-slate-400 uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
+                  )}
+              </div>
+              <div className="text-center space-y-1">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Deductions</span>
+                  <p className="text-xl font-black text-slate-500 tracking-tight">
+                      -{countryConfig.symbol}{Math.round(currentResults.totalDeductions).toLocaleString()}
+                  </p>
+              </div>
+              <div className="text-center space-y-1">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Effective</span>
+                  <p className="text-xl font-black text-brand-primary tracking-tight">
+                      {currentResults.effectiveRate.toFixed(1)}%
+                  </p>
+              </div>
+              <div className="text-center space-y-1">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Marginal</span>
+                  <p className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                      {currentResults.marginalRate}%
+                  </p>
+              </div>
+          </div>
       </div>
 
       {/* Saved Scenarios List */}
