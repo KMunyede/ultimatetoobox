@@ -89,8 +89,8 @@ export function AdUnit({
   }, [isVisible]);
 
   return (
-    <div className="w-full flex flex-col items-center gap-1 py-2 relative z-0">
-      <span className="text-[8px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.25em] select-none">
+    <div className="w-full flex flex-col items-center gap-1 py-1 relative z-0">
+      <span className="text-[7px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.25em] select-none">
         Advertisement
       </span>
       <div

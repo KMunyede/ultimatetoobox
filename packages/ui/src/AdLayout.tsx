@@ -52,7 +52,7 @@ export function AdLayout({
 
           {/* Bottom Horizontal Ad - Significant margin for safety */}
           {showInnerAds && (
-            <div className="mt-8 w-full">
+            <div className="mt-4 w-full">
               <AdUnit
                 publisherId={publisherId}
                 slotId={bottomSlotId}
