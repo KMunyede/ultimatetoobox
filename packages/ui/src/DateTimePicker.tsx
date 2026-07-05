@@ -1,45 +1,128 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Calendar as CalendarIcon, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface DateTimePickerProps {
-  value: string; // ISO format or similar
+  value: string; // ISO format or similar: YYYY-MM-DDThh:mm:ss
   onChange: (value: string) => void;
   label?: string;
 }
 
 type ViewMode = "month" | "year" | "decade" | "century";
 
+const ITEM_HEIGHT = 40;
+
+const formatForInput = (d: Date) => {
+  if (isNaN(d.getTime())) return "";
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  return `${pad(d.getDate())}-${pad(d.getMonth() + 1)}-${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+};
+
+const formatDateToISO = (d: Date) => {
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+};
+
+// Sub-component for the Time Dial to isolate re-renders and optimize scrolling
+const TimeDial = React.memo(({
+  type,
+  value,
+  onChange
+}: {
+  type: "hour" | "minute" | "second",
+  value: number,
+  onChange: (val: number) => void
+}) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<any>(null);
+  const max = type === "hour" ? 24 : 60;
+
+  // Generate the 3x list once
+  const list = useMemo(() => Array.from({ length: max * 3 }, (_, i) => i % max), [max]);
+
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+
+    // Silent loop logic for infinite scroll
+    if (el.scrollTop <= ITEM_HEIGHT) {
+      el.scrollTop += max * ITEM_HEIGHT;
+    } else if (el.scrollTop >= (max * 2 - 1) * ITEM_HEIGHT) {
+      el.scrollTop -= max * ITEM_HEIGHT;
+    }
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      const index = Math.round(el.scrollTop / ITEM_HEIGHT) % max;
+      onChange(index);
+    }, 100);
+  }, [max, onChange]);
+
+  const handleClickItem = useCallback((val: number) => {
+    const targetScroll = (val + max) * ITEM_HEIGHT;
+    scrollRef.current?.scrollTo({ top: targetScroll, behavior: "smooth" });
+  }, [max]);
+
+  // Sync scroll position when external value changes (e.g. via typed input)
+  useEffect(() => {
+    if (scrollRef.current) {
+      const currentScrollIndex = Math.round(scrollRef.current.scrollTop / ITEM_HEIGHT) % max;
+      if (currentScrollIndex !== value) {
+        scrollRef.current.scrollTo({ top: (value + max) * ITEM_HEIGHT, behavior: "smooth" });
+      }
+    }
+  }, [value, max]);
+
+  // Initial scroll position
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = (value + max) * ITEM_HEIGHT;
+    }
+  }, []);
+
+  return (
+    <div
+      ref={scrollRef}
+      onScroll={handleScroll}
+      className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10 overscroll-contain"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+    >
+      <div className="h-[40px] shrink-0" />
+      {list.map((v, i) => (
+        <div
+          key={i}
+          onClick={() => handleClickItem(v)}
+          className={`h-10 flex items-center justify-center snap-center cursor-pointer font-medium select-none transition-colors
+            ${v === value ? "text-blue-600 font-bold scale-110" : "text-slate-800 dark:text-slate-200 hover:text-blue-500"}`}
+        >
+          {v.toString().padStart(2, '0')}
+        </div>
+      ))}
+      <div className="h-[40px] shrink-0" />
+    </div>
+  );
+});
+
+TimeDial.displayName = "TimeDial";
+
 export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const popoverRef = useRef<HTMLDivElement>(null);
 
-  const initialDate = value ? new Date(value) : new Date();
+  const initialDate = useMemo(() => {
+    if (!value) return new Date();
+    const d = new Date(value);
+    return isNaN(d.getTime()) ? new Date() : d;
+  }, [value]);
   
   const [currentDate, setCurrentDate] = useState<Date>(initialDate);
   const [currentMonth, setCurrentMonth] = useState<number>(initialDate.getMonth());
   const [currentYear, setCurrentYear] = useState<number>(initialDate.getFullYear());
   const [viewMode, setViewMode] = useState<ViewMode>("month");
 
-  // Input value state
-  const formatForInput = (d: Date) => {
-    if (isNaN(d.getTime())) return "";
-    const pad = (n: number) => n.toString().padStart(2, "0");
-    return `${pad(d.getDate())}-${pad(d.getMonth() + 1)}-${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  };
-  
   const [inputValue, setInputValue] = useState(value ? formatForInput(initialDate) : "");
 
-  // Refs for scrolling dials
-  const hoursRef = useRef<HTMLDivElement>(null);
-  const minutesRef = useRef<HTMLDivElement>(null);
-  const secondsRef = useRef<HTMLDivElement>(null);
-
-  const itemHeight = 40; // 40px height for dial items (h-10)
-
-  // Sync internal state if external value changes (and we're not focused/open)
+  // Sync internal state if external value changes while closed
   useEffect(() => {
     if (!isOpen && value) {
       const d = new Date(value);
@@ -54,6 +137,7 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
 
   // Click outside listener
   useEffect(() => {
+    if (!isOpen) return;
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -61,23 +145,18 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isOpen]);
 
-  const applyChange = (newDate: Date) => {
+  const applyChange = useCallback((newDate: Date) => {
     setCurrentDate(newDate);
     setInputValue(formatForInput(newDate));
-    // Emit ISO-like string format that `<input type="datetime-local">` originally used: YYYY-MM-DDThh:mm:ss
-    const pad = (n: number) => n.toString().padStart(2, "0");
-    const formatted = `${newDate.getFullYear()}-${pad(newDate.getMonth() + 1)}-${pad(newDate.getDate())}T${pad(newDate.getHours())}:${pad(newDate.getMinutes())}:${pad(newDate.getSeconds())}`;
-    onChange(formatted);
-  };
+    onChange(formatDateToISO(newDate));
+  }, [onChange]);
 
-  // Typed Input Parsing
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setInputValue(val);
     
-    // Attempt to parse DD-MM-YYYY HH:mm:ss
     const regex = /^(\d{2})-(\d{2})-(\d{4})\s(\d{2}):(\d{2}):(\d{2})$/;
     const match = val.match(regex);
     let newDate: Date | null = null;
@@ -86,7 +165,6 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
       const [_, day, month, year, h, m, s] = match;
       newDate = new Date(Number(year), Number(month) - 1, Number(day), Number(h), Number(m), Number(s));
     } else {
-      // Fallback
       newDate = new Date(val);
     }
 
@@ -94,48 +172,43 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
       setCurrentDate(newDate);
       setCurrentMonth(newDate.getMonth());
       setCurrentYear(newDate.getFullYear());
-      // Emit the change
-      const pad = (n: number) => n.toString().padStart(2, "0");
-      const formatted = `${newDate.getFullYear()}-${pad(newDate.getMonth() + 1)}-${pad(newDate.getDate())}T${pad(newDate.getHours())}:${pad(newDate.getMinutes())}:${pad(newDate.getSeconds())}`;
-      onChange(formatted);
+      onChange(formatDateToISO(newDate));
     }
   };
 
-  // View Navigation Handlers
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (viewMode === "month") {
       if (currentMonth === 0) {
         setCurrentMonth(11);
-        setCurrentYear(currentYear - 1);
+        setCurrentYear(prev => prev - 1);
       } else {
-        setCurrentMonth(currentMonth - 1);
+        setCurrentMonth(prev => prev - 1);
       }
-    } else if (viewMode === "year") setCurrentYear(currentYear - 10);
-    else if (viewMode === "decade") setCurrentYear(currentYear - 100);
-    else if (viewMode === "century") setCurrentYear(currentYear - 1000);
-  };
+    } else if (viewMode === "year") setCurrentYear(prev => prev - 10);
+    else if (viewMode === "decade") setCurrentYear(prev => prev - 100);
+    else if (viewMode === "century") setCurrentYear(prev => prev - 1000);
+  }, [viewMode, currentMonth]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (viewMode === "month") {
       if (currentMonth === 11) {
         setCurrentMonth(0);
-        setCurrentYear(currentYear + 1);
+        setCurrentYear(prev => prev + 1);
       } else {
-        setCurrentMonth(currentMonth + 1);
+        setCurrentMonth(prev => prev + 1);
       }
-    } else if (viewMode === "year") setCurrentYear(currentYear + 10);
-    else if (viewMode === "decade") setCurrentYear(currentYear + 100);
-    else if (viewMode === "century") setCurrentYear(currentYear + 1000);
-  };
+    } else if (viewMode === "year") setCurrentYear(prev => prev + 10);
+    else if (viewMode === "decade") setCurrentYear(prev => prev + 100);
+    else if (viewMode === "century") setCurrentYear(prev => prev + 1000);
+  }, [viewMode, currentMonth]);
 
-  const handleHeaderClick = () => {
+  const handleHeaderClick = useCallback(() => {
     if (viewMode === "month") setViewMode("year");
     else if (viewMode === "year") setViewMode("decade");
     else if (viewMode === "decade") setViewMode("century");
-  };
+  }, [viewMode]);
 
-  // View Renderers
-  const renderHeaderLabel = () => {
+  const headerLabel = useMemo(() => {
     if (viewMode === "month") {
       return new Date(currentYear, currentMonth).toLocaleString("default", { month: "long", year: "numeric" });
     } else if (viewMode === "year") {
@@ -148,197 +221,24 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
       const start = Math.floor(currentYear / 1000) * 1000;
       return `${start} - ${start + 900}`;
     }
-  };
+  }, [viewMode, currentYear, currentMonth]);
 
-  const renderMonthView = () => {
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-    const blankDays = Array.from({ length: firstDay }, (_, i) => i);
+  const handleTimeChange = useCallback((type: "hour" | "minute" | "second", newVal: number) => {
+    setCurrentDate(prev => {
+        const next = new Date(prev);
+        if (type === "hour") next.setHours(newVal);
+        else if (type === "minute") next.setMinutes(newVal);
+        else if (type === "second") next.setSeconds(newVal);
 
-    return (
-      <>
-        <div className="grid grid-cols-7 gap-1 text-center mb-2">
-          {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(day => (
-            <div key={day} className="text-xs font-semibold text-slate-400">{day}</div>
-          ))}
-        </div>
-        <div className="grid grid-cols-7 gap-1">
-          {blankDays.map(b => <div key={`blank-${b}`} className="h-8 w-8" />)}
-          {daysArray.map(day => {
-            const isSelected = day === currentDate.getDate() && currentMonth === currentDate.getMonth() && currentYear === currentDate.getFullYear();
-            const isToday = day === new Date().getDate() && currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear();
-            return (
-              <button
-                key={day}
-                type="button"
-                onClick={() => {
-                  const newDate = new Date(currentDate);
-                  newDate.setFullYear(currentYear);
-                  newDate.setMonth(currentMonth);
-                  newDate.setDate(day);
-                  applyChange(newDate);
-                }}
-                className={`h-8 w-8 mx-auto rounded-full flex items-center justify-center text-sm transition-colors
-                  ${isSelected ? "bg-blue-600 text-white font-bold" 
-                  : isToday ? "border border-blue-500 text-blue-600 dark:text-blue-400 font-bold" 
-                  : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
-              >
-                {day}
-              </button>
-            );
-          })}
-        </div>
-      </>
-    );
-  };
+        // Side effects after state update
+        setTimeout(() => {
+            setInputValue(formatForInput(next));
+            onChange(formatDateToISO(next));
+        }, 0);
 
-  const renderYearView = () => {
-    const startYear = Math.floor(currentYear / 10) * 10;
-    const years = Array.from({ length: 12 }, (_, i) => startYear - 1 + i);
-    return (
-      <div className="grid grid-cols-4 gap-2 py-4">
-        {years.map(y => {
-          const isSelected = y === currentDate.getFullYear();
-          const isOut = y < startYear || y > startYear + 9;
-          return (
-            <button
-              key={y}
-              type="button"
-              onClick={() => {
-                setCurrentYear(y);
-                setViewMode("month");
-              }}
-              className={`py-3 rounded-lg text-sm transition-colors font-medium
-                ${isSelected ? "bg-blue-600 text-white" 
-                : isOut ? "text-slate-400" 
-                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
-            >
-              {y}
-            </button>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const renderDecadeView = () => {
-    const startDecade = Math.floor(currentYear / 100) * 100;
-    const decades = Array.from({ length: 12 }, (_, i) => startDecade - 10 + i * 10);
-    return (
-      <div className="grid grid-cols-4 gap-2 py-4">
-        {decades.map(d => {
-          const isSelected = Math.floor(currentDate.getFullYear() / 10) * 10 === d;
-          const isOut = d < startDecade || d > startDecade + 90;
-          return (
-            <button
-              key={d}
-              type="button"
-              onClick={() => {
-                setCurrentYear(d);
-                setViewMode("year");
-              }}
-              className={`py-3 rounded-lg text-xs transition-colors font-medium
-                ${isSelected ? "bg-blue-600 text-white" 
-                : isOut ? "text-slate-400" 
-                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
-            >
-              {d}-{d + 9}
-            </button>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const renderCenturyView = () => {
-    const startCentury = Math.floor(currentYear / 1000) * 1000;
-    const centuries = Array.from({ length: 12 }, (_, i) => startCentury - 100 + i * 100);
-    return (
-      <div className="grid grid-cols-4 gap-2 py-4">
-        {centuries.map(c => {
-          const isSelected = Math.floor(currentDate.getFullYear() / 100) * 100 === c;
-          const isOut = c < startCentury || c > startCentury + 900;
-          return (
-            <button
-              key={c}
-              type="button"
-              onClick={() => {
-                setCurrentYear(c);
-                setViewMode("decade");
-              }}
-              className={`py-3 rounded-lg text-xs transition-colors font-medium
-                ${isSelected ? "bg-blue-600 text-white" 
-                : isOut ? "text-slate-400" 
-                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
-            >
-              {c}-{c + 99}
-            </button>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const hoursList = Array.from({ length: 24 * 3 }, (_, i) => i % 24);
-  const minutesList = Array.from({ length: 60 * 3 }, (_, i) => i % 60);
-  const secondsList = Array.from({ length: 60 * 3 }, (_, i) => i % 60);
-
-  const handleScroll = (type: "hour" | "minute" | "second", e: React.UIEvent<HTMLDivElement>) => {
-    const el = e.currentTarget;
-    const max = type === "hour" ? 24 : 60;
-
-    // Silent loop logic
-    if (el.scrollTop <= itemHeight) {
-      el.scrollTop += max * itemHeight;
-    } else if (el.scrollTop >= (max * 2 - 1) * itemHeight) {
-      el.scrollTop -= max * itemHeight;
-    }
-
-    clearTimeout((el as any).scrollTimeout);
-    (el as any).scrollTimeout = setTimeout(() => {
-      const index = Math.round(el.scrollTop / itemHeight) % max;
-      const newDate = new Date(currentDate);
-      if (type === "hour") newDate.setHours(index);
-      else if (type === "minute") newDate.setMinutes(index);
-      else if (type === "second") newDate.setSeconds(index);
-      applyChange(newDate);
-    }, 150);
-  };
-
-  const clickDialItem = (type: "hour" | "minute" | "second", index: number) => {
-    const max = type === "hour" ? 24 : 60;
-    const targetScroll = (index + max) * itemHeight;
-    if (type === "hour" && hoursRef.current) hoursRef.current.scrollTo({ top: targetScroll, behavior: "smooth" });
-    if (type === "minute" && minutesRef.current) minutesRef.current.scrollTo({ top: targetScroll, behavior: "smooth" });
-    if (type === "second" && secondsRef.current) secondsRef.current.scrollTo({ top: targetScroll, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      setViewMode("month");
-      setTimeout(() => {
-        const h = currentDate.getHours();
-        const m = currentDate.getMinutes();
-        const s = currentDate.getSeconds();
-        if (hoursRef.current) hoursRef.current.scrollTop = (h + 24) * itemHeight;
-        if (minutesRef.current) minutesRef.current.scrollTop = (m + 60) * itemHeight;
-        if (secondsRef.current) secondsRef.current.scrollTop = (s + 60) * itemHeight;
-      }, 50);
-    }
-  }, [isOpen]);
-
-  // Sync scroll positions when typed input changes
-  useEffect(() => {
-    if (isOpen) {
-      const h = currentDate.getHours();
-      const m = currentDate.getMinutes();
-      const s = currentDate.getSeconds();
-      if (hoursRef.current) hoursRef.current.scrollTo({ top: (h + 24) * itemHeight, behavior: "smooth" });
-      if (minutesRef.current) minutesRef.current.scrollTo({ top: (m + 60) * itemHeight, behavior: "smooth" });
-      if (secondsRef.current) secondsRef.current.scrollTo({ top: (s + 60) * itemHeight, behavior: "smooth" });
-    }
-  }, [inputValue]);
+        return next;
+    });
+  }, [onChange]);
 
   return (
     <div className="relative w-full" ref={containerRef}>
@@ -363,14 +263,11 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
       </div>
 
       {isOpen && (
-        <div 
-          ref={popoverRef}
-          className="absolute z-50 mt-2 w-full min-w-[320px] max-w-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-4 sm:flex gap-4 sm:min-w-[540px]"
-        >
+        <div className="absolute z-50 mt-2 w-full min-w-[320px] max-w-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-4 sm:flex gap-4 sm:min-w-[540px] animate-in fade-in zoom-in-95 duration-200">
           {/* Calendar Section */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-4">
-              <button type="button" onClick={handlePrev} className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400">
+              <button type="button" onClick={handlePrev} className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 transition-colors">
                 <ChevronLeft size={20} />
               </button>
               <button 
@@ -378,17 +275,57 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
                 onClick={handleHeaderClick}
                 className="font-semibold text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 px-3 py-1 rounded-lg transition-colors"
               >
-                {renderHeaderLabel()}
+                {headerLabel}
               </button>
-              <button type="button" onClick={handleNext} className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400">
+              <button type="button" onClick={handleNext} className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 transition-colors">
                 <ChevronRight size={20} />
               </button>
             </div>
 
-            {viewMode === "month" && renderMonthView()}
-            {viewMode === "year" && renderYearView()}
-            {viewMode === "decade" && renderDecadeView()}
-            {viewMode === "century" && renderCenturyView()}
+            {viewMode === "month" && (
+                <MonthView
+                    currentYear={currentYear}
+                    currentMonth={currentMonth}
+                    selectedDate={currentDate}
+                    onSelect={(d: number) => {
+                        const next = new Date(currentDate);
+                        next.setFullYear(currentYear);
+                        next.setMonth(currentMonth);
+                        next.setDate(d);
+                        applyChange(next);
+                    }}
+                />
+            )}
+            {viewMode === "year" && (
+                <YearView
+                    currentYear={currentYear}
+                    selectedYear={currentDate.getFullYear()}
+                    onSelect={(y: number) => {
+                        setCurrentYear(y);
+                        setViewMode("month");
+                    }}
+                />
+            )}
+            {viewMode === "decade" && (
+                <DecadeView
+                    currentYear={currentYear}
+                    selectedYear={currentDate.getFullYear()}
+                    onSelect={(y: number) => {
+                        setCurrentYear(y);
+                        setViewMode("year");
+                    }}
+                />
+            )}
+            {viewMode === "century" && (
+                <CenturyView
+                    currentYear={currentYear}
+                    selectedYear={currentDate.getFullYear()}
+                    onSelect={(y: number) => {
+                        setCurrentYear(y);
+                        setViewMode("decade");
+                    }}
+                />
+            )}
           </div>
 
           <div className="hidden sm:block w-px bg-slate-200 dark:bg-slate-700 mx-2" />
@@ -401,60 +338,25 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
             </div>
             
             <div className="relative w-full flex justify-between h-40 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-2 overflow-hidden border border-slate-200 dark:border-slate-700">
-              {/* Highlight selection bar */}
               <div className="absolute top-1/2 left-0 right-0 h-10 -translate-y-1/2 bg-blue-100/50 dark:bg-blue-900/30 rounded-lg pointer-events-none" />
-              
-              {/* Hours Dial */}
-              <div 
-                ref={hoursRef}
-                onScroll={(e) => handleScroll("hour", e)}
-                className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                <div className="h-[40px]" />
-                {hoursList.map((h, i) => (
-                  <div key={i} onClick={() => clickDialItem("hour", h)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
-                    {h.toString().padStart(2, '0')}
-                  </div>
-                ))}
-                <div className="h-[40px]" />
-              </div>
-              
+
+              <TimeDial
+                type="hour"
+                value={currentDate.getHours()}
+                onChange={(val) => handleTimeChange("hour", val)}
+              />
               <div className="h-full flex items-center font-bold text-slate-400 z-10">:</div>
-
-              {/* Minutes Dial */}
-              <div 
-                ref={minutesRef}
-                onScroll={(e) => handleScroll("minute", e)}
-                className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                <div className="h-[40px]" />
-                {minutesList.map((m, i) => (
-                  <div key={i} onClick={() => clickDialItem("minute", m)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
-                    {m.toString().padStart(2, '0')}
-                  </div>
-                ))}
-                <div className="h-[40px]" />
-              </div>
-
+              <TimeDial
+                type="minute"
+                value={currentDate.getMinutes()}
+                onChange={(val) => handleTimeChange("minute", val)}
+              />
               <div className="h-full flex items-center font-bold text-slate-400 z-10">:</div>
-
-              {/* Seconds Dial */}
-              <div 
-                ref={secondsRef}
-                onScroll={(e) => handleScroll("second", e)}
-                className="w-12 h-full overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar text-center z-10"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                <div className="h-[40px]" />
-                {secondsList.map((s, i) => (
-                  <div key={i} onClick={() => clickDialItem("second", s)} className="h-10 flex items-center justify-center snap-center cursor-pointer text-slate-800 dark:text-slate-200 hover:text-blue-600 font-medium select-none">
-                    {s.toString().padStart(2, '0')}
-                  </div>
-                ))}
-                <div className="h-[40px]" />
-              </div>
+              <TimeDial
+                type="second"
+                value={currentDate.getSeconds()}
+                onChange={(val) => handleTimeChange("second", val)}
+              />
             </div>
             
             <div className="mt-4 w-full">
@@ -472,3 +374,123 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
     </div>
   );
 }
+
+// Internal view components for better memoization and cleaner code
+interface ViewProps {
+    currentYear: number;
+    currentMonth?: number;
+    selectedDate?: Date;
+    selectedYear?: number;
+    onSelect: (val: number) => void;
+}
+
+const MonthView = React.memo(({ currentYear, currentMonth, selectedDate, onSelect }: ViewProps) => {
+    const month = currentMonth ?? 0;
+    const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
+    const firstDay = new Date(currentYear, month, 1).getDay();
+    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    const blankDays = Array.from({ length: firstDay }, (_, i) => i);
+    const today = new Date();
+
+    return (
+        <>
+            <div className="grid grid-cols-7 gap-1 text-center mb-2">
+                {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(day => (
+                    <div key={day} className="text-[10px] font-bold text-slate-400 uppercase">{day}</div>
+                ))}
+            </div>
+            <div className="grid grid-cols-7 gap-1">
+                {blankDays.map(b => <div key={`blank-${b}`} className="h-8 w-8" />)}
+                {daysArray.map(day => {
+                    const isSelected = selectedDate && day === selectedDate.getDate() && month === selectedDate.getMonth() && currentYear === selectedDate.getFullYear();
+                    const isToday = day === today.getDate() && month === today.getMonth() && currentYear === today.getFullYear();
+                    return (
+                        <button
+                            key={day}
+                            type="button"
+                            onClick={() => onSelect(day)}
+                            className={`h-8 w-8 mx-auto rounded-full flex items-center justify-center text-xs transition-all
+                                ${isSelected ? "bg-blue-600 text-white font-bold shadow-md scale-110"
+                                : isToday ? "border-2 border-blue-500 text-blue-600 dark:text-blue-400 font-bold"
+                                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                        >
+                            {day}
+                        </button>
+                    );
+                })}
+            </div>
+        </>
+    );
+});
+MonthView.displayName = "MonthView";
+
+const YearView = React.memo(({ currentYear, selectedYear, onSelect }: ViewProps) => {
+    const startYear = Math.floor(currentYear / 10) * 10;
+    const years = Array.from({ length: 12 }, (_, i) => startYear - 1 + i);
+    return (
+        <div className="grid grid-cols-4 gap-2 py-2">
+            {years.map(y => (
+                <button
+                    key={y}
+                    type="button"
+                    onClick={() => onSelect(y)}
+                    className={`py-3 rounded-xl text-xs transition-all font-medium
+                        ${y === selectedYear ? "bg-blue-600 text-white shadow-md scale-105"
+                        : (y < startYear || y > startYear + 9) ? "text-slate-400 opacity-50"
+                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                >
+                    {y}
+                </button>
+            ))}
+        </div>
+    );
+});
+YearView.displayName = "YearView";
+
+const DecadeView = React.memo(({ currentYear, selectedYear, onSelect }: ViewProps) => {
+    const startDecade = Math.floor(currentYear / 100) * 100;
+    const decades = Array.from({ length: 12 }, (_, i) => startDecade - 10 + i * 10);
+    const selYear = selectedYear ?? 0;
+    return (
+        <div className="grid grid-cols-3 gap-2 py-2">
+            {decades.map(d => (
+                <button
+                    key={d}
+                    type="button"
+                    onClick={() => onSelect(d)}
+                    className={`py-3 rounded-xl text-[10px] transition-all font-bold
+                        ${Math.floor(selYear / 10) * 10 === d ? "bg-blue-600 text-white shadow-md"
+                        : (d < startDecade || d > startDecade + 90) ? "text-slate-400 opacity-50"
+                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                >
+                    {d}s
+                </button>
+            ))}
+        </div>
+    );
+});
+DecadeView.displayName = "DecadeView";
+
+const CenturyView = React.memo(({ currentYear, selectedYear, onSelect }: ViewProps) => {
+    const startCentury = Math.floor(currentYear / 1000) * 1000;
+    const centuries = Array.from({ length: 12 }, (_, i) => startCentury - 100 + i * 100);
+    const selYear = selectedYear ?? 0;
+    return (
+        <div className="grid grid-cols-3 gap-2 py-2">
+            {centuries.map(c => (
+                <button
+                    key={c}
+                    type="button"
+                    onClick={() => onSelect(c)}
+                    className={`py-3 rounded-xl text-[10px] transition-all font-bold
+                        ${Math.floor(selYear / 100) * 100 === c ? "bg-blue-600 text-white shadow-md"
+                        : (c < startCentury || c > startCentury + 900) ? "text-slate-400 opacity-50"
+                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                >
+                    {c}s
+                </button>
+            ))}
+        </div>
+    );
+});
+CenturyView.displayName = "CenturyView";

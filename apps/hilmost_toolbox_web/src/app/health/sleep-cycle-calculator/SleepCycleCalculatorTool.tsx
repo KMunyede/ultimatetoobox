@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Button } from "../../../components/ui/Button";
 import { PillSelector } from "../../../components/ui/PillSelector";
-import { NumberInput } from "../../../components/ui/NumberInput";
 import { Input } from "../../../components/ui/Input";
 import {
   RotateCcw,
-  Copy,
-  Check,
+  Clock,
 } from "lucide-react";
 
 type Mode = "wake_up" | "bed_time";
@@ -20,41 +18,155 @@ interface SleepTime {
   quality: "optimal" | "good" | "minimum";
 }
 
+// Separate component for Live Clock to prevent whole-page re-renders every second
+const LiveClock = React.memo(({ onUseCurrentTime }: { onUseCurrentTime: () => void }) => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-6">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Live Clock</span>
+        </div>
+        <button
+          onClick={onUseCurrentTime}
+          className="text-[10px] font-black uppercase tracking-widest text-rose-600 hover:underline transition-colors"
+        >
+          Use Current Time
+        </button>
+      </div>
+      <div className="text-4xl font-black text-slate-800 dark:text-white tabular-nums">
+        {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+      </div>
+    </div>
+  );
+});
+LiveClock.displayName = "LiveClock";
+
+// Results section extracted for memoization
+const ResultsSection = React.memo(({ results, mode, inputTime, fallAsleepMins, onReset }: {
+    results: SleepTime[],
+    mode: Mode,
+    inputTime: string,
+    fallAsleepMins: string,
+    onReset: () => void
+}) => {
+  const [copyStatus, setCopyStatus] = useState(false);
+
+  const handleCopy = useCallback(() => {
+    const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
+    const header = mode === "wake_up"
+      ? `Optimal Bedtimes for waking at ${inputTime} (with ${fMins}m fall asleep):`
+      : `Optimal Wakeup Times for sleeping at ${inputTime} (with ${fMins}m fall asleep):`;
+
+    const body = results
+      .map(r => `- ${r.time} (${r.cycles} cycles, ${r.duration}) [${r.quality.toUpperCase()}]`)
+      .join("\n");
+
+    const text = `${header}\n${body}\n\nCalculated via Hilmost Sleep Lab`;
+    navigator.clipboard.writeText(text);
+    setCopyStatus(true);
+    setTimeout(() => setCopyStatus(false), 2000);
+  }, [results, mode, inputTime, fallAsleepMins]);
+
+  return (
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {results.map((res, i) => (
+          <div
+            key={i}
+            className={`p-8 rounded-[2.5rem] border-2 transition-all relative ${
+              res.quality === "optimal"
+                ? "border-rose-500 bg-rose-50/30 dark:bg-rose-900/10 shadow-xl scale-105 z-10"
+                : "border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900"
+            }`}
+          >
+            <div className="flex justify-between items-start mb-6">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{res.cycles} Cycles</span>
+              <span className={`px-2 py-0.5 rounded-full text-[8.5px] font-black uppercase tracking-widest ${
+                res.quality === "optimal" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
+                res.quality === "good" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
+                "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+              }`}>
+                {res.quality}
+              </span>
+            </div>
+            <div className="text-3xl font-black text-slate-900 dark:text-white mb-2">{res.time}</div>
+            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{res.duration} sleep</div>
+
+            {res.quality === "optimal" && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[8.5px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                Optimal
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-4 justify-center">
+        <Button variant="pill" onClick={handleCopy}>
+          <svg className={`w-4 h-4 ${copyStatus ? 'text-emerald-500' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {copyStatus ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            )}
+          </svg>
+          {copyStatus ? "Copied!" : "Copy Results"}
+        </Button>
+        <Button variant="secondary" onClick={onReset}>
+          <RotateCcw size={16} /> Reset
+        </Button>
+      </div>
+    </div>
+  );
+});
+ResultsSection.displayName = "ResultsSection";
+
+const SleepTips = React.memo(() => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    {[
+      { title: "Consistency", text: "Go to bed and wake up at the same time every day to stabilize your internal clock." },
+      { title: "Dark Room", text: "Ensure your environment is pitch black to trigger melatonin production naturally." },
+      { title: "Avoid Screens", text: "Blue light from phones blocks sleep hormones. Put devices away 60 mins before bed." },
+      { title: "Caffeine Cutoff", text: "Stop caffeine intake 8-10 hours before sleep to ensure it doesn't block adenosine." },
+    ].map((tip, i) => (
+      <div key={i} className="bg-slate-50 dark:bg-slate-950/50 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 transition-colors hover:border-rose-200 dark:hover:border-rose-900/30">
+        <h4 className="text-[10px] font-black uppercase tracking-widest text-rose-600 mb-2">{tip.title}</h4>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{tip.text}</p>
+      </div>
+    ))}
+  </div>
+));
+SleepTips.displayName = "SleepTips";
+
 export function SleepCycleCalculatorTool() {
-  // --- State ---
   const [mode, setMode] = useState<Mode>("wake_up");
   const [inputTime, setInputTime] = useState("07:00");
   const [fallAsleepMins, setFallAsleepMins] = useState<string>("14");
   const [results, setResults] = useState<SleepTime[] | null>(null);
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [copyStatus, setCopyStatus] = useState(false);
 
-  // --- Live Clock ---
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // --- Logic ---
-  const calculate = () => {
+  const handleCalculate = useCallback(() => {
     const [hours, minutes] = inputTime.split(":").map(Number);
     const baseDate = new Date();
     baseDate.setHours(hours, minutes, 0, 0);
 
     const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
-
     const cycleCounts = [6, 5, 4, 3];
+
     const calculated: SleepTime[] = cycleCounts.map((cycles) => {
       const totalMinutes = cycles * 90;
       const resultDate = new Date(baseDate);
 
       if (mode === "wake_up") {
-        // bedTime = wakeTime - (cycles * 90) - fallAsleepMins
         resultDate.setMinutes(resultDate.getMinutes() - totalMinutes - fMins);
       } else {
-        // wakeTime = bedTime + fallAsleepMins + (cycles * 90)
         resultDate.setMinutes(resultDate.getMinutes() + totalMinutes + fMins);
       }
 
@@ -77,36 +189,17 @@ export function SleepCycleCalculatorTool() {
     });
 
     setResults(calculated);
-  };
+  }, [mode, inputTime, fallAsleepMins]);
 
-  const useCurrentTime = () => {
+  const useCurrentTime = useCallback(() => {
     const now = new Date();
     const h = String(now.getHours()).padStart(2, "0");
     const m = String(now.getMinutes()).padStart(2, "0");
     setInputTime(`${h}:${m}`);
-  };
-
-  const handleCopy = () => {
-    if (!results) return;
-    const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
-    const header = mode === "wake_up"
-      ? `Optimal Bedtimes for waking at ${inputTime} (with ${fMins}m fall asleep):`
-      : `Optimal Wakeup Times for sleeping at ${inputTime} (with ${fMins}m fall asleep):`;
-
-    const body = results
-      .map(r => `- ${r.time} (${r.cycles} cycles, ${r.duration}) [${r.quality.toUpperCase()}]`)
-      .join("\n");
-
-    const text = `${header}\n${body}\n\nCalculated via Hilmost Sleep Lab`;
-    navigator.clipboard.writeText(text);
-    setCopyStatus(true);
-    setTimeout(() => setCopyStatus(false), 2000);
-  };
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto my-8 space-y-12">
-
-      {/* 1. Mode Toggle Pills */}
       <div className="flex justify-center" id="mode-toggle">
         <PillSelector
           value={mode}
@@ -119,39 +212,19 @@ export function SleepCycleCalculatorTool() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* 2. Live Clock Section */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-6">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Live Clock</span>
-            </div>
-            <button
-              onClick={useCurrentTime}
-              className="text-[10px] font-black uppercase tracking-widest text-rose-600 hover:underline"
-            >
-              Use Current Time
-            </button>
-          </div>
-          <div className="text-4xl font-black text-slate-800 dark:text-white tabular-nums">
-            {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-          </div>
-        </div>
-
-        {/* 3. Time Input Section */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 flex items-center" id="time-input-section">
+        <LiveClock onUseCurrentTime={useCurrentTime} />
+        <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 flex items-center shadow-sm">
           <Input
             type="time"
             label={mode === "wake_up" ? "I want to wake up at..." : "I'm going to bed at..."}
             value={inputTime}
             onChange={(e) => setInputTime(e.target.value)}
-            className="text-3xl font-black text-center p-4 h-auto"
+            className="text-3xl font-black text-center p-4 h-auto bg-transparent border-none focus:ring-0"
           />
         </div>
       </div>
 
-      {/* 4. Fall Asleep Pills */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8" id="fall-asleep-section">
+      <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
         <PillSelector
           label="How long does it take you to fall asleep?"
           value={fallAsleepMins}
@@ -166,86 +239,26 @@ export function SleepCycleCalculatorTool() {
         />
       </div>
 
-      {/* 5. Calculate Button */}
-      <div className="flex justify-center" id="calculate-btn">
-        <Button onClick={calculate}>
+      <div className="flex justify-center">
+        <Button onClick={handleCalculate} className="!px-12 !py-4 text-lg">
           Calculate Results
         </Button>
       </div>
 
-      {/* 6. Results Section */}
       {results && (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {results.map((res, i) => (
-              <div
-                key={i}
-                className={`p-8 rounded-[2.5rem] border-2 transition-all relative ${
-                  res.quality === "optimal"
-                    ? "border-rose-500 bg-rose-50/30 dark:bg-rose-900/10 shadow-xl"
-                    : "border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900"
-                }`}
-              >
-                <div className="flex justify-between items-start mb-6">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{res.cycles} Cycles</span>
-                  <span className={`px-2 py-0.5 rounded-full text-[8.5px] font-black uppercase tracking-widest ${
-                    res.quality === "optimal" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
-                    res.quality === "good" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
-                    "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                  }`}>
-                    {res.quality}
-                  </span>
-                </div>
-                <div className="text-3xl font-black text-slate-900 dark:text-white mb-2">{res.time}</div>
-                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{res.duration} sleep</div>
-
-                {res.quality === "optimal" && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[8.5px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
-                    Optimal
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* 8. Copy Results Button */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button variant="pill" onClick={handleCopy}>
-              <svg className={`w-4 h-4 ${copyStatus ? 'text-emerald-500' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {copyStatus ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                )}
-              </svg>
-              {copyStatus ? "Copied!" : "Copy Results"}
-            </Button>
-            <Button variant="secondary" onClick={() => setResults(null)}>
-              <RotateCcw size={16} /> Reset
-            </Button>
-          </div>
-        </div>
+        <ResultsSection
+            results={results}
+            mode={mode}
+            inputTime={inputTime}
+            fallAsleepMins={fallAsleepMins}
+            onReset={() => setResults(null)}
+        />
       )}
 
-      {/* 7. Sleep Tips Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          { title: "Consistency", text: "Go to bed and wake up at the same time every day to stabilize your internal clock." },
-          { title: "Dark Room", text: "Ensure your environment is pitch black to trigger melatonin production naturally." },
-          { title: "Avoid Screens", text: "Blue light from phones blocks sleep hormones. Put devices away 60 mins before bed." },
-          { title: "Caffeine Cutoff", text: "Stop caffeine intake 8-10 hours before sleep to ensure it doesn't block adenosine." },
-        ].map((tip, i) => (
-          <div key={i} className="bg-slate-50 dark:bg-slate-950/50 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
-            <h4 className="text-[10px] font-black uppercase tracking-widest text-rose-600 mb-2">{tip.title}</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{tip.text}</p>
-          </div>
-        ))}
-      </div>
+      <SleepTips />
 
-      {/* 9. SEO Block */}
       <div className="mt-24 pt-12 border-t border-slate-100 dark:border-slate-800 space-y-12">
         <h1 className="text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">Free Sleep Cycle Calculator</h1>
-
         <div className="prose prose-slate dark:prose-invert max-w-none space-y-6 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
           <p>
             Understanding your biological clock is the key to waking up refreshed. Most people operate on <strong>90-minute sleep cycles</strong>, moving from light sleep to deep sleep and finally REM. If you wake up in the middle of a deep sleep stage, you experience sleep inertia—that heavy, groggy feeling that can last for hours. Our <strong>Sleep Cycle Calculator</strong> predicts the best windows for you to wake up based on these natural rhythms.
@@ -257,8 +270,7 @@ export function SleepCycleCalculatorTool() {
             Our tool also accounts for <strong>Sleep Latency</strong>—the time it takes for you to actually fall asleep. On average, this takes 14 minutes. By including this in the math, we ensure that your calculated bedtimes or wakeup times are realistic and actionable. Start optimizing your rest today with our privacy-first, browser-side sleep laboratory.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 pb-12">
           {[
             { q: "What is a sleep cycle?", a: "A sleep cycle consists of four stages: three stages of Non-REM and one stage of REM. A complete cycle typically lasts about 90 minutes." },
             { q: "How many cycles do I need?", a: "For peak performance, aim for 5 or 6 cycles. Consistency is more important than total hours, so try to keep a regular schedule." },
@@ -272,7 +284,6 @@ export function SleepCycleCalculatorTool() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

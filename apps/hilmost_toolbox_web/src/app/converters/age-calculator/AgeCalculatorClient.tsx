@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Cake, Calendar } from "lucide-react";
 import { parseISO, intervalToDuration } from "date-fns";
 import { Input } from "../../../components/ui/Input";
+import { useMemo } from "react";
 
 export function AgeCalculatorClient() {
   const [state, setState] = useUrlState({
@@ -13,26 +14,26 @@ export function AgeCalculatorClient() {
 
   const { birthDate, targetDate } = state as { birthDate: string; targetDate: string };
 
-  let ageResult = { years: 0, months: 0, days: 0 };
-  let totalDays = 0;
-  let totalWeeks = 0;
-
-  try {
-    const start = parseISO(birthDate);
-    const end = parseISO(targetDate);
-    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
-      const duration = intervalToDuration({ start, end });
-      ageResult = {
-        years: duration.years || 0,
-        months: duration.months || 0,
-        days: duration.days || 0
-      };
-      totalDays = Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-      totalWeeks = Math.floor(totalDays / 7);
+  const results = useMemo(() => {
+    try {
+      const start = parseISO(birthDate);
+      const end = parseISO(targetDate);
+      if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+        const duration = intervalToDuration({ start, end });
+        const totalDays = Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+        return {
+          years: duration.years || 0,
+          months: duration.months || 0,
+          days: duration.days || 0,
+          totalDays,
+          totalWeeks: Math.floor(totalDays / 7)
+        };
+      }
+    } catch (e) {
+      console.error(e);
     }
-  } catch (e) {
-    console.error(e);
-  }
+    return { years: 0, months: 0, days: 0, totalDays: 0, totalWeeks: 0 };
+  }, [birthDate, targetDate]);
 
   return (
     <motion.div
@@ -46,7 +47,7 @@ export function AgeCalculatorClient() {
             <div id="tour-age-birth" className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Cake size={16} className="text-brand-primary" />
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Date of Birth</label>
+                    <label className="block text-[10px] font-medium uppercase tracking-widest text-slate-500">Date of Birth</label>
                 </div>
                 <Input
                     type="date"
@@ -58,7 +59,7 @@ export function AgeCalculatorClient() {
             <div id="tour-age-target" className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Calendar size={16} className="text-slate-400" />
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Age at Date of</label>
+                    <label className="block text-[10px] font-medium uppercase tracking-widest text-slate-500">Age at Date of</label>
                 </div>
                 <Input
                     type="date"
@@ -76,22 +77,22 @@ export function AgeCalculatorClient() {
             <div className="relative z-10 text-center space-y-4 py-4">
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Current Age</span>
                 <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter">{ageResult.years}</span>
+                    <span className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter tabular-nums">{results.years}</span>
                     <span className="text-xl font-black text-slate-400 uppercase">Years</span>
                 </div>
                 <p className="text-lg font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tight">
-                    {ageResult.months} months and {ageResult.days} days
+                    {results.months} months and {results.days} days
                 </p>
             </div>
 
             <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
                 <div className="text-center space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Total Weeks</span>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white">{totalWeeks.toLocaleString()}</p>
+                    <p className="text-2xl font-black text-slate-900 dark:text-white tabular-nums">{results.totalWeeks.toLocaleString()}</p>
                 </div>
                 <div className="text-center space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Total Days</span>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white">{totalDays.toLocaleString()}</p>
+                    <p className="text-2xl font-black text-slate-900 dark:text-white tabular-nums">{results.totalDays.toLocaleString()}</p>
                 </div>
             </div>
         </div>
