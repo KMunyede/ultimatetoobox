@@ -87,11 +87,11 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                         <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
                             {res.label} Pay
                         </span>
-                        <div className={`font-black tracking-tighter flex items-baseline justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[140px]' : 'text-2xl'}`}>
+                        <div className={`font-black tracking-tighter flex items-center justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[160px]' : 'text-xl md:text-2xl min-h-[100px]'}`}>
                             {isVeryLarge ? (
                                 <ScientificNumber
                                     value={res.value}
-                                    precision={12}
+                                    precision={7}
                                     prefix="$"
                                     multiLine={true}
                                 />

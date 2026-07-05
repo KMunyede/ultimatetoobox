@@ -39,20 +39,15 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
   if (multiLine) {
     return (
       <div className={`flex flex-col items-center justify-center text-center ${className}`}>
-        {/* Mantissa Line */}
-        <div className="leading-none tracking-tight font-black">{prefix}{baseStr}</div>
+        {/* Line 1: Mantissa with prefix */}
+        <div className="leading-tight tracking-tight font-black">
+          {prefix}{baseStr}
+        </div>
 
-        {/* Scale & Unit Line */}
-        <div className="flex items-center justify-center mt-4 gap-2 opacity-80">
-          <div className="flex items-baseline">
-             <span className="text-[0.5em] font-bold text-slate-400">&times; 10</span>
-             <sup className="text-[0.4em] ml-1 font-black text-brand-primary">{exponentStr}</sup>
-          </div>
-          {suffix && (
-            <span className="text-[0.3em] font-black uppercase text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md tracking-widest">
-              {suffix}
-            </span>
-          )}
+        {/* Line 2: Scale (x 10 ^ x) with suffix */}
+        <div className="leading-tight tracking-tight font-black flex items-center justify-center gap-2">
+          <span>x 10 ^ {exponentStr}</span>
+          {suffix && <span className="uppercase">{suffix}</span>}
         </div>
       </div>
     );
