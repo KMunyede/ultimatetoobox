@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker } from "@utilitiessite/ui";
+import { NumberTicker, Tooltip } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -89,6 +89,7 @@ export function IncomeTaxClient() {
         i.name.toLowerCase().includes('health') ||
         i.name.toLowerCase().includes('pension') ||
         i.name.toLowerCase().includes('401k') ||
+        i.name.toLowerCase().includes('ira') ||
         i.name.toLowerCase().includes('insurance')
     );
     const itemized = ded.filter(i => !adjustments.includes(i));
@@ -208,6 +209,33 @@ export function IncomeTaxClient() {
 
   const countryOptions = Object.values(TAX_DATA).map(c => ({ label: c.name, value: c.id }));
 
+  const handleFrequencyChange = (newFreq: string) => {
+    if (newFreq === frequency) return;
+
+    // Conversion Factors
+    const getFactor = (f: string) => f === 'monthly' ? 12 : f === 'weekly' ? 52 : 1;
+    const oldFactor = getFactor(frequency);
+    const newFactor = getFactor(newFreq);
+    const ratio = oldFactor / newFactor;
+
+    const convert = (items: Item[]) => items.map(item => ({
+        ...item,
+        amount: (parseFloat(item.amount) * ratio).toFixed(2).replace(/\.00$/, '')
+    }));
+
+    setIncomeItems(convert(incomeItems));
+    setDeductionItems(convert(deductionItems));
+    setState({ frequency: newFreq });
+  };
+
+  const handleCountryChange = (newCountry: string) => {
+      if (newCountry === country) return;
+      // Reset items to avoid confusing state between very different tax systems
+      setIncomeItems([{ id: "init-inc", name: "Salary", amount: frequency === 'annually' ? "85000" : frequency === 'monthly' ? "7000" : "1600" }]);
+      setDeductionItems([]);
+      setState({ country: newCountry });
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -221,7 +249,7 @@ export function IncomeTaxClient() {
                   <PillSelector
                       label="Frequency"
                       value={frequency}
-                      onChange={v => setState({ frequency: v })}
+                      onChange={handleFrequencyChange}
                       options={[
                           { label: "Annual", value: "annually" },
                           { label: "Monthly", value: "monthly" },
@@ -233,7 +261,7 @@ export function IncomeTaxClient() {
                   <Select
                       label="Country / Jurisdiction"
                       value={country}
-                      onChange={e => setState({ country: e.target.value })}
+                      onChange={e => handleCountryChange(e.target.value)}
                       options={countryOptions}
                   />
                   <div className="space-y-1 mt-2 px-1">
@@ -303,14 +331,23 @@ export function IncomeTaxClient() {
               </div>
               <div className="space-y-3">
                   <AnimatePresence initial={false}>
-                      {deductionItems.map((item) => (
+                      {deductionItems.map((item) => {
+                          const isAdj = item.name.toLowerCase().includes('health') ||
+                                        item.name.toLowerCase().includes('pension') ||
+                                        item.name.toLowerCase().includes('401k') ||
+                                        item.name.toLowerCase().includes('ira') ||
+                                        item.name.toLowerCase().includes('insurance');
+                          return (
                           <motion.div key={item.id} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="flex gap-3">
-                              <Input
-                                  placeholder="e.g. Charity or 401k"
-                                  value={item.name}
-                                  onChange={(e) => updateItem(setDeductionItems, item.id, 'name', e.target.value)}
-                                  className="flex-1 !py-2 !text-xs font-bold"
-                              />
+                              <div className="flex-1 relative">
+                                <Input
+                                    placeholder="e.g. Charity or 401k"
+                                    value={item.name}
+                                    onChange={(e) => updateItem(setDeductionItems, item.id, 'name', e.target.value)}
+                                    className={`!py-2 !text-xs font-bold ${isAdj ? 'border-emerald-500/50 bg-emerald-50/10' : ''}`}
+                                />
+                                {isAdj && <span className="absolute right-2 top-2 text-[7px] font-black text-emerald-600 uppercase">Adj</span>}
+                              </div>
                               <div className="w-32">
                                   <NumberInput
                                       value={item.amount}
@@ -322,7 +359,7 @@ export function IncomeTaxClient() {
                                   <Trash2 size={16} />
                               </button>
                           </motion.div>
-                      ))}
+                      );})}
                   </AnimatePresence>
                   <Button variant="secondary" onClick={() => addItem(setDeductionItems)} className="w-full !py-2 !text-[9px] flex items-center justify-center gap-2 border-dashed border-2">
                       <Plus size={14} /> Add Deduction
@@ -352,7 +389,12 @@ export function IncomeTaxClient() {
 
               {currentResults.adjustmentAmount > 0 && (
                   <div className="bg-emerald-50 dark:bg-emerald-950/20 p-3 rounded-xl border border-emerald-100 dark:border-emerald-900/30 flex justify-between items-center">
-                      <span className="text-[9px] font-black text-emerald-600 uppercase tracking-tight">Total Adjustments (Above-the-line):</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[9px] font-black text-emerald-600 uppercase tracking-tight">Total Adjustments (Above-the-line):</span>
+                        <Tooltip content="Items like Health Insurance or Pension contributions are deducted directly from your gross income before tax brackets or standard deductions are applied.">
+                            <Info size={12} className="text-emerald-500 cursor-help" />
+                        </Tooltip>
+                      </div>
                       <span className="text-xs font-black text-emerald-700 dark:text-emerald-400">-{countryConfig.symbol}{Math.round(currentResults.adjustmentAmount).toLocaleString()}</span>
                   </div>
               )}
