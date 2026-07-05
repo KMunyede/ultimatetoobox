@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Button } from "../../../components/ui/Button";
 import { PillSelector } from "../../../components/ui/PillSelector";
-import { Input } from "../../../components/ui/Input";
+import { DateTimePicker } from "@utilitiessite/ui";
 import {
   RotateCcw,
   Clock,
@@ -28,7 +28,7 @@ const LiveClock = React.memo(({ onUseCurrentTime }: { onUseCurrentTime: () => vo
   }, []);
 
   return (
-    <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-6">
+    <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-6 shadow-sm">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
@@ -59,11 +59,16 @@ const ResultsSection = React.memo(({ results, mode, inputTime, fallAsleepMins, o
 }) => {
   const [copyStatus, setCopyStatus] = useState(false);
 
+  const displayTime = useMemo(() => {
+    const d = new Date(inputTime);
+    return isNaN(d.getTime()) ? "" : d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }, [inputTime]);
+
   const handleCopy = useCallback(() => {
     const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
     const header = mode === "wake_up"
-      ? `Optimal Bedtimes for waking at ${inputTime} (with ${fMins}m fall asleep):`
-      : `Optimal Wakeup Times for sleeping at ${inputTime} (with ${fMins}m fall asleep):`;
+      ? `Optimal Bedtimes for waking at ${displayTime} (with ${fMins}m fall asleep):`
+      : `Optimal Wakeup Times for sleeping at ${displayTime} (with ${fMins}m fall asleep):`;
 
     const body = results
       .map(r => `- ${r.time} (${r.cycles} cycles, ${r.duration}) [${r.quality.toUpperCase()}]`)
@@ -73,7 +78,7 @@ const ResultsSection = React.memo(({ results, mode, inputTime, fallAsleepMins, o
     navigator.clipboard.writeText(text);
     setCopyStatus(true);
     setTimeout(() => setCopyStatus(false), 2000);
-  }, [results, mode, inputTime, fallAsleepMins]);
+  }, [results, mode, displayTime, fallAsleepMins]);
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -97,7 +102,7 @@ const ResultsSection = React.memo(({ results, mode, inputTime, fallAsleepMins, o
                 {res.quality}
               </span>
             </div>
-            <div className="text-3xl font-black text-slate-900 dark:text-white mb-2">{res.time}</div>
+            <div className="text-3xl font-black text-slate-900 dark:text-white mb-2 tabular-nums">{res.time}</div>
             <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{res.duration} sleep</div>
 
             {res.quality === "optimal" && (
@@ -148,14 +153,17 @@ SleepTips.displayName = "SleepTips";
 
 export function SleepCycleCalculatorTool() {
   const [mode, setMode] = useState<Mode>("wake_up");
-  const [inputTime, setInputTime] = useState("07:00");
+  const [inputTime, setInputTime] = useState(() => {
+    const d = new Date();
+    d.setHours(7, 0, 0, 0);
+    return d.toISOString().split('.')[0];
+  });
   const [fallAsleepMins, setFallAsleepMins] = useState<string>("14");
   const [results, setResults] = useState<SleepTime[] | null>(null);
 
   const handleCalculate = useCallback(() => {
-    const [hours, minutes] = inputTime.split(":").map(Number);
-    const baseDate = new Date();
-    baseDate.setHours(hours, minutes, 0, 0);
+    const baseDate = new Date(inputTime);
+    if (isNaN(baseDate.getTime())) return;
 
     const fMins = fallAsleepMins === '' ? 0 : parseInt(fallAsleepMins);
     const cycleCounts = [6, 5, 4, 3];
@@ -193,9 +201,7 @@ export function SleepCycleCalculatorTool() {
 
   const useCurrentTime = useCallback(() => {
     const now = new Date();
-    const h = String(now.getHours()).padStart(2, "0");
-    const m = String(now.getMinutes()).padStart(2, "0");
-    setInputTime(`${h}:${m}`);
+    setInputTime(now.toISOString().split('.')[0]);
   }, []);
 
   return (
@@ -214,12 +220,10 @@ export function SleepCycleCalculatorTool() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <LiveClock onUseCurrentTime={useCurrentTime} />
         <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 flex items-center shadow-sm">
-          <Input
-            type="time"
+          <DateTimePicker
             label={mode === "wake_up" ? "I want to wake up at..." : "I'm going to bed at..."}
             value={inputTime}
-            onChange={(e) => setInputTime(e.target.value)}
-            className="text-3xl font-black text-center p-4 h-auto bg-transparent border-none focus:ring-0"
+            onChange={(val) => setInputTime(val)}
           />
         </div>
       </div>

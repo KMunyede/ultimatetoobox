@@ -7,6 +7,7 @@ interface DateTimePickerProps {
   value: string; // ISO format or similar: YYYY-MM-DDThh:mm:ss
   onChange: (value: string) => void;
   label?: string;
+  id?: string;
 }
 
 type ViewMode = "month" | "year" | "decade" | "century";
@@ -105,7 +106,7 @@ const TimeDial = React.memo(({
 
 TimeDial.displayName = "TimeDial";
 
-export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) {
+export function DateTimePicker({ value, onChange, label, id }: DateTimePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -241,7 +242,7 @@ export function DateTimePicker({ value, onChange, label }: DateTimePickerProps) 
   }, [onChange]);
 
   return (
-    <div className="relative w-full" ref={containerRef}>
+    <div className="relative w-full" ref={containerRef} id={id}>
       {label && <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{label}</label>}
       
       <div className="relative w-full">

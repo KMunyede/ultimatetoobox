@@ -61,7 +61,7 @@ export default function AgeCalculatorPage() {
   const lastUpdated = getFileLastUpdated(filePath);
 
   const tourSteps = [
-    { element: 'input[type="date"]', popover: { title: '1. Select Dates', description: 'Enter your birth date and the date you want to calculate your age at.' } },
+    { element: '#birth-date-picker', popover: { title: '1. Select Dates', description: 'Enter your birth date and the date you want to calculate your age at.' } },
     { element: '.text-brand-primary', popover: { title: '2. Instant Results', description: 'See your age broken down into multiple time units simultaneously.' } },
   ];
 

@@ -3,13 +3,13 @@ import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 import { Cake, Calendar } from "lucide-react";
 import { parseISO, intervalToDuration } from "date-fns";
-import { Input } from "../../../components/ui/Input";
+import { DateTimePicker } from "@utilitiessite/ui";
 import { useMemo } from "react";
 
 export function AgeCalculatorClient() {
   const [state, setState] = useUrlState({
-    birthDate: "1990-01-01",
-    targetDate: new Date().toISOString().split('T')[0],
+    birthDate: "1990-01-01T00:00:00",
+    targetDate: new Date().toISOString().split('.')[0],
   });
 
   const { birthDate, targetDate } = state as { birthDate: string; targetDate: string };
@@ -49,11 +49,10 @@ export function AgeCalculatorClient() {
                     <Cake size={16} className="text-brand-primary" />
                     <label className="block text-[10px] font-medium uppercase tracking-widest text-slate-500">Date of Birth</label>
                 </div>
-                <Input
-                    type="date"
+                <DateTimePicker
+                    id="birth-date-picker"
                     value={birthDate}
-                    onChange={e => setState({ birthDate: e.target.value })}
-                    className="font-bold text-lg"
+                    onChange={val => setState({ birthDate: val })}
                 />
             </div>
             <div id="tour-age-target" className="space-y-1.5">
@@ -61,11 +60,10 @@ export function AgeCalculatorClient() {
                     <Calendar size={16} className="text-slate-400" />
                     <label className="block text-[10px] font-medium uppercase tracking-widest text-slate-500">Age at Date of</label>
                 </div>
-                <Input
-                    type="date"
+                <DateTimePicker
+                    id="target-date-picker"
                     value={targetDate}
-                    onChange={e => setState({ targetDate: e.target.value })}
-                    className="font-bold text-lg"
+                    onChange={val => setState({ targetDate: val })}
                 />
             </div>
         </div>
