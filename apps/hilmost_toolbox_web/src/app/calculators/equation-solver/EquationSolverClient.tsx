@@ -259,7 +259,11 @@ export function EquationSolverClient({
                 >
                   <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary mb-4">Calculated {target}</div>
                   <div className="text-5xl md:text-6xl font-mono font-black text-slate-900 dark:text-white tracking-tighter">
-                    <ScientificNumber value={parseFloat(result)} suffix={equation.variables.find(v => v.id === target)?.unit} />
+                    <ScientificNumber
+                      value={parseFloat(result)}
+                      suffix={equation.variables.find(v => v.id === target)?.unit}
+                      multiLine={true}
+                    />
                   </div>
                 </motion.div>
               ) : (

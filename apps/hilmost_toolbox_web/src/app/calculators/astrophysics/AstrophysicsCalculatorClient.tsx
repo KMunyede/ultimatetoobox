@@ -366,7 +366,7 @@ export function AstrophysicsCalculatorClient({
             <div className="relative z-10">
               <div className="text-[10px] font-black uppercase tracking-[0.3em] opacity-80 mb-2">Calculated Result</div>
               <div className="text-4xl md:text-6xl font-mono font-black mb-2 tracking-tighter leading-none">
-                <ScientificNumber value={parseFloat(result)} className="text-white" />
+                <ScientificNumber value={parseFloat(result)} className="text-white" multiLine={true} />
               </div>
               <div className="text-sm font-bold opacity-90 uppercase tracking-widest italic">
                 {humanResult}
