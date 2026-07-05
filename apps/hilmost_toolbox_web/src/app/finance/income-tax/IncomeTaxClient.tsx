@@ -3,18 +3,25 @@ import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import { Save, Trash2, History, Scale, Globe, Calendar, Clock, AlertTriangle, Info } from "lucide-react";
+import { Save, Trash2, History, Scale, Globe, Calendar, Clock, AlertTriangle, Info, Plus } from "lucide-react";
 import { NumberInput } from "../../../components/ui/NumberInput";
 import { Button } from "../../../components/ui/Button";
 import { PillSelector } from "../../../components/ui/PillSelector";
 import { Select } from "../../../components/ui/Select";
+import { Input } from "../../../components/ui/Input";
 import { TAX_DATA, CURRENT_TAX_YEAR, CountryConfig, YearConfig } from "./brackets";
+
+interface Item {
+  id: string;
+  name: string;
+  amount: string;
+}
 
 interface TaxScenario {
   id: string;
   label: string;
-  salary: string;
-  deductions: string;
+  incomeItems: Item[];
+  deductionItems: Item[];
   country: string;
   frequency: string;
   timestamp: number;
@@ -22,13 +29,13 @@ interface TaxScenario {
 
 export function IncomeTaxClient() {
   const [state, setState] = useUrlState({
-    salary: "85000",
-    deductions: "0",
     country: "usa",
     frequency: "annually",
   });
 
-  const { salary, deductions, country, frequency } = state as Record<string, string>;
+  const { country, frequency } = state as Record<string, string>;
+  const [incomeItems, setIncomeItems] = useState<Item[]>([{ id: "init-inc", name: "Salary", amount: "85000" }]);
+  const [deductionItems, setDeductionItems] = useState<Item[]>([]);
   const [scenarios, setScenarios] = useState<TaxScenario[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -46,6 +53,17 @@ export function IncomeTaxClient() {
         console.error("Failed to parse tax scenarios", e);
       }
     }
+
+    // Also try to load current working state
+    const workingState = localStorage.getItem("hilmost_income_tax_working");
+    if (workingState) {
+        try {
+            const parsed = JSON.parse(workingState);
+            if (parsed.incomeItems) setIncomeItems(parsed.incomeItems);
+            if (parsed.deductionItems) setDeductionItems(parsed.deductionItems);
+        } catch (e) { /* ignore */ }
+    }
+
     setIsLoaded(true);
   }, []);
 
@@ -53,26 +71,26 @@ export function IncomeTaxClient() {
   useEffect(() => {
     if (isLoaded) {
       localStorage.setItem("hilmost_income_tax_scenarios", JSON.stringify(scenarios));
+      localStorage.setItem("hilmost_income_tax_working", JSON.stringify({ incomeItems, deductionItems }));
     }
-  }, [scenarios, isLoaded]);
+  }, [scenarios, incomeItems, deductionItems, isLoaded]);
 
-  const calculateResults = (s: string, d: string, c: string, f: string) => {
+  const calculateResults = (inc: Item[], ded: Item[], c: string, f: string) => {
     const countryData = TAX_DATA[c] || TAX_DATA.usa;
     const config = countryData.years[CURRENT_TAX_YEAR] || Object.values(countryData.years)[0];
 
-    let rawSalary = parseFloat(s) || 0;
-    let rawDeductions = parseFloat(d) || 0;
+    const sum = (items: Item[]) => items.reduce((acc, item) => acc + (parseFloat(item.amount) || 0), 0);
+
+    const rawIncome = sum(inc);
+    const rawDeductions = sum(ded);
 
     // Normalize to annual for bracket calculation
-    let annualSalary = rawSalary;
-    let annualDeductions = rawDeductions;
-    if (f === "monthly") {
-      annualSalary *= 12;
-      annualDeductions *= 12;
-    } else if (f === "weekly") {
-      annualSalary *= 52;
-      annualDeductions *= 52;
-    }
+    let factor = 1;
+    if (f === "monthly") factor = 12;
+    else if (f === "weekly") factor = 52;
+
+    const annualSalary = rawIncome * factor;
+    const annualDeductions = rawDeductions * factor;
 
     const totalDeductions = annualDeductions + config.standardDeduction;
     const taxableIncome = Math.max(0, annualSalary - totalDeductions);
@@ -103,12 +121,7 @@ export function IncomeTaxClient() {
     }
 
     const totalAnnualTax = annualTax + additionalLevyAmount;
-    const netAnnual = annualSalary - (rawDeductions * (f === 'annually' ? 1 : f === 'monthly' ? 12 : 52)) - totalAnnualTax;
-
-    // Denormalize back to selected frequency for display
-    let factor = 1;
-    if (f === "monthly") factor = 12;
-    else if (f === "weekly") factor = 52;
+    const netAnnual = annualSalary - annualDeductions - totalAnnualTax;
 
     return {
       taxAmount: totalAnnualTax / factor,
@@ -123,8 +136,8 @@ export function IncomeTaxClient() {
   };
 
   const currentResults = useMemo(() =>
-    calculateResults(salary, deductions, country, frequency),
-    [salary, deductions, country, frequency]
+    calculateResults(incomeItems, deductionItems, country, frequency),
+    [incomeItems, deductionItems, country, frequency]
   );
 
   const handleSave = () => {
@@ -136,8 +149,8 @@ export function IncomeTaxClient() {
     const newScenario: TaxScenario = {
       id: Date.now().toString(),
       label: `Scenario ${scenarios.length + 1}`,
-      salary,
-      deductions,
+      incomeItems,
+      deductionItems,
       country,
       frequency,
       timestamp: Date.now(),
@@ -157,6 +170,18 @@ export function IncomeTaxClient() {
     );
   };
 
+  const addItem = (set: React.Dispatch<React.SetStateAction<Item[]>>) => {
+      set(prev => [...prev, { id: Math.random().toString(36).substr(2, 9), name: "", amount: "" }]);
+  };
+
+  const updateItem = (set: React.Dispatch<React.SetStateAction<Item[]>>, id: string, field: keyof Item, val: string) => {
+      set(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+  };
+
+  const deleteItem = (set: React.Dispatch<React.SetStateAction<Item[]>>, id: string) => {
+      set(prev => prev.filter(item => item.id !== id));
+  };
+
   const selectedScenarios = scenarios.filter(s => selectedIds.includes(s.id));
 
   const countryOptions = Object.values(TAX_DATA).map(c => ({ label: c.name, value: c.id }));
@@ -167,9 +192,9 @@ export function IncomeTaxClient() {
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-6 my-8 max-w-4xl mx-auto"
     >
-      {/* Form Section - Now Full Width */}
+      {/* Form Section */}
       <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div className="w-full md:w-auto">
                   <PillSelector
                       label="Frequency"
@@ -203,23 +228,81 @@ export function IncomeTaxClient() {
               </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-              <NumberInput
-                  label={`${frequency.charAt(0).toUpperCase() + frequency.slice(1, -2)} Gross Salary (${countryConfig.symbol})`}
-                  value={salary}
-                  onChange={val => setState({ salary: val })}
-                  min={0}
-              />
-
-              <NumberInput
-                  label={`Other Deductions (${countryConfig.symbol})`}
-                  value={deductions}
-                  onChange={val => setState({ deductions: val })}
-                  min={0}
-              />
+          {/* INCOME SECTION */}
+          <div className="space-y-4">
+              <div className="flex items-center justify-between px-1">
+                  <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Gross Income Sources</h3>
+                  <span className="text-[10px] font-black text-brand-primary uppercase">Total: {countryConfig.symbol}{currentResults.grossAmount.toLocaleString()}</span>
+              </div>
+              <div className="space-y-3">
+                  <AnimatePresence initial={false}>
+                      {incomeItems.map((item) => (
+                          <motion.div key={item.id} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="flex gap-3">
+                              <Input
+                                  placeholder="e.g. Primary Salary"
+                                  value={item.name}
+                                  onChange={(e) => updateItem(setIncomeItems, item.id, 'name', e.target.value)}
+                                  className="flex-1 !py-2 !text-xs font-bold"
+                              />
+                              <div className="w-32">
+                                  <NumberInput
+                                      value={item.amount}
+                                      onChange={(val) => updateItem(setIncomeItems, item.id, 'amount', val)}
+                                      className="!py-2 !text-xs font-black"
+                                  />
+                              </div>
+                              <button onClick={() => deleteItem(setIncomeItems, item.id)} className="p-2 text-slate-300 hover:text-rose-500 transition-colors">
+                                  <Trash2 size={16} />
+                              </button>
+                          </motion.div>
+                      ))}
+                  </AnimatePresence>
+                  <Button variant="secondary" onClick={() => addItem(setIncomeItems)} className="w-full !py-2 !text-[9px] flex items-center justify-center gap-2 border-dashed border-2">
+                      <Plus size={14} /> Add Income Source
+                  </Button>
+              </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          {/* DEDUCTIONS SECTION */}
+          <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-between px-1">
+                  <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tax Deductible Items</h3>
+                  <span className="text-[10px] font-black text-rose-500 uppercase">Itemized: {countryConfig.symbol}{Math.round(currentResults.totalDeductions - yearConfig.standardDeduction).toLocaleString()}</span>
+              </div>
+              <div className="space-y-3">
+                  <AnimatePresence initial={false}>
+                      {deductionItems.map((item) => (
+                          <motion.div key={item.id} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="flex gap-3">
+                              <Input
+                                  placeholder="e.g. Health Insurance"
+                                  value={item.name}
+                                  onChange={(e) => updateItem(setDeductionItems, item.id, 'name', e.target.value)}
+                                  className="flex-1 !py-2 !text-xs font-bold"
+                              />
+                              <div className="w-32">
+                                  <NumberInput
+                                      value={item.amount}
+                                      onChange={(val) => updateItem(setDeductionItems, item.id, 'amount', val)}
+                                      className="!py-2 !text-xs font-black"
+                                  />
+                              </div>
+                              <button onClick={() => deleteItem(setDeductionItems, item.id)} className="p-2 text-slate-300 hover:text-rose-500 transition-colors">
+                                  <Trash2 size={16} />
+                              </button>
+                          </motion.div>
+                      ))}
+                  </AnimatePresence>
+                  <Button variant="secondary" onClick={() => addItem(setDeductionItems)} className="w-full !py-2 !text-[9px] flex items-center justify-center gap-2 border-dashed border-2">
+                      <Plus size={14} /> Add Tax Deduction
+                  </Button>
+              </div>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                  <span className="text-[9px] font-black text-slate-500 uppercase">Standard {yearConfig.taxYear} Deduction Included:</span>
+                  <span className="text-xs font-black text-slate-900 dark:text-white">{countryConfig.symbol}{(yearConfig.standardDeduction / (frequency === 'annually' ? 1 : frequency === 'monthly' ? 12 : 52)).toLocaleString()}</span>
+              </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
               <Button onClick={handleSave} className="w-full sm:w-auto flex items-center justify-center gap-2" variant="secondary">
                   <Save size={18} />
                   Save Scenario
@@ -229,7 +312,6 @@ export function IncomeTaxClient() {
                   <Info size={16} className="text-brand-primary shrink-0" />
                   <p className="text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest leading-none">
                       Source: <span className="text-brand-primary">{yearConfig.source}</span>
-                      {yearConfig.disclaimer && <span className="ml-2 opacity-60 italic">* {yearConfig.disclaimer}</span>}
                   </p>
               </div>
           </div>
@@ -310,8 +392,9 @@ export function IncomeTaxClient() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {scenarios.map((s) => {
-                  const res = calculateResults(s.salary, s.deductions, s.country, s.frequency);
+                  const res = calculateResults(s.incomeItems, s.deductionItems, s.country, s.frequency);
                   const conf = TAX_DATA[s.country] || TAX_DATA.usa;
+                  const totalGross = s.incomeItems.reduce((acc, i) => acc + (parseFloat(i.amount) || 0), 0);
                   return (
                     <tr key={s.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
                       <td className="p-4">
@@ -327,7 +410,7 @@ export function IncomeTaxClient() {
                           <span className="block text-[8px] text-slate-400 font-bold uppercase mt-0.5">{s.frequency}</span>
                       </td>
                       <td className="p-4 text-xs font-bold text-slate-500 uppercase">{conf.name}</td>
-                      <td className="p-4 text-xs font-bold text-slate-500">{conf.symbol}{Math.round(parseFloat(s.salary)).toLocaleString()}</td>
+                      <td className="p-4 text-xs font-bold text-slate-500">{conf.symbol}{Math.round(totalGross).toLocaleString()}</td>
                       <td className="p-4 text-xs font-black text-[var(--color-brand-primary)]">{conf.symbol}{Math.round(res.netAmount).toLocaleString()}</td>
                       <td className="p-4 text-right">
                         <button
@@ -365,8 +448,9 @@ export function IncomeTaxClient() {
             <div className="overflow-x-auto">
               <div className="flex gap-4 min-w-max">
                 {selectedScenarios.map((s) => {
-                  const res = calculateResults(s.salary, s.deductions, s.country, s.frequency);
+                  const res = calculateResults(s.incomeItems, s.deductionItems, s.country, s.frequency);
                   const conf = TAX_DATA[s.country] || TAX_DATA.usa;
+                  const totalGross = s.incomeItems.reduce((acc, i) => acc + (parseFloat(i.amount) || 0), 0);
                   return (
                     <div key={s.id} className="flex-1 min-w-[220px] bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
                       <div className="flex justify-between items-start">
@@ -381,7 +465,7 @@ export function IncomeTaxClient() {
                         <div className="h-px bg-slate-200 dark:bg-slate-700" />
                         <div>
                           <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Gross Pay</p>
-                          <p className="text-xl font-black text-slate-900 dark:text-white">{conf.symbol}{Math.round(parseFloat(s.salary)).toLocaleString()}</p>
+                          <p className="text-xl font-black text-slate-900 dark:text-white">{conf.symbol}{Math.round(totalGross).toLocaleString()}</p>
                         </div>
                         <div>
                           <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Total Tax</p>
