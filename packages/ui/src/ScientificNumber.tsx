@@ -4,7 +4,8 @@ interface ScientificNumberProps {
   value: number;
   precision?: number; // Defaults to 4
   className?: string;
-  suffix?: string; // Optional unit
+  suffix?: string; // Optional unit (e.g. "N")
+  prefix?: string; // Optional prefix (e.g. "$")
   multiLine?: boolean;
 }
 
@@ -14,7 +15,7 @@ function formatWithCommas(str: string) {
   return parts.join(".");
 }
 
-export function ScientificNumber({ value, precision = 4, className = "", suffix, multiLine = false }: ScientificNumberProps) {
+export function ScientificNumber({ value, precision = 4, className = "", suffix, prefix, multiLine = false }: ScientificNumberProps) {
   if (isNaN(value) || !isFinite(value)) return <span className={className}>Invalid</span>;
 
   // For numbers between 0.001 and 1000000, show them normally with grouping
@@ -24,7 +25,7 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
     const formattedStr = formatWithCommas(rawStr);
     return (
       <span className={className}>
-        {formattedStr} {suffix && <span className="text-[0.4em] text-slate-500 font-medium ml-1 uppercase">{suffix}</span>}
+        {prefix}{formattedStr} {suffix && <span className="text-[0.4em] text-slate-500 font-medium ml-1 uppercase">{suffix}</span>}
       </span>
     );
   }
@@ -39,7 +40,7 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
     return (
       <div className={`flex flex-col items-center justify-center text-center ${className}`}>
         {/* Mantissa Line */}
-        <div className="leading-none tracking-tight font-black">{baseStr}</div>
+        <div className="leading-none tracking-tight font-black">{prefix}{baseStr}</div>
 
         {/* Scale & Unit Line */}
         <div className="flex items-center justify-center mt-4 gap-2 opacity-80">
@@ -59,7 +60,7 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
 
   return (
     <span className={`inline-flex items-baseline ${className}`}>
-      <span>{baseStr} &times; 10</span>
+      <span>{prefix}{baseStr} &times; 10</span>
       <sup className="text-[0.6em] ml-0.5">{exponentStr}</sup>
       {suffix && <span className="text-[0.5em] text-slate-500 font-medium ml-1 uppercase">{suffix}</span>}
     </span>

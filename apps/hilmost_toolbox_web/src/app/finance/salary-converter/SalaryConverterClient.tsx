@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker } from "@utilitiessite/ui";
+import { NumberTicker, ScientificNumber } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 import { NumberInput } from "../../../components/ui/NumberInput";
@@ -77,19 +77,34 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
 
         {/* Results Grid */}
         <div id="tour-salary-results" className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {results.map((res, idx) => (
-                <div
-                    key={res.label}
-                    className={`p-6 rounded-2xl border-2 transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white shadow-sm hover:shadow-md'}`}
-                >
-                    <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
-                        {res.label} Pay
-                    </span>
-                    <div className={`font-black tracking-tighter ${idx === 0 ? 'text-5xl md:text-6xl' : 'text-2xl'}`}>
-                        $<NumberTicker value={res.value} decimals={2} />
+            {results.map((res, idx) => {
+                const isVeryLarge = res.value >= 100000000;
+                return (
+                    <div
+                        key={res.label}
+                        className={`p-6 rounded-2xl border-2 transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white shadow-sm hover:shadow-md'}`}
+                    >
+                        <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
+                            {res.label} Pay
+                        </span>
+                        <div className={`font-black tracking-tighter flex items-baseline justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[140px]' : 'text-2xl'}`}>
+                            {isVeryLarge ? (
+                                <ScientificNumber
+                                    value={res.value}
+                                    precision={12}
+                                    prefix="$"
+                                    multiLine={true}
+                                />
+                            ) : (
+                                <>
+                                    <span className="mr-0.5">$</span>
+                                    <NumberTicker value={res.value} decimals={2} />
+                                </>
+                            )}
+                        </div>
                     </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
       </div>
     </motion.div>

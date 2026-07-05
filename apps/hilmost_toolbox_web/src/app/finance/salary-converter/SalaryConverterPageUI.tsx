@@ -63,7 +63,7 @@ export function SalaryConverterPageUI({
         shareButton={<ShareButton />}
       />
       
-      <div className="max-w-xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <SalaryConverterClient defaultPeriod={defaultPeriod} />
       </div>
 
