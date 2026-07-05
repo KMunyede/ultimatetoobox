@@ -21,7 +21,7 @@ interface AdUnitProps {
 
 const FORMAT_DEFAULTS: Record<AdFormat, { minHeight: string, minWidth?: string }> = {
   vertical: { minHeight: "600px", minWidth: "160px" },
-  horizontal: { minHeight: "90px", minWidth: "100%" },
+  horizontal: { minHeight: "60px", minWidth: "100%" },
   rectangle: { minHeight: "250px", minWidth: "300px" },
   fluid: { minHeight: "auto" },
   auto: { minHeight: "280px" },
@@ -89,8 +89,8 @@ export function AdUnit({
   }, [isVisible]);
 
   return (
-    <div className="w-full flex flex-col items-center gap-1.5 py-4 relative z-0">
-      <span className="text-[9px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.25em] select-none">
+    <div className="w-full flex flex-col items-center gap-1 py-2 relative z-0">
+      <span className="text-[8px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.25em] select-none">
         Advertisement
       </span>
       <div

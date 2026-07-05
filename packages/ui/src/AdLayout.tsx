@@ -36,13 +36,14 @@ export function AdLayout({
         <div className="flex-1 w-full max-w-5xl min-w-0 mx-auto">
           {/* Mobile Top Ad - Moved lower and with more margin to prevent accidental clicks */}
           {showInnerAds && (
-            <div className="block lg:hidden mb-8 w-full">
+            <div className="block lg:hidden mb-2 w-full">
               <AdUnit
                 publisherId={publisherId}
                 slotId={bottomSlotId}
                 format="horizontal"
+                responsive={false}
                 className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-                style={{ width: "100%", minHeight: "90px" }}
+                style={{ width: "100%", minHeight: "60px" }}
               />
             </div>
           )}
@@ -51,13 +52,13 @@ export function AdLayout({
 
           {/* Bottom Horizontal Ad - Significant margin for safety */}
           {showInnerAds && (
-            <div className="mt-16 w-full">
+            <div className="mt-8 w-full">
               <AdUnit
                 publisherId={publisherId}
                 slotId={bottomSlotId}
                 format="horizontal"
                 className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-                style={{ width: "100%", minHeight: "90px" }}
+                style={{ width: "100%", minHeight: "60px" }}
               />
             </div>
           )}
