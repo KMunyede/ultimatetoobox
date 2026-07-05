@@ -3,7 +3,7 @@ import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import { Save, Trash2, History, Scale, Globe, Calendar, Clock, AlertTriangle, Info, Plus } from "lucide-react";
+import { Save, Trash2, History, Scale, Globe, Calendar, Clock, AlertTriangle, Info, Plus, Check } from "lucide-react";
 import { NumberInput } from "../../../components/ui/NumberInput";
 import { Button } from "../../../components/ui/Button";
 import { PillSelector } from "../../../components/ui/PillSelector";
@@ -82,7 +82,19 @@ export function IncomeTaxClient() {
     const sum = (items: Item[]) => items.reduce((acc, item) => acc + (parseFloat(item.amount) || 0), 0);
 
     const rawIncome = sum(inc);
-    const rawDeductions = sum(ded);
+
+    // US TAX LAW LOGIC: Above-the-Line vs Itemized
+    // We treat "Health" and "Pension" in the name as above-the-line adjustments
+    const adjustments = ded.filter(i =>
+        i.name.toLowerCase().includes('health') ||
+        i.name.toLowerCase().includes('pension') ||
+        i.name.toLowerCase().includes('401k') ||
+        i.name.toLowerCase().includes('insurance')
+    );
+    const itemized = ded.filter(i => !adjustments.includes(i));
+
+    const rawAdjustments = sum(adjustments);
+    const rawItemized = sum(itemized);
 
     // Normalize to annual for bracket calculation
     let factor = 1;
@@ -90,10 +102,14 @@ export function IncomeTaxClient() {
     else if (f === "weekly") factor = 52;
 
     const annualSalary = rawIncome * factor;
-    const annualDeductions = rawDeductions * factor;
+    const annualAdjustments = rawAdjustments * factor;
+    const annualItemized = rawItemized * factor;
 
-    const totalDeductions = annualDeductions + config.standardDeduction;
-    const taxableIncome = Math.max(0, annualSalary - totalDeductions);
+    // RULE: Take higher of Itemized vs Standard
+    const usedDeduction = Math.max(annualItemized, config.standardDeduction);
+    const isItemizing = annualItemized > config.standardDeduction;
+
+    const taxableIncome = Math.max(0, annualSalary - annualAdjustments - usedDeduction);
 
     // Progressive calculation
     let annualTax = 0;
@@ -121,14 +137,20 @@ export function IncomeTaxClient() {
     }
 
     const totalAnnualTax = annualTax + additionalLevyAmount;
-    const netAnnual = annualSalary - annualDeductions - totalAnnualTax;
+
+    // Net = Gross - Adjustments - Itemized - Tax (Standard deduction is not a cash expense)
+    const netAnnual = annualSalary - annualAdjustments - annualItemized - totalAnnualTax;
 
     return {
       taxAmount: totalAnnualTax / factor,
       netAmount: netAnnual / factor,
       levyAmount: additionalLevyAmount / factor,
       grossAmount: annualSalary / factor,
-      totalDeductions: totalDeductions / factor,
+      totalDeductions: (annualAdjustments + usedDeduction) / factor,
+      itemizedAmount: annualItemized / factor,
+      standardAmount: config.standardDeduction / factor,
+      adjustmentAmount: annualAdjustments / factor,
+      isItemizing,
       effectiveRate: annualSalary > 0 ? (totalAnnualTax / annualSalary) * 100 : 0,
       marginalRate,
       symbol: countryData.symbol,
@@ -265,16 +287,26 @@ export function IncomeTaxClient() {
 
           {/* DEDUCTIONS SECTION */}
           <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-              <div className="flex items-center justify-between px-1">
-                  <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tax Deductible Items</h3>
-                  <span className="text-[10px] font-black text-rose-500 uppercase">Itemized: {countryConfig.symbol}{Math.round(currentResults.totalDeductions - yearConfig.standardDeduction).toLocaleString()}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between px-1 gap-2">
+                  <div className="space-y-0.5">
+                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tax Deductible Items</h3>
+                    <p className="text-[8px] text-slate-400 font-bold uppercase">Pension/Health are auto-treated as adjustments</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[9px] font-black px-2 py-0.5 rounded-md border ${currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-slate-400 opacity-40'} uppercase tracking-tight`}>
+                        Itemized
+                    </span>
+                    <span className={`text-[9px] font-black px-2 py-0.5 rounded-md border ${!currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-slate-400 opacity-40'} uppercase tracking-tight`}>
+                        Standard
+                    </span>
+                  </div>
               </div>
               <div className="space-y-3">
                   <AnimatePresence initial={false}>
                       {deductionItems.map((item) => (
                           <motion.div key={item.id} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="flex gap-3">
                               <Input
-                                  placeholder="e.g. Health Insurance"
+                                  placeholder="e.g. Charity or 401k"
                                   value={item.name}
                                   onChange={(e) => updateItem(setDeductionItems, item.id, 'name', e.target.value)}
                                   className="flex-1 !py-2 !text-xs font-bold"
@@ -293,13 +325,37 @@ export function IncomeTaxClient() {
                       ))}
                   </AnimatePresence>
                   <Button variant="secondary" onClick={() => addItem(setDeductionItems)} className="w-full !py-2 !text-[9px] flex items-center justify-center gap-2 border-dashed border-2">
-                      <Plus size={14} /> Add Tax Deduction
+                      <Plus size={14} /> Add Deduction
                   </Button>
               </div>
-              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                  <span className="text-[9px] font-black text-slate-500 uppercase">Standard {yearConfig.taxYear} Deduction Included:</span>
-                  <span className="text-xs font-black text-slate-900 dark:text-white">{countryConfig.symbol}{(yearConfig.standardDeduction / (frequency === 'annually' ? 1 : frequency === 'monthly' ? 12 : 52)).toLocaleString()}</span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                  <div className={`p-3 rounded-xl border transition-all ${currentResults.isItemizing ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60'}`}>
+                      <div className="flex justify-between items-center mb-1">
+                          <span className="text-[8px] font-black text-slate-500 uppercase">Itemized Total</span>
+                          {currentResults.isItemizing && <Check size={10} className="text-brand-primary" />}
+                      </div>
+                      <p className="text-sm font-black text-slate-900 dark:text-white">
+                          {countryConfig.symbol}{Math.round(currentResults.itemizedAmount).toLocaleString()}
+                      </p>
+                  </div>
+                  <div className={`p-3 rounded-xl border transition-all ${!currentResults.isItemizing ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60'}`}>
+                      <div className="flex justify-between items-center mb-1">
+                          <span className="text-[8px] font-black text-slate-500 uppercase">Standard ({yearConfig.taxYear})</span>
+                          {!currentResults.isItemizing && <Check size={10} className="text-brand-primary" />}
+                      </div>
+                      <p className="text-sm font-black text-slate-900 dark:text-white">
+                          {countryConfig.symbol}{Math.round(currentResults.standardAmount).toLocaleString()}
+                      </p>
+                  </div>
               </div>
+
+              {currentResults.adjustmentAmount > 0 && (
+                  <div className="bg-emerald-50 dark:bg-emerald-950/20 p-3 rounded-xl border border-emerald-100 dark:border-emerald-900/30 flex justify-between items-center">
+                      <span className="text-[9px] font-black text-emerald-600 uppercase tracking-tight">Total Adjustments (Above-the-line):</span>
+                      <span className="text-xs font-black text-emerald-700 dark:text-emerald-400">-{countryConfig.symbol}{Math.round(currentResults.adjustmentAmount).toLocaleString()}</span>
+                  </div>
+              )}
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
