@@ -57,8 +57,9 @@ export function AdLayout({
                 publisherId={publisherId}
                 slotId={bottomSlotId}
                 format="horizontal"
+                responsive={false}
                 className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-                style={{ width: "100%", minHeight: "60px" }}
+                style={{ width: "100%", minHeight: "60px", maxHeight: "100px" }}
               />
             </div>
           )}

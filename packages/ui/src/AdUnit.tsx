@@ -116,7 +116,11 @@ export function AdUnit({
         {isVisible && (
           <ins
             className="adsbygoogle w-full h-full relative z-10"
-            style={{ display: "block", minHeight: finalMinHeight }}
+            style={{
+              display: "block",
+              minHeight: finalMinHeight,
+              maxHeight: style?.maxHeight
+            }}
             data-ad-client={publisherId}
             data-ad-slot={slotId}
             data-ad-format={format}
