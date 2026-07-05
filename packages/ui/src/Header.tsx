@@ -56,7 +56,7 @@ export function Header() {
           </div>
 
           {/* Row 2: Quick Links Pills (Mobile Only) */}
-          <div className="lg:hidden grid grid-cols-1 sm:grid-cols-4 gap-2">
+          <div className="lg:hidden grid grid-cols-2 sm:grid-cols-4 gap-2">
             <Link href={domains.toolbox + "/guides"} className="flex items-center justify-center py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Guides
             </Link>
