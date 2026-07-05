@@ -88,7 +88,7 @@ export default function IncomeTaxPage() {
 
       <IncomeTaxClient />
 
-      <ToolArticle title="Mastering Your Paycheck: How Taxes Work">
+      <ToolArticle title="Mastering Your Paycheck: How Taxes Work" className="!mt-8 !pt-8">
         <p>
           Understanding your paycheck is the first step to financial literacy. When you negotiate a salary, you agree on a Gross Income. However, the amount that hits your bank account is significantly lower.
         </p>

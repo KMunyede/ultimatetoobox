@@ -406,8 +406,8 @@ export function IncomeTaxClient() {
         )}
       </AnimatePresence>
 
-      <footer className="mt-12 pt-8 border-t border-slate-100 dark:border-slate-800">
-          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.1em] text-center max-w-2xl mx-auto leading-relaxed">
+      <footer className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.1em] text-center max-w-2xl mx-auto leading-relaxed">
               Disclaimer: Tax brackets are estimates for general reference only, may not reflect the latest local budget updates, and do not constitute tax advice. Verify with official sources for filing purposes.
           </p>
       </footer>
