@@ -127,7 +127,7 @@ export default function JWTDecoderPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="text-data" currentPath={PATH} />
+      <RelatedTools category="dx" currentPath={PATH} />
     </div>
   );
 }

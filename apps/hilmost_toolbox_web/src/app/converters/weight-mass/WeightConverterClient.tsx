@@ -5,6 +5,7 @@ import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 import { NumberInput } from "../../../components/ui/NumberInput";
 import { Select } from "../../../components/ui/Select";
+import { ScientificNumber } from "@utilitiessite/ui";
 
 const UNITS = {
   kilograms: 1,
@@ -120,7 +121,9 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
             <p className="text-slate-500 dark:text-slate-400 font-bold italic uppercase tracking-widest text-sm">
-                {val1 || "0"} {formatUnitName(unit1)} is exactly <span className="text-brand-primary font-black not-italic text-xl">{val2 || "0"}</span> {formatUnitName(unit2)}
+                {val1 || "0"} {formatUnitName(unit1)} is exactly <span className="text-brand-primary font-black not-italic text-xl">
+                  <ScientificNumber value={parseFloat(val2) || 0} precision={6} />
+                </span> {formatUnitName(unit2)}
             </p>
         </div>
       </div>

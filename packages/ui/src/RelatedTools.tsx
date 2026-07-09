@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-type Category = "converters" | "calculators" | "finance" | "text-data" | "health" | "pdf-tools";
+type Category = "converters" | "calculators" | "finance" | "text-data" | "health" | "pdf-tools" | "dx" | "education";
 
 interface RelatedToolsProps {
   category: Category;
@@ -45,9 +45,12 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
     { name: "Base64 Text Encoder", href: "/text-data/base64-encode", description: "Encode and decode Base64." },
     { name: "MD5 Hash", href: "/text-data/md5-hash", description: "Generate MD5 checksums." },
     { name: "Word Count", href: "/text-data/word-count", description: "Count words, characters, sentences." },
+    { name: "Text Case Converter", href: "/text-data/text-case-converter", description: "Convert text to camelCase, snake_case, etc." },
   ],
   health: [
     { name: "BMI Calculator", href: "/health/bmi-calculator", description: "Check your Body Mass Index." },
+    { name: "Sleep Cycle Calculator", href: "/health/sleep-cycle-calculator", description: "Calculate optimal wake-up times." },
+    { name: "Calorie & Macro Calculator", href: "/health/calorie-macro-calculator", description: "Plan your daily nutrition targets." },
     { name: "Daily Wisdom", href: "/health/daily-wisdom", description: "Inspirational quotes & journaling." },
   ],
   "pdf-tools": [
@@ -55,6 +58,17 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
     { name: "Split PDF", href: "/pdf-tools/split-pdf", description: "Extract pages from a PDF." },
     { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf", description: "Fix PDF orientation." },
     { name: "Delete Pages", href: "/pdf-tools/delete-pages", description: "Remove pages from a PDF." },
+  ],
+  dx: [
+    { name: "JSON Formatter", href: "/dx/json-formatter", description: "Prettify and validate JSON data." },
+    { name: "Password Generator", href: "/dx/password-generator", description: "Forge secure random passwords." },
+    { name: "Regex Tester", href: "/dx/regex-tester", description: "Test and debug regular expressions." },
+    { name: "JWT Decoder", href: "/dx/jwt-decoder", description: "Inspect JSON Web Tokens securely." },
+    { name: "QR Code Generator", href: "/dx/qr-code-generator", description: "Generate custom QR codes instantly." },
+    { name: "Color Picker", href: "/dx/color-picker", description: "HEX/RGB/HSL picker and contrast checker." },
+  ],
+  education: [
+    { name: "GPA Calculator", href: "/education/gpa-calculator", description: "Calculate semester and cumulative GPA." },
   ],
 };
 

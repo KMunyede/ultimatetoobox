@@ -121,7 +121,7 @@ export default function RegexTesterPage() {
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
-      <RelatedTools category="text-data" currentPath={PATH} />
+      <RelatedTools category="dx" currentPath={PATH} />
     </div>
   );
 }

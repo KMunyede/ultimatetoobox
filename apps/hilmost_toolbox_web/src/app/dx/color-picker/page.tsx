@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, ToolArticle, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { ColorPickerTool } from "./ColorPickerTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -115,6 +115,7 @@ export default function ColorPickerPage() {
         </ToolArticle>
 
         <FAQAccordion items={faqs} />
+        <RelatedTools category="dx" currentPath={PATH} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { WebApplicationSchema, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, ToolArticle, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { CalorieMacroCalculatorTool } from "./CalorieMacroCalculatorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -116,6 +116,7 @@ export default function CalorieMacroCalculatorPage() {
         </ToolArticle>
 
         <FAQAccordion items={faqs} />
+        <RelatedTools category="health" currentPath={PATH} />
       </div>
     </div>
   );

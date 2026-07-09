@@ -1,4 +1,4 @@
-import { WebApplicationSchema, ToolArticle, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, ToolArticle, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { PasswordGeneratorTool } from "./PasswordGeneratorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -110,6 +110,7 @@ export default function PasswordGeneratorPage() {
         </ToolArticle>
 
         <FAQAccordion items={faqs} />
+        <RelatedTools category="dx" currentPath={PATH} />
       </div>
     </div>
   );
