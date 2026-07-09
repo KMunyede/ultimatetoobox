@@ -107,7 +107,8 @@ export default function PDFToolsHub() {
         url={CANONICAL_URL}
         image="https://hilmost-toolbox.hilmost.net/og/pdf-tools.png"
       />
-      
+      <FAQSchema items={faqs} />
+
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="flex items-center gap-3 mb-4 mt-2">
