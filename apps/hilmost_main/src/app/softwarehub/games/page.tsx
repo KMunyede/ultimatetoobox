@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Games | Hilmost Software Corporation",
-  description: "Discover entertaining casual games developed by Hilmost.",
+  description: "Discover entertaining casual games developed by Hilmost. Explore our collection of fun and engaging digital games, designed for high-performance and seamless gameplay on any device.",
 };
 
 export default function GamesPage() {

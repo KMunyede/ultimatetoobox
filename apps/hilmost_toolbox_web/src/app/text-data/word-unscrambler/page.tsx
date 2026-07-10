@@ -9,7 +9,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Word Unscrambler";
 const TOOL_TYPE = "Anagram Solver";
-const TOOL_DESC = "Instantly untangle any anagram and find the hidden words in milliseconds — no signup required.";
+const TOOL_DESC = "Instantly untangle any anagram and find hidden words in milliseconds. Our powerful word unscrambler uses global dictionaries to help you solve jumbled letters and win word games.";
 const PATH = "/text-data/word-unscrambler";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 

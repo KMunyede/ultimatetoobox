@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About Hilmost | Practical Software for Everyday Tasks",
-  description: "Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks.",
+  description: "Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks. Explore our mission to create a high-performance digital sanctuary for all.",
 };
 
 export default function AboutPage() {

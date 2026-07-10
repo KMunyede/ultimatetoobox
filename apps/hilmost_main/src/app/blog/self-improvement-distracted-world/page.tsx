@@ -5,7 +5,7 @@ import { ChevronLeft } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Building Software for Self-Improvement | Hilmost Blog",
-  description: "How we build technology that helps people focus, reflect, and actually improve their lives.",
+  description: "How we build technology that helps people focus, reflect, and actually improve their lives. Discover our philosophy on creating digital tools for a more focused and intentional life.",
 };
 
 export default function BlogPost2() {

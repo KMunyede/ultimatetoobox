@@ -3,7 +3,7 @@ import { ArrowRight, HeartPulse, Sparkles } from "lucide-react";
 
 export const metadata = {
   title: "Hilmost Health Hub | Daily Wisdom & Wellness",
-  description: "Explore health and wellness applications developed by Hilmost Health.",
+  description: "Explore health and wellness applications developed by Hilmost Health. From BMI calculators to daily wisdom, discover tools designed to help you maintain a balanced and healthy lifestyle.",
 };
 
 export default function HealthHub() {

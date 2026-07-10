@@ -8,7 +8,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Budget Planner";
-const TOOL_DESC = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Private and secure.";
+const TOOL_DESC = "Free online budget planner using the 50/30/20 rule. Track your income, needs, wants, and savings. Securely manage your personal finances with our private, browser-side tool.";
 const PATH = "/finance/budget-planner";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 

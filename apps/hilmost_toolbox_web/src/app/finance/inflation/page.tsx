@@ -8,7 +8,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Inflation Calculator";
-const TOOL_DESC = "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power.";
+const TOOL_DESC = "Free online inflation calculator. Instantly see how the rising cost of living affects your money and purchasing power. Track historical value and understand economic shifts easily.";
 const PATH = "/finance/inflation";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 

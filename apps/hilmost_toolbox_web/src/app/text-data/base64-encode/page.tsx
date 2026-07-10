@@ -7,7 +7,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Base64 Text Encoder & Decoder";
 const TOOL_TYPE = "Base64 Converter";
-const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII format — no signup required.";
+const TOOL_DESC = "Safely transform your text strings into URL-friendly ASCII format. Our free Base64 encoder and decoder provides instant, secure data transformation for developers and IT professionals.";
 const PATH = "/text-data/base64-encode";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 

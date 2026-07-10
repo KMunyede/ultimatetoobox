@@ -4,7 +4,7 @@ import { formatTitle } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: formatTitle("Editorial & Accuracy Policy"),
-  description: "Learn about the banking-grade engineering, expert review process, and mathematical precision behind Hilmost tools.",
+  description: "Learn about the banking-grade engineering, expert review process, and mathematical precision behind Hilmost tools. Discover how we ensure the highest standards of data accuracy.",
   alternates: {
     canonical: "/editorial-policy",
   }

@@ -9,7 +9,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Word Count Tool";
 const TOOL_TYPE = "Word Counter";
-const TOOL_DESC = "Count words, characters and sentences instantly — no signup required.";
+const TOOL_DESC = "Count words, characters and sentences instantly. Our free, high-performance word count tool provides real-time text analytics for authors, students, and social media managers.";
 const PATH = "/text-data/word-count";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 

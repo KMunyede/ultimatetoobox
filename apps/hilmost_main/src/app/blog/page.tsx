@@ -5,7 +5,7 @@ import { AdLayout } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
   title: "Blog | Hilmost Digital Labs",
-  description: "Insights on software engineering, product design, and building the Hilmost Toolbox.",
+  description: "Insights on software engineering, product design, and building the Hilmost Toolbox. Read our latest articles on crafting professional-grade digital utilities and tools.",
 };
 
 const posts = [

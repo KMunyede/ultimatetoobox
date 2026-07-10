@@ -5,7 +5,7 @@ import { ChevronLeft } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Why We Built the Hilmost Toolbox | Hilmost Blog",
-  description: "The story behind our collection of 39+ free online utilities and our commitment to friction-free software.",
+  description: "The story behind our collection of 39+ free online utilities and our commitment to friction-free software. Learn how we engineered a high-performance, private digital toolkit.",
 };
 
 export default function BlogPost1() {

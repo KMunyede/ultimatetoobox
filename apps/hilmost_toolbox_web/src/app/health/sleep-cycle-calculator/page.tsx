@@ -6,7 +6,7 @@ import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 
 const TOOL_NAME = "Free Sleep Cycle Calculator";
-const TOOL_DESC = "Find the best times to wake up or go to sleep based on 90-minute sleep cycles. Avoid sleep inertia and wake up refreshed.";
+const TOOL_DESC = "Find the best times to wake up or go to sleep based on 90-minute sleep cycles. Our high-precision calculator helps you avoid sleep inertia and wake up feeling refreshed and energized.";
 const PATH = "/health/sleep-cycle-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 

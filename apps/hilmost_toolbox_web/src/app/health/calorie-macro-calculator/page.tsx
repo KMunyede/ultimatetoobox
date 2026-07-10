@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Free Calorie & Macro Calculator";
-const TOOL_DESC = "Calculate your BMR, TDEE and daily macro targets for weight loss, maintenance or muscle gain. Supports metric and imperial units with custom macro splits.";
+const TOOL_DESC = "Calculate your BMR, TDEE and daily macro targets for weight loss or muscle gain. Our tool supports metric and imperial units with custom macro splits for precision nutrition planning.";
 const PATH = "/health/calorie-macro-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 

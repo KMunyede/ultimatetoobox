@@ -6,7 +6,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { Metadata } from "next";
 
 const TITLE = "Free Online Calculators & Converters";
-const DESC = "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters.";
+const DESC = "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters for every task.";
 const PATH = "/";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 

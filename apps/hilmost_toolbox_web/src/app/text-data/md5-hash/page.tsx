@@ -9,7 +9,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "MD5 Hash Generator";
 const TOOL_TYPE = "MD5 Hashing Tool";
-const TOOL_DESC = "Generate lightning-fast MD5 hashes to verify data integrity — no signup required.";
+const TOOL_DESC = "Generate lightning-fast MD5 hashes to verify data integrity. Our secure, browser-side hash generator helps you confirm file authenticity and data consistency with zero delay.";
 const PATH = "/text-data/md5-hash";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 

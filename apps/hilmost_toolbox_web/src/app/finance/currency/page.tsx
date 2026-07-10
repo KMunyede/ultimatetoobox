@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle("Currency Converter | Real-Time Exchange Rates");
   return {
     title,
-    description: "Convert global currencies instantly with real-time exchange rates. Free, accurate, and bidirectional.",
+    description: "Convert global currencies instantly with real-time exchange rates. Our free, accurate, and bidirectional currency converter helps you track live market rates for over 150 currencies.",
     alternates: {
       canonical: PATH,
     },

@@ -2,7 +2,7 @@
 
 export const metadata: Metadata = {
   title: "Careers | Hilmost Software Corporation",
-  description: "Join Hilmost Software Corporation (HSC) and build the future with us.",
+  description: "Join Hilmost Software Corporation (HSC) and build the future with us. Explore career opportunities in software engineering and product design within our innovative monorepo.",
 };
 
 export default function CareersPage() {

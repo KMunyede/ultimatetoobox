@@ -8,7 +8,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Retirement Planner";
-const TOOL_DESC = "Calculate exactly how much you need to save to retire comfortably. Free online retirement planner with visual charts.";
+const TOOL_DESC = "Calculate exactly how much you need to save to retire comfortably. Our free online retirement planner provides visual charts and detailed projections to help you secure your future.";
 const PATH = "/finance/retirement-planner";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 

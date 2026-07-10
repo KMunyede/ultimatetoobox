@@ -3,7 +3,7 @@ import { JournalClient } from "./JournalClient";
 
 export const metadata: Metadata = {
   title: "Private Journal | Daily Wisdom",
-  description: "Your private space for reflection and stoic journaling.",
+  description: "Your private space for reflection and stoic journaling. Use our secure, browser-side tool to record your thoughts, practice mindfulness, and apply timeless wisdom to your daily life.",
 };
 
 export default function JournalPage() {

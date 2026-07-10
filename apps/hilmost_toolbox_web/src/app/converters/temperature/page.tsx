@@ -7,7 +7,7 @@ import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Temperature Converter";
 const TOOL_TYPE = "Temperature Converter";
-const TOOL_DESC = "Convert seamlessly between Celsius, Fahrenheit, and Kelvin in real-time — no signup required.";
+const TOOL_DESC = "Convert seamlessly between Celsius, Fahrenheit, and Kelvin in real-time. Our high-precision temperature converter provides instant, accurate results for all your scientific needs.";
 const PATH = "/converters/temperature";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 

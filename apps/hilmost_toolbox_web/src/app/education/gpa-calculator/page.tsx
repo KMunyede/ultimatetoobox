@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Free GPA Calculator";
-const TOOL_DESC = "Calculate your semester and cumulative GPA using letter grades, percentages, or 4.0 scale. Supports weighted 4.0 and 5.0 scales.";
+const TOOL_DESC = "Calculate your semester and cumulative GPA using letter grades, percentages, or 4.0 scale. Our free tool supports weighted 4.0 and 5.0 scales for high school and university students.";
 const PATH = "/education/gpa-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
