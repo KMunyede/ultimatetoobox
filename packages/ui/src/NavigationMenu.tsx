@@ -194,7 +194,7 @@ export function NavigationMenu() {
       >
         <div className="flex items-center gap-3">
           <Menu size={20} />
-          <span className="text-xs font-black uppercase tracking-widest">Browse 370+ Free Tools</span>
+          <span className="text-xs font-black uppercase tracking-widest">Browse 30+ Free Tools — more added regularly</span>
         </div>
         <ChevronRight size={18} className="opacity-60" />
       </button>

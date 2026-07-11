@@ -72,6 +72,53 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Our Products Section */}
+          <div className="max-w-6xl mx-auto mt-16 mb-20">
+            <div className="flex items-center gap-4 mb-10">
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Our Products</h2>
+                <div className="h-px flex-1 bg-base" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  name: "Hilmost Toolbox",
+                  description: "30+ free browser tools",
+                  href: "https://hilmost-toolbox.hilmost.net",
+                  cta: "Open Toolbox"
+                },
+                {
+                  name: "Hilmost Apparel",
+                  description: "Wear your story",
+                  href: "https://shop.hilmost.net",
+                  cta: "Shop Now"
+                },
+                {
+                  name: "Hilmost Apps",
+                  description: "Daily Stoic, MindOS",
+                  href: null,
+                  cta: "Coming soon"
+                }
+              ].map((product) => (
+                <div
+                  key={product.name}
+                  className="group bg-canvas-card border border-base rounded-[2rem] p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:border-brand-primary/30"
+                >
+                  <h3 className="text-2xl font-black text-text-primary tracking-tight mb-2">{product.name}</h3>
+                  <p className="text-text-secondary font-medium leading-relaxed mb-8">{product.description}</p>
+                  {product.href ? (
+                    <Link href={product.href} className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
+                      {product.cta} <ArrowRight size={16} />
+                    </Link>
+                  ) : (
+                    <span className="inline-flex text-[10px] font-black uppercase tracking-widest text-text-muted bg-canvas-muted px-4 py-2 rounded-full">
+                      {product.cta}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
 
           {/* Core Tool Categories - Flattened Navigation */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
