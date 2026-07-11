@@ -120,91 +120,70 @@ export default function Home() {
           </div>
 
 
-          {/* Core Tool Categories - Flattened Navigation */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                name: "Money & Tax",
-                description: "Professional calculators for currency, loans, interest, and taxes.",
-                href: "https://hilmost-toolbox.hilmost.net/finance",
-                icon: <Banknote size={32} />,
-                color: "blue",
-                count: 12
-              },
-              {
-                name: "PDF Tools",
-                description: "Securely merge, split, and manage PDF files 100% in your browser.",
-                href: "https://hilmost-toolbox.hilmost.net/pdf-tools",
-                icon: <FileText size={32} />,
-                color: "red",
-                count: 4
-              },
-              {
-                name: "Unit Converters",
-                description: "Quickly convert length, weight, temperature, and data storage units.",
-                href: "https://hilmost-toolbox.hilmost.net/converters",
-                icon: <Replace size={32} />,
-                color: "amber",
-                count: 10
-              },
-              {
-                name: "Text & Formatting",
-                description: "Clean up text, count words, and encode data with ease.",
-                href: "https://hilmost-toolbox.hilmost.net/text-data",
-                icon: <Binary size={32} />,
-                color: "green",
-                count: 4
-              },
-              {
-                name: "Math & Science",
-                description: "From standard math to astrophysics and science equation solvers.",
-                href: "https://hilmost-toolbox.hilmost.net/calculators",
-                icon: <Wrench size={32} />,
-                color: "indigo",
-                count: 4
-              },
-              {
-                name: "Health & Wellness",
-                description: "Simple tools for BMI tracking and daily wellness check-ins.",
-                href: "https://hilmost-toolbox.hilmost.net/health",
-                icon: <HeartPulse size={32} />,
-                color: "rose",
-                count: 2
-              },
-              {
-                name: "Developer Experience",
-                description: "JSON, Regex, Password, and JWT utilities built for modern engineering workflows.",
-                href: "https://hilmost-toolbox.hilmost.net/dx",
-                icon: <Code2 size={32} />,
-                color: "slate",
-                count: 5
-              }
-            ].map((cat) => (
+          {/* Core Tool Categories Teaser */}
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center gap-4 mb-10">
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Free Digital Utilities</h2>
+                <div className="h-px flex-1 bg-base" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  name: "Money & Tax",
+                  description: "Professional calculators for currency, loans, and taxes.",
+                  href: "https://hilmost-toolbox.hilmost.net/finance",
+                  icon: <Banknote size={24} />,
+                  color: "blue",
+                  count: 12
+                },
+                {
+                  name: "PDF Tools",
+                  description: "Securely merge and manage PDF files in your browser.",
+                  href: "https://hilmost-toolbox.hilmost.net/pdf-tools",
+                  icon: <FileText size={24} />,
+                  color: "red",
+                  count: 4
+                },
+                {
+                  name: "Developer Experience",
+                  description: "JSON, Regex, and JWT utilities for engineers.",
+                  href: "https://hilmost-toolbox.hilmost.net/dx",
+                  icon: <Code2 size={24} />,
+                  color: "slate",
+                  count: 5
+                }
+              ].map((cat) => (
+                <Link
+                  key={cat.name}
+                  href={cat.href}
+                  className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-primary/30 overflow-hidden"
+                >
+                  <div className="relative z-10">
+                      <div className={`h-12 w-12 flex items-center justify-center rounded-xl bg-${cat.color}-500/10 text-${cat.color}-600 mb-6`}>
+                          {cat.icon}
+                      </div>
+                      <h3 className="text-xl font-black text-text-primary tracking-tight mb-2">{cat.name}</h3>
+                      <p className="text-sm text-text-secondary font-medium leading-relaxed mb-6">
+                          {cat.description}
+                      </p>
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-[10px] font-black text-text-muted uppercase tracking-widest bg-canvas-muted px-3 py-1 rounded-full">
+                          {cat.count} Tools
+                        </span>
+                      </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
               <Link
-                key={cat.name}
-                href={cat.href}
-                className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-primary/30 overflow-hidden"
+                href="https://hilmost-toolbox.hilmost.net"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all shadow-lg text-sm"
               >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-${cat.color}-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-${cat.color}-500/10 transition-colors`} />
-                <div className="relative z-10">
-                    <div className={`h-16 w-16 flex items-center justify-center rounded-2xl bg-${cat.color}-500/10 text-${cat.color}-600 transition-transform group-hover:scale-110 duration-500 mb-8`}>
-                        {cat.icon}
-                    </div>
-                    <h2 className="text-2xl font-black text-text-primary tracking-tight mb-4">{cat.name}</h2>
-                    <p className="text-text-secondary font-medium leading-relaxed mb-8">
-                        {cat.description}
-                    </p>
-                    <div className="flex items-center justify-between mt-auto">
-                      <span className={`inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-${cat.color}-600 group-hover:gap-4 transition-all`}>
-                          Open Tools <ArrowRight size={16} />
-                      </span>
-                      <span className="text-[10px] font-black text-text-muted uppercase tracking-widest bg-canvas-muted px-3 py-1 rounded-full">
-                        {cat.count} Utilities
-                      </span>
-                    </div>
-                </div>
+                Explore All 30+ Tools <ArrowRight size={18} />
               </Link>
-            ))}
+            </div>
           </div>
 
 
