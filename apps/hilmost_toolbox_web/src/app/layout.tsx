@@ -62,7 +62,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
+          <Header logoSrc="/logo-square.png" logoAlt="Hilmost Toolbox Logo" />
           <main className="flex-1">
             <AdLayout publisherId="ca-pub-5650522247882745">
               {children}

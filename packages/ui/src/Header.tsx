@@ -10,7 +10,12 @@ import { NavigationMenu } from "./NavigationMenu";
 import { GraduationCap } from "lucide-react";
 
 
-export function Header() {
+interface HeaderProps {
+  logoSrc?: string;
+  logoAlt?: string;
+}
+
+export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
   const [isStaging, setIsStaging] = useState(false);
 
   useEffect(() => {
@@ -42,8 +47,12 @@ export function Header() {
             <div className="flex items-center gap-3">
               <BackButton />
               <Link href={domains.corporate} className="flex items-center gap-2 group">
-                <div className="h-8 w-8 bg-text-primary dark:bg-canvas-card rounded-md flex items-center justify-center border border-base transition-transform group-hover:scale-105">
-                  <span className="text-canvas-card dark:text-text-primary font-bold text-lg">H</span>
+                <div className="h-8 w-8 bg-text-primary dark:bg-canvas-card rounded-md flex items-center justify-center border border-base transition-transform group-hover:scale-105 overflow-hidden">
+                  {logoSrc ? (
+                    <img src={logoSrc} alt={logoAlt} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-canvas-card dark:text-text-primary font-bold text-lg">H</span>
+                  )}
                 </div>
                 <span className="font-bold text-xl tracking-tighter text-text-primary">Hilmost</span>
               </Link>
