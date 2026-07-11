@@ -160,6 +160,18 @@
             }
           ]
         }
+      ],
+      "redirects": [
+        {
+          "source": "/softwarehub",
+          "destination": "https://hilmost.net",
+          "type": 301
+        },
+        {
+          "source": "/softwarehub/:path*",
+          "destination": "https://hilmost.net",
+          "type": 301
+        }
       ]
     },
     {
@@ -214,6 +226,18 @@
             }
           ]
         }
+      ],
+      "redirects": [
+        {
+          "source": "/softwarehub",
+          "destination": "https://hilmost.net",
+          "type": 301
+        },
+        {
+          "source": "/softwarehub/:path*",
+          "destination": "https://hilmost.net",
+          "type": 301
+        }
       ]
     },
     {
@@ -267,6 +291,18 @@
               "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
+        }
+      ],
+      "redirects": [
+        {
+          "source": "/softwarehub",
+          "destination": "https://hilmost.net",
+          "type": 301
+        },
+        {
+          "source": "/softwarehub/:path*",
+          "destination": "https://hilmost.net",
+          "type": 301
         }
       ]
     },

@@ -32,7 +32,7 @@ export function BackButton() {
   const handleBack = () => {
     if (pathname === "/" || pathname === "") {
       if (!isMainSite) {
-        window.location.href = "https://hilmost.net/softwarehub";
+        window.location.href = "https://hilmost.net";
       }
     } else {
       router.back();

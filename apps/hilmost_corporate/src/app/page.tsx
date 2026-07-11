@@ -3,7 +3,7 @@ import { Building2, Code2, HeartPulse, ShieldCheck, Wrench } from "lucide-react"
 
 export default function Home() {
   const activeSubsidiaries = [
-    { name: "Hilmost Software Corporation", icon: Code2, desc: "Digital platforms and SaaS solutions.", href: "/softwarehub" },
+    { name: "Hilmost Toolbox", icon: Code2, desc: "Digital platforms and SaaS solutions.", href: "https://hilmost-toolbox.hilmost.net" },
     { name: "Hilmost Health", icon: HeartPulse, desc: "Digital and physical health services. Home of Daily Wisdom.", href: "/healthhub" },
   ];
 

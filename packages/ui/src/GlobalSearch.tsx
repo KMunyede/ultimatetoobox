@@ -45,8 +45,8 @@ export function GlobalSearch() {
       icon: <Zap size={16} className="text-amber-500" />
     },
     {
-      name: "Software Hub",
-      href: `${corporateDomain}/softwarehub`,
+      name: "Hilmost Toolbox",
+      href: `${toolboxDomain}`,
       description: "Explore all Hilmost products",
       category: "Quick Action",
       type: "action",
