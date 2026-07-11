@@ -64,7 +64,17 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-base mt-12 pt-8 flex flex-col lg:flex-row items-start justify-between gap-8 text-sm text-text-secondary">
+        <div className="border-t border-base mt-12 pt-8">
+          <div className="mb-12">
+            <h3 className="font-bold text-text-primary mb-4 uppercase tracking-widest text-[10px]">Our Products</h3>
+            <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm font-medium text-text-secondary">
+              <Link href={domains.corporate} className="hover:text-brand-primary transition-colors">Hilmost.net</Link>
+              <Link href={domains.toolbox} className="hover:text-brand-primary transition-colors">Hilmost Toolbox</Link>
+              <a href="https://shop.hilmost.net" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors">Hilmost Apparel</a>
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-8 text-sm text-text-secondary">
           <div className="flex flex-col gap-3 flex-1">
             <p>© {new Date().getFullYear()} Hilmost Software Corporation. All rights reserved.</p>
             <div className="text-xs leading-relaxed max-w-3xl opacity-80">
@@ -83,6 +93,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
   );
 }
