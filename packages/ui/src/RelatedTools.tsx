@@ -17,6 +17,7 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
     { name: "Temperature Converter", href: "/converters/temperature", description: "Convert Celsius, Fahrenheit, Kelvin." },
     { name: "Time Converter", href: "/converters/time", description: "Convert hours, minutes, seconds." },
     { name: "Time Zone Converter", href: "/converters/time-zone", description: "Compare global time zones instantly." },
+    { name: "Aspect Ratio", href: "/converters/aspect-ratio", description: "Calculate image and video proportions." },
     { name: "Data Storage", href: "/converters/data-storage", description: "Convert bytes, KB, MB, GB, TB." },
     { name: "Age Calculator", href: "/converters/age-calculator", description: "Calculate exact age in years, months, days." },
     { name: "Percentage Calculator", href: "/converters/percentage", description: "Calculate percentages easily." },

@@ -83,6 +83,7 @@ export default function Home() {
         { name: "Temperature Converter", href: "/converters/temperature" },
         { name: "Time Converter", href: "/converters/time" },
         { name: "Time Zone Converter", href: "/converters/time-zone" },
+        { name: "Aspect Ratio", href: "/converters/aspect-ratio" },
         { name: "Data Storage", href: "/converters/data-storage" },
         { name: "Area Converter", href: "/converters/area" },
       ],

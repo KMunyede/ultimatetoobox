@@ -72,6 +72,7 @@ const TOOLBOX_DATA = {
         { name: "Temperature Converter", href: "/converters/temperature", tooltip: "Celsius, Fahrenheit, and Kelvin." },
         { name: "Time Converter", href: "/converters/time", tooltip: "Convert hours, days, and seconds." },
         { name: "Time Zone Hub", href: "/converters/time-zone", tooltip: "Global time zone synchronization." },
+        { name: "Aspect Ratio", href: "/converters/aspect-ratio", tooltip: "Calculate image and video proportions." },
         { name: "Data Storage", href: "/converters/data-storage", tooltip: "MB, GB, TB, and Bit conversions." },
         { name: "Area Converter", href: "/converters/area", tooltip: "Convert acres, meters, and miles." },
       ]
