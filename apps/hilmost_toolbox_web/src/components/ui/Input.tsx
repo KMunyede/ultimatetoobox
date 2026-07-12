@@ -9,9 +9,9 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function Input({ label, className = "", ...props }: InputProps) {
   return (
-    <div className="space-y-1.5 w-full">
+    <div className="space-y-1 w-full">
       {label && (
-        <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">
+        <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1">
           {label}
         </label>
       )}

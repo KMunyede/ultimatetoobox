@@ -25,9 +25,9 @@ export function PillSelector<T extends string | number>({
   pillClassName = "",
 }: PillSelectorProps<T>) {
   return (
-    <div className={`space-y-4 w-full ${className}`}>
+    <div className={`space-y-3 w-full ${className}`}>
       {label && (
-        <h3 className="text-center text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-secondary)] mb-1.5">
+        <h3 className="text-center text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">
           {label}
         </h3>
       )}

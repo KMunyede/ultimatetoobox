@@ -20,7 +20,7 @@ export function AdLayout({
 }: AdLayoutProps) {
   return (
     <div className="w-full max-w-[1750px] mx-auto px-4 py-0">
-      <div className="flex flex-col lg:flex-row gap-6 xl:gap-10 justify-center">
+      <div className="flex flex-col lg:flex-row gap-5 xl:gap-8 justify-center">
         {/* Left Sidebar Ad (Hidden on mobile/tablet) */}
         <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
           <div className="sticky top-24 h-[600px]">
