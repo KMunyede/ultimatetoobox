@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from './Tooltip';
+import { TOOL_CATEGORIES } from '@utilitiessite/config';
 
 const TOOLBOX_DATA = {
   name: "Free Tools",
@@ -183,6 +184,9 @@ export function NavigationMenu() {
     }, 300);
   };
 
+  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
+  const displayCount = Math.floor(totalTools / 10) * 10; // e.g. 43 -> 40
+
   const resolveHref = (path: string) => {
     return `${domains.toolbox}${path}`;
   };
@@ -197,7 +201,7 @@ export function NavigationMenu() {
       >
         <div className="flex items-center gap-3">
           <Menu size={20} />
-          <span className="text-xs font-black uppercase tracking-widest">Browse 30+ Free Tools — more added regularly</span>
+          <span className="text-xs font-black uppercase tracking-widest">Browse {displayCount}+ Free Tools — more added regularly</span>
         </div>
         <ChevronRight size={18} className="opacity-60" />
       </button>
@@ -302,6 +306,13 @@ export function NavigationMenu() {
             Guides
           </Link>
         </Tooltip>
+
+        <Link
+          href={domains.corporate + "/blog"}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight text-text-secondary hover:text-brand-primary transition-all"
+        >
+          Blog
+        </Link>
       </nav>
 
       {/* Ad-Safe Mobile Drawer (Slides from Right) */}

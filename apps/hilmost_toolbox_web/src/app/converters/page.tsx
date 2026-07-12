@@ -71,6 +71,11 @@ const links = [
     description: "Compare times across global time zones and plan international meetings. Automatically accounts for daylight saving time transitions worldwide."
   },
   {
+    name: "Aspect Ratio Calculator",
+    href: "/converters/aspect-ratio",
+    description: "Simplify image and video aspect ratios instantly. Supports common presets like 16:9, 9:16, 4:3, and 1:1 with GCD-based precision."
+  },
+  {
     name: "Data Storage",
     href: "/converters/data-storage",
     description: "Convert between bits, bytes, kilobytes, megabytes, and gigabytes. Essential for IT professionals managing server capacity and file transfers."

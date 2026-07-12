@@ -7,7 +7,7 @@ export const TOOL_CATEGORIES = [
     name: "Developer Experience",
     slug: "dx",
     description: "JSON, Regex, and JWT utilities built for modern engineering workflows.",
-    count: 3,
+    count: 6,
     color: "slate",
     icon: "Code2"
   },

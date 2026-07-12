@@ -41,6 +41,11 @@ const links = [
     description: "Estimate monthly payments, total interest, and payoff schedules for mortgages or personal loans."
   },
   {
+    name: "Mortgage Calculator",
+    href: "/finance/mortgage-calculator",
+    description: "Estimate full PITI (Principal, Interest, Tax, Insurance) mortgage payments with precision."
+  },
+  {
     name: "Income Tax",
     href: "/finance/income-tax",
     description: "Calculate your take-home pay after federal and local taxes. Supports multiple jurisdictions."

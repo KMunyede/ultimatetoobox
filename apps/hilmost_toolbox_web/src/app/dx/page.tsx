@@ -1,6 +1,6 @@
 import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle, CollapsibleSection } from "@utilitiessite/ui";
 import Link from "next/link";
-import { Code2, ArrowRight, FileJson, Lock, QrCode, Search, ShieldCheck, Palette } from "lucide-react";
+import { Code2, ArrowRight, FileJson, Lock, QrCode, Search, ShieldCheck, Palette, Cpu } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -35,6 +35,12 @@ const links = [
     href: "/dx/json-formatter",
     icon: <FileJson size={20} />,
     description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors."
+  },
+  {
+    name: "AI Token Calculator",
+    href: "/dx/ai-token-calculator",
+    icon: <Cpu size={20} />,
+    description: "Estimate token counts and API costs for LLM prompts. Supports custom rate entry to stay accurate as pricing changes."
   },
   {
     name: "Password Generator",
