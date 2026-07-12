@@ -62,6 +62,7 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
   ],
   dx: [
     { name: "JSON Formatter", href: "/dx/json-formatter", description: "Prettify and validate JSON data." },
+    { name: "AI Token Calculator", href: "/dx/ai-token-calculator", description: "Estimate LLM tokens and costs." },
     { name: "Password Generator", href: "/dx/password-generator", description: "Forge secure random passwords." },
     { name: "Regex Tester", href: "/dx/regex-tester", description: "Test and debug regular expressions." },
     { name: "JWT Decoder", href: "/dx/jwt-decoder", description: "Inspect JSON Web Tokens securely." },

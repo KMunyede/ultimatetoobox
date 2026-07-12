@@ -18,6 +18,7 @@ const TOOLBOX_DATA = {
       icon: "Code2",
       tools: [
         { name: "JSON Formatter", href: "/dx/json-formatter", tooltip: "Pretty-print and validate JSON data." },
+        { name: "AI Token Calculator", href: "/dx/ai-token-calculator", tooltip: "Estimate LLM token count and API costs." },
         { name: "QR Code Generator", href: "/dx/qr-code-generator", tooltip: "Create QR codes for URLs, Wi-Fi, and more." },
         { name: "Password Generator", href: "/dx/password-generator", tooltip: "Generate secure random passwords with custom rules." },
         { name: "Regex Tester", href: "/dx/regex-tester", tooltip: "Real-time regular expression testing." },

@@ -169,6 +169,7 @@ export default function Home() {
             colorClass: "bg-slate-500/10",
             links: [
               { name: "JSON Formatter", href: "/dx/json-formatter" },
+              { name: "AI Token Calculator", href: "/dx/ai-token-calculator" },
               { name: "Password Generator", href: "/dx/password-generator" },
               { name: "Regex Tester", href: "/dx/regex-tester" },
               { name: "JWT Decoder", href: "/dx/jwt-decoder" },
