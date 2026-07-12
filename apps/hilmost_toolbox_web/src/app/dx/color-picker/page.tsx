@@ -92,7 +92,7 @@ export default function ColorPickerPage() {
 
       <ColorPickerTool />
 
-      <div className="max-w-4xl mx-auto my-10 space-y-10">
+      <div className="max-w-4xl mx-auto my-6 space-y-6">
         <ToolArticle title="Mastering Digital Color: A Technical Overview">
           <p>
             Color is the heartbeat of visual communication. Modern web development requires more than just picking a &quot;pretty&quot; color; it requires mathematical precision for accessibility and brand consistency. Our <strong>Spectrum Dynamics Studio</strong> is your all-in-one laboratory for spectrum analysis.

@@ -134,7 +134,7 @@ export default function Home() {
   const breadcrumbItems = [{ label: "Home", href: PATH }];
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+    <div className="container mx-auto px-4 py-6 md:py-8 max-w-6xl">
       <WebApplicationSchema
         name={`${TITLE} | Hilmost Ultimate Toolbox`}
         description={DESC}
@@ -145,12 +145,12 @@ export default function Home() {
       <BreadcrumbSchema items={breadcrumbItems} />
 
       {/* Hero Section */}
-      <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-6">
+      <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-3">
             <Sparkles size={14} className="animate-pulse" />
             The fastest, versatile toolbox
         </div>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight text-text-primary mb-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight text-text-primary mb-3">
           Free Tools & <span className="text-brand-primary">Calculators</span>
         </h1>
         <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium">
@@ -159,7 +159,7 @@ export default function Home() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {[
           {
             title: "Developer Experience",
@@ -175,21 +175,21 @@ export default function Home() {
           },
           ...categories
         ].map((category) => (
-          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
-            <div className="flex items-center gap-x-4 mb-4">
+          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-5 md:p-6 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
+            <div className="flex items-center gap-x-4 mb-3">
               <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>
                 {category.icon}
               </div>
               <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.title}</h2>
             </div>
-            <p className="text-text-secondary mb-6 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
+            <p className="text-text-secondary mb-5 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
 
             <div className="flex-1 overflow-hidden">
               <div className={`pr-1 ${category.links.length > 5 ? 'max-h-[280px] overflow-y-auto custom-scrollbar' : ''}`}>
                 <ul className="space-y-0.5">
                   {category.links.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="group/link flex items-center justify-between py-2.5 border-b border-base/50 hover:border-brand-primary/50 transition-all">
+                      <Link href={link.href} className="group/link flex items-center justify-between py-2 border-b border-base/50 hover:border-brand-primary/50 transition-all">
                         <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
                         <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
                       </Link>
@@ -199,7 +199,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-base">
+            <div className="mt-5 pt-3 border-t border-base">
                 <p className="text-[10px] font-black uppercase tracking-widest text-text-muted opacity-60">
                     {category.links.length} Tools Available
                 </p>
@@ -210,7 +210,7 @@ export default function Home() {
 
 
       {/* Trust Footer Section */}
-      <div className="mt-24 py-12 border-t border-base text-center">
+      <div className="mt-16 py-8 border-t border-base text-center">
           <div className="flex flex-wrap justify-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
             <div className="flex flex-col items-center">
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Secured by</span>

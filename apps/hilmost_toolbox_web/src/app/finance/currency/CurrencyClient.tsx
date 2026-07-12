@@ -115,7 +115,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-8 my-8"
+      className="@container space-y-6 my-6"
     >
       <div className="flex justify-between items-center">
         <div id="tour-currency-status" className="flex flex-col sm:flex-row sm:items-center gap-3">

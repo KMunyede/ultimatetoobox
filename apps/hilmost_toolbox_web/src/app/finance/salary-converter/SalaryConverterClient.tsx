@@ -36,7 +36,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-8 my-8"
+      className="@container space-y-6 my-6"
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Sidebar Inputs */}

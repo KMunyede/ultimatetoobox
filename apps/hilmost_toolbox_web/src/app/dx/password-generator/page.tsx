@@ -87,7 +87,7 @@ export default function PasswordGeneratorPage() {
 
       <PasswordGeneratorTool />
 
-      <div className="max-w-4xl mx-auto my-10 space-y-10">
+      <div className="max-w-4xl mx-auto my-6 space-y-6">
         <ToolArticle title="Advanced Security Features">
           <p>
             Our Secure Password Laboratory offers advanced features designed for precision and usability. The <strong>&quot;Exclude Ambiguous Characters&quot;</strong> option removes confusing characters like <code>0</code> (zero) and <code>O</code> (uppercase o), preventing entry errors on sensitive logins.

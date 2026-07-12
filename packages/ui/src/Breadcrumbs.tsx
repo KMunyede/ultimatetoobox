@@ -39,7 +39,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       />
 
       {/* Visual Breadcrumbs */}
-      <nav aria-label="Breadcrumb" className="mb-6">
+      <nav aria-label="Breadcrumb" className="mb-4">
         <ol className="flex items-center space-x-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-text-muted">
           <li>
             <Link href="/" scroll={true} className="hover:text-brand-primary transition-colors flex items-center gap-1">

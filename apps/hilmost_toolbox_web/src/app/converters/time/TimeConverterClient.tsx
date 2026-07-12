@@ -65,7 +65,7 @@ export function TimeConverterClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-8 my-8"
+      className="@container space-y-6 my-6"
     >
       <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
         <div className="flex flex-col md:flex-row items-center gap-8">

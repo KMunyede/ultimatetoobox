@@ -24,7 +24,7 @@ export function PercentageClient() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="@container space-y-8 my-8"
+      className="@container space-y-6 my-6"
     >
       <div className="grid grid-cols-1 gap-8">
         {/* Section 1: X% of Y */}

@@ -22,13 +22,13 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="mt-10 max-w-4xl mx-auto px-4 sm:px-0">
+    <div className="mt-6 max-w-4xl mx-auto px-4 sm:px-0">
       {title && (
-        <h2 className="text-[20px] md:text-2xl font-black text-slate-900 dark:text-white mb-8 uppercase tracking-tight">
+        <h2 className="text-[20px] md:text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">
           {title}
         </h2>
       )}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
@@ -38,7 +38,7 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
             >
               <button
                 onClick={() => toggle(index)}
-                className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
+                className="w-full text-left px-6 py-4 flex items-center justify-between focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
                 aria-expanded={isOpen}
               >
                 <span className="font-bold text-slate-900 dark:text-slate-100 text-sm md:text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -59,7 +59,7 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
                 }`}
               >
                 <div className="overflow-hidden">
-                  <div className="px-6 pb-6 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-800/50 pt-4">
+                  <div className="px-6 pb-5 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-800/50 pt-3">
                     {item.answer}
                   </div>
                 </div>

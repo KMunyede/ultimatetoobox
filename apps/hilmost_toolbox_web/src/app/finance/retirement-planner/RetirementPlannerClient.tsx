@@ -64,7 +64,7 @@ export function RetirementPlannerClient() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="@container space-y-8 my-8"
+      className="@container space-y-6 my-6"
     >
       <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

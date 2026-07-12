@@ -40,7 +40,7 @@ export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
       <div className="h-1 w-full bg-gradient-to-r from-red-500 via-white to-brand-primary opacity-90"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:h-16 items-stretch lg:items-center justify-between py-4 lg:py-0 gap-4 lg:gap-0">
+        <div className="flex flex-col lg:flex-row lg:h-16 items-stretch lg:items-center justify-between py-3 lg:py-0 gap-3 lg:gap-0">
           
           {/* Row 1: Brand & Action Icons */}
           <div className="flex items-center justify-between lg:justify-start gap-4">
@@ -64,18 +64,17 @@ export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
             </div>
           </div>
 
-          {/* Row 2: Quick Links Pills (Mobile Only) */}
           <div className="lg:hidden grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <Link href={domains.toolbox + "/guides"} className="flex items-center justify-center py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.toolbox + "/guides"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Guides
             </Link>
-            <Link href={domains.corporate + "/blog"} className="flex items-center justify-center py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.corporate + "/blog"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Blog
             </Link>
-            <Link href={domains.corporate + "/about"} className="flex items-center justify-center py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.corporate + "/about"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               About
             </Link>
-            <Link href={domains.corporate + "/contact"} className="flex items-center justify-center py-2.5 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.corporate + "/contact"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Contact
             </Link>
           </div>

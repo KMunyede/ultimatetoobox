@@ -23,10 +23,10 @@ export function Footer() {
 
   return (
     <footer className="border-t border-base bg-canvas-card text-text-primary mt-auto print:hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="md:col-span-2 pr-0 md:pr-12">
-            <Link href="/" className="flex items-center gap-2 mb-6">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 bg-brand-primary rounded-md flex items-center justify-center">
                 <span className="text-white font-bold text-lg">H</span>
               </div>
@@ -38,8 +38,8 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-bold text-text-primary mb-6 uppercase tracking-widest text-[10px]">Research Verticals</h3>
-            <ul className="space-y-3 text-sm text-text-secondary font-medium">
+            <h3 className="font-bold text-text-primary mb-4 uppercase tracking-widest text-[10px]">Research Verticals</h3>
+            <ul className="space-y-2 text-sm text-text-secondary font-medium">
               <li><Link href={`${domains.toolbox}/text-data`} className="hover:text-brand-primary transition-colors">Text & Data</Link></li>
               <li><Link href={`${domains.toolbox}/finance`} className="hover:text-brand-primary transition-colors">Financial</Link></li>
               <li><Link href={`${domains.toolbox}/converters`} className="hover:text-brand-primary transition-colors">Converters</Link></li>
@@ -50,8 +50,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-text-primary mb-6 uppercase tracking-widest text-[10px]">Platform</h3>
-            <ul className="space-y-3 text-sm text-text-secondary font-medium">
+            <h3 className="font-bold text-text-primary mb-4 uppercase tracking-widest text-[10px]">Platform</h3>
+            <ul className="space-y-2 text-sm text-text-secondary font-medium">
               <li><Link href={`${domains.corporate}/blog`} className="hover:text-brand-primary transition-colors">Blog</Link></li>
               <li><Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">About</Link></li>
               <li><Link href={`${domains.corporate}/contact`} className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
@@ -64,8 +64,8 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-base mt-12 pt-8">
-          <div className="mb-12">
+        <div className="border-t border-base mt-10 pt-6">
+          <div className="mb-10">
             <h3 className="font-bold text-text-primary mb-4 uppercase tracking-widest text-[10px]">Our Products</h3>
             <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm font-medium text-text-secondary">
               <Link href={domains.corporate} className="hover:text-brand-primary transition-colors">Hilmost.net</Link>
