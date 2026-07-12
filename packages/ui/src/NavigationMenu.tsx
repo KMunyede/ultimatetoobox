@@ -266,6 +266,7 @@ export function NavigationMenu() {
                             <Link
                               key={tool.href}
                               href={resolveHref(tool.href)}
+                              scroll={true}
                               onClick={() => { setHubOpen(false); setActiveCategory(null); }}
                               className="group flex flex-col px-4 py-3 rounded-xl hover:bg-canvas-muted transition-all"
                               title={tool.tooltip}
@@ -340,6 +341,7 @@ export function NavigationMenu() {
                         <Link
                           key={tool.href}
                           href={resolveHref(tool.href)}
+                          scroll={true}
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center w-full py-4 text-sm font-bold text-text-secondary border-b border-base/40 active:bg-brand-primary/5 active:text-brand-primary transition-all"
                         >

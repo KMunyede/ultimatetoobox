@@ -42,7 +42,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       <nav aria-label="Breadcrumb" className="mb-6">
         <ol className="flex items-center space-x-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-text-muted">
           <li>
-            <Link href="/" className="hover:text-brand-primary transition-colors flex items-center gap-1">
+            <Link href="/" scroll={true} className="hover:text-brand-primary transition-colors flex items-center gap-1">
               Hilmost Toolbox
             </Link>
           </li>
@@ -58,7 +58,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                     {item.label}
                   </span>
                 ) : (
-                  <Link href={item.href} className="hover:text-brand-primary transition-colors">
+                  <Link href={item.href} scroll={true} className="hover:text-brand-primary transition-colors">
                     {item.label}
                   </Link>
                 )}

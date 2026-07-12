@@ -2,7 +2,7 @@
 
 import { ArrowLeft } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Tooltip } from "./Tooltip";
 
 
@@ -11,6 +11,7 @@ export function BackButton() {
   const pathname = usePathname();
 
   const [isMainSite, setIsMainSite] = useState(true);
+  const shouldScrollToTop = useRef(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,6 +25,19 @@ export function BackButton() {
     }
   }, []);
 
+  // Effect to handle scrolling to top after navigation completes
+  useEffect(() => {
+    if (shouldScrollToTop.current) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      shouldScrollToTop.current = false;
+
+      // Reset scroll restoration to auto after the jump
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'auto';
+      }
+    }
+  }, [pathname]);
+
   // Hide the back button if we are on the homepage of the main site
   if (pathname === "/" && isMainSite) {
     return null;
@@ -35,6 +49,15 @@ export function BackButton() {
         window.location.href = "https://hilmost.net";
       }
     } else {
+      // 1. Set flag to trigger scroll in the useEffect after route change
+      shouldScrollToTop.current = true;
+
+      // 2. Override scroll restoration for this specific action
+      if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+
+      // 3. Trigger the navigation
       router.back();
     }
   };
