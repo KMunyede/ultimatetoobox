@@ -21,15 +21,15 @@ export function AdLayout({
   return (
     <div className="w-full max-w-[1750px] mx-auto px-4 py-0">
       <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 justify-center">
-        {/* Left Sidebar Ad (Hidden on mobile) */}
-        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 pt-8">
-          <div className="sticky top-24">
+        {/* Left Sidebar Ad (Hidden on mobile/tablet) */}
+        <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
+          <div className="sticky top-24 h-[600px]">
             <AdUnit
               publisherId={publisherId}
               slotId={leftSlotId}
               format="vertical"
               className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-              style={{ width: "100%", minHeight: "600px" }}
+              style={{ width: "100%", height: "600px" }}
             />
           </div>
         </div>
@@ -67,15 +67,15 @@ export function AdLayout({
           )}
         </div>
 
-        {/* Right Sidebar Ad (Hidden on mobile) */}
-        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 pt-8">
-          <div className="sticky top-24">
+        {/* Right Sidebar Ad (Hidden on mobile/tablet) */}
+        <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
+          <div className="sticky top-24 h-[600px]">
             <AdUnit
               publisherId={publisherId}
               slotId={rightSlotId}
               format="vertical"
               className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-              style={{ width: "100%", minHeight: "600px" }}
+              style={{ width: "100%", height: "600px" }}
             />
           </div>
         </div>
