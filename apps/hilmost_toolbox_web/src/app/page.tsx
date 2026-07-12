@@ -46,6 +46,7 @@ export default function Home() {
         { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator" },
         { name: "Currency Converter", href: "/finance/currency" },
         { name: "Loan Calculator", href: "/finance/loan-calculator" },
+        { name: "Mortgage Calculator", href: "/finance/mortgage-calculator" },
         { name: "Income Tax", href: "/finance/income-tax" },
         { name: "Compound Interest", href: "/finance/compound-interest" },
         { name: "VAT & Tax Calculator", href: "/finance/vat-tax" },

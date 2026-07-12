@@ -34,6 +34,7 @@ const TOOLBOX_DATA = {
         { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator", tooltip: "Calculate Earnings Per Share metrics." },
         { name: "Currency Converter", href: "/finance/currency", tooltip: "Real-time global currency exchange." },
         { name: "Loan Calculator", href: "/finance/loan-calculator", tooltip: "Analyze monthly payments and interest." },
+        { name: "Mortgage Calculator", href: "/finance/mortgage-calculator", tooltip: "PITI mortgage payment estimator." },
         { name: "Income Tax", href: "/finance/income-tax", tooltip: "Estimate your personal tax burden." },
         { name: "Compound Interest", href: "/finance/compound-interest", tooltip: "Project long-term savings growth." },
         { name: "VAT & Tax Calculator", href: "/finance/vat-tax", tooltip: "Quick sales tax and VAT calculations." },

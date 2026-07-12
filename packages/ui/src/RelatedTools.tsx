@@ -32,6 +32,7 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
     { name: "Currency Converter", href: "/finance/currency", description: "Live foreign exchange rates." },
     { name: "Income Tax", href: "/finance/income-tax", description: "Estimate net take-home pay." },
     { name: "Loan Calculator", href: "/finance/loan-calculator", description: "Calculate monthly payments." },
+    { name: "Mortgage Calculator", href: "/finance/mortgage-calculator", description: "PITI mortgage payment estimator." },
     { name: "Compound Interest", href: "/finance/compound-interest", description: "Calculate investment growth." },
     { name: "VAT & Tax Calculator", href: "/finance/vat-tax", description: "Add or remove VAT/GST." },
     { name: "Salary Converter", href: "/finance/salary-converter", description: "Hourly to annual pay conversion." },
