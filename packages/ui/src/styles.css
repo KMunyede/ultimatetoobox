@@ -1,14 +1,14 @@
 ﻿@layer base {
   :root {
     /* Backgrounds */
-    --color-canvas-base: #F3F4F6; /* light neutral grey */
-    --color-canvas-card: #FAFAFA; /* even lighter grey for card separation */
-    --color-canvas-muted: #FFFFFF; /* white for contrast inside controls */
+    --color-canvas-base: #E5E7EB; /* Matte light grey (~10% darkness) */
+    --color-canvas-card: #FFFFFF; /* Pure white cards for maximum pop */
+    --color-canvas-muted: #F9FAFB; /* Very light grey for nested contrast */
 
     /* Text */
     --color-text-primary: #0f172a; /* slate-900 */
-    --color-text-secondary: #57544C; /* softer dark for labels */
-    --color-text-muted: #94a3b8; /* slate-400 */
+    --color-text-secondary: #475569; /* slate-600 */
+    --color-text-muted: #64748b; /* slate-500 */
     --color-text-inverse: #ffffff;
 
     /* Brand / Action */
@@ -43,6 +43,15 @@
     --color-border-base: #1e293b; /* slate-800 */
     --color-border-focus: #10b981; /* emerald-500 */
     --color-shadow: rgba(0, 0, 0, 0.2);
+  }
+
+  body {
+    @apply bg-canvas-base text-text-primary;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    background-attachment: fixed;
+    background-blend-mode: soft-light;
   }
 }
 

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex-1 bg-canvas-base">
+    <main className="flex-1">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify({
