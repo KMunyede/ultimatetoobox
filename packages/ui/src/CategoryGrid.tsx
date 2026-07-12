@@ -36,7 +36,7 @@ export function CategoryGrid({ limit = 6, variant = "minimalist" }: CategoryGrid
           <Link
             key={cat.slug}
             href={`https://hilmost-toolbox.hilmost.net/${cat.slug}`}
-            className="group flex items-center gap-4 p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 hover:shadow-md transition-all"
+            className="group flex items-center gap-4 p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-500 hover:shadow-md transition-all focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 outline-none"
           >
             <div className={`h-12 w-12 flex items-center justify-center rounded-xl bg-${cat.color}-500/10 text-${cat.color}-600 shrink-0 group-hover:scale-110 transition-transform`}>
               {ICON_MAP[cat.icon]}

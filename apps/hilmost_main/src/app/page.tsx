@@ -98,24 +98,35 @@ export default function Home() {
                   href: null,
                   cta: "Coming soon"
                 }
-              ].map((product) => (
-                <div
-                  key={product.name}
-                  className="group bg-canvas-card border border-base rounded-[2rem] p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:border-brand-primary/30"
-                >
-                  <h3 className="text-2xl font-black text-text-primary tracking-tight mb-2">{product.name}</h3>
-                  <p className="text-text-secondary font-medium leading-relaxed mb-8">{product.description}</p>
-                  {product.href ? (
-                    <Link href={product.href} className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
-                      {product.cta} <ArrowRight size={16} />
-                    </Link>
-                  ) : (
-                    <span className="inline-flex text-[10px] font-black uppercase tracking-widest text-text-muted bg-canvas-muted px-4 py-2 rounded-full">
-                      {product.cta}
-                    </span>
-                  )}
-                </div>
-              ))}
+              ].map((product) => {
+                const CardContent = (
+                  <>
+                    <h3 className="text-2xl font-black text-text-primary tracking-tight mb-2">{product.name}</h3>
+                    <p className="text-text-secondary font-medium leading-relaxed mb-8">{product.description}</p>
+                    {product.href ? (
+                      <span className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
+                        {product.cta} <ArrowRight size={16} />
+                      </span>
+                    ) : (
+                      <span className="inline-flex text-[10px] font-black uppercase tracking-widest text-text-muted bg-canvas-muted px-4 py-2 rounded-full">
+                        {product.cta}
+                      </span>
+                    )}
+                  </>
+                );
+
+                const cardClasses = "group flex flex-col bg-canvas-card border border-base rounded-[2rem] p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-primary/30 h-full text-left focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none";
+
+                return product.href ? (
+                  <Link key={product.name} href={product.href} className={cardClasses}>
+                    {CardContent}
+                  </Link>
+                ) : (
+                  <div key={product.name} className={cardClasses}>
+                    {CardContent}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -156,7 +167,7 @@ export default function Home() {
                 <Link
                   key={cat.name}
                   href={cat.href}
-                  className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-primary/30 overflow-hidden"
+                  className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-primary/30 overflow-hidden focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 outline-none"
                 >
                   <div className="relative z-10">
                       <div className={`h-12 w-12 flex items-center justify-center rounded-xl bg-${cat.color}-500/10 text-${cat.color}-600 mb-6`}>

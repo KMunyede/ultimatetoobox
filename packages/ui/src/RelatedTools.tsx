@@ -91,7 +91,7 @@ export function RelatedTools({ category, currentPath }: RelatedToolsProps) {
           <Link
             key={tool.href}
             href={tool.href}
-            className="group flex flex-col p-5 bg-canvas-card border border-base rounded-2xl hover:border-brand-primary hover:shadow-md transition-all"
+            className="group flex flex-col p-5 bg-canvas-card border border-base rounded-2xl hover:border-brand-primary hover:shadow-md transition-all focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 outline-none"
           >
             <div className="flex items-center justify-between mb-2">
               <h3 className="font-semibold text-text-primary group-hover:text-brand-primary transition-colors">

@@ -175,7 +175,7 @@ export default function Home() {
           },
           ...categories
         ].map((category) => (
-          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300">
+          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
             <div className="flex items-center gap-x-4 mb-4">
               <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>
                 {category.icon}
