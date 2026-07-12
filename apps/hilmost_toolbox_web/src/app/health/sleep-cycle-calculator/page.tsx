@@ -80,7 +80,7 @@ export default function SleepCycleCalculatorPage() {
 
       <SleepCycleCalculatorTool />
 
-      <div className="max-w-4xl mx-auto my-16 space-y-16">
+      <div className="max-w-4xl mx-auto my-10 space-y-10">
         <ToolArticle title="Circadian Rhythm Lab: The Science of 90-Minute Sleep Cycles">
           <p>
             Understanding the architecture of sleep is essential for anyone looking to optimize their daily energy levels and cognitive performance. Sleep is not a uniform state of rest but rather a complex series of physiological transitions. Throughout the night, your brain moves through several distinct stages, including Light Sleep (N1 & N2), Deep Sleep (N3), and REM (Rapid Eye Movement). A complete progression through these stages is known as a <strong>Sleep Cycle</strong>, and for most healthy adults, one cycle lasts approximately 90 minutes.

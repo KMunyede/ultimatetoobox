@@ -22,7 +22,7 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="mt-16 max-w-4xl mx-auto px-4 sm:px-0">
+    <div className="mt-10 max-w-4xl mx-auto px-4 sm:px-0">
       {title && (
         <h2 className="text-[20px] md:text-2xl font-black text-slate-900 dark:text-white mb-8 uppercase tracking-tight">
           {title}

@@ -64,7 +64,7 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
         Back to Knowledge Base
       </Link>
 
-      <header className="mb-12">
+      <header className="mb-8">
         <div className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em] mb-4">
           Research Vertical: {article.category.replace("-", " ")}
         </div>
@@ -73,12 +73,12 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
         </h1>
       </header>
 
-      <div className="prose prose-slate dark:prose-invert max-w-none mb-16 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 md:p-12 rounded-[2.5rem] shadow-sm">
+      <div className="prose prose-slate dark:prose-invert max-w-none mb-10 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 md:p-12 rounded-[2.5rem] shadow-sm">
         {article.content}
       </div>
 
       {article.relatedTools.length > 0 && (
-        <div className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
+        <div className="mt-10 pt-10 border-t border-slate-200 dark:border-slate-800">
            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase flex items-center gap-3">
              <Wrench className="text-blue-600" /> Experiment With This Logic
            </h2>

@@ -84,7 +84,7 @@ export function RelatedTools({ category, currentPath }: RelatedToolsProps) {
   if (selectedTools.length === 0) return null;
 
   return (
-    <div className="mt-16 pt-12 border-t border-base">
+    <div className="mt-10 pt-10 border-t border-base">
       <h2 className="text-2xl font-bold text-text-primary mb-6">Related Tools</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {selectedTools.map((tool) => (

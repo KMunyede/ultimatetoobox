@@ -22,7 +22,7 @@ export function AuthorBio({
   category = "generic"
 }: AuthorBioProps) {
   return (
-    <div className={`mt-16 p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 shadow-sm ${className}`}>
+    <div className={`mt-10 p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 shadow-sm ${className}`}>
       {/* Avatar / Initials Circle */}
       <div className="w-20 h-20 rounded-full bg-brand-primary flex items-center justify-center text-white text-3xl font-black shrink-0 shadow-lg border-4 border-white dark:border-slate-800">
         KM

@@ -92,7 +92,7 @@ export default function TextCaseConverterPage() {
 
       <TextCaseConverterTool />
 
-      <div className="max-w-4xl mx-auto my-16 space-y-16">
+      <div className="max-w-4xl mx-auto my-10 space-y-10">
         <ToolArticle title="Advanced Text Transformation: A Deep Dive">
           <p>
             Text case conversion is more than just capitalization; it&apos;s about structural consistency. For developers, this is an essential part of the workflow when transforming variable names between different programming languages. For example, moving a JSON key from <code>camelCase</code> to <code>snake_case</code> is a common task that can be tedious to do manually.

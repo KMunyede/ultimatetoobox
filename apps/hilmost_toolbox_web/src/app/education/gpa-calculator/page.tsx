@@ -93,7 +93,7 @@ export default function GpaCalculatorPage() {
 
       <GpaCalculatorTool />
 
-      <div className="max-w-4xl mx-auto my-16 space-y-16">
+      <div className="max-w-4xl mx-auto my-10 space-y-10">
         <ToolArticle title="The Science of GPA: Tracking Academic Success">
           <p>
             Navigating academic success requires precise planning. Our <strong>Academic Performance Lab</strong> is designed to provide students with a professional-grade environment to track their Grade Point Average. Whether you need to calculate your semester GPA for honors eligibility or your cumulative average for graduation, our tool handles the complex mathematics for you.

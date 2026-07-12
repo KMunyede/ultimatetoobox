@@ -20,16 +20,18 @@ export function AdLayout({
 }: AdLayoutProps) {
   return (
     <div className="w-full max-w-[1750px] mx-auto px-4 py-0">
-      <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 items-start justify-center">
+      <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 justify-center">
         {/* Left Sidebar Ad (Hidden on mobile) */}
-        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 sticky top-24 pt-8">
-          <AdUnit 
-            publisherId={publisherId} 
-            slotId={leftSlotId} 
-            format="vertical" 
-            className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-            style={{ width: "100%", minHeight: "600px" }}
-          />
+        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 pt-8">
+          <div className="sticky top-24">
+            <AdUnit
+              publisherId={publisherId}
+              slotId={leftSlotId}
+              format="vertical"
+              className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
+              style={{ width: "100%", minHeight: "600px" }}
+            />
+          </div>
         </div>
 
         {/* Center Content */}
@@ -52,7 +54,7 @@ export function AdLayout({
 
           {/* Bottom Horizontal Ad - Significant margin for safety */}
           {showInnerAds && (
-            <div className="mt-4 w-full">
+            <div className="mt-8 w-full">
               <AdUnit
                 publisherId={publisherId}
                 slotId={bottomSlotId}
@@ -66,14 +68,16 @@ export function AdLayout({
         </div>
 
         {/* Right Sidebar Ad (Hidden on mobile) */}
-        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 sticky top-24 pt-8">
-          <AdUnit 
-            publisherId={publisherId} 
-            slotId={rightSlotId} 
-            format="vertical" 
-            className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-            style={{ width: "100%", minHeight: "600px" }}
-          />
+        <div className="hidden lg:block w-[160px] xl:w-[250px] shrink-0 pt-8">
+          <div className="sticky top-24">
+            <AdUnit
+              publisherId={publisherId}
+              slotId={rightSlotId}
+              format="vertical"
+              className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
+              style={{ width: "100%", minHeight: "600px" }}
+            />
+          </div>
         </div>
       </div>
     </div>

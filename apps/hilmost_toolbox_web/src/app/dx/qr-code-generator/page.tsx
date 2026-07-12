@@ -91,7 +91,7 @@ export default function QrCodeGeneratorPage() {
 
       <QrCodeGeneratorTool />
 
-      <div className="max-w-4xl mx-auto my-16 space-y-16">
+      <div className="max-w-4xl mx-auto my-10 space-y-10">
         <ToolArticle title="Mastering QR Encoding: Beyond the Basics">
           <p>
             Quick Response (QR) codes are incredibly versatile digital bridges between the physical and digital worlds. With our <strong>QR Architecture Studio</strong>, you can encode standard <strong>Website URLs</strong> for instant browsing, or share <strong>Plain Text</strong> messages without needing an internet connection.

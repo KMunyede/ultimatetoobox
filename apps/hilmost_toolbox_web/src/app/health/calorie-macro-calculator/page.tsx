@@ -93,7 +93,7 @@ export default function CalorieMacroCalculatorPage() {
 
       <CalorieMacroCalculatorTool />
 
-      <div className="max-w-4xl mx-auto my-16 space-y-16">
+      <div className="max-w-4xl mx-auto my-10 space-y-10">
         <ToolArticle title="Nutrition Architecture: Understanding Your Metabolism">
           <p>
             Understanding your energy balance is the foundation of any successful fitness transformation. Our <strong>Metabolic Intelligence Lab</strong> leverages the Mifflin-St Jeor equation to provide high-precision estimates of your metabolic needs. By analyzing your unique profile, we determine your <strong>Basal Metabolic Rate (BMR)</strong>—the minimum energy required for vital functions.
