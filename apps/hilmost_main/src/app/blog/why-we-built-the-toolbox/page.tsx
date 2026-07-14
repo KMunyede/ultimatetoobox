@@ -51,7 +51,7 @@ export default function BlogPost1() {
         <section className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
            <ToolArticle title="About the Author">
              <p>
-               Written by the engineering team at Hilmost Software Corporation. We apply banking-grade precision to everyday digital tasks.
+               Written by the engineering team at Hilmost. We apply high-precision logic to everyday digital tasks.
              </p>
            </ToolArticle>
         </section>

@@ -151,7 +151,7 @@ export default function PDFToolsHub() {
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Document Processing</h2>
           <p>
-            The most significant risk with standard &quot;online&quot; PDF tools is the privacy of your data. Most sites require you to upload your sensitive bank statements or legal contracts to their servers for processing. At Hilmost Digital Labs, we have eliminated this risk through a <strong>browser-side first architecture</strong>. Every operation—from rotation to page deletion—happens locally on your device. Your files never touch our servers, making our platform a safe digital sanctuary for your most confidential data.
+            The most significant risk with standard &quot;online&quot; PDF tools is the privacy of your data. Most sites require you to upload your sensitive bank statements or legal contracts to their servers for processing. At Hilmost, we have eliminated this risk through a <strong>browser-side first architecture</strong>. Every operation—from rotation to page deletion—happens locally on your device. Your files never touch our servers, making our platform a safe, private environment for your most confidential data.
           </p>
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Fast, Lossless, and Watermark-Free</h2>

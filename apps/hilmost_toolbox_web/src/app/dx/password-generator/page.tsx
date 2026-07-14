@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Strong Password Generator";
-const TOOL_DESC = "Generate secure random passwords instantly. Customize length and character sets. Banking-grade security with 100% browser-side generation.";
+const TOOL_DESC = "Generate secure random passwords instantly. Customize length and character sets. High-security standards with 100% browser-side generation.";
 const PATH = "/dx/password-generator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
@@ -105,7 +105,7 @@ export default function PasswordGeneratorPage() {
 
           <h3>Zero-Server Security</h3>
           <p>
-            The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost Digital Labs, we use a 100% browser-side architecture using the <code>crypto.getRandomValues()</code> API. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
+            The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost, we use a 100% browser-side architecture using the <code>crypto.getRandomValues()</code> API. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
           </p>
         </ToolArticle>
 

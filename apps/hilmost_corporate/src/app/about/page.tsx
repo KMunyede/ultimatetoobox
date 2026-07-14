@@ -2,6 +2,7 @@
 import { ShieldCheck, Code, Globe, User } from "lucide-react";
 import { CategoryGrid, AdLayout } from "@utilitiessite/ui";
 import Image from "next/image";
+import { TOOL_CATEGORIES } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "About the Corporation | Hilmost Software Corporation",
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
+  const displayCount = Math.floor(totalTools / 10) * 10;
+
   return (
     <AdLayout publisherId="ca-pub-5650522247882745">
       <div className="container mx-auto px-4 py-8 max-w-5xl">
@@ -28,7 +32,7 @@ export default function AboutPage() {
             The idea started from a real problem: coordinating meetings across colleagues in Australia, Hong Kong, Singapore, China, India, the UK, and New York — juggling three or four time zones by hand, every time, because the tools available online were confusing or bloated. That frustration became our first tool, and the same principle now drives everything we build: solve a real, specific annoyance, make it free, and make it fast.
           </p>
           <p className="text-lg leading-relaxed">
-            Our flagship product, the Hilmost Toolbox, is a growing collection of over 39 free utilities — calculators, converters, PDF tools, and productivity aids — built to be fast, accurate, and genuinely useful. No sign-ups, no unnecessary steps, just tools that work.
+            Our flagship product, the Hilmost Toolbox, is a growing collection of over {displayCount} free utilities — calculators, converters, PDF tools, and productivity aids — built to be fast, accurate, and genuinely useful. No sign-ups, no unnecessary steps, just tools that work.
           </p>
         </div>
 

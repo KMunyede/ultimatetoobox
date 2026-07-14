@@ -120,7 +120,7 @@ export default function CalculatorsHub() {
       </div>
 
       <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
-        Precision engineering for every equation. Our free online calculators provide banking-grade accuracy for math, science, and astrophysics, all running locally in your browser.
+        Precision engineering for every equation. Our free online calculators provide high accuracy for math, science, and astrophysics, all running locally in your browser.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -140,7 +140,7 @@ export default function CalculatorsHub() {
       <CollapsibleSection title="About Mathematics & Science Tools">
         <section className="prose prose-slate dark:prose-invert max-w-none">
           <p className="text-lg leading-relaxed">
-            Welcome to the <strong>free online calculators</strong> hub at Hilmost Toolbox. In today&apos;s fast-paced digital world, having access to reliable, accurate, and fast computing tools is essential. Whether you are a student tackling homework, an engineer performing site calculations, or a scientist exploring the depths of the cosmos, our suite of calculators is engineered to meet your needs with banking-grade precision.
+            Welcome to the <strong>free online calculators</strong> hub at Hilmost Toolbox. In today&apos;s fast-paced digital world, having access to reliable, accurate, and fast computing tools is essential. Whether you are a student tackling homework, an engineer performing site calculations, or a scientist exploring the depths of the cosmos, our suite of calculators is engineered to meet your needs with high precision.
           </p>
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Precision Engineering for Every Equation</h2>

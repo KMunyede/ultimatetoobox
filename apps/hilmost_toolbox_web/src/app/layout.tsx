@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     default: "Hilmost Toolbox | Free Online Calculators & Converters",
     template: "%s"
   },
-  description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
+  description: "Free online calculators and converters — fast, accurate, and private. No sign-up, no data collection.",
   openGraph: {
     title: "Hilmost Toolbox | Free Online Calculators & Converters",
-    description: "Your digital sanctuary for everyday utilities. Work smarter, breathe easier, and move forward with our free online calculators and converters.",
+    description: "Free online calculators and converters — fast, accurate, and private. No sign-up, no data collection.",
     url: "/",
     siteName: "Hilmost Toolbox",
     type: "website",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Hilmost Toolbox | Free Online Calculators",
-    description: "Work smarter with our free online calculators and converters.",
+    description: "Free online calculators and converters — fast, accurate, and private.",
     images: ["https://hilmost-toolbox.hilmost.net/og/main.png"],
   },
 };

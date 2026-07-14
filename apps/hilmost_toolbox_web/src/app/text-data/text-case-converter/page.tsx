@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: "Does this tool store my text?",
-    answer: "No. Hilmost Digital Labs follows a 'Zero-Server' architecture. All text transformations happen directly in your browser's memory. Your content is never sent to our servers or stored anywhere."
+    answer: "No. Hilmost follows a 'Zero-Server' architecture. All text transformations happen directly in your browser's memory. Your content is never sent to our servers or stored anywhere."
   },
   {
     question: "Can I convert large amounts of text?",

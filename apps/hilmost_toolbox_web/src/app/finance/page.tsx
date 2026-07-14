@@ -186,7 +186,7 @@ export default function FinanceHub() {
       <CollapsibleSection title="About Money & Tax Tools">
         <section className="prose prose-slate dark:prose-invert max-w-none">
           <p className="text-lg leading-relaxed">
-            Welcome to the Hilmost hub for <strong>free online finance tools</strong>. In today&apos;s economy, having access to reliable, accurate, and fast data is essential for making informed financial decisions. Our suite is engineered to provide banking-grade precision for your personal wealth and business operations, from daily currency checks to multi-year retirement projections.
+            Welcome to the Hilmost hub for <strong>free online finance tools</strong>. In today&apos;s economy, having access to reliable, accurate, and fast data is essential for making informed financial decisions. Our suite is engineered to provide high precision for your personal wealth and business operations, from daily currency checks to multi-year retirement projections.
           </p>
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Comprehensive Debt and Loan Management</h2>
@@ -206,9 +206,9 @@ export default function FinanceHub() {
         </section>
       </CollapsibleSection>
 
-      <ToolArticle title="Why Banking-Grade Precision Matters">
+      <ToolArticle title="Why Precision and Privacy Matter">
         <p>
-          In finance, a small rounding error can lead to a large discrepancy over time. Hilmost Digital Labs was founded by a software architect with 15+ years of experience in high-availability banking systems. We apply the same rigorous mathematical standards to our free tools as are used in enterprise financial platforms, ensuring that your results are accurate down to the last cent.
+          In finance, a small rounding error can lead to a large discrepancy over time. At Hilmost, we apply rigorous mathematical standards to our free tools, ensuring that your results are accurate down to the last cent.
         </p>
       </ToolArticle>
 

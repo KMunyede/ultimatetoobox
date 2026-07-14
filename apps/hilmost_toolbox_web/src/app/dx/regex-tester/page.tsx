@@ -116,7 +116,7 @@ export default function RegexTesterPage() {
 
         <h3>Privacy-First Debugging</h3>
         <p>
-          Developers often need to test patterns against sensitive production data or logs. Using standard online testers can be a security risk. At Hilmost Digital Labs, we use a <strong>browser-side architecture</strong>. Your regex patterns and test strings are never sent to a server, ensuring 100% privacy for your proprietary code and data.
+          Developers often need to test patterns against sensitive production data or logs. Using standard online testers can be a security risk. At Hilmost, we use a <strong>browser-side architecture</strong>. Your regex patterns and test strings are never sent to a server, ensuring 100% privacy for your proprietary code and data.
         </p>
       </ToolArticle>
 

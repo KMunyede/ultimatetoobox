@@ -160,7 +160,7 @@ export default function TextDataHub() {
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Privacy by Architecture</h2>
           <p>
-            The primary risk with online text tools is the &quot;leakage&quot; of sensitive information to remote servers. At Hilmost Digital Labs, we have solved this through a <strong>browser-side architecture</strong>. When you use our text tools, your data never leaves your device. This &quot;zero-server&quot; approach makes our platform a safe digital sanctuary for processing private keys, sensitive logs, or confidential drafts.
+            The primary risk with online text tools is the &quot;leakage&quot; of sensitive information to remote servers. At Hilmost, we have solved this through a <strong>browser-side architecture</strong>. When you use our text tools, your data never leaves your device. This &quot;zero-server&quot; approach makes our platform a safe, private environment for processing private keys, sensitive logs, or confidential drafts.
           </p>
         </section>
       </CollapsibleSection>

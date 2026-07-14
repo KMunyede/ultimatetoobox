@@ -175,7 +175,7 @@ export default function DXHub() {
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost for your DX?</h2>
           <p>
-            Standard online developer tools often log your data for analysis or advertising. At Hilmost Digital Labs, we utilize <strong>Zero-Server Architecture</strong>. Every operation happens locally in your browser. This makes our platform the safest laboratory for your code, tokens, and data.
+            Standard online developer tools often log your data for analysis or advertising. At Hilmost, we utilize <strong>Zero-Server Architecture</strong>. Every operation happens locally in your browser. This makes our platform the safest laboratory for your code, tokens, and data.
           </p>
         </section>
       </CollapsibleSection>

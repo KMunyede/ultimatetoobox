@@ -4,6 +4,7 @@
       "target": "hilmost-toolbox",
       "public": "apps/hilmost_toolbox_web/out",
       "cleanUrls": true,
+      "trailingSlash": false,
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -178,6 +179,7 @@
       "target": "hsc-platform-core",
       "public": "apps/hilmost_main/out",
       "cleanUrls": true,
+      "trailingSlash": false,
       "ignore": [
         "firebase.json",
         "**/.*",

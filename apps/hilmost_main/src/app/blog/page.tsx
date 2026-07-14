@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import { AdLayout } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
-  title: "Blog | Hilmost Digital Labs",
+  title: "Blog | Hilmost",
   description: "Insights on software engineering, product design, and building the Hilmost Toolbox. Read our latest articles on crafting professional-grade digital utilities and tools.",
 };
 

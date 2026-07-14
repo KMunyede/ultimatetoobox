@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2, GraduationCap } from "lucide-react";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 import { WebApplicationSchema, OrganizationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { Metadata } from "next";
 
 const TITLE = "Free Online Calculators & Converters";
-const DESC = "High-performance digital sanctuary for your daily workflow. Fast, accurate, and secure free online calculators and converters for every task.";
+const DESC = "Free online calculators and converters — fast, accurate, and private. No sign-up, no data collection.";
 const PATH = "/";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
@@ -156,7 +156,7 @@ export default function Home() {
           Free Tools & <span className="text-brand-primary">Calculators</span>
         </h1>
         <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium">
-          A high-performance digital sanctuary for your daily workflow. <br className="hidden md:block" /> Fast, accurate, and secure.
+          Fast, accurate, and secure tools for your daily workflow. <br className="hidden md:block" /> Built to run entirely in your browser.
         </p>
       </div>
 

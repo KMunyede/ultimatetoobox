@@ -91,7 +91,7 @@ export default function JWTDecoderPage() {
 
       <ToolHeader
         title="JWT Security Inspector"
-        subtitle="Peek inside the token. Securely decode headers and payloads instantly with banking-grade privacy and real-time visualization."
+        subtitle="Peek inside the token. Securely decode headers and payloads instantly with full privacy and real-time visualization."
         lastUpdated={lastUpdated}
         tourId="jwt_decoder"
         tourSteps={tourSteps}
@@ -117,7 +117,7 @@ export default function JWTDecoderPage() {
 
         <h3>The Risk of Public Decoders</h3>
         <p>
-          Many popular JWT decoders are &quot;cloud-based,&quot; meaning they transmit your token to their servers to be decoded. If your token represents a live session, anyone with access to those server logs could potentially hijack your user&apos;s account. This is a critical security vulnerability. At Hilmost Digital Labs, our <strong>JWT Inspector</strong> runs 100% locally in your browser. Your tokens never leave your device.
+          Many popular JWT decoders are &quot;cloud-based,&quot; meaning they transmit your token to their servers to be decoded. If your token represents a live session, anyone with access to those server logs could potentially hijack your user&apos;s account. This is a critical security vulnerability. At Hilmost, our <strong>JWT Inspector</strong> runs 100% locally in your browser. Your tokens never leave your device.
         </p>
 
         <h3>Human-Readable Time Tracking</h3>

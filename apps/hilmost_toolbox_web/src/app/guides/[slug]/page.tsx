@@ -62,7 +62,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     "image": "https://hilmost-toolbox.hilmost.net/og/main.png",
     "author": {
       "@type": "Organization",
-      "name": "Hilmost Digital Labs"
+      "name": "Hilmost"
     },
     "publisher": {
       "@type": "Organization",

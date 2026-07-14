@@ -33,7 +33,7 @@ const links = [
   {
     name: "Daily Wisdom & Wellness",
     href: "/health/daily-wisdom",
-    description: "A digital sanctuary for mental well-being. Access daily quotes, journaling tools, and library resources to elevate your mindset."
+    description: "A private space for mental well-being. Access daily quotes, journaling tools, and library resources to elevate your mindset."
   },
   {
     name: "Calorie & Macro Calculator",
@@ -158,7 +158,7 @@ export default function HealthHub() {
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Daily Wisdom and Mental Well-being</h2>
           <p>
-            At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Wisdom & Wellness</strong> project—a digital space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;digital sanctuary&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
+            At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Wisdom & Wellness</strong> project—a private space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;private space&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
           </p>
 
           <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Health Monitoring</h2>

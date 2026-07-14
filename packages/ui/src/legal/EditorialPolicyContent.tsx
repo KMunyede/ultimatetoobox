@@ -26,13 +26,6 @@ export function EditorialPolicyContent() {
           </p>
         </div>
         <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
-          <ShieldCheck className="text-brand-primary mb-6" size={32} />
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-tight">Expert Authorship</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-            Content is authored and reviewed by Keepy Munyede, a Principal Engineer with 15+ years of experience in high-availability banking systems and enterprise architecture.
-          </p>
-        </div>
-        <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
           <Lock className="text-brand-primary mb-6" size={32} />
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-tight">Privacy by Design</h3>
           <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -54,7 +47,7 @@ export function EditorialPolicyContent() {
           At Hilmost, we recognize that our users rely on our tools for critical decision-making in their professional and personal lives. Whether you are calculating the WACC for a corporate project or managing your household budget, accuracy is non-negotiable.
         </p>
         <p className="text-lg leading-relaxed">
-          Our &quot;Digital Sanctuary&quot; philosophy means we prioritize the user experience above all else. This includes minimizing intrusive advertising and maximizing site performance to ensure our tools are available exactly when you need them.
+          At Hilmost, we prioritize the user experience above all else. This includes minimizing intrusive advertising and maximizing site performance to ensure our tools are available exactly when you need them.
         </p>
 
         <h2 className="text-2xl font-black uppercase tracking-tight mt-12">Fact-Checking & Updates</h2>

@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
   transpilePackages: ["@utilitiessite/ui"],
-  trailingSlash: true,
+  trailingSlash: false,
   async headers() {
     return [
       {

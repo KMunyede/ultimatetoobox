@@ -1,35 +1,39 @@
 import Link from "next/link";
 import { ArrowRight, Code2, HeartPulse, ShieldCheck, Utensils, Wrench, Sparkles, Zap, Binary, Microchip, Banknote, FileText, Replace } from "lucide-react";
 import { Metadata } from "next";
+import { TOOL_CATEGORIES } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
-  title: "Hilmost | Engineering the Everyday Utility",
-  description: "A specialized software R&D unit building high-precision digital tools. Fast, secure, and privacy-focused utilities for your daily workflow.",
+  title: "Hilmost | Free Browser-Based Tools",
+  description: "Free browser-based tools and utilities for everyday tasks — fast, private, no sign-up required.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Hilmost | Engineering the Everyday Utility",
-    description: "High-precision digital tools and utilities for your daily workflow.",
+    title: "Hilmost | Free Browser-Based Tools",
+    description: "Free browser-based tools and utilities for everyday tasks — fast, private, no sign-up required.",
     url: "https://hilmost.net",
     images: [
       {
         url: "https://hilmost.net/og-home.png",
         width: 1200,
         height: 630,
-        alt: "Hilmost | Engineering the Everyday Utility",
+        alt: "Hilmost | Free Browser-Based Tools",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hilmost | Engineering the Everyday Utility",
-    description: "A specialized software R&D unit building high-precision digital tools. Fast, secure, and privacy-focused utilities for your daily workflow.",
+    title: "Hilmost | Free Browser-Based Tools",
+    description: "Free browser-based tools and utilities for everyday tasks — fast, private, no sign-up required.",
     images: ["https://hilmost.net/og-home.png"],
   },
 };
 
 export default function Home() {
+  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
+  const displayCount = Math.floor(totalTools / 10) * 10;
+
   return (
     <main className="flex-1">
       <script
@@ -41,7 +45,7 @@ export default function Home() {
           "alternateName": "HSC",
           "url": "https://hilmost.net",
           "logo": "https://hilmost.net/logo.png",
-          "description": "A specialized software R&D unit building high-precision digital tools for finance, health, and data science.",
+          "description": "Hilmost builds free browser-based tools and everyday software for finance, health, and data science.",
           "sameAs": ["https://github.com/KMunyede"],
           "contactPoint": {
             "@type": "ContactPoint",
@@ -57,17 +61,17 @@ export default function Home() {
             <div className="text-center md:text-left mb-3 md:mb-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest font-mono">
                   <Sparkles size={14} className="animate-pulse" />
-                  HILMOST DIGITAL LABS
+                  HILMOST
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
               <h1 className="font-black tracking-tighter text-text-primary text-3xl sm:text-4xl lg:text-5xl leading-[1] text-left">
-                Engineering the <br />
-                <span className="text-brand-primary">Everyday Utility.</span>
+                Everyday tools. <br />
+                <span className="text-brand-primary">Built to just work.</span>
               </h1>
               <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium text-left">
-                A specialized software research and development unit building high-precision digital tools. We bridge the gap between complex enterprise logic and secure, browser-first solutions.
+                Hilmost builds free browser-based tools and everyday software — simple, fast, and private by design.
               </p>
             </div>
           </div>
@@ -82,7 +86,7 @@ export default function Home() {
               {[
                 {
                   name: "Hilmost Toolbox",
-                  description: "30+ free browser tools",
+                  description: `${displayCount}+ free browser tools`,
                   href: "https://hilmost-toolbox.hilmost.net",
                   cta: "Open Toolbox"
                 },
@@ -192,7 +196,7 @@ export default function Home() {
                 href="https://hilmost-toolbox.hilmost.net"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all shadow-lg text-sm"
               >
-                Explore All 30+ Tools <ArrowRight size={18} />
+                Explore All {displayCount}+ Tools <ArrowRight size={18} />
               </Link>
             </div>
           </div>
@@ -208,10 +212,10 @@ export default function Home() {
                             <span className="text-[10px] font-black uppercase tracking-widest text-brand-primary font-mono">Architecture Status: Stable</span>
                         </div>
                         <h2 className="text-3xl md:text-5xl font-black text-canvas-card dark:text-text-primary tracking-tighter leading-tight mb-4">
-                            Banking-grade <span className="text-brand-primary">Precision.</span>
+                            Every tool runs entirely in your browser.
                         </h2>
                         <p className="text-text-muted font-medium text-lg leading-relaxed">
-                            Every Hilmost tool is engineered by architectural experts to ensure mathematical accuracy and 100% client-side data privacy.
+                            No sign-up. No data leaves your device. No ads slowing things down. Just fast, accurate tools — free, forever.
                         </p>
                     </div>
                     <div className="flex flex-col items-center gap-4">

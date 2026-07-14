@@ -7,7 +7,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Free QR Code Generator";
-const TOOL_DESC = "Generate QR codes instantly for URLs, text, email, phone or Wi-Fi. Free, no sign-up, download as PNG. Banking-grade security with 100% browser-side generation.";
+const TOOL_DESC = "Generate QR codes instantly for URLs, text, email, phone or Wi-Fi. Free, no sign-up, download as PNG. High-security standards with 100% browser-side generation.";
 const PATH = "/dx/qr-code-generator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
@@ -104,7 +104,7 @@ export default function QrCodeGeneratorPage() {
 
           <h3>Privacy-First Architecture</h3>
           <p>
-            At Hilmost Digital Labs, we ensure that your QR codes are generated using the highest standards of the ISO/IEC 18004 specification. Most importantly, we use a <strong>Zero-Server Architecture</strong>. Your data never leaves your device; the generation happens entirely in your browser&apos;s memory, ensuring your sensitive information remains private.
+            At Hilmost, we ensure that your QR codes are generated using the highest standards of the ISO/IEC 18004 specification. Most importantly, we use a <strong>Zero-Server Architecture</strong>. Your data never leaves your device; the generation happens entirely in your browser&apos;s memory, ensuring your sensitive information remains private.
           </p>
         </ToolArticle>
 

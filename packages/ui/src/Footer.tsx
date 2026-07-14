@@ -30,10 +30,10 @@ export function Footer() {
               <div className="h-8 w-8 bg-brand-primary rounded-md flex items-center justify-center">
                 <span className="text-white font-bold text-lg">H</span>
               </div>
-              <span className="font-semibold tracking-tight text-xl text-text-primary uppercase letter tracking-tighter">Hilmost <span className="text-brand-primary">Digital Labs</span></span>
+              <span className="font-semibold tracking-tight text-xl text-text-primary uppercase letter tracking-tighter">Hilmost</span>
             </Link>
             <p className="text-sm leading-relaxed text-text-secondary max-w-md">
-              A software research and development lab dedicated to building high-precision digital tools. We apply banking-grade engineering to solve everyday utility challenges across finance, health, and data science.
+              Hilmost builds free, browser-based tools and everyday software — fast, private, and built to just work. All calculations run on your device; nothing is sent to a server.
             </p>
           </div>
           
@@ -79,7 +79,7 @@ export function Footer() {
             <p>© {new Date().getFullYear()} Hilmost Software Corporation. All rights reserved.</p>
             <div className="text-xs leading-relaxed max-w-3xl opacity-80">
               <p className="mb-1">
-                <strong>Technical Disclaimer:</strong> Tools provided by Hilmost Digital Labs are intended for informational and research purposes. Calculations are performed locally on your device to ensure data privacy. Please consult a qualified professional for high-stakes financial, health, or legal decisions.
+                <strong>Technical Disclaimer:</strong> Tools provided by Hilmost are intended for informational and research purposes. Calculations are performed locally on your device to ensure data privacy. Please consult a qualified professional for high-stakes financial, health, or legal decisions.
               </p>
               <p>
                 Developer Feedback? <a href="mailto:k.munyede@gmail.com?subject=Lab Feedback" className="text-brand-primary hover:underline transition-colors font-medium">Contact the Engineering Team</a>

@@ -3,13 +3,17 @@ import Link from "next/link";
 import { GitBranch, Mail, MapPin } from "lucide-react";
 import { CategoryGrid, AdLayout } from "@utilitiessite/ui";
 import Image from "next/image";
+import { TOOL_CATEGORIES } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "About Hilmost | Practical Software for Everyday Tasks",
-  description: "Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks. Explore our mission to create a high-performance digital sanctuary for all.",
+  description: "Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks. Explore our mission to create high-performance, private software for all.",
 };
 
 export default function AboutPage() {
+  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
+  const displayCount = Math.floor(totalTools / 10) * 10;
+
   return (
     <AdLayout publisherId="ca-pub-5650522247882745">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -19,11 +23,11 @@ export default function AboutPage() {
           </h1>
 
           <p className="lead text-xl text-slate-600 dark:text-slate-400 mb-8 border-l-4 border-brand-primary pl-6 font-medium">
-            Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks. The idea started from a real problem: coordinating meetings across colleagues in Australia, Hong Kong, Singapore, China, India, the UK, and New York — juggling three or four time zones by hand, every time, because the tools available online were confusing or bloated. That frustration became our first tool, and the same principle now drives everything we build: solve a real, specific annoyance, make it free, and make it fast.
+            Hilmost Software Corporation started with a simple frustration: coordinating meetings across colleagues spread over five continents meant juggling time zones by hand every time, because the tools available online were confusing or bloated. That problem became the Time Zone Converter — the first tool in what&apos;s grown into Hilmost Toolbox, a collection of {displayCount}+ free browser-based utilities built with the same principle: fast, private, and no unnecessary friction. No sign-up, no data collection — everything runs on your device.
           </p>
 
           <p className="text-lg leading-relaxed mb-8">
-            Our flagship product, the Hilmost Toolbox, is a growing collection of over 39 free utilities — calculators, converters, PDF tools, and productivity aids — built to be fast, accurate, and genuinely useful. No sign-ups, no unnecessary steps, just tools that work.
+            Keepy Munyede is the Technical Founder of Hilmost Software Corporation.
           </p>
 
           <figure className="my-12 not-prose">
@@ -41,15 +45,11 @@ export default function AboutPage() {
           </figure>
 
           <p className="text-lg leading-relaxed mb-8">
-            Beyond the Toolbox, we&apos;re expanding into mobile apps focused on personal growth and wellbeing, including Daily Stoic (a companion for practicing Stoic philosophy) and MindOS (an AI-assisted wellness tool). We believe technology should make life simpler, not add complexity — whether that&apos;s solving a quick calculation or supporting a daily habit of reflection.
-          </p>
-
-          <p className="text-lg leading-relaxed mb-8">
-            Hilmost is based in Harare, Zimbabwe, and built by a small, focused team with a background in banking systems, payments infrastructure, and software engineering. Our motto: <strong>You Choose Your Destiny.</strong>
+            Keepy directs the design and development of Hilmost&apos;s products using an AI-assisted build process, working as a team of one. The portfolio has since expanded into Hilmost Apparel, a print-on-demand store, with mobile apps focused on personal growth and mental well-being on the roadmap.
           </p>
 
           <p className="text-lg leading-relaxed mb-16">
-            We&apos;re just getting started. More tools, more apps, and more ways to make everyday computing easier are on the way.
+            The mission is simple: build useful, well-crafted technology that respects people&apos;s time, privacy, and attention — without the bloat of larger platforms.
           </p>
 
           <section className="mb-16 not-prose">

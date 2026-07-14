@@ -117,7 +117,7 @@ export default function JSONFormatterPage() {
 
         <h3>Zero-Server Security Architecture</h3>
         <p>
-          Many online formatters upload your data to a server for processing, which can be a massive security risk if your JSON contains API keys, customer data, or internal configurations. At Hilmost Digital Labs, we use a <strong>browser-side architecture</strong>. Your data never leaves your device, making our JSON lab the safest place for your technical workflows.
+          Many online formatters upload your data to a server for processing, which can be a massive security risk if your JSON contains API keys, customer data, or internal configurations. At Hilmost, we use a <strong>browser-side architecture</strong>. Your data never leaves your device, making our JSON lab the safest place for your technical workflows.
         </p>
       </ToolArticle>
 
