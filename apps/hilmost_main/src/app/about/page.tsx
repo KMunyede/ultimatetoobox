@@ -65,7 +65,7 @@ export default function AboutPage() {
                   Hilmost Software Corporation welcomes collaboration and feedback. Reach out to our engineering team.
                 </p>
                 <div className="flex flex-col gap-4">
-                  <a href="mailto:k.munyede@gmail.com" className="flex items-center gap-3 text-slate-900 dark:text-white font-bold hover:text-brand-primary transition-colors group">
+                  <a href="mailto:support@hilmost.net" className="flex items-center gap-3 text-slate-900 dark:text-white font-bold hover:text-brand-primary transition-colors group">
                     <div className="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg group-hover:bg-brand-primary/10 transition-colors">
                       <Mail size={18} className="text-brand-primary" />
                     </div>
