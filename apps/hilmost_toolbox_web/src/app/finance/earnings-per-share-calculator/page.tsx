@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { EPSCalculatorClient } from "./EPSCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -102,6 +104,14 @@ export default function EPSCalculatorPage() {
         <div className="bg-canvas-muted p-6 rounded-2xl border border-base my-6 font-mono text-sm overflow-x-auto">
           <p className="mb-2">Basic EPS = (Net Income - Preferred Dividends) / Weighted Avg Shares</p>
           <p>Diluted EPS = (Net Income - Preferred Dividends) / (Weighted Avg Shares + Dilutive Potential Shares)</p>
+        </div>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Investment Insight</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Ready to learn what EPS really tells you about a company&apos;s value?</p>
+          <Link href="/guides/understanding-earnings-per-share-eps" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            Read our full EPS Guide <ArrowRight size={14} />
+          </Link>
         </div>
       </ToolArticle>
 

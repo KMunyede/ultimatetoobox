@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { WACCCalculatorClient } from "./WACCCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -114,6 +116,14 @@ export default function WACCCalculatorPage() {
         <p>
           One of the most misunderstood parts of finance is that <strong>debt can be cheaper than it looks</strong>. Because interest payments are tax-deductible, a 6% interest rate might only cost you 4.5% after taxes. Our dashboard calculates this &quot;Tax Shield Savings&quot; automatically to show you the hidden benefit of your capital structure.
         </p>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the theory behind the cost of capital?</p>
+          <Link href="/guides/wacc-cost-of-capital-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            Read our full WACC Guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

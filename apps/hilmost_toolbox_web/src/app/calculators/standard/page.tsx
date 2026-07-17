@@ -4,7 +4,9 @@ import { StandardCalculatorClient } from "./StandardCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
+import Link from "next/link";
 import { ShareButton } from "@/components/ShareButton";
+import { ArrowRight } from "lucide-react";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Standard Calculator";
@@ -129,6 +131,14 @@ export default function StandardCalculatorPage() {
         <p>
           We have prioritized <strong>&quot;Enterprise-Calm&quot;</strong> design principles to reduce visual noise. Every button has a minimum 44px tap target to comply with modern accessibility standards, ensuring that users with varying physical needs can calculate with confidence. The integrated <strong>History Tape</strong> allows you to scroll back through your work, effectively eliminating the need for scratch paper in your daily workflow.
         </p>
+
+        <div className="mt-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-black text-indigo-900 dark:text-indigo-100 mb-2 uppercase tracking-tight">Mathematical Logic</h4>
+          <p className="text-indigo-800 dark:text-indigo-300 mb-4 font-medium">Why do different calculators sometimes give different answers for the same sum?</p>
+          <Link href="/guides/order-of-operations-basic-calculations" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            Read our Order of Operations Guide <ArrowRight size={14} />
+          </Link>
+        </div>
 
         <SourceReference
           sources={[

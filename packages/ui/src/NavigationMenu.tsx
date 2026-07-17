@@ -8,124 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from './Tooltip';
 import { TOOL_CATEGORIES } from '@utilitiessite/config';
 
-const TOOLBOX_DATA = {
-  name: "Free Tools",
-  href: "/", // Toolbox root
-  categories: [
-    {
-      name: "Developer Experience",
-      description: "JSON, Regex, JWT, and developer utilities.",
-      href: "/dx",
-      icon: "Code2",
-      tools: [
-        { name: "JSON Formatter", href: "/dx/json-formatter", tooltip: "Pretty-print and validate JSON data." },
-        { name: "AI Token Calculator", href: "/dx/ai-token-calculator", tooltip: "Estimate LLM token count and API costs." },
-        { name: "QR Code Generator", href: "/dx/qr-code-generator", tooltip: "Create QR codes for URLs, Wi-Fi, and more." },
-        { name: "Password Generator", href: "/dx/password-generator", tooltip: "Generate secure random passwords with custom rules." },
-        { name: "Regex Tester", href: "/dx/regex-tester", tooltip: "Real-time regular expression testing." },
-        { name: "JWT Decoder", href: "/dx/jwt-decoder", tooltip: "Decode JSON Web Tokens instantly." },
-      ]
-    },
-    {
-      name: "Money & Tax",
-      description: "Currency, loans, interest, and tax calculators.",
-      href: "/finance",
-      icon: "Banknote",
-      tools: [
-        { name: "WACC Calculator", href: "/finance/wacc-calculator", tooltip: "Professional Weighted Average Cost of Capital solver." },
-        { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator", tooltip: "Calculate Earnings Per Share metrics." },
-        { name: "Currency Converter", href: "/finance/currency", tooltip: "Real-time global currency exchange." },
-        { name: "Loan Calculator", href: "/finance/loan-calculator", tooltip: "Analyze monthly payments and interest." },
-        { name: "Mortgage Calculator", href: "/finance/mortgage-calculator", tooltip: "PITI mortgage payment estimator." },
-        { name: "Income Tax", href: "/finance/income-tax", tooltip: "Estimate your personal tax burden." },
-        { name: "Compound Interest", href: "/finance/compound-interest", tooltip: "Project long-term savings growth." },
-        { name: "VAT & Tax Calculator", href: "/finance/vat-tax", tooltip: "Quick sales tax and VAT calculations." },
-        { name: "Salary Converter", href: "/finance/salary-converter", tooltip: "Convert hourly pay to annual salary." },
-        { name: "Tip Calculator", href: "/finance/tip-calculator", tooltip: "Calculate gratuity and split bills." },
-        { name: "Retirement Planner", href: "/finance/retirement-planner", tooltip: "Plan your financial independence." },
-        { name: "Inflation Calculator", href: "/finance/inflation", tooltip: "Check the buying power of your money." },
-        { name: "Budget Planner", href: "/finance/budget-planner", tooltip: "Organize your monthly spending." },
-      ]
-    },
-    {
-      name: "PDF Tools",
-      description: "Merge, split, rotate, and manage PDF files.",
-      href: "/pdf-tools",
-      icon: "FileText",
-      tools: [
-        { name: "Merge PDF", href: "/pdf-tools/merge-pdf", tooltip: "Combine multiple PDFs into one." },
-        { name: "Split PDF", href: "/pdf-tools/split-pdf", tooltip: "Extract pages into new files." },
-        { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf", tooltip: "Correct document orientation." },
-        { name: "Delete Pages", href: "/pdf-tools/delete-pages", tooltip: "Remove unwanted pages instantly." },
-      ]
-    },
-    {
-      name: "Unit Converters",
-      description: "Convert length, weight, time, and data units.",
-      href: "/converters",
-      icon: "Replace",
-      tools: [
-        { name: "Age Calculator", href: "/converters/age-calculator", tooltip: "Calculate precise age and milestones." },
-        { name: "Percentage Calculator", href: "/converters/percentage", tooltip: "Solve all percentage-based problems." },
-        { name: "Unix Time", href: "/converters/unix-time", tooltip: "Convert timestamps to readable dates." },
-        { name: "Length Converter", href: "/converters/length", tooltip: "Switch between metric and imperial." },
-        { name: "Weight/Mass Converter", href: "/converters/weight-mass", tooltip: "Convert grams, pounds, and tons." },
-        { name: "Temperature Converter", href: "/converters/temperature", tooltip: "Celsius, Fahrenheit, and Kelvin." },
-        { name: "Time Converter", href: "/converters/time", tooltip: "Convert hours, days, and seconds." },
-        { name: "Time Zone Hub", href: "/converters/time-zone", tooltip: "Global time zone synchronization." },
-        { name: "Aspect Ratio", href: "/converters/aspect-ratio", tooltip: "Calculate image and video proportions." },
-        { name: "Data Storage", href: "/converters/data-storage", tooltip: "MB, GB, TB, and Bit conversions." },
-        { name: "Area Converter", href: "/converters/area", tooltip: "Convert acres, meters, and miles." },
-      ]
-    },
-    {
-      name: "Text & Formatting",
-      description: "Word count, unscramblers, and data hashing.",
-      href: "/text-data",
-      icon: "Binary",
-      tools: [
-        { name: "Word Unscrambler", href: "/text-data/word-unscrambler", tooltip: "Find words from scrambled letters." },
-        { name: "Base64 Text Encoder", href: "/text-data/base64-encode", tooltip: "Securely encode text for data transfer." },
-        { name: "MD5 Hash", href: "/text-data/md5-hash", tooltip: "Generate secure cryptographic hashes." },
-        { name: "Word Count", href: "/text-data/word-count", tooltip: "Analyze text length and statistics." },
-      ]
-    },
-    {
-      name: "Math & Science",
-      description: "Standard, scientific, and specialized calculators.",
-      href: "/calculators",
-      icon: "Calculator",
-      tools: [
-        { name: "Standard Calculator", href: "/calculators/standard", tooltip: "Quick everyday arithmetic." },
-        { name: "Scientific Calculator", href: "/calculators/scientific", tooltip: "Advanced engineering functions." },
-        { name: "Astrophysics", href: "/calculators/astrophysics", tooltip: "Celestial mechanics and physics." },
-        { name: "Equation Solver", href: "/calculators/equation-solver", tooltip: "Solve linear and complex equations." },
-      ]
-    },
-    {
-      name: "Health & Wellness",
-      description: "BMI tracking and daily wisdom utilities.",
-      href: "/health",
-      icon: "HeartPulse",
-      tools: [
-        { name: "Daily Wisdom", href: "/health/daily-wisdom", tooltip: "Stoic quotes and daily guidance." },
-        { name: "BMI Calculator", href: "/health/bmi-calculator", tooltip: "Calculate Body Mass Index safely." },
-        { name: "Calorie & Macro", href: "/health/calorie-macro-calculator", tooltip: "Precision nutrition and macro ratios." },
-        { name: "Sleep Cycle", href: "/health/sleep-cycle-calculator", tooltip: "Optimal wake-up and bed times." },
-      ]
-    },
-    {
-      name: "Education",
-      description: "GPA calculators and academic tools.",
-      href: "/education",
-      icon: "GraduationCap",
-      tools: [
-        { name: "GPA Calculator", href: "/education/gpa-calculator", tooltip: "Calculate semester and cumulative GPA." },
-      ]
-    }
-  ]
-};
-
 const ICON_MAP: Record<string, React.ReactNode> = {
   Code2: <Code2 size={16} />,
   Banknote: <Banknote size={16} />,
@@ -184,8 +66,8 @@ export function NavigationMenu() {
     }, 300);
   };
 
-  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
-  const displayCount = Math.floor(totalTools / 10) * 10; // e.g. 43 -> 40
+  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.tools.length, 0);
+  const displayCount = Math.floor(totalTools / 10) * 10; // e.g. 49 -> 40
 
   const resolveHref = (path: string) => {
     return `${domains.toolbox}${path}`;
@@ -219,7 +101,7 @@ export function NavigationMenu() {
             }`}
             title="Explore our library of free digital utilities."
           >
-            {TOOLBOX_DATA.name}
+            Free Tools
             <ChevronDown size={14} className={`transition-transform duration-300 ${hubOpen ? 'rotate-180' : 'opacity-40'}`} />
           </button>
 
@@ -234,7 +116,7 @@ export function NavigationMenu() {
               >
                 {/* Category Sidebar */}
                 <div className="w-64 bg-canvas-card border border-base rounded-2xl shadow-xl overflow-hidden py-2">
-                  {TOOLBOX_DATA.categories.map((cat) => (
+                  {TOOL_CATEGORIES.map((cat) => (
                     <button
                       key={cat.name}
                       onMouseEnter={() => setActiveCategory(cat.name)}
@@ -267,7 +149,7 @@ export function NavigationMenu() {
                         </h3>
                       </div>
                       <div className="max-h-[400px] overflow-y-auto custom-scrollbar p-2">
-                        {TOOLBOX_DATA.categories
+                        {TOOL_CATEGORIES
                           .find(c => c.name === activeCategory)
                           ?.tools.map((tool) => (
                             <Link
@@ -344,7 +226,7 @@ export function NavigationMenu() {
               </div>
 
               <div className="flex-1 overflow-y-auto py-2 px-6 space-y-6 custom-scrollbar scrollbar-visible">
-                {TOOLBOX_DATA.categories.map((cat) => (
+                {TOOL_CATEGORIES.map((cat) => (
                   <div key={cat.name} className="space-y-1">
                     <div className="flex items-center gap-2 text-brand-primary pt-4 pb-2">
                       {ICON_MAP[cat.icon]}

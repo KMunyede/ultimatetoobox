@@ -7,16 +7,16 @@
 
   Creating an optimized production build ...
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
-✓ Compiled successfully in 50s
+✓ Compiled successfully in 44s
   Running TypeScript ...
-  Finished TypeScript in 14.7s ...
+  Finished TypeScript in 13.8s ...
   Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/381) ...
+  Generating static pages using 11 workers (0/387) ...
 Warning: Please use the `legacy` build in Node.js environments.
-  Generating static pages using 11 workers (95/381) 
-  Generating static pages using 11 workers (190/381) 
-  Generating static pages using 11 workers (285/381) 
-✓ Generating static pages using 11 workers (381/381) in 26.9s
+  Generating static pages using 11 workers (96/387) 
+  Generating static pages using 11 workers (193/387) 
+  Generating static pages using 11 workers (290/387) 
+✓ Generating static pages using 11 workers (387/387) in 15.7s
   Finalizing page optimization ...
 ⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 
@@ -112,7 +112,7 @@ Route (app)
 │ ├ /guides/calculate-monthly-loan-repayments
 │ ├ /guides/how-compound-interest-works
 │ ├ /guides/bmi-calculator-score-meaning
-│ └ [+3 more paths]
+│ └ [+9 more paths]
 ├ ○ /health
 ├ ○ /health/bmi-calculator
 ├ ○ /health/calorie-macro-calculator

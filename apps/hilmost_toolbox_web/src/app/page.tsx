@@ -35,105 +35,30 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Home() {
-  const categories = [
-    {
-      title: "Money & Tax",
-      description: "Currency, loans, compound interest, taxes, and inflation.",
-      icon: <Banknote className="w-6 h-6 text-amber-500" />,
-      colorClass: "bg-amber-500/10",
-      links: [
-        { name: "WACC Calculator", href: "/finance/wacc-calculator" },
-        { name: "EPS Calculator", href: "/finance/earnings-per-share-calculator" },
-        { name: "Currency Converter", href: "/finance/currency" },
-        { name: "Loan Calculator", href: "/finance/loan-calculator" },
-        { name: "Mortgage Calculator", href: "/finance/mortgage-calculator" },
-        { name: "Income Tax", href: "/finance/income-tax" },
-        { name: "Compound Interest", href: "/finance/compound-interest" },
-        { name: "VAT & Tax Calculator", href: "/finance/vat-tax" },
-        { name: "Salary Converter", href: "/finance/salary-converter" },
-        { name: "Tip Calculator", href: "/finance/tip-calculator" },
-        { name: "Retirement Planner", href: "/finance/retirement-planner" },
-        { name: "Inflation Calculator", href: "/finance/inflation" },
-        { name: "Budget Planner", href: "/finance/budget-planner" },
-      ],
-    },
-    {
-      title: "PDF Tools",
-      description: "Merge, split, rotate, and delete pages from PDF files.",
-      icon: <FileText className="w-6 h-6 text-red-500" />,
-      colorClass: "bg-red-500/10",
-      links: [
-        { name: "Merge PDF", href: "/pdf-tools/merge-pdf" },
-        { name: "Split PDF", href: "/pdf-tools/split-pdf" },
-        { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf" },
-        { name: "Delete Pages", href: "/pdf-tools/delete-pages" },
-      ],
-    },
-    {
-      title: "Unit Converters",
-      description: "Convert units of length, weight, temperature, data, time, and more.",
-      icon: <Replace className="w-6 h-6 text-blue-500" />,
-      colorClass: "bg-blue-500/10",
-      links: [
-        { name: "Age Calculator", href: "/converters/age-calculator" },
-        { name: "Percentage Calculator", href: "/converters/percentage" },
-        { name: "Unix Time", href: "/converters/unix-time" },
-        { name: "Length Converter", href: "/converters/length" },
-        { name: "Weight/Mass Converter", href: "/converters/weight-mass" },
-        { name: "Temperature Converter", href: "/converters/temperature" },
-        { name: "Time Converter", href: "/converters/time" },
-        { name: "Time Zone Converter", href: "/converters/time-zone" },
-        { name: "Aspect Ratio", href: "/converters/aspect-ratio" },
-        { name: "Data Storage", href: "/converters/data-storage" },
-        { name: "Area Converter", href: "/converters/area" },
-      ],
-    },
-    {
-      title: "Text & Formatting",
-      description: "Word count, unscramblers, hashing, and encoding utilities.",
-      icon: <FileText className="w-6 h-6 text-brand-primary" />,
-      colorClass: "bg-brand-primary/10",
-      links: [
-        { name: "Word Unscrambler", href: "/text-data/word-unscrambler" },
-        { name: "Base64 Text Encoder", href: "/text-data/base64-encode" },
-        { name: "MD5 Hash", href: "/text-data/md5-hash" },
-        { name: "Word Count", href: "/text-data/word-count" },
-      ],
-    },
-    {
-      title: "Math & Science",
-      description: "Standard, scientific, and specialized math calculators.",
-      icon: <Calculator className="w-6 h-6 text-indigo-500" />,
-      colorClass: "bg-indigo-500/10",
-      links: [
-        { name: "Standard Calculator", href: "/calculators/standard" },
-        { name: "Scientific Calculator", href: "/calculators/scientific" },
-        { name: "Astrophysics Calculator", href: "/calculators/astrophysics" },
-        { name: "Science Equation Solver", href: "/calculators/equation-solver" },
-      ],
-    },
-    {
-      title: "Health & Wellness",
-      description: "Daily wellness, BMI tracking, and stoic philosophy.",
-      icon: <Activity className="w-6 h-6 text-rose-500" />,
-      colorClass: "bg-rose-500/10",
-      links: [
-        { name: "Daily Wisdom", href: "/health/daily-wisdom" },
-        { name: "BMI Calculator", href: "/health/bmi-calculator" },
-      ],
-    },
-    {
-      title: "Education",
-      description: "GPA calculators and academic tracking tools.",
-      icon: <GraduationCap className="w-6 h-6 text-orange-500" />,
-      colorClass: "bg-orange-500/10",
-      links: [
-        { name: "GPA Calculator", href: "/education/gpa-calculator" },
-      ],
-    },
-  ];
-
   const breadcrumbItems = [{ label: "Home", href: PATH }];
+
+  const iconMap: Record<string, React.ReactNode> = {
+    Banknote: <Banknote className="w-6 h-6 text-amber-500" />,
+    FileText: <FileText className="w-6 h-6 text-red-500" />,
+    Replace: <Replace className="w-6 h-6 text-blue-500" />,
+    Binary: <FileText className="w-6 h-6 text-brand-primary" />,
+    Calculator: <Calculator className="w-6 h-6 text-indigo-500" />,
+    Activity: <Activity className="w-6 h-6 text-rose-500" />,
+    HeartPulse: <Activity className="w-6 h-6 text-rose-500" />,
+    GraduationCap: <GraduationCap className="w-6 h-6 text-orange-500" />,
+    Code2: <Code2 className="w-6 h-6 text-slate-500" />,
+  };
+
+  const colorClassMap: Record<string, string> = {
+    amber: "bg-amber-500/10",
+    red: "bg-red-500/10",
+    blue: "bg-blue-500/10",
+    "brand-primary": "bg-brand-primary/10",
+    indigo: "bg-indigo-500/10",
+    rose: "bg-rose-500/10",
+    orange: "bg-orange-500/10",
+    slate: "bg-slate-500/10",
+  };
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-8 max-w-6xl">
@@ -162,36 +87,21 @@ export default function Home() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-        {[
-          {
-            title: "Developer Experience",
-            description: "JSON, Regex, JWT, and developer utilities.",
-            icon: <Code2 className="w-6 h-6 text-slate-500" />,
-            colorClass: "bg-slate-500/10",
-            links: [
-              { name: "JSON Formatter", href: "/dx/json-formatter" },
-              { name: "AI Token Calculator", href: "/dx/ai-token-calculator" },
-              { name: "Password Generator", href: "/dx/password-generator" },
-              { name: "Regex Tester", href: "/dx/regex-tester" },
-              { name: "JWT Decoder", href: "/dx/jwt-decoder" },
-            ],
-          },
-          ...categories
-        ].map((category) => (
-          <div key={category.title} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-5 md:p-6 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
+        {TOOL_CATEGORIES.map((category) => (
+          <div key={category.name} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-5 md:p-6 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
             <div className="flex items-center gap-x-4 mb-3">
-              <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${category.colorClass}`}>
-                {category.icon}
+              <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${colorClassMap[category.color] || 'bg-slate-500/10'}`}>
+                {iconMap[category.icon] || <Calculator className="w-6 h-6 text-slate-500" />}
               </div>
-              <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.title}</h2>
+              <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.name}</h2>
             </div>
             <p className="text-text-secondary mb-5 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
 
             <div className="flex-1 overflow-hidden">
-              <div className={`pr-1 ${category.links.length > 5 ? 'max-h-[280px] overflow-y-auto custom-scrollbar' : ''}`}>
+              <div className={`pr-1 ${category.tools.length > 5 ? 'max-h-[280px] overflow-y-auto custom-scrollbar' : ''}`}>
                 <ul className="space-y-0.5">
-                  {category.links.map((link) => (
-                    <li key={link.name}>
+                  {category.tools.map((link) => (
+                    <li key={link.href}>
                       <Link href={link.href} className="group/link flex items-center justify-between py-2 border-b border-base/50 hover:border-brand-primary/50 transition-all">
                         <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
                         <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
@@ -204,12 +114,13 @@ export default function Home() {
 
             <div className="mt-5 pt-3 border-t border-base">
                 <p className="text-[10px] font-black uppercase tracking-widest text-text-muted opacity-60">
-                    {category.links.length} Tools Available
+                    {category.tools.length} Tools Available
                 </p>
             </div>
           </div>
         ))}
       </div>
+
 
 
       {/* Trust Footer Section */}

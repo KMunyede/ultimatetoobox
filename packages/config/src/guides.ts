@@ -300,5 +300,297 @@ export const GUIDES: Guide[] = [
         <a href="/calculators" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Explore All Calculators →</a>
       </div>
     `
+  },
+  {
+    slug: "wacc-cost-of-capital-explained",
+    title: "How WACC Actually Works: A Practical Guide to the Cost of Capital",
+    metaTitle: "Understanding WACC | Cost of Capital Guide | Hilmost",
+    metaDesc: "Learn how to calculate Weighted Average Cost of Capital (WACC). We break down the formula, tax shields, and why it's the ultimate hurdle rate for business.",
+    category: "finance",
+    excerpt: "Every dollar a company raises has a price. Learn how to calculate the blended cost of debt and equity to value investments accurately.",
+    targetToolHref: "/finance/wacc-calculator",
+    content: `
+      <p>Every dollar a company raises — whether from shareholders or lenders — has a price. <strong>WACC (Weighted Average Cost of Capital)</strong> is simply the blended price of all that money, expressed as a single percentage. It answers one question every business eventually has to ask: is this investment worth doing, or would the money be better left in the bank?</p>
+
+      <h2>Why &quot;weighted&quot; matters</h2>
+      <p>Most companies fund themselves with a mix of equity (money from shareholders, who expect returns through growth and dividends) and debt (loans and bonds, which charge interest). These two sources rarely cost the same. Equity is almost always more expensive than debt, because shareholders take on more risk — if the company fails, lenders get paid first, shareholders get whatever&apos;s left.</p>
+      <p>WACC blends these two costs based on how much of each a company actually uses. A business funded 70% by debt and 30% by equity will have a very different WACC than one funded the other way around, even if the individual costs of debt and equity are identical.</p>
+
+      <h2>The two halves: cost of equity and cost of debt</h2>
+      <p>Cost of equity is usually estimated using <strong>CAPM (the Capital Asset Pricing Model)</strong>: a risk-free rate (like a government bond yield) plus a risk premium adjusted by the company&apos;s Beta — a measure of how volatile the stock is compared to the overall market. A Beta above 1.0 means the stock swings more than the market; below 1.0 means it&apos;s calmer.</p>
+      <p>Cost of debt is more straightforward — it&apos;s the interest rate a company pays on its loans and bonds. But there&apos;s a twist: interest payments are tax-deductible. So the effective cost of debt is lower than the sticker rate, because some of that interest expense reduces the company&apos;s tax bill. This is called the <strong>tax shield</strong>, and it&apos;s one of the main reasons debt is often cheaper than it first appears.</p>
+
+      <h2>Putting it together</h2>
+      <div class="bg-slate-100 dark:bg-slate-800 p-6 rounded-xl font-mono my-6 text-center text-blue-600 dark:text-blue-400">
+        WACC = (Weight of Equity × Cost of Equity) + (Weight of Debt × Cost of Debt × (1 − Tax Rate))
+      </div>
+      <p>The result is a single hurdle rate. Any new project, acquisition, or investment a company considers should be expected to earn a return above this number — otherwise, it&apos;s actually destroying value, even if it looks &quot;profitable&quot; on paper.</p>
+
+      <h2>A simple example</h2>
+      <p>Imagine a company with $2M in equity and $1M in debt. Cost of equity is 12%, cost of debt is 6%, and the tax rate is 25%.</p>
+      <ul class="space-y-2 my-6 list-disc pl-6">
+        <li><strong>Weight of equity</strong>: 2/3, <strong>weight of debt</strong>: 1/3</li>
+        <li><strong>After-tax cost of debt</strong>: 6% × (1 − 0.25) = 4.5%</li>
+        <li><strong>WACC</strong> = (2/3 × 12%) + (1/3 × 4.5%) = 8% + 1.5% = <strong>9.5%</strong></li>
+      </ul>
+      <p>Any project this company considers needs to clear 9.5% to be worth pursuing.</p>
+
+      <h2>Where people get WACC wrong</h2>
+      <p>The most common mistake is treating WACC as a fixed, universal number rather than something that changes with a company&apos;s capital structure and market conditions. As interest rates rise, cost of debt rises too. As a stock becomes more volatile, Beta — and therefore cost of equity — rises. WACC should be recalculated periodically, not set once and forgotten.</p>
+      <p>Another frequent error is applying a company-wide WACC to every project regardless of risk. A low-risk expansion of an existing product line and a high-risk entry into a new market shouldn&apos;t be judged by the same hurdle rate — riskier projects generally deserve a higher required return.</p>
+
+      <h2>Why WACC matters even outside corporate finance</h2>
+      <p>You don&apos;t need to run a public company to find this useful. Small business owners evaluating whether to take a loan to expand, freelancers deciding whether to reinvest profits, and even individual investors valuing a stock (WACC is the discount rate used in most DCF valuation models) all lean on this same logic: money has a cost, and any use of it should beat that cost to be worthwhile.</p>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Calculate Your Hurdle Rate</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Determine the true cost of your capital with precision. Use our free WACC Calculator to model different debt-to-equity scenarios instantly.</p>
+        <a href="/finance/wacc-calculator" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open WACC Calculator →</a>
+      </div>
+    `
+  },
+  {
+    slug: "understanding-earnings-per-share-eps",
+    title: "Understanding EPS: What Earnings Per Share Really Tells Investors",
+    metaTitle: "What is EPS? | Earnings Per Share Explained | Hilmost",
+    metaDesc: "Master the most important metric in investing. Learn how to calculate EPS, the difference between basic and diluted, and how to spot artificial inflation.",
+    category: "finance",
+    excerpt: "At its core, EPS answers a simple question: for every share of stock outstanding, how much profit did the company generate?",
+    targetToolHref: "/finance/earnings-per-share-calculator",
+    content: `
+      <p><strong>Earnings Per Share (EPS)</strong> is one of the most quoted numbers in investing — and one of the most misunderstood. At its core, EPS answers a simple question: for every share of stock outstanding, how much profit did the company generate?</p>
+
+      <h2>The basic formula</h2>
+      <div class="bg-slate-100 dark:bg-slate-800 p-6 rounded-xl font-mono my-6 text-center text-blue-600 dark:text-blue-400">
+        EPS = (Net Income − Preferred Dividends) ÷ Weighted Average Shares Outstanding
+      </div>
+      <p>Preferred dividends are subtracted first because that money belongs to preferred shareholders, not common shareholders — EPS is specifically about what&apos;s left for common stock. The &quot;weighted average&quot; part matters too: if a company issues new shares partway through the year, those shares don&apos;t count for the full period, only from when they existed.</p>
+
+      <h2>Why EPS alone can mislead</h2>
+      <p>A company with $10M net income and 1 million shares has an EPS of $10. A company with the same $10M profit but 10 million shares has an EPS of $1. Neither number tells you whether the company is actually a good investment — it depends entirely on the share price too. This is why EPS is almost always paired with the <strong>P/E ratio</strong> (price divided by EPS), which shows how much investors are paying for each dollar of earnings.</p>
+      <p>A high EPS by itself doesn&apos;t mean a company is efficient or growing — it might simply have fewer shares outstanding. Comparing EPS between different companies is usually meaningless unless you also account for share count and price. EPS is most useful when tracked for a single company over time, watching whether it&apos;s growing, shrinking, or being artificially inflated.</p>
+
+      <h2>Basic EPS vs. Diluted EPS</h2>
+      <p>Basic EPS uses only shares currently outstanding. <strong>Diluted EPS</strong> goes further, assuming that all convertible securities — stock options, convertible bonds, warrants — are exercised and turned into shares. Diluted EPS is always equal to or lower than basic EPS, because it spreads the same profit over more shares. Public companies are required to report both, and diluted EPS is generally considered the more conservative, realistic figure for valuation purposes.</p>
+
+      <h2>How companies can artificially boost EPS</h2>
+      <p>Because EPS is so closely watched, companies have several ways to influence it — not always in ways that reflect genuine business improvement:</p>
+      <ul class="space-y-4 my-8">
+        <li><strong>Stock buybacks</strong>: reducing the number of shares outstanding mechanically increases EPS, even if net income stays flat. This is one of the most common uses of corporate cash and one of the most debated — it can reward shareholders, but doesn&apos;t necessarily mean the underlying business got stronger.</li>
+        <li><strong>One-time gains</strong>: selling an asset or a subsidiary can spike net income for a single quarter, inflating EPS temporarily without reflecting ongoing operational performance. This is why analysts often look at &quot;adjusted EPS,&quot; which strips out one-off items.</li>
+        <li><strong>Accounting timing</strong>: shifting when revenue or expenses are recognized can smooth or bump EPS in a given period.</li>
+      </ul>
+
+      <h2>What to actually look for</h2>
+      <p>Rather than treating EPS as a standalone verdict, it&apos;s more useful as a trend line: is EPS growing consistently over several years, or is growth coming entirely from buybacks rather than actual profit increases? Comparing EPS growth to revenue growth is a useful sanity check — if revenue is flat but EPS keeps climbing, buybacks or one-time items are usually the reason, not genuine business improvement.</p>
+      <p>EPS is a starting point for understanding a company&apos;s profitability per share, not a complete picture. Paired with P/E ratio, revenue trends, and free cash flow, it becomes a genuinely useful tool rather than a number that can be gamed in isolation.</p>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Analyze Stock Profitability</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Don&apos;t guess at the numbers. Use our free EPS Calculator to determine basic and diluted earnings per share with precision.</p>
+        <a href="/finance/earnings-per-share-calculator" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open EPS Calculator →</a>
+      </div>
+    `
+  },
+  {
+    slug: "piti-mortgage-payments-explained",
+    title: "How PITI Mortgage Payments Are Actually Calculated (And Why It Matters)",
+    metaTitle: "What is PITI? | Mortgage Payment Breakdown Explained | Hilmost",
+    metaDesc: "Budget for a home with confidence. Learn what Principal, Interest, Taxes, and Insurance (PITI) means and how to calculate your total monthly mortgage cost.",
+    category: "finance",
+    excerpt: "Principal and interest are only half the story. Learn how property taxes and insurance impact your real monthly mortgage payment.",
+    targetToolHref: "/finance/mortgage-calculator",
+    content: `
+      <p>When people ask &quot;what will my mortgage payment be,&quot; they&apos;re usually only thinking about principal and interest. But your actual monthly payment — the number that hits your bank account — is almost always more than that. It&apos;s made up of four parts, commonly abbreviated <strong>PITI: Principal, Interest, Taxes, and Insurance</strong>.</p>
+
+      <h2>Principal: paying down what you borrowed</h2>
+      <p>This is the portion of your payment that reduces your loan balance. Early in a mortgage, principal makes up a small fraction of each payment. As the loan matures, more of each payment goes toward principal and less toward interest — this shifting balance is called amortization.</p>
+
+      <h2>Interest: the cost of borrowing</h2>
+      <p>Interest is calculated on your remaining loan balance, not the original amount. This is why interest payments start high and decrease over time — as principal shrinks, there&apos;s less balance to charge interest on. On a standard 30-year fixed mortgage, it&apos;s common for more than half of your total payments in the first several years to go toward interest rather than principal.</p>
+
+      <h2>Taxes: property tax, collected monthly</h2>
+      <p>Most lenders don&apos;t wait for you to pay your annual property tax bill in one lump sum. Instead, they estimate your yearly property tax, divide it by 12, and collect that amount each month into an escrow account. When the tax bill comes due, the lender pays it on your behalf from that account. Property tax rates vary significantly by location, which is why the same loan amount can have very different total monthly payments depending on where the property is.</p>
+
+      <h2>Insurance: protecting the lender&apos;s collateral</h2>
+      <p>Homeowner&apos;s insurance is required by virtually all mortgage lenders, because the home is collateral for the loan — if it&apos;s destroyed, the lender wants to know the debt can still be recovered. Like property tax, insurance is often collected monthly and held in escrow, then paid annually by the lender.</p>
+      <p>If your down payment is below 20%, you&apos;ll typically also pay <strong>PMI (Private Mortgage Insurance)</strong> — an additional monthly cost that protects the lender (not you) in case you default. PMI usually disappears automatically once you&apos;ve paid down enough principal to reach 20% equity.</p>
+
+      <h2>Why looking at P&amp;I alone is misleading</h2>
+      <p>A common mistake when budgeting for a home is calculating principal and interest only, then being caught off guard by a monthly payment that&apos;s hundreds of dollars higher once taxes and insurance are included. In areas with high property tax rates, taxes and insurance can easily add 20-30% on top of the base principal-and-interest number. Always budget for full PITI, not just the loan payment itself.</p>
+
+      <h2>A simplified example</h2>
+      <p>On a $300,000 loan at 6.5% interest over 30 years, principal and interest alone comes to roughly $1,896/month. Add $400/month in estimated property tax and $150/month in homeowner&apos;s insurance, and the real monthly payment is closer to <strong>$2,446</strong> — nearly 30% higher than the P&amp;I figure alone.</p>
+
+      <h2>What this means for affordability</h2>
+      <p>Lenders typically use full PITI (not just P&amp;I) when calculating debt-to-income ratios for loan approval. This is worth remembering when comparing homes in different tax jurisdictions — a cheaper home in a high-tax area can end up costing more per month than a pricier home somewhere with lower property taxes. Understanding the full PITI breakdown, not just the loan amount and rate, is the only way to accurately judge what a mortgage will really cost you each month.</p>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Budget for Your Home</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Get the full picture of your home affordability. Use our PITI Mortgage Calculator to estimate principal, interest, taxes, and insurance in one place.</p>
+        <a href="/finance/mortgage-calculator" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open Mortgage Calculator →</a>
+      </div>
+    `
+  },
+  {
+    slug: "percentage-calculations-explained",
+    title: "Percentage Calculations Explained: The Formulas Behind Every \"% Off,\" Tip, and Grade",
+    metaTitle: "Percentage Formulas Explained | How to Calculate % Off | Hilmost",
+    metaDesc: "Master percentage math with three simple formulas. Learn to calculate discounts, tips, percentage changes, and original prices with ease.",
+    category: "converters",
+    excerpt: "Percentages show up everywhere. We break down the three core formulas you need to master sale discounts, tips, and growth rates.",
+    targetToolHref: "/converters/percentage",
+    content: `
+      <p>Percentages show up everywhere — sale discounts, tips, exam grades, interest rates, population growth — yet the actual math behind them trips up more people than almost any other everyday calculation. The good news: there are really only three core percentage formulas, and once you know when to use each one, the rest is just plugging in numbers.</p>
+
+      <h2>Formula 1: Finding a percentage of a number</h2>
+      <p>This is the most common one — &quot;what is 20% of 150?&quot;</p>
+      <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg font-mono my-6 text-center text-blue-600">Percentage of a number = (Percentage ÷ 100) × Number</div>
+      <p>20% of 150 = (20 ÷ 100) × 150 = 0.2 × 150 = <strong>30</strong></p>
+      <p>This is the formula behind tips, discounts, and taxes: 15% tip on a $40 bill = 0.15 × 40 = $6.</p>
+
+      <h2>Formula 2: Finding what percentage one number is of another</h2>
+      <p>&quot;30 is what percent of 150?&quot; This is the reverse of Formula 1.</p>
+      <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg font-mono my-6 text-center text-blue-600">Percentage = (Part ÷ Whole) × 100</div>
+      <p>30 ÷ 150 = 0.2, × 100 = <strong>20%</strong></p>
+      <p>This is the formula behind grades (correct answers ÷ total questions), conversion rates, and &quot;what share of my budget went to X.&quot;</p>
+
+      <h2>Formula 3: Percentage change (increase or decrease)</h2>
+      <p>&quot;A price went from $50 to $65 — what&apos;s the percentage increase?&quot;</p>
+      <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg font-mono my-6 text-center text-blue-600">Percentage Change = ((New Value − Old Value) ÷ Old Value) × 100</div>
+      <p>(65 − 50) ÷ 50 = 0.3, × 100 = <strong>30% increase</strong></p>
+      <p>If the new value is smaller, the result comes out negative — that&apos;s a percentage decrease. This formula is behind salary raises, stock price movement, weight change tracking, and year-over-year growth reporting.</p>
+
+      <h2>The most common mistake: confusing &quot;percent of&quot; with &quot;percentage points&quot;</h2>
+      <p>If a savings account interest rate goes from 2% to 3%, that&apos;s a <strong>1 percentage point increase</strong> — but a <strong>50% increase</strong> in the actual rate (since 1 ÷ 2 = 0.5 = 50%). News headlines often blur this distinction, and it matters: &quot;interest rates rose by 50%&quot; and &quot;interest rates rose by 1 percentage point&quot; describe the exact same change, but sound very different. Always check which one is being reported.</p>
+
+      <h2>Working backwards: finding the original price after a discount</h2>
+      <p>A trickier but common real-world case: an item is on sale for $80 after a 20% discount — what was the original price? It&apos;s tempting to just add 20% back to $80, but that&apos;s wrong, because the 20% discount was calculated off the original price, not the sale price.</p>
+      <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg font-mono my-6 text-center text-blue-600">Original Price = Sale Price ÷ (1 − Discount as decimal)</div>
+      <p>80 ÷ (1 − 0.20) = 80 ÷ 0.80 = <strong>$100</strong></p>
+      <p>Adding 20% to $80 would incorrectly give $96 — close, but not accurate. This distinction matters most when discounts are large; the gap between the &quot;add it back&quot; shortcut and the correct answer grows as the percentage increases.</p>
+
+      <h2>Percentages with negative numbers</h2>
+      <p>Percentage change calculations get confusing when the &quot;old value&quot; is negative — for example, a business going from a $10,000 loss to a $5,000 loss. Plugging straight into the formula gives a misleading result, because percentage change assumes the base value is meaningful in the direction of growth. In these cases, it&apos;s often clearer to describe the change in absolute terms (&quot;loss narrowed by $5,000&quot;) rather than forcing a percentage.</p>
+
+      <h2>Why this matters beyond school math</h2>
+      <p>Percentage literacy affects real financial decisions: understanding that a &quot;50% off, then an extra 20% off&quot; sale is not 70% off total (it&apos;s 60% off, since the second discount applies to the already-reduced price) can save real money. Understanding percentage points versus percent avoids being misled by headlines. And knowing how to reverse-calculate an original price from a discounted one is genuinely useful when comparing deals.</p>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Solve Any Percentage Task</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Stop struggling with formulas. Use our multi-mode Percentage Calculator to find values, changes, and proportions instantly.</p>
+        <a href="/converters/percentage" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open Percentage Calculator →</a>
+      </div>
+    `
+  },
+  {
+    slug: "bmi-calculation-and-limitations",
+    title: "How BMI Is Actually Calculated — And Why It's Not the Whole Picture",
+    metaTitle: "How is BMI Calculated? | BMI Limitations Explained | Hilmost",
+    metaDesc: "Understand the math behind Body Mass Index (BMI). Learn how it's calculated, the standard categories, and why it's not a complete health diagnosis.",
+    category: "health",
+    excerpt: "BMI is a quick health benchmark, but it has significant limitations. Learn the formula and why muscle mass and frame size matter.",
+    targetToolHref: "/health/bmi-calculator",
+    content: `
+      <p>Body Mass Index (BMI) is one of the most widely used health metrics in the world, appearing in everything from doctor&apos;s office charts to insurance calculations. It&apos;s also one of the most widely misunderstood — both in how it&apos;s calculated and, more importantly, in what it can and can&apos;t tell you.</p>
+
+      <h2>The formula</h2>
+      <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg font-mono my-6 text-center text-rose-600">BMI = Weight (kg) ÷ Height (m)²</div>
+      <p>Or in imperial units:</p>
+      <div class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg font-mono my-6 text-center text-rose-600">BMI = (Weight (lbs) ÷ Height (in)²) × 703</div>
+      <p>For example, someone weighing 70 kg at 1.75 m tall: 70 ÷ (1.75 × 1.75) = 70 ÷ 3.0625 = <strong>22.9</strong></p>
+
+      <h2>The standard categories</h2>
+      <ul class="space-y-2 my-6 list-disc pl-6">
+        <li><strong>Below 18.5</strong>: Underweight</li>
+        <li><strong>18.5–24.9</strong>: Normal weight</li>
+        <li><strong>25.0–29.9</strong>: Overweight</li>
+        <li><strong>30.0 and above</strong>: Obese</li>
+      </ul>
+      <p>These thresholds were established by the World Health Organization and are widely used as a population-level screening tool — meaning they were designed to track health trends across large groups, not to serve as a precise individual diagnosis.</p>
+
+      <h2>Why BMI was never designed for individual diagnosis</h2>
+      <p>BMI was developed in the 1830s by Adolphe Quetelet, a Belgian mathematician — not a physician — studying the &quot;average man&quot; for population statistics, not individual health assessment. It only uses two numbers: height and weight. It has no way to distinguish between muscle mass and fat mass, no way to account for bone density, and no way to factor in where fat is distributed on the body (which matters significantly for health risk).</p>
+
+      <h2>Where BMI genuinely breaks down</h2>
+      <ul class="space-y-4 my-8">
+        <li><strong>Athletes and muscular individuals</strong>: muscle is denser than fat, so a bodybuilder or athlete can register as &quot;overweight&quot; or even &quot;obese&quot; by BMI despite having very low body fat.</li>
+        <li><strong>Older adults</strong>: muscle mass naturally declines with age while fat can increase, meaning two people with identical BMI can have very different actual body compositions.</li>
+        <li><strong>Different body frames</strong>: BMI doesn&apos;t account for frame size — someone with a naturally larger bone structure can register higher without carrying more fat.</li>
+        <li><strong>Pregnancy</strong>: BMI calculations aren&apos;t meaningful during pregnancy due to expected and healthy weight gain.</li>
+        <li><strong>Ethnic variation in health risk</strong>: research has shown that health risks associated with a given BMI can differ across ethnic groups — some populations show increased health risks at lower BMI thresholds than the standard cutoffs suggest.</li>
+      </ul>
+
+      <h2>What BMI is still useful for</h2>
+      <p>Despite its limitations, BMI remains a fast, free, and genuinely useful first-pass screening tool, especially at a population level or as one data point among several. It&apos;s inexpensive to calculate, doesn&apos;t require special equipment, and correlates reasonably well with health risk on average across large groups — it just isn&apos;t precise for any single individual, especially those in the edge cases above.</p>
+
+      <h2>Better metrics, when available</h2>
+      <p>For a more complete picture, health professionals often use BMI alongside:</p>
+      <ul class="space-y-2 my-6 list-disc pl-6">
+        <li><strong>Waist circumference</strong> — a strong independent predictor of health risk, since abdominal fat carries different risk than fat elsewhere on the body</li>
+        <li><strong>Waist-to-hip ratio</strong> — another distribution-based measure</li>
+        <li><strong>Body fat percentage</strong> (via skinfold calipers, bioelectrical impedance, or DEXA scans) — directly measures fat rather than inferring it from weight and height</li>
+      </ul>
+
+      <h2>The bottom line</h2>
+      <p>BMI is a quick, useful starting point — not a diagnosis. If your BMI falls outside the &quot;normal&quot; range, especially at the borderline, that&apos;s a reasonable cue to look deeper (waist measurement, body composition, or simply a conversation with a doctor), not a verdict on your health. It&apos;s one number out of many that matter.</p>
+
+      <div class="mt-12 p-8 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-rose-900 dark:text-rose-100 mb-4">Check Your Metrics Privatey</h3>
+        <p class="text-rose-800 dark:text-rose-300 mb-6 text-lg">Get a fast, private benchmark of your Body Mass Index. Our calculator runs 100% in your browser—your health data never leaves your device.</p>
+        <a href="/health/bmi-calculator" class="inline-block px-8 py-4 bg-rose-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-rose-700 hover:scale-105 transition-all shadow-lg">Open BMI Calculator →</a>
+      </div>
+    `
+  },
+  {
+    slug: "order-of-operations-basic-calculations",
+    title: "Why Calculators Sometimes Give Different Answers: Understanding Order of Operations",
+    metaTitle: "Order of Operations Explained | PEMDAS & BODMAS Guide | Hilmost",
+    metaDesc: "Why does 6 + 2 x 3 equal 12 and not 24? Master the order of operations (PEMDAS) to ensure your calculations are always mathematically correct.",
+    category: "calculators",
+    excerpt: "One rule governs all mathematics. Learn why operation priority (PEMDAS) is the difference between a correct result and a costly mistake.",
+    targetToolHref: "/calculators/standard",
+    content: `
+      <p>Type 6 + 2 × 3 into two different calculators and you might get two different answers: 24, or 12. Only one is mathematically correct — and understanding why reveals one of the most important, and most commonly misapplied, rules in basic math.</p>
+
+      <h2>The rule: PEMDAS / BODMAS</h2>
+      <p>Mathematics follows a fixed order when evaluating expressions with multiple operations, commonly remembered by the acronym <strong>PEMDAS</strong> (or BODMAS in some countries):</p>
+      <ol class="space-y-4 my-8">
+        <li><strong>Parentheses / Brackets</strong> — solve anything inside brackets first</li>
+        <li><strong>Exponents / Orders</strong> — powers and roots</li>
+        <li><strong>Multiplication and Division</strong> — left to right, same priority</li>
+        <li><strong>Addition and Subtraction</strong> — left to right, same priority</li>
+      </ol>
+      <p>Applying this to 6 + 2 × 3: multiplication happens before addition, so it&apos;s 6 + (2 × 3) = 6 + 6 = <strong>12</strong>. A calculator that returns 24 is evaluating left to right without respecting operation priority — this is the difference between a &quot;basic&quot; arithmetic calculator and a properly order-aware one.</p>
+
+      <h2>Why multiplication/division and addition/subtraction are &quot;tied&quot;</h2>
+      <p>A common misconception is that multiplication always comes before division, and addition always before subtraction — but they&apos;re actually equal priority pairs, resolved left to right. 20 ÷ 4 × 2 is not 20 ÷ 8; it&apos;s (20 ÷ 4) × 2 = 5 × 2 = <strong>10</strong>, because division appears first reading left to right.</p>
+
+      <h2>Where this trips people up in real life</h2>
+      <ul class="space-y-4 my-8">
+        <li><strong>Spreadsheets</strong>: Excel and Google Sheets follow standard order of operations, so a formula like <code>=6+2*3</code> returns 12, not 24.</li>
+        <li><strong>Nested parentheses</strong>: (4 + 2) × (10 − 3) requires solving each set of parentheses independently first (6 × 7 = 42) before combining.</li>
+        <li><strong>Negative exponents and roots</strong>: -2² is often miscalculated. Strictly by order of operations, the exponent applies before the negative sign, so this equals −4, not 4 — because the expression is read as −(2²), not (−2)². Writing (−2)² explicitly changes the answer to 4.</li>
+      </ul>
+
+      <h2>A worked example combining several rules</h2>
+      <p><strong>3 + 4 × (2 + 3)² ÷ 5</strong></p>
+      <ol class="space-y-2 my-6 list-decimal pl-6">
+        <li>Parentheses first: (2 + 3) = 5, so: 3 + 4 × 5² ÷ 5</li>
+        <li>Exponent next: 5² = 25, so: 3 + 4 × 25 ÷ 5</li>
+        <li>Multiplication and division, left to right: 4 × 25 = 100, then 100 ÷ 5 = 20, so: 3 + 20</li>
+        <li>Addition last: 3 + 20 = <strong>23</strong></li>
+      </ol>
+      <p>Skipping the order and solving left to right would give a completely different, incorrect answer.</p>
+
+      <h2>Why this matters beyond school</h2>
+      <p>Order of operations isn&apos;t just an academic exercise — it&apos;s the foundation every spreadsheet formula, financial model, and piece of software relies on to calculate correctly. A single misapplied operation order in a budget spreadsheet or engineering calculation can produce results that look plausible but are simply wrong. Understanding the rule is the difference between trusting a number because a calculator produced it, and actually knowing why that number is correct.</p>
+
+      <div class="mt-12 p-8 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-indigo-900 dark:text-indigo-100 mb-4">Calculate with Precision</h3>
+        <p class="text-indigo-800 dark:text-indigo-300 mb-6 text-lg">Use a calculator that respects mathematical laws. Our Standard Calculator is order-aware, ensuring your results are always accurate and reliable.</p>
+        <a href="/calculators/standard" class="inline-block px-8 py-4 bg-indigo-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-indigo-700 hover:scale-105 transition-all shadow-lg">Open Standard Calculator →</a>
+      </div>
+    `
   }
 ];

@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { MortgageCalculatorClient } from "./MortgageCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -117,6 +119,14 @@ export default function MortgageCalculatorPage() {
         <p>
           To reduce your total cost, consider making a larger down payment, which reduces the principal and may eliminate the need for PMI. Additionally, even a small reduction in your interest rate can save you tens of thousands of dollars over a 30-year term. Always check your local tax rates, as they vary significantly by county and state.
         </p>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Financial Planning</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to understand exactly how property taxes and insurance impact your monthly budget?</p>
+          <Link href="/guides/piti-mortgage-payments-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            Read our full PITI Mortgage Guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
