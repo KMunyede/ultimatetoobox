@@ -101,10 +101,11 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Text & Formatting",
     slug: "text-data",
     description: "Clean up text, count words, and encode data with ease.",
-    count: 5,
+    count: 6,
     color: "brand-primary",
     icon: "Binary",
     tools: [
+      { name: "Random Name/Number Generator", href: "/text-data/random-name-number-generator", tooltip: "Generate secure random numbers or names instantly.", description: "Generate cryptographically secure random numbers or random names from various categories entirely in your browser.", icon: "Hash" },
       { name: "Text Case Converter", href: "/text-data/text-case-converter", tooltip: "Convert text between camelCase, snake_case, and more.", description: "Convert text between camelCase, snake_case, Title Case, and 9 other formats instantly." },
       { name: "Word Unscrambler", href: "/text-data/word-unscrambler", tooltip: "Find words from scrambled letters.", description: "Instantly untangle any anagram and find hidden words for Scrabble or crossword puzzles." },
       { name: "Base64 Text Encoder", href: "/text-data/base64-encode", tooltip: "Securely encode text for data transfer.", description: "Safely encode and decode text strings into URL-friendly ASCII format." },
