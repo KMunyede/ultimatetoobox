@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle
 import Link from "next/link";
 import { Code2, ArrowRight, FileJson, Lock, QrCode, Search, ShieldCheck, Palette, Cpu } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Developer Experience Tools";
@@ -29,50 +29,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "JSON Formatter",
-    href: "/dx/json-formatter",
-    icon: <FileJson size={20} />,
-    description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors."
-  },
-  {
-    name: "AI Token Calculator",
-    href: "/dx/ai-token-calculator",
-    icon: <Cpu size={20} />,
-    description: "Estimate token counts and API costs for LLM prompts. Supports custom rate entry to stay accurate as pricing changes."
-  },
-  {
-    name: "Password Generator",
-    href: "/dx/password-generator",
-    icon: <Lock size={20} />,
-    description: "Generate secure random passwords with custom length, character sets, and strength indicator."
-  },
-  {
-    name: "QR Code Generator",
-    href: "/dx/qr-code-generator",
-    icon: <QrCode size={20} />,
-    description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up."
-  },
-  {
-    name: "Regex Tester",
-    href: "/dx/regex-tester",
-    icon: <Search size={20} />,
-    description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting."
-  },
-  {
-    name: "JWT Decoder",
-    href: "/dx/jwt-decoder",
-    icon: <ShieldCheck size={20} />,
-    description: "Inspect JSON Web Tokens (JWT) safely. Decode headers and payloads without ever sending your sensitive tokens to a server."
-  },
-  {
-    name: "Color Picker",
-    href: "/dx/color-picker",
-    icon: <Palette size={20} />,
-    description: "Convert HEX, RGB & HSL instantly. Generate palettes, check WCAG contrast, and save your color history."
-  },
-];
+const CATEGORY_SLUG = "dx";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
+
+const iconMap: Record<string, React.ReactNode> = {
+  FileJson: <FileJson size={20} />,
+  Cpu: <Cpu size={20} />,
+  Lock: <Lock size={20} />,
+  QrCode: <QrCode size={20} />,
+  Search: <Search size={20} />,
+  ShieldCheck: <ShieldCheck size={20} />,
+  Palette: <Palette size={20} />,
+};
 
 const faqs = [
   {
@@ -143,7 +112,7 @@ export default function DXHub() {
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-blue-500/50">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-slate-400 group-hover:text-blue-600 transition-colors">
-                {link.icon}
+                {link.icon ? iconMap[link.icon] : <Code2 size={20} />}
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
             </div>
@@ -156,6 +125,7 @@ export default function DXHub() {
           </Link>
         ))}
       </div>
+
 
       <CollapsibleSection title="About Developer Experience Tools">
         <section className="prose prose-slate dark:prose-invert max-w-none">

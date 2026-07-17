@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, AuthorBio, ToolArticle, PrivacyBadge
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "PDF Tools";
@@ -29,28 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "Merge PDF",
-    href: "/pdf-tools/merge-pdf",
-    description: "Combine multiple PDF files into a single document. Drag and drop to reorder files before merging."
-  },
-  {
-    name: "Split PDF",
-    href: "/pdf-tools/split-pdf",
-    description: "Extract specific pages from your PDF or split a large document into multiple files by page range."
-  },
-  {
-    name: "Rotate PDF",
-    href: "/pdf-tools/rotate-pdf",
-    description: "Rotate individual pages or the entire document by 90, 180, or 270 degrees with visual previews."
-  },
-  {
-    name: "Delete Pages",
-    href: "/pdf-tools/delete-pages",
-    description: "Remove unwanted pages from your PDF file and download the cleaned version instantly."
-  },
-];
+const CATEGORY_SLUG = "pdf-tools";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
 
 const faqs = [
   {

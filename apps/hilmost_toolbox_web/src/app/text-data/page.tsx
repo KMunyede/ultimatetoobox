@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle
 import Link from "next/link";
 import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Text & Data Tools";
@@ -29,33 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "Text Case Converter",
-    href: "/text-data/text-case-converter",
-    description: "Convert text between camelCase, snake_case, Title Case, and 9 other formats instantly. Essential for developers and professional writers."
-  },
-  {
-    name: "Word Unscrambler",
-    href: "/text-data/word-unscrambler",
-    description: "Instantly untangle any anagram and find hidden words for Scrabble or crossword puzzles. Perfect for language enthusiasts and competitive gamers looking for a quick edge."
-  },
-  {
-    name: "Base64 Text Encoder",
-    href: "/text-data/base64-encode",
-    description: "Safely encode and decode text strings into URL-friendly ASCII format. Essential for developers moving binary data or special characters through strict protocols."
-  },
-  {
-    name: "MD5 Hash",
-    href: "/text-data/md5-hash",
-    description: "Generate lightning-fast MD5 hashes to verify data integrity and confirm file authenticity. A must-have tool for security-conscious users and system administrators."
-  },
-  {
-    name: "Word Count",
-    href: "/text-data/word-count",
-    description: "Get real-time analytics on your text including word, character, and sentence counts. Ideal for authors, students, and social media managers hitting precise limits."
-  },
-];
+const CATEGORY_SLUG = "text-data";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
 
 const faqs = [
   {

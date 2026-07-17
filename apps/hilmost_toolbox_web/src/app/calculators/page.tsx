@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle
 import Link from "next/link";
 import { Calculator, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Math & Science Calculators";
@@ -29,28 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "Standard Calculator",
-    href: "/calculators/standard",
-    description: "A fast, clean calculator for everyday arithmetic. Simple, responsive, and perfect for quick sums on any device."
-  },
-  {
-    name: "Scientific Calculator",
-    href: "/calculators/scientific",
-    description: "Advanced math functions including trigonometry, logarithms, and exponentials. A complete replacement for your physical scientific calculator."
-  },
-  {
-    name: "Astrophysics Calculator",
-    href: "/calculators/astrophysics",
-    description: "Explore the cosmos with specialized tools for escape velocity, Schwarzschild radius, and orbital speed calculations."
-  },
-  {
-    name: "Science Equation Solver",
-    href: "/calculators/equation-solver",
-    description: "Solve complex physics and chemistry equations instantly. Supports kinematics, force, and ideal gas law calculations."
-  },
-];
+const CATEGORY_SLUG = "calculators";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
 
 const faqs = [
   {

@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle
 import Link from "next/link";
 import { GraduationCap, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Education Tools";
@@ -29,14 +29,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "GPA Calculator",
-    href: "/education/gpa-calculator",
-    icon: <GraduationCap size={20} />,
-    description: "Calculate semester and cumulative GPA with standard or weighted scales. Supports letter grades, percentages, and points."
-  },
-];
+const CATEGORY_SLUG = "education";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
+
+const iconMap: Record<string, React.ReactNode> = {
+  GraduationCap: <GraduationCap size={20} />
+};
 
 const faqs = [
   {
@@ -107,7 +106,7 @@ export default function EducationHub() {
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-orange-500/50">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-slate-400 group-hover:text-orange-600 transition-colors">
-                {link.icon}
+                {link.icon ? iconMap[link.icon] : <GraduationCap size={20} />}
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
             </div>

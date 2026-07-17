@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, BreadcrumbSchema, FAQSchema, FAQAcco
 import Link from "next/link";
 import { Replace, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Unit Converters";
@@ -29,63 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "Age Calculator",
-    href: "/converters/age-calculator",
-    description: "Determine exact age in years, months, and days based on birth date. Perfect for checking milestones and calculating precise duration since birth."
-  },
-  {
-    name: "Percentage Calculator",
-    href: "/converters/percentage",
-    description: "Calculate percentage increases, decreases, and common math ratios. Essential for retail discounts, tax estimates, and financial analysis."
-  },
-  {
-    name: "Unix Time",
-    href: "/converters/unix-time",
-    description: "Convert between human-readable dates and Unix timestamps instantly. A vital tool for developers, database administrators, and system engineers."
-  },
-  {
-    name: "Length Converter",
-    href: "/converters/length",
-    description: "Transform measurements between meters, feet, inches, miles, and kilometers. Supports both metric and imperial systems for global engineering tasks."
-  },
-  {
-    name: "Weight/Mass Converter",
-    href: "/converters/weight-mass",
-    description: "Convert between grams, kilograms, pounds, ounces, and metric tons. Reliable for shipping logistics, culinary recipes, and scientific experiments."
-  },
-  {
-    name: "Temperature Converter",
-    href: "/converters/temperature",
-    description: "Switch between Celsius, Fahrenheit, and Kelvin with precise calculations. Useful for travel planning, scientific research, and weather comparisons."
-  },
-  {
-    name: "Time Converter",
-    href: "/converters/time",
-    description: "Convert between seconds, minutes, hours, days, and weeks easily. High-precision results for project management and duration calculations."
-  },
-  {
-    name: "Time Zone Converter",
-    href: "/converters/time-zone",
-    description: "Compare times across global time zones and plan international meetings. Automatically accounts for daylight saving time transitions worldwide."
-  },
-  {
-    name: "Aspect Ratio Calculator",
-    href: "/converters/aspect-ratio",
-    description: "Simplify image and video aspect ratios instantly. Supports common presets like 16:9, 9:16, 4:3, and 1:1 with GCD-based precision."
-  },
-  {
-    name: "Data Storage",
-    href: "/converters/data-storage",
-    description: "Convert between bits, bytes, kilobytes, megabytes, and gigabytes. Essential for IT professionals managing server capacity and file transfers."
-  },
-  {
-    name: "Area Converter",
-    href: "/converters/area",
-    description: "Calculate conversions for square meters, acres, hectares, and square feet. Crucial for real estate, landscaping, and construction projects."
-  },
-];
+const CATEGORY_SLUG = "converters";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
 
 const faqs = [
   {

@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle
 import Link from "next/link";
 import { Activity, ArrowRight, Apple, Moon } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Health & Wellness Tools";
@@ -29,29 +29,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "Daily Wisdom & Wellness",
-    href: "/health/daily-wisdom",
-    description: "A private space for mental well-being. Access daily quotes, journaling tools, and library resources to elevate your mindset."
-  },
-  {
-    name: "Calorie & Macro Calculator",
-    href: "/health/calorie-macro-calculator",
-    description: "Calculate your BMR, TDEE, and optimal macronutrient split. Optimize your daily intake for weight loss, maintenance, or muscle gain."
-  },
-  {
-    name: "Sleep Cycle Calculator",
-    href: "/health/sleep-cycle-calculator",
-    description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Wake up refreshed, not groggy.",
-    icon: <Moon className="w-5 h-5" />
-  },
-  {
-    name: "BMI Calculator",
-    href: "/health/bmi-calculator",
-    description: "Calculate your Body Mass Index (BMI) instantly. Understand your weight category and track your fitness trajectory with ease."
-  },
-];
+const CATEGORY_SLUG = "health";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
+
+const iconMap: Record<string, React.ReactNode> = {
+  Moon: <Moon className="w-5 h-5" />
+};
 
 const faqs = [
   {
@@ -130,7 +114,7 @@ export default function HealthHub() {
             <div className="flex items-center gap-3 mb-3">
               {link.icon && (
                 <div className="text-rose-500 group-hover:scale-110 transition-transform">
-                  {link.icon}
+                  {iconMap[link.icon]}
                 </div>
               )}
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>

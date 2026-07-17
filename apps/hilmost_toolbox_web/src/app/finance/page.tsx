@@ -2,7 +2,7 @@ import { WebApplicationSchema, Breadcrumbs, FAQSchema, FAQAccordion, ToolArticle
 import Link from "next/link";
 import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { getCanonicalUrl } from "@utilitiessite/config";
+import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "Financial Calculators";
@@ -29,73 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const links = [
-  {
-    name: "Currency Converter",
-    href: "/finance/currency",
-    description: "Real-time exchange rates for global currencies. Convert USD, EUR, GBP, and more instantly."
-  },
-  {
-    name: "Loan Calculator",
-    href: "/finance/loan-calculator",
-    description: "Estimate monthly payments, total interest, and payoff schedules for mortgages or personal loans."
-  },
-  {
-    name: "Mortgage Calculator",
-    href: "/finance/mortgage-calculator",
-    description: "Estimate full PITI (Principal, Interest, Tax, Insurance) mortgage payments with precision."
-  },
-  {
-    name: "Income Tax",
-    href: "/finance/income-tax",
-    description: "Calculate your take-home pay after federal and local taxes. Supports multiple jurisdictions."
-  },
-  {
-    name: "Compound Interest",
-    href: "/finance/compound-interest",
-    description: "Visualize how your investments grow exponentially over time with reinvested earnings."
-  },
-  {
-    name: "VAT & Tax Calculator",
-    href: "/finance/vat-tax",
-    description: "Quickly add or remove Value Added Tax (VAT) from prices with custom percentage rates."
-  },
-  {
-    name: "Salary Converter",
-    href: "/finance/salary-converter",
-    description: "Convert annual salary to hourly, weekly, or monthly rates to better understand your earnings."
-  },
-  {
-    name: "Tip Calculator",
-    href: "/finance/tip-calculator",
-    description: "Calculate the perfect tip and split the bill easily between friends or colleagues."
-  },
-  {
-    name: "Retirement Planner",
-    href: "/finance/retirement-planner",
-    description: "Estimate how much you need to save today to maintain your lifestyle in the future."
-  },
-  {
-    name: "Inflation Calculator",
-    href: "/finance/inflation",
-    description: "See how the purchasing power of your money has changed over time due to inflation."
-  },
-  {
-    name: "Budget Planner",
-    href: "/finance/budget-planner",
-    description: "Track income and expenses to create a balanced financial plan for your household."
-  },
-  {
-    name: "EPS Calculator",
-    href: "/finance/earnings-per-share-calculator",
-    description: "Analyze company profitability by calculating Basic and Diluted Earnings Per Share (EPS)."
-  },
-  {
-    name: "WACC Calculator",
-    href: "/finance/wacc-calculator",
-    description: "Determine your company's hurdle rate and capital structure efficiency with integrated CAPM logic."
-  },
-];
+const CATEGORY_SLUG = "finance";
+const category = TOOL_CATEGORIES.find(c => c.slug === CATEGORY_SLUG);
+const links = category?.tools || [];
 
 const faqs = [
   {

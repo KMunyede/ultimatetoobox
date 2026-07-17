@@ -8,6 +8,7 @@ export interface Tool {
   href: string;
   description: string;
   tooltip: string;
+  icon?: string;
 }
 
 export interface ToolCategory {
@@ -29,13 +30,13 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     color: "slate",
     icon: "Code2",
     tools: [
-      { name: "JSON Formatter", href: "/dx/json-formatter", tooltip: "Pretty-print and validate JSON data.", description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors." },
-      { name: "AI Token Calculator", href: "/dx/ai-token-calculator", tooltip: "Estimate LLM token count and API costs.", description: "Estimate token counts and API costs for LLM prompts. Supports custom rate entry to stay accurate as pricing changes." },
-      { name: "QR Code Generator", href: "/dx/qr-code-generator", tooltip: "Create QR codes for URLs, Wi-Fi, and more.", description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up." },
-      { name: "Password Generator", href: "/dx/password-generator", tooltip: "Generate secure random passwords with custom rules.", description: "Generate secure random passwords with custom length, character sets, and strength indicator." },
-      { name: "Regex Tester", href: "/dx/regex-tester", tooltip: "Real-time regular expression testing.", description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting." },
-      { name: "JWT Decoder", href: "/dx/jwt-decoder", tooltip: "Decode JSON Web Tokens instantly.", description: "Inspect JSON Web Tokens (JWT) safely. Decode headers and payloads without ever sending your sensitive tokens to a server." },
-      { name: "Color Picker", href: "/dx/color-picker", tooltip: "Convert HEX, RGB & HSL instantly.", description: "Convert HEX, RGB & HSL instantly. Generate palettes, check WCAG contrast, and save your color history." },
+      { name: "JSON Formatter", href: "/dx/json-formatter", tooltip: "Pretty-print and validate JSON data.", description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors.", icon: "FileJson" },
+      { name: "AI Token Calculator", href: "/dx/ai-token-calculator", tooltip: "Estimate LLM token count and API costs.", description: "Estimate token counts and API costs for LLM prompts. Supports custom rate entry to stay accurate as pricing changes.", icon: "Cpu" },
+      { name: "QR Code Generator", href: "/dx/qr-code-generator", tooltip: "Create QR codes for URLs, Wi-Fi, and more.", description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up.", icon: "QrCode" },
+      { name: "Password Generator", href: "/dx/password-generator", tooltip: "Generate secure random passwords with custom rules.", description: "Generate secure random passwords with custom length, character sets, and strength indicator.", icon: "Lock" },
+      { name: "Regex Tester", href: "/dx/regex-tester", tooltip: "Real-time regular expression testing.", description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting.", icon: "Search" },
+      { name: "JWT Decoder", href: "/dx/jwt-decoder", tooltip: "Decode JSON Web Tokens instantly.", description: "Inspect JSON Web Tokens (JWT) safely. Decode headers and payloads without ever sending your sensitive tokens to a server.", icon: "ShieldCheck" },
+      { name: "Color Picker", href: "/dx/color-picker", tooltip: "Convert HEX, RGB & HSL instantly.", description: "Convert HEX, RGB & HSL instantly. Generate palettes, check WCAG contrast, and save your color history.", icon: "Palette" },
     ]
   },
   {
@@ -136,7 +137,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
       { name: "Daily Wisdom", href: "/health/daily-wisdom", tooltip: "Stoic quotes and daily guidance.", description: "A private space for mental well-being. Access daily quotes, journaling tools, and library resources." },
       { name: "BMI Calculator", href: "/health/bmi-calculator", tooltip: "Calculate Body Mass Index safely.", description: "Calculate your Body Mass Index (BMI) instantly. Understand your weight category and trajectory." },
       { name: "Calorie & Macro", href: "/health/calorie-macro-calculator", tooltip: "Precision nutrition and macro ratios.", description: "Calculate your BMR, TDEE, and optimal macronutrient split for your fitness goals." },
-      { name: "Sleep Cycle", href: "/health/sleep-cycle-calculator", tooltip: "Optimal wake-up and bed times.", description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Wake up refreshed." },
+      { name: "Sleep Cycle", href: "/health/sleep-cycle-calculator", tooltip: "Optimal wake-up and bed times.", description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Wake up refreshed.", icon: "Moon" },
     ]
   },
   {
@@ -147,7 +148,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     color: "orange",
     icon: "GraduationCap",
     tools: [
-      { name: "GPA Calculator", href: "/education/gpa-calculator", tooltip: "Calculate semester and cumulative GPA.", description: "Calculate semester and cumulative GPA with standard or weighted scales. Supports letter grades and points." },
+      { name: "GPA Calculator", href: "/education/gpa-calculator", tooltip: "Calculate semester and cumulative GPA.", description: "Calculate semester and cumulative GPA with standard or weighted scales. Supports letter grades and points.", icon: "GraduationCap" },
     ]
   }
 ];
