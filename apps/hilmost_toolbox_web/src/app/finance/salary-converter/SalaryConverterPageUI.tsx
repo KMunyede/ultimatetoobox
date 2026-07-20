@@ -1,6 +1,8 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { SalaryConverterClient } from "./SalaryConverterClient";
 import { ShareButton } from "@/components/ShareButton";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 type Period = "hourly" | "daily" | "weekly" | "monthly" | "annually";
 
@@ -79,6 +81,14 @@ export function SalaryConverterPageUI({
           <li><strong>Step 2: Define Work Week</strong> - Adjust your average working hours per week for a precise conversion.</li>
           <li><strong>Step 3: Compare Timeframes</strong> - See how your pay translates across daily, weekly, monthly, and annual intervals.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to understand the gap between gross and net pay?</p>
+          <Link href="/guides/understanding-take-home-salary" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            Read our Take-Home Salary Guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

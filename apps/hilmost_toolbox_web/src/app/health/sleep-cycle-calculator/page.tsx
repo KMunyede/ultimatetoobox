@@ -1,5 +1,7 @@
 import { WebApplicationSchema, Breadcrumbs, ToolHeader, ToolArticle, FAQAccordion, RelatedTools, FAQSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { SleepCycleCalculatorTool } from "./SleepCycleCalculatorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -109,6 +111,14 @@ export default function SleepCycleCalculatorPage() {
           <p>
             By mastering your sleep cycles, you aren&apos;t just sleeping more; you&apos;re sleeping smarter.
           </p>
+
+          <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+            <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+            <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the science of rest?</p>
+            <Link href="/guides/sleep-cycles-and-wake-times-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+              Read our full Sleep Cycle Guide <ArrowRight size={14} />
+            </Link>
+          </div>
         </ToolArticle>
 
         <FAQAccordion items={faqs} />

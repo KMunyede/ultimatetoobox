@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { CompoundInterestClient } from "./CompoundInterestClient";
 import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -146,6 +148,14 @@ export default function CompoundInterestPage() {
             { name: "Federal Reserve Education - The Power of Compounding", url: "https://www.federalreserveeducation.org/" }
           ]}
         />
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the mathematical engine of wealth?</p>
+          <Link href="/guides/compound-interest-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            Read our full Compound Interest Guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

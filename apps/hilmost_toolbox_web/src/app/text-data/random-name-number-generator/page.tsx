@@ -1,5 +1,7 @@
 import { WebApplicationSchema, ToolArticle, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { RandomGeneratorTool } from "./RandomGeneratorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -107,6 +109,14 @@ export default function RandomGeneratorPage() {
           <p>
             Privacy isn&apos;t just a feature; it&apos;s our foundation. This tool does not track your IP address or save the names and numbers you generate. Once you refresh the page or close the tab, the results are wiped from your browser&apos;s memory. No databases, no logs, just pure utility.
           </p>
+
+          <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+            <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+            <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to understand the science of digital randomness?</p>
+            <Link href="/guides/how-random-number-generators-work" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+              Read our full RNG Guide <ArrowRight size={14} />
+            </Link>
+          </div>
         </ToolArticle>
 
         <FAQAccordion items={faqs} />

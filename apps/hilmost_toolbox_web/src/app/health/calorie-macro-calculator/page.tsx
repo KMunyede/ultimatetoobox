@@ -1,5 +1,7 @@
 import { WebApplicationSchema, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, ToolArticle, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { CalorieMacroCalculatorTool } from "./CalorieMacroCalculatorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -113,6 +115,14 @@ export default function CalorieMacroCalculatorPage() {
           <p>
             Your health data is personal. Following the Hilmost monorepo standards, this tool uses a <strong>Zero-Server Architecture</strong>. All metabolic calculations happen entirely in your browser&apos;s memory. Your weight, age, and goals are never transmitted to or stored on our servers, ensuring 100% privacy for your fitness journey.
           </p>
+
+          <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+            <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+            <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master your metabolic roadmap?</p>
+            <Link href="/guides/bmr-tdee-and-macros-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+              Read our full BMR & Macros Guide <ArrowRight size={14} />
+            </Link>
+          </div>
         </ToolArticle>
 
         <FAQAccordion items={faqs} />
