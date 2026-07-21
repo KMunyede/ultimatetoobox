@@ -53,6 +53,13 @@
             }
           ]
         }
+      ],
+      "redirects": [
+        {
+          "source": "/guides/how-compound-interest-works",
+          "destination": "/guides/compound-interest-explained",
+          "type": 301
+        }
       ]
     },
     {
@@ -106,6 +113,13 @@
               "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
+        }
+      ],
+      "redirects": [
+        {
+          "source": "/guides/how-compound-interest-works",
+          "destination": "/guides/compound-interest-explained",
+          "type": 301
         }
       ]
     },

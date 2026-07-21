@@ -1,6 +1,7 @@
 ﻿export function TermsOfServiceContent() {
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none">
+      <h1>Terms of Service</h1>
       <p className="lead text-xl text-slate-600 dark:text-slate-400 mb-8">
         Welcome to the Hilmost Software Corporation (HSC) network. By accessing or using our websites, tools, and services, you agree to be bound by these Terms of Service.
       </p>

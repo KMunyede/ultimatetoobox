@@ -3,6 +3,7 @@ import React from "react";
 export function CookiePolicyContent() {
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none">
+      <h1>Cookie Policy</h1>
       <div className="space-y-10">
         <section>
           <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">1. What Are Cookies</h2>

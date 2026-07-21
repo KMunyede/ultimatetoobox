@@ -1,6 +1,7 @@
 ﻿export function PrivacyPolicyContent() {
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none">
+      <h1>Privacy Policy</h1>
       <p className="lead text-xl text-slate-600 dark:text-slate-400 mb-8">
         At Hilmost Software Corporation (HSC), we take your privacy seriously. This Privacy Policy outlines how we collect, use, and protect your information across our network of applications and services.
       </p>
