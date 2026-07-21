@@ -1,49 +1,61 @@
 # Content Signals (https://contentsignals.org/)
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
+# Global rules for bots not specified below
 User-agent: *
-Allow: /
 Disallow: /api/
 Disallow: /_next/
 Disallow: /cdn-cgi/
+Allow: /
 
+# Specific search engine crawlers
 User-agent: Googlebot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: Bingbot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: DuckDuckBot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: Baiduspider
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: YandexBot
+Disallow: /cdn-cgi/
 Allow: /
 
+# AI & LLM Crawlers
 User-agent: GPTBot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: ClaudeBot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: anthropic-ai
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: PerplexityBot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: OAI-SearchBot
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: cohere-ai
+Disallow: /cdn-cgi/
 Allow: /
 
 User-agent: meta-externalagent
-Allow: /
-
-User-agent: *
 Disallow: /cdn-cgi/
+Allow: /
 
 Sitemap: https://hilmost.net/sitemap.xml
