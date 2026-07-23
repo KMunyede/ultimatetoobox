@@ -61,11 +61,7 @@
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <span className="font-semibold text-slate-900 dark:text-white min-w-[80px]">Email:</span> 
-                <a href="mailto:k.munyede@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="font-semibold text-slate-900 dark:text-white min-w-[80px]">Phone:</span> 
-                <span className="text-slate-600 dark:text-slate-400">263772934762</span>
+                <a href="mailto:support@hilmost.net" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>
               </li>
               <li className="flex items-start gap-3 pt-2">
                 <span className="font-semibold text-slate-900 dark:text-white min-w-[80px]">Address:</span>
