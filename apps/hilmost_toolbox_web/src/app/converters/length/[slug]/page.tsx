@@ -76,15 +76,39 @@ export default async function LengthDynamicPage({ params }: { params: Promise<{ 
   const filePath = path.join(process.cwd(), "src/app/converters/length/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const canonicalUrl = getCanonicalUrl(`/converters/length/${slug}`);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": displayTitle,
+    "description": `Professional online tool to convert ${fromUnitStr} to ${toUnitStr} with high precision. Free, private, and instant.`,
+    "url": canonicalUrl,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
+
   return (
-    <LengthPageUI 
-      defaultUnit1={fromUnitStr}
-      defaultUnit2={toUnitStr}
-      title={displayTitle}
-      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free distance calculator.`}
-      canonicalUrl={getCanonicalUrl(`/converters/length/${slug}`)}
-      lastUpdated={lastUpdated}
-      breadcrumbItems={breadcrumbItems}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <LengthPageUI
+        defaultUnit1={fromUnitStr}
+        defaultUnit2={toUnitStr}
+        title={displayTitle}
+        description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free distance calculator.`}
+        canonicalUrl={canonicalUrl}
+        lastUpdated={lastUpdated}
+        breadcrumbItems={breadcrumbItems}
+      />
+    </>
   );
 }
