@@ -7,16 +7,16 @@
 
   Creating an optimized production build ...
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
-✓ Compiled successfully in 44s
+✓ Compiled successfully in 29.1s
   Running TypeScript ...
-  Finished TypeScript in 13.8s ...
+  Finished TypeScript in 9.1s ...
   Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/387) ...
+  Generating static pages using 11 workers (0/394) ...
 Warning: Please use the `legacy` build in Node.js environments.
-  Generating static pages using 11 workers (96/387) 
-  Generating static pages using 11 workers (193/387) 
-  Generating static pages using 11 workers (290/387) 
-✓ Generating static pages using 11 workers (387/387) in 15.7s
+  Generating static pages using 11 workers (98/394) 
+  Generating static pages using 11 workers (196/394) 
+  Generating static pages using 11 workers (295/394) 
+✓ Generating static pages using 11 workers (394/394) in 14.1s
   Finalizing page optimization ...
 ⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 
@@ -110,9 +110,9 @@ Route (app)
 ├ ○ /guides
 ├ ● /guides/[slug]
 │ ├ /guides/calculate-monthly-loan-repayments
-│ ├ /guides/how-compound-interest-works
+│ ├ /guides/compound-interest-explained
 │ ├ /guides/bmi-calculator-score-meaning
-│ └ [+9 more paths]
+│ └ [+15 more paths]
 ├ ○ /health
 ├ ○ /health/bmi-calculator
 ├ ○ /health/calorie-macro-calculator
@@ -147,6 +147,7 @@ Route (app)
 │ ├ /text-data/base64-encode/base64-encode
 │ └ /text-data/base64-encode/base64-decode
 ├ ○ /text-data/md5-hash
+├ ○ /text-data/random-name-number-generator
 ├ ○ /text-data/text-case-converter
 ├ ○ /text-data/word-count
 └ ○ /text-data/word-unscrambler

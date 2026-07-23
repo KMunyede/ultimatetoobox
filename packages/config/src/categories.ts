@@ -153,3 +153,13 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     ]
   }
 ];
+
+export const TOTAL_TOOL_COUNT = TOOL_CATEGORIES.reduce(
+  (sum, cat) => sum + cat.tools.length, 0
+);
+
+export const CATEGORY_COUNT = TOOL_CATEGORIES.length;
+
+export function getCategoryToolCount(categoryId: string): number {
+  return TOOL_CATEGORIES.find(c => c.slug === categoryId)?.tools.length ?? 0;
+}
