@@ -49,6 +49,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+function generateDynamicSummary(from: string, to: string) {
+  return `Looking to convert ${from} to ${to}? Use our precise online length conversion tool for instant results. Whether you're working on engineering blueprints, home DIY projects, or international travel plans, this high-accuracy distance calculator provides the exact conversion from ${from} to ${to} using standard scientific constants. 100% private and runs entirely in your browser.`;
+}
+
 export default async function LengthDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -108,6 +112,7 @@ export default async function LengthDynamicPage({ params }: { params: Promise<{ 
         canonicalUrl={canonicalUrl}
         lastUpdated={lastUpdated}
         breadcrumbItems={breadcrumbItems}
+        summary={generateDynamicSummary(fromUnit, toUnit)}
       />
     </>
   );

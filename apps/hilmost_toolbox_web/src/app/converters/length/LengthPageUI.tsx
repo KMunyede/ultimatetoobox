@@ -9,7 +9,8 @@ export function LengthPageUI({
   description = "Bridge the gap between Metric and Imperial systems. Convert any distance measurement instantly.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/length",
   lastUpdated,
-  breadcrumbItems: customBreadcrumbItems
+  breadcrumbItems: customBreadcrumbItems,
+  summary
 }: {
   defaultUnit1?: string;
   defaultUnit2?: string;
@@ -18,6 +19,7 @@ export function LengthPageUI({
   canonicalUrl?: string;
   lastUpdated?: string;
   breadcrumbItems?: { label: string; href: string }[];
+  summary?: string;
 }) {
   const defaultBreadcrumbItems = [
     { label: "Converters", href: "/converters" },
@@ -87,6 +89,14 @@ export function LengthPageUI({
         shareButton={<ShareButton />}
       />
       
+      {summary && (
+        <div className="max-w-4xl mx-auto mb-6">
+          <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed italic border-l-4 border-brand-primary/20 pl-4">
+            {summary}
+          </p>
+        </div>
+      )}
+
       <div className="max-w-4xl mx-auto">
         <LengthConverterClient defaultUnit1={defaultUnit1} defaultUnit2={defaultUnit2} />
       </div>
