@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider, Header, Footer, AdSenseScript, AdLayout, AutoBreadcrumbs } from "@utilitiessite/ui";
+import { AdBanner } from "@/components/AdBanner";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -55,6 +56,12 @@ export default function RootLayout({
         ></script>
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col bg-canvas-base text-text-primary antialiased`}>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5650522247882745"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <AdSenseScript publisherId="ca-pub-5650522247882745" />
         <ThemeProvider
           attribute="class"
@@ -64,9 +71,17 @@ export default function RootLayout({
         >
           <Header logoSrc="/logo-square.png" logoAlt="Hilmost Toolbox Logo" />
           <main className="flex-1">
+            <div className="container mx-auto max-w-5xl px-4">
+              <AdBanner dataAdSlot="2372116691" />
+            </div>
+
             <AdLayout publisherId="ca-pub-5650522247882745">
               {children}
             </AdLayout>
+
+            <div className="container mx-auto max-w-5xl px-4 mb-8">
+              <AdBanner dataAdSlot="2372116691" />
+            </div>
           </main>
           <Footer />
         </ThemeProvider>
