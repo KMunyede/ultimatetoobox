@@ -21,10 +21,7 @@ export default function ContactPage() {
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Company Address</h3>
             <address className="not-italic text-slate-600 dark:text-slate-400 space-y-1">
-              <p>84 Broughton Drive</p>
-              <p>Sunridge</p>
               <p>Harare</p>
-              <p>Harare Metropolitan</p>
               <p>Zimbabwe</p>
             </address>
           </div>

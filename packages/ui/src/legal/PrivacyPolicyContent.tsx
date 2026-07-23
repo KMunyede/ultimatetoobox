@@ -70,10 +70,7 @@
               <li className="flex items-start gap-3 pt-2">
                 <span className="font-semibold text-slate-900 dark:text-white min-w-[80px]">Address:</span>
                 <address className="not-italic text-slate-600 dark:text-slate-400">
-                  84 Broughton Drive<br />
-                  Sunridge<br />
                   Harare<br />
-                  Harare Metropolitan<br />
                   Zimbabwe
                 </address>
               </li>

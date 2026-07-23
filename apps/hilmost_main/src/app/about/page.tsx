@@ -87,7 +87,6 @@ export default function AboutPage() {
                 </h3>
                 <address className="not-italic text-sm text-slate-600 dark:text-slate-400 space-y-1">
                   <strong className="text-slate-900 dark:text-white block mb-2">Hilmost Software Corporation</strong>
-                  84 Broughton Drive, Sunridge<br />
                   Harare, Zimbabwe
                 </address>
               </div>
