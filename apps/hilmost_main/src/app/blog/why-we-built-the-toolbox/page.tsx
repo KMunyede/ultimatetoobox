@@ -2,10 +2,11 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { TOTAL_TOOL_COUNT, CATEGORY_COUNT } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "Why We Built the Hilmost Toolbox | Hilmost Blog",
-  description: "The story behind our collection of 39+ free online utilities and our commitment to friction-free software. Learn how we engineered a high-performance, private digital toolkit.",
+  description: `The story behind our collection of ${TOTAL_TOOL_COUNT}+ free online utilities and our commitment to friction-free software. Learn how we engineered a high-performance, private digital toolkit.`,
 };
 
 export default function BlogPost1() {
@@ -36,7 +37,7 @@ export default function BlogPost1() {
           </p>
 
           <p>
-            Today the Toolbox has grown to 39+ tools across eight categories — developer utilities, unit converters, financial calculators, health and wellness tools, text processing, PDF editing, and educational calculators like our Astrophysics tool, which lets you explore concepts like gravitational force, escape velocity, and the Schwarzschild radius interactively.
+            Today the Toolbox has grown to {TOTAL_TOOL_COUNT}+ tools across {CATEGORY_COUNT} categories — developer utilities, unit converters, financial calculators, health and wellness tools, text processing, PDF editing, and educational calculators like our Astrophysics tool, which lets you explore concepts like gravitational force, escape velocity, and the Schwarzschild radius interactively.
           </p>
 
           <p>
