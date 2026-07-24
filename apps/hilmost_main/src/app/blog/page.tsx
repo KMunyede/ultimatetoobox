@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    title: "Building an Actually Private Password Generator",
+    slug: "building-a-private-password-generator",
+    excerpt: "Why we built our Password Generator around crypto.getRandomValues() instead of Math.random(), and what zero-server architecture actually means.",
+    date: "July 2026"
+  },
+  {
     title: "Why We Built the Hilmost Toolbox",
     slug: "why-we-built-the-toolbox",
     excerpt: "The Hilmost Toolbox started as a simple idea: what if a calculator, converter, or PDF tool just worked, instantly, without friction?",
