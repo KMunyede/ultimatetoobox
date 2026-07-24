@@ -1,5 +1,7 @@
 import { WebApplicationSchema, ToolArticle, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PasswordGeneratorTool } from "./PasswordGeneratorTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -107,6 +109,14 @@ export default function PasswordGeneratorPage() {
           <p>
             The most critical feature of our tool is what it <em>doesn&apos;t</em> do: it never sends your data to a server. Many online tools log generated passwords for telemetry or advertising. At Hilmost, we use a 100% browser-side architecture using the <code>crypto.getRandomValues()</code> API. Your secure keys are born and stay within your device&apos;s local memory, making this the safest place on the web to forge your digital armor.
           </p>
+
+          <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+            <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+            <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the physics of security?</p>
+            <Link href="/guides/password-entropy-and-crack-time-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+              Learn how password entropy works <ArrowRight size={14} />
+            </Link>
+          </div>
         </ToolArticle>
 
         <FAQAccordion items={faqs} />
