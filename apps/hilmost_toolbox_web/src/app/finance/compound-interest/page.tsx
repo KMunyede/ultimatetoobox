@@ -153,7 +153,7 @@ export default function CompoundInterestPage() {
           <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
           <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the mathematical engine of wealth?</p>
           <Link href="/guides/compound-interest-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
-            Read our full Compound Interest Guide <ArrowRight size={14} />
+            Learn how compound interest works <ArrowRight size={14} />
           </Link>
         </div>
       </ToolArticle>

@@ -131,9 +131,9 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
 <p>Yes, absolutely. This is most common with credit card debt. If you only pay the "minimum amount" on a card with 20% interest, the interest is added to your balance every month (or even every day). You end up paying interest on your previous interest, which is how a $1,000 purchase can turn into a $5,000 debt if not managed aggressively.</p>
 
 <div class="mt-12 p-8 border border-slate-200 rounded-xl text-center bg-white shadow-sm">
-  <h3 class="text-2xl font-bold mb-4 text-slate-900">Project Your Financial Future</h3>
-  <p class="mb-6 text-slate-600">Don't guess your growth. Enter your numbers into our professional-grade calculator to visualize your wealth growth over time with high-precision charts.</p>
-  <a href="/finance/compound-interest" class="inline-block bg-brand-primary text-white px-10 py-4 rounded-lg font-bold hover:opacity-90 transition-all">Open Compound Interest Calculator</a>
+  <h3 className="text-2xl font-bold mb-4 text-slate-900">Project Your Financial Future</h3>
+  <p className="mb-6 text-slate-600">Don't guess your growth. Enter your numbers into our professional-grade calculator to visualize your wealth growth over time with high-precision charts.</p>
+  <a href="/finance/compound-interest" class="inline-block bg-brand-primary text-white px-10 py-4 rounded-lg font-bold hover:opacity-90 transition-all">Try our Compound Interest Calculator</a>
 </div>
     `
   },
