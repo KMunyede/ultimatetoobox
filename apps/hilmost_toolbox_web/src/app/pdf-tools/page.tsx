@@ -6,7 +6,7 @@ import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TITLE = "PDF Tools";
-const DESC = "A complete suite of private, browser-side PDF manipulation tools. Merge, split, rotate, and delete pages securely without ever uploading your sensitive files to a remote server.";
+const DESC = "Private, browser-side PDF tools to merge, split, rotate, and delete pages securely. Your files never leave your device.";
 const PATH = "/pdf-tools";
 const CANONICAL_URL = getCanonicalUrl(PATH);
 
