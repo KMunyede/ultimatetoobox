@@ -49,6 +49,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+function generateDynamicSummary(from: string, to: string) {
+  return `Looking for a reliable ${from} to ${to} conversion? Whether you're adjusting a baking recipe in the kitchen, tracking your fitness mass, or calculating shipping weights for international freight, our high-precision mass calculator provides instant results. We translate ${from} to ${to} using 64-bit precision to ensure industrial-grade accuracy entirely in your browser.`;
+}
+
 export default async function WeightDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -75,16 +79,40 @@ export default async function WeightDynamicPage({ params }: { params: Promise<{ 
 
   const filePath = path.join(process.cwd(), "src/app/converters/weight-mass/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
+  const canonicalUrl = getCanonicalUrl(`/converters/weight-mass/${slug}`);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": displayTitle,
+    "description": `Professional online tool to convert ${fromUnit} to ${toUnit} with high precision. Free, private, and instant.`,
+    "url": canonicalUrl,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
 
   return (
-    <WeightMassPageUI 
-      defaultUnit1={fromUnitStr}
-      defaultUnit2={toUnitStr}
-      title={displayTitle}
-      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free mass calculator.`}
-      canonicalUrl={getCanonicalUrl(`/converters/weight-mass/${slug}`)}
-      lastUpdated={lastUpdated}
-      breadcrumbItems={breadcrumbItems}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <WeightMassPageUI
+        defaultUnit1={fromUnitStr}
+        defaultUnit2={toUnitStr}
+        title={displayTitle}
+        description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free mass calculator.`}
+        canonicalUrl={canonicalUrl}
+        lastUpdated={lastUpdated}
+        breadcrumbItems={breadcrumbItems}
+        summary={generateDynamicSummary(fromUnit, toUnit)}
+      />
+    </>
   );
 }

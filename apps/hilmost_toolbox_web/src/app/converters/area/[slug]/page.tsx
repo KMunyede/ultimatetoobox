@@ -59,6 +59,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+function generateDynamicSummary(from: string, to: string) {
+  return `Need to convert ${from} to ${to}? Use our high-precision area converter for instant, accurate results. Whether you're calculating land for real estate, planning a landscaping project, or determining floor space for construction, this tool provides reliable measurements from ${from} to ${to} using standard conversion factors. 100% private and secure.`;
+}
+
 export default async function AreaDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -76,15 +80,40 @@ export default async function AreaDynamicPage({ params }: { params: Promise<{ sl
 
   const filePath = path.join(process.cwd(), "src/app/converters/area/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
+  const canonicalUrl = getCanonicalUrl(`/converters/area/${slug}`);
+  const displayTitle = `Convert ${fromUnitStr} to ${toUnitStr} | Area Calculator`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": displayTitle,
+    "description": `Professional online tool to convert ${fromUnitStr} to ${toUnitStr} with high precision. Free, private, and instant.`,
+    "url": canonicalUrl,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
 
   return (
-    <AreaPageUI 
-      defaultFrom={fromUnitStr} 
-      defaultTo={toUnitStr}
-      title={`Convert ${fromUnitStr} to ${toUnitStr} | Area Calculator`}
-      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free area calculator. Perfect for real estate, landscaping, and construction.`}
-      canonicalUrl={getCanonicalUrl(`/converters/area/${slug}`)}
-      lastUpdated={lastUpdated}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <AreaPageUI
+        defaultFrom={fromUnitStr}
+        defaultTo={toUnitStr}
+        title={displayTitle}
+        description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free area calculator. Perfect for real estate, landscaping, and construction.`}
+        canonicalUrl={canonicalUrl}
+        lastUpdated={lastUpdated}
+        summary={generateDynamicSummary(fromUnitStr, toUnitStr)}
+      />
+    </>
   );
 }

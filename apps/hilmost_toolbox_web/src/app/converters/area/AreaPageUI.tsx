@@ -9,7 +9,8 @@ export function AreaPageUI({
   description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area",
   lastUpdated,
-  breadcrumbItems: customBreadcrumbItems
+  breadcrumbItems: customBreadcrumbItems,
+  summary
 }: {
   defaultFrom?: string;
   defaultTo?: string;
@@ -18,6 +19,7 @@ export function AreaPageUI({
   canonicalUrl?: string;
   lastUpdated?: string;
   breadcrumbItems?: { label: string; href: string }[];
+  summary?: string;
 }) {
   const defaultBreadcrumbItems = [
     { label: "Converters", href: "/converters" },
@@ -67,6 +69,14 @@ export function AreaPageUI({
         shareButton={<ShareButton />}
       />
       
+      {summary && (
+        <div className="max-w-4xl mx-auto mb-6">
+          <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed italic border-l-4 border-brand-primary/20 pl-4">
+            {summary}
+          </p>
+        </div>
+      )}
+
       <AreaClient defaultFrom={defaultFrom} defaultTo={defaultTo} />
 
       <ToolArticle title="The Importance of Accurate Area Conversion">

@@ -49,6 +49,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+function generateDynamicSummary(from: string, to: string) {
+  return `Switching between ${from} and ${to}? Our thermal conversion tool provides instant, scientifically accurate results for laboratories, kitchens, and daily weather checks. We use high-precision floating-point math to ensure that every degree from ${from} to ${to} is translated correctly across global measurement standards. 100% private and server-free.`;
+}
+
 export default async function TemperatureDynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -75,16 +79,40 @@ export default async function TemperatureDynamicPage({ params }: { params: Promi
 
   const filePath = path.join(process.cwd(), "src/app/converters/temperature/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
+  const canonicalUrl = getCanonicalUrl(`/converters/temperature/${slug}`);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": displayTitle,
+    "description": `Professional online tool to convert ${fromUnit} to ${toUnit} with high precision. Free, private, and instant.`,
+    "url": canonicalUrl,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
 
   return (
-    <TemperaturePageUI 
-      defaultUnit1={fromUnitStr}
-      defaultUnit2={toUnitStr}
-      title={displayTitle}
-      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free thermal calculator.`}
-      canonicalUrl={getCanonicalUrl(`/converters/temperature/${slug}`)}
-      lastUpdated={lastUpdated}
-      breadcrumbItems={breadcrumbItems}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <TemperaturePageUI
+        defaultUnit1={fromUnitStr}
+        defaultUnit2={toUnitStr}
+        title={displayTitle}
+        description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free thermal calculator.`}
+        canonicalUrl={canonicalUrl}
+        lastUpdated={lastUpdated}
+        breadcrumbItems={breadcrumbItems}
+        summary={generateDynamicSummary(fromUnit, toUnit)}
+      />
+    </>
   );
 }
