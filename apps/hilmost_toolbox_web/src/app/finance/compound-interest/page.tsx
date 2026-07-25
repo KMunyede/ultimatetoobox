@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CompoundInterestClient } from "./CompoundInterestClient";
-import { getCanonicalUrl, sanitizeTitle } from "@utilitiessite/config";
+import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";

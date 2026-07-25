@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    title: "What a Six-Week Indexing Stall Taught Me About Thinking Like Google",
+    slug: "six-week-indexing-stall",
+    excerpt: "How a bloated sitemap and parameterized URLs silenced our new tools in Google Search for over a month.",
+    date: "July 2026"
+  },
+  {
     title: "Building an Actually Private Password Generator",
     slug: "building-a-private-password-generator",
     excerpt: "Why we built our Password Generator around crypto.getRandomValues() instead of Math.random(), and what zero-server architecture actually means.",

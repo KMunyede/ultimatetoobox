@@ -7,15 +7,15 @@
 
   Creating an optimized production build ...
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
-✓ Compiled successfully in 12.8s
+✓ Compiled successfully in 11.9s
   Running TypeScript ...
-  Finished TypeScript in 8.0s ...
+  Finished TypeScript in 8.9s ...
   Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/19) ...
-  Generating static pages using 11 workers (4/19) 
-  Generating static pages using 11 workers (9/19) 
-  Generating static pages using 11 workers (14/19) 
-✓ Generating static pages using 11 workers (19/19) in 2.6s
+  Generating static pages using 11 workers (0/21) ...
+  Generating static pages using 11 workers (5/21) 
+  Generating static pages using 11 workers (10/21) 
+  Generating static pages using 11 workers (15/21) 
+✓ Generating static pages using 11 workers (21/21) in 1058ms
   Finalizing page optimization ...
 ⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 
@@ -25,7 +25,9 @@ Route (app)
 ├ ○ /.well-known/api-catalog
 ├ ○ /about
 ├ ○ /blog
+├ ○ /blog/building-a-private-password-generator
 ├ ○ /blog/self-improvement-distracted-world
+├ ○ /blog/six-week-indexing-stall
 ├ ○ /blog/why-we-built-the-toolbox
 ├ ○ /careers
 ├ ○ /contact

@@ -7,16 +7,16 @@
 
   Creating an optimized production build ...
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
-✓ Compiled successfully in 29.1s
+✓ Compiled successfully in 42s
   Running TypeScript ...
-  Finished TypeScript in 9.1s ...
+  Finished TypeScript in 12.1s ...
   Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/394) ...
+  Generating static pages using 11 workers (0/398) ...
 Warning: Please use the `legacy` build in Node.js environments.
-  Generating static pages using 11 workers (98/394) 
-  Generating static pages using 11 workers (196/394) 
-  Generating static pages using 11 workers (295/394) 
-✓ Generating static pages using 11 workers (394/394) in 14.1s
+  Generating static pages using 11 workers (99/398) 
+  Generating static pages using 11 workers (198/398) 
+  Generating static pages using 11 workers (298/398) 
+✓ Generating static pages using 11 workers (398/398) in 14.5s
   Finalizing page optimization ...
 ⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 
@@ -112,7 +112,7 @@ Route (app)
 │ ├ /guides/calculate-monthly-loan-repayments
 │ ├ /guides/compound-interest-explained
 │ ├ /guides/bmi-calculator-score-meaning
-│ └ [+15 more paths]
+│ └ [+18 more paths]
 ├ ○ /health
 ├ ○ /health/bmi-calculator
 ├ ○ /health/calorie-macro-calculator
@@ -139,6 +139,7 @@ Route (app)
 ├ ○ /pdf-tools/rotate-pdf
 ├ ○ /pdf-tools/split-pdf
 ├ ○ /privacy-policy
+├ ○ /robots.txt
 ├ ○ /sitemap.xml
 ├ ○ /terms-of-service
 ├ ○ /text-data

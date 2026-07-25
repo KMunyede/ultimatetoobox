@@ -101,8 +101,12 @@ export default function TimeZonePage() {
         <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
           <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
           <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the global clock?</p>
-          <Link href="/guides/time-zones-and-dst-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+          <Link href="/guides/time-zones-and-dst-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline mb-4">
             Learn how time zones and DST work <ArrowRight size={14} />
+          </Link>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium pt-4 border-t border-blue-200 dark:border-blue-800">Inside the engineering:</p>
+          <Link href="https://hilmost.net/blog/six-week-indexing-stall" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+            How we fixed a six-week Google indexing stall for this tool <ArrowRight size={14} />
           </Link>
         </div>
       </ToolArticle>

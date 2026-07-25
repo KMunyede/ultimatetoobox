@@ -1158,7 +1158,11 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
 <div class="mt-12 p-8 border border-slate-200 rounded-xl text-center bg-white shadow-sm">
   <h3 class="text-2xl font-bold mb-4 text-slate-900">Coordinate Your Global Team</h3>
   <p class="mb-6 text-slate-600">Stop the timezone math headache. Use our high-precision global clock to compare cities and schedule meetings perfectly across any border.</p>
-  <a href="/converters/time-zone" class="inline-block bg-brand-primary text-white px-10 py-4 rounded-lg font-bold hover:opacity-90 transition-all">Try our Time Zone Converter</a>
+  <a href="/converters/time-zone" class="inline-block bg-brand-primary text-white px-10 py-4 rounded-lg font-bold hover:opacity-90 transition-all mb-8">Try our Time Zone Converter</a>
+
+  <p class="mt-8 pt-8 border-t border-slate-100 text-slate-500 text-sm italic">
+    Engineering Note: Read our blog post on how <a href="https://hilmost.net/blog/six-week-indexing-stall" class="text-brand-primary hover:underline font-bold">sitemap and URL structure issues</a> caused a six-week indexing stall for this tool.
+  </p>
 </div>
     `
   },
