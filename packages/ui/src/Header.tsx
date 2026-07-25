@@ -85,9 +85,6 @@ export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
 
             {/* Desktop-only Navigation Links */}
             <div className="hidden lg:flex items-center gap-6">
-              <Link href={domains.corporate + "/blog"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
-                Blog
-              </Link>
               <Link href={domains.corporate + "/about"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
                 About
               </Link>
