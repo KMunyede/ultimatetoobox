@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 import { WebApplicationSchema, OrganizationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { Metadata } from "next";
+import { ToolboxDirectory } from "@/components/ToolboxDirectory";
 
 const TITLE = "Free Online Calculators & Converters";
 const DESC = "Free online calculators and converters — fast, accurate, and private. No sign-up, no data collection.";
@@ -62,40 +63,8 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-        {TOOL_CATEGORIES.map((category) => (
-          <div key={category.name} className="group flex flex-col border border-base rounded-xl p-4 md:p-5 hover:border-brand-primary transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
-            <div className="mb-3">
-              <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.name}</h2>
-            </div>
-            <p className="text-text-secondary mb-5 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
-
-            <div className="flex-1 overflow-hidden">
-              <div className={`pr-1 ${category.tools.length > 5 ? 'max-h-[280px] overflow-y-auto custom-scrollbar' : ''}`}>
-                <ul className="grid grid-cols-2 gap-x-3 gap-y-0.5 md:block md:space-y-0.5">
-                  {category.tools.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className="group/link flex items-center justify-between py-1.5 border-b border-base/50 hover:border-brand-primary/50 transition-all">
-                        <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-5 pt-3 border-t border-base">
-                <p className="text-[10px] font-black uppercase tracking-widest text-text-muted opacity-60">
-                    {category.tools.length} Tools Available
-                </p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-
+      {/* Directory Section */}
+      <ToolboxDirectory categories={TOOL_CATEGORIES} />
 
       {/* Trust Footer Section */}
       <div className="mt-16 py-8 border-t border-base text-center">
