@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, ArrowRight, Activity, FileText, Banknote, Replace, Sparkles, Code2, GraduationCap } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 import { WebApplicationSchema, OrganizationSchema, BreadcrumbSchema } from "@utilitiessite/ui";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
@@ -37,29 +37,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   const breadcrumbItems = [{ label: "Home", href: PATH }];
 
-  const iconMap: Record<string, React.ReactNode> = {
-    Banknote: <Banknote className="w-6 h-6 text-amber-500" />,
-    FileText: <FileText className="w-6 h-6 text-red-500" />,
-    Replace: <Replace className="w-6 h-6 text-blue-500" />,
-    Binary: <FileText className="w-6 h-6 text-brand-primary" />,
-    Calculator: <Calculator className="w-6 h-6 text-indigo-500" />,
-    Activity: <Activity className="w-6 h-6 text-rose-500" />,
-    HeartPulse: <Activity className="w-6 h-6 text-rose-500" />,
-    GraduationCap: <GraduationCap className="w-6 h-6 text-orange-500" />,
-    Code2: <Code2 className="w-6 h-6 text-slate-500" />,
-  };
-
-  const colorClassMap: Record<string, string> = {
-    amber: "bg-amber-500/10",
-    red: "bg-red-500/10",
-    blue: "bg-blue-500/10",
-    "brand-primary": "bg-brand-primary/10",
-    indigo: "bg-indigo-500/10",
-    rose: "bg-rose-500/10",
-    orange: "bg-orange-500/10",
-    slate: "bg-slate-500/10",
-  };
-
   return (
     <div className="container mx-auto px-4 py-6 md:py-8 max-w-6xl">
       <WebApplicationSchema
@@ -88,11 +65,8 @@ export default function Home() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {TOOL_CATEGORIES.map((category) => (
-          <div key={category.name} className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-5 md:p-6 shadow-sm hover:shadow-xl hover:border-brand-primary/30 transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
-            <div className="flex items-center gap-x-4 mb-3">
-              <div className={`h-12 w-12 flex items-center justify-center rounded-2xl shrink-0 transition-transform group-hover:scale-110 duration-500 ${colorClassMap[category.color] || 'bg-slate-500/10'}`}>
-                {iconMap[category.icon] || <Calculator className="w-6 h-6 text-slate-500" />}
-              </div>
+          <div key={category.name} className="group flex flex-col border border-base rounded-xl p-5 md:p-6 hover:border-brand-primary transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
+            <div className="mb-3">
               <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.name}</h2>
             </div>
             <p className="text-text-secondary mb-5 text-sm leading-relaxed font-medium line-clamp-2">{category.description}</p>
