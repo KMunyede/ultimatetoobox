@@ -73,7 +73,7 @@ export default function Home() {
 
             <div className="flex-1 overflow-hidden">
               <div className={`pr-1 ${category.tools.length > 5 ? 'max-h-[280px] overflow-y-auto custom-scrollbar' : ''}`}>
-                <ul className="space-y-0.5">
+                <ul className="grid grid-cols-2 gap-x-3 gap-y-0.5 md:block md:space-y-0.5">
                   {category.tools.map((link) => (
                     <li key={link.href}>
                       <Link href={link.href} className="group/link flex items-center justify-between py-1.5 border-b border-base/50 hover:border-brand-primary/50 transition-all">
