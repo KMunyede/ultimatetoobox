@@ -63,9 +63,9 @@ export default function Home() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
         {TOOL_CATEGORIES.map((category) => (
-          <div key={category.name} className="group flex flex-col border border-base rounded-xl p-5 md:p-6 hover:border-brand-primary transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
+          <div key={category.name} className="group flex flex-col border border-base rounded-xl p-4 md:p-5 hover:border-brand-primary transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none">
             <div className="mb-3">
               <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.name}</h2>
             </div>
@@ -76,7 +76,7 @@ export default function Home() {
                 <ul className="space-y-0.5">
                   {category.tools.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="group/link flex items-center justify-between py-2 border-b border-base/50 hover:border-brand-primary/50 transition-all">
+                      <Link href={link.href} className="group/link flex items-center justify-between py-1.5 border-b border-base/50 hover:border-brand-primary/50 transition-all">
                         <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">{link.name}</span>
                         <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
                       </Link>
