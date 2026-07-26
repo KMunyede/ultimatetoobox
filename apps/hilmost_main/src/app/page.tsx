@@ -135,7 +135,7 @@ export default function Home() {
 
 
           {/* Core Web Vitals Banner */}
-          <div className="mt-20 p-8 md:p-10 bg-text-primary dark:bg-canvas-card rounded-2xl border border-base relative overflow-hidden">
+          <div className="mt-10 p-8 md:p-10 bg-text-primary dark:bg-canvas-card rounded-2xl border border-base relative overflow-hidden">
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="max-w-2xl text-center md:text-left">
                         <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
@@ -150,7 +150,10 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="flex flex-col items-center gap-4">
-                        <Link href="https://hilmost-toolbox.hilmost.net" className="px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-2xl hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm">
+                        <Link
+                          href="https://hilmost-toolbox.hilmost.net"
+                          className="px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
+                        >
                             Open All Tools
                         </Link>
                         <span className="text-[10px] font-mono font-bold text-text-muted uppercase">SYSTEMS OPERATIONAL v2.4.0</span>
