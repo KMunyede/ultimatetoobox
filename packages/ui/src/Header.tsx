@@ -20,12 +20,13 @@ export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsStaging(
-        window.location.hostname.includes("staging") || 
-        window.location.hostname.includes("localhost")
-      );
+      const isStagingHost = window.location.hostname.includes("staging") ||
+                           window.location.hostname.includes("localhost");
+      if (isStagingHost !== isStaging) {
+        setIsStaging(isStagingHost);
+      }
     }
-  }, []);
+  }, [isStaging]);
 
   const domains = {
     corporate: isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net",
