@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Code2, HeartPulse, ShieldCheck, Utensils, Wrench, Sparkles, Zap, Binary, Microchip, Banknote, FileText, Replace } from "lucide-react";
+import { Sparkles, ArrowRight, Code2 } from "lucide-react";
 import { Metadata } from "next";
 import { TOOL_CATEGORIES } from "@utilitiessite/config";
 
@@ -54,172 +54,103 @@ export default function Home() {
           }
         })}}
       />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 max-w-7xl">
           
           {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-4 md:mb-6">
-            <div className="text-center md:text-left mb-3 md:mb-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest font-mono">
-                  <Sparkles size={14} className="animate-pulse" />
-                  HILMOST
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
-              <h1 className="font-black tracking-tighter text-text-primary text-3xl sm:text-4xl lg:text-5xl leading-[1] text-left">
-                Everyday tools. <br />
-                <span className="text-brand-primary">Built to just work.</span>
-              </h1>
-              <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium text-left">
-                Hilmost builds free browser-based tools and everyday software — simple, fast, and private by design.
-              </p>
-            </div>
+          <div className="mb-12 border-b border-base pb-8">
+            <h1 className="font-black tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
+              Everyday tools. <span className="text-brand-primary">Built to just work.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium max-w-3xl">
+              Hilmost builds free browser-based tools and everyday software — simple, fast, and private by design. All calculations run locally on your device.
+            </p>
           </div>
 
           {/* Our Products Section */}
-          <div className="max-w-6xl mx-auto mt-12 mb-16">
-            <div className="flex items-center gap-4 mb-8">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Our Products</h2>
-                <div className="h-px flex-1 bg-base" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  name: "Hilmost Toolbox",
-                  description: `${displayCount}+ free browser tools`,
-                  href: "https://hilmost-toolbox.hilmost.net",
-                  cta: "Open Toolbox"
-                },
-                {
-                  name: "Hilmost Apparel",
-                  description: "Wear your story",
-                  href: "https://shop.hilmost.net",
-                  cta: "Shop Now"
-                },
-                {
-                  name: "Hilmost Apps",
-                  description: "Daily Stoic, MindOS",
-                  href: null,
-                  cta: "Coming soon"
-                }
-              ].map((product) => {
-                const CardContent = (
-                  <>
-                    <h3 className="text-2xl font-black text-text-primary tracking-tight mb-1.5">{product.name}</h3>
-                    <p className="text-text-secondary font-medium leading-relaxed mb-6">{product.description}</p>
-                    {product.href ? (
-                      <span className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
-                        {product.cta} <ArrowRight size={16} />
-                      </span>
-                    ) : (
-                      <span className="inline-flex text-[10px] font-black uppercase tracking-widest text-text-muted bg-canvas-muted px-4 py-2 rounded-full">
-                        {product.cta}
-                      </span>
-                    )}
-                  </>
-                );
-
-                const cardClasses = "group flex flex-col bg-canvas-card border border-base rounded-[2rem] p-6 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-primary/30 h-full text-left focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none";
-
-                return product.href ? (
-                  <Link key={product.name} href={product.href} className={cardClasses}>
-                    {CardContent}
-                  </Link>
-                ) : (
-                  <div key={product.name} className={cardClasses}>
-                    {CardContent}
-                  </div>
-                );
-              })}
+          <div className="mb-16">
+            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted mb-6">Product Ecosystem</h2>
+            <div className="flex flex-wrap gap-x-12 gap-y-6">
+              <Link href="https://hilmost-toolbox.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
+                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
+                <span className="ml-2 text-xs font-bold text-brand-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">→ Open</span>
+              </Link>
+              <Link href="https://shop.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
+                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
+                <span className="ml-2 text-xs font-bold text-brand-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">→ Shop</span>
+              </Link>
+              <div className="flex items-center">
+                <span className="text-xl font-bold text-text-muted cursor-not-allowed">Hilmost Apps</span>
+                <span className="ml-3 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-canvas-muted rounded text-text-muted border border-base">Soon</span>
+              </div>
             </div>
           </div>
 
-
-          {/* Core Tool Categories Teaser */}
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-center gap-4 mb-8">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Free Digital Utilities</h2>
-                <div className="h-px flex-1 bg-base" />
+          {/* Dense Directory Section - Curated Top Categories */}
+          <div className="mb-20">
+            <div className="flex items-center gap-4 mb-10">
+                <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary">Free Digital Utilities</h2>
+                <div className="h-px flex-1 bg-brand-primary/10" />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  name: "Money & Tax",
-                  description: "Professional calculators for currency, loans, and taxes.",
-                  href: "https://hilmost-toolbox.hilmost.net/finance",
-                  icon: <Banknote size={24} />,
-                  color: "blue",
-                  count: 12
-                },
-                {
-                  name: "PDF Tools",
-                  description: "Securely merge and manage PDF files in your browser.",
-                  href: "https://hilmost-toolbox.hilmost.net/pdf-tools",
-                  icon: <FileText size={24} />,
-                  color: "red",
-                  count: 4
-                },
-                {
-                  name: "Developer Experience",
-                  description: "JSON, Regex, and JWT utilities for engineers.",
-                  href: "https://hilmost-toolbox.hilmost.net/dx",
-                  icon: <Code2 size={24} />,
-                  color: "slate",
-                  count: 5
-                }
-              ].map((cat) => (
-                <Link
-                  key={cat.name}
-                  href={cat.href}
-                  className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-5 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-primary/30 overflow-hidden focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 outline-none"
-                >
-                  <div className="relative z-10">
-                      <div className={`h-12 w-12 flex items-center justify-center rounded-xl bg-${cat.color}-500/10 text-${cat.color}-600 mb-5`}>
-                          {cat.icon}
-                      </div>
-                      <h3 className="text-xl font-black text-text-primary tracking-tight mb-1.5">{cat.name}</h3>
-                      <p className="text-sm text-text-secondary font-medium leading-relaxed mb-5">
-                          {cat.description}
-                      </p>
-                      <div className="flex items-center justify-between mt-auto">
-                        <span className="text-[10px] font-black text-text-muted uppercase tracking-widest bg-canvas-muted px-3 py-1 rounded-full">
-                          {cat.count} Tools
-                        </span>
-                      </div>
-                  </div>
-                </Link>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-16">
+              {TOOL_CATEGORIES.slice(0, 4).map((cat) => (
+                <div key={cat.name} className="flex flex-col">
+                  <h3 className="text-xs font-black uppercase tracking-widest text-text-primary mb-6 flex items-center justify-between group cursor-default">
+                    {cat.name}
+                    <span className="h-px flex-1 bg-base ml-4 opacity-50" />
+                  </h3>
+                  <ul className="flex flex-col space-y-3">
+                    {cat.tools.map((tool) => (
+                      <li key={tool.href}>
+                        <Link
+                          href={`https://hilmost-toolbox.hilmost.net${tool.href}`}
+                          className="text-sm font-bold text-text-secondary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-sm transition-colors block"
+                        >
+                          {tool.name}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link
+                        href={`https://hilmost-toolbox.hilmost.net/${cat.slug}`}
+                        className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:underline focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-sm pt-2 inline-block"
+                      >
+                        View all {cat.name} →
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-20 text-center">
               <Link
                 href="https://hilmost-toolbox.hilmost.net"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all shadow-lg text-sm"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
               >
-                Explore All {displayCount}+ Tools <ArrowRight size={18} />
+                Open Full Directory ({displayCount}+ Tools) <ArrowRight size={18} />
               </Link>
             </div>
           </div>
 
 
           {/* Core Web Vitals Banner */}
-          <div className="mt-20 p-8 md:p-10 bg-text-primary dark:bg-canvas-card rounded-[2.5rem] relative overflow-hidden shadow-2xl">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full -mr-32 -mt-32 blur-3xl" />
+          <div className="mt-20 p-8 md:p-10 bg-text-primary dark:bg-canvas-card rounded-2xl border border-base relative overflow-hidden">
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div className="max-w-xl text-center md:text-left">
+                    <div className="max-w-2xl text-center md:text-left">
                         <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
                             <Code2 size={16} className="text-brand-primary" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-brand-primary font-mono">Architecture Status: Stable</span>
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-black text-canvas-card dark:text-text-primary tracking-tighter leading-tight mb-4">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-canvas-card dark:text-text-primary tracking-tighter leading-tight mb-4">
                             Every tool runs entirely in your browser.
                         </h2>
-                        <p className="text-text-muted font-medium text-lg leading-relaxed">
-                            No sign-up. No data leaves your device. No ads slowing things down. Just fast, accurate tools — free, forever.
+                        <p className="text-text-muted font-medium text-lg leading-relaxed max-w-xl">
+                            No sign-up. No data leaves your device. Just fast, accurate tools — free, forever. Hilmost utilizes the latest Web APIs to ensure total privacy and maximum performance.
                         </p>
                     </div>
                     <div className="flex flex-col items-center gap-4">
-                        <Link href="https://hilmost-toolbox.hilmost.net" className="px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-brand-primary/20 hover:scale-105 active:scale-95 transition-all text-sm">
+                        <Link href="https://hilmost-toolbox.hilmost.net" className="px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-2xl hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm">
                             Open All Tools
                         </Link>
                         <span className="text-[10px] font-mono font-bold text-text-muted uppercase">SYSTEMS OPERATIONAL v2.4.0</span>
