@@ -58,8 +58,8 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-4 md:pb-6 max-w-7xl">
           
           {/* Hero Section */}
-          <div className="mb-12 border-b border-base pb-8">
-            <h1 className="font-black tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
+          <div className="mb-8 pb-4 md:mb-12 md:pb-8 border-b border-base">
+            <h1 className="font-extrabold tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
               Everyday tools. <span className="text-brand-primary">Built to just work.</span>
             </h1>
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium max-w-3xl">
@@ -68,9 +68,9 @@ export default function Home() {
           </div>
 
           {/* Our Products Section */}
-          <div className="mb-16">
+          <div className="mb-8 md:mb-16">
             <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
               <Link href="https://hilmost-toolbox.hilmost.net" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
                 <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
                 <span className="mt-1 text-[10px] font-black uppercase tracking-widest text-brand-primary">→ Open Product</span>
@@ -87,13 +87,13 @@ export default function Home() {
           </div>
 
           {/* Dense Directory Section - Featured Tools */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-10">
+          <div className="mb-6 md:mb-8">
+            <div className="flex items-center gap-4 mb-6 md:mb-10">
                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Featured Free Utilities</h2>
                 <div className="h-px flex-1 bg-brand-primary/10" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-4 md:gap-y-8">
               {featuredTools.map((tool) => (
                 <Link
                   key={tool.href}
@@ -105,7 +105,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-10 text-center">
+            <div className="mt-6 md:mt-10 text-center">
               <Link
                 href="https://hilmost-toolbox.hilmost.net"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
