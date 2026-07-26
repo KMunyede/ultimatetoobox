@@ -12,7 +12,7 @@ html, body {
 }
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Semantic Mapping */
   --color-canvas-base: var(--color-canvas-base);

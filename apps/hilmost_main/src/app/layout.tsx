@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider, Header, Footer } from "@utilitiessite/ui";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hilmost.net'),
@@ -40,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full antialiased">
-      <body className={`${inter.className} min-h-full flex flex-col bg-canvas-base text-text-primary`}>
+      <body className={`${workSans.variable} ${workSans.className} min-h-full flex flex-col bg-canvas-base text-text-primary`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
           <div className="flex-1 flex flex-col">
