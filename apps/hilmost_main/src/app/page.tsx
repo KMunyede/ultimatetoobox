@@ -54,7 +54,7 @@ export default function Home() {
           }
         })}}
       />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-4 md:pb-6 max-w-7xl">
           
           {/* Hero Section */}
           <div className="mb-12 border-b border-base pb-8">
@@ -86,7 +86,7 @@ export default function Home() {
           </div>
 
           {/* Dense Directory Section - Curated Top Categories */}
-          <div className="mb-20">
+          <div className="mb-8">
             <div className="flex items-center gap-4 mb-10">
                 <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary">Free Digital Utilities</h2>
                 <div className="h-px flex-1 bg-brand-primary/10" />
@@ -123,7 +123,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-20 text-center">
+            <div className="mt-10 text-center">
               <Link
                 href="https://hilmost-toolbox.hilmost.net"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
