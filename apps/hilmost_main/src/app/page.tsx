@@ -72,15 +72,15 @@ export default function Home() {
             <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
             <div className="flex flex-wrap gap-x-12 gap-y-6">
               <Link href="https://hilmost-toolbox.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
-                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
+                <span className="text-2xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
                 <span className="ml-2 text-xs font-bold text-brand-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">→ Open</span>
               </Link>
               <Link href="https://shop.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
-                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
+                <span className="text-2xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
                 <span className="ml-2 text-xs font-bold text-brand-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">→ Shop</span>
               </Link>
               <div className="flex items-center">
-                <span className="text-xl font-bold text-text-muted cursor-not-allowed">Hilmost Apps</span>
+                <span className="text-2xl font-black text-text-muted cursor-not-allowed">Hilmost Apps</span>
                 <span className="ml-3 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-canvas-muted rounded text-text-muted border border-base">Soon</span>
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function Home() {
                 <Link
                   key={tool.href}
                   href={`https://hilmost-toolbox.hilmost.net${tool.href}`}
-                  className="text-lg font-bold text-text-primary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-md transition-colors block"
+                  className="text-base font-semibold text-text-secondary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-md transition-colors block"
                 >
                   {tool.name}
                 </Link>
