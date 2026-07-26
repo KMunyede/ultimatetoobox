@@ -9,6 +9,7 @@ export interface Tool {
   description: string;
   tooltip: string;
   icon?: string;
+  featured?: boolean;
 }
 
 export interface ToolCategory {
@@ -32,8 +33,8 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     tools: [
       { name: "JSON Formatter", href: "/dx/json-formatter", tooltip: "Pretty-print and validate JSON data.", description: "Pretty-print, validate, and minify JSON data instantly. Handles large payloads with ease and highlights syntax errors.", icon: "FileJson" },
       { name: "AI Token Calculator", href: "/dx/ai-token-calculator", tooltip: "Estimate LLM token count and API costs.", description: "Estimate token counts and API costs for LLM prompts. Supports custom rate entry to stay accurate as pricing changes.", icon: "Cpu" },
-      { name: "QR Code Generator", href: "/dx/qr-code-generator", tooltip: "Create QR codes for URLs, Wi-Fi, and more.", description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up.", icon: "QrCode" },
-      { name: "Password Generator", href: "/dx/password-generator", tooltip: "Generate secure random passwords with custom rules.", description: "Generate secure random passwords with custom length, character sets, and strength indicator.", icon: "Lock" },
+      { name: "QR Code Generator", href: "/dx/qr-code-generator", tooltip: "Create QR codes for URLs, Wi-Fi, and more.", description: "Create QR codes for URLs, Wi-Fi, email and more. Free, instant, no sign-up.", icon: "QrCode", featured: true },
+      { name: "Password Generator", href: "/dx/password-generator", tooltip: "Generate secure random passwords with custom rules.", description: "Generate secure random passwords with custom length, character sets, and strength indicator.", icon: "Lock", featured: true },
       { name: "Regex Tester", href: "/dx/regex-tester", tooltip: "Real-time regular expression testing.", description: "Build and test regular expressions in real-time. Includes reference guides for common patterns and instant match highlighting.", icon: "Search" },
       { name: "JWT Decoder", href: "/dx/jwt-decoder", tooltip: "Decode JSON Web Tokens instantly.", description: "Inspect JSON Web Tokens (JWT) safely. Decode headers and payloads without ever sending your sensitive tokens to a server.", icon: "ShieldCheck" },
       { name: "Color Picker", href: "/dx/color-picker", tooltip: "Convert HEX, RGB & HSL instantly.", description: "Convert HEX, RGB & HSL instantly. Generate palettes, check WCAG contrast, and save your color history.", icon: "Palette" },
@@ -47,7 +48,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     color: "amber",
     icon: "Banknote",
     tools: [
-      { name: "Currency Converter", href: "/finance/currency", tooltip: "Real-time global currency exchange.", description: "Real-time exchange rates for global currencies. Convert USD, EUR, GBP, and more instantly." },
+      { name: "Currency Converter", href: "/finance/currency", tooltip: "Real-time global currency exchange.", description: "Real-time exchange rates for global currencies. Convert USD, EUR, GBP, and more instantly.", featured: true },
       { name: "Loan Calculator", href: "/finance/loan-calculator", tooltip: "Analyze monthly payments and interest.", description: "Estimate monthly payments, total interest, and payoff schedules for mortgages or personal loans." },
       { name: "Mortgage Calculator", href: "/finance/mortgage-calculator", tooltip: "PITI mortgage payment estimator.", description: "Estimate full PITI (Principal, Interest, Tax, Insurance) mortgage payment with precision." },
       { name: "Income Tax", href: "/finance/income-tax", tooltip: "Estimate your personal tax burden.", description: "Calculate your take-home pay after federal and local taxes. Supports multiple jurisdictions." },
@@ -70,7 +71,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     color: "red",
     icon: "FileText",
     tools: [
-      { name: "Merge PDF", href: "/pdf-tools/merge-pdf", tooltip: "Combine multiple PDFs into one.", description: "Combine multiple PDF files into a single document. Drag and drop to reorder files before merging." },
+      { name: "Merge PDF", href: "/pdf-tools/merge-pdf", tooltip: "Combine multiple PDFs into one.", description: "Combine multiple PDF files into a single document. Drag and drop to reorder files before merging.", featured: true },
       { name: "Split PDF", href: "/pdf-tools/split-pdf", tooltip: "Extract pages into new files.", description: "Extract specific pages from your PDF or split a large document into multiple files by page range." },
       { name: "Rotate PDF", href: "/pdf-tools/rotate-pdf", tooltip: "Correct document orientation.", description: "Rotate individual pages or the entire document by 90, 180, or 270 degrees with visual previews." },
       { name: "Delete Pages", href: "/pdf-tools/delete-pages", tooltip: "Remove unwanted pages instantly.", description: "Remove unwanted pages from your PDF file and download the cleaned version instantly." },
@@ -84,10 +85,10 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     color: "blue",
     icon: "Replace",
     tools: [
-      { name: "Age Calculator", href: "/converters/age-calculator", tooltip: "Calculate precise age and milestones.", description: "Determine exact age in years, months, and days based on birth date." },
+      { name: "Age Calculator", href: "/converters/age-calculator", tooltip: "Calculate precise age and milestones.", description: "Determine exact age in years, months, and days based on birth date.", featured: true },
       { name: "Percentage Calculator", href: "/converters/percentage", tooltip: "Solve all percentage-based problems.", description: "Calculate percentage increases, decreases, and common math ratios." },
       { name: "Unix Time", href: "/converters/unix-time", tooltip: "Convert timestamps to readable dates.", description: "Convert between human-readable dates and Unix timestamps instantly." },
-      { name: "Length Converter", href: "/converters/length", tooltip: "Switch between metric and imperial.", description: "Transform measurements between meters, feet, inches, miles, and kilometers." },
+      { name: "Length Converter", href: "/converters/length", tooltip: "Switch between metric and imperial.", description: "Transform measurements between meters, feet, inches, miles, and kilometers.", featured: true },
       { name: "Weight/Mass Converter", href: "/converters/weight-mass", tooltip: "Convert grams, pounds, and tons.", description: "Convert between grams, kilograms, pounds, ounces, and metric tons." },
       { name: "Temperature Converter", href: "/converters/temperature", tooltip: "Celsius, Fahrenheit, and Kelvin.", description: "Switch between Celsius, Fahrenheit, and Kelvin with precise calculations." },
       { name: "Time Converter", href: "/converters/time", tooltip: "Convert hours, days, and seconds.", description: "Convert between seconds, minutes, hours, days, and weeks easily." },
@@ -162,4 +163,8 @@ export const CATEGORY_COUNT = TOOL_CATEGORIES.length;
 
 export function getCategoryToolCount(categoryId: string): number {
   return TOOL_CATEGORIES.find(c => c.slug === categoryId)?.tools.length ?? 0;
+}
+
+export function getFeaturedTools(): Tool[] {
+  return TOOL_CATEGORIES.flatMap(cat => cat.tools).filter(tool => tool.featured);
 }

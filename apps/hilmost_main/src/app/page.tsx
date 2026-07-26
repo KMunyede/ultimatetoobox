@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { TOOL_CATEGORIES } from "@utilitiessite/config";
+import { TOOL_CATEGORIES, getFeaturedTools } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "Hilmost | Free Browser-Based Tools",
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 export default function Home() {
   const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
   const displayCount = Math.floor(totalTools / 10) * 10;
+  const featuredTools = getFeaturedTools();
 
   return (
     <main className="flex-1">
@@ -68,7 +69,7 @@ export default function Home() {
 
           {/* Our Products Section */}
           <div className="mb-16">
-            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted mb-6">Product Ecosystem</h2>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
             <div className="flex flex-wrap gap-x-12 gap-y-6">
               <Link href="https://hilmost-toolbox.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
                 <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
@@ -85,41 +86,22 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Dense Directory Section - Curated Top Categories */}
+          {/* Dense Directory Section - Featured Tools */}
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-10">
-                <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary">Free Digital Utilities</h2>
+                <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary">Featured Free Utilities</h2>
                 <div className="h-px flex-1 bg-brand-primary/10" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-16">
-              {TOOL_CATEGORIES.slice(0, 4).map((cat) => (
-                <div key={cat.name} className="flex flex-col">
-                  <h3 className="text-xs font-black uppercase tracking-widest text-text-primary mb-6 flex items-center justify-between group cursor-default">
-                    {cat.name}
-                    <span className="h-px flex-1 bg-base ml-4 opacity-50" />
-                  </h3>
-                  <ul className="flex flex-col space-y-3">
-                    {cat.tools.map((tool) => (
-                      <li key={tool.href}>
-                        <Link
-                          href={`https://hilmost-toolbox.hilmost.net${tool.href}`}
-                          className="text-sm font-bold text-text-secondary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-sm transition-colors block"
-                        >
-                          {tool.name}
-                        </Link>
-                      </li>
-                    ))}
-                    <li>
-                      <Link
-                        href={`https://hilmost-toolbox.hilmost.net/${cat.slug}`}
-                        className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:underline focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-sm pt-2 inline-block"
-                      >
-                        View all {cat.name} →
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+              {featuredTools.map((tool) => (
+                <Link
+                  key={tool.href}
+                  href={`https://hilmost-toolbox.hilmost.net${tool.href}`}
+                  className="text-lg font-bold text-text-primary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-md transition-colors block"
+                >
+                  {tool.name}
+                </Link>
               ))}
             </div>
 
