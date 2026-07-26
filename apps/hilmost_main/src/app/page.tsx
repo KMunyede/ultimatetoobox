@@ -70,18 +70,18 @@ export default function Home() {
           {/* Our Products Section */}
           <div className="mb-16">
             <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
-            <div className="flex flex-wrap gap-x-12 gap-y-6">
-              <Link href="https://hilmost-toolbox.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
-                <span className="text-2xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
-                <span className="ml-2 text-xs font-bold text-brand-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">→ Open</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <Link href="https://hilmost-toolbox.hilmost.net" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
+                <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
+                <span className="mt-1 text-[10px] font-black uppercase tracking-widest text-brand-primary">→ Open Product</span>
               </Link>
-              <Link href="https://shop.hilmost.net" className="group focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none rounded-lg">
-                <span className="text-2xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
-                <span className="ml-2 text-xs font-bold text-brand-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">→ Shop</span>
+              <Link href="https://shop.hilmost.net" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
+                <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
+                <span className="mt-1 text-[10px] font-black uppercase tracking-widest text-brand-primary">→ Shop Store</span>
               </Link>
-              <div className="flex items-center">
-                <span className="text-2xl font-black text-text-muted cursor-not-allowed">Hilmost Apps</span>
-                <span className="ml-3 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-canvas-muted rounded text-text-muted border border-base">Soon</span>
+              <div className="flex flex-col items-start px-6 py-4 rounded-xl border border-base text-text-muted cursor-not-allowed opacity-60">
+                <span className="text-xl font-black">Hilmost Apps</span>
+                <span className="mt-1 text-[10px] font-black uppercase tracking-widest">Soon</span>
               </div>
             </div>
           </div>
