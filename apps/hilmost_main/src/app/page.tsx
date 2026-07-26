@@ -135,17 +135,17 @@ export default function Home() {
 
 
           {/* Core Web Vitals Banner */}
-          <div className="mt-10 p-8 md:p-10 bg-text-primary dark:bg-canvas-card rounded-2xl border border-base relative overflow-hidden">
+          <div className="mt-10 p-6 md:p-8 bg-text-primary dark:bg-canvas-card rounded-2xl border border-base relative overflow-hidden">
                 <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="max-w-2xl text-center md:text-left">
                         <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
                             <Code2 size={16} className="text-brand-primary" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-brand-primary font-mono">Architecture Status: Stable</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-canvas-card dark:text-text-primary tracking-tighter leading-tight mb-4">
+                        <h2 className="text-2xl md:text-3xl font-black text-canvas-card dark:text-text-primary tracking-tighter leading-tight mb-4">
                             Every tool runs entirely in your browser.
                         </h2>
-                        <p className="text-text-muted font-medium text-lg leading-relaxed max-w-xl">
+                        <p className="text-text-muted font-medium text-base leading-relaxed max-w-xl">
                             No sign-up. No data leaves your device. Just fast, accurate tools — free, forever. Hilmost utilizes the latest Web APIs to ensure total privacy and maximum performance.
                         </p>
                     </div>
