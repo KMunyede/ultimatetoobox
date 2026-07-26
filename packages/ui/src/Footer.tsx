@@ -84,6 +84,11 @@ export function Footer() {
               <p>
                 Developer Feedback? <a href="mailto:support@hilmost.net?subject=Engineering Feedback" className="text-brand-primary hover:underline transition-colors font-medium">Contact the Engineering Team</a>
               </p>
+              <div className="mt-4">
+                <a href="https://fazier.com/launches/hilmost-toolbox.hilmost.net" target="_blank" rel="noopener noreferrer">
+                  <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=light" width="120" alt="Fazier badge" />
+                </a>
+              </div>
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-start lg:justify-end gap-x-8 gap-y-4 whitespace-nowrap pt-2 font-medium">
