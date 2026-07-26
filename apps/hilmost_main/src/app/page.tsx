@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles, ArrowRight, Code2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { TOOL_CATEGORIES } from "@utilitiessite/config";
 
@@ -131,34 +131,6 @@ export default function Home() {
                 Open Full Directory ({displayCount}+ Tools) <ArrowRight size={18} />
               </Link>
             </div>
-          </div>
-
-
-          {/* Core Web Vitals Banner */}
-          <div className="mt-10 p-6 md:p-8 bg-text-primary dark:bg-canvas-card rounded-2xl border border-base relative overflow-hidden">
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div className="max-w-2xl text-center md:text-left">
-                        <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-                            <Code2 size={16} className="text-brand-primary" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-brand-primary font-mono">Architecture Status: Stable</span>
-                        </div>
-                        <h2 className="text-2xl md:text-3xl font-black text-canvas-card dark:text-text-primary tracking-tighter leading-tight mb-4">
-                            Every tool runs entirely in your browser.
-                        </h2>
-                        <p className="text-text-muted font-medium text-base leading-relaxed max-w-xl">
-                            No sign-up. No data leaves your device. Just fast, accurate tools — free, forever. Hilmost utilizes the latest Web APIs to ensure total privacy and maximum performance.
-                        </p>
-                    </div>
-                    <div className="flex flex-col items-center gap-4">
-                        <Link
-                          href="https://hilmost-toolbox.hilmost.net"
-                          className="px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
-                        >
-                            Open All Tools
-                        </Link>
-                        <span className="text-[10px] font-mono font-bold text-text-muted uppercase">SYSTEMS OPERATIONAL v2.4.0</span>
-                    </div>
-                </div>
           </div>
         </div>
     </main>
