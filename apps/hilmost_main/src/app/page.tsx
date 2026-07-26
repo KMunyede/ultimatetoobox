@@ -69,7 +69,7 @@ export default function Home() {
 
           {/* Our Products Section */}
           <div className="mb-16">
-            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
+            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <Link href="https://hilmost-toolbox.hilmost.net" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
                 <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
@@ -89,7 +89,7 @@ export default function Home() {
           {/* Dense Directory Section - Featured Tools */}
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-10">
-                <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary">Featured Free Utilities</h2>
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Featured Free Utilities</h2>
                 <div className="h-px flex-1 bg-brand-primary/10" />
             </div>
 
