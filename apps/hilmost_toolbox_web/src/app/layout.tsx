@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider, Header, Footer, AdSenseScript, AdLayout, AutoBreadcrumbs } from "@utilitiessite/ui";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hilmost-toolbox.hilmost.net'),
@@ -49,7 +52,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} min-h-screen flex flex-col bg-canvas-base text-text-primary antialiased`}>
+      <body className={`${workSans.variable} ${workSans.className} min-h-screen flex flex-col bg-canvas-base text-text-primary antialiased`}>
         <AdSenseScript publisherId="ca-pub-5650522247882745" />
         <ThemeProvider
           attribute="class"
