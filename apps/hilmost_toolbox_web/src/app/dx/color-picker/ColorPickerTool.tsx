@@ -443,7 +443,7 @@ export function ColorPickerTool() {
                 className="w-16 aspect-square rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-all group"
             >
                 <Plus size={20} className="group-active:scale-125 transition-transform" />
-                <span className="text-[8.5px] font-black uppercase mt-1">Save</span>
+                <span className="text-micro font-black uppercase mt-1">Save</span>
             </button>
 
             {savedColors.map((c, i) => (

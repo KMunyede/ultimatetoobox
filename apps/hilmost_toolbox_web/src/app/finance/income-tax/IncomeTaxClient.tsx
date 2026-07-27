@@ -267,11 +267,11 @@ export function IncomeTaxClient() {
                   <div className="space-y-1 mt-2 px-1">
                       <div className="flex items-center gap-1.5">
                           <Clock size={10} className="text-slate-400" />
-                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                          <span className="text-micro font-black text-slate-400 uppercase tracking-widest">
                               {yearConfig.taxYear} · Verified {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                           </span>
                       </div>
-                      <p className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-relaxed opacity-70">
+                      <p className="text-micro text-slate-400 font-bold uppercase tracking-wider leading-relaxed opacity-70">
                           Verified on {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}. Accurate until 15 Jan {new Date(yearConfig.lastVerified).getFullYear() + 1}.
                       </p>
                   </div>
@@ -318,7 +318,7 @@ export function IncomeTaxClient() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between px-1 gap-2">
                   <div className="space-y-0.5">
                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tax Deductible Items</h3>
-                    <p className="text-[8px] text-slate-400 font-bold uppercase">Pension/Health are auto-treated as adjustments</p>
+                    <p className="text-micro text-slate-400 font-bold uppercase">Pension/Health are auto-treated as adjustments</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`text-[9px] font-black px-2 py-0.5 rounded-md border ${currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-slate-400 opacity-40'} uppercase tracking-tight`}>
@@ -346,7 +346,7 @@ export function IncomeTaxClient() {
                                     onChange={(e) => updateItem(setDeductionItems, item.id, 'name', e.target.value)}
                                     className={`!py-2 !text-xs font-bold ${isAdj ? 'border-emerald-500/50 bg-emerald-50/10' : ''}`}
                                 />
-                                {isAdj && <span className="absolute right-2 top-2 text-[7px] font-black text-emerald-600 uppercase">Adj</span>}
+                                {isAdj && <span className="absolute right-2 top-2 text-micro font-black text-emerald-600 uppercase">Adj</span>}
                               </div>
                               <div className="w-32">
                                   <NumberInput
@@ -369,7 +369,7 @@ export function IncomeTaxClient() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                   <div className={`p-3 rounded-xl border transition-all ${currentResults.isItemizing ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60'}`}>
                       <div className="flex justify-between items-center mb-1">
-                          <span className="text-[8px] font-black text-slate-500 uppercase">Itemized Total</span>
+                          <span className="text-micro font-black text-slate-500 uppercase">Itemized Total</span>
                           {currentResults.isItemizing && <Check size={10} className="text-brand-primary" />}
                       </div>
                       <p className="text-sm font-black text-slate-900 dark:text-white">
@@ -378,7 +378,7 @@ export function IncomeTaxClient() {
                   </div>
                   <div className={`p-3 rounded-xl border transition-all ${!currentResults.isItemizing ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60'}`}>
                       <div className="flex justify-between items-center mb-1">
-                          <span className="text-[8px] font-black text-slate-500 uppercase">Standard ({yearConfig.taxYear})</span>
+                          <span className="text-micro font-black text-slate-500 uppercase">Standard ({yearConfig.taxYear})</span>
                           {!currentResults.isItemizing && <Check size={10} className="text-brand-primary" />}
                       </div>
                       <p className="text-sm font-black text-slate-900 dark:text-white">
@@ -439,7 +439,7 @@ export function IncomeTaxClient() {
                       -{countryConfig.symbol}{Math.round(currentResults.taxAmount).toLocaleString()}
                   </p>
                   {currentResults.levyAmount > 0 && (
-                      <p className="text-[8px] font-bold text-slate-400 uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
+                      <p className="text-micro font-bold text-slate-400 uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
                   )}
               </div>
               <div className="text-center space-y-1">
@@ -505,7 +505,7 @@ export function IncomeTaxClient() {
                       </td>
                       <td className="p-4 text-xs font-black text-slate-900 dark:text-white">
                           {s.label}
-                          <span className="block text-[8px] text-slate-400 font-bold uppercase mt-0.5">{s.frequency}</span>
+                          <span className="block text-micro text-slate-400 font-bold uppercase mt-0.5">{s.frequency}</span>
                       </td>
                       <td className="p-4 text-xs font-bold text-slate-500 uppercase">{conf.name}</td>
                       <td className="p-4 text-xs font-bold text-slate-500">{conf.symbol}{Math.round(totalGross).toLocaleString()}</td>

@@ -85,7 +85,7 @@ const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now:
                 key={hour}
                 className={`w-6 h-8 flex flex-col items-center justify-center rounded transition-all shrink-0 ${color} ${isCurrent ? 'ring-2 ring-brand-primary scale-110 shadow-sm z-10 bg-white dark:bg-slate-800' : 'opacity-60'}`}
               >
-                <span className="text-[8.5px] font-black">{hour.toString().padStart(2, '0')}</span>
+                <span className="text-micro font-black">{hour.toString().padStart(2, '0')}</span>
                 {isCurrent && <div className="w-1 h-1 bg-brand-primary rounded-full mt-0.5" />}
               </div>
             );

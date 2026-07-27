@@ -121,7 +121,7 @@ export function AITokenCalculatorClient() {
                 <Calculator size={14} className="text-blue-500" />
                 Cost Projector
               </h3>
-              <div className="text-[8px] font-bold text-slate-400 uppercase">
+              <div className="text-micro font-bold text-slate-400 uppercase">
                 Reference Pricing
               </div>
             </div>

@@ -13,6 +13,7 @@ html, body {
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --text-micro: 9px;
 
   /* Semantic Mapping */
   --color-canvas-base: var(--color-canvas-base);
