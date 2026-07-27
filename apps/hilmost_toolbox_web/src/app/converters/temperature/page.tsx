@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { TemperaturePageUI } from "./TemperaturePageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
+import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 

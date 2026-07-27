@@ -1,10 +1,10 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PercentageClient } from "./PercentageClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
+import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -76,7 +76,8 @@ export default function PercentagePage() {
         image="https://hilmost-toolbox.hilmost.net/og/converters.png"
       />
       <FAQSchema items={faqs} />
-      
+      <BreadcrumbSchema items={breadcrumbItems} />
+
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
