@@ -9,7 +9,7 @@ export function EditorialPolicyContent() {
           <ShieldCheck size={14} />
           Trust & Transparency
         </div>
-        <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-none mb-6">
+        <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white tracking-tight leading-none mb-6">
           Editorial & Accuracy <span className="text-brand-primary text-italic">Policy</span>
         </h1>
         <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium">
@@ -42,7 +42,7 @@ export function EditorialPolicyContent() {
       </div>
 
       <article className="prose prose-slate dark:prose-invert max-w-none mb-16">
-        <h2 className="text-2xl font-black uppercase tracking-tight">Our Commitment to Your Data</h2>
+        <h2 className="text-2xl font-bold uppercase tracking-tight">Our Commitment to Your Data</h2>
         <p className="text-lg leading-relaxed">
           At Hilmost, we recognize that our users rely on our tools for critical decision-making in their professional and personal lives. Whether you are calculating the WACC for a corporate project or managing your household budget, accuracy is non-negotiable.
         </p>
@@ -50,7 +50,7 @@ export function EditorialPolicyContent() {
           At Hilmost, we prioritize the user experience above all else. This includes minimizing intrusive advertising and maximizing site performance to ensure our tools are available exactly when you need them.
         </p>
 
-        <h2 className="text-2xl font-black uppercase tracking-tight mt-12">Fact-Checking & Updates</h2>
+        <h2 className="text-2xl font-bold uppercase tracking-tight mt-12">Fact-Checking & Updates</h2>
         <p className="text-lg leading-relaxed">
           The digital landscape and financial regulations change rapidly. We perform quarterly audits of our calculators to ensure they remain compliant with the latest standards. Every tool page features a &quot;Last Updated&quot; signal derived directly from our development history, providing you with full transparency on the freshness of our logic.
         </p>

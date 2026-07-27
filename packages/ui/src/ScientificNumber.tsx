@@ -40,12 +40,12 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
     return (
       <div className={`flex flex-col items-center justify-center text-center ${className}`}>
         {/* Line 1: Mantissa with prefix */}
-        <div className="leading-tight tracking-tight font-black">
+        <div className="leading-tight tracking-tight font-bold">
           {prefix}{baseStr}
         </div>
 
         {/* Line 2: Scale (x 10 ^ x) with suffix */}
-        <div className="leading-tight tracking-tight font-black flex items-center justify-center gap-2">
+        <div className="leading-tight tracking-tight font-bold flex items-center justify-center gap-2">
           <span>x 10 ^ {exponentStr}</span>
           {suffix && <span className="uppercase">{suffix}</span>}
         </div>

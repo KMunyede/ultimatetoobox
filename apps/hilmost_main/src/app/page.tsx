@@ -59,7 +59,7 @@ export default function Home() {
           
           {/* Hero Section */}
           <div className="mb-8 pb-4 md:mb-12 md:pb-8 border-b border-base">
-            <h1 className="font-extrabold tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
+            <h1 className="font-bold tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
               Everyday tools. <span className="text-brand-primary">Built to just work.</span>
             </h1>
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium max-w-3xl">

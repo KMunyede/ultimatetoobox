@@ -43,7 +43,7 @@ export default function BlogIndex() {
           <div className="p-2 bg-brand-primary/10 rounded-lg">
             <BookOpen className="text-brand-primary" size={24} />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white uppercase">
             The <span className="text-brand-primary">Blog</span>
           </h1>
         </div>
@@ -62,7 +62,7 @@ export default function BlogIndex() {
               <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
                 {post.date}
               </div>
-              <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-4 group-hover:text-brand-primary transition-colors">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-brand-primary transition-colors">
                 {post.title}
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed line-clamp-2">

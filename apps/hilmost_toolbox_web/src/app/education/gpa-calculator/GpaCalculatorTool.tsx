@@ -270,7 +270,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
              </div>
              <div className="relative z-10">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-2 opacity-80">Semester GPA</p>
-                <div className="text-7xl font-black mb-2">{semesterResults.gpa.toFixed(2)}</div>
+                <div className="text-7xl font-bold mb-2">{semesterResults.gpa.toFixed(2)}</div>
                 <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-[10px] font-black uppercase tracking-widest">
                     Grade Class: {semesterResults.classification}
                 </div>
@@ -305,7 +305,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
               />
 
               <div className="mt-10 pt-10 border-t border-slate-100 dark:border-slate-800 space-y-4 text-center">
-                <div className="text-5xl font-black text-slate-900 dark:text-white">
+                <div className="text-5xl font-bold text-slate-900 dark:text-white">
                     {cumulativeResults.gpa.toFixed(2)}
                 </div>
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Overall Cumulative</p>

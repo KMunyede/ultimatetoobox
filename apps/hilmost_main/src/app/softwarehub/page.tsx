@@ -18,7 +18,7 @@ export default function SoftwareHub() {
                 <Sparkles size={14} className="animate-pulse" />
                 The best software hub
             </div>
-            <h1 className="mx-auto max-w-4xl font-black tracking-tight text-text-primary text-2xl sm:text-3xl md:text-4xl lg:text-[40px]">
+            <h1 className="mx-auto max-w-4xl font-bold tracking-tight text-text-primary text-2xl sm:text-3xl md:text-4xl lg:text-[40px]">
               Hilmost <span className="text-brand-primary">Software</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg text-text-secondary leading-relaxed font-medium">
@@ -89,7 +89,7 @@ export default function SoftwareHub() {
         <section className="container mx-auto px-4 py-20">
             <div className="bg-text-primary dark:bg-canvas-card rounded-[2.5rem] p-8 md:p-16 flex flex-col items-center text-center shadow-2xl relative overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-primary/5 blur-[100px] pointer-events-none" />
-                <h2 className="text-3xl md:text-5xl font-black text-canvas-card dark:text-text-primary tracking-tighter mb-6 relative z-10">
+                <h2 className="text-3xl md:text-5xl font-bold text-canvas-card dark:text-text-primary tracking-tighter mb-6 relative z-10">
                     Ready to achieve <span className="text-brand-primary text-italic">more?</span>
                 </h2>
                 <Link

@@ -18,7 +18,7 @@ export default function AboutPage() {
     <AdLayout publisherId="ca-pub-5650522247882745">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="prose prose-slate dark:prose-invert max-w-none">
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-8 uppercase">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-8 uppercase">
             About <span className="text-brand-primary">Hilmost</span>
           </h1>
 
@@ -53,12 +53,12 @@ export default function AboutPage() {
           </p>
 
           <section className="mb-16 not-prose">
-            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Explore the Toolbox</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-tight mb-8">Explore the Toolbox</h2>
             <CategoryGrid limit={6} />
           </section>
 
           <section className="mt-20 pt-12 border-t border-slate-200 dark:border-slate-800 not-prose">
-            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Connect With Us</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-tight mb-8">Connect With Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <p className="text-slate-600 dark:text-slate-400">
