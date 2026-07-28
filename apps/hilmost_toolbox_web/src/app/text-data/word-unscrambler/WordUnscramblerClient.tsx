@@ -107,7 +107,7 @@ export function WordUnscramblerClient() {
       className="@container space-y-6 my-6"
     >
       <div className="max-w-4xl mx-auto w-full space-y-4">
-        <div id="tour-unscramble-input" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm relative overflow-hidden">
+        <div id="tour-unscramble-input" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-48 h-48 bg-brand-primary/5 rounded-full -mr-24 -mt-24 blur-3xl pointer-events-none" />
 
           <div className="relative space-y-6">
@@ -252,7 +252,7 @@ export function WordUnscramblerClient() {
               ) : results.length > 0 ? (
                   <WordResults results={results} />
               ) : hasSearched ? (
-                  <motion.div key="empty" initial={{opacity:0}} animate={{opacity:1}} className="max-w-xl mx-auto flex flex-col items-center justify-center text-center p-16 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[3rem] shadow-sm">
+                  <motion.div key="empty" initial={{opacity:0}} animate={{opacity:1}} className="max-w-xl mx-auto flex flex-col items-center justify-center text-center p-4 md:p-5 bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl">
                       <div className="w-24 h-24 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mb-8 border border-[#D8D6CF] dark:border-slate-700 shadow-inner">
                         <Hash size={40} className="text-slate-300" />
                       </div>

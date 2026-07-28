@@ -158,7 +158,7 @@ Macros:
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* PERSONAL DETAILS */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-8" id="body-details">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8" id="body-details">
           <div className="flex items-center gap-2 mb-2">
             <Settings2 size={18} className="text-brand-primary" />
             <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-slate-100">Personal Details</h2>
@@ -231,7 +231,7 @@ Macros:
         </div>
 
         {/* ACTIVITY LEVEL */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm" id="activity-level">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5" id="activity-level">
           <div className="flex items-center gap-2 mb-6">
             <Activity size={18} className="text-brand-primary" />
             <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-slate-100">Activity Level</h2>
@@ -254,7 +254,7 @@ Macros:
       </div>
 
       {/* GOAL SELECTOR */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm" id="goal-selector">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5" id="goal-selector">
         <div className="flex items-center gap-2 mb-6">
           <Apple size={18} className="text-brand-primary" />
           <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-slate-100">Your Fitness Goal</h2>
@@ -334,7 +334,7 @@ Macros:
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2">
                 <Settings2 size={18} className="text-brand-primary" />

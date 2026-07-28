@@ -54,7 +54,7 @@ export function WACCCalculatorClient() {
         {/* Input Sections */}
         <div className="space-y-8">
           {/* Section 1: Equity & CAPM */}
-          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm border-l-4 border-l-brand-primary">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6 border-l-4 border-l-brand-primary">
             <h3 className="text-[10px] font-black text-brand-primary uppercase tracking-widest flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-brand-primary/10 flex items-center justify-center text-[10px]">1</span>
               Equity & CAPM Inputs
@@ -94,7 +94,7 @@ export function WACCCalculatorClient() {
           </div>
 
           {/* Section 2: Debt & Taxes */}
-          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 shadow-sm border-l-4 border-l-rose-500">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6 border-l-4 border-l-rose-500">
             <h3 className="text-[10px] font-black text-rose-500 uppercase tracking-widest flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-rose-500/10 flex items-center justify-center text-[10px]">2</span>
               Debt & Taxes
@@ -130,7 +130,7 @@ export function WACCCalculatorClient() {
         </div>
 
         {/* Dashboard Results */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col shadow-sm relative overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center flex-1 flex flex-col justify-center py-8">
@@ -167,7 +167,7 @@ export function WACCCalculatorClient() {
       </div>
 
       {/* Capital Structure Breakdown */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-6">Capital Structure Breakdown</h4>
         <div className="relative h-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
           <div style={{ width: `${equityWeight}%` }} className="h-full bg-brand-primary transition-all duration-1000" />

@@ -86,7 +86,7 @@ export function LoanCalculatorClient() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Input Form */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 space-y-4 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4">
           <NumberInput
             label="Loan Amount ($)"
             value={amount}
@@ -114,7 +114,7 @@ export function LoanCalculatorClient() {
         </div>
 
         {/* Results */}
-        <div id="tour-loan-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 flex flex-col justify-between shadow-sm relative overflow-hidden">
+        <div id="tour-loan-results" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-2 py-2">
@@ -139,7 +139,7 @@ export function LoanCalculatorClient() {
 
       {/* Amortization Schedule Section */}
       {schedule.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-4 md:p-5 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl bg-[var(--color-brand-alpha)] text-[var(--color-brand-primary)] border border-[var(--color-brand-primary)]/20">

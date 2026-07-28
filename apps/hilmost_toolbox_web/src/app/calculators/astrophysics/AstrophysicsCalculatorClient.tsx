@@ -259,7 +259,7 @@ export function AstrophysicsCalculatorClient({
         .astronomer-theme .shadow-sm, .astronomer-theme .shadow-xl { box-shadow: 0 10px 15px -3px rgba(139, 0, 0, 0.1) !important; }
       `}</style>
 
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-4 md:p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
 
           {/* Controls Column */}

@@ -28,7 +28,7 @@ export function PercentageClient() {
     >
       <div className="grid grid-cols-1 gap-8">
         {/* Section 1: X% of Y */}
-        <div id="tour-perc-1" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div id="tour-perc-1" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
           <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">What is X% of Y?</h2>
           <div className="flex flex-wrap items-end gap-4">
             <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">What is</span>
@@ -57,7 +57,7 @@ export function PercentageClient() {
         </div>
 
         {/* Section 2: X is what % of Y? */}
-        <div id="tour-perc-2" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div id="tour-perc-2" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
           <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">X is what % of Y?</h2>
           <div className="flex flex-wrap items-end gap-4">
             <div className="w-36">
@@ -85,7 +85,7 @@ export function PercentageClient() {
         </div>
 
         {/* Section 3: Percentage Change */}
-        <div id="tour-perc-3" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div id="tour-perc-3" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
           <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
           <div className="flex flex-wrap items-end gap-4">
             <span className="text-sm font-black text-slate-500 uppercase tracking-widest mb-3.5">From</span>

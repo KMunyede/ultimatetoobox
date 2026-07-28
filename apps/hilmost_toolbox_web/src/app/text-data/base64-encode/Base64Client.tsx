@@ -43,7 +43,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-6 my-6"
     >
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-8">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8">
         <PillSelector
           value={mode}
           onChange={(val) => setState({ mode: val })}

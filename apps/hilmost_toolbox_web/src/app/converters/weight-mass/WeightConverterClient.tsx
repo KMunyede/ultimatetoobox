@@ -74,7 +74,7 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-6 my-6"
     >
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <div className="flex flex-col md:flex-row items-center gap-8">
           
           {/* Unit 1 */}

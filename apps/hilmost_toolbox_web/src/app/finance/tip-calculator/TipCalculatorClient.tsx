@@ -30,7 +30,7 @@ export function TipCalculatorClient() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Form */}
-        <div id="tour-tip-inputs" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm">
+        <div id="tour-tip-inputs" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 mb-2 ml-1">
                 <DollarSign size={16} className="text-brand-primary" />
@@ -75,7 +75,7 @@ export function TipCalculatorClient() {
         </div>
 
         {/* Results */}
-        <div id="tour-tip-results" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm relative overflow-hidden">
+        <div id="tour-tip-results" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
           <div className="relative z-10 text-center space-y-2 py-4">

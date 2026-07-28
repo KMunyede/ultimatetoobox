@@ -28,7 +28,7 @@ const LiveClock = React.memo(({ onUseCurrentTime }: { onUseCurrentTime: () => vo
   }, []);
 
   return (
-    <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 space-y-6 shadow-sm">
+    <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
@@ -219,7 +219,7 @@ export function SleepCycleCalculatorTool() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <LiveClock onUseCurrentTime={useCurrentTime} />
-        <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 flex items-center shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex items-center">
           <DateTimePicker
             label={mode === "wake_up" ? "I want to wake up at..." : "I'm going to bed at..."}
             value={inputTime}
@@ -228,7 +228,7 @@ export function SleepCycleCalculatorTool() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <PillSelector
           label="How long does it take you to fall asleep?"
           value={fallAsleepMins}

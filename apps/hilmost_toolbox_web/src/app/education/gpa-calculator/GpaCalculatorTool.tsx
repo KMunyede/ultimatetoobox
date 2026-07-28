@@ -175,7 +175,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
 
   return (
     <div className="max-w-6xl mx-auto my-8 space-y-10">
-      <div className="flex flex-col md:flex-row gap-8 items-center justify-between bg-white dark:bg-slate-900 p-6 rounded-3xl border-2 border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="flex flex-col md:flex-row gap-8 items-center justify-between bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <PillSelector
           label="Grading Scale"
           value={scale}
@@ -202,7 +202,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div id="semester-section" className="lg:col-span-8 space-y-6">
-          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
             <div className="flex items-center gap-2 mb-6">
               <BookOpen size={18} className="text-brand-primary" />
               <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-slate-100">Semester Courses</h2>
@@ -279,7 +279,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
         </div>
 
         <div id="cumulative-section" className="lg:col-span-4 space-y-6">
-          <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm h-full">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 h-full">
             <div className="flex items-center gap-2 mb-6">
               <History size={18} className="text-brand-primary" />
               <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-slate-100">Cumulative</h2>

@@ -60,7 +60,7 @@ export function AITokenCalculatorClient() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Input Area */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
             <div className="flex items-center justify-between mb-3">
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
                 <Cpu size={14} className="text-brand-primary" />
@@ -89,7 +89,7 @@ export function AITokenCalculatorClient() {
         {/* Results Sidebar */}
         <div className="space-y-5">
           {/* Token Estimate Card */}
-          <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 shadow-sm text-center space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 text-center space-y-4">
             <div className="space-y-1">
               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center justify-center gap-1">
                 Estimated Tokens
@@ -115,7 +115,7 @@ export function AITokenCalculatorClient() {
           </div>
 
           {/* Cost Projector */}
-          <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 shadow-sm space-y-4 relative overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <h3 className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-2">
                 <Calculator size={14} className="text-blue-500" />

@@ -304,7 +304,7 @@ export function TimeZoneClient() {
   return (
     <div className="space-y-4">
       <div className="grid md:grid-cols-12 gap-8">
-        <div id="tour-tz-source" className="md:col-span-5 space-y-6 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        <div id="tour-tz-source" className="md:col-span-5 space-y-6 bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
           <div className="flex items-center gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
             <div className="bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-2xl text-emerald-600 dark:text-emerald-400"><Clock className="w-6 h-6" /></div>
             <div className="flex flex-col">
@@ -323,7 +323,7 @@ export function TimeZoneClient() {
 
         <div className="hidden md:flex md:col-span-1 items-center justify-center"><ArrowRight className="w-10 h-10 text-slate-300 dark:text-slate-700" /></div>
 
-        <div id="tour-tz-targets" className="md:col-span-6 space-y-6 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        <div id="tour-tz-targets" className="md:col-span-6 space-y-6 bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4"><h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Converted Times</h2></div>
           <div className="space-y-4">
             <AnimatePresence mode="popLayout">
@@ -342,7 +342,7 @@ export function TimeZoneClient() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm mt-8">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl overflow-hidden mt-8 p-4 md:p-5">
         <button onClick={() => setIsTeamOpen(!isTeamOpen)} className="w-full flex items-center justify-between p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
           <div className="flex items-center gap-3">
             <Users className="text-brand-primary w-6 h-6" />

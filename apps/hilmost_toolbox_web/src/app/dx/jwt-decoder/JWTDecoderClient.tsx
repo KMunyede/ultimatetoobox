@@ -42,7 +42,7 @@ export function JWTDecoderClient() {
   return (
     <div className="space-y-6 my-8">
       {/* Input Section */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <div className="flex items-center justify-between mb-4">
             <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
                 <Key size={14} className="text-brand-primary" /> Paste Encoded Token
@@ -97,7 +97,7 @@ export function JWTDecoderClient() {
       </div>
 
       {/* Signature Section - Minimalized */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
          <label className="text-[10px] font-black uppercase tracking-widest text-brand-primary flex items-center gap-2 mb-3">
              Signature
          </label>

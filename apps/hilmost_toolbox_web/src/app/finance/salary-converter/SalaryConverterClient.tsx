@@ -41,7 +41,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Sidebar Inputs */}
         <div className="space-y-6">
-            <div id="tour-salary-input" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-6 shadow-sm h-fit">
+            <div id="tour-salary-input" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6 h-fit">
                 <NumberInput
                   label="Amount ($)"
                   value={amount}
@@ -63,7 +63,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                 />
             </div>
 
-            <div id="tour-salary-hours" className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 space-y-2 shadow-sm">
+            <div id="tour-salary-hours" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-2">
                 <NumberInput
                   label="Hours Per Week"
                   value={hoursPerWeek}

@@ -28,7 +28,7 @@ export function MD5HashClient() {
       animate={{ opacity: 1, y: 0 }}
       className="@container space-y-6 my-6"
     >
-      <div className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-10 shadow-sm space-y-8">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8">
         <div id="tour-md5-input" className="space-y-1.5 w-full">
             <div className="flex items-center gap-2 mb-2 ml-1">
                 <ShieldCheck size={16} className="text-brand-primary" />

@@ -57,7 +57,7 @@ export function BMIClient() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Inputs */}
-        <div id="tour-bmi-inputs" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-8">
+        <div id="tour-bmi-inputs" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8">
         
         <PillSelector
           value={unitSystem}
@@ -131,7 +131,7 @@ export function BMIClient() {
         layout
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         id="tour-bmi-results" 
-        className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col items-center justify-center text-center min-h-[250px]"
+        className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col items-center justify-center text-center min-h-[250px]"
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>

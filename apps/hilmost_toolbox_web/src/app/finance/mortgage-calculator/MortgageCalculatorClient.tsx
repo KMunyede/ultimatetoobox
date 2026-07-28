@@ -52,7 +52,7 @@ export function MortgageCalculatorClient() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Input Form */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 space-y-4 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <NumberInput
               label="Home Price ($)"
@@ -105,7 +105,7 @@ export function MortgageCalculatorClient() {
         </div>
 
         {/* Results */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 flex flex-col justify-between shadow-sm relative overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-1 py-2">

@@ -76,7 +76,7 @@ export function AspectRatioCalculatorClient() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Input Form */}
-        <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 space-y-6 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
           <div className="space-y-4">
             <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Original Dimensions</h3>
             <div className="grid grid-cols-2 gap-4">
@@ -126,7 +126,7 @@ export function AspectRatioCalculatorClient() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-4 md:p-5 shadow-sm space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4">
             <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
               <Layout size={14} className="text-blue-500" />
               Common Presets

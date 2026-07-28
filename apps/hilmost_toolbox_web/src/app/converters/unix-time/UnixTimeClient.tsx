@@ -27,7 +27,7 @@ const LiveEpoch = React.memo(() => {
   }, [currentEpoch]);
 
   return (
-    <div id="tour-unix-current" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
+    <div id="tour-unix-current" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex items-center justify-between transition-all">
       <div className="flex items-center gap-4">
         <div className="h-14 w-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary">
           <Clock size={28} />
@@ -107,7 +107,7 @@ export function UnixTimeClient() {
       <LiveEpoch />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+        <div id="tour-unix-ts2date" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
           <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Timestamp to Date</h2>
           <div className="space-y-4">
             <Input
@@ -123,7 +123,7 @@ export function UnixTimeClient() {
           </div>
         </div>
 
-        <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+        <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
           <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Date to Timestamp</h2>
           <div className="space-y-4">
             <DateTimePicker

@@ -243,7 +243,7 @@ export function IncomeTaxClient() {
       className="@container space-y-6 my-8 max-w-4xl mx-auto"
     >
       {/* Form Section */}
-      <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div className="w-full md:w-auto">
                   <PillSelector
@@ -416,7 +416,7 @@ export function IncomeTaxClient() {
       </div>
 
       {/* Results Dashboard - Now Below */}
-      <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2rem] p-6 md:p-8 shadow-sm relative overflow-hidden">
+      <div id="tour-tax-results" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center py-2">
@@ -465,7 +465,7 @@ export function IncomeTaxClient() {
 
       {/* Saved Scenarios List */}
       {scenarios.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-6 md:p-8 shadow-sm space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
               <History size={20} className="text-slate-400" />
