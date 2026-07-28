@@ -34,7 +34,7 @@ export function ToolHeader({
     <div className="w-full mb-2">
       {/* Title Line - Tightened further */}
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
-        <h1 className="text-[17px] md:text-[19px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
+        <h1 className="text-[19px] md:text-[21px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
           {title}
         </h1>
         {showDate && lastUpdated && (
