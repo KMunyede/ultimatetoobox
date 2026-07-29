@@ -88,7 +88,7 @@ export function RelatedTools({ category, currentPath }: RelatedToolsProps) {
 
   return (
     <div className="mt-6 pt-6 border-t border-base">
-      <h2 className="text-2xl font-bold text-text-primary mb-5">Related Tools</h2>
+      <h2 className="text-2xl font-normal text-text-primary mb-5">Related Tools</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {selectedTools.map((tool) => (
           <Link
@@ -97,7 +97,7 @@ export function RelatedTools({ category, currentPath }: RelatedToolsProps) {
             className="group flex flex-col p-4 bg-canvas-card border border-base rounded-2xl hover:border-brand-primary hover:shadow-md transition-all focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 outline-none"
           >
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold text-text-primary group-hover:text-brand-primary transition-colors">
+              <h3 className="font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                 {tool.name}
               </h3>
               <ArrowRight size={18} className="text-text-muted group-hover:text-brand-primary transition-colors group-hover:translate-x-1" />

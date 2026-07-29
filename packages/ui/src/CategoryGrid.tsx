@@ -42,8 +42,8 @@ export function CategoryGrid({ limit = 6, variant = "minimalist" }: CategoryGrid
               {ICON_MAP[cat.icon]}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-slate-900 dark:text-white truncate">{cat.name}</h3>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              <h3 className="font-normal text-slate-900 dark:text-white truncate">{cat.name}</h3>
+              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">
                 {cat.count} Utilities
               </p>
             </div>
@@ -57,7 +57,7 @@ export function CategoryGrid({ limit = 6, variant = "minimalist" }: CategoryGrid
             className="group flex flex-col items-center justify-center p-3 bg-slate-50 dark:bg-slate-800/50 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-center"
           >
             <Sparkles size={20} className="text-blue-500 mb-2 animate-pulse" />
-            <span className="text-xs font-black uppercase tracking-widest text-blue-600">
+            <span className="text-xs font-normal uppercase tracking-widest text-blue-600">
               View All {categories.length} Categories
             </span>
             <span className="text-[10px] text-slate-400 mt-1 font-medium">

@@ -8,7 +8,7 @@
 
       <div className="space-y-10">
         <section>
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">1. Information We Collect</h2>
+          <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">1. Information We Collect</h2>
           <p className="mb-4">
             When you use our services (such as Hilmost Toolbox or Hilmost Main), we may collect the following types of information:
           </p>
@@ -20,7 +20,7 @@
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">2. How We Use Your Information</h2>
+          <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">2. How We Use Your Information</h2>
           <p className="mb-4">
             The information we collect is used in the following ways:
           </p>
@@ -32,40 +32,40 @@
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">3. Data Security</h2>
+          <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">3. Data Security</h2>
           <p>
             We implement a variety of security measures to maintain the safety of your personal information. Our websites use secure SSL encryption to protect data transmitted between your browser and our servers.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">4. Third-Party Links</h2>
+          <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">4. Third-Party Links</h2>
           <p>
             Occasionally, at our discretion, we may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We therefore have no responsibility or liability for the content and activities of these linked sites.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">5. Changes to this Policy</h2>
+          <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">5. Changes to this Policy</h2>
           <p>
             HSC reserves the right to update this privacy policy at any time. We encourage users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white border-b pb-2 mb-4">6. Contact Us</h2>
+          <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">6. Contact Us</h2>
           <p className="mb-6">
             If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:
           </p>
           <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800 not-prose">
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
-                <span className="font-semibold text-slate-900 dark:text-white min-w-[80px]">Email:</span> 
+                <span className="font-normal text-slate-900 dark:text-white min-w-[80px]">Email:</span>
                 <a href="mailto:support@hilmost.net" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>
               </li>
               <li className="flex items-start gap-3 pt-2">
-                <span className="font-semibold text-slate-900 dark:text-white min-w-[80px]">Address:</span>
-                <address className="not-italic text-slate-600 dark:text-slate-400">
+                <span className="font-normal text-slate-900 dark:text-white min-w-[80px]">Address:</span>
+                <address className="text-slate-600 dark:text-slate-400">
                   Harare<br />
                   Zimbabwe
                 </address>

@@ -12,7 +12,7 @@ export function PrivacyBadge() {
         <ShieldCheck size={20} />
       </div>
       <div className="space-y-1">
-        <h4 className="text-xs font-black text-emerald-800 dark:text-emerald-400 uppercase tracking-widest flex items-center justify-center sm:justify-start gap-2">
+        <h4 className="text-xs font-normal text-emerald-800 dark:text-emerald-400 uppercase tracking-widest flex items-center justify-center sm:justify-start gap-2">
           <Lock size={12} />
           Zero-Server Privacy
         </h4>
@@ -20,7 +20,7 @@ export function PrivacyBadge() {
           Your files never leave your device. All PDF processing happens locally in your browser using 256-bit encryption logic. No data is ever uploaded or stored on our servers.
         </p>
       </div>
-      <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-white/50 dark:bg-black/20 rounded-lg border border-emerald-200/50 text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-tighter whitespace-nowrap ml-auto">
+      <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-white/50 dark:bg-black/20 rounded-lg border border-emerald-200/50 text-micro font-normal text-emerald-600 dark:text-emerald-400 uppercase tracking-tighter whitespace-nowrap ml-auto">
         <EyeOff size={10} />
         Private Session
       </div>

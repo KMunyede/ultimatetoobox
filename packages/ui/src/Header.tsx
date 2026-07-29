@@ -66,16 +66,16 @@ export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
           </div>
 
           <div className="lg:hidden grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <Link href={domains.toolbox + "/guides"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.toolbox + "/guides"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-normal uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Guides
             </Link>
-            <Link href={domains.corporate + "/blog"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.corporate + "/blog"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-normal uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Blog
             </Link>
-            <Link href={domains.corporate + "/about"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.corporate + "/about"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-normal uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               About
             </Link>
-            <Link href={domains.corporate + "/contact"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
+            <Link href={domains.corporate + "/contact"} className="flex items-center justify-center py-2 px-1 bg-canvas-muted rounded-xl text-[10px] font-normal uppercase tracking-widest text-text-secondary border border-base/50 active:bg-base transition-colors">
               Contact
             </Link>
           </div>
@@ -86,10 +86,10 @@ export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
 
             {/* Desktop-only Navigation Links */}
             <div className="hidden lg:flex items-center gap-6">
-              <Link href={domains.corporate + "/about"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
+              <Link href={domains.corporate + "/about"} className="text-sm font-normal text-text-secondary hover:text-brand-primary transition-colors">
                 About
               </Link>
-              <Link href={domains.corporate + "/contact"} className="text-sm font-bold text-text-secondary hover:text-brand-primary transition-colors">
+              <Link href={domains.corporate + "/contact"} className="text-sm font-normal text-text-secondary hover:text-brand-primary transition-colors">
                 Contact
               </Link>
             </div>

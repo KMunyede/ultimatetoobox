@@ -83,7 +83,7 @@ export function NavigationMenu() {
       >
         <div className="flex items-center gap-3">
           <Menu size={20} />
-          <span className="text-xs font-black uppercase tracking-widest">Browse {displayCount}+ Free Tools — more added regularly</span>
+          <span className="text-xs font-normal uppercase tracking-widest">Browse {displayCount}+ Free Tools — more added regularly</span>
         </div>
         <ChevronRight size={18} className="opacity-60" />
       </button>
@@ -96,7 +96,7 @@ export function NavigationMenu() {
           onMouseLeave={handleMouseLeave}
         >
           <button
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight transition-all ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-normal tracking-tight transition-all ${
               hubOpen || (!isGuidesPage && pathname !== '/') ? 'text-brand-primary bg-brand-primary/5' : 'text-text-secondary hover:text-brand-primary'
             }`}
             title="Explore our library of free digital utilities."
@@ -120,7 +120,7 @@ export function NavigationMenu() {
                     <button
                       key={cat.name}
                       onMouseEnter={() => setActiveCategory(cat.name)}
-                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm font-bold transition-all ${
+                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm font-normal transition-all ${
                         activeCategory === cat.name ? 'text-brand-primary bg-brand-primary/5' : 'text-text-secondary hover:bg-canvas-muted/50'
                       }`}
                       title={cat.description}
@@ -144,7 +144,7 @@ export function NavigationMenu() {
                       className="ml-1 w-72 bg-canvas-card border border-base rounded-2xl shadow-xl overflow-hidden"
                     >
                       <div className="p-4 bg-brand-primary/5 border-b border-base">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-brand-primary">
+                        <h3 className="text-xs font-normal uppercase tracking-widest text-brand-primary">
                           {activeCategory} Tools
                         </h3>
                       </div>
@@ -160,7 +160,7 @@ export function NavigationMenu() {
                               className="group flex flex-col px-4 py-3 rounded-xl hover:bg-canvas-muted transition-all"
                               title={tool.tooltip}
                             >
-                              <span className="text-sm font-bold text-text-primary group-hover:text-brand-primary transition-colors">
+                              <span className="text-sm font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                                 {tool.name}
                               </span>
                               <span className="text-[10px] text-text-muted leading-tight mt-0.5">
@@ -181,7 +181,7 @@ export function NavigationMenu() {
         <Tooltip content="Master our tools with expert guides and precision math." position="bottom">
           <Link
             href={resolveHref("/guides")}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight transition-all ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-normal tracking-tight transition-all ${
               isGuidesPage ? 'text-brand-primary bg-brand-primary/5' : 'text-text-secondary hover:text-brand-primary'
             }`}
           >
@@ -191,7 +191,7 @@ export function NavigationMenu() {
 
         <Link
           href={domains.corporate + "/blog"}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold tracking-tight text-text-secondary hover:text-brand-primary transition-all"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-normal tracking-tight text-text-secondary hover:text-brand-primary transition-all"
         >
           Blog
         </Link>
@@ -216,7 +216,7 @@ export function NavigationMenu() {
               className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-canvas-card border-l border-base shadow-2xl z-[110] lg:hidden flex flex-col overflow-x-hidden"
             >
               <div className="flex items-center justify-between py-2 px-6 border-b border-base">
-                <span className="text-[10px] font-black text-brand-primary tracking-[0.2em] uppercase">HILMOST HUB</span>
+                <span className="text-[10px] font-normal text-brand-primary tracking-[0.2em] uppercase">HILMOST HUB</span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-1 rounded-lg bg-canvas-muted text-text-primary"
@@ -230,7 +230,7 @@ export function NavigationMenu() {
                   <div key={cat.name} className="space-y-1">
                     <div className="flex items-center gap-2 text-brand-primary pt-4 pb-2">
                       {ICON_MAP[cat.icon]}
-                      <span className="text-[9px] font-black uppercase tracking-[0.2em]">{cat.name}</span>
+                      <span className="text-micro font-normal uppercase tracking-[0.2em]">{cat.name}</span>
                     </div>
                     <div className="flex flex-col">
                       {cat.tools.map((tool) => (
@@ -239,7 +239,7 @@ export function NavigationMenu() {
                           href={resolveHref(tool.href)}
                           scroll={true}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center w-full py-4 text-sm font-bold text-text-secondary border-b border-base/40 active:bg-brand-primary/5 active:text-brand-primary transition-all"
+                          className="flex items-center w-full py-4 text-sm font-normal text-text-secondary border-b border-base/40 active:bg-brand-primary/5 active:text-brand-primary transition-all"
                         >
                           {tool.name}
                         </Link>

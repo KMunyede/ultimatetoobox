@@ -34,11 +34,11 @@ export function ToolHeader({
     <div className="w-full mb-2">
       {/* Title Line - Tightened further */}
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
-        <h1 className="text-[19px] md:text-[21px] font-black text-slate-900 dark:text-white tracking-tight uppercase leading-none">
+        <h1 className="text-[19px] md:text-[21px] font-normal text-slate-900 dark:text-white tracking-tight uppercase leading-none">
           {title}
         </h1>
         {showDate && lastUpdated && (
-          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-1.5 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+          <span className="inline-flex items-center gap-1 text-micro font-normal text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-1.5 py-0.5 rounded border border-slate-100 dark:border-slate-800">
             <Calendar size={10} />
             {lastUpdated}
           </span>

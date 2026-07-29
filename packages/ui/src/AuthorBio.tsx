@@ -23,7 +23,7 @@ export function AuthorBio({
 
       <Link
         href="/editorial-policy"
-        className="flex items-center gap-2 text-[10px] font-black text-brand-primary uppercase tracking-widest hover:underline transition-all shrink-0"
+        className="flex items-center gap-2 text-[10px] font-normal text-brand-primary uppercase tracking-widest hover:underline transition-all shrink-0"
       >
         <FileText size={14} />
         Platform Privacy Policy

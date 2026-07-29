@@ -90,7 +90,7 @@ export function AdUnit({
 
   return (
     <div className="w-full flex flex-col items-center gap-1 py-1 relative z-0">
-      <span className="text-micro text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.25em] select-none">
+      <span className="text-micro text-slate-400 dark:text-slate-500 font-normal uppercase tracking-[0.25em] select-none">
         Advertisement
       </span>
       <div

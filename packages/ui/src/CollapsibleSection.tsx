@@ -21,7 +21,7 @@ export function CollapsibleSection({
         className="w-full text-left px-8 py-6 flex items-center justify-between focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
         aria-expanded={isOpen}
       >
-        <h2 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <h2 className="text-xl md:text-2xl font-normal text-slate-900 dark:text-white uppercase tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {title}
         </h2>
         <div className={`p-2 rounded-full transition-all ${isOpen ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30' : 'text-slate-400 bg-slate-50 dark:bg-slate-800/50'}`}>

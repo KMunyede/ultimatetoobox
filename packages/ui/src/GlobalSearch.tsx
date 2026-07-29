@@ -172,7 +172,7 @@ export function GlobalSearch() {
                     onKeyDown={handleKeyDown}
                   />
                   <div className="flex items-center gap-3">
-                    <kbd className="hidden sm:block px-2 py-0.5 text-[10px] rounded-md border border-base bg-canvas-muted text-text-muted font-bold">ESC</kbd>
+                    <kbd className="hidden sm:block px-2 py-0.5 text-[10px] rounded-md border border-base bg-canvas-muted text-text-muted font-normal">ESC</kbd>
                     <button
                       onClick={() => setIsOpen(false)}
                       className="p-1.5 text-text-muted hover:text-text-primary transition-colors rounded-full hover:bg-canvas-muted shrink-0"
@@ -186,7 +186,7 @@ export function GlobalSearch() {
                 <div className="max-h-[60vh] overflow-y-auto p-3 custom-scrollbar">
                   {query.trim() === "" && (
                     <div className="px-3 py-2 mb-2">
-                      <span className="text-[11px] font-bold text-text-muted uppercase tracking-widest">Suggestions</span>
+                      <span className="text-[11px] font-normal text-text-muted uppercase tracking-widest">Suggestions</span>
                     </div>
                   )}
 
@@ -217,7 +217,7 @@ export function GlobalSearch() {
                                 {result.type === "action" ? result.icon : <Zap size={16} className={idx === selectedIndex ? "text-white" : "text-brand-primary"} />}
                               </div>
                               <div className="flex flex-col">
-                                <span className={`font-bold ${idx === selectedIndex ? "text-white" : "text-text-primary"}`}>
+                                <span className={`font-normal ${idx === selectedIndex ? "text-white" : "text-text-primary"}`}>
                                   {result.name}
                                 </span>
                                 <span className={`text-xs line-clamp-1 ${idx === selectedIndex ? "text-white/80" : "text-text-muted"}`}>
@@ -231,7 +231,7 @@ export function GlobalSearch() {
                                 animate={{ x: 0, opacity: 1 }}
                                 className="flex items-center gap-2"
                               >
-                                <span className="text-[10px] font-bold uppercase tracking-tighter opacity-70">Jump to</span>
+                                <span className="text-[10px] font-normal uppercase tracking-tighter opacity-70">Jump to</span>
                                 <ArrowRight className="w-4 h-4" />
                               </motion.div>
                             )}
@@ -246,15 +246,15 @@ export function GlobalSearch() {
                 <div className="px-5 py-4 border-t border-base text-[10px] text-text-muted flex items-center justify-between bg-canvas-muted/30">
                   <div className="flex gap-6">
                     <span className="flex items-center gap-2">
-                      <kbd className="px-1.5 py-0.5 rounded-md border border-base bg-canvas-card font-mono text-[9px] shadow-sm">↑↓</kbd>
+                      <kbd className="px-1.5 py-0.5 rounded-md border border-base bg-canvas-card font-mono text-micro shadow-sm">↑↓</kbd>
                       to navigate
                     </span>
                     <span className="flex items-center gap-2">
-                      <kbd className="px-1.5 py-0.5 rounded-md border border-base bg-canvas-card font-mono text-[9px] shadow-sm">Enter</kbd>
+                      <kbd className="px-1.5 py-0.5 rounded-md border border-base bg-canvas-card font-mono text-micro shadow-sm">Enter</kbd>
                       to select
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 px-2 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-bold tracking-tighter">
+                  <div className="flex items-center gap-2 px-2 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-normal tracking-tighter">
                     <Zap size={10} className="animate-pulse" />
                     OMNI-SEARCH
                   </div>

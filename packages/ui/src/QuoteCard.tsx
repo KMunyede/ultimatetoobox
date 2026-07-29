@@ -69,14 +69,14 @@ export function QuoteCard({ quote, className = "", showFavorite = true }: QuoteC
       
       <div className="relative z-10 flex flex-1 flex-col justify-center space-y-6 text-center">
         <Quote className="mx-auto mb-2 h-8 w-8 text-brand-primary opacity-50 @md:h-12 @md:w-12" />
-        <h2 className="font-serif text-base italic font-medium leading-relaxed text-text-primary break-words whitespace-pre-wrap @sm:text-lg @md:text-2xl @lg:text-3xl">
+        <h2 className="font-serif text-base font-medium leading-relaxed text-text-primary break-words whitespace-pre-wrap @sm:text-lg @md:text-2xl @lg:text-3xl">
           "{quote.text}"
         </h2>
       </div>
         
       <div className="relative z-10 pt-6 text-center @md:pt-10">
         <div className="mx-auto mb-4 h-px w-12 bg-emerald-200 dark:bg-emerald-800/50"></div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary @md:text-base">
+        <p className="text-xs font-normal uppercase tracking-wider text-text-secondary @md:text-base">
           {quote.philosopher}
         </p>
       </div>

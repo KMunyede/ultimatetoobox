@@ -65,7 +65,7 @@ export function DidYouKnow({ category }: DidYouKnowProps) {
           <Lightbulb size={20} />
         </div>
         <div className="space-y-1">
-          <h4 className="text-[10px] font-black text-brand-primary uppercase tracking-[0.2em]">
+          <h4 className="text-[10px] font-normal text-brand-primary uppercase tracking-[0.2em]">
             Did you know?
           </h4>
           <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed">

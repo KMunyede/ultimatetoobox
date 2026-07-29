@@ -24,7 +24,7 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
   return (
     <div className="mt-6 max-w-4xl mx-auto px-4 sm:px-0">
       {title && (
-        <h2 className="text-[20px] md:text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">
+        <h2 className="text-[20px] md:text-2xl font-normal text-slate-900 dark:text-white mb-6 uppercase tracking-tight">
           {title}
         </h2>
       )}
@@ -41,7 +41,7 @@ export function FAQAccordion({ items, title = "Frequently Asked Questions" }: { 
                 className="w-full text-left px-6 py-4 flex items-center justify-between focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
                 aria-expanded={isOpen}
               >
-                <span className="font-bold text-slate-900 dark:text-slate-100 text-sm md:text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <span className="font-normal text-slate-900 dark:text-slate-100 text-sm md:text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {item.question}
                 </span>
                 <div className={`p-2 rounded-full transition-all ${isOpen ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30' : 'text-slate-400 bg-slate-50 dark:bg-slate-800/50'}`}>
