@@ -90,8 +90,8 @@ export function MergePDFClient() {
             <IconUpload size={32} />
           </div>
           <div>
-            <p className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF files here</p>
-            <p className="text-[10px] text-slate-400 mt-1 font-black uppercase tracking-widest">Supports multiple PDF files</p>
+            <p className="text-xl font-normal text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF files here</p>
+            <p className="text-[10px] text-slate-400 mt-1 font-normal uppercase tracking-widest">Supports multiple PDF files</p>
           </div>
         </div>
       </div>
@@ -99,7 +99,7 @@ export function MergePDFClient() {
       {error && (
         <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-2xl p-4 flex items-center gap-3 text-rose-600">
           <IconAlertCircle size={20} />
-          <span className="font-bold text-sm">{error}</span>
+          <span className="font-normal text-sm">{error}</span>
         </div>
       )}
 
@@ -107,13 +107,13 @@ export function MergePDFClient() {
       {files.length > 0 && (
         <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4">
           <div className="flex items-center justify-between px-2">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
+            <h3 className="text-[10px] font-normal uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
               Queue
               <span className="bg-brand-primary/10 text-brand-primary px-2 py-0.5 rounded-full">{files.length}</span>
             </h3>
             <button
               onClick={() => setFiles([])}
-              className="text-[10px] font-black text-slate-400 hover:text-rose-500 transition-colors uppercase tracking-widest"
+              className="text-[10px] font-normal text-slate-400 hover:text-rose-500 transition-colors uppercase tracking-widest"
             >
               Clear All
             </button>
@@ -131,8 +131,8 @@ export function MergePDFClient() {
                 </div>
                 <PDFThumbnail file={file.file} className="w-12 h-16 shrink-0 rounded border border-slate-100" />
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-slate-900 dark:text-white truncate">{file.name}</p>
-                  <p className="text-[10px] text-slate-400 font-black uppercase mt-0.5">{file.size}</p>
+                  <p className="font-normal text-slate-900 dark:text-white truncate">{file.name}</p>
+                  <p className="text-[10px] text-slate-400 font-normal uppercase mt-0.5">{file.size}</p>
                 </div>
                 <button
                   onClick={() => removeFile(file.id)}

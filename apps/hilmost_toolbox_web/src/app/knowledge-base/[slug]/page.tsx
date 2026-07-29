@@ -58,17 +58,17 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
 
       <Link
         href="/knowledge-base"
-        className="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-brand-primary transition-colors mb-8 group"
+        className="inline-flex items-center gap-2 text-sm font-normal text-slate-500 hover:text-brand-primary transition-colors mb-8 group"
       >
         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
         Back to Knowledge Base
       </Link>
 
       <header className="mb-8">
-        <div className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em] mb-4">
+        <div className="text-[10px] font-normal text-brand-primary uppercase tracking-[0.2em] mb-4">
           Research Vertical: {article.category.replace("-", " ")}
         </div>
-        <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
+        <h1 className="text-3xl md:text-5xl font-normal text-slate-900 dark:text-white leading-tight">
           {article.title}
         </h1>
       </header>
@@ -79,7 +79,7 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
 
       {article.relatedTools.length > 0 && (
         <div className="mt-10 pt-10 border-t border-slate-200 dark:border-slate-800">
-           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase flex items-center gap-3">
+           <h2 className="text-2xl font-normal text-slate-900 dark:text-white mb-6 uppercase flex items-center gap-3">
              <Wrench className="text-blue-600" /> Experiment With This Logic
            </h2>
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -87,7 +87,7 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
                <Link
                  key={toolPath}
                  href={toolPath}
-                 className="p-6 bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-between group hover:scale-[1.02] transition-all"
+                 className="p-6 bg-blue-600 text-white rounded-2xl font-normal flex items-center justify-between group hover:scale-[1.02] transition-all"
                >
                  <span>Launch {toolPath.split("/").pop()?.replace("-", " ").toUpperCase()}</span>
                  <Wrench size={20} className="opacity-50 group-hover:rotate-12 transition-transform" />

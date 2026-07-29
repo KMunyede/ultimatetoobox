@@ -85,24 +85,24 @@ export default function Home() {
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
         <a 
           href="/health/daily-wisdom/library" 
-          className="flex items-center justify-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-bold py-4 px-6 rounded-2xl transition-all shadow-md hover:shadow-lg text-center"
+          className="flex items-center justify-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 font-normal py-4 px-6 rounded-2xl transition-all shadow-md hover:shadow-lg text-center"
         >
           Wisdom Library
         </a>
         <a 
           href="/health/daily-wisdom/journal" 
-          className="flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-md hover:shadow-lg text-center"
+          className="flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-normal py-4 px-6 rounded-2xl transition-all shadow-md hover:shadow-lg text-center"
         >
           Open Private Journal
         </a>
         <span
-          className="flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold py-4 px-6 rounded-2xl cursor-not-allowed opacity-75 text-center"
+          className="flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-normal py-4 px-6 rounded-2xl cursor-not-allowed opacity-75 text-center"
           title="Coming Soon"
         >
           My Favorites (Soon)
         </span>
         <span 
-          className="flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold py-4 px-6 rounded-2xl cursor-not-allowed opacity-75 text-center"
+          className="flex items-center justify-center bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-normal py-4 px-6 rounded-2xl cursor-not-allowed opacity-75 text-center"
           title="Coming Soon"
         >
           My Profile (Soon)

@@ -44,7 +44,7 @@ export function NumberInput({
   return (
     <div className="space-y-1 w-full">
       {label && (
-        <label className="block text-[11px] font-bold uppercase tracking-widest text-[var(--color-text-secondary)] ml-1 mb-1">
+        <label className="block text-[11px] font-normal uppercase tracking-widest text-[var(--color-text-secondary)] ml-1 mb-1">
           {label}
         </label>
       )}

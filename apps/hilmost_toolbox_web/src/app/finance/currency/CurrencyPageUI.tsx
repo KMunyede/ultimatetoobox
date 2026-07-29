@@ -105,9 +105,9 @@ export function CurrencyPageUI({
         />
 
         <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
-          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
           <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the global currency market?</p>
-          <Link href="/guides/currency-conversion-and-exchange-rates" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+          <Link href="/guides/currency-conversion-and-exchange-rates" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
             Read our full Currency Guide <ArrowRight size={14} />
           </Link>
         </div>

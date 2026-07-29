@@ -98,7 +98,7 @@ export default function DXHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
           <Code2 className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Developer Experience Tools
         </h1>
       </div>
@@ -114,12 +114,12 @@ export default function DXHub() {
               <div className="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-slate-400 group-hover:text-blue-600 transition-colors">
                 {link.icon ? iconMap[link.icon] : <Code2 size={20} />}
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
+              <h3 className="text-xl font-normal text-slate-900 dark:text-white">{link.name}</h3>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-blue-600 dark:text-blue-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -133,17 +133,17 @@ export default function DXHub() {
             Welcome to the <strong>Developer Experience (DX)</strong> hub at Hilmost Toolbox. In the modern engineering landscape, minor friction points in your workflow can lead to significant productivity losses. Our mission is to eliminate that friction by providing a suite of high-performance, privacy-first utilities that handle the &quot;grunt work&quot; of data manipulation and inspection.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Streamlined Data Formatting and Validation</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Streamlined Data Formatting and Validation</h2>
           <p>
             Working with messy JSON shouldn&apos;t be a headache. Our <strong>JSON Formatter</strong> is built to handle deep nesting and large payloads, providing instant syntax highlighting and error detection. Whether you are debugging an API response or preparing a config file, our tool ensures your data is clean, valid, and readable.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Real-Time Pattern Matching and Token Security</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Real-Time Pattern Matching and Token Security</h2>
           <p>
             Regular expressions are powerful but notoriously difficult to get right on the first try. Our <strong>Regex Tester</strong> provides a real-time feedback loop, highlighting matches as you type and providing a quick-reference guide for common syntax. Furthermore, for those working with authentication, our <strong>JWT Decoder</strong> offers a secure environment to inspect token payloads without risking your production secrets on insecure servers.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost for your DX?</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost for your DX?</h2>
           <p>
             Standard online developer tools often log your data for analysis or advertising. At Hilmost, we utilize <strong>Zero-Server Architecture</strong>. Every operation happens locally in your browser. This makes our platform the safest laboratory for your code, tokens, and data.
           </p>

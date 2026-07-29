@@ -56,11 +56,11 @@ export default function GuidesIndex() {
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-normal uppercase tracking-widest mb-6">
           <BookOpen size={12} />
           Learning Center
         </div>
-        <h1 className="text-4xl md:text-5xl font-black text-text-primary mb-6 uppercase tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-normal text-text-primary mb-6 uppercase tracking-tight">
           Utility <span className="text-brand-primary">Guides</span>
         </h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed font-medium">
@@ -76,21 +76,21 @@ export default function GuidesIndex() {
             className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:shadow-xl hover:border-brand-primary/30"
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary block">
+              <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-brand-primary block">
                 {guide.category.replace("-", " ")}
               </span>
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-400 uppercase">
+              <span className="inline-flex items-center gap-1 text-[10px] font-normal text-slate-400 uppercase">
                 <Calendar size={10} />
                 {lastUpdated}
               </span>
             </div>
-            <h2 className="text-2xl font-black text-text-primary mb-4 group-hover:text-brand-primary transition-colors">
+            <h2 className="text-2xl font-normal text-text-primary mb-4 group-hover:text-brand-primary transition-colors">
               {guide.title}
             </h2>
             <p className="text-text-secondary leading-relaxed mb-8 flex-1 font-medium">
               {guide.excerpt}
             </p>
-            <div className="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
+            <div className="flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
               Read Guide <ArrowRight size={16} />
             </div>
           </Link>

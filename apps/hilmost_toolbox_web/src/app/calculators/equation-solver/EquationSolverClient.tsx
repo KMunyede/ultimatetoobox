@@ -174,7 +174,7 @@ export function EquationSolverClient({
           <button
             key={cat}
             onClick={() => handleCategoryChange(cat)}
-            className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border-2 ${
+            className={`px-5 py-2.5 rounded-xl text-[10px] font-normal uppercase tracking-widest transition-all whitespace-nowrap border-2 ${
               category === cat
                 ? "bg-brand-primary text-white border-brand-primary shadow-sm"
                 : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-400 hover:border-brand-primary hover:text-brand-primary"
@@ -198,8 +198,8 @@ export function EquationSolverClient({
                   : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 hover:border-brand-primary/50 shadow-sm"
               }`}
             >
-              <div className="font-black text-slate-900 dark:text-white mb-1 truncate uppercase text-xs tracking-tight">{eq.name}</div>
-              <div className="text-[10px] font-mono text-brand-primary font-bold">{eq.formula}</div>
+              <div className="font-normal text-slate-900 dark:text-white mb-1 truncate uppercase text-xs tracking-tight">{eq.name}</div>
+              <div className="text-[10px] font-mono text-brand-primary font-normal">{eq.formula}</div>
             </button>
           ))}
         </div>
@@ -225,7 +225,7 @@ export function EquationSolverClient({
                         value={inputs[v.id] || ""}
                         onChange={val => setInputs(prev => ({ ...prev, [v.id]: val }))}
                         placeholder="0.00"
-                        className="text-lg font-mono font-bold"
+                        className="text-lg font-mono font-normal"
                       />
                     </div>
                     {v.units.length > 1 && (
@@ -257,8 +257,8 @@ export function EquationSolverClient({
                   animate={{ scale: 1, opacity: 1 }}
                   className="bg-brand-primary/5 rounded-[2rem] p-8 border border-brand-primary/10 flex flex-col justify-center items-center text-center h-full min-h-[250px] shadow-inner"
                 >
-                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary mb-4">Calculated {target}</div>
-                  <div className="text-5xl md:text-6xl font-mono font-black text-slate-900 dark:text-white tracking-tighter">
+                  <div className="text-[10px] font-normal uppercase tracking-[0.2em] text-brand-primary mb-4">Calculated {target}</div>
+                  <div className="text-5xl md:text-6xl font-mono font-normal text-slate-900 dark:text-white tracking-tighter">
                     <ScientificNumber
                       value={parseFloat(result)}
                       suffix={equation.variables.find(v => v.id === target)?.unit}
@@ -268,7 +268,7 @@ export function EquationSolverClient({
                 </motion.div>
               ) : (
                 <div className="bg-slate-50 dark:bg-slate-800/50 rounded-[2rem] p-8 border-2 border-dashed border-slate-100 dark:border-slate-800 flex flex-col justify-center items-center text-center h-full min-h-[250px] text-slate-400">
-                  <p className="text-[10px] font-black uppercase tracking-widest">Enter values to compute result</p>
+                  <p className="text-[10px] font-normal uppercase tracking-widest">Enter values to compute result</p>
                 </div>
               )}
             </div>

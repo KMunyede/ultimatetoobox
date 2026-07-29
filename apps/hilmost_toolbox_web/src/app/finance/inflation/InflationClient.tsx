@@ -34,46 +34,46 @@ export function InflationClient() {
         {/* Form */}
         <div id="tour-inf-inputs" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8 h-fit">
           <div className="space-y-1.5">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Historical Amount ($)</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">Historical Amount ($)</label>
             <NumberInput
               value={amount}
               onChange={val => setState({ amount: val })}
               min={0}
-              className="text-lg font-bold"
+              className="text-lg font-normal"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Calendar size={16} className="text-brand-primary" />
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Start Year</label>
+                    <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500">Start Year</label>
                 </div>
                 <NumberInput
                   value={startYear}
                   onChange={val => setState({ startYear: val })}
                   min={1800}
                   max={2100}
-                  className="text-lg font-bold"
+                  className="text-lg font-normal"
                 />
             </div>
             <div className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Calendar size={16} className="text-brand-primary" />
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">End Year</label>
+                    <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500">End Year</label>
                 </div>
                 <NumberInput
                   value={endYear}
                   onChange={val => setState({ endYear: val })}
                   min={1800}
                   max={2100}
-                  className="text-lg font-bold"
+                  className="text-lg font-normal"
                 />
             </div>
           </div>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 mb-2 ml-1">
                 <TrendingUp size={16} className="text-brand-primary" />
-                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Avg. Inflation Rate (%)</label>
+                <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500">Avg. Inflation Rate (%)</label>
             </div>
             <NumberInput
               value={rate}
@@ -81,7 +81,7 @@ export function InflationClient() {
               min={-20}
               max={1000}
               step={0.1}
-              className="text-lg font-bold"
+              className="text-lg font-normal"
             />
           </div>
         </div>
@@ -91,16 +91,16 @@ export function InflationClient() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
           <div className="relative z-10 text-center space-y-2 py-4">
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Adjusted Value in {endY}</span>
-            <div className="text-5xl md:text-6xl font-black text-brand-primary tracking-tighter">
+            <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Adjusted Value in {endY}</span>
+            <div className="text-5xl md:text-6xl font-normal text-brand-primary tracking-tighter">
               $<NumberTicker value={adjustedValue} decimals={2} />
             </div>
           </div>
 
           <div className="relative z-10 grid grid-cols-1 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Cumulative Inflation</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white">
+                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Cumulative Inflation</span>
+                <p className="text-2xl font-normal text-slate-900 dark:text-white">
                     <NumberTicker value={cumulativeInflation} decimals={1} />%
                 </p>
             </div>

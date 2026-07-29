@@ -49,7 +49,7 @@ export default function FavoritesPage() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
+        <h1 className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white mb-6">
           Your <span className="text-amber-500">Favorites</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">

@@ -141,13 +141,13 @@ export function RandomGeneratorTool() {
           <div className="inline-flex p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl border border-base">
             <button
               onClick={() => { setMode("number"); setResults([]); }}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${mode === "number" ? 'bg-white dark:bg-slate-700 text-brand-primary shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-normal transition-all ${mode === "number" ? 'bg-white dark:bg-slate-700 text-brand-primary shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
             >
               <Hash size={18} /> Random Number
             </button>
             <button
               onClick={() => { setMode("name"); setResults([]); }}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${mode === "name" ? 'bg-white dark:bg-slate-700 text-brand-primary shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-normal transition-all ${mode === "name" ? 'bg-white dark:bg-slate-700 text-brand-primary shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
             >
               <User size={18} /> Random Name
             </button>
@@ -176,14 +176,14 @@ export function RandomGeneratorTool() {
                 />
                 <div className="space-y-4">
                    <label className="flex items-center justify-between p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all group">
-                     <span className="text-xs font-black uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Allow Duplicates</span>
+                     <span className="text-xs font-normal uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Allow Duplicates</span>
                      <div className="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" checked={allowDuplicates} onChange={(e) => setAllowDuplicates(e.target.checked)} className="sr-only peer" />
                         <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-primary"></div>
                      </div>
                    </label>
                    <label className="flex items-center justify-between p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all group">
-                     <span className="text-xs font-black uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Generate Decimals</span>
+                     <span className="text-xs font-normal uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Generate Decimals</span>
                      <div className="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" checked={isDecimal} onChange={(e) => setIsDecimal(e.target.checked)} className="sr-only peer" />
                         <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-primary"></div>
@@ -243,7 +243,7 @@ export function RandomGeneratorTool() {
               </div>
             )}
 
-            <Button onClick={handleGenerate} className="w-full h-14 rounded-2xl text-lg font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20">
+            <Button onClick={handleGenerate} className="w-full h-14 rounded-2xl text-lg font-normal uppercase tracking-widest shadow-lg shadow-brand-primary/20">
               <RefreshCw size={20} /> Generate {mode === "number" ? "Numbers" : "Names"}
             </Button>
           </div>
@@ -251,7 +251,7 @@ export function RandomGeneratorTool() {
           {/* Results Section */}
           <div className="space-y-4 flex flex-col" id="tour-generator-output">
             <div className="flex items-center justify-between px-1">
-               <label className="text-xs font-black uppercase tracking-widest text-slate-500">
+               <label className="text-xs font-normal uppercase tracking-widest text-slate-500">
                  Results
                </label>
                {results.length > 0 && (
@@ -283,7 +283,7 @@ export function RandomGeneratorTool() {
                 <div className="space-y-2">
                   {results.map((res, idx) => (
                     <div key={idx} className="group flex items-center justify-between p-3 bg-white dark:bg-slate-900 border border-base rounded-xl hover:border-brand-primary/30 transition-all shadow-sm">
-                      <span className="font-mono font-bold text-slate-700 dark:text-slate-300">{res}</span>
+                      <span className="font-mono font-normal text-slate-700 dark:text-slate-300">{res}</span>
                       <CopyButton value={res} />
                     </div>
                   ))}
@@ -293,13 +293,13 @@ export function RandomGeneratorTool() {
                   <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-4 opacity-50">
                     {mode === "number" ? <Hash size={32} /> : <User size={32} />}
                   </div>
-                  <p className="text-sm font-bold uppercase tracking-widest opacity-40">Ready to Generate</p>
+                  <p className="text-sm font-normal uppercase tracking-widest opacity-40">Ready to Generate</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] mt-1 opacity-40">Select options and click generate</p>
                 </div>
               )}
             </div>
 
-            <p className="text-[10px] text-slate-400 text-center font-bold uppercase tracking-widest mt-2">
+            <p className="text-[10px] text-slate-400 text-center font-normal uppercase tracking-widest mt-2">
                🔒 100% Secure & Private — No data leaves your browser
             </p>
           </div>

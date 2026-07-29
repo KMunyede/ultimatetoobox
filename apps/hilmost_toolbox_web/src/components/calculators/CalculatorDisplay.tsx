@@ -43,7 +43,7 @@ export function CalculatorDisplay({
             {expression || "\u00A0"}
           </div>
           {/* Result Line */}
-          <div className="text-3xl md:text-4xl font-mono font-bold text-slate-900 dark:text-white break-all text-right w-full pr-8 mt-1">
+          <div className="text-3xl md:text-4xl font-mono font-normal text-slate-900 dark:text-white break-all text-right w-full pr-8 mt-1">
             {formatValue(result) || "0"}
           </div>
         </div>
@@ -75,15 +75,15 @@ export function CalculatorDisplay({
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">History tape</span>
-                  <span className="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-xs px-2 py-0.5 rounded-full font-bold">
+                  <span className="text-sm font-normal text-slate-900 dark:text-white uppercase tracking-wider">History tape</span>
+                  <span className="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-xs px-2 py-0.5 rounded-full font-normal">
                     {history.length}
                   </span>
                 </div>
                 {history.length > 0 && (
                   <button
                     onClick={onClearHistory}
-                    className="text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline flex items-center gap-1"
+                    className="text-xs font-normal text-rose-600 dark:text-rose-400 hover:underline flex items-center gap-1"
                   >
                     <IconTrash size={14} />
                     Clear all
@@ -94,7 +94,7 @@ export function CalculatorDisplay({
               {/* Entries */}
               <div className="max-h-[300px] overflow-y-auto">
                 {history.length === 0 ? (
-                  <div className="p-8 text-center text-sm text-slate-500 dark:text-slate-400 italic">
+                  <div className="p-8 text-center text-sm text-slate-500 dark:text-slate-400">
                     No history yet
                   </div>
                 ) : (
@@ -110,7 +110,7 @@ export function CalculatorDisplay({
                         <div className="text-xs font-mono text-slate-500 dark:text-slate-400 mb-1 break-all">
                           {entry.expression}
                         </div>
-                        <div className="text-base font-mono font-bold text-slate-900 dark:text-white break-all">
+                        <div className="text-base font-mono font-normal text-slate-900 dark:text-white break-all">
                           = {formatValue(entry.result)}
                         </div>
 

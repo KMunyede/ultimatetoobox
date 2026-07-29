@@ -99,7 +99,7 @@ export default function HealthHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
           <Activity className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Free Online Health Calculators
         </h1>
       </div>
@@ -117,12 +117,12 @@ export default function HealthHub() {
                   {iconMap[link.icon]}
                 </div>
               )}
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
+              <h3 className="text-xl font-normal text-slate-900 dark:text-white">{link.name}</h3>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-rose-600 dark:text-rose-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-rose-600 dark:text-rose-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -135,17 +135,17 @@ export default function HealthHub() {
             Welcome to the Hilmost sanctuary for <strong>free online health calculators</strong> and wellness tracking. In the pursuit of a balanced life, understanding your body&apos;s core metrics is a vital first step. We have developed a suite of high-precision tools designed to help you monitor your physical health and mental well-being with complete privacy and scientific accuracy.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Track Your BMI and Body Metrics Safely</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Track Your BMI and Body Metrics Safely</h2>
           <p>
             Maintaining a healthy weight is about more than just numbers; it&apos;s about long-term wellness. Our <strong>BMI Calculator</strong> provides an instant analysis of your Body Mass Index, helping you understand your weight category relative to your height. We use standard medical formulas to ensure that your results are reliable, whether you are using Metric or Imperial measurements. By tracking these metrics regularly, you can make more informed decisions about your diet and exercise routines.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Daily Wisdom and Mental Well-being</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Daily Wisdom and Mental Well-being</h2>
           <p>
             At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Wisdom & Wellness</strong> project—a private space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;private space&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Health Monitoring</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Secure and Private Health Monitoring</h2>
           <p>
             Health data is incredibly sensitive. Unlike other wellness platforms that track your information for advertising purposes, Hilmost Toolbox operates with a <strong>privacy-first architecture</strong>. Your metrics are processed entirely within your browser and are never stored on our servers. This ensures that your weight, height, and personal reflections remain entirely yours, providing you with a secure environment to focus on what truly matters: your health.
           </p>

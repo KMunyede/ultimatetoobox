@@ -95,7 +95,7 @@ export default function CalculatorsHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
           <Calculator className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white">
           Free Online Calculators
         </h1>
       </div>
@@ -107,11 +107,11 @@ export default function CalculatorsHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-blue-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-2">{link.name}</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-blue-600 dark:text-blue-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -124,17 +124,17 @@ export default function CalculatorsHub() {
             Welcome to the <strong>free online calculators</strong> hub at Hilmost Toolbox. In today&apos;s fast-paced digital world, having access to reliable, accurate, and fast computing tools is essential. Whether you are a student tackling homework, an engineer performing site calculations, or a scientist exploring the depths of the cosmos, our suite of calculators is engineered to meet your needs with high precision.
           </p>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4 uppercase tracking-tight">Precision Engineering for Every Equation</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Precision Engineering for Every Equation</h2>
           <p>
             At Hilmost, we believe that math should be accessible and frictionless. Our collection spans from the essential <strong>Standard Calculator</strong> for everyday budgeting and simple sums to advanced <strong>Scientific Calculators</strong> capable of handling complex trigonometry and logarithmic functions. We focus on a clean, &quot;enterprise-calm&quot; interface that eliminates distractions, allowing you to focus entirely on the numbers that matter.
           </p>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4 uppercase tracking-tight">Advanced Science and Astrophysics Solvers</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Advanced Science and Astrophysics Solvers</h2>
           <p>
             Beyond basic arithmetic, we offer specialized tools for the scientific community. Our <strong>Astrophysics Calculator</strong> allows you to compute physical constants and cosmic trajectories, such as escape velocity and gravitational attraction, using the latest astronomical data models. For chemistry and physics students, our <strong>Science Equation Solver</strong> provides instant answers to common kinematics, force, and thermodynamics problems, saving you time and reducing manual errors.
           </p>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost Calculators?</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Why Choose Hilmost Calculators?</h2>
           <p>
             Unlike many other utility sites, Hilmost Toolbox is built with a <strong>privacy-first architecture</strong>. We utilize client-side processing, meaning your calculations happen locally in your browser. Your data is never uploaded to a server, ensuring 100% privacy for sensitive financial or academic work. Furthermore, our tools are optimized for Core Web Vitals, ensuring they load instantly on both high-speed desktop connections and mobile networks.
           </p>

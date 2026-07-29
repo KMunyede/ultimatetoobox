@@ -96,7 +96,7 @@ export default function ConvertersHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
           <Replace className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Free Online Unit Converters
         </h1>
       </div>
@@ -108,11 +108,11 @@ export default function ConvertersHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-green-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-2">{link.name}</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-green-600 dark:text-green-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-green-600 dark:text-green-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -125,17 +125,17 @@ export default function ConvertersHub() {
             Welcome to the Hilmost hub for <strong>free online unit converters</strong>. In a globalized world, the ability to translate measurements between different systems is a daily requirement for professionals and hobbyists alike. Whether you are an engineer working with international blueprints, a traveler checking local temperatures, or a developer managing digital data, our suite of converters provides instant, high-precision results.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional Measurement Transformations</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Professional Measurement Transformations</h2>
           <p>
             Accuracy is the cornerstone of our engineering philosophy. Our <strong>Length Converter</strong> and <strong>Weight/Mass Converter</strong> allow you to switch between Metric (meters, kilograms) and Imperial (feet, pounds) systems with zero friction. We use the latest conversion factors to ensure that every result is reliable for even the most sensitive tasks, such as aerospace calculations or medical dosages.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Specialized Time and Data Utilities</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Specialized Time and Data Utilities</h2>
           <p>
             Modern workflows often require specialized conversions beyond simple physical dimensions. Our <strong>Unix Time Converter</strong> is a vital tool for software developers, while our <strong>Data Storage Converter</strong> helps IT professionals manage everything from bits and bytes to terabytes. We also offer a <strong>Time Zone Converter</strong> to help global teams synchronize meetings across different continents without the headache of manual math.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Everyday Math Made Simple</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Everyday Math Made Simple</h2>
           <p>
             Beyond professional use, our hub includes tools for common daily tasks. The <strong>Percentage Calculator</strong> is perfect for retail discounts or tax estimates, while the <strong>Age Calculator</strong> provides exact milestones in years, months, and days. By housing all these tools in one &quot;enterprise-calm&quot; dashboard, we eliminate the need to search multiple websites, saving you time and reducing digital clutter.
           </p>

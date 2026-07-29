@@ -96,7 +96,7 @@ export default function FinanceHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
           <Banknote className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Free Online Finance Tools
         </h1>
       </div>
@@ -108,11 +108,11 @@ export default function FinanceHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-yellow-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-2">{link.name}</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-yellow-600 dark:text-yellow-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-yellow-600 dark:text-yellow-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -125,17 +125,17 @@ export default function FinanceHub() {
             Welcome to the Hilmost hub for <strong>free online finance tools</strong>. In today&apos;s economy, having access to reliable, accurate, and fast data is essential for making informed financial decisions. Our suite is engineered to provide high precision for your personal wealth and business operations, from daily currency checks to multi-year retirement projections.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Comprehensive Debt and Loan Management</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Comprehensive Debt and Loan Management</h2>
           <p>
             Managing debt is the first step toward financial freedom. Our <strong>Loan Calculator</strong> and <strong>Amortization Solver</strong> help you break down monthly payments and visualize exactly how much interest you will pay over the life of a loan. Whether you are looking at a 30-year mortgage or a short-term personal credit line, our tools expose the &quot;hidden costs&quot; of borrowing, allowing you to plan payoff strategies that save you thousands.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Tax Optimization and Earnings Analysis</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Tax Optimization and Earnings Analysis</h2>
           <p>
             Taxes are often the largest expense for any individual or business. We offer specialized tools like the <strong>VAT & Tax Calculator</strong> and <strong>Income Tax Estimator</strong> to help you understand your net take-home pay. For entrepreneurs and employees alike, our <strong>Salary Converter</strong> translates annual earnings into hourly or monthly rates, providing a realistic view of your earning power and helping you negotiate better compensation.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Investment Growth and Inflation Realities</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Investment Growth and Inflation Realities</h2>
           <p>
             Building wealth is about understanding compounding and the purchasing power of money. Our <strong>Compound Interest Calculator</strong> demonstrates the exponential growth of reinvested returns, while our <strong>Inflation Calculator</strong> reveals how the value of your currency shifts over time. For corporate analysis, we even include advanced metrics like <strong>WACC (Weighted Average Cost of Capital)</strong> and <strong>EPS (Earnings Per Share)</strong> to help you evaluate company performance like a seasoned Wall Street analyst.
           </p>

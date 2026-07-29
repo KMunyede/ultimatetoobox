@@ -104,9 +104,9 @@ export default function BMIPage() {
         </ol>
 
         <div className="mt-8 p-6 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-2xl not-prose">
-          <h4 className="text-lg font-black text-rose-900 dark:text-rose-100 mb-2 uppercase tracking-tight">Wellness Insight</h4>
+          <h4 className="text-lg font-normal text-rose-900 dark:text-rose-100 mb-2 uppercase tracking-tight">Wellness Insight</h4>
           <p className="text-rose-800 dark:text-rose-300 mb-4 font-medium">Want to know exactly how BMI is calculated and where it can be misleading?</p>
-          <Link href="/guides/bmi-calculation-and-limitations" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+          <Link href="/guides/bmi-calculation-and-limitations" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
             Read our full BMI Guide <ArrowRight size={14} />
           </Link>
         </div>

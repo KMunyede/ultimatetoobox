@@ -119,12 +119,12 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
     >
       <div className="flex justify-between items-center">
         <div id="tour-currency-status" className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${error ? 'bg-amber-50 dark:bg-amber-900/10 border-amber-500/20 text-amber-600' : 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-500/20 text-emerald-600'}`}>
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-normal uppercase tracking-widest ${error ? 'bg-amber-50 dark:bg-amber-900/10 border-amber-500/20 text-amber-600' : 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-500/20 text-emerald-600'}`}>
                 {loading ? <RefreshCw size={10} className="animate-spin" /> : <Globe size={10} />}
                 {loading ? 'Syncing Rates...' : provider}
             </div>
             {!loading && (
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest opacity-60">
+              <span className="text-[10px] text-slate-400 font-normal uppercase tracking-widest opacity-60">
                 Updated: {lastUpdated.split(' ').slice(0, 4).join(' ')}
               </span>
             )}
@@ -144,12 +144,12 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 1 */}
           <div id="tour-currency-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
                 onChange={v => setState({ activeInput: 1, val1: v })}
-                className="text-2xl font-black"
+                className="text-2xl font-normal"
                 min={0}
               />
               <Select
@@ -166,12 +166,12 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 2 */}
           <div id="tour-currency-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}
                 onChange={v => setState({ activeInput: 2, val2: v })}
-                className="text-2xl font-black"
+                className="text-2xl font-normal"
                 min={0}
               />
               <Select
@@ -185,8 +185,8 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
         </div>
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <p className="text-slate-500 dark:text-slate-400 font-bold italic uppercase tracking-widest text-sm leading-relaxed">
-                {val1 || "0"} <span className="text-brand-primary font-black not-italic">{unit1}</span> equals approximately <span className="text-brand-primary font-black not-italic text-2xl">{val2 || "0"}</span> <span className="text-brand-primary font-black not-italic">{unit2}</span>
+            <p className="text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest text-sm leading-relaxed">
+                {val1 || "0"} <span className="text-brand-primary font-normal">{unit1}</span> equals approximately <span className="text-brand-primary font-normal text-2xl">{val2 || "0"}</span> <span className="text-brand-primary font-normal">{unit2}</span>
             </p>
         </div>
       </div>

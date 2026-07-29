@@ -94,8 +94,8 @@ export function RotatePDFClient() {
               <IconUpload size={32} />
             </div>
             <div>
-              <p className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
-              <p className="text-[10px] text-slate-400 mt-1 font-black uppercase tracking-widest">Select one PDF to rotate</p>
+              <p className="text-xl font-normal text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
+              <p className="text-[10px] text-slate-400 mt-1 font-normal uppercase tracking-widest">Select one PDF to rotate</p>
             </div>
           </div>
         </div>
@@ -104,8 +104,8 @@ export function RotatePDFClient() {
           <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
             <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0 rounded border border-slate-100" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
-              <h3 className="text-xl font-black text-slate-900 dark:text-white truncate">{file.name}</h3>
-              <p className="text-slate-400 font-black uppercase text-[10px] tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <h3 className="text-xl font-normal text-slate-900 dark:text-white truncate">{file.name}</h3>
+              <p className="text-slate-400 font-normal uppercase text-[10px] tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-6">
                 <Button
                   onClick={rotateAll}
@@ -118,7 +118,7 @@ export function RotatePDFClient() {
                 </Button>
                 <button
                   onClick={() => setFile(null)}
-                  className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-rose-500 hover:underline"
+                  className="text-[10px] font-normal text-slate-400 uppercase tracking-widest hover:text-rose-500 hover:underline"
                 >
                   Change File
                 </button>
@@ -129,7 +129,7 @@ export function RotatePDFClient() {
           {loadingPdf && (
             <div className="flex flex-col items-center gap-4 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-100 dark:border-slate-800">
               <IconLoader2 className="animate-spin text-brand-primary" size={32} />
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Generating Previews...</p>
+              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Generating Previews...</p>
             </div>
           )}
 
@@ -159,7 +159,7 @@ export function RotatePDFClient() {
           {(error || pdfError) && (
             <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-2xl p-4 flex items-center gap-3 text-rose-600">
               <IconAlertCircle size={20} />
-              <span className="font-bold text-sm">{error || pdfError}</span>
+              <span className="font-normal text-sm">{error || pdfError}</span>
             </div>
           )}
 

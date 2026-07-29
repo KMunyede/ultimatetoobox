@@ -79,12 +79,12 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
           
           {/* Unit 1 */}
           <div id="tour-weight-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
                 onChange={(v) => setState({ activeInput: 1, val1: v })}
-                className="text-2xl font-black"
+                className="text-2xl font-normal"
                 min={0}
               />
               <Select
@@ -101,12 +101,12 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
 
           {/* Unit 2 */}
           <div id="tour-weight-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}
                 onChange={(v) => setState({ activeInput: 2, val2: v })}
-                className="text-2xl font-black"
+                className="text-2xl font-normal"
                 min={0}
               />
               <Select
@@ -120,8 +120,8 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
         </div>
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <p className="text-slate-500 dark:text-slate-400 font-bold italic uppercase tracking-widest text-sm">
-                {val1 || "0"} {formatUnitName(unit1)} is exactly <span className="text-brand-primary font-black not-italic text-xl">
+            <p className="text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest text-sm">
+                {val1 || "0"} {formatUnitName(unit1)} is exactly <span className="text-brand-primary font-normal text-xl">
                   <ScientificNumber value={parseFloat(val2) || 0} precision={6} />
                 </span> {formatUnitName(unit2)}
             </p>

@@ -133,9 +133,9 @@ export default function StandardCalculatorPage() {
         </p>
 
         <div className="mt-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-2xl not-prose">
-          <h4 className="text-lg font-black text-indigo-900 dark:text-indigo-100 mb-2 uppercase tracking-tight">Mathematical Logic</h4>
+          <h4 className="text-lg font-normal text-indigo-900 dark:text-indigo-100 mb-2 uppercase tracking-tight">Mathematical Logic</h4>
           <p className="text-indigo-800 dark:text-indigo-300 mb-4 font-medium">Why do different calculators sometimes give different answers for the same sum?</p>
-          <Link href="/guides/order-of-operations-basic-calculations" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+          <Link href="/guides/order-of-operations-basic-calculations" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
             Read our Order of Operations Guide <ArrowRight size={14} />
           </Link>
         </div>

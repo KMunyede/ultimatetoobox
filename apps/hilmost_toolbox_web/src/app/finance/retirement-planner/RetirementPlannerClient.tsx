@@ -93,14 +93,14 @@ export function RetirementPlannerClient() {
               value={currentSavings}
               onChange={val => setState({ currentSavings: val })}
               min={0}
-              className="font-bold"
+              className="font-normal"
             />
             <NumberInput
               label="Monthly Contribution ($)"
               value={monthlyContribution}
               onChange={val => setState({ monthlyContribution: val })}
               min={0}
-              className="font-bold"
+              className="font-normal"
             />
             <NumberInput
               label="Expected Return (%)"
@@ -109,7 +109,7 @@ export function RetirementPlannerClient() {
               min={0}
               max={50}
               step={0.1}
-              className="font-bold"
+              className="font-normal"
             />
           </div>
 
@@ -119,11 +119,11 @@ export function RetirementPlannerClient() {
               id="tour-retire-results"
               className="bg-brand-primary/5 rounded-2xl p-6 border border-brand-primary/10 flex-shrink-0"
             >
-              <p className="text-[10px] font-black text-brand-primary uppercase tracking-[0.2em] mb-1">Projected Savings at Age {retireAge}</p>
-              <div className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">
+              <p className="text-[10px] font-normal text-brand-primary uppercase tracking-[0.2em] mb-1">Projected Savings at Age {retireAge}</p>
+              <div className="text-4xl md:text-5xl font-normal text-slate-900 dark:text-white tracking-tighter">
                 <NumberTicker value={finalBalance} prefix="$" duration={0.8} />
               </div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">
+              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mt-2">
                 Based on {Math.max(0, parseInt(retireAge) - parseInt(currentAge))} years of compounding.
               </p>
             </div>
@@ -138,11 +138,11 @@ export function RetirementPlannerClient() {
                         <stop offset="95%" stopColor="var(--color-brand-primary)" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
-                    <XAxis dataKey="age" stroke="#94a3b8" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tickFormatter={(val) => `Age ${val}`} />
+                    <XAxis dataKey="age" stroke="#94a3b8" fontSize={10} fontWeight="normal" tickLine={false} axisLine={false} tickFormatter={(val) => `Age ${val}`} />
                     <YAxis
                       stroke="#94a3b8"
                       fontSize={10}
-                      fontWeight="bold"
+                      fontWeight="normal"
                       tickLine={false}
                       axisLine={false}
                       tickFormatter={(value) => `$${value >= 1000 ? (value / 1000) + 'k' : value}`}
@@ -152,7 +152,7 @@ export function RetirementPlannerClient() {
                       labelFormatter={(label) => `Age ${label}`}
                       formatter={(value: unknown) => formatCurrency(Number(value))}
                       contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
-                      itemStyle={{ fontWeight: '800', fontSize: '10px', textTransform: 'uppercase' }}
+                      itemStyle={{ fontWeight: 'normal', fontSize: '10px', textTransform: 'uppercase' }}
                     />
                     <Area type="monotone" dataKey="balance" name="Savings" stroke="var(--color-brand-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorBalanceRetire)" />
                   </AreaChart>

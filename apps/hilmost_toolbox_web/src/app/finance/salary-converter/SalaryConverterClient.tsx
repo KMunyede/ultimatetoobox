@@ -47,7 +47,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                   value={amount}
                   onChange={val => setState({ amount: val })}
                   min={0}
-                  className="text-lg font-bold"
+                  className="text-lg font-normal"
                 />
                 <Select
                   label="Frequency"
@@ -70,7 +70,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                   onChange={val => setState({ hoursPerWeek: val })}
                   min={1}
                   max={168}
-                  className="text-lg font-bold"
+                  className="text-lg font-normal"
                 />
             </div>
         </div>
@@ -84,10 +84,10 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                         key={res.label}
                         className={`p-6 rounded-2xl border-2 transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white shadow-sm hover:shadow-md'}`}
                     >
-                        <span className={`text-[10px] font-black uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
+                        <span className={`text-[10px] font-normal uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
                             {res.label} Pay
                         </span>
-                        <div className={`font-black tracking-tighter flex items-center justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[160px]' : 'text-xl md:text-2xl min-h-[100px]'}`}>
+                        <div className={`font-normal tracking-tighter flex items-center justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[160px]' : 'text-xl md:text-2xl min-h-[100px]'}`}>
                             {isVeryLarge ? (
                                 <ScientificNumber
                                     value={res.value}

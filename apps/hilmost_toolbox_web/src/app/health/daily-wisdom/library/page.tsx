@@ -29,7 +29,7 @@ export default function LibraryPage() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
+        <h1 className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white mb-6">
           The Wisdom <span className="text-emerald-600 dark:text-emerald-500">Library</span>
         </h1>
         <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
@@ -42,14 +42,14 @@ export default function LibraryPage() {
         <div className="relative z-10 flex items-center gap-3 text-left">
           <Crown className="w-8 h-8 text-yellow-400 shrink-0" />
           <div>
-            <h2 className="text-lg font-bold">Premium is Coming Soon</h2>
+            <h2 className="text-lg font-normal">Premium is Coming Soon</h2>
             <p className="text-slate-300 text-sm hidden sm:block">
               Unlock thousands of categorized quotes and historical context.
             </p>
           </div>
         </div>
         <div className="relative z-10 shrink-0">
-          <button disabled className="bg-emerald-600/50 cursor-not-allowed text-white text-sm font-semibold py-2 px-4 rounded-lg transition whitespace-nowrap">
+          <button disabled className="bg-emerald-600/50 cursor-not-allowed text-white text-sm font-normal py-2 px-4 rounded-lg transition whitespace-nowrap">
             Unlock Premium
           </button>
         </div>

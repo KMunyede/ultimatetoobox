@@ -151,24 +151,24 @@ export function BudgetClient() {
         {/* Sidebar Summary */}
         <div className="space-y-8">
             <div id="tour-budget-summary" className="sticky top-24 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-[2.5rem] p-6 shadow-sm overflow-hidden">
-                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
+                <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-8 flex items-center gap-3 uppercase tracking-tight">
                     <ArrowUpCircle className="text-brand-primary" />
                     Summary
                 </h3>
 
                 <div className="space-y-6 mb-10">
                     <div className="flex justify-between items-end">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total In</span>
-                        <span className="text-2xl font-black text-brand-primary">$<NumberTicker value={totals.income} /></span>
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total In</span>
+                        <span className="text-2xl font-normal text-brand-primary">$<NumberTicker value={totals.income} /></span>
                     </div>
                     <div className="flex justify-between items-end">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Out</span>
-                        <span className="text-2xl font-black text-rose-500">$<NumberTicker value={totals.expenses} /></span>
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Out</span>
+                        <span className="text-2xl font-normal text-rose-500">$<NumberTicker value={totals.expenses} /></span>
                     </div>
                     <div className="h-px bg-slate-100 dark:bg-slate-800" />
                     <div className="flex justify-between items-end pt-2">
-                        <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest">Net Balance</span>
-                        <span className={`text-2xl md:text-3xl font-black ${netBalance >= 0 ? 'text-brand-primary' : 'text-rose-600'}`}>
+                        <span className="text-[10px] font-normal text-slate-900 dark:text-white uppercase tracking-widest">Net Balance</span>
+                        <span className={`text-2xl md:text-3xl font-normal ${netBalance >= 0 ? 'text-brand-primary' : 'text-rose-600'}`}>
                             {netBalance < 0 && "-"}$<NumberTicker value={Math.abs(netBalance)} />
                         </span>
                     </div>
@@ -190,13 +190,13 @@ export function BudgetClient() {
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: '10px', fontWeight: 'bold' }}
+                                contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: '10px', fontWeight: 'normal' }}
                             />
                         </PieChart>
                     </ResponsiveContainer>
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Remaining</span>
-                        <span className="text-lg font-black text-slate-900 dark:text-white">
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-tighter">Remaining</span>
+                        <span className="text-lg font-normal text-slate-900 dark:text-white">
                             {totals.income > 0 ? Math.round((Math.max(0, netBalance) / totals.income) * 100) : 0}%
                         </span>
                     </div>
@@ -204,7 +204,7 @@ export function BudgetClient() {
 
                 <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 flex gap-3 items-start border border-slate-100 dark:border-slate-800">
                     <Info size={18} className="text-brand-primary shrink-0 mt-0.5" />
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed font-bold uppercase tracking-widest">
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed font-normal uppercase tracking-widest">
                         Your data is saved automatically to your device.
                     </p>
                 </div>
@@ -236,9 +236,9 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
           <div className={`p-2 rounded-xl border-2`} style={{ backgroundColor: `${config.color}10`, color: config.color, borderColor: `${config.color}20` }}>
             <Icon size={20} />
           </div>
-          <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight uppercase">{config.label}</h2>
+          <h2 className="text-lg font-normal text-slate-900 dark:text-white tracking-tight uppercase">{config.label}</h2>
         </div>
-        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+        <div className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">
           Subtotal: <span className="text-slate-900 dark:text-white">$<NumberTicker value={total} /></span>
         </div>
       </div>
@@ -257,14 +257,14 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
                 <div className="flex-1 w-full">
                   <Input
                     placeholder={config.placeholder}
-                    className="!bg-transparent !border-none !p-0 !text-sm !font-bold"
+                    className="!bg-transparent !border-none !p-0 !text-sm !font-normal"
                     value={item.name}
                     onChange={(e) => onUpdate(item.id, { name: e.target.value })}
                   />
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
                     <div className="relative flex-1 sm:w-32">
-                        <span className="absolute left-3 top-3 text-slate-400 font-bold text-sm">$</span>
+                        <span className="absolute left-3 top-3 text-slate-400 font-normal text-sm">$</span>
                         <NumberInput
                             className="!pl-7"
                             value={item.amount}
@@ -286,7 +286,7 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
 
         <button
           onClick={onAdd}
-          className="w-full p-4 flex items-center justify-center gap-2 text-[10px] font-black text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all group uppercase tracking-widest"
+          className="w-full p-4 flex items-center justify-center gap-2 text-[10px] font-normal text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all group uppercase tracking-widest"
         >
           <Plus size={16} className="group-hover:scale-125 transition-transform" />
           Add {config.label} Item

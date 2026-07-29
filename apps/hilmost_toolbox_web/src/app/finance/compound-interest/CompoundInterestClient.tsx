@@ -114,14 +114,14 @@ export function CompoundInterestClient() {
 
                 <div className="flex flex-col @md:flex-row justify-between items-start @md:items-center mb-10 gap-6 relative z-10">
                     <div>
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Estimated Future Balance</span>
-                        <div className="text-4xl @md:text-5xl @lg:text-6xl font-black text-[var(--color-brand-primary)] tracking-tighter mt-1">
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Estimated Future Balance</span>
+                        <div className="text-4xl @md:text-5xl @lg:text-6xl font-normal text-[var(--color-brand-primary)] tracking-tighter mt-1">
                             $<NumberTicker value={finalBalance} decimals={0} />
                         </div>
                     </div>
                     <div className="@md:text-right">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Total Interest Earned</span>
-                        <div className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Total Interest Earned</span>
+                        <div className="text-2xl font-normal text-slate-900 dark:text-white mt-1">
                           +<NumberTicker value={totalInterest} decimals={0} />
                         </div>
                     </div>
@@ -138,8 +138,8 @@ export function CompoundInterestClient() {
                                   </linearGradient>
                               </defs>
                               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148, 163, 184, 0.1)" />
-                              <XAxis dataKey="year" stroke="#94a3b8" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tick={{dy: 10}} />
-                              <YAxis stroke="#94a3b8" fontSize={10} fontWeight="bold" tickLine={false} axisLine={false} tickFormatter={(v) => `$${v/1000}k`} />
+                              <XAxis dataKey="year" stroke="#94a3b8" fontSize={10} fontWeight="normal" tickLine={false} axisLine={false} tick={{dy: 10}} />
+                              <YAxis stroke="#94a3b8" fontSize={10} fontWeight="normal" tickLine={false} axisLine={false} tickFormatter={(v) => `$${v/1000}k`} />
                               <ChartTooltip
                                   contentStyle={{
                                     backgroundColor: 'white',
@@ -148,7 +148,7 @@ export function CompoundInterestClient() {
                                     boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
                                     padding: '12px'
                                   }}
-                                  itemStyle={{ fontWeight: '800', fontSize: '10px', textTransform: 'uppercase' }}
+                                  itemStyle={{ fontWeight: 'normal', fontSize: '10px', textTransform: 'uppercase' }}
                               />
                               <Area type="monotone" dataKey="balance" stroke="var(--color-brand-primary)" strokeWidth={4} fillOpacity={1} fill="url(#colorBalance)" />
                               <Area type="monotone" dataKey="contributions" stroke="#94a3b8" strokeWidth={2} fill="transparent" strokeDasharray="6 6" />
@@ -160,11 +160,11 @@ export function CompoundInterestClient() {
                 <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-10 relative z-10">
                     <div className="flex items-center gap-2.5">
                         <div className="w-3.5 h-3.5 rounded-full bg-brand-primary shadow-sm" />
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Portfolio</span>
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Portfolio</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                         <div className="w-3.5 h-3.5 rounded-full border-2 border-dashed border-slate-300" />
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Contributions</span>
+                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Contributions</span>
                     </div>
                 </div>
             </div>

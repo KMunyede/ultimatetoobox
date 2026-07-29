@@ -13,7 +13,7 @@ const WordResults = dynamic(() => import("./WordResults"), {
   loading: () => (
     <div className="h-64 flex flex-col items-center justify-center space-y-4">
       <div className="w-12 h-12 border-4 border-brand-primary border-t-transparent rounded-full animate-spin" />
-      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Grouping Results...</p>
+      <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Grouping Results...</p>
     </div>
   ),
   ssr: false,
@@ -113,14 +113,14 @@ export function WordUnscramblerClient() {
           <div className="relative space-y-6">
             <div className="space-y-1.5">
                 <div className="flex justify-between items-end px-1">
-                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest">Jumbled Letters</label>
+                  <label className="block text-[10px] font-normal text-slate-500 uppercase tracking-widest">Jumbled Letters</label>
                   <button
                     onClick={() => {
                       setState({ letters: "", startsWith: "", endsWith: "", contains: "" });
                       setResults([]);
                       setHasSearched(false);
                     }}
-                    className={`text-[10px] font-black text-brand-primary uppercase tracking-widest hover:underline transition-opacity ${letters ? 'opacity-100' : 'opacity-0'}`}
+                    className={`text-[10px] font-normal text-brand-primary uppercase tracking-widest hover:underline transition-opacity ${letters ? 'opacity-100' : 'opacity-0'}`}
                   >
                     Clear All
                   </button>
@@ -132,7 +132,7 @@ export function WordUnscramblerClient() {
                           inputMode="text"
                           spellCheck={false}
                           autoComplete="off"
-                          className="pl-12 @[600px]:pl-14 text-xl @[600px]:text-2xl font-black uppercase placeholder:normal-case shadow-inner"
+                          className="pl-12 @[600px]:pl-14 text-xl @[600px]:text-2xl font-normal uppercase placeholder:normal-case shadow-inner"
                           value={letters}
                           onChange={e => setState({ letters: e.target.value.replace(/[^a-zA-Z?*]/g, '') })}
                           onKeyDown={e => e.key === 'Enter' && fetchWords()}
@@ -156,7 +156,7 @@ export function WordUnscramblerClient() {
                     )}
                   </Button>
                 </div>
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                <p className="text-[10px] text-slate-400 font-normal uppercase tracking-widest ml-1 flex items-center gap-1.5">
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40" />
                   Use <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-900 dark:text-white">?</code> or <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-900 dark:text-white">*</code> for blank tiles
                 </p>
@@ -213,7 +213,7 @@ export function WordUnscramblerClient() {
                         <Input
                           label={filter.label}
                           type="text"
-                          className="font-black uppercase shadow-inner"
+                          className="font-normal uppercase shadow-inner"
                           value={state[filter.key as keyof typeof state]}
                           onChange={e => setState({ [filter.key]: e.target.value.replace(/[^a-zA-Z]/g, '') })}
                           placeholder={filter.placeholder}
@@ -245,8 +245,8 @@ export function WordUnscramblerClient() {
                         <div className="w-16 h-14 border-4 border-brand-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0" />
                       </div>
                       <div className="text-center">
-                        <p className="font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] text-sm mb-1">Scanning Dictionary</p>
-                        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Matching your letters across thousands of words...</p>
+                        <p className="font-normal text-slate-900 dark:text-white uppercase tracking-[0.2em] text-sm mb-1">Scanning Dictionary</p>
+                        <p className="text-xs text-slate-400 font-normal uppercase tracking-widest">Matching your letters across thousands of words...</p>
                       </div>
                   </motion.div>
               ) : results.length > 0 ? (
@@ -256,16 +256,16 @@ export function WordUnscramblerClient() {
                       <div className="w-24 h-24 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mb-8 border border-[#D8D6CF] dark:border-slate-700 shadow-inner">
                         <Hash size={40} className="text-slate-300" />
                       </div>
-                      <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-3 uppercase">No anagrams found</h3>
-                      <p className="text-slate-500 text-sm leading-relaxed font-bold uppercase tracking-widest">
+                      <h3 className="text-2xl font-normal text-slate-900 dark:text-white tracking-tight mb-3 uppercase">No anagrams found</h3>
+                      <p className="text-slate-500 text-sm leading-relaxed font-normal uppercase tracking-widest">
                         We couldn&apos;t find any valid words using those exact letters and filters. Try adding wildcards (<code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">?</code>) to unlock more possibilities.
                       </p>
                   </motion.div>
               ) : (
                   <motion.div key="start" initial={{opacity:0}} animate={{opacity:1}} className="max-w-2xl mx-auto h-80 flex flex-col items-center justify-center text-center p-12 border-4 border-dashed border-slate-200 dark:border-slate-800 rounded-[3.5rem] opacity-40">
                       <Star size={64} className="text-brand-primary opacity-20 mb-6 animate-pulse" />
-                      <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-widest uppercase">Lexicon Ready</h3>
-                      <p className="text-[10px] text-slate-500 mt-2 font-black uppercase tracking-[0.2em] max-w-xs">
+                      <h3 className="text-xl font-normal text-slate-900 dark:text-white tracking-widest uppercase">Lexicon Ready</h3>
+                      <p className="text-[10px] text-slate-500 mt-2 font-normal uppercase tracking-[0.2em] max-w-xs">
                         Enter your letters above and click <span className="text-brand-primary underline">Unscramble</span> to scan through the dictionary.
                       </p>
                   </motion.div>

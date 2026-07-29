@@ -44,11 +44,11 @@ export function JWTDecoderClient() {
       {/* Input Section */}
       <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <div className="flex items-center justify-between mb-4">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <label className="text-[10px] font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
                 <Key size={14} className="text-brand-primary" /> Paste Encoded Token
             </label>
-            {error && <span className="text-[10px] font-bold text-rose-500 uppercase flex items-center gap-1"><AlertCircle size={12} /> {error}</span>}
-            {decoded && !error && <span className="text-[10px] font-bold text-emerald-500 uppercase flex items-center gap-1"><CheckCircle2 size={12} /> Decoded Successfully</span>}
+            {error && <span className="text-[10px] font-normal text-rose-500 uppercase flex items-center gap-1"><AlertCircle size={12} /> {error}</span>}
+            {decoded && !error && <span className="text-[10px] font-normal text-emerald-500 uppercase flex items-center gap-1"><CheckCircle2 size={12} /> Decoded Successfully</span>}
         </div>
         <textarea
             id="tour-jwt-input"
@@ -63,7 +63,7 @@ export function JWTDecoderClient() {
         {/* Header Section */}
         <div className="flex flex-col h-[450px]">
             <div className="flex items-center justify-between mb-3 px-1">
-                <label className="text-[10px] font-black uppercase tracking-widest text-rose-500 flex items-center gap-2">
+                <label className="text-[10px] font-normal uppercase tracking-widest text-rose-500 flex items-center gap-2">
                     <Shield size={14} /> Header
                 </label>
             </div>
@@ -77,7 +77,7 @@ export function JWTDecoderClient() {
         {/* Payload Section */}
         <div className="flex flex-col h-[450px]">
             <div className="flex items-center justify-between mb-3 px-1">
-                <label className="text-[10px] font-black uppercase tracking-widest text-purple-500 flex items-center gap-2">
+                <label className="text-[10px] font-normal uppercase tracking-widest text-purple-500 flex items-center gap-2">
                     <Eye size={14} /> Payload
                 </label>
             </div>
@@ -87,7 +87,7 @@ export function JWTDecoderClient() {
                 </div>
                 {decoded?.payload?.exp && (
                     <div className="p-3 bg-purple-500/10 border-t border-purple-500/20">
-                         <div className="flex items-center gap-2 text-[10px] text-purple-300 font-bold uppercase tracking-widest">
+                         <div className="flex items-center gap-2 text-[10px] text-purple-300 font-normal uppercase tracking-widest">
                             <Clock size={12} /> Expires: {formatTimestamp(decoded.payload.exp)}
                          </div>
                     </div>
@@ -98,13 +98,13 @@ export function JWTDecoderClient() {
 
       {/* Signature Section - Minimalized */}
       <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-         <label className="text-[10px] font-black uppercase tracking-widest text-brand-primary flex items-center gap-2 mb-3">
+         <label className="text-[10px] font-normal uppercase tracking-widest text-brand-primary flex items-center gap-2 mb-3">
              Signature
          </label>
          <div className="bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-[10px] text-slate-500 break-all select-none shadow-inner">
              {decoded ? `HMACSHA256( base64UrlEncode(header) + "." + base64UrlEncode(payload), [YOUR_SECRET_KEY] )` : "// Signature mechanism details"}
          </div>
-         <p className="mt-3 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
+         <p className="mt-3 text-[10px] text-slate-400 font-normal uppercase tracking-widest text-center">
              Note: For security reasons, we do not perform signature verification. Your secret keys should never be entered into any website.
          </p>
       </div>

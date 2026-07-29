@@ -138,26 +138,26 @@ export function ScientificCalculatorClient() {
     { label: "(", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
 
     { label: isSecond ? (isHyp ? "asinh" : "asin") : (isHyp ? "sinh" : "sin"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "7", type: "number", className: "font-black text-xl" },
-    { label: "8", type: "number", className: "font-black text-xl" },
-    { label: "9", type: "number", className: "font-black text-xl" },
+    { label: "7", type: "number", className: "font-normal text-xl" },
+    { label: "8", type: "number", className: "font-normal text-xl" },
+    { label: "9", type: "number", className: "font-normal text-xl" },
     { label: ")", type: "operator", className: "bg-slate-50 dark:bg-slate-800/50" },
 
     { label: isSecond ? (isHyp ? "acosh" : "acos") : (isHyp ? "cosh" : "cos"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "4", type: "number", className: "font-black text-xl" },
-    { label: "5", type: "number", className: "font-black text-xl" },
-    { label: "6", type: "number", className: "font-black text-xl" },
+    { label: "4", type: "number", className: "font-normal text-xl" },
+    { label: "5", type: "number", className: "font-normal text-xl" },
+    { label: "6", type: "number", className: "font-normal text-xl" },
     { label: "÷", type: "operator", val: "÷", className: "text-brand-primary bg-brand-primary/5" },
 
     { label: isSecond ? (isHyp ? "atanh" : "atan") : (isHyp ? "tanh" : "tan"), type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "1", type: "number", className: "font-black text-xl" },
-    { label: "2", type: "number", className: "font-black text-xl" },
-    { label: "3", type: "number", className: "font-black text-xl" },
+    { label: "1", type: "number", className: "font-normal text-xl" },
+    { label: "2", type: "number", className: "font-normal text-xl" },
+    { label: "3", type: "number", className: "font-normal text-xl" },
     { label: "×", type: "operator", val: "×", className: "text-brand-primary bg-brand-primary/5" },
 
     { label: "log", type: "func", className: "bg-sky-50 dark:bg-sky-900/20" },
-    { label: "0", type: "number", className: "font-black text-xl" },
-    { label: ".", type: "number", className: "font-black text-xl" },
+    { label: "0", type: "number", className: "font-normal text-xl" },
+    { label: ".", type: "number", className: "font-normal text-xl" },
     { label: "=", type: "equals", className: "bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg" },
     { label: "−", type: "operator", val: "−", className: "text-brand-primary bg-brand-primary/5" },
 
@@ -199,7 +199,7 @@ export function ScientificCalculatorClient() {
               key={i}
               onClick={() => onButtonClick(btn.val || btn.label, btn.type)}
               className={`
-                w-full h-12 md:h-14 rounded-xl md:rounded-2xl text-[16px] font-black uppercase tracking-widest transition-all active:scale-95 border-2
+                w-full h-12 md:h-14 rounded-xl md:rounded-2xl text-[16px] font-normal uppercase tracking-widest transition-all active:scale-95 border-2
                 ${btn.className || ""}
                 ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-400" : ""}
                 ${btn.type === "mode" && btn.active ? "bg-brand-primary/10 border-brand-primary/30 text-brand-primary" : ""}

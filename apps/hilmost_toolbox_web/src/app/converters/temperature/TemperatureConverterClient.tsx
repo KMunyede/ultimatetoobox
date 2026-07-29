@@ -76,12 +76,12 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
           
           {/* Unit 1 */}
           <div id="tour-temp-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
                 onChange={(v) => setState({ activeInput: 1, val1: v })}
-                className="text-2xl font-black"
+                className="text-2xl font-normal"
               />
               <Select
                 value={unit1}
@@ -97,12 +97,12 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
 
           {/* Unit 2 */}
           <div id="tour-temp-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}
                 onChange={(v) => setState({ activeInput: 2, val2: v })}
-                className="text-2xl font-black"
+                className="text-2xl font-normal"
               />
               <Select
                 value={unit2}
@@ -115,8 +115,8 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
         </div>
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <p className="text-slate-500 dark:text-slate-400 font-bold italic uppercase tracking-widest text-sm">
-                {val1 || "0"}° {unit1} is equal to <span className="text-brand-primary font-black not-italic text-xl">{val2 || "0"}</span> {unit2}
+            <p className="text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest text-sm">
+                {val1 || "0"}° {unit1} is equal to <span className="text-brand-primary font-normal text-xl">{val2 || "0"}</span> {unit2}
             </p>
         </div>
       </div>

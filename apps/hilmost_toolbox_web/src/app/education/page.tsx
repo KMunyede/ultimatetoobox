@@ -92,7 +92,7 @@ export default function EducationHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
           <GraduationCap className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Education & Academic Tools
         </h1>
       </div>
@@ -108,12 +108,12 @@ export default function EducationHub() {
               <div className="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg text-slate-400 group-hover:text-orange-600 transition-colors">
                 {link.icon ? iconMap[link.icon] : <GraduationCap size={20} />}
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{link.name}</h3>
+              <h3 className="text-xl font-normal text-slate-900 dark:text-white">{link.name}</h3>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-orange-600 dark:text-orange-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-orange-600 dark:text-orange-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -126,12 +126,12 @@ export default function EducationHub() {
             Welcome to the <strong>Education Hub</strong> at Hilmost Software Corporation. Our mission is to provide students with the highest-quality digital laboratory for tracking and improving their academic performance. Academic success shouldn&apos;t be complicated by manual spreadsheets or insecure online trackers.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Precision GPA Calculation</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Precision GPA Calculation</h2>
           <p>
             Our flagship <strong>GPA Calculator</strong> provides a seamless interface for determining both semester and cumulative Grade Point Averages. We support multiple input methods—including letter grades, percentages, and raw points—to ensure compatibility with various institutional standards. With support for weighted 5.0 scales, even the most advanced academic tracks are covered.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Privacy in Academia</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Privacy in Academia</h2>
           <p>
             Students often have to enter sensitive academic history into online tools. At Hilmost, we prioritize your data privacy through our <strong>Zero-Server Architecture</strong>. Every grade you enter and every calculation performed happens entirely on your local device. We never store or transmit your academic records, making our platform a safe haven for your study planning.
           </p>

@@ -51,11 +51,11 @@ export default function Home() {
 
       {/* Hero Section */}
       <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-bold uppercase tracking-widest mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs md:text-sm font-normal uppercase tracking-widest mb-3">
             <Sparkles size={14} className="animate-pulse" />
             The fastest, versatile toolbox
         </div>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight text-text-primary mb-3">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-normal tracking-tight text-text-primary mb-3">
           Free Tools & <span className="text-brand-primary">Calculators</span>
         </h1>
         <p className="text-base md:text-lg text-text-secondary leading-relaxed font-medium">
@@ -70,16 +70,16 @@ export default function Home() {
       <div className="mt-16 py-8 border-t border-base text-center">
           <div className="flex flex-wrap justify-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
             <div className="flex flex-col items-center">
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Secured by</span>
-                <span className="text-lg font-bold text-text-primary mt-1">Firebase</span>
+                <span className="text-xs font-normal uppercase tracking-[0.2em] text-text-primary">Secured by</span>
+                <span className="text-lg font-normal text-text-primary mt-1">Firebase</span>
             </div>
             <div className="flex flex-col items-center">
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Optimized for</span>
-                <span className="text-lg font-bold text-text-primary mt-1">Core Web Vitals</span>
+                <span className="text-xs font-normal uppercase tracking-[0.2em] text-text-primary">Optimized for</span>
+                <span className="text-lg font-normal text-text-primary mt-1">Core Web Vitals</span>
             </div>
             <div className="flex flex-col items-center">
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-text-primary">Global Edge</span>
-                <span className="text-lg font-bold text-text-primary mt-1">Cloudflare</span>
+                <span className="text-xs font-normal uppercase tracking-[0.2em] text-text-primary">Global Edge</span>
+                <span className="text-lg font-normal text-text-primary mt-1">Cloudflare</span>
             </div>
           </div>
       </div>

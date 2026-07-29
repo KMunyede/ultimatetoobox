@@ -100,7 +100,7 @@ export function BMIClient() {
                      min={2}
                      max={8}
                   />
-                  <span className="absolute right-4 bottom-3 text-slate-400 font-bold text-xs">ft</span>
+                  <span className="absolute right-4 bottom-3 text-slate-400 font-normal text-xs">ft</span>
                 </div>
                 <div className="flex-1 relative">
                   <NumberInput
@@ -110,7 +110,7 @@ export function BMIClient() {
                      min={0}
                      max={11}
                   />
-                  <span className="absolute right-4 bottom-3 text-slate-400 font-bold text-xs">in</span>
+                  <span className="absolute right-4 bottom-3 text-slate-400 font-normal text-xs">in</span>
                 </div>
               </div>
             </div>
@@ -135,8 +135,8 @@ export function BMIClient() {
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
-            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">Your BMI Score</div>
-            <div className="text-6xl md:text-7xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">
+            <div className="text-[10px] font-normal uppercase tracking-[0.2em] text-slate-400 mb-2">Your BMI Score</div>
+            <div className="text-6xl md:text-7xl font-normal text-slate-900 dark:text-white mb-8 tracking-tighter">
               <NumberTicker value={bmi} decimals={1} duration={0.8} />
             </div>
             {(() => {
@@ -145,7 +145,7 @@ export function BMIClient() {
                 <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className={`px-8 py-3 rounded-full border-2 ${cat.bg} ${cat.border} ${cat.color} font-black text-xl md:text-2xl uppercase tracking-widest shadow-sm`}
+                  className={`px-8 py-3 rounded-full border-2 ${cat.bg} ${cat.border} ${cat.color} font-normal text-xl md:text-2xl uppercase tracking-widest shadow-sm`}
                 >
                   {cat.label}
                 </motion.div>
@@ -155,9 +155,9 @@ export function BMIClient() {
         ) : (
           <div className="flex flex-col items-center gap-4 text-slate-300">
             <div className="w-20 h-20 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border-2 border-slate-100 dark:border-slate-700">
-                <span className="text-4xl font-black">?</span>
+                <span className="text-4xl font-normal">?</span>
             </div>
-            <p className="max-w-[200px] text-xs font-bold uppercase tracking-widest">Enter height and weight to reveal your BMI</p>
+            <p className="max-w-[200px] text-xs font-normal uppercase tracking-widest">Enter height and weight to reveal your BMI</p>
           </div>
         )}
       </motion.div>

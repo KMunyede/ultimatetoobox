@@ -194,7 +194,7 @@ export function ColorPickerTool() {
 
         {/* 1. Visual Picker */}
         <section id="main-picker" className="space-y-4">
-          <label className="text-[10px] font-black uppercase tracking-widest text-[#57544C] ml-1 mb-1.5 block">Visual Color Picker</label>
+          <label className="text-[10px] font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5 block">Visual Color Picker</label>
           <div className="relative group h-24">
             <input
               type="color"
@@ -212,7 +212,7 @@ export function ColorPickerTool() {
           <div className="space-y-1.5 w-full">
             <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HEX Code</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-mono font-bold">#</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-mono font-normal">#</span>
               <Input
                 type="text"
                 value={hex.replace("#", "")}
@@ -271,7 +271,7 @@ export function ColorPickerTool() {
         <section className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
           <div className="grid grid-cols-1 gap-4">
             <div className="flex items-center gap-4">
-              <span className="w-4 text-xs font-black text-red-500">R</span>
+              <span className="w-4 text-xs font-normal text-red-500">R</span>
               <input
                 type="range" min={0} max={255} value={parseInt(rgb.r) || 0}
                 onChange={(e) => updateFromRgb({ ...rgb, r: e.target.value })}
@@ -280,7 +280,7 @@ export function ColorPickerTool() {
               <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.r}</span>
             </div>
             <div className="flex items-center gap-4">
-              <span className="w-4 text-xs font-black text-emerald-500">G</span>
+              <span className="w-4 text-xs font-normal text-emerald-500">G</span>
               <input
                 type="range" min={0} max={255} value={parseInt(rgb.g) || 0}
                 onChange={(e) => updateFromRgb({ ...rgb, g: e.target.value })}
@@ -289,7 +289,7 @@ export function ColorPickerTool() {
               <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.g}</span>
             </div>
             <div className="flex items-center gap-4">
-              <span className="w-4 text-xs font-black text-blue-500">B</span>
+              <span className="w-4 text-xs font-normal text-blue-500">B</span>
               <input
                 type="range" min={0} max={255} value={parseInt(rgb.b) || 0}
                 onChange={(e) => updateFromRgb({ ...rgb, b: e.target.value })}
@@ -340,7 +340,7 @@ export function ColorPickerTool() {
 
         {/* 5. Color Preview */}
         <section className="relative h-32 rounded-3xl shadow-inner flex items-center justify-center overflow-hidden border-2 border-slate-100 dark:border-slate-800" style={{ backgroundColor: hex }}>
-          <span className="text-2xl font-black font-mono tracking-tighter" style={{ color: (parseInt(hsl.l) || 0) > 60 ? '#000000' : '#FFFFFF' }}>
+          <span className="text-2xl font-normal font-mono tracking-tighter" style={{ color: (parseInt(hsl.l) || 0) > 60 ? '#000000' : '#FFFFFF' }}>
             {hex}
           </span>
         </section>
@@ -349,7 +349,7 @@ export function ColorPickerTool() {
         <section id="wcag-checker" className="pt-10 border-t border-slate-100 dark:border-slate-800 space-y-6">
           <div className="flex items-center gap-2 mb-4">
             <ShieldCheck size={18} className="text-brand-primary" />
-            <h3 className="text-sm font-black uppercase tracking-tight text-slate-800 dark:text-slate-100">Accessibility (WCAG 2.1)</h3>
+            <h3 className="text-sm font-normal uppercase tracking-tight text-slate-800 dark:text-slate-100">Accessibility (WCAG 2.1)</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -374,10 +374,10 @@ export function ColorPickerTool() {
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-950/50 p-6 rounded-2xl border-2 border-slate-100 dark:border-slate-800 text-center">
-              <div className="text-4xl font-black text-slate-900 dark:text-white mb-1">
+              <div className="text-4xl font-normal text-slate-900 dark:text-white mb-1">
                 {contrastRatio.toFixed(2)}:1
               </div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Contrast Ratio</p>
+              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Contrast Ratio</p>
 
               <div className="grid grid-cols-2 gap-2 mt-6">
                 {([
@@ -386,7 +386,7 @@ export function ColorPickerTool() {
                   { label: "AAA Normal", pass: contrastRatio >= 7 },
                   { label: "AAA Large", pass: contrastRatio >= 4.5 },
                 ] as const).map((check) => (
-                  <div key={check.label} className={`py-1.5 px-2 rounded-lg text-[10px] font-black uppercase border-2 flex items-center justify-center gap-1.5 ${check.pass ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-red-500/20 bg-red-500/10 text-red-600 opacity-40'}`}>
+                  <div key={check.label} className={`py-1.5 px-2 rounded-lg text-[10px] font-normal uppercase border-2 flex items-center justify-center gap-1.5 ${check.pass ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-red-500/20 bg-red-500/10 text-red-600 opacity-40'}`}>
                     {check.pass ? <Check size={10} /> : <X size={10} />}
                     {check.label}
                   </div>
@@ -401,7 +401,7 @@ export function ColorPickerTool() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Palette size={18} className="text-brand-primary" />
-              <h3 className="text-sm font-black uppercase tracking-tight text-slate-800 dark:text-slate-100">Harmonious Palette</h3>
+              <h3 className="text-sm font-normal uppercase tracking-tight text-slate-800 dark:text-slate-100">Harmonious Palette</h3>
             </div>
           </div>
 
@@ -417,7 +417,7 @@ export function ColorPickerTool() {
                     <Eye size={16} className="text-white drop-shadow-md" />
                   </div>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-slate-400 group-hover:text-brand-primary transition-colors uppercase">{c}</span>
+                <span className="text-[10px] font-mono font-normal text-slate-400 group-hover:text-brand-primary transition-colors uppercase">{c}</span>
               </button>
             ))}
           </div>
@@ -428,10 +428,10 @@ export function ColorPickerTool() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <History size={18} className="text-brand-primary" />
-              <h3 className="text-sm font-black uppercase tracking-tight text-slate-800 dark:text-slate-100">Color History</h3>
+              <h3 className="text-sm font-normal uppercase tracking-tight text-slate-800 dark:text-slate-100">Color History</h3>
             </div>
             {savedColors.length > 0 && (
-              <button onClick={clearHistory} className="text-[10px] font-black text-slate-400 hover:text-red-500 uppercase tracking-widest transition-colors flex items-center gap-1.5">
+              <button onClick={clearHistory} className="text-[10px] font-normal text-slate-400 hover:text-red-500 uppercase tracking-widest transition-colors flex items-center gap-1.5">
                 <Trash2 size={12} /> Clear
               </button>
             )}
@@ -443,7 +443,7 @@ export function ColorPickerTool() {
                 className="w-16 aspect-square rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-slate-300 hover:border-brand-primary hover:text-brand-primary transition-all group"
             >
                 <Plus size={20} className="group-active:scale-125 transition-transform" />
-                <span className="text-micro font-black uppercase mt-1">Save</span>
+                <span className="text-micro font-normal uppercase mt-1">Save</span>
             </button>
 
             {savedColors.map((c, i) => (
@@ -453,12 +453,12 @@ export function ColorPickerTool() {
                 className="group relative flex flex-col items-center space-y-2 animate-in fade-in zoom-in-90 duration-300"
               >
                 <div className="w-16 aspect-square rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition-transform group-hover:scale-105 active:scale-95" style={{ backgroundColor: c }} />
-                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase">{c}</span>
+                <span className="text-[10px] font-mono font-normal text-slate-400 uppercase">{c}</span>
               </button>
             ))}
 
             {savedColors.length === 0 && (
-              <div className="flex-1 flex items-center justify-center py-10 border-2 border-dashed border-slate-100 dark:border-slate-800 rounded-3xl text-slate-400 italic text-xs">
+              <div className="flex-1 flex items-center justify-center py-10 border-2 border-dashed border-slate-100 dark:border-slate-800 rounded-3xl text-slate-400 text-xs">
                 No saved colors yet.
               </div>
             )}
@@ -468,7 +468,7 @@ export function ColorPickerTool() {
 
       <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
         <ShieldCheck size={12} />
-        <span className="text-[10px] font-black uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
+        <span className="text-[10px] font-normal uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
       </div>
     </div>
   );

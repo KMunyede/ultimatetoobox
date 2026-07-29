@@ -133,12 +133,12 @@ export function PasswordGeneratorTool() {
         <div className="mb-8" id="tour-password-output">
           <div className="flex items-center justify-between mb-4 px-1">
             <div className="flex flex-col gap-1">
-              <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+              <label className="text-xs font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
                 Security Analysis
               </label>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-tight">{strength.label}</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Crack Time: {strength.crackTime}</span>
+                <span className="text-sm font-normal text-slate-900 dark:text-white uppercase tracking-tight">{strength.label}</span>
+                <span className="text-[10px] text-slate-400 font-normal uppercase tracking-wider">Crack Time: {strength.crackTime}</span>
               </div>
             </div>
             <div className="w-32 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-base">
@@ -157,7 +157,7 @@ export function PasswordGeneratorTool() {
                 </div>
               </div>
             )) : (
-              <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-2xl p-5 text-center text-slate-500 italic">
+              <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-2xl p-5 text-center text-slate-500">
                 Adjust settings to generate passwords
               </div>
             )}
@@ -200,7 +200,7 @@ export function PasswordGeneratorTool() {
                 onChange={(e) => setLength(e.target.value)}
                 className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-primary"
               />
-              <div className="flex justify-between text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              <div className="flex justify-between text-[10px] font-normal text-slate-400 uppercase tracking-widest">
                 <span>Short (4)</span>
                 <span>Ultra Secure (128)</span>
               </div>
@@ -230,7 +230,7 @@ export function PasswordGeneratorTool() {
              ].map((opt) => (
                <label key={opt.label} className="flex items-center justify-between p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all group">
                  <div className="flex flex-col">
-                    <span className="text-xs font-black uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">{opt.label}</span>
+                    <span className="text-xs font-normal uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">{opt.label}</span>
                     {opt.sub && <span className="text-[10px] text-slate-400 font-medium">{opt.sub}</span>}
                  </div>
                  <div className="relative inline-flex items-center cursor-pointer">

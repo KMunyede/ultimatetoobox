@@ -56,20 +56,20 @@ const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now:
 
   return (
     <div className="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-slate-800/50 border border-[#D8D6CF] dark:border-slate-800 p-4 rounded-2xl group transition-all hover:border-brand-primary/30">
-      <div className="h-12 w-12 rounded-full bg-brand-primary flex items-center justify-center text-white font-black text-lg shrink-0 shadow-sm">
+      <div className="h-12 w-12 rounded-full bg-brand-primary flex items-center justify-center text-white font-normal text-lg shrink-0 shadow-sm">
         {member.name.charAt(0).toUpperCase()}
       </div>
 
       <div className="flex-1 w-full text-center sm:text-left">
         <div className="flex flex-col">
-          <span className="font-bold text-slate-800 dark:text-slate-100">{member.name}</span>
-          <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{formatZoneName(member.timezone)}</span>
+          <span className="font-normal text-slate-800 dark:text-slate-100">{member.name}</span>
+          <span className="text-[10px] text-slate-400 font-normal uppercase tracking-widest">{formatZoneName(member.timezone)}</span>
         </div>
       </div>
 
       <div className="flex-1 text-center">
-        <p className="text-2xl font-black text-slate-800 dark:text-white tabular-nums">{timeStr}</p>
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{dateStr}</p>
+        <p className="text-2xl font-normal text-slate-800 dark:text-white tabular-nums">{timeStr}</p>
+        <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">{dateStr}</p>
       </div>
 
       <div className="hidden lg:flex flex-1 overflow-x-auto no-scrollbar">
@@ -85,7 +85,7 @@ const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now:
                 key={hour}
                 className={`w-6 h-8 flex flex-col items-center justify-center rounded transition-all shrink-0 ${color} ${isCurrent ? 'ring-2 ring-brand-primary scale-110 shadow-sm z-10 bg-white dark:bg-slate-800' : 'opacity-60'}`}
               >
-                <span className="text-micro font-black">{hour.toString().padStart(2, '0')}</span>
+                <span className="text-micro font-normal">{hour.toString().padStart(2, '0')}</span>
                 {isCurrent && <div className="w-1 h-1 bg-brand-primary rounded-full mt-0.5" />}
               </div>
             );
@@ -95,9 +95,9 @@ const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now:
 
       <div className="flex items-center gap-3 shrink-0">
         {isDST(member.timezone) && (
-          <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+          <span className="text-[10px] font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
         )}
-        <div className={`text-[9px] font-black px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
+        <div className={`text-micro font-normal px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
           {availability.label}
         </div>
         <button onClick={onRemove} className="p-2 text-slate-300 hover:text-red-500 transition-colors">
@@ -130,13 +130,13 @@ const TargetZoneRow = React.memo(({ zone, date, onRemove }: { zone: string, date
     >
       <div>
         <div className="flex items-center gap-2">
-          <h3 className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{formatZoneName(zone)}</h3>
+          <h3 className="font-normal text-slate-800 dark:text-slate-200 text-sm">{formatZoneName(zone)}</h3>
           {isDST(zone) && (
-            <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+            <span className="text-[10px] font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
           )}
         </div>
-        <p className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1 tabular-nums">{formattedTime}</p>
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{formattedDate}</p>
+        <p className="text-2xl font-normal text-emerald-600 dark:text-emerald-400 mt-1 tabular-nums">{formattedTime}</p>
+        <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">{formattedDate}</p>
       </div>
       <Tooltip content={`Remove ${formatZoneName(zone)}`} position="left">
         <button
@@ -199,11 +199,11 @@ function SearchableSelect({ value, options, onChange, placeholder, className, la
         <div className="absolute z-[70] mt-1 w-full max-h-60 overflow-y-auto bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-800 rounded-lg shadow-2xl custom-scrollbar animate-in fade-in zoom-in-95 duration-200">
           {filtered.length > 0 ? filtered.map(opt => (
             <button key={opt} onClick={() => { onChange(opt); setIsOpen(false); setSearch(""); }}
-              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-brand-primary/10 hover:text-brand-primary transition-colors ${opt === value ? 'bg-brand-primary/5 text-brand-primary font-bold' : 'text-slate-600 dark:text-slate-300'}`}
+              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-brand-primary/10 hover:text-brand-primary transition-colors ${opt === value ? 'bg-brand-primary/5 text-brand-primary font-normal' : 'text-slate-600 dark:text-slate-300'}`}
             >
               {formatZoneName(opt)}
             </button>
-          )) : <div className="p-4 text-xs text-slate-400 italic text-center">No matching time zones</div>}
+          )) : <div className="p-4 text-xs text-slate-400 text-center">No matching time zones</div>}
         </div>
       )}
     </div>
@@ -309,10 +309,10 @@ export function TimeZoneClient() {
             <div className="bg-emerald-100 dark:bg-emerald-900/30 p-3 rounded-2xl text-emerald-600 dark:text-emerald-400"><Clock className="w-6 h-6" /></div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Source Time</h2>
-                {isDST(sourceZone) && <span className="text-[10px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>}
+                <h2 className="text-xl font-normal text-slate-800 dark:text-slate-100">Source Time</h2>
+                {isDST(sourceZone) && <span className="text-[10px] font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>}
               </div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest tabular-nums">{formatInTimeZone(effectiveDate, sourceZone, "HH:mm:ss")}</p>
+              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest tabular-nums">{formatInTimeZone(effectiveDate, sourceZone, "HH:mm:ss")}</p>
             </div>
           </div>
           <div className="space-y-4">
@@ -324,14 +324,14 @@ export function TimeZoneClient() {
         <div className="hidden md:flex md:col-span-1 items-center justify-center"><ArrowRight className="w-10 h-10 text-slate-300 dark:text-slate-700" /></div>
 
         <div id="tour-tz-targets" className="md:col-span-6 space-y-6 bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4"><h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">Converted Times</h2></div>
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4"><h2 className="text-xl font-normal text-slate-800 dark:text-slate-100">Converted Times</h2></div>
           <div className="space-y-4">
             <AnimatePresence mode="popLayout">
               {targets.map(zone => (
                 <TargetZoneRow key={zone} zone={zone} date={effectiveDate} onRemove={() => handleRemoveZone(zone)} />
               ))}
             </AnimatePresence>
-            {targets.length === 0 && <div className="text-center py-8 text-slate-500 font-bold italic text-sm">No target time zones selected.</div>}
+            {targets.length === 0 && <div className="text-center py-8 text-slate-500 font-normal text-sm">No target time zones selected.</div>}
           </div>
           <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
             <div className="flex gap-2 items-end">
@@ -347,8 +347,8 @@ export function TimeZoneClient() {
           <div className="flex items-center gap-3">
             <Users className="text-brand-primary w-6 h-6" />
             <div className="text-left">
-              <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">My Team Clocks</h2>
-              {isTeamOpen && <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Track your global team&apos;s availability instantly</p>}
+              <h2 className="text-xl font-normal text-slate-800 dark:text-slate-100">My Team Clocks</h2>
+              {isTeamOpen && <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mt-1">Track your global team&apos;s availability instantly</p>}
             </div>
           </div>
           <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isTeamOpen ? 'rotate-180' : ''}`} />
@@ -368,7 +368,7 @@ export function TimeZoneClient() {
                     <TeamMemberRow key={i} member={member} now={now} onRemove={() => handleRemoveMember(i)} />
                   )) : (
                     <div className="py-12 border-2 border-dashed border-slate-100 dark:border-slate-800 rounded-3xl flex flex-col items-center justify-center text-slate-400">
-                      <User size={32} className="mb-2 opacity-20" /><p className="text-sm font-bold italic">No team members yet.</p>
+                      <User size={32} className="mb-2 opacity-20" /><p className="text-sm font-normal">No team members yet.</p>
                     </div>
                   )}
                 </div>

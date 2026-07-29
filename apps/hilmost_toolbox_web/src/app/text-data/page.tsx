@@ -95,7 +95,7 @@ export default function TextDataHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
           <FileText className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Free Online Text Tools
         </h1>
       </div>
@@ -107,11 +107,11 @@ export default function TextDataHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-indigo-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-2">{link.name}</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-3">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-indigo-600 dark:text-indigo-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -124,17 +124,17 @@ export default function TextDataHub() {
             Welcome to the Hilmost lab for <strong>free online text tools</strong> and data utilities. In the modern digital landscape, the ability to quickly analyze, transform, and secure text-based data is crucial for everyone from creative writers to systems engineers. We have built a high-performance suite of tools designed to provide instant results without compromising your data privacy.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Essential Analysis and Formatting Utilities</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Essential Analysis and Formatting Utilities</h2>
           <p>
             Whether you are drafting an article, a social media post, or a technical report, our <strong>Word Count</strong> tool provides real-time statistics on your content. We go beyond simple counts, offering insights into sentence structure and character density. For word-game enthusiasts and crossword solvers, our <strong>Word Unscrambler</strong> uses a comprehensive dictionary engine to find hidden anagrams in seconds, helping you break through linguistic bottlenecks.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure Hashing and Encoding for Developers</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Secure Hashing and Encoding for Developers</h2>
           <p>
             Data security and transport are at the heart of our technical utility suite. Our <strong>MD5 Hash Generator</strong> provides a reliable way to verify the integrity of your data strings, while the <strong>Base64 Text Encoder</strong> is a staple for developers needing to move binary data through text-only protocols. We ensure that these tools follow RFC standards, providing outputs that are compatible with any system or programming language.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Privacy by Architecture</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Privacy by Architecture</h2>
           <p>
             The primary risk with online text tools is the &quot;leakage&quot; of sensitive information to remote servers. At Hilmost, we have solved this through a <strong>browser-side architecture</strong>. When you use our text tools, your data never leaves your device. This &quot;zero-server&quot; approach makes our platform a safe, private environment for processing private keys, sensitive logs, or confidential drafts.
           </p>

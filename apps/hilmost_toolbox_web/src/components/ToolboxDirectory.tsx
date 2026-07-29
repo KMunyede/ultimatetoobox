@@ -31,7 +31,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
               className="w-full flex items-center justify-between p-5 rounded-2xl border border-base bg-canvas-card hover:border-brand-primary transition-all text-left focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none group"
             >
               <div className="flex flex-col">
-                <span className="text-lg font-black text-text-primary group-hover:text-brand-primary transition-colors">
+                <span className="text-lg font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                   {cat.name}
                 </span>
                 <span className="text-xs text-text-muted mt-0.5">{cat.count} Tools</span>
@@ -62,7 +62,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
               >
                 <ChevronLeft size={24} />
               </button>
-              <h2 className="text-2xl font-black text-text-primary tracking-tight">{cat.name}</h2>
+              <h2 className="text-2xl font-normal text-text-primary tracking-tight">{cat.name}</h2>
             </div>
 
             <div className="flex-1 overflow-y-auto custom-scrollbar pb-8">
@@ -74,7 +74,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
                     className="group flex items-center justify-between p-4 rounded-xl border border-base bg-canvas-card hover:border-brand-primary transition-all focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none"
                   >
                     <div className="flex flex-col">
-                       <span className="font-bold text-text-primary group-hover:text-brand-primary transition-colors">
+                       <span className="font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                         {tool.name}
                       </span>
                       <span className="text-[10px] text-text-muted line-clamp-1 mt-0.5">
@@ -98,7 +98,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
             className="group flex flex-col border border-base rounded-xl p-4 md:p-5 hover:border-brand-primary transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none"
           >
             <div className="mb-3">
-              <h2 className="text-lg font-extrabold text-text-primary tracking-tight">{category.name}</h2>
+              <h2 className="text-lg font-normal text-text-primary tracking-tight">{category.name}</h2>
             </div>
             <p className="text-text-secondary mb-5 text-sm leading-relaxed font-medium line-clamp-2">
               {category.description}
@@ -113,7 +113,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
                         href={link.href}
                         className="group/link flex items-center justify-between py-1.5 border-b border-base/50 hover:border-brand-primary/50 transition-all"
                       >
-                        <span className="text-sm font-bold text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">
+                        <span className="text-sm font-normal text-text-secondary group-hover/link:text-brand-primary group-hover/link:translate-x-1 transition-all">
                           {link.name}
                         </span>
                         <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover/link:opacity-100 group-hover/link:text-brand-primary transition-all" />
@@ -125,7 +125,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
             </div>
 
             <div className="mt-5 pt-3 border-t border-base">
-              <p className="text-[10px] font-black uppercase tracking-widest text-text-muted opacity-60">
+              <p className="text-[10px] font-normal uppercase tracking-widest text-text-muted opacity-60">
                 {category.tools.length} Tools Available
               </p>
             </div>

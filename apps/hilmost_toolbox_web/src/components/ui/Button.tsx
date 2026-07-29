@@ -14,7 +14,7 @@ export function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const baseStyles = "flex items-center justify-center gap-2 transition-all active:scale-95 font-black uppercase tracking-widest border";
+  const baseStyles = "flex items-center justify-center gap-2 transition-all active:scale-95 font-normal uppercase tracking-widest border";
 
   const variants = {
     primary: "px-10 py-3.5 bg-brand-primary text-white border-brand-primary rounded-lg text-sm shadow-xl shadow-brand-primary/20 hover:scale-105",

@@ -91,27 +91,27 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <article className="mt-8">
         <header className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-                <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary block">
+                <span className="text-xs font-normal uppercase tracking-[0.3em] text-brand-primary block">
                     {guide.category.replace("-", " ")} Deep Dive
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-normal text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
                     <Calendar size={10} />
                     {lastUpdated}
                 </span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-text-primary tracking-tight leading-tight">
+            <h1 className="text-3xl md:text-5xl font-normal text-text-primary tracking-tight leading-tight">
                 {guide.title}
             </h1>
         </header>
 
         <div
-          className="prose prose-slate dark:prose-invert max-w-none prose-h2:text-2xl prose-h2:font-black prose-h2:uppercase prose-h2:tracking-tight prose-h2:mt-12 prose-p:text-lg prose-p:leading-relaxed prose-p:font-medium prose-strong:text-brand-primary prose-li:text-lg prose-li:font-medium"
+          className="prose prose-slate dark:prose-invert max-w-none prose-h2:text-2xl prose-h2:font-normal prose-h2:uppercase prose-h2:tracking-tight prose-h2:mt-12 prose-p:text-lg prose-p:leading-relaxed prose-p:font-medium prose-strong:text-brand-primary prose-li:text-lg prose-li:font-medium"
           dangerouslySetInnerHTML={{ __html: guide.content }}
         />
       </article>
 
       <div className="mt-12 pt-12 border-t border-base">
-        <h2 className="text-2xl font-black text-text-primary uppercase tracking-tight mb-8">Related Utilities</h2>
+        <h2 className="text-2xl font-normal text-text-primary uppercase tracking-tight mb-8">Related Utilities</h2>
         <RelatedTools
           category={guide.category as "converters" | "calculators" | "finance" | "text-data" | "health" | "pdf-tools"}
           currentPath={`/guides/${guide.slug}`}

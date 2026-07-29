@@ -96,7 +96,7 @@ export default function PDFToolsHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400">
           <FileText className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
           Free Online PDF Tools
         </h1>
       </div>
@@ -108,11 +108,11 @@ export default function PDFToolsHub() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-red-500/50">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{link.name}</h3>
+            <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-2">{link.name}</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">
               {link.description}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-semibold text-red-600 dark:text-red-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-red-600 dark:text-red-400">
               Open Tool <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -125,17 +125,17 @@ export default function PDFToolsHub() {
             Welcome to the Hilmost lab for <strong>free online PDF tools</strong> and document management. In an era where digital documentation is the global standard for business and law, having access to professional-grade PDF manipulation software is essential. We have designed a suite of high-performance utilities that bring the power of expensive desktop software directly into your web browser, with zero cost and maximum security.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Professional PDF Manipulation in Your Browser</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Professional PDF Manipulation in Your Browser</h2>
           <p>
             Managing your documents should be frictionless. Our <strong>Merge PDF</strong> tool allows you to combine multiple reports, invoices, or academic papers into a single, organized file with simple drag-and-drop reordering. Conversely, our <strong>Split PDF</strong> utility gives you the precision to extract specific ranges or individual pages, creating new documents tailored to your exact requirements. We use lossless processing engines to ensure that your text and images remain sharp and searchable.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Secure and Private Document Processing</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Secure and Private Document Processing</h2>
           <p>
             The most significant risk with standard &quot;online&quot; PDF tools is the privacy of your data. Most sites require you to upload your sensitive bank statements or legal contracts to their servers for processing. At Hilmost, we have eliminated this risk through a <strong>browser-side first architecture</strong>. Every operation—from rotation to page deletion—happens locally on your device. Your files never touch our servers, making our platform a safe, private environment for your most confidential data.
           </p>
 
-          <h2 className="text-2xl font-black mt-8 mb-4 uppercase tracking-tight">Fast, Lossless, and Watermark-Free</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Fast, Lossless, and Watermark-Free</h2>
           <p>
             We believe in utility without compromise. Our tools are optimized for speed, leveraging your device&apos;s local hardware to process files instantly without waiting for slow server uploads or queues. Furthermore, we promise a &quot;clean&quot; output: we never add watermarks to your documents, and we don&apos;t limit the number of downloads. Whether you are correcting the orientation of a scan with our <strong>Rotate PDF</strong> tool or cleaning up a file by <strong>Deleting Pages</strong>, you get professional results every time.
           </p>

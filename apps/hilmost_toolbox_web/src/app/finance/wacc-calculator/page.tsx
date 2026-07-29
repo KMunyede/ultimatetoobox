@@ -99,15 +99,15 @@ export default function WACCCalculatorPage() {
         <h3>Simplistic 3-Step Usage Guide</h3>
         <ol className="space-y-4 my-6">
           <li className="bg-white p-4 rounded-xl border border-base shadow-sm">
-            <span className="font-black text-blue-600 mr-2">Step 1: Equity Data</span>
+            <span className="font-normal text-blue-600 mr-2">Step 1: Equity Data</span>
             Input your <strong>Market Cap</strong> (Total value of your shares) and <strong>Beta</strong>. If you aren&apos;t sure about Beta, 1.0 is a safe &quot;average&quot; starting point.
           </li>
           <li className="bg-white p-4 rounded-xl border border-base shadow-sm">
-            <span className="font-black text-red-600 mr-2">Step 2: Debt Data</span>
+            <span className="font-normal text-red-600 mr-2">Step 2: Debt Data</span>
             Enter how much <strong>Interest-bearing Debt</strong> you have and what rate you pay. Also, enter your <strong>Tax Rate</strong> (usually around 20-30%).
           </li>
           <li className="bg-white p-4 rounded-xl border border-base shadow-sm">
-            <span className="font-black text-amber-600 mr-2">Step 3: Analyze the Dashboard</span>
+            <span className="font-normal text-amber-600 mr-2">Step 3: Analyze the Dashboard</span>
             Look at the <strong>Total WACC</strong>. This is your &quot;Hurdle Rate.&quot; Any new project you start should earn a return HIGHER than this number.
           </li>
         </ol>
@@ -118,9 +118,9 @@ export default function WACCCalculatorPage() {
         </p>
 
         <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
-          <h4 className="text-lg font-black text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
           <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the theory behind the cost of capital?</p>
-          <Link href="/guides/wacc-cost-of-capital-explained" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-brand-primary hover:underline">
+          <Link href="/guides/wacc-cost-of-capital-explained" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
             Read our full WACC Guide <ArrowRight size={14} />
           </Link>
         </div>

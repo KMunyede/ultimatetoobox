@@ -74,22 +74,22 @@ export function VatTaxClient() {
           <div className="absolute top-0 right-0 w-48 h-48 bg-brand-primary/5 rounded-full -mr-24 -mt-24 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-3">
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Grand Total</span>
-            <div className="text-5xl @md:text-6xl @lg:text-7xl font-black text-[var(--color-brand-primary)] tracking-tighter">
+            <span className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.25em]">Grand Total</span>
+            <div className="text-5xl @md:text-6xl @lg:text-7xl font-normal text-[var(--color-brand-primary)] tracking-tighter">
               $<NumberTicker value={gross} decimals={2} />
             </div>
           </div>
 
           <div className="relative z-10 grid grid-cols-2 gap-8 mt-12 pt-10 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-2">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Net Price</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Net Price</span>
+                <p className="text-2xl font-normal text-slate-900 dark:text-white tracking-tight">
                   $<NumberTicker value={net} decimals={2} />
                 </p>
             </div>
             <div className="text-center space-y-2">
-                <span className="text-[10px] font-black text-[var(--color-text-secondary)] dark:text-slate-400 uppercase tracking-widest">Tax ({rate}%)</span>
-                <p className="text-2xl font-black text-[var(--color-brand-primary)] tracking-tight">
+                <span className="text-[10px] font-normal text-[var(--color-text-secondary)] dark:text-slate-400 uppercase tracking-widest">Tax ({rate}%)</span>
+                <p className="text-2xl font-normal text-[var(--color-brand-primary)] tracking-tight">
                   +<NumberTicker value={vat} decimals={2} />
                 </p>
             </div>

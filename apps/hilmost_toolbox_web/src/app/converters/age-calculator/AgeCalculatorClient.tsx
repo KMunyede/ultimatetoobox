@@ -73,24 +73,24 @@ export function AgeCalculatorClient() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
             <div className="relative z-10 text-center space-y-4 py-4">
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Current Age</span>
+                <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-slate-400">Current Age</span>
                 <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-6xl md:text-7xl font-black text-brand-primary tracking-tighter tabular-nums">{results.years}</span>
-                    <span className="text-xl font-black text-slate-400 uppercase">Years</span>
+                    <span className="text-6xl md:text-7xl font-normal text-brand-primary tracking-tighter tabular-nums">{results.years}</span>
+                    <span className="text-xl font-normal text-slate-400 uppercase">Years</span>
                 </div>
-                <p className="text-lg font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tight">
+                <p className="text-lg font-normal text-slate-500 dark:text-slate-400 uppercase tracking-tight">
                     {results.months} months and {results.days} days
                 </p>
             </div>
 
             <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
                 <div className="text-center space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Total Weeks</span>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white tabular-nums">{results.totalWeeks.toLocaleString()}</p>
+                    <span className="text-[10px] font-normal uppercase tracking-widest text-slate-400">Total Weeks</span>
+                    <p className="text-2xl font-normal text-slate-900 dark:text-white tabular-nums">{results.totalWeeks.toLocaleString()}</p>
                 </div>
                 <div className="text-center space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Total Days</span>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white tabular-nums">{results.totalDays.toLocaleString()}</p>
+                    <span className="text-[10px] font-normal uppercase tracking-widest text-slate-400">Total Days</span>
+                    <p className="text-2xl font-normal text-slate-900 dark:text-white tabular-nums">{results.totalDays.toLocaleString()}</p>
                 </div>
             </div>
         </div>

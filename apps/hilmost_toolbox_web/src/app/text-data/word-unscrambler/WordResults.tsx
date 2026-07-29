@@ -35,13 +35,13 @@ export default function WordResults({ results }: WordResultsProps) {
         <div key={len} className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-4">
-              <h3 className="text-lg font-black text-text-primary tracking-tight whitespace-nowrap">
+              <h3 className="text-lg font-normal text-text-primary tracking-tight whitespace-nowrap">
                 {len} <span className="text-text-muted">Letter Words</span>
               </h3>
               <div className="h-px w-16 bg-gradient-to-r from-border-base to-transparent" />
               <div className="flex items-center gap-1.5 bg-canvas-card border border-base px-2 py-1 rounded-full shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
-                <span className="text-[10px] font-black text-text-secondary uppercase tracking-widest whitespace-nowrap">
+                <span className="text-[10px] font-normal text-text-secondary uppercase tracking-widest whitespace-nowrap">
                   {groupedResults[len].length}
                 </span>
               </div>
@@ -49,7 +49,7 @@ export default function WordResults({ results }: WordResultsProps) {
 
             <button
               onClick={() => copyGroupToClipboard(groupedResults[len], len)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all font-black text-[10px] uppercase tracking-wider shadow-sm ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all font-normal text-[10px] uppercase tracking-wider shadow-sm ${
                 copiedGroup === len
                   ? "bg-emerald-500 text-white border-emerald-500"
                   : "bg-canvas-card border-base text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-sm"
@@ -79,11 +79,11 @@ export default function WordResults({ results }: WordResultsProps) {
                   className="group relative bg-canvas-card border border-base p-3 md:p-4 rounded-xl flex items-center justify-between hover:border-brand-primary hover:shadow-lg hover:-translate-y-0.5 transition-all active:scale-95"
                 >
                   <div className="flex flex-col items-start overflow-hidden mr-2">
-                    <span className="text-base font-black text-text-primary group-hover:text-brand-primary transition-colors uppercase tracking-tight truncate w-full">
+                    <span className="text-base font-normal text-text-primary group-hover:text-brand-primary transition-colors uppercase tracking-tight truncate w-full">
                       {word}
                     </span>
                     <div className="flex items-center gap-1 mt-0.5">
-                      <span className="text-[10px] font-black text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
+                      <span className="text-[10px] font-normal text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
                         {score} Points
                       </span>
                     </div>

@@ -34,41 +34,41 @@ export function TipCalculatorClient() {
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 mb-2 ml-1">
                 <DollarSign size={16} className="text-brand-primary" />
-                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Bill Amount</label>
+                <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500">Bill Amount</label>
             </div>
             <NumberInput
               value={bill}
               onChange={val => setState({ bill: val })}
               min={0}
               placeholder="e.g. 120"
-              className="text-lg font-bold"
+              className="text-lg font-normal"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Percent size={16} className="text-brand-primary" />
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Tip %</label>
+                    <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500">Tip %</label>
                 </div>
                 <NumberInput
                   value={tipPerc}
                   onChange={val => setState({ tipPerc: val })}
                   min={0}
                   max={100}
-                  className="text-lg font-bold"
+                  className="text-lg font-normal"
                 />
             </div>
             <div id="tour-tip-split" className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Users size={16} className="text-brand-primary" />
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500">Split</label>
+                    <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500">Split</label>
                 </div>
                 <NumberInput
                   value={people}
                   onChange={val => setState({ people: val })}
                   min={1}
                   max={100}
-                  className="text-lg font-bold"
+                  className="text-lg font-normal"
                 />
             </div>
           </div>
@@ -79,20 +79,20 @@ export function TipCalculatorClient() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
           <div className="relative z-10 text-center space-y-2 py-4">
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Per Person</span>
-            <div className="text-5xl md:text-6xl font-black text-brand-primary tracking-tighter">
+            <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Per Person</span>
+            <div className="text-5xl md:text-6xl font-normal text-brand-primary tracking-tighter">
               $<NumberTicker value={perPerson} decimals={2} />
             </div>
           </div>
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Tip</span>
-                <p className="text-xl font-black text-slate-900 dark:text-white">$<NumberTicker value={totalTip} decimals={2} /></p>
+                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Tip</span>
+                <p className="text-xl font-normal text-slate-900 dark:text-white">$<NumberTicker value={totalTip} decimals={2} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Bill</span>
-                <p className="text-xl font-black text-slate-900 dark:text-white">$<NumberTicker value={totalBill} decimals={2} /></p>
+                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Bill</span>
+                <p className="text-xl font-normal text-slate-900 dark:text-white">$<NumberTicker value={totalBill} decimals={2} /></p>
             </div>
           </div>
         </div>
