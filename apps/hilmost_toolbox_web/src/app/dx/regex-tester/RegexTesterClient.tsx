@@ -71,7 +71,7 @@ export function RegexTesterClient() {
       {/* Pattern Input */}
       <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <div className="flex items-center justify-between mb-4">
-            <label className="text-[10px] font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <label className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
                 <Search size={14} className="text-brand-primary" /> Regular Expression Pattern
             </label>
             <div className="flex items-center gap-2">
@@ -79,7 +79,7 @@ export function RegexTesterClient() {
                     <button
                         key={f}
                         onClick={() => toggleFlag(f)}
-                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-normal transition-all ${flags[f] ? 'bg-brand-primary text-white shadow-md' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600'}`}
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-caption font-normal transition-all ${flags[f] ? 'bg-brand-primary text-white shadow-md' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-600'}`}
                         title={`Toggle ${f} flag`}
                     >
                         {f}
@@ -102,7 +102,7 @@ export function RegexTesterClient() {
         </div>
 
         {error && (
-            <div className="mt-3 p-3 bg-rose-50 dark:bg-rose-900/10 border border-rose-200 dark:border-rose-800 rounded-xl text-[11px] text-rose-600 dark:text-rose-400 font-mono leading-relaxed flex items-center gap-2">
+            <div className="mt-3 p-3 bg-rose-50 dark:bg-rose-900/10 border border-rose-200 dark:border-rose-800 rounded-xl text-caption text-rose-600 dark:text-rose-400 font-mono leading-relaxed flex items-center gap-2">
                 <AlertCircle size={14} /> <strong>Error:</strong> {error}
             </div>
         )}
@@ -110,9 +110,9 @@ export function RegexTesterClient() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Test String Input */}
-        <div className="flex flex-col h-[400px]">
+        <div className="flex flex-col min-h-[160px] max-h-[400px] overflow-y-auto">
             <div className="flex items-center justify-between mb-3 px-1">
-                <label className="text-[10px] font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                <label className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
                     Test String
                 </label>
                 <button
@@ -133,9 +133,9 @@ export function RegexTesterClient() {
         </div>
 
         {/* Highlighted Result & Stats */}
-        <div className="flex flex-col h-[400px]">
+        <div className="flex flex-col min-h-[160px] max-h-[400px] overflow-y-auto">
              <div className="flex items-center justify-between mb-3 px-1">
-                <label className="text-[10px] font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                <label className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
                     Live Preview
                     <span className={`px-2 py-0.5 rounded-full text-micro font-normal uppercase tracking-widest ${matches.length > 0 ? 'bg-brand-primary text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'}`}>
                         {matches.length} Matches
@@ -150,14 +150,14 @@ export function RegexTesterClient() {
                     <div className="p-4 bg-slate-900 border-t border-slate-800 max-h-[150px] overflow-auto custom-scrollbar">
                          <div className="grid grid-cols-1 gap-2">
                             {matches.slice(0, 10).map((m, i) => (
-                                <div key={i} className="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-800 pb-1">
+                                <div key={i} className="flex items-center justify-between text-caption text-slate-500 border-b border-slate-800 pb-1">
                                     <span className="font-normal text-brand-primary">Match {i + 1}</span>
                                     <span className="font-mono bg-slate-800 px-1.5 rounded">&quot;{m[0]}&quot;</span>
                                     <span>Idx: {m.index}</span>
                                 </div>
                             ))}
                             {matches.length > 10 && (
-                                <div className="text-[10px] text-slate-600 text-center py-1">
+                                <div className="text-caption text-slate-600 text-center py-1">
                                     + {matches.length - 10} more matches...
                                 </div>
                             )}
