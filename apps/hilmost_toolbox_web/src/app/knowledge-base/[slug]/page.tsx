@@ -57,7 +57,7 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
       <WebApplicationSchema
         name={`${article.title} | Hilmost`}
         description={article.excerpt}
-        url={getCanonicalUrl(canonical)}
+        url={getCanonicalUrl(`/knowledge-base/${resolvedParams.slug}`)}
         image="https://hilmost-toolbox.hilmost.net/og/main.png"
       />
       <BreadcrumbSchema items={breadcrumbItems} />

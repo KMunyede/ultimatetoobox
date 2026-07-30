@@ -69,7 +69,7 @@ export default async function AstroProgrammaticPage({ params }: { params: Promis
       <WebApplicationSchema
         name={`${config.title} | Hilmost`}
         description={config.desc}
-        url={getCanonicalUrl(canonical)}
+        url={getCanonicalUrl(`/calculators/astrophysics/${resolvedParams.slug}`)}
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <BreadcrumbSchema items={breadcrumbItems} />

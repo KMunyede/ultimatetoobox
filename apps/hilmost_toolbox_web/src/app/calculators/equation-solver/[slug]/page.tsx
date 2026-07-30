@@ -63,7 +63,7 @@ export default async function EquationProgrammaticPage({ params }: { params: Pro
       <WebApplicationSchema
         name={`${config.title} | Hilmost`}
         description={config.desc}
-        url={canonical}
+        url={getCanonicalUrl(`/calculators/equation-solver/${resolvedParams.slug}`)}
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <BreadcrumbSchema items={breadcrumbItems} />
