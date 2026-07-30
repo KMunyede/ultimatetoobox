@@ -46,7 +46,7 @@ export function ToolHeader({
       </div>
 
       {/* Subtitle - Single line, smaller text */}
-      <p className="text-[10px] md:text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mb-2">
+      <p className="text-caption md:text-caption text-slate-500 dark:text-slate-400 line-clamp-1 mb-2">
         {subtitle}
       </p>
 

@@ -12,7 +12,7 @@ export function KnowledgeCard({ article }: { article: KBArticle }) {
         <div className="p-2 bg-brand-primary/10 rounded-lg text-brand-primary">
           <BookOpen size={18} />
         </div>
-        <span className="text-[10px] font-normal uppercase tracking-widest text-slate-400 group-hover:text-brand-primary transition-colors">
+        <span className="text-caption font-normal uppercase tracking-widest text-slate-400 group-hover:text-brand-primary transition-colors">
           {article.category.replace("-", " ")}
         </span>
       </div>

@@ -315,7 +315,7 @@ export function QrCodeGeneratorTool() {
 
               {type === 'Text' && (
                 <div className="space-y-1.5 w-full">
-                  <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">
+                  <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">
                     Plain Text
                   </label>
                   <textarea
@@ -532,7 +532,7 @@ export function QrCodeGeneratorTool() {
 
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Colors</label>
+                      <label className="text-caption font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Colors</label>
                       <div className="grid grid-cols-1 gap-3">
                         <div className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800">
                           <span className="text-xs font-normal text-slate-600 dark:text-slate-400">QR Code</span>
@@ -546,7 +546,7 @@ export function QrCodeGeneratorTool() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Frame Label</label>
+                      <label className="text-caption font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Frame Label</label>
                       <div className="space-y-3">
                         <label className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800 cursor-pointer group">
                           <div className="flex items-center gap-2">
@@ -599,11 +599,11 @@ export function QrCodeGeneratorTool() {
               <div className={`w-full mb-6 p-4 rounded-2xl border ${scannability.color} transition-all duration-500 animate-in fade-in slide-in-from-bottom-2`}>
                 <div className="flex items-center gap-3 mb-2">
                   <div className={`h-2.5 w-2.5 rounded-full ${scannability.iconColor} bg-current shadow-[0_0_8px_currentColor]`} />
-                  <span className="text-[11px] font-normal uppercase tracking-widest">{scannability.label}</span>
-                  <span className="ml-auto text-[10px] font-mono font-normal opacity-60">Score: {scannability.score}/100</span>
+                  <span className="text-caption font-normal uppercase tracking-widest">{scannability.label}</span>
+                  <span className="ml-auto text-caption font-mono font-normal opacity-60">Score: {scannability.score}/100</span>
                 </div>
                 {scannability.hint && (
-                  <p className="text-[10px] font-normal leading-tight opacity-80 flex items-start gap-1.5 mt-1">
+                  <p className="text-caption font-normal leading-tight opacity-80 flex items-start gap-1.5 mt-1">
                     <AlertCircle size={10} className="mt-0.5 shrink-0" />
                     Fix: {scannability.hint}
                   </p>
@@ -648,7 +648,7 @@ export function QrCodeGeneratorTool() {
 
               <div className="flex items-center justify-center gap-2 text-slate-500 select-none pt-2">
                 <Lock size={12} />
-                <span className="text-[10px] font-normal uppercase tracking-[0.2em]">Generated Locally</span>
+                <span className="text-caption font-normal uppercase tracking-[0.2em]">Generated Locally</span>
               </div>
             </div>
           </div>
@@ -657,7 +657,7 @@ export function QrCodeGeneratorTool() {
 
       <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
         <Lock size={12} />
-        <span className="text-[10px] font-normal uppercase tracking-[0.25em]">🔒 Generated in your browser. Never sent to any server.</span>
+        <span className="text-caption font-normal uppercase tracking-[0.25em]">🔒 Generated in your browser. Never sent to any server.</span>
       </div>
     </div>
   );

@@ -163,7 +163,7 @@ export function NavigationMenu() {
                               <span className="text-sm font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                                 {tool.name}
                               </span>
-                              <span className="text-[10px] text-text-muted leading-tight mt-0.5">
+                              <span className="text-caption text-text-muted leading-tight mt-0.5">
                                 {tool.tooltip}
                               </span>
                             </Link>
@@ -216,7 +216,7 @@ export function NavigationMenu() {
               className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-canvas-card border-l border-base shadow-2xl z-[110] lg:hidden flex flex-col overflow-x-hidden"
             >
               <div className="flex items-center justify-between py-2 px-6 border-b border-base">
-                <span className="text-[10px] font-normal text-brand-primary tracking-[0.2em] uppercase">HILMOST HUB</span>
+                <span className="text-caption font-normal text-brand-primary tracking-[0.2em] uppercase">HILMOST HUB</span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-1 rounded-lg bg-canvas-muted text-text-primary"

@@ -18,7 +18,7 @@ export default function KnowledgeBasePage() {
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-[10px] font-normal uppercase tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-caption font-normal uppercase tracking-widest mb-6">
           <Lightbulb size={12} />
           Informational Depth
         </div>

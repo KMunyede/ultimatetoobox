@@ -133,7 +133,7 @@ export function GlobalSearch() {
         >
           <Search size={16} className="group-hover:text-brand-primary transition-colors" />
           <span className="hidden sm:inline font-medium">Search tools...</span>
-          <div className="hidden sm:flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded border border-base bg-canvas-card font-medium opacity-60">
+          <div className="hidden sm:flex items-center gap-1 text-caption px-1.5 py-0.5 rounded border border-base bg-canvas-card font-medium opacity-60">
             <Command size={10} /> K
           </div>
         </button>
@@ -172,7 +172,7 @@ export function GlobalSearch() {
                     onKeyDown={handleKeyDown}
                   />
                   <div className="flex items-center gap-3">
-                    <kbd className="hidden sm:block px-2 py-0.5 text-[10px] rounded-md border border-base bg-canvas-muted text-text-muted font-normal">ESC</kbd>
+                    <kbd className="hidden sm:block px-2 py-0.5 text-caption rounded-md border border-base bg-canvas-muted text-text-muted font-normal">ESC</kbd>
                     <button
                       onClick={() => setIsOpen(false)}
                       className="p-1.5 text-text-muted hover:text-text-primary transition-colors rounded-full hover:bg-canvas-muted shrink-0"
@@ -186,7 +186,7 @@ export function GlobalSearch() {
                 <div className="max-h-[60vh] overflow-y-auto p-3 custom-scrollbar">
                   {query.trim() === "" && (
                     <div className="px-3 py-2 mb-2">
-                      <span className="text-[11px] font-normal text-text-muted uppercase tracking-widest">Suggestions</span>
+                      <span className="text-caption font-normal text-text-muted uppercase tracking-widest">Suggestions</span>
                     </div>
                   )}
 
@@ -231,7 +231,7 @@ export function GlobalSearch() {
                                 animate={{ x: 0, opacity: 1 }}
                                 className="flex items-center gap-2"
                               >
-                                <span className="text-[10px] font-normal uppercase tracking-tighter opacity-70">Jump to</span>
+                                <span className="text-caption font-normal uppercase tracking-tighter opacity-70">Jump to</span>
                                 <ArrowRight className="w-4 h-4" />
                               </motion.div>
                             )}
@@ -243,7 +243,7 @@ export function GlobalSearch() {
                 </div>
 
                 {/* Enhanced Footer */}
-                <div className="px-5 py-4 border-t border-base text-[10px] text-text-muted flex items-center justify-between bg-canvas-muted/30">
+                <div className="px-5 py-4 border-t border-base text-caption text-text-muted flex items-center justify-between bg-canvas-muted/30">
                   <div className="flex gap-6">
                     <span className="flex items-center gap-2">
                       <kbd className="px-1.5 py-0.5 rounded-md border border-base bg-canvas-card font-mono text-micro shadow-sm">↑↓</kbd>

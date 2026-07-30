@@ -76,7 +76,7 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
           
           {/* Unit 1 */}
           <div id="tour-temp-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
@@ -97,7 +97,7 @@ export function TemperatureConverterClient({ defaultUnit1, defaultUnit2 }: { def
 
           {/* Unit 2 */}
           <div id="tour-temp-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}

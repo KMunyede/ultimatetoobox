@@ -79,7 +79,7 @@ export function ScientificInput({
   return (
     <div className="flex flex-col gap-3 p-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm transition-all hover:shadow-md">
       <div className="flex items-center justify-between px-1">
-        <label className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">{label}</label>
+        <label className="text-caption font-normal text-slate-400 uppercase tracking-widest">{label}</label>
         {selectedPreset === "Custom" && (
           <span className="text-micro font-normal text-brand-primary uppercase tracking-widest bg-brand-primary/5 px-2 py-0.5 rounded-full">
             Custom
@@ -94,7 +94,7 @@ export function ScientificInput({
             <button
               key={p.label}
               onClick={() => setSelectedPreset(p.label)}
-              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-[10px] font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
+              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
                 selectedPreset === p.label
                   ? "bg-brand-primary text-white border-brand-primary shadow-sm"
                   : "bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-transparent hover:border-slate-200"
@@ -105,7 +105,7 @@ export function ScientificInput({
           ))}
           <button
             onClick={() => setSelectedPreset("Custom")}
-            className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-[10px] font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
+            className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
               selectedPreset === "Custom"
                 ? "bg-brand-primary text-white border-brand-primary shadow-sm"
                 : "bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-transparent hover:border-slate-200"
@@ -141,7 +141,7 @@ export function ScientificInput({
                 className="flex-1 min-w-[70px] bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-3 py-2 font-mono font-normal text-slate-900 dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base shadow-inner"
                 placeholder="1.0"
               />
-              <span className="text-slate-400 font-normal text-[10px] uppercase whitespace-nowrap shrink-0">
+              <span className="text-slate-400 font-normal text-caption uppercase whitespace-nowrap shrink-0">
                 &times; 10^
               </span>
               <input

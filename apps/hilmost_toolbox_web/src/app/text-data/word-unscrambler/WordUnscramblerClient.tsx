@@ -13,7 +13,7 @@ const WordResults = dynamic(() => import("./WordResults"), {
   loading: () => (
     <div className="h-64 flex flex-col items-center justify-center space-y-4">
       <div className="w-12 h-12 border-4 border-brand-primary border-t-transparent rounded-full animate-spin" />
-      <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Grouping Results...</p>
+      <p className="text-caption font-normal text-slate-400 uppercase tracking-widest">Grouping Results...</p>
     </div>
   ),
   ssr: false,
@@ -113,14 +113,14 @@ export function WordUnscramblerClient() {
           <div className="relative space-y-6">
             <div className="space-y-1.5">
                 <div className="flex justify-between items-end px-1">
-                  <label className="block text-[10px] font-normal text-slate-500 uppercase tracking-widest">Jumbled Letters</label>
+                  <label className="block text-caption font-normal text-slate-500 uppercase tracking-widest">Jumbled Letters</label>
                   <button
                     onClick={() => {
                       setState({ letters: "", startsWith: "", endsWith: "", contains: "" });
                       setResults([]);
                       setHasSearched(false);
                     }}
-                    className={`text-[10px] font-normal text-brand-primary uppercase tracking-widest hover:underline transition-opacity ${letters ? 'opacity-100' : 'opacity-0'}`}
+                    className={`text-caption font-normal text-brand-primary uppercase tracking-widest hover:underline transition-opacity ${letters ? 'opacity-100' : 'opacity-0'}`}
                   >
                     Clear All
                   </button>
@@ -156,7 +156,7 @@ export function WordUnscramblerClient() {
                     )}
                   </Button>
                 </div>
-                <p className="text-[10px] text-slate-400 font-normal uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                <p className="text-caption text-slate-400 font-normal uppercase tracking-widest ml-1 flex items-center gap-1.5">
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40" />
                   Use <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-900 dark:text-white">?</code> or <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-900 dark:text-white">*</code> for blank tiles
                 </p>
@@ -184,7 +184,7 @@ export function WordUnscramblerClient() {
                   id="tour-unscramble-options"
                   onClick={() => setShowOptions(!showOptions)}
                   variant="secondary"
-                  className="w-full !py-3 h-[46px] !text-[10px]"
+                  className="w-full !py-3 h-[46px] !text-caption"
                 >
                   <div className="flex items-center gap-2">
                     <Settings2 size={16} />
@@ -265,7 +265,7 @@ export function WordUnscramblerClient() {
                   <motion.div key="start" initial={{opacity:0}} animate={{opacity:1}} className="max-w-2xl mx-auto h-80 flex flex-col items-center justify-center text-center p-12 border-4 border-dashed border-slate-200 dark:border-slate-800 rounded-[3.5rem] opacity-40">
                       <Star size={64} className="text-brand-primary opacity-20 mb-6 animate-pulse" />
                       <h3 className="text-xl font-normal text-slate-900 dark:text-white tracking-widest uppercase">Lexicon Ready</h3>
-                      <p className="text-[10px] text-slate-500 mt-2 font-normal uppercase tracking-[0.2em] max-w-xs">
+                      <p className="text-caption text-slate-500 mt-2 font-normal uppercase tracking-[0.2em] max-w-xs">
                         Enter your letters above and click <span className="text-brand-primary underline">Unscramble</span> to scan through the dictionary.
                       </p>
                   </motion.div>

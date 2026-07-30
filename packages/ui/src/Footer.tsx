@@ -38,7 +38,7 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-normal text-text-primary mb-4 uppercase tracking-widest text-[10px]">Research Verticals</h3>
+            <h3 className="font-normal text-text-primary mb-4 uppercase tracking-widest text-caption">Research Verticals</h3>
             <ul className="space-y-2 text-sm text-text-secondary font-medium">
               <li><Link href={`${domains.toolbox}/text-data`} className="hover:text-brand-primary transition-colors">Text & Data</Link></li>
               <li><Link href={`${domains.toolbox}/finance`} className="hover:text-brand-primary transition-colors">Financial</Link></li>
@@ -50,13 +50,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-normal text-text-primary mb-4 uppercase tracking-widest text-[10px]">Platform</h3>
+            <h3 className="font-normal text-text-primary mb-4 uppercase tracking-widest text-caption">Platform</h3>
             <ul className="space-y-2 text-sm text-text-secondary font-medium">
               <li><Link href={`${domains.corporate}/blog`} className="hover:text-brand-primary transition-colors">Blog</Link></li>
               <li><Link href={`${domains.corporate}/about`} className="hover:text-brand-primary transition-colors">About</Link></li>
               <li><Link href={`${domains.corporate}/contact`} className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
               <li><Link href={`${domains.toolbox}/guides`} className="hover:text-brand-primary transition-colors">Utility Guides</Link></li>
-              <li><div className="flex items-center gap-2 text-[10px] text-text-muted mt-4 font-mono">
+              <li><div className="flex items-center gap-2 text-caption text-text-muted mt-4 font-mono">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 SYSTEMS OPERATIONAL v2.4
               </div></li>
@@ -66,7 +66,7 @@ export function Footer() {
         
         <div className="border-t border-base mt-10 pt-6">
           <div className="mb-10">
-            <h3 className="font-normal text-text-primary mb-4 uppercase tracking-widest text-[10px]">Our Products</h3>
+            <h3 className="font-normal text-text-primary mb-4 uppercase tracking-widest text-caption">Our Products</h3>
             <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm font-medium text-text-secondary">
               <Link href={domains.corporate} className="hover:text-brand-primary transition-colors">Hilmost.net</Link>
               <Link href={domains.toolbox} className="hover:text-brand-primary transition-colors">Hilmost Toolbox</Link>

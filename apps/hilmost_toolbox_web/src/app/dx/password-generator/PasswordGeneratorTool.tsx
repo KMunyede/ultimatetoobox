@@ -138,7 +138,7 @@ export function PasswordGeneratorTool() {
               </label>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-normal text-slate-900 dark:text-white uppercase tracking-tight">{strength.label}</span>
-                <span className="text-[10px] text-slate-400 font-normal uppercase tracking-wider">Crack Time: {strength.crackTime}</span>
+                <span className="text-caption text-slate-400 font-normal uppercase tracking-wider">Crack Time: {strength.crackTime}</span>
               </div>
             </div>
             <div className="w-32 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-base">
@@ -200,7 +200,7 @@ export function PasswordGeneratorTool() {
                 onChange={(e) => setLength(e.target.value)}
                 className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-primary"
               />
-              <div className="flex justify-between text-[10px] font-normal text-slate-400 uppercase tracking-widest">
+              <div className="flex justify-between text-caption font-normal text-slate-400 uppercase tracking-widest">
                 <span>Short (4)</span>
                 <span>Ultra Secure (128)</span>
               </div>
@@ -231,7 +231,7 @@ export function PasswordGeneratorTool() {
                <label key={opt.label} className="flex items-center justify-between p-4 rounded-2xl border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all group">
                  <div className="flex flex-col">
                     <span className="text-xs font-normal uppercase tracking-tight text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">{opt.label}</span>
-                    {opt.sub && <span className="text-[10px] text-slate-400 font-medium">{opt.sub}</span>}
+                    {opt.sub && <span className="text-caption text-slate-400 font-medium">{opt.sub}</span>}
                  </div>
                  <div className="relative inline-flex items-center cursor-pointer">
                     <input

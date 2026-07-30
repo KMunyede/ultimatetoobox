@@ -49,7 +49,7 @@ export function WordCountClient() {
                 >
                     <div className="flex items-center gap-2 text-slate-400 mb-2">
                         <span className={idx === 0 ? 'text-brand-primary' : ''}>{stat.icon}</span>
-                        <span className="text-[10px] font-normal uppercase tracking-widest">{stat.label}</span>
+                        <span className="text-caption font-normal uppercase tracking-widest">{stat.label}</span>
                     </div>
                     <div className={`text-2xl @[800px]:text-4xl font-normal ${idx === 0 ? 'text-brand-primary' : 'text-slate-900 dark:text-white'}`}>
                         {stat.value.toLocaleString()}

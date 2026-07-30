@@ -72,14 +72,14 @@ export function EPSCalculatorClient() {
 
           <div className="relative z-10 text-center space-y-8">
             <div className="space-y-1">
-              <span className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Basic EPS</span>
+              <span className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Basic EPS</span>
               <div className="text-6xl font-normal text-brand-primary tracking-tighter">
                 $<NumberTicker value={basicEps} decimals={2} />
               </div>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Diluted EPS</span>
+              <span className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Diluted EPS</span>
               <div className="text-4xl font-normal text-slate-900 dark:text-white tracking-tighter">
                 $<NumberTicker value={dilutedEps} decimals={2} />
               </div>
@@ -88,11 +88,11 @@ export function EPSCalculatorClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-12 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Net Profit</span>
+                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Net Profit</span>
                 <p className="text-xl font-normal text-slate-900 dark:text-white">${netProfit.toLocaleString()}</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Diluted Sh.</span>
+                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total Diluted Sh.</span>
                 <p className="text-xl font-normal text-slate-900 dark:text-white">{totalDilutedShares.toLocaleString()}</p>
             </div>
           </div>

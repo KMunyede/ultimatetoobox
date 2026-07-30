@@ -65,7 +65,7 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
       </Link>
 
       <header className="mb-8">
-        <div className="text-[10px] font-normal text-brand-primary uppercase tracking-[0.2em] mb-4">
+        <div className="text-caption font-normal text-brand-primary uppercase tracking-[0.2em] mb-4">
           Research Vertical: {article.category.replace("-", " ")}
         </div>
         <h1 className="text-3xl md:text-5xl font-normal text-slate-900 dark:text-white leading-tight">

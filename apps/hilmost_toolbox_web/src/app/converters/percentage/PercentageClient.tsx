@@ -29,7 +29,7 @@ export function PercentageClient() {
       <div className="grid grid-cols-1 gap-8">
         {/* Section 1: X% of Y */}
         <div id="tour-perc-1" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <h2 className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mb-6">What is X% of Y?</h2>
+          <h2 className="text-caption font-normal text-slate-400 uppercase tracking-widest mb-6">What is X% of Y?</h2>
           <div className="flex flex-wrap items-end gap-4">
             <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">What is</span>
             <div className="w-28">
@@ -58,7 +58,7 @@ export function PercentageClient() {
 
         {/* Section 2: X is what % of Y? */}
         <div id="tour-perc-2" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <h2 className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mb-6">X is what % of Y?</h2>
+          <h2 className="text-caption font-normal text-slate-400 uppercase tracking-widest mb-6">X is what % of Y?</h2>
           <div className="flex flex-wrap items-end gap-4">
             <div className="w-36">
               <NumberInput
@@ -86,7 +86,7 @@ export function PercentageClient() {
 
         {/* Section 3: Percentage Change */}
         <div id="tour-perc-3" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <h2 className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
+          <h2 className="text-caption font-normal text-slate-400 uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
           <div className="flex flex-wrap items-end gap-4">
             <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">From</span>
             <div className="w-36">
@@ -109,7 +109,7 @@ export function PercentageClient() {
               <span className="text-xl font-normal uppercase tracking-tight flex items-baseline gap-1">
                 {res3 > 0 ? "+" : ""}
                 <ScientificNumber value={res3} precision={2} suffix="%" />
-                <span className="ml-2 text-[10px] font-normal uppercase">{res3 >= 0 ? "Increase" : "Decrease"}</span>
+                <span className="ml-2 text-caption font-normal uppercase">{res3 >= 0 ? "Increase" : "Decrease"}</span>
               </span>
             </div>
           </div>

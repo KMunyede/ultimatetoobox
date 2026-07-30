@@ -23,7 +23,7 @@ export const AdBanner = ({
 
   return (
     <div className="w-full text-center my-3 md:my-4 overflow-hidden min-h-[90px]">
-      <span className="text-[10px] text-slate-400 uppercase tracking-widest block mb-1">Advertisement</span>
+      <span className="text-caption text-slate-400 uppercase tracking-widest block mb-1">Advertisement</span>
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}

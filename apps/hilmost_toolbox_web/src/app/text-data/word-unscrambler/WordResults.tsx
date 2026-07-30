@@ -41,7 +41,7 @@ export default function WordResults({ results }: WordResultsProps) {
               <div className="h-px w-16 bg-gradient-to-r from-border-base to-transparent" />
               <div className="flex items-center gap-1.5 bg-canvas-card border border-base px-2 py-1 rounded-full shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
-                <span className="text-[10px] font-normal text-text-secondary uppercase tracking-widest whitespace-nowrap">
+                <span className="text-caption font-normal text-text-secondary uppercase tracking-widest whitespace-nowrap">
                   {groupedResults[len].length}
                 </span>
               </div>
@@ -49,7 +49,7 @@ export default function WordResults({ results }: WordResultsProps) {
 
             <button
               onClick={() => copyGroupToClipboard(groupedResults[len], len)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all font-normal text-[10px] uppercase tracking-wider shadow-sm ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all font-normal text-caption uppercase tracking-wider shadow-sm ${
                 copiedGroup === len
                   ? "bg-emerald-500 text-white border-emerald-500"
                   : "bg-canvas-card border-base text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-sm"
@@ -83,7 +83,7 @@ export default function WordResults({ results }: WordResultsProps) {
                       {word}
                     </span>
                     <div className="flex items-center gap-1 mt-0.5">
-                      <span className="text-[10px] font-normal text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
+                      <span className="text-caption font-normal text-text-muted group-hover:text-brand-primary/70 uppercase tracking-tighter transition-colors">
                         {score} Points
                       </span>
                     </div>

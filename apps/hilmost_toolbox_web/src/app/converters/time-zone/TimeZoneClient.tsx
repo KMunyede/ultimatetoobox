@@ -63,13 +63,13 @@ const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now:
       <div className="flex-1 w-full text-center sm:text-left">
         <div className="flex flex-col">
           <span className="font-normal text-slate-800 dark:text-slate-100">{member.name}</span>
-          <span className="text-[10px] text-slate-400 font-normal uppercase tracking-widest">{formatZoneName(member.timezone)}</span>
+          <span className="text-caption text-slate-400 font-normal uppercase tracking-widest">{formatZoneName(member.timezone)}</span>
         </div>
       </div>
 
       <div className="flex-1 text-center">
         <p className="text-2xl font-normal text-slate-800 dark:text-white tabular-nums">{timeStr}</p>
-        <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">{dateStr}</p>
+        <p className="text-caption font-normal text-slate-400 uppercase tracking-widest">{dateStr}</p>
       </div>
 
       <div className="hidden lg:flex flex-1 overflow-x-auto no-scrollbar">
@@ -95,7 +95,7 @@ const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now:
 
       <div className="flex items-center gap-3 shrink-0">
         {isDST(member.timezone) && (
-          <span className="text-[10px] font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+          <span className="text-caption font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
         )}
         <div className={`text-micro font-normal px-2.5 py-1 rounded-full border ${availability.color} uppercase tracking-widest`}>
           {availability.label}
@@ -132,11 +132,11 @@ const TargetZoneRow = React.memo(({ zone, date, onRemove }: { zone: string, date
         <div className="flex items-center gap-2">
           <h3 className="font-normal text-slate-800 dark:text-slate-200 text-sm">{formatZoneName(zone)}</h3>
           {isDST(zone) && (
-            <span className="text-[10px] font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
+            <span className="text-caption font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>
           )}
         </div>
         <p className="text-2xl font-normal text-emerald-600 dark:text-emerald-400 mt-1 tabular-nums">{formattedTime}</p>
-        <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">{formattedDate}</p>
+        <p className="text-caption font-normal text-slate-400 uppercase tracking-widest">{formattedDate}</p>
       </div>
       <Tooltip content={`Remove ${formatZoneName(zone)}`} position="left">
         <button
@@ -310,9 +310,9 @@ export function TimeZoneClient() {
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-normal text-slate-800 dark:text-slate-100">Source Time</h2>
-                {isDST(sourceZone) && <span className="text-[10px] font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>}
+                {isDST(sourceZone) && <span className="text-caption font-normal bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded uppercase tracking-wider">DST</span>}
               </div>
-              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest tabular-nums">{formatInTimeZone(effectiveDate, sourceZone, "HH:mm:ss")}</p>
+              <p className="text-caption font-normal text-slate-400 uppercase tracking-widest tabular-nums">{formatInTimeZone(effectiveDate, sourceZone, "HH:mm:ss")}</p>
             </div>
           </div>
           <div className="space-y-4">
@@ -348,7 +348,7 @@ export function TimeZoneClient() {
             <Users className="text-brand-primary w-6 h-6" />
             <div className="text-left">
               <h2 className="text-xl font-normal text-slate-800 dark:text-slate-100">My Team Clocks</h2>
-              {isTeamOpen && <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mt-1">Track your global team&apos;s availability instantly</p>}
+              {isTeamOpen && <p className="text-caption font-normal text-slate-400 uppercase tracking-widest mt-1">Track your global team&apos;s availability instantly</p>}
             </div>
           </div>
           <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isTeamOpen ? 'rotate-180' : ''}`} />

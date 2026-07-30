@@ -194,7 +194,7 @@ export function ColorPickerTool() {
 
         {/* 1. Visual Picker */}
         <section id="main-picker" className="space-y-4">
-          <label className="text-[10px] font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5 block">Visual Color Picker</label>
+          <label className="text-caption font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5 block">Visual Color Picker</label>
           <div className="relative group h-24">
             <input
               type="color"
@@ -210,7 +210,7 @@ export function ColorPickerTool() {
         <section id="format-inputs" className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* HEX */}
           <div className="space-y-1.5 w-full">
-            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HEX Code</label>
+            <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HEX Code</label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-mono font-normal">#</span>
               <Input
@@ -234,7 +234,7 @@ export function ColorPickerTool() {
 
           {/* RGB */}
           <div className="space-y-1.5 w-full">
-            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">RGB Values</label>
+            <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">RGB Values</label>
             <div className="grid grid-cols-3 gap-2">
               {(['r', 'g', 'b'] as const).map(k => (
                 <NumberInput
@@ -251,7 +251,7 @@ export function ColorPickerTool() {
 
           {/* HSL */}
           <div className="space-y-1.5 w-full">
-            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HSL Values</label>
+            <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">HSL Values</label>
             <div className="grid grid-cols-3 gap-2">
               {(['h', 's', 'l'] as const).map(k => (
                 <NumberInput
@@ -277,7 +277,7 @@ export function ColorPickerTool() {
                 onChange={(e) => updateFromRgb({ ...rgb, r: e.target.value })}
                 className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-red-500"
               />
-              <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.r}</span>
+              <span className="w-8 text-caption font-mono text-slate-400">{rgb.r}</span>
             </div>
             <div className="flex items-center gap-4">
               <span className="w-4 text-xs font-normal text-emerald-500">G</span>
@@ -286,7 +286,7 @@ export function ColorPickerTool() {
                 onChange={(e) => updateFromRgb({ ...rgb, g: e.target.value })}
                 className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
               />
-              <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.g}</span>
+              <span className="w-8 text-caption font-mono text-slate-400">{rgb.g}</span>
             </div>
             <div className="flex items-center gap-4">
               <span className="w-4 text-xs font-normal text-blue-500">B</span>
@@ -295,7 +295,7 @@ export function ColorPickerTool() {
                 onChange={(e) => updateFromRgb({ ...rgb, b: e.target.value })}
                 className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
               />
-              <span className="w-8 text-[10px] font-mono text-slate-400">{rgb.b}</span>
+              <span className="w-8 text-caption font-mono text-slate-400">{rgb.b}</span>
             </div>
           </div>
         </section>
@@ -377,7 +377,7 @@ export function ColorPickerTool() {
               <div className="text-4xl font-normal text-slate-900 dark:text-white mb-1">
                 {contrastRatio.toFixed(2)}:1
               </div>
-              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Contrast Ratio</p>
+              <p className="text-caption font-normal text-slate-400 uppercase tracking-widest">Contrast Ratio</p>
 
               <div className="grid grid-cols-2 gap-2 mt-6">
                 {([
@@ -386,7 +386,7 @@ export function ColorPickerTool() {
                   { label: "AAA Normal", pass: contrastRatio >= 7 },
                   { label: "AAA Large", pass: contrastRatio >= 4.5 },
                 ] as const).map((check) => (
-                  <div key={check.label} className={`py-1.5 px-2 rounded-lg text-[10px] font-normal uppercase border-2 flex items-center justify-center gap-1.5 ${check.pass ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-red-500/20 bg-red-500/10 text-red-600 opacity-40'}`}>
+                  <div key={check.label} className={`py-1.5 px-2 rounded-lg text-caption font-normal uppercase border-2 flex items-center justify-center gap-1.5 ${check.pass ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600' : 'border-red-500/20 bg-red-500/10 text-red-600 opacity-40'}`}>
                     {check.pass ? <Check size={10} /> : <X size={10} />}
                     {check.label}
                   </div>
@@ -417,7 +417,7 @@ export function ColorPickerTool() {
                     <Eye size={16} className="text-white drop-shadow-md" />
                   </div>
                 </div>
-                <span className="text-[10px] font-mono font-normal text-slate-400 group-hover:text-brand-primary transition-colors uppercase">{c}</span>
+                <span className="text-caption font-mono font-normal text-slate-400 group-hover:text-brand-primary transition-colors uppercase">{c}</span>
               </button>
             ))}
           </div>
@@ -431,7 +431,7 @@ export function ColorPickerTool() {
               <h3 className="text-sm font-normal uppercase tracking-tight text-slate-800 dark:text-slate-100">Color History</h3>
             </div>
             {savedColors.length > 0 && (
-              <button onClick={clearHistory} className="text-[10px] font-normal text-slate-400 hover:text-red-500 uppercase tracking-widest transition-colors flex items-center gap-1.5">
+              <button onClick={clearHistory} className="text-caption font-normal text-slate-400 hover:text-red-500 uppercase tracking-widest transition-colors flex items-center gap-1.5">
                 <Trash2 size={12} /> Clear
               </button>
             )}
@@ -453,7 +453,7 @@ export function ColorPickerTool() {
                 className="group relative flex flex-col items-center space-y-2 animate-in fade-in zoom-in-90 duration-300"
               >
                 <div className="w-16 aspect-square rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition-transform group-hover:scale-105 active:scale-95" style={{ backgroundColor: c }} />
-                <span className="text-[10px] font-mono font-normal text-slate-400 uppercase">{c}</span>
+                <span className="text-caption font-mono font-normal text-slate-400 uppercase">{c}</span>
               </button>
             ))}
 
@@ -468,7 +468,7 @@ export function ColorPickerTool() {
 
       <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
         <ShieldCheck size={12} />
-        <span className="text-[10px] font-normal uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
+        <span className="text-caption font-normal uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
       </div>
     </div>
   );

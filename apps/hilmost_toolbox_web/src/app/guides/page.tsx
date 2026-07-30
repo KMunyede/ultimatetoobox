@@ -56,7 +56,7 @@ export default function GuidesIndex() {
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-normal uppercase tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-caption font-normal uppercase tracking-widest mb-6">
           <BookOpen size={12} />
           Learning Center
         </div>
@@ -76,10 +76,10 @@ export default function GuidesIndex() {
             className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:shadow-xl hover:border-brand-primary/30"
           >
             <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-brand-primary block">
+              <span className="text-caption font-normal uppercase tracking-[0.2em] text-brand-primary block">
                 {guide.category.replace("-", " ")}
               </span>
-              <span className="inline-flex items-center gap-1 text-[10px] font-normal text-slate-400 uppercase">
+              <span className="inline-flex items-center gap-1 text-caption font-normal text-slate-400 uppercase">
                 <Calendar size={10} />
                 {lastUpdated}
               </span>

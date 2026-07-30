@@ -194,7 +194,7 @@ Macros:
           />
 
           <div className="space-y-1.5 w-full">
-            <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Height</label>
+            <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Height</label>
             {unit === 'metric' ? (
               <div className="relative">
                 <NumberInput
@@ -245,7 +245,7 @@ Macros:
               >
                 <div className="flex justify-between items-center">
                   <span className={`text-xs font-normal ${activityLevel === key ? 'text-brand-primary' : 'text-slate-600'}`}>{ACTIVITY_CONFIG[key].label}</span>
-                  <span className="text-[10px] opacity-40 font-normal uppercase tracking-widest">{ACTIVITY_CONFIG[key].desc}</span>
+                  <span className="text-caption opacity-40 font-normal uppercase tracking-widest">{ACTIVITY_CONFIG[key].desc}</span>
                 </div>
               </button>
             ))}
@@ -266,7 +266,7 @@ Macros:
               onClick={() => setGoal(key)}
               className={`flex-1 min-w-[140px] p-3 rounded-2xl border-2 transition-all text-center ${goal === key ? 'border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10 text-brand-primary font-normal' : 'border-slate-50 dark:border-slate-950 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 text-slate-400'}`}
             >
-              <div className="text-[10px] font-normal uppercase tracking-widest">{GOAL_CONFIG[key].label}</div>
+              <div className="text-caption font-normal uppercase tracking-widest">{GOAL_CONFIG[key].label}</div>
             </button>
           ))}
         </div>
@@ -290,24 +290,24 @@ Macros:
             </div>
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
               <div>
-                <p className="text-[10px] font-normal uppercase tracking-[0.2em] opacity-70 mb-1">BMR</p>
+                <p className="text-caption font-normal uppercase tracking-[0.2em] opacity-70 mb-1">BMR</p>
                 <p className="text-3xl font-normal">{results.bmr}</p>
-                <p className="text-[10px] font-normal opacity-50 uppercase tracking-widest">kcal/day</p>
+                <p className="text-caption font-normal opacity-50 uppercase tracking-widest">kcal/day</p>
               </div>
               <div className="bg-white/10 py-6 rounded-[2rem] border border-white/20">
-                <p className="text-[10px] font-normal uppercase tracking-[0.3em] mb-2">Target Calories</p>
+                <p className="text-caption font-normal uppercase tracking-[0.3em] mb-2">Target Calories</p>
                 <p className="text-6xl font-normal">{results.targetCalories}</p>
-                <p className="text-[10px] font-normal mt-2 opacity-80 uppercase tracking-widest">{GOAL_CONFIG[goal].label} mode</p>
+                <p className="text-caption font-normal mt-2 opacity-80 uppercase tracking-widest">{GOAL_CONFIG[goal].label} mode</p>
               </div>
               <div>
-                <p className="text-[10px] font-normal uppercase tracking-[0.2em] opacity-70 mb-1">TDEE</p>
+                <p className="text-caption font-normal uppercase tracking-[0.2em] opacity-70 mb-1">TDEE</p>
                 <p className="text-3xl font-normal">{results.tdee}</p>
-                <p className="text-[10px] font-normal opacity-50 uppercase tracking-widest">kcal/day</p>
+                <p className="text-caption font-normal opacity-50 uppercase tracking-widest">kcal/day</p>
               </div>
             </div>
 
             <div className="mt-10 space-y-4 max-w-2xl mx-auto">
-               <div className="flex justify-between text-[10px] font-normal uppercase tracking-widest opacity-80">
+               <div className="flex justify-between text-caption font-normal uppercase tracking-widest opacity-80">
                   <span>Protein</span>
                   <span>Carbs</span>
                   <span>Fat</span>
@@ -320,15 +320,15 @@ Macros:
                <div className="grid grid-cols-3 gap-4">
                   <div className="bg-white/10 p-3 rounded-2xl">
                     <p className="text-xl font-normal">{results.protein}g</p>
-                    <p className="text-[10px] font-normal opacity-60 uppercase">{useCustomMacros ? customProtein : GOAL_CONFIG[goal].p}%</p>
+                    <p className="text-caption font-normal opacity-60 uppercase">{useCustomMacros ? customProtein : GOAL_CONFIG[goal].p}%</p>
                   </div>
                   <div className="bg-white/10 p-3 rounded-2xl">
                     <p className="text-xl font-normal">{results.carbs}g</p>
-                    <p className="text-[10px] font-normal opacity-60 uppercase">{useCustomMacros ? customCarbs : GOAL_CONFIG[goal].c}%</p>
+                    <p className="text-caption font-normal opacity-60 uppercase">{useCustomMacros ? customCarbs : GOAL_CONFIG[goal].c}%</p>
                   </div>
                   <div className="bg-white/10 p-3 rounded-2xl">
                     <p className="text-xl font-normal">{results.fat}g</p>
-                    <p className="text-[10px] font-normal opacity-60 uppercase">{useCustomMacros ? customFat : GOAL_CONFIG[goal].f}%</p>
+                    <p className="text-caption font-normal opacity-60 uppercase">{useCustomMacros ? customFat : GOAL_CONFIG[goal].f}%</p>
                   </div>
                </div>
             </div>
@@ -342,7 +342,7 @@ Macros:
               </div>
               <button
                 onClick={() => setUseCustomMacros(!useCustomMacros)}
-                className={`px-4 py-1.5 rounded-full text-[10px] font-normal uppercase tracking-widest transition-all ${useCustomMacros ? 'bg-brand-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
+                className={`px-4 py-1.5 rounded-full text-caption font-normal uppercase tracking-widest transition-all ${useCustomMacros ? 'bg-brand-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
               >
                 {useCustomMacros ? 'Enabled' : 'Enable Custom'}
               </button>
@@ -357,14 +357,14 @@ Macros:
                 ].map(m => (
                   <div key={m.label} className="space-y-3">
                     <div className="flex justify-between items-end">
-                      <span className="text-[10px] font-normal uppercase tracking-widest text-slate-500">{m.label}</span>
+                      <span className="text-caption font-normal uppercase tracking-widest text-slate-500">{m.label}</span>
                       <span className="text-lg font-normal text-slate-900 dark:text-white">{m.val}%</span>
                     </div>
                     <input type="range" min="0" max="100" value={m.val} onChange={e => m.set(parseInt(e.target.value))} className={`w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer ${m.color}`} />
                   </div>
                 ))}
 
-                <div className={`p-4 rounded-2xl text-center text-[10px] font-normal uppercase tracking-widest border-2 ${totalCustom === 100 ? 'bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 border-emerald-100 dark:border-emerald-800/50' : 'bg-rose-50 dark:bg-rose-900/10 text-rose-600 border-rose-100 dark:border-rose-800/50'}`}>
+                <div className={`p-4 rounded-2xl text-center text-caption font-normal uppercase tracking-widest border-2 ${totalCustom === 100 ? 'bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 border-emerald-100 dark:border-emerald-800/50' : 'bg-rose-50 dark:bg-rose-900/10 text-rose-600 border-rose-100 dark:border-rose-800/50'}`}>
                    Total: {totalCustom}% {totalCustom !== 100 && "(Must equal 100%)"}
                 </div>
 
@@ -373,7 +373,7 @@ Macros:
                 </Button>
               </div>
             ) : (
-              <p className="text-center text-[10px] text-slate-400 font-normal uppercase tracking-widest">Custom sliders are disabled. Using {GOAL_CONFIG[goal].label} presets.</p>
+              <p className="text-center text-caption text-slate-400 font-normal uppercase tracking-widest">Custom sliders are disabled. Using {GOAL_CONFIG[goal].label} presets.</p>
             )}
           </div>
 
@@ -399,7 +399,7 @@ Macros:
 
       <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
         <Zap size={14} />
-        <span className="text-[10px] font-normal uppercase tracking-[0.25em]">Privacy First. Pure Browser Math. No Data Collection.</span>
+        <span className="text-caption font-normal uppercase tracking-[0.25em]">Privacy First. Pure Browser Math. No Data Collection.</span>
       </div>
     </div>
   );

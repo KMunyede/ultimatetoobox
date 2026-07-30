@@ -158,16 +158,16 @@ export function BudgetClient() {
 
                 <div className="space-y-6 mb-10">
                     <div className="flex justify-between items-end">
-                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total In</span>
+                        <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total In</span>
                         <span className="text-2xl font-normal text-brand-primary">$<NumberTicker value={totals.income} /></span>
                     </div>
                     <div className="flex justify-between items-end">
-                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Out</span>
+                        <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total Out</span>
                         <span className="text-2xl font-normal text-rose-500">$<NumberTicker value={totals.expenses} /></span>
                     </div>
                     <div className="h-px bg-slate-100 dark:bg-slate-800" />
                     <div className="flex justify-between items-end pt-2">
-                        <span className="text-[10px] font-normal text-slate-900 dark:text-white uppercase tracking-widest">Net Balance</span>
+                        <span className="text-caption font-normal text-slate-900 dark:text-white uppercase tracking-widest">Net Balance</span>
                         <span className={`text-2xl md:text-3xl font-normal ${netBalance >= 0 ? 'text-brand-primary' : 'text-rose-600'}`}>
                             {netBalance < 0 && "-"}$<NumberTicker value={Math.abs(netBalance)} />
                         </span>
@@ -190,12 +190,12 @@ export function BudgetClient() {
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: '10px', fontWeight: 'normal' }}
+                                contentStyle={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: 'var(--text-caption)', fontWeight: 'normal' }}
                             />
                         </PieChart>
                     </ResponsiveContainer>
                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-[10px] font-normal text-slate-400 uppercase tracking-tighter">Remaining</span>
+                        <span className="text-caption font-normal text-slate-400 uppercase tracking-tighter">Remaining</span>
                         <span className="text-lg font-normal text-slate-900 dark:text-white">
                             {totals.income > 0 ? Math.round((Math.max(0, netBalance) / totals.income) * 100) : 0}%
                         </span>
@@ -204,7 +204,7 @@ export function BudgetClient() {
 
                 <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 flex gap-3 items-start border border-slate-100 dark:border-slate-800">
                     <Info size={18} className="text-brand-primary shrink-0 mt-0.5" />
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed font-normal uppercase tracking-widest">
+                    <p className="text-caption text-slate-500 dark:text-slate-400 leading-relaxed font-normal uppercase tracking-widest">
                         Your data is saved automatically to your device.
                     </p>
                 </div>
@@ -238,7 +238,7 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
           </div>
           <h2 className="text-lg font-normal text-slate-900 dark:text-white tracking-tight uppercase">{config.label}</h2>
         </div>
-        <div className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">
+        <div className="text-caption font-normal text-slate-400 uppercase tracking-widest">
           Subtotal: <span className="text-slate-900 dark:text-white">$<NumberTicker value={total} /></span>
         </div>
       </div>
@@ -286,7 +286,7 @@ function Section({ id, category, items, onAdd, onUpdate, onDelete, total }: Sect
 
         <button
           onClick={onAdd}
-          className="w-full p-4 flex items-center justify-center gap-2 text-[10px] font-normal text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all group uppercase tracking-widest"
+          className="w-full p-4 flex items-center justify-center gap-2 text-caption font-normal text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all group uppercase tracking-widest"
         >
           <Plus size={16} className="group-hover:scale-125 transition-transform" />
           Add {config.label} Item

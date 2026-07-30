@@ -94,7 +94,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <span className="text-xs font-normal uppercase tracking-[0.3em] text-brand-primary block">
                     {guide.category.replace("-", " ")} Deep Dive
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-normal text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+                <span className="inline-flex items-center gap-1.5 text-caption font-normal text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
                     <Calendar size={10} />
                     {lastUpdated}
                 </span>

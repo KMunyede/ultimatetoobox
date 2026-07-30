@@ -12,7 +12,7 @@ export function Select({ label, options, className = "", ...props }: SelectProps
   return (
     <div className="space-y-1 w-full">
       {label && (
-        <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1">
+        <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1">
           {label}
         </label>
       )}

@@ -47,7 +47,7 @@ export function AgeCalculatorClient() {
             <div id="tour-age-birth" className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Cake size={16} className="text-brand-primary" />
-                    <label className="block text-[10px] font-medium uppercase tracking-widest text-slate-500">Date of Birth</label>
+                    <label className="block text-caption font-medium uppercase tracking-widest text-slate-500">Date of Birth</label>
                 </div>
                 <DateTimePicker
                     id="birth-date-picker"
@@ -58,7 +58,7 @@ export function AgeCalculatorClient() {
             <div id="tour-age-target" className="space-y-1.5">
                 <div className="flex items-center gap-2 mb-2 ml-1">
                     <Calendar size={16} className="text-slate-400" />
-                    <label className="block text-[10px] font-medium uppercase tracking-widest text-slate-500">Age at Date of</label>
+                    <label className="block text-caption font-medium uppercase tracking-widest text-slate-500">Age at Date of</label>
                 </div>
                 <DateTimePicker
                     id="target-date-picker"
@@ -73,7 +73,7 @@ export function AgeCalculatorClient() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl" />
 
             <div className="relative z-10 text-center space-y-4 py-4">
-                <span className="text-[10px] font-normal uppercase tracking-[0.2em] text-slate-400">Current Age</span>
+                <span className="text-caption font-normal uppercase tracking-[0.2em] text-slate-400">Current Age</span>
                 <div className="flex items-baseline justify-center gap-2">
                     <span className="text-6xl md:text-7xl font-normal text-brand-primary tracking-tighter tabular-nums">{results.years}</span>
                     <span className="text-xl font-normal text-slate-400 uppercase">Years</span>
@@ -85,11 +85,11 @@ export function AgeCalculatorClient() {
 
             <div className="relative z-10 grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
                 <div className="text-center space-y-1">
-                    <span className="text-[10px] font-normal uppercase tracking-widest text-slate-400">Total Weeks</span>
+                    <span className="text-caption font-normal uppercase tracking-widest text-slate-400">Total Weeks</span>
                     <p className="text-2xl font-normal text-slate-900 dark:text-white tabular-nums">{results.totalWeeks.toLocaleString()}</p>
                 </div>
                 <div className="text-center space-y-1">
-                    <span className="text-[10px] font-normal uppercase tracking-widest text-slate-400">Total Days</span>
+                    <span className="text-caption font-normal uppercase tracking-widest text-slate-400">Total Days</span>
                     <p className="text-2xl font-normal text-slate-900 dark:text-white tabular-nums">{results.totalDays.toLocaleString()}</p>
                 </div>
             </div>

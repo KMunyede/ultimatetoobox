@@ -82,7 +82,7 @@ export function AreaClient({ defaultFrom, defaultTo }: { defaultFrom?: string; d
 
           {/* Unit 1 */}
           <div id="tour-area-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
@@ -104,7 +104,7 @@ export function AreaClient({ defaultFrom, defaultTo }: { defaultFrom?: string; d
 
           {/* Unit 2 */}
           <div id="tour-area-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}

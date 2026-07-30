@@ -77,7 +77,7 @@ export function Tooltip({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className={`absolute z-[100] w-max max-w-[200px] px-2.5 py-1.5 text-[11px] leading-normal font-medium text-white bg-slate-900/95 dark:bg-slate-800/95 backdrop-blur-sm rounded shadow-md pointer-events-none text-center ${positionClasses[position]}`}
+            className={`absolute z-[100] w-max max-w-[200px] px-2.5 py-1.5 text-caption leading-normal font-medium text-white bg-slate-900/95 dark:bg-slate-800/95 backdrop-blur-sm rounded shadow-md pointer-events-none text-center ${positionClasses[position]}`}
           >
             {content}
             {/* Visual tiny arrow */}

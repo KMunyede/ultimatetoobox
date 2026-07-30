@@ -119,12 +119,12 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
     >
       <div className="flex justify-between items-center">
         <div id="tour-currency-status" className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-normal uppercase tracking-widest ${error ? 'bg-amber-50 dark:bg-amber-900/10 border-amber-500/20 text-amber-600' : 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-500/20 text-emerald-600'}`}>
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-caption font-normal uppercase tracking-widest ${error ? 'bg-amber-50 dark:bg-amber-900/10 border-amber-500/20 text-amber-600' : 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-500/20 text-emerald-600'}`}>
                 {loading ? <RefreshCw size={10} className="animate-spin" /> : <Globe size={10} />}
                 {loading ? 'Syncing Rates...' : provider}
             </div>
             {!loading && (
-              <span className="text-[10px] text-slate-400 font-normal uppercase tracking-widest opacity-60">
+              <span className="text-caption text-slate-400 font-normal uppercase tracking-widest opacity-60">
                 Updated: {lastUpdated.split(' ').slice(0, 4).join(' ')}
               </span>
             )}
@@ -144,7 +144,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 1 */}
           <div id="tour-currency-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
@@ -166,7 +166,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 2 */}
           <div id="tour-currency-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}

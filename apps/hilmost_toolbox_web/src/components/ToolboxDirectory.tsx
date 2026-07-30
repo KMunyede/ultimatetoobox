@@ -77,7 +77,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
                        <span className="font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                         {tool.name}
                       </span>
-                      <span className="text-[10px] text-text-muted line-clamp-1 mt-0.5">
+                      <span className="text-caption text-text-muted line-clamp-1 mt-0.5">
                         {tool.tooltip}
                       </span>
                     </div>
@@ -125,7 +125,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
             </div>
 
             <div className="mt-5 pt-3 border-t border-base">
-              <p className="text-[10px] font-normal uppercase tracking-widest text-text-muted opacity-60">
+              <p className="text-caption font-normal uppercase tracking-widest text-text-muted opacity-60">
                 {category.tools.length} Tools Available
               </p>
             </div>

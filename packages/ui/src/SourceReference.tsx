@@ -38,7 +38,7 @@ export function SourceReference({ sources, title = "Data Sources & References" }
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">
+      <p className="mt-6 text-caption text-slate-400 dark:text-slate-500 leading-relaxed">
         Hilmost Ultimate Toolbox prioritizes accuracy by utilizing standard scientific constants and verified financial methodologies. These tools are provided for educational and informational purposes.
       </p>
     </div>

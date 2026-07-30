@@ -11,7 +11,7 @@ export function Input({ label, className = "", ...props }: InputProps) {
   return (
     <div className="space-y-1 w-full">
       {label && (
-        <label className="block text-[11px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1">
+        <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1">
           {label}
         </label>
       )}

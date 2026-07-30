@@ -27,7 +27,7 @@ export function PillSelector<T extends string | number>({
   return (
     <div className={`space-y-3 w-full ${className}`}>
       {label && (
-        <h3 className="text-center text-[10px] font-normal uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">
+        <h3 className="text-center text-caption font-normal uppercase tracking-widest text-[var(--color-text-secondary)] mb-1">
           {label}
         </h3>
       )}
@@ -37,7 +37,7 @@ export function PillSelector<T extends string | number>({
             <button
               key={opt.value}
               onClick={() => onChange(opt.value)}
-              className={`px-6 py-3 rounded-lg text-[10px] font-normal uppercase tracking-widest transition-all ${
+              className={`px-6 py-3 rounded-lg text-caption font-normal uppercase tracking-widest transition-all ${
                 value === opt.value
                   ? "bg-[var(--color-brand-primary)] text-white shadow-sm"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-white"

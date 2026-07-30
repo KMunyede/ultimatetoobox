@@ -258,7 +258,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
 
             <button
               onClick={addCourse}
-              className="mt-6 flex items-center justify-center gap-2 w-full py-4 border-2 border-dashed border-[#D8D6CF] dark:border-slate-800 rounded-2xl text-slate-400 hover:border-brand-primary hover:text-brand-primary transition-all text-[10px] font-normal uppercase tracking-widest"
+              className="mt-6 flex items-center justify-center gap-2 w-full py-4 border-2 border-dashed border-[#D8D6CF] dark:border-slate-800 rounded-2xl text-slate-400 hover:border-brand-primary hover:text-brand-primary transition-all text-caption font-normal uppercase tracking-widest"
             >
               <Plus size={16} /> Add Course
             </button>
@@ -269,9 +269,9 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                 <Calculator size={120} />
              </div>
              <div className="relative z-10">
-                <p className="text-[10px] font-normal uppercase tracking-[0.3em] mb-2 opacity-80">Semester GPA</p>
+                <p className="text-caption font-normal uppercase tracking-[0.3em] mb-2 opacity-80">Semester GPA</p>
                 <div className="text-7xl font-normal mb-2">{semesterResults.gpa.toFixed(2)}</div>
-                <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-[10px] font-normal uppercase tracking-widest">
+                <div className="inline-block px-4 py-1 bg-white/20 rounded-full text-caption font-normal uppercase tracking-widest">
                     Grade Class: {semesterResults.classification}
                 </div>
              </div>
@@ -308,8 +308,8 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                 <div className="text-5xl font-normal text-slate-900 dark:text-white">
                     {cumulativeResults.gpa.toFixed(2)}
                 </div>
-                <p className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Overall Cumulative</p>
-                <div className="text-[10px] font-normal text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+                <p className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Overall Cumulative</p>
+                <div className="text-caption font-normal text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
                     Total Credits: {cumulativeResults.totalCredits}
                 </div>
               </div>
@@ -338,7 +338,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
 
       <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
         <GraduationCap size={12} />
-        <span className="text-[10px] font-normal uppercase tracking-[0.25em]">🔒 Private academic tool. Your data stays in your browser.</span>
+        <span className="text-caption font-normal uppercase tracking-[0.25em]">🔒 Private academic tool. Your data stays in your browser.</span>
       </div>
     </div>
   );

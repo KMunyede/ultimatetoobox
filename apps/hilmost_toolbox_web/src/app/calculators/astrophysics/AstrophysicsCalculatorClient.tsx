@@ -227,14 +227,14 @@ export function AstrophysicsCalculatorClient({
       <div className="flex justify-end items-center gap-4 px-2">
         <div className="flex items-center gap-2 mr-auto">
           <div className={`w-2 h-2 rounded-full ${isAstronomerMode ? 'bg-rose-500 animate-pulse' : 'bg-brand-primary'}`} />
-          <span className={`text-[10px] font-normal uppercase tracking-widest ${isAstronomerMode ? 'text-rose-500' : 'text-slate-400'}`}>
+          <span className={`text-caption font-normal uppercase tracking-widest ${isAstronomerMode ? 'text-rose-500' : 'text-slate-400'}`}>
             {isAstronomerMode ? 'Red Night-Vision Active' : 'Daylight Mode'}
           </span>
         </div>
 
         <button
           onClick={() => setIsAstronomerMode(!isAstronomerMode)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-normal uppercase tracking-widest border-2 transition-all active:scale-95 ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-caption font-normal uppercase tracking-widest border-2 transition-all active:scale-95 ${
             isAstronomerMode
               ? 'bg-rose-950 text-rose-500 border-rose-900 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
               : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-500 hover:border-brand-primary'
@@ -265,14 +265,14 @@ export function AstrophysicsCalculatorClient({
           {/* Controls Column */}
           <div className="lg:col-span-1 flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-normal text-slate-400 uppercase tracking-widest ml-1">Calculation Type</label>
+              <label className="text-caption font-normal text-slate-400 uppercase tracking-widest ml-1">Calculation Type</label>
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl px-4 py-2.5 flex items-center justify-between gap-2 text-left transition-all outline-none shadow-inner group"
                 >
-                  <span className="text-[10px] font-normal text-slate-900 dark:text-white uppercase leading-tight">
+                  <span className="text-caption font-normal text-slate-900 dark:text-white uppercase leading-tight">
                     {CALC_OPTIONS.find(opt => opt.value === calcType)?.label}
                   </span>
                   <ChevronDown size={16} className={`text-slate-400 shrink-0 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -301,7 +301,7 @@ export function AstrophysicsCalculatorClient({
                                 : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
                             }`}
                           >
-                            <span className="text-[10px] font-normal uppercase tracking-widest">
+                            <span className="text-caption font-normal uppercase tracking-widest">
                               {option.label}
                             </span>
                           </button>
@@ -364,7 +364,7 @@ export function AstrophysicsCalculatorClient({
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24 pointer-events-none" />
             <div className="relative z-10">
-              <div className="text-[10px] font-normal uppercase tracking-[0.3em] opacity-80 mb-2">Calculated Result</div>
+              <div className="text-caption font-normal uppercase tracking-[0.3em] opacity-80 mb-2">Calculated Result</div>
               <div className="text-4xl md:text-6xl font-mono font-normal mb-2 tracking-tighter leading-none">
                 <ScientificNumber value={parseFloat(result)} className="text-white" multiLine={true} />
               </div>
@@ -379,7 +379,7 @@ export function AstrophysicsCalculatorClient({
             <Button
               variant="secondary"
               onClick={() => copyToClipboard(lastLaTeX, 'latex')}
-              className="w-full !py-3 !text-[10px]"
+              className="w-full !py-3 !text-caption"
             >
               {copiedType === 'latex' ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
               {copiedType === 'latex' ? 'LaTeX Copied!' : 'Copy LaTeX'}
@@ -388,7 +388,7 @@ export function AstrophysicsCalculatorClient({
             <Button
               variant="secondary"
               onClick={() => copyToClipboard(lastPython, 'python')}
-              className="w-full !py-3 !text-[10px]"
+              className="w-full !py-3 !text-caption"
             >
               {copiedType === 'python' ? <Check size={14} className="text-emerald-500" /> : <Terminal size={14} />}
               {copiedType === 'python' ? 'Python Copied!' : 'Copy Python'}

@@ -397,7 +397,7 @@ const MonthView = React.memo(({ currentYear, currentMonth, selectedDate, onSelec
         <>
             <div className="grid grid-cols-7 gap-1 text-center mb-2">
                 {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(day => (
-                    <div key={day} className="text-[10px] font-normal text-slate-400 uppercase">{day}</div>
+                    <div key={day} className="text-caption font-normal text-slate-400 uppercase">{day}</div>
                 ))}
             </div>
             <div className="grid grid-cols-7 gap-1">
@@ -459,7 +459,7 @@ const DecadeView = React.memo(({ currentYear, selectedYear, onSelect }: ViewProp
                     key={d}
                     type="button"
                     onClick={() => onSelect(d)}
-                    className={`py-3 rounded-xl text-[10px] transition-all font-normal
+                    className={`py-3 rounded-xl text-caption transition-all font-normal
                         ${Math.floor(selYear / 10) * 10 === d ? "bg-blue-600 text-white shadow-md"
                         : (d < startDecade || d > startDecade + 90) ? "text-slate-400 opacity-50"
                         : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
@@ -483,7 +483,7 @@ const CenturyView = React.memo(({ currentYear, selectedYear, onSelect }: ViewPro
                     key={c}
                     type="button"
                     onClick={() => onSelect(c)}
-                    className={`py-3 rounded-xl text-[10px] transition-all font-normal
+                    className={`py-3 rounded-xl text-caption transition-all font-normal
                         ${Math.floor(selYear / 100) * 100 === c ? "bg-blue-600 text-white shadow-md"
                         : (c < startCentury || c > startCentury + 900) ? "text-slate-400 opacity-50"
                         : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}

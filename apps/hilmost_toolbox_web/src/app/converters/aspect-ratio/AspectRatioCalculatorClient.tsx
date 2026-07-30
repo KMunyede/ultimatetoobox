@@ -78,7 +78,7 @@ export function AspectRatioCalculatorClient() {
         {/* Input Form */}
         <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
           <div className="space-y-4">
-            <h3 className="text-[10px] font-normal uppercase tracking-widest text-slate-400">Original Dimensions</h3>
+            <h3 className="text-caption font-normal uppercase tracking-widest text-slate-400">Original Dimensions</h3>
             <div className="grid grid-cols-2 gap-4">
               <NumberInput
                 label="Width (px)"
@@ -96,7 +96,7 @@ export function AspectRatioCalculatorClient() {
           </div>
 
           <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <h3 className="text-[10px] font-normal uppercase tracking-widest text-slate-400">Calculate New Dimensions</h3>
+            <h3 className="text-caption font-normal uppercase tracking-widest text-slate-400">Calculate New Dimensions</h3>
             <div className="grid grid-cols-2 gap-4">
               <NumberInput
                 label="New Width"
@@ -117,7 +117,7 @@ export function AspectRatioCalculatorClient() {
         {/* Results & Presets */}
         <div className="space-y-5">
           <div className="bg-brand-primary text-white rounded-3xl p-6 shadow-xl shadow-brand-primary/20 flex flex-col items-center justify-center text-center space-y-2">
-            <span className="text-[10px] font-normal uppercase tracking-[0.2em] opacity-80">Simplified Ratio</span>
+            <span className="text-caption font-normal uppercase tracking-[0.2em] opacity-80">Simplified Ratio</span>
             <div className="text-6xl font-normal tracking-tighter">
               {simplifiedRatio}
             </div>
@@ -127,7 +127,7 @@ export function AspectRatioCalculatorClient() {
           </div>
 
           <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4">
-            <h3 className="text-[10px] font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <h3 className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
               <Layout size={14} className="text-blue-500" />
               Common Presets
             </h3>

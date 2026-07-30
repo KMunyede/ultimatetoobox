@@ -95,7 +95,7 @@ export function RotatePDFClient() {
             </div>
             <div>
               <p className="text-xl font-normal text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
-              <p className="text-[10px] text-slate-400 mt-1 font-normal uppercase tracking-widest">Select one PDF to rotate</p>
+              <p className="text-caption text-slate-400 mt-1 font-normal uppercase tracking-widest">Select one PDF to rotate</p>
             </div>
           </div>
         </div>
@@ -105,20 +105,20 @@ export function RotatePDFClient() {
             <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0 rounded border border-slate-100" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
               <h3 className="text-xl font-normal text-slate-900 dark:text-white truncate">{file.name}</h3>
-              <p className="text-slate-400 font-normal uppercase text-[10px] tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <p className="text-slate-400 font-normal uppercase text-caption tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-6">
                 <Button
                   onClick={rotateAll}
                   disabled={loadingPdf}
                   variant="secondary"
-                  className="!px-4 !py-2 !text-[10px]"
+                  className="!px-4 !py-2 !text-caption"
                 >
                   <IconRotateClockwise size={14} />
                   Rotate All
                 </Button>
                 <button
                   onClick={() => setFile(null)}
-                  className="text-[10px] font-normal text-slate-400 uppercase tracking-widest hover:text-rose-500 hover:underline"
+                  className="text-caption font-normal text-slate-400 uppercase tracking-widest hover:text-rose-500 hover:underline"
                 >
                   Change File
                 </button>
@@ -129,7 +129,7 @@ export function RotatePDFClient() {
           {loadingPdf && (
             <div className="flex flex-col items-center gap-4 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-100 dark:border-slate-800">
               <IconLoader2 className="animate-spin text-brand-primary" size={32} />
-              <p className="text-[10px] font-normal text-slate-400 uppercase tracking-[0.2em]">Generating Previews...</p>
+              <p className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Generating Previews...</p>
             </div>
           )}
 
@@ -146,7 +146,7 @@ export function RotatePDFClient() {
                   <Button
                     onClick={() => rotatePage(i)}
                     variant="secondary"
-                    className="w-full !py-2 !px-2 !text-[10px]"
+                    className="w-full !py-2 !px-2 !text-caption"
                   >
                     <IconRotateClockwise size={14} />
                     90°

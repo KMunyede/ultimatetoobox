@@ -16,7 +16,7 @@ export function PrivacyBadge() {
           <Lock size={12} />
           Zero-Server Privacy
         </h4>
-        <p className="text-[11px] md:text-xs text-emerald-700/80 dark:text-emerald-500/80 font-medium leading-relaxed">
+        <p className="text-caption md:text-xs text-emerald-700/80 dark:text-emerald-500/80 font-medium leading-relaxed">
           Your files never leave your device. All PDF processing happens locally in your browser using 256-bit encryption logic. No data is ever uploaded or stored on our servers.
         </p>
       </div>

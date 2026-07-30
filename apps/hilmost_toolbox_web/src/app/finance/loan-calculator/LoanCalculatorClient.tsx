@@ -118,7 +118,7 @@ export function LoanCalculatorClient() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-2 py-2">
-            <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Monthly Payment</span>
+            <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Monthly Payment</span>
             <div className="text-5xl md:text-6xl font-normal text-[var(--color-brand-primary)] tracking-tighter">
               $<NumberTicker value={monthlyPayment} decimals={2} />
             </div>
@@ -126,11 +126,11 @@ export function LoanCalculatorClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Interest</span>
+                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total Interest</span>
                 <p className="text-2xl font-normal text-slate-900 dark:text-white">$<NumberTicker value={totalInterest} decimals={0} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest">Total Payable</span>
+                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total Payable</span>
                 <p className="text-2xl font-normal text-slate-900 dark:text-white">$<NumberTicker value={totalPayable} decimals={0} /></p>
             </div>
           </div>
@@ -147,7 +147,7 @@ export function LoanCalculatorClient() {
               </div>
               <div>
                 <h3 className="text-lg font-normal text-slate-900 dark:text-white uppercase tracking-tight leading-none">Amortization Schedule</h3>
-                <p className="text-[10px] font-normal text-slate-400 uppercase tracking-widest mt-1">Monthly breakdown of your loan repayment</p>
+                <p className="text-caption font-normal text-slate-400 uppercase tracking-widest mt-1">Monthly breakdown of your loan repayment</p>
               </div>
             </div>
             <Button variant="secondary" onClick={downloadCSV} className="w-full sm:w-auto flex items-center justify-center gap-2">
@@ -161,11 +161,11 @@ export function LoanCalculatorClient() {
               <table className="w-full text-left border-collapse">
                 <thead className="sticky top-0 bg-slate-50 dark:bg-slate-800 z-10 border-b border-[var(--color-border-base)] dark:border-slate-700">
                   <tr>
-                    <th className="p-3 text-[10px] font-normal text-slate-500 uppercase tracking-widest">Month</th>
-                    <th className="p-3 text-[10px] font-normal text-slate-500 uppercase tracking-widest">Payment</th>
-                    <th className="p-3 text-[10px] font-normal text-slate-500 uppercase tracking-widest">Principal</th>
-                    <th className="p-3 text-[10px] font-normal text-slate-500 uppercase tracking-widest">Interest</th>
-                    <th className="p-3 text-[10px] font-normal text-slate-500 uppercase tracking-widest text-right">Balance</th>
+                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Month</th>
+                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Payment</th>
+                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Principal</th>
+                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Interest</th>
+                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest text-right">Balance</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">

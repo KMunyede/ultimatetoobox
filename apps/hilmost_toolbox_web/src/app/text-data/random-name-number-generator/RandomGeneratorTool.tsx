@@ -294,12 +294,12 @@ export function RandomGeneratorTool() {
                     {mode === "number" ? <Hash size={32} /> : <User size={32} />}
                   </div>
                   <p className="text-sm font-normal uppercase tracking-widest opacity-40">Ready to Generate</p>
-                  <p className="text-[10px] uppercase tracking-[0.2em] mt-1 opacity-40">Select options and click generate</p>
+                  <p className="text-caption uppercase tracking-[0.2em] mt-1 opacity-40">Select options and click generate</p>
                 </div>
               )}
             </div>
 
-            <p className="text-[10px] text-slate-400 text-center font-normal uppercase tracking-widest mt-2">
+            <p className="text-caption text-slate-400 text-center font-normal uppercase tracking-widest mt-2">
                🔒 100% Secure & Private — No data leaves your browser
             </p>
           </div>

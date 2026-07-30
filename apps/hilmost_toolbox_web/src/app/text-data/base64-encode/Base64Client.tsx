@@ -57,7 +57,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
         <div className="grid grid-cols-1 @[800px]:grid-cols-2 gap-8 items-stretch">
           {/* Input */}
           <div id="tour-b64-input" className="space-y-1.5 w-full">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1 mb-1.5">Input Text</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1 mb-1.5">Input Text</label>
             <textarea
               className="w-full h-48 @[800px]:h-64 p-4 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl text-slate-900 dark:text-white font-mono text-sm outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
               placeholder={mode === 'encode' ? 'Enter plain text...' : 'Enter Base64 string...'}
@@ -68,7 +68,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
 
           {/* Output */}
           <div id="tour-b64-output" className="space-y-1.5 w-full relative">
-            <label className="block text-[10px] font-normal uppercase tracking-widest text-slate-500 ml-1 mb-1.5">Result</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1 mb-1.5">Result</label>
             <div className={`w-full h-48 @[800px]:h-64 p-4 rounded-xl border font-mono text-sm break-all overflow-y-auto custom-scrollbar relative ${error ? 'bg-rose-50 dark:bg-rose-900/10 border-rose-200 dark:border-rose-800 text-rose-600' : 'bg-white dark:bg-slate-950 border-[#D8D6CF] dark:border-slate-800 text-brand-primary font-normal shadow-inner'}`}>
               {error || output || <span className="opacity-20 font-normal">Waiting for input...</span>}
 

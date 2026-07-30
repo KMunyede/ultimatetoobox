@@ -90,7 +90,7 @@ export function BMIClient() {
         ) : (
           <div className="space-y-6">
             <div className="space-y-1.5 w-full">
-              <label className="block text-[10px] font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Height</label>
+              <label className="block text-caption font-medium uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Height</label>
               <div className="flex gap-4">
                 <div className="flex-1 relative">
                   <NumberInput
@@ -135,7 +135,7 @@ export function BMIClient() {
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
-            <div className="text-[10px] font-normal uppercase tracking-[0.2em] text-slate-400 mb-2">Your BMI Score</div>
+            <div className="text-caption font-normal uppercase tracking-[0.2em] text-slate-400 mb-2">Your BMI Score</div>
             <div className="text-6xl md:text-7xl font-normal text-slate-900 dark:text-white mb-8 tracking-tighter">
               <NumberTicker value={bmi} decimals={1} duration={0.8} />
             </div>

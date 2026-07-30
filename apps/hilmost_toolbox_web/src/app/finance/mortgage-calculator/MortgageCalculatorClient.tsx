@@ -109,7 +109,7 @@ export function MortgageCalculatorClient() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-1 py-2">
-            <span className="text-[10px] font-normal text-slate-400 uppercase tracking-widest flex items-center justify-center gap-1">
+            <span className="text-caption font-normal text-slate-400 uppercase tracking-widest flex items-center justify-center gap-1">
               Total Monthly Payment (PITI)
               <Tooltip content="Principal, Interest, Taxes, and Insurance">
                 <Info size={12} className="cursor-help" />
