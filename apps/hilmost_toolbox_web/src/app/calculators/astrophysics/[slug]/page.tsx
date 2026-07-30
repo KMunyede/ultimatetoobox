@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Breadcrumbs, ToolArticle, RelatedTools, ToolHeader } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { AstrophysicsCalculatorClient } from "../AstrophysicsCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -66,7 +66,14 @@ export default async function AstroProgrammaticPage({ params }: { params: Promis
 
   return (
     <div className="container mx-auto px-4 py-2 max-w-5xl">
-      
+      <WebApplicationSchema
+        name={`${config.title} | Hilmost`}
+        description={config.desc}
+        url={getCanonicalUrl(canonical)}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
+      />
+      <BreadcrumbSchema items={breadcrumbItems} />
+
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

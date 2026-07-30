@@ -90,6 +90,7 @@ export default function ScientificCalculatorPage() {
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <HowToSchema
         name={`How to Use Our Scientific Calculator`}
         description="Master advanced mathematics with this comprehensive guide to our online scientific computing engine."

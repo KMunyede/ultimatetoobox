@@ -91,6 +91,7 @@ export default function StandardCalculatorPage() {
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <HowToSchema
         name={`How to Use the Standard Calculator`}
         description="A simple, four-step guide to mastering everyday arithmetic using our optimized web interface."

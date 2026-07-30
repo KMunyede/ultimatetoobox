@@ -86,6 +86,7 @@ export default function AstrophysicsCalculatorPage() {
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
       <FAQSchema items={faqs} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <HowToSchema
         name="How to Compute Celestial Mechanics"
         description="Follow our professional guide to calculating orbits and gravitational forces using our high-precision engine."

@@ -60,7 +60,14 @@ export default async function EquationProgrammaticPage({ params }: { params: Pro
 
   return (
     <div className="container mx-auto px-4 py-2 max-w-6xl">
-      
+      <WebApplicationSchema
+        name={`${config.title} | Hilmost`}
+        description={config.desc}
+        url={canonical}
+        image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
+      />
+      <BreadcrumbSchema items={breadcrumbItems} />
+
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader

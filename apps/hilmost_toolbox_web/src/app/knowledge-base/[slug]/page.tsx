@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { KNOWLEDGE_BASE } from "@utilitiessite/config";
-import { Breadcrumbs, RelatedTools, ToolArticle } from "@utilitiessite/ui";
+import { WebApplicationSchema, BreadcrumbSchema, Breadcrumbs, RelatedTools, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ArrowLeft, Wrench } from "lucide-react";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -54,6 +54,14 @@ export default async function KBArticlePage({ params }: { params: Promise<{ slug
 
   return (
     <div className="container mx-auto px-4 py-2 max-w-4xl">
+      <WebApplicationSchema
+        name={`${article.title} | Hilmost`}
+        description={article.excerpt}
+        url={getCanonicalUrl(canonical)}
+        image="https://hilmost-toolbox.hilmost.net/og/main.png"
+      />
+      <BreadcrumbSchema items={breadcrumbItems} />
+
       <Breadcrumbs items={breadcrumbItems} />
 
       <Link
