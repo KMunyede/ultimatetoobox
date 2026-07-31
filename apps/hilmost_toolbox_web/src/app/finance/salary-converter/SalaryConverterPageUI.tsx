@@ -57,7 +57,7 @@ export function SalaryConverterPageUI({
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
-        title={title.split(' — ')[0]}
+        title={title.split(' | ')[0]}
         subtitle="Compare your wages and instantly translate rates across daily, weekly, monthly, and annual intervals."
         lastUpdated={lastUpdated}
         tourId="salary_calc"

@@ -4,13 +4,14 @@ import { SalaryConverterPageUI } from "../SalaryConverterPageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
+import { formatTitle } from "@/lib/metadata";
 
 const SLUGS = [
-  { slug: "hourly-to-salary", type: "hourly", title: "Hourly to Salary Converter", desc: "Convert your hourly wage to an annual salary instantly. See how much you make per year." },
-  { slug: "salary-to-hourly", type: "annually", title: "Salary to Hourly Converter", desc: "Convert your annual salary to an hourly wage instantly. Find out exactly how much you make per hour." },
-  { slug: "monthly-to-hourly", type: "monthly", title: "Monthly to Hourly Converter", desc: "Convert your monthly pay to an hourly wage instantly. Calculate your true hourly rate." },
-  { slug: "weekly-to-salary", type: "weekly", title: "Weekly to Salary Converter", desc: "Convert your weekly pay to an annual salary instantly. Project your yearly earnings." },
-  { slug: "daily-rate-calculator", type: "daily", title: "Daily Rate to Salary Calculator", desc: "Convert your daily freelance rate into an annual salary equivalent." }
+  { slug: "hourly-to-salary", type: "hourly", title: "Hourly Wage to Annual Salary", desc: "Convert your hourly wage to an annual salary instantly. See how much you make per year." },
+  { slug: "salary-to-hourly", type: "annually", title: "Annual Salary to Hourly Wage", desc: "Convert your annual salary to an hourly wage instantly. Find out exactly how much you make per hour." },
+  { slug: "monthly-to-hourly", type: "monthly", title: "Monthly Pay to Hourly Wage", desc: "Convert your monthly pay to an hourly wage instantly. Calculate your true hourly rate." },
+  { slug: "weekly-to-salary", type: "weekly", title: "Weekly Pay to Annual Salary", desc: "Convert your weekly pay to an annual salary instantly. Project your yearly earnings." },
+  { slug: "daily-rate-calculator", type: "daily", title: "Daily Rate to Annual Salary", desc: "Convert your daily freelance rate into an annual salary equivalent." }
 ] as const;
 
 export function generateStaticParams() {
@@ -23,9 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!config) return { title: "Salary Converter" };
 
   const canonical = getCanonicalUrl(`/finance/salary-converter/${resolvedParams.slug}`);
+  const title = formatTitle(`Convert ${config.title} | Salary Calculator`);
 
   return {
-    title: `${config.title} — Free Online Calculator`,
+    title,
     description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based financial calculations.`,
     alternates: { canonical },
     openGraph: {

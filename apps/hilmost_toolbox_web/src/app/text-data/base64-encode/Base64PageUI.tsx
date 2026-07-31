@@ -53,7 +53,7 @@ export function Base64PageUI({
             <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
-        title={title.split(' — ')[0]}
+        title={title.split(' | ')[0]}
         subtitle={description}
         lastUpdated={lastUpdated}
         tourId="base64_converter"

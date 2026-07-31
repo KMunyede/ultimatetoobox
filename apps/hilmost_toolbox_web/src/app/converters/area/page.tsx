@@ -6,7 +6,7 @@ import path from "path";
 
 import { formatTitle } from "@/lib/metadata";
 
-const TITLE = "Area Converter — Square Feet, Meters, Acres & More";
+const TITLE = "Area Converter | Square Feet, Meters & Acres Calculator";
 const DESC = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more for real estate, farming, and construction.";
 const PATH = "/converters/area";
 const CANONICAL_URL = getCanonicalUrl(PATH);

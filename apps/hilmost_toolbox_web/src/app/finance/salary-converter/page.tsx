@@ -5,7 +5,7 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { formatTitle } from "@/lib/metadata";
 
-const TITLE = "Salary Converter | Hourly to Annual Wage Tool";
+const TITLE = "Salary Converter | Hourly, Monthly & Annual Wage Tool";
 const DESC = "Compare your wages instantly. Free online salary converter to translate hourly rates into daily, weekly, monthly, and annual earnings.";
 const PATH = "/finance/salary-converter";
 const CANONICAL_URL = getCanonicalUrl(PATH);

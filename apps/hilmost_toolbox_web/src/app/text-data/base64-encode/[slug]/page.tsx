@@ -4,10 +4,11 @@ import { Base64PageUI } from "../Base64PageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
+import { formatTitle } from "@/lib/metadata";
 
 const SLUGS = [
-  { slug: "base64-encode", type: "encode", title: "Base64 Text Encoder", desc: "Encode text strings into Base64 format securely and instantly within your browser. Local processing for maximum privacy." },
-  { slug: "base64-decode", type: "decode", title: "Base64 Text Decoder", desc: "Decode Base64 strings back into human-readable text securely and instantly within your browser. Fast, accurate, and secure." }
+  { slug: "base64-encode", type: "encode", title: "Base64 Text Encoder & Online Tool", desc: "Encode text strings into Base64 format securely and instantly within your browser. Local processing for maximum privacy." },
+  { slug: "base64-decode", type: "decode", title: "Base64 Text Decoder & Online Tool", desc: "Decode Base64 strings back into human-readable text securely and instantly within your browser. Fast, accurate, and secure." }
 ] as const;
 
 export function generateStaticParams() {
@@ -20,9 +21,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!config) return { title: "Base64 Converter" };
 
   const canonical = getCanonicalUrl(`/text-data/base64-encode/${resolvedParams.slug}`);
+  const title = formatTitle(`${config.title} | Base64 Tool`);
 
   return {
-    title: `${config.title} — Free Online Utility`,
+    title,
     description: `Free online ${config.title.toLowerCase()}. ${config.desc} No signup required — secure, browser-based data transformation.`,
     alternates: { canonical },
     openGraph: {

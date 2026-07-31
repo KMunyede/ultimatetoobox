@@ -41,7 +41,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const fromUnit = match[1].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   const toUnit = match[2].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   const canonical = getCanonicalUrl(`/converters/area/${slug}`);
-  const title = formatTitle(`Convert ${fromUnit} to ${toUnit} | Area Calculator`);
+
+  const shorten = (u: string) => u.replace('Square', 'Sq.');
+  const title = formatTitle(`Convert ${shorten(fromUnit)} to ${shorten(toUnit)} | Area Converter`);
 
   return {
     title,
@@ -84,7 +86,9 @@ export default async function AreaDynamicPage({ params }: { params: Promise<{ sl
   const filePath = path.join(process.cwd(), "src/app/converters/area/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
   const canonicalUrl = getCanonicalUrl(`/converters/area/${slug}`);
-  const displayTitle = `Convert ${fromUnitStr} to ${toUnitStr} | Area Calculator`;
+
+  const shorten = (u: string) => u.replace('Square', 'Sq.');
+  const displayTitle = `Convert ${shorten(fromUnitStr)} to ${shorten(toUnitStr)} | Area Converter`;
 
   return (
     <AreaPageUI
