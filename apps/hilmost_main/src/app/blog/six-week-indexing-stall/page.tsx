@@ -14,13 +14,13 @@ export default function BlogPostIndexingStall() {
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-brand-primary transition-colors mb-8 uppercase tracking-widest"
+          className="inline-flex items-center gap-2 text-sm font-bold text-text-muted hover:text-brand-primary transition-colors mb-8 uppercase tracking-widest"
         >
           <ChevronLeft size={16} /> Back to Blog
         </Link>
 
         <header className="mb-16">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">July 2026</div>
+          <div className="text-xs font-bold text-text-muted uppercase tracking-widest mb-4">July 2026</div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase mb-6 leading-tight">
             What a Six-Week Indexing Stall Taught Me About <span className="text-brand-primary">Thinking Like Google</span>
           </h1>

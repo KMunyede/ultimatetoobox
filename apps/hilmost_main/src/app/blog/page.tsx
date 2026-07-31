@@ -59,7 +59,7 @@ export default function BlogIndex() {
               href={`/blog/${post.slug}`}
               className="group block p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm hover:shadow-md hover:border-brand-primary/50 transition-all"
             >
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+              <div className="text-xs font-bold text-text-muted uppercase tracking-widest mb-4">
                 {post.date}
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-brand-primary transition-colors">

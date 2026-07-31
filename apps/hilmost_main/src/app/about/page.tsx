@@ -39,7 +39,7 @@ export default function AboutPage() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-4 text-center text-sm font-medium text-slate-500 dark:text-slate-400 italic">
+            <figcaption className="mt-4 text-center text-sm font-medium text-text-muted dark:text-slate-400 italic">
               Real-world use: merging certification documents while applying for work.
             </figcaption>
           </figure>
@@ -81,7 +81,7 @@ export default function AboutPage() {
               </div>
 
               <div className="bg-slate-50 dark:bg-slate-900/50 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800">
-                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-2">
+                <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted mb-6 flex items-center gap-2">
                   <MapPin size={10} className="text-brand-primary" />
                   Headquarters
                 </h3>
