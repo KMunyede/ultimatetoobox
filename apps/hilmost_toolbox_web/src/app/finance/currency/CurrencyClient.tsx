@@ -144,7 +144,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 1 */}
           <div id="tour-currency-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-text-muted ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
@@ -166,7 +166,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 2 */}
           <div id="tour-currency-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-text-muted ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}

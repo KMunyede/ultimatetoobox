@@ -72,7 +72,7 @@ export function TimeConverterClient() {
           
           {/* Unit 1 */}
           <div id="tour-time-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-text-muted ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
@@ -94,7 +94,7 @@ export function TimeConverterClient() {
 
           {/* Unit 2 */}
           <div id="tour-time-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-text-muted ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}
