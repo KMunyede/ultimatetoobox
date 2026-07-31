@@ -1,5 +1,8 @@
 ﻿@layer base {
   :root {
+    /* Spacing Scale (Tailwind v4 default is 0.25rem) - 10% reduction */
+    --spacing: 0.225rem;
+
     /* Backgrounds */
     --color-canvas-base: #E5E7EB; /* Matte light grey (~10% darkness) */
     --color-canvas-card: #FFFFFF; /* Pure white cards for maximum pop */
@@ -23,6 +26,9 @@
   }
 
   .dark {
+    /* Spacing Scale (Tailwind v4 default is 0.25rem) - 10% reduction */
+    --spacing: 0.225rem;
+
     /* Backgrounds */
     --color-canvas-base: #0f172a; /* slate-900 */
     --color-canvas-card: #1e293b; /* slate-800 */

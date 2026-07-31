@@ -59,7 +59,7 @@ export default function Home() {
           
           {/* Hero Section */}
           <div className="mb-8 pb-4 md:mb-12 md:pb-8 border-b border-base">
-            <h1 className="font-bold tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
+            <h1 className="font-semibold tracking-tighter text-text-primary text-4xl sm:text-5xl lg:text-6xl leading-[0.9] mb-4">
               Everyday tools. <span className="text-brand-primary">Built to just work.</span>
             </h1>
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium max-w-3xl">
@@ -69,19 +69,19 @@ export default function Home() {
 
           {/* Our Products Section */}
           <div className="mb-8 md:mb-16">
-            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
+            <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
               <Link href="https://hilmost-toolbox.hilmost.net" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
-                <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
-                <span className="mt-1 text-[10px] font-black uppercase tracking-widest text-brand-primary">→ Open Product</span>
+                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Toolbox</span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary">→ Open Product</span>
               </Link>
               <Link href="https://shop.hilmost.net" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
-                <span className="text-xl font-black text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
-                <span className="mt-1 text-[10px] font-black uppercase tracking-widest text-brand-primary">→ Shop Store</span>
+                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary">→ Shop Store</span>
               </Link>
               <div className="flex flex-col items-start px-6 py-4 rounded-xl border border-base text-text-muted cursor-not-allowed opacity-60">
-                <span className="text-xl font-black">Hilmost Apps</span>
-                <span className="mt-1 text-[10px] font-black uppercase tracking-widest">Soon</span>
+                <span className="text-xl font-bold">Hilmost Apps</span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">Soon</span>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function Home() {
           {/* Dense Directory Section - Featured Tools */}
           <div className="mb-6 md:mb-8">
             <div className="flex items-center gap-4 mb-6 md:mb-10">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand-primary">Featured Free Utilities</h2>
+                <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary">Featured Free Utilities</h2>
                 <div className="h-px flex-1 bg-brand-primary/10" />
             </div>
 
@@ -98,7 +98,7 @@ export default function Home() {
                 <Link
                   key={tool.href}
                   href={`https://hilmost-toolbox.hilmost.net${tool.href}`}
-                  className="text-base font-semibold text-text-secondary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-md transition-colors block"
+                  className="text-base font-medium text-text-secondary hover:text-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none rounded-md transition-colors block"
                 >
                   {tool.name}
                 </Link>
@@ -108,7 +108,7 @@ export default function Home() {
             <div className="mt-6 md:mt-10 text-center">
               <Link
                 href="https://hilmost-toolbox.hilmost.net"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-black uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-canvas-card border border-brand-primary/20 text-brand-primary font-bold uppercase tracking-widest rounded-2xl hover:bg-brand-primary hover:text-white hover:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 outline-none transition-all text-sm"
               >
                 Open Full Directory ({displayCount}+ Tools) <ArrowRight size={18} />
               </Link>
