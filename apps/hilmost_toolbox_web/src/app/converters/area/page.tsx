@@ -38,5 +38,12 @@ export default function AreaPage() {
   const filePath = path.join(process.cwd(), "src/app/converters/area/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
-  return <AreaPageUI lastUpdated={lastUpdated} canonicalUrl={CANONICAL_URL} />;
+  return (
+    <AreaPageUI
+      title={TITLE}
+      description={DESC}
+      canonicalUrl={CANONICAL_URL}
+      lastUpdated={lastUpdated}
+    />
+  );
 }

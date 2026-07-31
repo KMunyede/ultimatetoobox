@@ -5,6 +5,8 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 
+import { formatTitle } from "@/lib/metadata";
+
 const AREA_UNITS = ["Square Meter", "Square Kilometer", "Square Centimeter", "Square Millimeter", "Hectare", "Acre", "Square Foot", "Square Inch", "Square Yard", "Square Mile"];
 
 // Pre-generate popular routes at build time
@@ -39,20 +41,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const fromUnit = match[1].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   const toUnit = match[2].split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   const canonical = getCanonicalUrl(`/converters/area/${slug}`);
+  const title = formatTitle(`Convert ${fromUnit} to ${toUnit} | Area Calculator`);
 
   return {
-    title: `Convert ${fromUnit} to ${toUnit} | Area Calculator — Free Online Converter`,
-    description: `Free online area converter. Instantly convert ${fromUnit} to ${toUnit} using our free area calculator. Perfect for real estate, landscaping, and construction — no signup required.`,
+    title,
+    description: `Free online area converter. Instantly convert ${fromUnit} to ${toUnit} using our free area calculator. Perfect for real estate, landscaping, and construction.`,
     alternates: { canonical },
     openGraph: {
-      title: `Convert ${fromUnit} to ${toUnit} | Area Calculator`,
+      title,
       description: `Instantly convert ${fromUnit} to ${toUnit} using our free area calculator.`,
       url: canonical,
       type: "website",
       images: [{ url: "https://hilmost-toolbox.hilmost.net/og/converters.png", width: 1200, height: 630, alt: `Convert ${fromUnit} to ${toUnit}` }],
     },
     twitter: {
-      title: `Convert ${fromUnit} to ${toUnit} | Area Calculator`,
+      title,
       description: `Instantly convert ${fromUnit} to ${toUnit} using our free area calculator.`,
       images: ["https://hilmost-toolbox.hilmost.net/og/converters.png"],
     }
@@ -83,37 +86,15 @@ export default async function AreaDynamicPage({ params }: { params: Promise<{ sl
   const canonicalUrl = getCanonicalUrl(`/converters/area/${slug}`);
   const displayTitle = `Convert ${fromUnitStr} to ${toUnitStr} | Area Calculator`;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": displayTitle,
-    "description": `Professional online tool to convert ${fromUnitStr} to ${toUnitStr} with high precision. Free, private, and instant.`,
-    "url": canonicalUrl,
-    "applicationCategory": "UtilityApplication",
-    "operatingSystem": "All",
-    "browserRequirements": "Requires JavaScript",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  };
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <AreaPageUI
-        defaultFrom={fromUnitStr}
-        defaultTo={toUnitStr}
-        title={displayTitle}
-        description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free area calculator. Perfect for real estate, landscaping, and construction.`}
-        canonicalUrl={canonicalUrl}
-        lastUpdated={lastUpdated}
-        summary={generateDynamicSummary(fromUnitStr, toUnitStr)}
-      />
-    </>
+    <AreaPageUI
+      defaultFrom={fromUnitStr}
+      defaultTo={toUnitStr}
+      title={displayTitle}
+      description={`Instantly convert ${fromUnitStr} to ${toUnitStr} using our free area calculator. Perfect for real estate, landscaping, and construction.`}
+      canonicalUrl={canonicalUrl}
+      lastUpdated={lastUpdated}
+      summary={generateDynamicSummary(fromUnitStr, toUnitStr)}
+    />
   );
 }

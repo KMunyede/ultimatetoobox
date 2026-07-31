@@ -5,18 +5,18 @@ import { ShareButton } from "@/components/ShareButton";
 export function AreaPageUI({
   defaultFrom = "Square Foot",
   defaultTo = "Square Meter",
-  title = "Area Converter",
-  description = "Free, high-precision area converter. Instantly convert between square feet, square meters, acres, hectares, and more.",
-  canonicalUrl = "https://hilmost-toolbox.hilmost.net/converters/area",
+  title,
+  description,
+  canonicalUrl,
   lastUpdated,
   breadcrumbItems: customBreadcrumbItems,
   summary
 }: {
   defaultFrom?: string;
   defaultTo?: string;
-  title?: string;
-  description?: string;
-  canonicalUrl?: string;
+  title: string;
+  description: string;
+  canonicalUrl: string;
   lastUpdated?: string;
   breadcrumbItems?: { label: string; href: string }[];
   summary?: string;

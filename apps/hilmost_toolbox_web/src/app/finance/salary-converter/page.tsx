@@ -37,5 +37,12 @@ export default function SalaryConverterPage() {
   const filePath = path.join(process.cwd(), "src/app/finance/salary-converter/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
-  return <SalaryConverterPageUI lastUpdated={lastUpdated} canonicalUrl={getCanonicalUrl(PATH)} />;
+  return (
+    <SalaryConverterPageUI
+      title={TITLE}
+      description={DESC}
+      canonicalUrl={CANONICAL_URL}
+      lastUpdated={lastUpdated}
+    />
+  );
 }

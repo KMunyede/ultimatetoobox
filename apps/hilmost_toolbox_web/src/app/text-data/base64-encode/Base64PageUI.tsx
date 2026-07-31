@@ -5,15 +5,15 @@ import { ShareButton } from "@/components/ShareButton";
 
 export function Base64PageUI({
   defaultMode = "encode",
-  title = "Base64 Text Encoder & Decoder",
-  description = "Free online Base64 text encoder and decoder. Developer-grade data encoding to safely transform your text strings, instantly.",
-  canonicalUrl = "https://hilmost-toolbox.hilmost.net/text-data/base64-encode",
+  title,
+  description,
+  canonicalUrl,
   lastUpdated
 }: {
   defaultMode?: "encode" | "decode";
-  title?: string;
-  description?: string;
-  canonicalUrl?: string;
+  title: string;
+  description: string;
+  canonicalUrl: string;
   lastUpdated?: string;
 }) {
   const breadcrumbItems = [

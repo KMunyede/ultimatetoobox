@@ -8,15 +8,15 @@ type Period = "hourly" | "daily" | "weekly" | "monthly" | "annually";
 
 export function SalaryConverterPageUI({
   defaultPeriod = "annually",
-  title = "Salary Converter",
-  description = "Free online salary converter. Compare your wages and instantly translate hourly rates into daily, weekly, monthly, and annual salaries.",
-  canonicalUrl = "https://hilmost-toolbox.hilmost.net/finance/salary-converter",
+  title,
+  description,
+  canonicalUrl,
   lastUpdated
 }: {
   defaultPeriod?: Period;
-  title?: string;
-  description?: string;
-  canonicalUrl?: string;
+  title: string;
+  description: string;
+  canonicalUrl: string;
   lastUpdated?: string;
 }) {
   const breadcrumbItems = [

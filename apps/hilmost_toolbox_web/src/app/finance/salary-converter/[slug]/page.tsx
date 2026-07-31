@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { SalaryConverterPageUI } from "../SalaryConverterPageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function SalaryProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
-  if (!config) return <SalaryConverterPageUI />;
+  if (!config) return notFound();
 
   const filePath = path.join(process.cwd(), "src/app/finance/salary-converter/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);

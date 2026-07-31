@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Base64PageUI } from "../Base64PageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function Base64ProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
-  if (!config) return <Base64PageUI />;
+  if (!config) return notFound();
 
   const filePath = path.join(process.cwd(), "src/app/text-data/base64-encode/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);

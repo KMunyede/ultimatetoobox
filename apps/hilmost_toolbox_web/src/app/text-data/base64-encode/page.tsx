@@ -39,5 +39,12 @@ export default function Base64Page() {
   const filePath = path.join(process.cwd(), "src/app/text-data/base64-encode/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
-  return <Base64PageUI lastUpdated={lastUpdated} />;
+  return (
+    <Base64PageUI
+      title={TOOL_NAME}
+      description={TOOL_DESC}
+      canonicalUrl={CANONICAL_URL}
+      lastUpdated={lastUpdated}
+    />
+  );
 }
