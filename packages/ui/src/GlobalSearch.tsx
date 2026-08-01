@@ -196,7 +196,7 @@ export function GlobalSearch() {
                         <Search className="w-7 h-7 opacity-20" />
                       </div>
                       <p className="text-lg font-medium text-text-primary">No results found for "{query}"</p>
-                      <p className="text-sm mt-1 max-w-[280px] mx-auto opacity-70">Try searching for generic terms like "Math", "Health", or "Finance".</p>
+                      <p className="text-sm mt-1 max-w-[252px] mx-auto opacity-70">Try searching for generic terms like "Math", "Health", or "Finance".</p>
                     </div>
                   ) : (
                     <ul className="space-y-1.5">

@@ -53,11 +53,11 @@
           <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800 not-prose">
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
-                <span className="font-normal text-slate-900 dark:text-white min-w-[80px]">Email:</span>
+                <span className="font-normal text-slate-900 dark:text-white min-w-[72px]">Email:</span>
                 <a href="mailto:support@hilmost.net" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>
               </li>
               <li className="flex items-start gap-3 pt-2">
-                <span className="font-normal text-slate-900 dark:text-white min-w-[80px]">Address:</span>
+                <span className="font-normal text-slate-900 dark:text-white min-w-[72px]">Address:</span>
                 <address className="text-slate-600 dark:text-slate-400">
                   Harare<br />
                   Zimbabwe

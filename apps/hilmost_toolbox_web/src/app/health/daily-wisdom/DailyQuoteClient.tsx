@@ -99,7 +99,7 @@ export function DailyQuoteClient() {
       
       {/* Mobile Navigation */}
       <div className="flex flex-col items-center gap-4 mt-4 w-full">
-        <div className="flex items-center justify-between w-full max-w-[280px] sm:hidden">
+        <div className="flex items-center justify-between w-full max-w-[252px] sm:hidden">
           <button
             onClick={() => scrollToQuote(activeIndex - 1)}
             className="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-emerald-600 font-normal font-mono text-2xl"

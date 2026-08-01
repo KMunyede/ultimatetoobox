@@ -48,7 +48,7 @@ export function PercentageClient() {
               />
             </div>
             <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">?</span>
-            <div className="flex-1 min-w-[120px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
+            <div className="flex-1 min-w-[108px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
               <span className="text-xl font-normal text-brand-primary">
                 <ScientificNumber value={res1} precision={2} />
               </span>
@@ -76,7 +76,7 @@ export function PercentageClient() {
               />
             </div>
             <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">?</span>
-            <div className="flex-1 min-w-[120px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
+            <div className="flex-1 min-w-[108px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
               <span className="text-xl font-normal text-brand-primary">
                 <ScientificNumber value={res2} precision={2} suffix="%" />
               </span>
@@ -105,7 +105,7 @@ export function PercentageClient() {
               />
             </div>
             <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">is a</span>
-            <div className={`flex-1 min-w-[180px] h-[46px] flex items-center justify-center rounded-lg border-2 mb-0.5 ${res3 >= 0 ? "bg-emerald-50 dark:bg-emerald-900/10 border-emerald-100 dark:border-emerald-800/50 text-emerald-600" : "bg-rose-50 dark:bg-rose-900/10 border-rose-100 dark:border-rose-800/50 text-rose-600"}`}>
+            <div className={`flex-1 min-w-[162px] h-[46px] flex items-center justify-center rounded-lg border-2 mb-0.5 ${res3 >= 0 ? "bg-emerald-50 dark:bg-emerald-900/10 border-emerald-100 dark:border-emerald-800/50 text-emerald-600" : "bg-rose-50 dark:bg-rose-900/10 border-rose-100 dark:border-rose-800/50 text-rose-600"}`}>
               <span className="text-xl font-normal uppercase tracking-tight flex items-baseline gap-1">
                 {res3 > 0 ? "+" : ""}
                 <ScientificNumber value={res3} precision={2} suffix="%" />

@@ -550,7 +550,7 @@ export function IncomeTaxClient() {
                   const conf = TAX_DATA[s.country] || TAX_DATA.usa;
                   const totalGross = s.incomeItems.reduce((acc, i) => acc + (parseFloat(i.amount) || 0), 0);
                   return (
-                    <div key={s.id} className="flex-1 min-w-[220px] bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
+                    <div key={s.id} className="flex-1 min-w-[198px] bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
                       <div className="flex justify-between items-start">
                         <span className="text-caption font-normal text-brand-primary uppercase tracking-widest">{s.label}</span>
                         <span className="text-micro font-normal text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded-md border border-slate-100 dark:border-slate-800 uppercase">{s.frequency}</span>

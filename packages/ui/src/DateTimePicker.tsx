@@ -264,7 +264,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 mt-2 w-full min-w-[320px] max-w-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-4 sm:flex gap-4 sm:min-w-[540px] animate-in fade-in zoom-in-95 duration-200">
+        <div className="absolute z-50 mt-2 w-full min-w-[288px] max-w-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-4 sm:flex gap-4 sm:min-w-[540px] animate-in fade-in zoom-in-95 duration-200">
           {/* Calendar Section */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-4">
@@ -333,7 +333,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
           <div className="sm:hidden h-px bg-slate-200 dark:bg-slate-700 my-4" />
 
           {/* Time Scrollers */}
-          <div className="w-full sm:w-[180px] flex flex-col items-center">
+          <div className="w-full sm:w-[162px] flex flex-col items-center">
             <div className="flex items-center gap-1 text-slate-500 text-sm font-medium mb-3">
               <Clock size={16} /> Time
             </div>

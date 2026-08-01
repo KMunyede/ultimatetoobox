@@ -157,7 +157,7 @@ export function BMIClient() {
             <div className="w-20 h-20 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center border-2 border-slate-100 dark:border-slate-700">
                 <span className="text-4xl font-normal">?</span>
             </div>
-            <p className="max-w-[200px] text-xs font-normal uppercase tracking-widest">Enter height and weight to reveal your BMI</p>
+            <p className="max-w-[180px] text-xs font-normal uppercase tracking-widest">Enter height and weight to reveal your BMI</p>
           </div>
         )}
       </motion.div>

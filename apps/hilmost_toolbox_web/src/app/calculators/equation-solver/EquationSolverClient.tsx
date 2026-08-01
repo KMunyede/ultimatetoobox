@@ -192,7 +192,7 @@ export function EquationSolverClient({
             <button
               key={eq.id}
               onClick={() => handleEquationChange(eq)}
-              className={`p-4 rounded-2xl border-2 text-left transition-all min-w-[200px] md:min-w-0 ${
+              className={`p-4 rounded-2xl border-2 text-left transition-all min-w-[180px] md:min-w-0 ${
                 equation.id === eq.id
                   ? "bg-brand-primary/5 border-brand-primary shadow-sm"
                   : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 hover:border-brand-primary/50 shadow-sm"

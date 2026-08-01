@@ -264,7 +264,7 @@ Macros:
             <button
               key={key}
               onClick={() => setGoal(key)}
-              className={`flex-1 min-w-[140px] p-3 rounded-2xl border-2 transition-all text-center ${goal === key ? 'border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10 text-brand-primary font-normal' : 'border-slate-50 dark:border-slate-950 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 text-slate-400'}`}
+              className={`flex-1 min-w-[126px] p-3 rounded-2xl border-2 transition-all text-center ${goal === key ? 'border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10 text-brand-primary font-normal' : 'border-slate-50 dark:border-slate-950 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 text-slate-400'}`}
             >
               <div className="text-caption font-normal uppercase tracking-widest">{GOAL_CONFIG[key].label}</div>
             </button>
