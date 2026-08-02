@@ -32,7 +32,10 @@ export function PillSelector<T extends string | number>({
         </h3>
       )}
       <div className="flex flex-wrap justify-center gap-2">
-        <div className="inline-flex bg-white dark:bg-slate-950 p-1 rounded-xl border border-[var(--color-border-base)] dark:border-slate-800 shadow-inner">
+        <div
+          className="inline-flex max-w-full overflow-x-auto no-scrollbar flex-nowrap bg-white dark:bg-slate-950 p-1 rounded-xl border border-[var(--color-border-base)] dark:border-slate-800 shadow-inner"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
           {options.map((opt) => (
             <button
               key={opt.value}
