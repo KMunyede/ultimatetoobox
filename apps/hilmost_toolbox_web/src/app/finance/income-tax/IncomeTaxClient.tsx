@@ -426,7 +426,7 @@ export function IncomeTaxClient() {
               </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6 pt-6 border-t border-[var(--color-border-base)] dark:border-slate-800">
+          <div className="relative z-10 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 mt-6 pt-6 border-t border-[var(--color-border-base)] dark:border-slate-800">
               <div className="text-center space-y-1">
                   <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Gross Pay</span>
                   <p className="text-xl font-normal text-black dark:text-white tracking-tight">

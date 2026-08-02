@@ -124,7 +124,7 @@ export function LoanCalculatorClient() {
             </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
+          <div className="relative z-10 grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4 mt-4 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-1">
                 <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Total Interest</span>
                 <p className="text-2xl font-normal text-black dark:text-white">$<NumberTicker value={totalInterest} decimals={0} /></p>

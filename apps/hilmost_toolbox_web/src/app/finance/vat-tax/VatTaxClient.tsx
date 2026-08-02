@@ -80,7 +80,7 @@ export function VatTaxClient() {
             </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-2 gap-8 mt-12 pt-10 border-t border-[var(--color-border-base)] dark:border-slate-800">
+          <div className="relative z-10 grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-8 mt-12 pt-10 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-2">
                 <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Net Price</span>
                 <p className="text-2xl font-normal text-black dark:text-white tracking-tight">

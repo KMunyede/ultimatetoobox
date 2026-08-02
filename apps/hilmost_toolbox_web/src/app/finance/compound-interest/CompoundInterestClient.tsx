@@ -112,7 +112,7 @@ export function CompoundInterestClient() {
             <div id="tour-ci-chart" className="bg-white dark:bg-slate-900 border-2 border-[var(--color-border-base)] dark:border-slate-800 rounded-[2.5rem] p-6 @md:p-10 shadow-sm overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
-                <div className="flex flex-col @md:flex-row justify-between items-start @md:items-center mb-10 gap-6 relative z-10">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] mb-10 gap-6 relative z-10">
                     <div>
                         <span className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Estimated Future Balance</span>
                         <div className="text-4xl @md:text-5xl @lg:text-6xl font-normal text-[var(--color-brand-primary)] tracking-tighter mt-1">
