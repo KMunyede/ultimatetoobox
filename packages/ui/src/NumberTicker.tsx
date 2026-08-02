@@ -36,8 +36,9 @@ export function NumberTicker({
 
   const formatAbbreviated = (v: number) => {
     const absVal = Math.abs(v);
-    if (absVal >= 1000000000) return `${prefix}${(v / 1000000000).toFixed(2)}B${suffix}`;
-    if (absVal >= 1000000) return `${prefix}${(v / 1000000).toFixed(2)}M${suffix}`;
+    if (absVal >= 1000000000000) return `${prefix}${(v / 1000000000000).toFixed(4)}T${suffix}`;
+    if (absVal >= 1000000000) return `${prefix}${(v / 1000000000).toFixed(4)}B${suffix}`;
+    if (absVal >= 1000000) return `${prefix}${(v / 1000000).toFixed(4)}M${suffix}`;
 
     const fixed = v.toFixed(decimals);
     return `${prefix}${formatWithCommas(fixed)}${suffix}`;
@@ -48,13 +49,13 @@ export function NumberTicker({
     maximumFractionDigits: decimals
   })}${suffix}`;
 
-  // Responsive font scaling for numbers just below 1M threshold (e.g. $999,999.99)
+  // Responsive font scaling based on displayed character length
   const scaleStyle = useMemo(() => {
-    const rawStr = value.toFixed(decimals);
+    const rawStr = formatAbbreviated(value);
     if (rawStr.length > 9) return { fontSize: '0.85em' };
     if (rawStr.length > 7) return { fontSize: '0.92em' };
     return {};
-  }, [value, decimals]);
+  }, [value, decimals, prefix, suffix]);
 
   const display = useTransform(springValue, (current) => {
     return formatAbbreviated(current);

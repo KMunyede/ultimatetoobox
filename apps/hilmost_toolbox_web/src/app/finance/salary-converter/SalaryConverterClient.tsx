@@ -1,5 +1,5 @@
 "use client";
-import { NumberTicker, ScientificNumber } from "@utilitiessite/ui";
+import { NumberTicker } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 import { NumberInput } from "../../../components/ui/NumberInput";
@@ -78,7 +78,6 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
         {/* Results Grid */}
         <div id="tour-salary-results" className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {results.map((res, idx) => {
-                const isVeryLarge = res.value >= 100000000;
                 return (
                     <div
                         key={res.label}
@@ -88,19 +87,7 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                             {res.label} Pay
                         </span>
                         <div className={`font-normal tracking-tighter flex items-center justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[160px]' : 'text-xl md:text-2xl min-h-[100px]'}`}>
-                            {isVeryLarge ? (
-                                <ScientificNumber
-                                    value={res.value}
-                                    precision={7}
-                                    prefix="$"
-                                    multiLine={true}
-                                />
-                            ) : (
-                                <>
-                                    <span className="mr-0.5">$</span>
-                                    <NumberTicker value={res.value} decimals={2} />
-                                </>
-                            )}
+                            <NumberTicker value={res.value} decimals={2} prefix="$" />
                         </div>
                     </div>
                 );
