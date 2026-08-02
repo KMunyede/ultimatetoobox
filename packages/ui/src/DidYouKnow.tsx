@@ -68,7 +68,7 @@ export function DidYouKnow({ category }: DidYouKnowProps) {
           <h4 className="text-caption font-normal text-brand-primary uppercase tracking-[0.2em]">
             Did you know?
           </h4>
-          <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+          <p className="text-sm md:text-base text-black dark:text-white font-medium leading-relaxed">
             {fact}
           </p>
         </div>

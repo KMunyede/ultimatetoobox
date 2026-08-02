@@ -27,7 +27,7 @@ export function ThemeToggle() {
           className={`p-1.5 rounded-full transition-colors ${
             theme === "light"
               ? "bg-white dark:bg-gray-700 shadow-sm text-blue-600 dark:text-blue-400"
-              : "text-gray-500 hover:text-gray-900 dark:hover:text-gray-300"
+              : "text-black dark:text-white hover:text-black dark:text-white dark:hover:text-gray-300"
           }`}
           aria-label="Light theme"
         >
@@ -40,7 +40,7 @@ export function ThemeToggle() {
           className={`p-1.5 rounded-full transition-colors ${
             theme === "system"
               ? "bg-white dark:bg-gray-700 shadow-sm text-blue-600 dark:text-blue-400"
-              : "text-gray-500 hover:text-gray-900 dark:hover:text-gray-300"
+              : "text-black dark:text-white hover:text-black dark:text-white dark:hover:text-gray-300"
           }`}
           aria-label="System theme"
         >
@@ -53,7 +53,7 @@ export function ThemeToggle() {
           className={`p-1.5 rounded-full transition-colors ${
             theme === "dark"
               ? "bg-white dark:bg-gray-700 shadow-sm text-blue-600 dark:text-blue-400"
-              : "text-gray-500 hover:text-gray-900 dark:hover:text-gray-300"
+              : "text-black dark:text-white hover:text-black dark:text-white dark:hover:text-gray-300"
           }`}
           aria-label="Dark theme"
         >

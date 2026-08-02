@@ -82,9 +82,9 @@ export function SalaryConverterClient({ defaultPeriod }: { defaultPeriod?: strin
                 return (
                     <div
                         key={res.label}
-                        className={`p-6 rounded-2xl border-2 transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white shadow-sm hover:shadow-md'}`}
+                        className={`p-6 rounded-2xl border-2 transition-all flex flex-col justify-center ${idx === 0 ? 'bg-brand-primary text-white border-brand-primary shadow-xl sm:col-span-2' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white shadow-sm hover:shadow-md'}`}
                     >
-                        <span className={`text-caption font-normal uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-slate-400'}`}>
+                        <span className={`text-caption font-normal uppercase tracking-widest mb-1 ${idx === 0 ? 'text-white/70' : 'text-black dark:text-white'}`}>
                             {res.label} Pay
                         </span>
                         <div className={`font-normal tracking-tighter flex items-center justify-center ${idx === 0 ? 'text-4xl md:text-6xl min-h-[160px]' : 'text-xl md:text-2xl min-h-[100px]'}`}>

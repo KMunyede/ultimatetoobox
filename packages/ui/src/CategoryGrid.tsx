@@ -42,8 +42,8 @@ export function CategoryGrid({ limit = 6, variant = "minimalist" }: CategoryGrid
               {ICON_MAP[cat.icon]}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-normal text-slate-900 dark:text-white truncate">{cat.name}</h3>
-              <p className="text-caption font-normal text-slate-400 uppercase tracking-widest">
+              <h3 className="font-normal text-black dark:text-white truncate">{cat.name}</h3>
+              <p className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">
                 {cat.count} Utilities
               </p>
             </div>
@@ -60,7 +60,7 @@ export function CategoryGrid({ limit = 6, variant = "minimalist" }: CategoryGrid
             <span className="text-xs font-normal uppercase tracking-widest text-blue-600">
               View All {categories.length} Categories
             </span>
-            <span className="text-caption text-slate-400 mt-1 font-medium">
+            <span className="text-caption text-black dark:text-white mt-1 font-medium">
               hilmost-toolbox.hilmost.net
             </span>
           </Link>

@@ -79,7 +79,7 @@ export function ScientificInput({
   return (
     <div className="flex flex-col gap-3 p-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm transition-all hover:shadow-md">
       <div className="flex items-center justify-between px-1">
-        <label className="text-caption font-normal text-slate-400 uppercase tracking-widest">{label}</label>
+        <label className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">{label}</label>
         {selectedPreset === "Custom" && (
           <span className="text-micro font-normal text-brand-primary uppercase tracking-widest bg-brand-primary/5 px-2 py-0.5 rounded-full">
             Custom
@@ -97,7 +97,7 @@ export function ScientificInput({
               className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
                 selectedPreset === p.label
                   ? "bg-brand-primary text-white border-brand-primary shadow-sm"
-                  : "bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-transparent hover:border-slate-200"
+                  : "bg-slate-50 dark:bg-slate-800 text-black dark:text-white border-transparent hover:border-slate-200"
               }`}
             >
               {p.label}
@@ -108,7 +108,7 @@ export function ScientificInput({
             className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
               selectedPreset === "Custom"
                 ? "bg-brand-primary text-white border-brand-primary shadow-sm"
-                : "bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-transparent hover:border-slate-200"
+                : "bg-slate-50 dark:bg-slate-800 text-black dark:text-white border-transparent hover:border-slate-200"
             }`}
           >
             Custom...
@@ -138,10 +138,10 @@ export function ScientificInput({
                 inputMode="decimal"
                 value={coefStr}
                 onChange={(e) => handleCustomChange(e.target.value.replace(/[^0-9.-]/g, ""), expStr)}
-                className="flex-1 min-w-[70px] bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-3 py-2 font-mono font-normal text-slate-900 dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base shadow-inner"
+                className="flex-1 min-w-[70px] bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-3 py-2 font-mono font-normal text-black dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base shadow-inner"
                 placeholder="1.0"
               />
-              <span className="text-slate-400 font-normal text-caption uppercase whitespace-nowrap shrink-0">
+              <span className="text-black dark:text-white font-normal text-caption uppercase whitespace-nowrap shrink-0">
                 &times; 10^
               </span>
               <input
@@ -149,7 +149,7 @@ export function ScientificInput({
                 inputMode="numeric"
                 value={expStr}
                 onChange={(e) => handleCustomChange(coefStr, e.target.value.replace(/[^0-9-]/g, ""))}
-                className="w-14 sm:w-16 bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-2 py-2 font-mono font-normal text-slate-900 dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base text-center shadow-inner"
+                className="w-14 sm:w-16 bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-2 py-2 font-mono font-normal text-black dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base text-center shadow-inner"
                 placeholder="0"
               />
             </div>
@@ -161,13 +161,13 @@ export function ScientificInput({
                    <select
                       value={currentUnitMult}
                       onChange={(e) => handleUnitChange(parseFloat(e.target.value))}
-                      className="w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg pl-3 pr-8 py-2 text-xs font-normal text-slate-700 dark:text-slate-300 outline-none cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all appearance-none"
+                      className="w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg pl-3 pr-8 py-2 text-xs font-normal text-black dark:text-white outline-none cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all appearance-none"
                     >
                       {units.map((u) => (
                         <option key={u.label} value={u.value}>{u.label}</option>
                       ))}
                     </select>
-                    <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-black dark:text-white pointer-events-none" />
                 </div>
               </div>
             )}

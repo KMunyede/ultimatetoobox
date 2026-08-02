@@ -44,7 +44,7 @@ export function JWTDecoderClient() {
       {/* Input Section */}
       <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
         <div className="flex items-center justify-between mb-4">
-            <label className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <label className="text-caption font-normal uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
                 <Key size={14} className="text-brand-primary" /> Paste Encoded Token
             </label>
             {error && <span className="text-caption font-normal text-rose-500 uppercase flex items-center gap-1"><AlertCircle size={12} /> {error}</span>}
@@ -101,10 +101,10 @@ export function JWTDecoderClient() {
          <label className="text-caption font-normal uppercase tracking-widest text-brand-primary flex items-center gap-2 mb-3">
              Signature
          </label>
-         <div className="bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-caption text-slate-500 break-all select-none shadow-inner">
+         <div className="bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-caption text-black dark:text-white break-all select-none shadow-inner">
              {decoded ? `HMACSHA256( base64UrlEncode(header) + "." + base64UrlEncode(payload), [YOUR_SECRET_KEY] )` : "// Signature mechanism details"}
          </div>
-         <p className="mt-3 text-caption text-slate-400 font-normal uppercase tracking-widest text-center">
+         <p className="mt-3 text-caption text-black dark:text-white font-normal uppercase tracking-widest text-center">
              Note: For security reasons, we do not perform signature verification. Your secret keys should never be entered into any website.
          </p>
       </div>

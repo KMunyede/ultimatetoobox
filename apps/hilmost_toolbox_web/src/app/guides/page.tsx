@@ -79,7 +79,7 @@ export default function GuidesIndex() {
               <span className="text-caption font-normal uppercase tracking-[0.2em] text-brand-primary block">
                 {guide.category.replace("-", " ")}
               </span>
-              <span className="inline-flex items-center gap-1 text-caption font-normal text-slate-400 uppercase">
+              <span className="inline-flex items-center gap-1 text-caption font-normal text-black dark:text-white uppercase">
                 <Calendar size={10} />
                 {lastUpdated}
               </span>

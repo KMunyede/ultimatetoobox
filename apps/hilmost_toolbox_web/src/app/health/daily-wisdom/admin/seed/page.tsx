@@ -70,7 +70,7 @@ export default function AdminSeedPage() {
   return (
     <div className="container mx-auto py-16 px-4 max-w-2xl text-center">
       <h1 className="text-3xl font-normal mb-6">Database Seeding Tool</h1>
-      <p className="mb-8 text-slate-600">
+      <p className="mb-8 text-black dark:text-white">
         This tool fetches quotes from ZenQuotes and populates the Firestore database up to the 1001 limit.
       </p>
 

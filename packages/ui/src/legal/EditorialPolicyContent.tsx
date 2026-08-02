@@ -9,10 +9,10 @@ export function EditorialPolicyContent() {
           <ShieldCheck size={14} />
           Trust & Transparency
         </div>
-        <h1 className="text-4xl md:text-6xl font-normal text-slate-900 dark:text-white tracking-tight leading-none mb-6">
+        <h1 className="text-4xl md:text-6xl font-normal text-black dark:text-white tracking-tight leading-none mb-6">
           Editorial & Accuracy <span className="text-brand-primary">Policy</span>
         </h1>
-        <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium">
+        <p className="text-xl text-black dark:text-white max-w-2xl mx-auto leading-relaxed font-medium">
           How Hilmost Software Corporation ensures the mathematical integrity, professional reliability, and absolute privacy of every tool we build.
         </p>
       </header>
@@ -20,22 +20,22 @@ export function EditorialPolicyContent() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
         <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
           <Scale className="text-brand-primary mb-6" size={32} />
-          <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-4 uppercase tracking-tight">Mathematical Precision</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          <h3 className="text-xl font-normal text-black dark:text-white mb-4 uppercase tracking-tight">Mathematical Precision</h3>
+          <p className="text-black dark:text-white leading-relaxed">
             Our finance and science tools utilize industry-standard libraries (like Math.js) and 64-bit floating-point precision. Every formula is verified against NIST standards and authoritative financial models.
           </p>
         </div>
         <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
           <Lock className="text-brand-primary mb-6" size={32} />
-          <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-4 uppercase tracking-tight">Privacy by Design</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          <h3 className="text-xl font-normal text-black dark:text-white mb-4 uppercase tracking-tight">Privacy by Design</h3>
+          <p className="text-black dark:text-white leading-relaxed">
             We employ a &quot;Zero-Upload&quot; architecture. Your sensitive data—whether it&apos;s a PDF contract or a monthly budget—is processed 100% locally in your browser. We never see your data.
           </p>
         </div>
         <div className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
           <MousePointer2 className="text-brand-primary mb-6" size={32} />
-          <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-4 uppercase tracking-tight">Independence</h3>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          <h3 className="text-xl font-normal text-black dark:text-white mb-4 uppercase tracking-tight">Independence</h3>
+          <p className="text-black dark:text-white leading-relaxed">
             The mathematical logic of our tools is never influenced by advertisers. Our primary goal is utility and accuracy, ensuring you get unbiased results every time you click.
           </p>
         </div>
@@ -57,7 +57,7 @@ export function EditorialPolicyContent() {
       </article>
 
       <footer className="pt-12 border-t border-slate-200 dark:border-slate-800 text-center">
-        <p className="text-sm font-normal text-slate-400 uppercase tracking-widest">
+        <p className="text-sm font-normal text-black dark:text-white uppercase tracking-widest">
           Last Reviewed: June 2026
         </p>
       </footer>

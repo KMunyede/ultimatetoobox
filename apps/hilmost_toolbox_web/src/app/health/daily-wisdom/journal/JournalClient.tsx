@@ -39,7 +39,7 @@ export function JournalClient() {
           value={newEntry}
           onChange={(e) => setNewEntry(e.target.value)}
           placeholder="What's on your mind today? Write it down and let it go..."
-          className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/20 transition-all min-h-[160px] resize-y text-center"
+          className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 text-black dark:text-white focus:ring-2 focus:ring-emerald-500/20 transition-all min-h-[160px] resize-y text-center"
         />
         <div className="mt-4 flex justify-center">
           <button
@@ -69,7 +69,7 @@ export function JournalClient() {
       </AnimatePresence>
 
       <div className="text-center pt-8 opacity-60">
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-black dark:text-white">
           This is an ephemeral journal. Your thoughts are not saved anywhere—they simply float away.
         </p>
       </div>

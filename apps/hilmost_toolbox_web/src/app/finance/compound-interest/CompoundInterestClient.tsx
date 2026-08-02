@@ -114,14 +114,14 @@ export function CompoundInterestClient() {
 
                 <div className="flex flex-col @md:flex-row justify-between items-start @md:items-center mb-10 gap-6 relative z-10">
                     <div>
-                        <span className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Estimated Future Balance</span>
+                        <span className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Estimated Future Balance</span>
                         <div className="text-4xl @md:text-5xl @lg:text-6xl font-normal text-[var(--color-brand-primary)] tracking-tighter mt-1">
                             $<NumberTicker value={finalBalance} decimals={0} />
                         </div>
                     </div>
                     <div className="@md:text-right">
-                        <span className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Total Interest Earned</span>
-                        <div className="text-2xl font-normal text-slate-900 dark:text-white mt-1">
+                        <span className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Total Interest Earned</span>
+                        <div className="text-2xl font-normal text-black dark:text-white mt-1">
                           +<NumberTicker value={totalInterest} decimals={0} />
                         </div>
                     </div>
@@ -160,11 +160,11 @@ export function CompoundInterestClient() {
                 <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-10 relative z-10">
                     <div className="flex items-center gap-2.5">
                         <div className="w-3.5 h-3.5 rounded-full bg-brand-primary shadow-sm" />
-                        <span className="text-caption font-normal text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Portfolio</span>
+                        <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest whitespace-nowrap">Total Portfolio</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                         <div className="w-3.5 h-3.5 rounded-full border-2 border-dashed border-slate-300" />
-                        <span className="text-caption font-normal text-slate-400 uppercase tracking-widest whitespace-nowrap">Total Contributions</span>
+                        <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest whitespace-nowrap">Total Contributions</span>
                     </div>
                 </div>
             </div>

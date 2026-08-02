@@ -40,7 +40,7 @@ export function PillSelector<T extends string | number>({
               className={`px-6 py-3 rounded-lg text-caption font-normal uppercase tracking-widest transition-all ${
                 value === opt.value
                   ? "bg-[var(--color-brand-primary)] text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                  : "text-black dark:text-white hover:text-black dark:text-white dark:hover:text-white"
               } ${pillClassName}`}
             >
               {opt.label}

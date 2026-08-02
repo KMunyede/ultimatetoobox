@@ -71,7 +71,7 @@ export function DataStorageClient() {
           
           {/* Input 1 */}
           <div id="tour-ds-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">From</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-black dark:text-white ml-1">From</label>
             <div className="space-y-4">
               <NumberInput
                 value={val1}
@@ -93,7 +93,7 @@ export function DataStorageClient() {
 
           {/* Input 2 */}
           <div id="tour-ds-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-slate-500 ml-1">To</label>
+            <label className="block text-caption font-normal uppercase tracking-widest text-black dark:text-white ml-1">To</label>
             <div className="space-y-4">
               <NumberInput
                 value={val2}
@@ -112,7 +112,7 @@ export function DataStorageClient() {
         </div>
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <p className="text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest text-sm">
+            <p className="text-black dark:text-white font-normal uppercase tracking-widest text-sm">
                 {val1 || "0"} {unit1} equals <span className="text-brand-primary font-normal text-xl">
                   <ScientificNumber value={parseFloat(val2) || 0} precision={6} />
                 </span> {unit2}

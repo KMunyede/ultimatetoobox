@@ -120,7 +120,7 @@ export function WeightConverterClient({ defaultUnit1, defaultUnit2 }: { defaultU
         </div>
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <p className="text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest text-sm">
+            <p className="text-black dark:text-white font-normal uppercase tracking-widest text-sm">
                 {val1 || "0"} {formatUnitName(unit1)} is exactly <span className="text-brand-primary font-normal text-xl">
                   <ScientificNumber value={parseFloat(val2) || 0} precision={6} />
                 </span> {formatUnitName(unit2)}

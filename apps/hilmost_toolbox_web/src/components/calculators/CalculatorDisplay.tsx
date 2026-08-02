@@ -39,11 +39,11 @@ export function CalculatorDisplay({
       <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm overflow-hidden">
         <div className="flex flex-col items-end min-h-[80px] justify-center">
           {/* Expression Line */}
-          <div className="text-sm font-mono text-slate-500 dark:text-slate-400 break-all text-right w-full pr-8">
+          <div className="text-sm font-mono text-black dark:text-white break-all text-right w-full pr-8">
             {expression || "\u00A0"}
           </div>
           {/* Result Line */}
-          <div className="text-3xl md:text-4xl font-mono font-normal text-slate-900 dark:text-white break-all text-right w-full pr-8 mt-1">
+          <div className="text-3xl md:text-4xl font-mono font-normal text-black dark:text-white break-all text-right w-full pr-8 mt-1">
             {formatValue(result) || "0"}
           </div>
         </div>
@@ -54,7 +54,7 @@ export function CalculatorDisplay({
           className={`absolute top-4 right-4 p-2 rounded-lg transition-colors ${
             showHistory
               ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-              : "text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
           }`}
           title="History Tape"
         >
@@ -75,8 +75,8 @@ export function CalculatorDisplay({
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-normal text-slate-900 dark:text-white uppercase tracking-wider">History tape</span>
-                  <span className="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-xs px-2 py-0.5 rounded-full font-normal">
+                  <span className="text-sm font-normal text-black dark:text-white uppercase tracking-wider">History tape</span>
+                  <span className="bg-slate-200 dark:bg-slate-700 text-black dark:text-white text-xs px-2 py-0.5 rounded-full font-normal">
                     {history.length}
                   </span>
                 </div>
@@ -94,7 +94,7 @@ export function CalculatorDisplay({
               {/* Entries */}
               <div className="max-h-[300px] overflow-y-auto">
                 {history.length === 0 ? (
-                  <div className="p-8 text-center text-sm text-slate-500 dark:text-slate-400">
+                  <div className="p-8 text-center text-sm text-black dark:text-white">
                     No history yet
                   </div>
                 ) : (
@@ -107,10 +107,10 @@ export function CalculatorDisplay({
                           index === 0 ? "bg-[#E6F1FB] dark:bg-blue-900/20" : ""
                         }`}
                       >
-                        <div className="text-xs font-mono text-slate-500 dark:text-slate-400 mb-1 break-all">
+                        <div className="text-xs font-mono text-black dark:text-white mb-1 break-all">
                           {entry.expression}
                         </div>
-                        <div className="text-base font-mono font-normal text-slate-900 dark:text-white break-all">
+                        <div className="text-base font-mono font-normal text-black dark:text-white break-all">
                           = {formatValue(entry.result)}
                         </div>
 

@@ -61,7 +61,7 @@ export function ConstantSelector({ onSelect }: ConstantSelectorProps) {
       {isOpen && (
         <div className="absolute right-0 top-full mt-2 w-72 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl z-50 overflow-hidden">
           <div className="px-4 py-2 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700">
-            <span className="text-xs font-normal text-slate-500 uppercase tracking-wider">Universal Constants</span>
+            <span className="text-xs font-normal text-black dark:text-white uppercase tracking-wider">Universal Constants</span>
           </div>
           <div className="max-h-64 overflow-y-auto no-scrollbar">
             {UNIVERSAL_CONSTANTS.map((c, i) => (
@@ -72,10 +72,10 @@ export function ConstantSelector({ onSelect }: ConstantSelectorProps) {
                 className="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 border-b border-slate-100 dark:border-slate-700/50 last:border-0 transition-colors group"
               >
                 <div className="flex justify-between items-baseline mb-0.5">
-                  <span className="font-medium text-slate-900 dark:text-slate-100">{c.name}</span>
+                  <span className="font-medium text-black dark:text-white">{c.name}</span>
                   <span className="text-sm font-normal text-blue-600 dark:text-blue-400 font-serif">{c.symbol}</span>
                 </div>
-                <div className="text-xs text-slate-500 font-mono group-hover:text-slate-700 dark:group-hover:text-slate-300">
+                <div className="text-xs text-black dark:text-white font-mono group-hover:text-black dark:text-white dark:group-hover:text-slate-300">
                   {c.value} {c.unit}
                 </div>
               </button>

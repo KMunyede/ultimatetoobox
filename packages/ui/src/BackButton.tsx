@@ -66,7 +66,7 @@ export function BackButton() {
     <Tooltip content="Go back to the previous page">
       <button 
         onClick={handleBack}
-        className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors mr-2"
+        className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-black dark:text-white transition-colors mr-2"
         aria-label="Go back"
       >
         <ArrowLeft size={20} />

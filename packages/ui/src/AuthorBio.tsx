@@ -17,7 +17,7 @@ export function AuthorBio({
 }: AuthorBioProps) {
   return (
     <div className={`mt-6 p-5 bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 ${className}`}>
-      <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium text-center md:text-left">
+      <p className="text-xs md:text-sm text-black dark:text-white font-medium text-center md:text-left">
         Every tool runs entirely in your browser. No sign-up, no data collection, no unnecessary steps.
       </p>
 

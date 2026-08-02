@@ -19,7 +19,7 @@ export function SourceReference({ sources, title = "Data Sources & References" }
         <div className="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
           <BookOpen size={16} />
         </div>
-        <h4 className="text-xs font-normal text-slate-900 dark:text-white uppercase tracking-[0.1em]">
+        <h4 className="text-xs font-normal text-black dark:text-white uppercase tracking-[0.1em]">
           {title}
         </h4>
       </div>
@@ -38,7 +38,7 @@ export function SourceReference({ sources, title = "Data Sources & References" }
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-caption text-slate-400 dark:text-slate-500 leading-relaxed">
+      <p className="mt-6 text-caption text-black dark:text-white leading-relaxed">
         Hilmost Ultimate Toolbox prioritizes accuracy by utilizing standard scientific constants and verified financial methodologies. These tools are provided for educational and informational purposes.
       </p>
     </div>

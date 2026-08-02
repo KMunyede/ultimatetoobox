@@ -227,7 +227,7 @@ export function AstrophysicsCalculatorClient({
       <div className="flex justify-end items-center gap-4 px-2">
         <div className="flex items-center gap-2 mr-auto">
           <div className={`w-2 h-2 rounded-full ${isAstronomerMode ? 'bg-rose-500 animate-pulse' : 'bg-brand-primary'}`} />
-          <span className={`text-caption font-normal uppercase tracking-widest ${isAstronomerMode ? 'text-rose-500' : 'text-slate-400'}`}>
+          <span className={`text-caption font-normal uppercase tracking-widest ${isAstronomerMode ? 'text-rose-500' : 'text-black dark:text-white'}`}>
             {isAstronomerMode ? 'Red Night-Vision Active' : 'Daylight Mode'}
           </span>
         </div>
@@ -237,7 +237,7 @@ export function AstrophysicsCalculatorClient({
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-caption font-normal uppercase tracking-widest border-2 transition-all active:scale-95 ${
             isAstronomerMode
               ? 'bg-rose-950 text-rose-500 border-rose-900 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
-              : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-500 hover:border-brand-primary'
+              : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white hover:border-brand-primary'
           }`}
         >
           <MoonStar size={14} className={isAstronomerMode ? 'animate-pulse' : ''} />
@@ -250,10 +250,10 @@ export function AstrophysicsCalculatorClient({
         .astronomer-theme .bg-slate-900 { background-color: #0c0000 !important; }
         .astronomer-theme .bg-slate-50 { background-color: #1a0000 !important; }
         .astronomer-theme .bg-slate-950 { background-color: #1a0000 !important; }
-        .astronomer-theme .text-slate-900 { color: #ff3333 !important; }
-        .astronomer-theme .text-slate-800 { color: #ff3333 !important; }
-        .astronomer-theme .text-slate-500 { color: #cc0000 !important; }
-        .astronomer-theme .text-slate-400 { color: #880000 !important; }
+        .astronomer-theme .text-black { color: #ff3333 !important; }
+        .astronomer-theme .text-black { color: #ff3333 !important; }
+        .astronomer-theme .text-black { color: #cc0000 !important; }
+        .astronomer-theme .text-black { color: #880000 !important; }
         .astronomer-theme .bg-brand-primary { background-color: #660000 !important; color: #ff3333 !important; }
         .astronomer-theme .border-slate-200, .astronomer-theme .border-slate-100, .astronomer-theme .border-slate-800 { border-color: #330000 !important; }
         .astronomer-theme .shadow-sm, .astronomer-theme .shadow-xl { box-shadow: 0 10px 15px -3px rgba(139, 0, 0, 0.1) !important; }
@@ -265,14 +265,14 @@ export function AstrophysicsCalculatorClient({
           {/* Controls Column */}
           <div className="lg:col-span-1 flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-caption font-normal text-slate-400 uppercase tracking-widest ml-1">Calculation Type</label>
+              <label className="text-caption font-normal text-black dark:text-white uppercase tracking-widest ml-1">Calculation Type</label>
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl px-4 py-2.5 flex items-center justify-between gap-2 text-left transition-all outline-none shadow-inner group"
                 >
-                  <span className="text-caption font-normal text-slate-900 dark:text-white uppercase leading-tight">
+                  <span className="text-caption font-normal text-black dark:text-white uppercase leading-tight">
                     {CALC_OPTIONS.find(opt => opt.value === calcType)?.label}
                   </span>
                   <ChevronDown size={16} className={`text-slate-400 shrink-0 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -298,7 +298,7 @@ export function AstrophysicsCalculatorClient({
                             className={`w-full px-4 py-2.5 text-left transition-colors flex items-center gap-3 border-b border-slate-50 dark:border-slate-800 last:border-0 ${
                               calcType === option.value
                                 ? "bg-brand-primary/10 text-brand-primary font-normal"
-                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                : "text-black dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800"
                             }`}
                           >
                             <span className="text-caption font-normal uppercase tracking-widest">

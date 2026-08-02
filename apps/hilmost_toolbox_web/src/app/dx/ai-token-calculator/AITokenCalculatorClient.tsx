@@ -62,11 +62,11 @@ export function AITokenCalculatorClient() {
         <div className="lg:col-span-2 space-y-4">
           <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
             <div className="flex items-center justify-between mb-3">
-              <label className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+              <label className="text-caption font-normal uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
                 <Cpu size={14} className="text-brand-primary" />
                 Prompt Analysis
               </label>
-              <div className="text-caption font-normal text-slate-400 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded">
+              <div className="text-caption font-normal text-black dark:text-white bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded">
                 {stats.charCount.toLocaleString()} Characters
               </div>
             </div>
@@ -79,8 +79,8 @@ export function AITokenCalculatorClient() {
           </div>
 
           <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex gap-3">
-            <HelpCircle className="text-slate-400 shrink-0" size={18} />
-            <p className="text-caption text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+            <HelpCircle className="text-black dark:text-white shrink-0" size={18} />
+            <p className="text-caption text-black dark:text-white leading-relaxed font-medium">
               <strong>About these estimates:</strong> Model providers update tokenizers and pricing frequently. These calculations use a standard 4-character-per-token benchmark. Always confirm current rates and specific model vocabularies (e.g. O200k, Tiktoken) directly with providers before making financial decisions.
             </p>
           </div>
@@ -91,7 +91,7 @@ export function AITokenCalculatorClient() {
           {/* Token Estimate Card */}
           <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 text-center space-y-4">
             <div className="space-y-1">
-              <span className="text-caption font-normal text-slate-400 uppercase tracking-widest flex items-center justify-center gap-1">
+              <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest flex items-center justify-center gap-1">
                 Estimated Tokens
                 <Tooltip content="Heuristic estimate (~4 chars/token). Actual count depends on model vocabulary.">
                   <Info size={12} className="cursor-help" />
@@ -104,12 +104,12 @@ export function AITokenCalculatorClient() {
 
             <div className="grid grid-cols-2 gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
               <div className="text-center">
-                <p className="text-micro font-normal text-slate-400 uppercase">Words</p>
-                <p className="text-sm font-normal text-slate-900 dark:text-white">{stats.wordCount.toLocaleString()}</p>
+                <p className="text-micro font-normal text-black dark:text-white uppercase">Words</p>
+                <p className="text-sm font-normal text-black dark:text-white">{stats.wordCount.toLocaleString()}</p>
               </div>
               <div className="text-center">
-                <p className="text-micro font-normal text-slate-400 uppercase">Pages</p>
-                <p className="text-sm font-normal text-slate-900 dark:text-white">{(stats.wordCount / 500).toFixed(1)}</p>
+                <p className="text-micro font-normal text-black dark:text-white uppercase">Pages</p>
+                <p className="text-sm font-normal text-black dark:text-white">{(stats.wordCount / 500).toFixed(1)}</p>
               </div>
             </div>
           </div>
@@ -117,11 +117,11 @@ export function AITokenCalculatorClient() {
           {/* Cost Projector */}
           <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-4 relative overflow-hidden">
             <div className="flex items-center justify-between">
-              <h3 className="text-caption font-normal text-slate-900 dark:text-white uppercase tracking-widest flex items-center gap-2">
+              <h3 className="text-caption font-normal text-black dark:text-white uppercase tracking-widest flex items-center gap-2">
                 <Calculator size={14} className="text-blue-500" />
                 Cost Projector
               </h3>
-              <div className="text-micro font-normal text-slate-400 uppercase">
+              <div className="text-micro font-normal text-black dark:text-white uppercase">
                 Reference Pricing
               </div>
             </div>
@@ -181,12 +181,12 @@ export function AITokenCalculatorClient() {
 
             <div className="pt-4 space-y-3 border-t border-slate-100 dark:border-slate-800">
               <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-500 font-medium">Input Cost</span>
-                <span className="font-normal text-slate-900 dark:text-white">${pricing.inCost.toFixed(4)}</span>
+                <span className="text-black dark:text-white font-medium">Input Cost</span>
+                <span className="font-normal text-black dark:text-white">${pricing.inCost.toFixed(4)}</span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-500 font-medium">Projected Output</span>
-                <span className="font-normal text-slate-900 dark:text-white">${pricing.outCost.toFixed(4)}</span>
+                <span className="text-black dark:text-white font-medium">Projected Output</span>
+                <span className="font-normal text-black dark:text-white">${pricing.outCost.toFixed(4)}</span>
               </div>
               <div className="pt-3 border-t-2 border-slate-50 dark:border-slate-800 flex justify-between items-center">
                 <span className="text-caption font-normal text-brand-primary uppercase tracking-widest">Estimated Total</span>
@@ -197,7 +197,7 @@ export function AITokenCalculatorClient() {
             </div>
 
             <div className="pt-2">
-              <p className="text-micro text-slate-400 leading-tight text-center">
+              <p className="text-micro text-black dark:text-white leading-tight text-center">
                 Model lineup and prices are illustrative examples. Providers frequently update models and rates. Verify current pricing directly with providers before budgeting.
               </p>
             </div>

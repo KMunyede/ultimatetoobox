@@ -116,8 +116,8 @@ export function SplitPDFClient() {
               <IconUpload size={32} />
             </div>
             <div>
-              <p className="text-xl font-normal text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
-              <p className="text-caption text-slate-400 mt-1 font-normal uppercase tracking-widest">Select one PDF to split</p>
+              <p className="text-xl font-normal text-black dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
+              <p className="text-caption text-black dark:text-white mt-1 font-normal uppercase tracking-widest">Select one PDF to split</p>
             </div>
           </div>
         </div>
@@ -126,8 +126,8 @@ export function SplitPDFClient() {
           <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
             <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0 rounded border border-slate-100" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
-              <h3 className="text-xl font-normal text-slate-900 dark:text-white truncate">{file.name}</h3>
-              <p className="text-slate-400 font-normal uppercase text-caption tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <h3 className="text-xl font-normal text-black dark:text-white truncate">{file.name}</h3>
+              <p className="text-black dark:text-white font-normal uppercase text-caption tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
               <button
                 onClick={() => setFile(null)}
                 className="mt-4 text-caption font-normal text-rose-500 uppercase tracking-widest hover:underline"
@@ -140,7 +140,7 @@ export function SplitPDFClient() {
           {loadingPdf && (
             <div className="flex flex-col items-center gap-4 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-100 dark:border-slate-800">
               <IconLoader2 className="animate-spin text-brand-primary" size={32} />
-              <p className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Analyzing Document...</p>
+              <p className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Analyzing Document...</p>
             </div>
           )}
 
@@ -168,7 +168,7 @@ export function SplitPDFClient() {
                     >
                       <PDFThumbnail pdfProxy={pdfProxy} pageNumber={i + 1} className="w-full aspect-[3/4] rounded" />
                       <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center font-normal text-caption ${
-                        extractPages.includes(i) ? "bg-brand-primary text-white" : "bg-slate-100 dark:bg-slate-800 text-slate-400"
+                        extractPages.includes(i) ? "bg-brand-primary text-white" : "bg-slate-100 dark:bg-slate-800 text-black dark:text-white"
                       }`}>
                         {i + 1}
                       </div>
@@ -185,7 +185,7 @@ export function SplitPDFClient() {
                     placeholder="e.g. 1-5, 8, 11-14"
                     className="text-lg font-mono font-normal"
                   />
-                  <p className="text-caption text-slate-400 font-normal uppercase tracking-widest text-center">Use commas for multiple ranges (e.g. 1-3, 5, 10-12)</p>
+                  <p className="text-caption text-black dark:text-white font-normal uppercase tracking-widest text-center">Use commas for multiple ranges (e.g. 1-3, 5, 10-12)</p>
                 </div>
               )}
             </div>

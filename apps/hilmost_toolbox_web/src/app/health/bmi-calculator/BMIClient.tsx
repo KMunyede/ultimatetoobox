@@ -100,7 +100,7 @@ export function BMIClient() {
                      min={2}
                      max={8}
                   />
-                  <span className="absolute right-4 bottom-3 text-slate-400 font-normal text-xs">ft</span>
+                  <span className="absolute right-4 bottom-3 text-black dark:text-white font-normal text-xs">ft</span>
                 </div>
                 <div className="flex-1 relative">
                   <NumberInput
@@ -110,7 +110,7 @@ export function BMIClient() {
                      min={0}
                      max={11}
                   />
-                  <span className="absolute right-4 bottom-3 text-slate-400 font-normal text-xs">in</span>
+                  <span className="absolute right-4 bottom-3 text-black dark:text-white font-normal text-xs">in</span>
                 </div>
               </div>
             </div>
@@ -135,8 +135,8 @@ export function BMIClient() {
       >
         {bmi !== null && !isNaN(bmi) && isFinite(bmi) ? (
           <>
-            <div className="text-caption font-normal uppercase tracking-[0.2em] text-slate-400 mb-2">Your BMI Score</div>
-            <div className="text-6xl md:text-7xl font-normal text-slate-900 dark:text-white mb-8 tracking-tighter">
+            <div className="text-caption font-normal uppercase tracking-[0.2em] text-black dark:text-white mb-2">Your BMI Score</div>
+            <div className="text-6xl md:text-7xl font-normal text-black dark:text-white mb-8 tracking-tighter">
               <NumberTicker value={bmi} decimals={1} duration={0.8} />
             </div>
             {(() => {

@@ -47,7 +47,7 @@ export function JSONFormatterClient() {
       {/* Left: Input */}
       <div className="flex flex-col h-[500px]">
         <div className="flex items-center justify-between mb-3 px-1">
-          <label className="text-caption font-normal uppercase tracking-widest text-slate-500 flex items-center gap-2">
+          <label className="text-caption font-normal uppercase tracking-widest text-black dark:text-white flex items-center gap-2">
             Raw Input
             {error && <span className="text-rose-500 animate-pulse flex items-center gap-1"><AlertCircle size={12} /> Invalid</span>}
             {!error && input && <span className="text-emerald-500 flex items-center gap-1"><CheckCircle2 size={12} /> Valid</span>}
@@ -61,7 +61,7 @@ export function JSONFormatterClient() {
             </button>
             <button
               onClick={handleClear}
-              className="text-slate-400 hover:text-rose-500 transition-colors p-1"
+              className="text-black dark:text-white hover:text-rose-500 transition-colors p-1"
               title="Clear Input"
             >
               <Trash2 size={14} />
@@ -88,13 +88,13 @@ export function JSONFormatterClient() {
           <div className="flex items-center gap-4" id="tour-json-actions">
             <button
               onClick={() => setIsPretty(true)}
-              className={`text-caption font-normal uppercase tracking-widest flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${isPretty ? 'bg-brand-primary text-white shadow-sm' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
+              className={`text-caption font-normal uppercase tracking-widest flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${isPretty ? 'bg-brand-primary text-white shadow-sm' : 'text-black dark:text-white hover:text-black dark:text-white dark:hover:text-white'}`}
             >
               <Maximize2 size={14} /> Pretty
             </button>
             <button
               onClick={() => setIsPretty(false)}
-              className={`text-caption font-normal uppercase tracking-widest flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${!isPretty ? 'bg-brand-primary text-white shadow-sm' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
+              className={`text-caption font-normal uppercase tracking-widest flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${!isPretty ? 'bg-brand-primary text-white shadow-sm' : 'text-black dark:text-white hover:text-black dark:text-white dark:hover:text-white'}`}
             >
               <Minimize2 size={14} /> Minify
             </button>
@@ -105,7 +105,7 @@ export function JSONFormatterClient() {
         </div>
         <div className="flex-1 relative bg-slate-900 rounded-2xl overflow-hidden border-2 border-slate-800 shadow-xl">
            {!output && !error && (
-             <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500 opacity-30 select-none">
+             <div className="absolute inset-0 flex flex-col items-center justify-center text-black dark:text-white opacity-30 select-none">
                 <Sparkles size={48} className="mb-4" />
                 <p className="text-caption font-normal uppercase tracking-widest text-center px-8">Result will appear here instantly</p>
              </div>

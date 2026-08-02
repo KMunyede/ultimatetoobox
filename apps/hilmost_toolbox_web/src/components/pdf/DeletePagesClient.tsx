@@ -92,8 +92,8 @@ export function DeletePagesClient() {
               <IconUpload size={32} />
             </div>
             <div>
-              <p className="text-xl font-normal text-slate-900 dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
-              <p className="text-caption text-slate-400 mt-1 font-normal uppercase tracking-widest">Select one PDF to clean</p>
+              <p className="text-xl font-normal text-black dark:text-white uppercase tracking-tight">Click or drag PDF file here</p>
+              <p className="text-caption text-black dark:text-white mt-1 font-normal uppercase tracking-widest">Select one PDF to clean</p>
             </div>
           </div>
         </div>
@@ -102,15 +102,15 @@ export function DeletePagesClient() {
           <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
             <PDFThumbnail pdfProxy={pdfProxy} className="w-24 h-32 shrink-0 rounded border border-slate-100" />
             <div className="flex-1 min-w-0 text-center sm:text-left">
-              <h3 className="text-xl font-normal text-slate-900 dark:text-white truncate">{file.name}</h3>
-              <p className="text-slate-400 font-normal uppercase text-caption tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <h3 className="text-xl font-normal text-black dark:text-white truncate">{file.name}</h3>
+              <p className="text-black dark:text-white font-normal uppercase text-caption tracking-widest mt-1">{pageCount} Pages • {(file.size / 1024 / 1024).toFixed(2)} MB</p>
               <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-6">
                 <div className="text-caption font-normal text-rose-500 uppercase tracking-widest bg-rose-50 dark:bg-rose-900/20 px-3 py-1.5 rounded-full border border-rose-100 dark:border-rose-800/50">
                   {pagesToDelete.length} Selected
                 </div>
                 <button
                   onClick={() => setFile(null)}
-                  className="text-caption font-normal text-slate-400 uppercase tracking-widest hover:text-rose-500 hover:underline"
+                  className="text-caption font-normal text-black dark:text-white uppercase tracking-widest hover:text-rose-500 hover:underline"
                 >
                   Change File
                 </button>
@@ -121,7 +121,7 @@ export function DeletePagesClient() {
           {loadingPdf && (
             <div className="flex flex-col items-center gap-4 p-12 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-100 dark:border-slate-800">
               <IconLoader2 className="animate-spin text-brand-primary" size={32} />
-              <p className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Scanning Pages...</p>
+              <p className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Scanning Pages...</p>
             </div>
           )}
 
@@ -137,7 +137,7 @@ export function DeletePagesClient() {
                 >
                   <PDFThumbnail pdfProxy={pdfProxy} pageNumber={i + 1} className="w-full aspect-[3/4] rounded" />
                   <div className={`absolute top-4 right-4 h-6 w-6 rounded-full flex items-center justify-center font-normal text-caption ${
-                    pagesToDelete.includes(i) ? "bg-rose-500 text-white" : "bg-slate-100 dark:bg-slate-800 text-slate-400"
+                    pagesToDelete.includes(i) ? "bg-rose-500 text-white" : "bg-slate-100 dark:bg-slate-800 text-black dark:text-white"
                   }`}>
                     {pagesToDelete.includes(i) ? <IconTrash size={14} /> : i + 1}
                   </div>

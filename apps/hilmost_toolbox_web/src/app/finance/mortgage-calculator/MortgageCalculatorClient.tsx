@@ -109,7 +109,7 @@ export function MortgageCalculatorClient() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-1 py-2">
-            <span className="text-caption font-normal text-slate-400 uppercase tracking-widest flex items-center justify-center gap-1">
+            <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest flex items-center justify-center gap-1">
               Total Monthly Payment (PITI)
               <Tooltip content="Principal, Interest, Taxes, and Insurance">
                 <Info size={12} className="cursor-help" />
@@ -122,16 +122,16 @@ export function MortgageCalculatorClient() {
 
           <div className="relative z-10 grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-micro font-normal text-slate-400 uppercase tracking-tighter">P&I</span>
-                <p className="text-sm font-normal text-slate-900 dark:text-white">{formatCurrency(monthlyPI)}</p>
+                <span className="text-micro font-normal text-black dark:text-white uppercase tracking-tighter">P&I</span>
+                <p className="text-sm font-normal text-black dark:text-white">{formatCurrency(monthlyPI)}</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-micro font-normal text-slate-400 uppercase tracking-tighter">Tax & Ins.</span>
-                <p className="text-sm font-normal text-slate-900 dark:text-white">{formatCurrency(monthlyTax + monthlyInsurance)}</p>
+                <span className="text-micro font-normal text-black dark:text-white uppercase tracking-tighter">Tax & Ins.</span>
+                <p className="text-sm font-normal text-black dark:text-white">{formatCurrency(monthlyTax + monthlyInsurance)}</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-micro font-normal text-slate-400 uppercase tracking-tighter">Total Interest</span>
-                <p className="text-sm font-normal text-slate-900 dark:text-white">{formatCurrency(totalInterest)}</p>
+                <span className="text-micro font-normal text-black dark:text-white uppercase tracking-tighter">Total Interest</span>
+                <p className="text-sm font-normal text-black dark:text-white">{formatCurrency(totalInterest)}</p>
             </div>
           </div>
         </div>

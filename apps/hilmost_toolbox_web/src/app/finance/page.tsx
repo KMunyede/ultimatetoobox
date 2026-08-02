@@ -96,20 +96,20 @@ export default function FinanceHub() {
         <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
           <Banknote className="w-5 h-5" />
         </div>
-        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white uppercase">
+        <h1 className="text-3xl font-normal tracking-tight text-black dark:text-white uppercase">
           Free Online Finance Tools
         </h1>
       </div>
 
-      <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl leading-relaxed font-medium">
+      <p className="text-lg text-black dark:text-white mb-10 max-w-3xl leading-relaxed font-medium">
         Master your money with professional-grade accuracy. Our free online finance tools help you manage debt, optimize taxes, and project investment growth with 100% privacy.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-yellow-500/50">
-            <h3 className="text-xl font-normal text-slate-900 dark:text-white mb-2">{link.name}</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">
+            <h3 className="text-xl font-normal text-black dark:text-white mb-2">{link.name}</h3>
+            <p className="text-sm text-black dark:text-white mb-4 line-clamp-2">
               {link.description}
             </p>
             <div className="mt-auto pt-2 flex items-center text-sm font-normal text-yellow-600 dark:text-yellow-400">

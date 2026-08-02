@@ -87,8 +87,8 @@ export default function BudgetPlannerPage() {
       />
 
       <div className="hidden print:block text-center mb-8">
-        <h1 className="text-3xl font-normal text-slate-900">Personal Budget Planner</h1>
-        <p className="text-slate-500">Generated via hilmost-toolbox.hilmost.net</p>
+        <h1 className="text-3xl font-normal text-black dark:text-white">Personal Budget Planner</h1>
+        <p className="text-black dark:text-white">Generated via hilmost-toolbox.hilmost.net</p>
       </div>
       
       <BudgetClient />

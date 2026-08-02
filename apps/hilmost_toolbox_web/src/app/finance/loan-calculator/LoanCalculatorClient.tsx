@@ -118,7 +118,7 @@ export function LoanCalculatorClient() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none" />
 
           <div className="relative z-10 text-center space-y-2 py-2">
-            <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Monthly Payment</span>
+            <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Monthly Payment</span>
             <div className="text-5xl md:text-6xl font-normal text-[var(--color-brand-primary)] tracking-tighter">
               $<NumberTicker value={monthlyPayment} decimals={2} />
             </div>
@@ -126,12 +126,12 @@ export function LoanCalculatorClient() {
 
           <div className="relative z-10 grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-[var(--color-border-base)] dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total Interest</span>
-                <p className="text-2xl font-normal text-slate-900 dark:text-white">$<NumberTicker value={totalInterest} decimals={0} /></p>
+                <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Total Interest</span>
+                <p className="text-2xl font-normal text-black dark:text-white">$<NumberTicker value={totalInterest} decimals={0} /></p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Total Payable</span>
-                <p className="text-2xl font-normal text-slate-900 dark:text-white">$<NumberTicker value={totalPayable} decimals={0} /></p>
+                <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Total Payable</span>
+                <p className="text-2xl font-normal text-black dark:text-white">$<NumberTicker value={totalPayable} decimals={0} /></p>
             </div>
           </div>
         </div>
@@ -146,8 +146,8 @@ export function LoanCalculatorClient() {
                 <TableIcon size={20} />
               </div>
               <div>
-                <h3 className="text-lg font-normal text-slate-900 dark:text-white uppercase tracking-tight leading-none">Amortization Schedule</h3>
-                <p className="text-caption font-normal text-slate-400 uppercase tracking-widest mt-1">Monthly breakdown of your loan repayment</p>
+                <h3 className="text-lg font-normal text-black dark:text-white uppercase tracking-tight leading-none">Amortization Schedule</h3>
+                <p className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mt-1">Monthly breakdown of your loan repayment</p>
               </div>
             </div>
             <Button variant="secondary" onClick={downloadCSV} className="w-full sm:w-auto flex items-center justify-center gap-2">
@@ -161,21 +161,21 @@ export function LoanCalculatorClient() {
               <table className="w-full text-left border-collapse">
                 <thead className="sticky top-0 bg-slate-50 dark:bg-slate-800 z-10 border-b border-[var(--color-border-base)] dark:border-slate-700">
                   <tr>
-                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Month</th>
-                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Payment</th>
-                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Principal</th>
-                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest">Interest</th>
-                    <th className="p-3 text-caption font-normal text-slate-500 uppercase tracking-widest text-right">Balance</th>
+                    <th className="p-3 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Month</th>
+                    <th className="p-3 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Payment</th>
+                    <th className="p-3 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Principal</th>
+                    <th className="p-3 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Interest</th>
+                    <th className="p-3 text-caption font-normal text-black dark:text-white uppercase tracking-widest text-right">Balance</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {schedule.map((row) => (
                     <tr key={row.month} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                      <td className="p-3 text-xs font-normal text-slate-400">#{row.month}</td>
-                      <td className="p-3 text-xs font-normal text-slate-900 dark:text-white">{formatCurrency(row.payment)}</td>
+                      <td className="p-3 text-xs font-normal text-black dark:text-white">#{row.month}</td>
+                      <td className="p-3 text-xs font-normal text-black dark:text-white">{formatCurrency(row.payment)}</td>
                       <td className="p-3 text-xs font-normal text-emerald-600">{formatCurrency(row.principal)}</td>
                       <td className="p-3 text-xs font-normal text-rose-500">{formatCurrency(row.interest)}</td>
-                      <td className="p-3 text-xs font-normal text-slate-900 dark:text-white text-right">{formatCurrency(row.balance)}</td>
+                      <td className="p-3 text-xs font-normal text-black dark:text-white text-right">{formatCurrency(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>

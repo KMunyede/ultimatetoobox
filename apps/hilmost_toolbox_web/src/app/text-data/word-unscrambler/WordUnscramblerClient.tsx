@@ -13,7 +13,7 @@ const WordResults = dynamic(() => import("./WordResults"), {
   loading: () => (
     <div className="h-64 flex flex-col items-center justify-center space-y-4">
       <div className="w-12 h-12 border-4 border-brand-primary border-t-transparent rounded-full animate-spin" />
-      <p className="text-caption font-normal text-slate-400 uppercase tracking-widest">Grouping Results...</p>
+      <p className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Grouping Results...</p>
     </div>
   ),
   ssr: false,
@@ -113,7 +113,7 @@ export function WordUnscramblerClient() {
           <div className="relative space-y-6">
             <div className="space-y-1.5">
                 <div className="flex justify-between items-end px-1">
-                  <label className="block text-caption font-normal text-slate-500 uppercase tracking-widest">Jumbled Letters</label>
+                  <label className="block text-caption font-normal text-black dark:text-white uppercase tracking-widest">Jumbled Letters</label>
                   <button
                     onClick={() => {
                       setState({ letters: "", startsWith: "", endsWith: "", contains: "" });
@@ -156,9 +156,9 @@ export function WordUnscramblerClient() {
                     )}
                   </Button>
                 </div>
-                <p className="text-caption text-slate-400 font-normal uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                <p className="text-caption text-black dark:text-white font-normal uppercase tracking-widest ml-1 flex items-center gap-1.5">
                   <span className="w-1 h-1 rounded-full bg-brand-primary/40" />
-                  Use <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-900 dark:text-white">?</code> or <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-slate-900 dark:text-white">*</code> for blank tiles
+                  Use <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-black dark:text-white">?</code> or <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded text-black dark:text-white">*</code> for blank tiles
                 </p>
             </div>
 
@@ -221,7 +221,7 @@ export function WordUnscramblerClient() {
                         {state[filter.key as keyof typeof state] && (
                           <button
                             onClick={() => setState({ [filter.key]: "" })}
-                            className="absolute right-3 bottom-3 text-slate-400 hover:text-rose-500 transition-colors"
+                            className="absolute right-3 bottom-3 text-black dark:text-white hover:text-rose-500 transition-colors"
                           >
                             <X size={14} />
                           </button>
@@ -245,8 +245,8 @@ export function WordUnscramblerClient() {
                         <div className="w-16 h-14 border-4 border-brand-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0" />
                       </div>
                       <div className="text-center">
-                        <p className="font-normal text-slate-900 dark:text-white uppercase tracking-[0.2em] text-sm mb-1">Scanning Dictionary</p>
-                        <p className="text-xs text-slate-400 font-normal uppercase tracking-widest">Matching your letters across thousands of words...</p>
+                        <p className="font-normal text-black dark:text-white uppercase tracking-[0.2em] text-sm mb-1">Scanning Dictionary</p>
+                        <p className="text-xs text-black dark:text-white font-normal uppercase tracking-widest">Matching your letters across thousands of words...</p>
                       </div>
                   </motion.div>
               ) : results.length > 0 ? (
@@ -256,16 +256,16 @@ export function WordUnscramblerClient() {
                       <div className="w-24 h-24 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mb-8 border border-[#D8D6CF] dark:border-slate-700 shadow-inner">
                         <Hash size={40} className="text-slate-300" />
                       </div>
-                      <h3 className="text-2xl font-normal text-slate-900 dark:text-white tracking-tight mb-3 uppercase">No anagrams found</h3>
-                      <p className="text-slate-500 text-sm leading-relaxed font-normal uppercase tracking-widest">
+                      <h3 className="text-2xl font-normal text-black dark:text-white tracking-tight mb-3 uppercase">No anagrams found</h3>
+                      <p className="text-black dark:text-white text-sm leading-relaxed font-normal uppercase tracking-widest">
                         We couldn&apos;t find any valid words using those exact letters and filters. Try adding wildcards (<code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">?</code>) to unlock more possibilities.
                       </p>
                   </motion.div>
               ) : (
                   <motion.div key="start" initial={{opacity:0}} animate={{opacity:1}} className="max-w-2xl mx-auto h-80 flex flex-col items-center justify-center text-center p-12 border-4 border-dashed border-slate-200 dark:border-slate-800 rounded-[3.5rem] opacity-40">
                       <Star size={64} className="text-brand-primary opacity-20 mb-6 animate-pulse" />
-                      <h3 className="text-xl font-normal text-slate-900 dark:text-white tracking-widest uppercase">Lexicon Ready</h3>
-                      <p className="text-caption text-slate-500 mt-2 font-normal uppercase tracking-[0.2em] max-w-xs">
+                      <h3 className="text-xl font-normal text-black dark:text-white tracking-widest uppercase">Lexicon Ready</h3>
+                      <p className="text-caption text-black dark:text-white mt-2 font-normal uppercase tracking-[0.2em] max-w-xs">
                         Enter your letters above and click <span className="text-brand-primary underline">Unscramble</span> to scan through the dictionary.
                       </p>
                   </motion.div>

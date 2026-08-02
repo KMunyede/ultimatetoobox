@@ -267,11 +267,11 @@ export function IncomeTaxClient() {
                   <div className="space-y-1 mt-2 px-1">
                       <div className="flex items-center gap-1.5">
                           <Clock size={10} className="text-slate-400" />
-                          <span className="text-micro font-normal text-slate-400 uppercase tracking-widest">
+                          <span className="text-micro font-normal text-black dark:text-white uppercase tracking-widest">
                               {yearConfig.taxYear} · Verified {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                           </span>
                       </div>
-                      <p className="text-micro text-slate-400 font-normal uppercase tracking-wider leading-relaxed opacity-70">
+                      <p className="text-micro text-black dark:text-white font-normal uppercase tracking-wider leading-relaxed opacity-70">
                           Verified on {new Date(yearConfig.lastVerified).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}. Accurate until 15 Jan {new Date(yearConfig.lastVerified).getFullYear() + 1}.
                       </p>
                   </div>
@@ -281,7 +281,7 @@ export function IncomeTaxClient() {
           {/* INCOME SECTION */}
           <div className="space-y-4">
               <div className="flex items-center justify-between px-1">
-                  <h3 className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Gross Income Sources</h3>
+                  <h3 className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Gross Income Sources</h3>
                   <span className="text-caption font-normal text-brand-primary uppercase">Total: {countryConfig.symbol}{currentResults.grossAmount.toLocaleString()}</span>
               </div>
               <div className="space-y-3">
@@ -317,14 +317,14 @@ export function IncomeTaxClient() {
           <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between px-1 gap-2">
                   <div className="space-y-0.5">
-                    <h3 className="text-caption font-normal text-slate-400 uppercase tracking-[0.2em]">Tax Deductible Items</h3>
-                    <p className="text-micro text-slate-400 font-normal uppercase">Pension/Health are auto-treated as adjustments</p>
+                    <h3 className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.2em]">Tax Deductible Items</h3>
+                    <p className="text-micro text-black dark:text-white font-normal uppercase">Pension/Health are auto-treated as adjustments</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`text-micro font-normal px-2 py-0.5 rounded-md border ${currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-slate-400 opacity-40'} uppercase tracking-tight`}>
+                    <span className={`text-micro font-normal px-2 py-0.5 rounded-md border ${currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-black dark:text-white opacity-40'} uppercase tracking-tight`}>
                         Itemized
                     </span>
-                    <span className={`text-micro font-normal px-2 py-0.5 rounded-md border ${!currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-slate-400 opacity-40'} uppercase tracking-tight`}>
+                    <span className={`text-micro font-normal px-2 py-0.5 rounded-md border ${!currentResults.isItemizing ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-slate-100 border-slate-200 text-black dark:text-white opacity-40'} uppercase tracking-tight`}>
                         Standard
                     </span>
                   </div>
@@ -369,19 +369,19 @@ export function IncomeTaxClient() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                   <div className={`p-3 rounded-xl border transition-all ${currentResults.isItemizing ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60'}`}>
                       <div className="flex justify-between items-center mb-1">
-                          <span className="text-micro font-normal text-slate-500 uppercase">Itemized Total</span>
+                          <span className="text-micro font-normal text-black dark:text-white uppercase">Itemized Total</span>
                           {currentResults.isItemizing && <Check size={10} className="text-brand-primary" />}
                       </div>
-                      <p className="text-sm font-normal text-slate-900 dark:text-white">
+                      <p className="text-sm font-normal text-black dark:text-white">
                           {countryConfig.symbol}{Math.round(currentResults.itemizedAmount).toLocaleString()}
                       </p>
                   </div>
                   <div className={`p-3 rounded-xl border transition-all ${!currentResults.isItemizing ? 'bg-brand-primary/5 border-brand-primary/20' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60'}`}>
                       <div className="flex justify-between items-center mb-1">
-                          <span className="text-micro font-normal text-slate-500 uppercase">Standard ({yearConfig.taxYear})</span>
+                          <span className="text-micro font-normal text-black dark:text-white uppercase">Standard ({yearConfig.taxYear})</span>
                           {!currentResults.isItemizing && <Check size={10} className="text-brand-primary" />}
                       </div>
-                      <p className="text-sm font-normal text-slate-900 dark:text-white">
+                      <p className="text-sm font-normal text-black dark:text-white">
                           {countryConfig.symbol}{Math.round(currentResults.standardAmount).toLocaleString()}
                       </p>
                   </div>
@@ -408,7 +408,7 @@ export function IncomeTaxClient() {
 
               <div className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 px-4 py-2.5 rounded-xl flex items-center gap-3">
                   <Info size={16} className="text-brand-primary shrink-0" />
-                  <p className="text-micro text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest leading-none">
+                  <p className="text-micro text-black dark:text-white font-normal uppercase tracking-widest leading-none">
                       Source: <span className="text-brand-primary">{yearConfig.source}</span>
                   </p>
               </div>
@@ -420,7 +420,7 @@ export function IncomeTaxClient() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center py-2">
-              <span className="text-caption font-normal text-slate-400 uppercase tracking-[0.3em]">Estimated {frequency === 'annually' ? 'Annual' : frequency === 'monthly' ? 'Monthly' : 'Weekly'} Net Pay</span>
+              <span className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.3em]">Estimated {frequency === 'annually' ? 'Annual' : frequency === 'monthly' ? 'Monthly' : 'Weekly'} Net Pay</span>
               <div className="text-6xl md:text-7xl font-normal text-[var(--color-brand-primary)] tracking-tighter tabular-nums leading-none mt-2">
                   {countryConfig.symbol}<NumberTicker value={currentResults.netAmount} decimals={0} />
               </div>
@@ -428,35 +428,35 @@ export function IncomeTaxClient() {
 
           <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6 pt-6 border-t border-[var(--color-border-base)] dark:border-slate-800">
               <div className="text-center space-y-1">
-                  <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Gross Pay</span>
-                  <p className="text-xl font-normal text-slate-900 dark:text-white tracking-tight">
+                  <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Gross Pay</span>
+                  <p className="text-xl font-normal text-black dark:text-white tracking-tight">
                       {countryConfig.symbol}{Math.round(currentResults.grossAmount).toLocaleString()}
                   </p>
               </div>
               <div className="text-center space-y-1">
-                  <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Est. Tax</span>
+                  <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Est. Tax</span>
                   <p className="text-xl font-normal text-rose-500 tracking-tight">
                       -{countryConfig.symbol}{Math.round(currentResults.taxAmount).toLocaleString()}
                   </p>
                   {currentResults.levyAmount > 0 && (
-                      <p className="text-micro font-normal text-slate-400 uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
+                      <p className="text-micro font-normal text-black dark:text-white uppercase leading-none">Incl. {yearConfig.additionalLevy?.name}</p>
                   )}
               </div>
               <div className="text-center space-y-1">
-                  <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Deductions</span>
-                  <p className="text-xl font-normal text-slate-500 tracking-tight">
+                  <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Deductions</span>
+                  <p className="text-xl font-normal text-black dark:text-white tracking-tight">
                       -{countryConfig.symbol}{Math.round(currentResults.totalDeductions).toLocaleString()}
                   </p>
               </div>
               <div className="text-center space-y-1">
-                  <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Effective</span>
+                  <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Effective</span>
                   <p className="text-xl font-normal text-brand-primary tracking-tight">
                       {currentResults.effectiveRate.toFixed(1)}%
                   </p>
               </div>
               <div className="text-center space-y-1">
-                  <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Marginal</span>
-                  <p className="text-xl font-normal text-slate-900 dark:text-white tracking-tight">
+                  <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Marginal</span>
+                  <p className="text-xl font-normal text-black dark:text-white tracking-tight">
                       {currentResults.marginalRate}%
                   </p>
               </div>
@@ -471,8 +471,8 @@ export function IncomeTaxClient() {
               <History size={20} className="text-slate-400" />
             </div>
             <div>
-              <h3 className="text-lg font-normal text-slate-900 dark:text-white uppercase tracking-tight leading-none">Saved Scenarios</h3>
-              <p className="text-caption font-normal text-slate-400 uppercase tracking-widest mt-1">Comparison history (Max 5)</p>
+              <h3 className="text-lg font-normal text-black dark:text-white uppercase tracking-tight leading-none">Saved Scenarios</h3>
+              <p className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mt-1">Comparison history (Max 5)</p>
             </div>
           </div>
 
@@ -480,12 +480,12 @@ export function IncomeTaxClient() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-[var(--color-border-base)] dark:border-slate-800">
-                  <th className="p-4 text-caption font-normal text-slate-400 uppercase tracking-widest">Compare</th>
-                  <th className="p-4 text-caption font-normal text-slate-400 uppercase tracking-widest">Label</th>
-                  <th className="p-4 text-caption font-normal text-slate-400 uppercase tracking-widest">Country</th>
-                  <th className="p-4 text-caption font-normal text-slate-400 uppercase tracking-widest">Gross</th>
-                  <th className="p-4 text-caption font-normal text-slate-400 uppercase tracking-widest">Net Pay</th>
-                  <th className="p-4 text-caption font-normal text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                  <th className="p-4 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Compare</th>
+                  <th className="p-4 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Label</th>
+                  <th className="p-4 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Country</th>
+                  <th className="p-4 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Gross</th>
+                  <th className="p-4 text-caption font-normal text-black dark:text-white uppercase tracking-widest">Net Pay</th>
+                  <th className="p-4 text-caption font-normal text-black dark:text-white uppercase tracking-widest text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -503,12 +503,12 @@ export function IncomeTaxClient() {
                           className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary cursor-pointer"
                         />
                       </td>
-                      <td className="p-4 text-xs font-normal text-slate-900 dark:text-white">
+                      <td className="p-4 text-xs font-normal text-black dark:text-white">
                           {s.label}
-                          <span className="block text-micro text-slate-400 font-normal uppercase mt-0.5">{s.frequency}</span>
+                          <span className="block text-micro text-black dark:text-white font-normal uppercase mt-0.5">{s.frequency}</span>
                       </td>
-                      <td className="p-4 text-xs font-normal text-slate-500 uppercase">{conf.name}</td>
-                      <td className="p-4 text-xs font-normal text-slate-500">{conf.symbol}{Math.round(totalGross).toLocaleString()}</td>
+                      <td className="p-4 text-xs font-normal text-black dark:text-white uppercase">{conf.name}</td>
+                      <td className="p-4 text-xs font-normal text-black dark:text-white">{conf.symbol}{Math.round(totalGross).toLocaleString()}</td>
                       <td className="p-4 text-xs font-normal text-[var(--color-brand-primary)]">{conf.symbol}{Math.round(res.netAmount).toLocaleString()}</td>
                       <td className="p-4 text-right">
                         <button
@@ -540,7 +540,7 @@ export function IncomeTaxClient() {
               <div className="p-2.5 rounded-xl bg-[var(--color-brand-alpha)] text-[var(--color-brand-primary)]">
                 <Scale size={20} />
               </div>
-              <h3 className="text-lg font-normal text-slate-900 dark:text-white uppercase tracking-tight">Tax Comparison</h3>
+              <h3 className="text-lg font-normal text-black dark:text-white uppercase tracking-tight">Tax Comparison</h3>
             </div>
 
             <div className="overflow-x-auto">
@@ -553,30 +553,30 @@ export function IncomeTaxClient() {
                     <div key={s.id} className="flex-1 min-w-[198px] bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-800">
                       <div className="flex justify-between items-start">
                         <span className="text-caption font-normal text-brand-primary uppercase tracking-widest">{s.label}</span>
-                        <span className="text-micro font-normal text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded-md border border-slate-100 dark:border-slate-800 uppercase">{s.frequency}</span>
+                        <span className="text-micro font-normal text-black dark:text-white bg-white dark:bg-slate-900 px-2 py-1 rounded-md border border-slate-100 dark:border-slate-800 uppercase">{s.frequency}</span>
                       </div>
                       <div className="mt-4 space-y-4">
                         <div>
-                          <p className="text-micro font-normal text-slate-400 uppercase tracking-widest">Country</p>
-                          <p className="text-xs font-normal text-slate-900 dark:text-white uppercase truncate">{conf.name}</p>
+                          <p className="text-micro font-normal text-black dark:text-white uppercase tracking-widest">Country</p>
+                          <p className="text-xs font-normal text-black dark:text-white uppercase truncate">{conf.name}</p>
                         </div>
                         <div className="h-px bg-slate-200 dark:bg-slate-700" />
                         <div>
-                          <p className="text-micro font-normal text-slate-400 uppercase tracking-widest">Gross Pay</p>
-                          <p className="text-xl font-normal text-slate-900 dark:text-white">{conf.symbol}{Math.round(totalGross).toLocaleString()}</p>
+                          <p className="text-micro font-normal text-black dark:text-white uppercase tracking-widest">Gross Pay</p>
+                          <p className="text-xl font-normal text-black dark:text-white">{conf.symbol}{Math.round(totalGross).toLocaleString()}</p>
                         </div>
                         <div>
-                          <p className="text-micro font-normal text-slate-400 uppercase tracking-widest">Total Tax</p>
+                          <p className="text-micro font-normal text-black dark:text-white uppercase tracking-widest">Total Tax</p>
                           <p className="text-xl font-normal text-rose-500">-{conf.symbol}{Math.round(res.taxAmount).toLocaleString()}</p>
                         </div>
                         <div className="h-px bg-slate-200 dark:bg-slate-700" />
                         <div>
-                          <p className="text-micro font-normal text-slate-400 uppercase tracking-widest">Net Pay</p>
+                          <p className="text-micro font-normal text-black dark:text-white uppercase tracking-widest">Net Pay</p>
                           <p className="text-2xl font-normal text-[var(--color-brand-primary)]">{conf.symbol}{Math.round(res.netAmount).toLocaleString()}</p>
                         </div>
                         <div className="bg-white dark:bg-slate-900 rounded-lg p-2 text-center border border-slate-100 dark:border-slate-800">
-                            <p className="text-micro font-normal text-slate-400 uppercase tracking-widest">Effective Rate</p>
-                            <p className="text-sm font-normal text-slate-900 dark:text-white">{res.effectiveRate.toFixed(1)}%</p>
+                            <p className="text-micro font-normal text-black dark:text-white uppercase tracking-widest">Effective Rate</p>
+                            <p className="text-sm font-normal text-black dark:text-white">{res.effectiveRate.toFixed(1)}%</p>
                         </div>
                       </div>
                     </div>
@@ -589,7 +589,7 @@ export function IncomeTaxClient() {
       </AnimatePresence>
 
       <footer className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <p className="text-caption text-slate-500 dark:text-slate-400 font-normal uppercase tracking-[0.1em] text-center max-w-2xl mx-auto leading-relaxed">
+          <p className="text-caption text-black dark:text-white font-normal uppercase tracking-[0.1em] text-center max-w-2xl mx-auto leading-relaxed">
               Disclaimer: Tax brackets are estimates for general reference only, may not reflect the latest local budget updates, and do not constitute tax advice. Verify with official sources for filing purposes.
           </p>
       </footer>

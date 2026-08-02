@@ -61,7 +61,7 @@ export function DailyQuoteClient() {
         <Tooltip content="Previous philosophical insight" position="top">
           <button
             onClick={() => scrollToQuote(activeIndex - 1)}
-            className="absolute left-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-normal hidden sm:flex -ml-2 md:-ml-7"
+            className="absolute left-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-black dark:text-white hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-normal hidden sm:flex -ml-2 md:-ml-7"
             aria-label="Previous quote"
             title="Previous Quote"
           >
@@ -88,7 +88,7 @@ export function DailyQuoteClient() {
         <Tooltip content="Next philosophical insight" position="top">
           <button
             onClick={() => scrollToQuote(activeIndex + 1)}
-            className="absolute right-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-normal hidden sm:flex -mr-2 md:-mr-7"
+            className="absolute right-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-black dark:text-white hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-normal hidden sm:flex -mr-2 md:-mr-7"
             aria-label="Next quote"
             title="Next Quote"
           >
@@ -102,7 +102,7 @@ export function DailyQuoteClient() {
         <div className="flex items-center justify-between w-full max-w-[252px] sm:hidden">
           <button
             onClick={() => scrollToQuote(activeIndex - 1)}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-emerald-600 font-normal font-mono text-2xl"
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md border border-slate-200 dark:border-slate-700 text-black dark:text-white hover:text-emerald-600 font-normal font-mono text-2xl"
           >
             {"<"}
           </button>
@@ -120,7 +120,7 @@ export function DailyQuoteClient() {
 
           <button
             onClick={() => scrollToQuote(activeIndex + 1)}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-emerald-600 font-normal font-mono text-2xl"
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-md border border-slate-200 dark:border-slate-700 text-black dark:text-white hover:text-emerald-600 font-normal font-mono text-2xl"
           >
             {">"}
           </button>

@@ -127,7 +127,7 @@ export function PDFThumbnail({ pdfProxy, file, pageNumber = 1, className = "", s
       {loading && isVisible && <div className="absolute inset-0 animate-pulse bg-slate-200 dark:bg-slate-700" />}
       {!isVisible && <div className="w-full h-full bg-slate-50 dark:bg-slate-900/50" />}
       {error ? (
-        <span className="text-caption text-slate-400 font-normal uppercase">{error}</span>
+        <span className="text-caption text-black dark:text-white font-normal uppercase">{error}</span>
       ) : (
         <canvas ref={canvasRef} className="max-w-full max-h-full object-contain" />
       )}

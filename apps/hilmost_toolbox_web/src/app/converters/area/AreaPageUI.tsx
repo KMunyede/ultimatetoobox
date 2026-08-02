@@ -71,7 +71,7 @@ export function AreaPageUI({
       
       {summary && (
         <div className="max-w-4xl mx-auto mb-6">
-          <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed border-l-4 border-brand-primary/20 pl-4">
+          <p className="text-black dark:text-white text-sm md:text-base leading-relaxed border-l-4 border-brand-primary/20 pl-4">
             {summary}
           </p>
         </div>

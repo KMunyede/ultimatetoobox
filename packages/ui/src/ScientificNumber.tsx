@@ -25,7 +25,7 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
     const formattedStr = formatWithCommas(rawStr);
     return (
       <span className={className}>
-        {prefix}{formattedStr} {suffix && <span className="text-[0.4em] text-slate-500 font-medium ml-1 uppercase">{suffix}</span>}
+        {prefix}{formattedStr} {suffix && <span className="text-[0.4em] text-black dark:text-white font-medium ml-1 uppercase">{suffix}</span>}
       </span>
     );
   }
@@ -57,7 +57,7 @@ export function ScientificNumber({ value, precision = 4, className = "", suffix,
     <span className={`inline-flex items-baseline ${className}`}>
       <span>{prefix}{baseStr} &times; 10</span>
       <sup className="text-[0.6em] ml-0.5">{exponentStr}</sup>
-      {suffix && <span className="text-[0.5em] text-slate-500 font-medium ml-1 uppercase">{suffix}</span>}
+      {suffix && <span className="text-[0.5em] text-black dark:text-white font-medium ml-1 uppercase">{suffix}</span>}
     </span>
   );
 }

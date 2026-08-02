@@ -134,22 +134,22 @@ export function WACCCalculatorClient() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 text-center flex-1 flex flex-col justify-center py-8">
-            <span className="text-caption font-normal text-slate-400 uppercase tracking-[0.3em] mb-2">Calculated WACC</span>
-            <div className="text-6xl md:text-7xl font-normal text-slate-900 dark:text-white tracking-tighter tabular-nums">
+            <span className="text-caption font-normal text-black dark:text-white uppercase tracking-[0.3em] mb-2">Calculated WACC</span>
+            <div className="text-6xl md:text-7xl font-normal text-black dark:text-white tracking-tighter tabular-nums">
               <NumberTicker value={wacc * 100} decimals={2} />%
             </div>
-            <p className="mt-6 text-caption font-normal text-slate-500 uppercase tracking-widest bg-slate-50 dark:bg-slate-800 inline-block px-4 py-2 rounded-full border border-slate-100 dark:border-slate-700 mx-auto">
+            <p className="mt-6 text-caption font-normal text-black dark:text-white uppercase tracking-widest bg-slate-50 dark:bg-slate-800 inline-block px-4 py-2 rounded-full border border-slate-100 dark:border-slate-700 mx-auto">
               {wacc < 0.1 ? "Efficient Capital Structure" : "High Risk Required"}
             </p>
           </div>
 
           <div className="relative z-10 grid grid-cols-2 gap-6 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
             <div className="text-center space-y-1">
-                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Cost of Equity</span>
+                <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Cost of Equity</span>
                 <p className="text-xl font-normal text-brand-primary">{(Re * 100).toFixed(2)}%</p>
             </div>
             <div className="text-center space-y-1">
-                <span className="text-caption font-normal text-slate-400 uppercase tracking-widest">Cost of Debt</span>
+                <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Cost of Debt</span>
                 <p className="text-xl font-normal text-rose-500">{(RdAfterTax * 100).toFixed(2)}%</p>
             </div>
           </div>
@@ -157,9 +157,9 @@ export function WACCCalculatorClient() {
           <div className="relative z-10 mt-8 bg-brand-primary/5 rounded-2xl p-5 border border-brand-primary/10">
             <div className="flex justify-between items-center mb-1">
               <span className="text-caption font-normal text-brand-primary uppercase tracking-widest">Tax Shield Savings</span>
-              <span className="text-micro font-normal text-slate-400 uppercase">Yearly Est.</span>
+              <span className="text-micro font-normal text-black dark:text-white uppercase">Yearly Est.</span>
             </div>
-            <div className="text-2xl font-normal text-slate-900 dark:text-white tracking-tight">
+            <div className="text-2xl font-normal text-black dark:text-white tracking-tight">
               $<NumberTicker value={taxShield} decimals={0} />
             </div>
           </div>
@@ -168,7 +168,7 @@ export function WACCCalculatorClient() {
 
       {/* Capital Structure Breakdown */}
       <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-        <h4 className="text-caption font-normal text-slate-500 uppercase tracking-widest mb-6">Capital Structure Breakdown</h4>
+        <h4 className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mb-6">Capital Structure Breakdown</h4>
         <div className="relative h-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
           <div style={{ width: `${equityWeight}%` }} className="h-full bg-brand-primary transition-all duration-1000" />
           <div style={{ width: `${debtWeight}%` }} className="h-full bg-rose-500 transition-all duration-1000" />
@@ -176,11 +176,11 @@ export function WACCCalculatorClient() {
         <div className="flex justify-between mt-4">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-brand-primary" />
-            <span className="text-caption font-normal text-slate-600 dark:text-slate-400 uppercase tracking-widest">Equity: {equityWeight.toFixed(1)}%</span>
+            <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Equity: {equityWeight.toFixed(1)}%</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-rose-500" />
-            <span className="text-caption font-normal text-slate-600 dark:text-slate-400 uppercase tracking-widest">Debt: {debtWeight.toFixed(1)}%</span>
+            <span className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">Debt: {debtWeight.toFixed(1)}%</span>
           </div>
         </div>
       </div>

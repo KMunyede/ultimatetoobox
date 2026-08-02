@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 const BUTTONS = [
   { label: "AC", type: "clear", className: "bg-rose-50 dark:bg-rose-900/20 text-rose-600 border-rose-100 dark:border-rose-900/50" },
-  { label: "+/−", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
-  { label: "%", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white" },
+  { label: "+/−", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-black dark:text-white" },
+  { label: "%", type: "operator", className: "bg-slate-100 dark:bg-slate-800 text-black dark:text-white" },
   { label: "÷", type: "operator", value: "/", className: "bg-brand-primary text-white" },
   { label: "7", type: "number" },
   { label: "8", type: "number" },
@@ -165,7 +165,7 @@ export function StandardCalculatorClient() {
             className={`
               w-full h-14 rounded-2xl text-xl font-normal uppercase tracking-widest transition-all active:scale-95 border-2
               ${btn.span === 2 ? "col-span-2" : "col-span-1"}
-              ${btn.className || "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white hover:border-brand-primary"}
+              ${btn.className || "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white hover:border-brand-primary"}
             `}
           >
             {btn.label}

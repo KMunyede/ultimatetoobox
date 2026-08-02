@@ -32,7 +32,7 @@ const LiveClock = React.memo(({ onUseCurrentTime }: { onUseCurrentTime: () => vo
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-          <span className="text-caption font-normal uppercase tracking-widest text-slate-400">Live Clock</span>
+          <span className="text-caption font-normal uppercase tracking-widest text-black dark:text-white">Live Clock</span>
         </div>
         <button
           onClick={onUseCurrentTime}
@@ -41,7 +41,7 @@ const LiveClock = React.memo(({ onUseCurrentTime }: { onUseCurrentTime: () => vo
           Use Current Time
         </button>
       </div>
-      <div className="text-4xl font-normal text-slate-800 dark:text-white tabular-nums">
+      <div className="text-4xl font-normal text-black dark:text-white tabular-nums">
         {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
       </div>
     </div>
@@ -93,7 +93,7 @@ const ResultsSection = React.memo(({ results, mode, inputTime, fallAsleepMins, o
             }`}
           >
             <div className="flex justify-between items-start mb-6">
-              <span className="text-caption font-normal uppercase tracking-widest text-slate-400">{res.cycles} Cycles</span>
+              <span className="text-caption font-normal uppercase tracking-widest text-black dark:text-white">{res.cycles} Cycles</span>
               <span className={`px-2 py-0.5 rounded-full text-micro font-normal uppercase tracking-widest ${
                 res.quality === "optimal" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
                 res.quality === "good" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" :
@@ -102,8 +102,8 @@ const ResultsSection = React.memo(({ results, mode, inputTime, fallAsleepMins, o
                 {res.quality}
               </span>
             </div>
-            <div className="text-3xl font-normal text-slate-900 dark:text-white mb-2 tabular-nums">{res.time}</div>
-            <div className="text-caption font-normal text-slate-500 uppercase tracking-widest">{res.duration} sleep</div>
+            <div className="text-3xl font-normal text-black dark:text-white mb-2 tabular-nums">{res.time}</div>
+            <div className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">{res.duration} sleep</div>
 
             {res.quality === "optimal" && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-micro font-normal px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
@@ -144,7 +144,7 @@ const SleepTips = React.memo(() => (
     ].map((tip, i) => (
       <div key={i} className="bg-slate-50 dark:bg-slate-950/50 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 transition-colors hover:border-rose-200 dark:hover:border-rose-900/30">
         <h4 className="text-caption font-normal uppercase tracking-widest text-rose-600 mb-2">{tip.title}</h4>
-        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{tip.text}</p>
+        <p className="text-xs text-black dark:text-white leading-relaxed">{tip.text}</p>
       </div>
     ))}
   </div>
@@ -262,8 +262,8 @@ export function SleepCycleCalculatorTool() {
       <SleepTips />
 
       <div className="mt-24 pt-12 border-t border-slate-100 dark:border-slate-800 space-y-12">
-        <h1 className="text-4xl font-normal text-slate-900 dark:text-white uppercase tracking-tighter">Free Sleep Cycle Calculator</h1>
-        <div className="prose prose-slate dark:prose-invert max-w-none space-y-6 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+        <h1 className="text-4xl font-normal text-black dark:text-white uppercase tracking-tighter">Free Sleep Cycle Calculator</h1>
+        <div className="prose prose-slate dark:prose-invert max-w-none space-y-6 text-sm leading-relaxed text-black dark:text-white">
           <p>
             Understanding your biological clock is the key to waking up refreshed. Most people operate on <strong>90-minute sleep cycles</strong>, moving from light sleep to deep sleep and finally REM. If you wake up in the middle of a deep sleep stage, you experience sleep inertia—that heavy, groggy feeling that can last for hours. Our <strong>Sleep Cycle Calculator</strong> predicts the best windows for you to wake up based on these natural rhythms.
           </p>
@@ -282,8 +282,8 @@ export function SleepCycleCalculatorTool() {
             { q: "How accurate is the calculator?", a: "The 90-minute cycle is a biological average. While most people fall within this range, personal variations exist based on age and health." },
           ].map((faq, i) => (
             <div key={i} className="space-y-2">
-              <h4 className="font-normal text-slate-800 dark:text-slate-200">{faq.q}</h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{faq.a}</p>
+              <h4 className="font-normal text-black dark:text-white">{faq.q}</h4>
+              <p className="text-xs text-black dark:text-white leading-relaxed">{faq.a}</p>
             </div>
           ))}
         </div>

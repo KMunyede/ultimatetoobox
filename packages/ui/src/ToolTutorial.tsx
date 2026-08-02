@@ -31,7 +31,7 @@ export function ToolTutorial({ tourId, steps, buttonText = "How to use" }: ToolT
     <div className="flex items-center gap-2">
       <a
         href={`mailto:k.munyede@gmail.com?subject=Feedback for Tool: ${tourId}&body=Please describe your feedback or issue below:%0D%0A%0D%0A`}
-        className="inline-flex items-center gap-1.5 px-2 py-1 text-caption font-normal text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 dark:text-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
+        className="inline-flex items-center gap-1.5 px-2 py-1 text-caption font-normal text-black bg-slate-100 rounded-lg hover:bg-slate-200 dark:text-white dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
         title="Report a problem or suggest an improvement"
       >
         <MessageSquareWarning className="w-3.5 h-3.5" />

@@ -49,10 +49,10 @@ export default function FavoritesPage() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white mb-6">
+        <h1 className="text-3xl md:text-4xl font-normal tracking-tight text-black dark:text-white mb-6">
           Your <span className="text-amber-500">Favorites</span>
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        <p className="text-lg text-black dark:text-white max-w-2xl mx-auto">
           The wisdom that resonates with you the most. Kept safe for whenever you need a reminder.
         </p>
       </div>
@@ -60,10 +60,10 @@ export default function FavoritesPage() {
       {favorites.length === 0 ? (
         <div className="text-center py-20 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
           <Star className="w-16 h-16 text-slate-300 dark:text-slate-700 mx-auto mb-6" />
-          <h3 className="text-2xl font-medium text-slate-800 dark:text-slate-200 mb-2">
+          <h3 className="text-2xl font-medium text-black dark:text-white mb-2">
             No favorites yet
           </h3>
-          <p className="text-slate-500 dark:text-slate-400">
+          <p className="text-black dark:text-white">
             When you find a quote that speaks to you, tap the star icon to save it here.
           </p>
         </div>

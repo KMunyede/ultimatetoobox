@@ -36,7 +36,7 @@ export function CopyButton({ value, label, className = "" }: CopyButtonProps) {
           <Copy size={16} className="text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors" />
         )}
         {label && (
-          <span className="text-xs font-medium text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-200">
+          <span className="text-xs font-medium text-black group-hover:text-black dark:text-white dark:group-hover:text-slate-200">
             {copied ? "Copied!" : label}
           </span>
         )}

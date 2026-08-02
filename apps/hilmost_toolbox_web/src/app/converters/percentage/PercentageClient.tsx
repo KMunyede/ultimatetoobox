@@ -29,9 +29,9 @@ export function PercentageClient() {
       <div className="grid grid-cols-1 gap-8">
         {/* Section 1: X% of Y */}
         <div id="tour-perc-1" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <h2 className="text-caption font-normal text-slate-400 uppercase tracking-widest mb-6">What is X% of Y?</h2>
+          <h2 className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mb-6">What is X% of Y?</h2>
           <div className="flex flex-wrap items-end gap-4">
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">What is</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">What is</span>
             <div className="w-28">
               <NumberInput
                 value={p1}
@@ -39,7 +39,7 @@ export function PercentageClient() {
                 className="text-xl font-normal text-center"
               />
             </div>
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">% of</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">% of</span>
             <div className="w-36">
               <NumberInput
                 value={v1}
@@ -47,7 +47,7 @@ export function PercentageClient() {
                 className="text-xl font-normal text-center"
               />
             </div>
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">?</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">?</span>
             <div className="flex-1 min-w-[108px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
               <span className="text-xl font-normal text-brand-primary">
                 <ScientificNumber value={res1} precision={2} />
@@ -58,7 +58,7 @@ export function PercentageClient() {
 
         {/* Section 2: X is what % of Y? */}
         <div id="tour-perc-2" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <h2 className="text-caption font-normal text-slate-400 uppercase tracking-widest mb-6">X is what % of Y?</h2>
+          <h2 className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mb-6">X is what % of Y?</h2>
           <div className="flex flex-wrap items-end gap-4">
             <div className="w-36">
               <NumberInput
@@ -67,7 +67,7 @@ export function PercentageClient() {
                 className="text-xl font-normal text-center"
               />
             </div>
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">is what % of</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">is what % of</span>
             <div className="w-36">
               <NumberInput
                 value={p2_2}
@@ -75,7 +75,7 @@ export function PercentageClient() {
                 className="text-xl font-normal text-center"
               />
             </div>
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">?</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">?</span>
             <div className="flex-1 min-w-[108px] h-[46px] flex items-center justify-center bg-brand-primary/5 border border-brand-primary/20 rounded-lg shadow-inner mb-0.5">
               <span className="text-xl font-normal text-brand-primary">
                 <ScientificNumber value={res2} precision={2} suffix="%" />
@@ -86,9 +86,9 @@ export function PercentageClient() {
 
         {/* Section 3: Percentage Change */}
         <div id="tour-perc-3" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-          <h2 className="text-caption font-normal text-slate-400 uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
+          <h2 className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mb-6">Percentage Increase/Decrease</h2>
           <div className="flex flex-wrap items-end gap-4">
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">From</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">From</span>
             <div className="w-36">
               <NumberInput
                 value={v3_1}
@@ -96,7 +96,7 @@ export function PercentageClient() {
                 className="text-xl font-normal text-center"
               />
             </div>
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">to</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">to</span>
             <div className="w-36">
               <NumberInput
                 value={v3_2}
@@ -104,7 +104,7 @@ export function PercentageClient() {
                 className="text-xl font-normal text-center"
               />
             </div>
-            <span className="text-sm font-normal text-slate-500 uppercase tracking-widest mb-3.5">is a</span>
+            <span className="text-sm font-normal text-black dark:text-white uppercase tracking-widest mb-3.5">is a</span>
             <div className={`flex-1 min-w-[162px] h-[46px] flex items-center justify-center rounded-lg border-2 mb-0.5 ${res3 >= 0 ? "bg-emerald-50 dark:bg-emerald-900/10 border-emerald-100 dark:border-emerald-800/50 text-emerald-600" : "bg-rose-50 dark:bg-rose-900/10 border-rose-100 dark:border-rose-800/50 text-rose-600"}`}>
               <span className="text-xl font-normal uppercase tracking-tight flex items-baseline gap-1">
                 {res3 > 0 ? "+" : ""}

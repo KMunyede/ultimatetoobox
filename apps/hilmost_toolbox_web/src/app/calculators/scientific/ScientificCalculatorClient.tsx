@@ -201,10 +201,10 @@ export function ScientificCalculatorClient() {
               className={`
                 w-full h-12 md:h-14 rounded-xl md:rounded-2xl text-[16px] font-normal uppercase tracking-widest transition-all active:scale-95 border-2
                 ${btn.className || ""}
-                ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-400" : ""}
+                ${btn.type === "mode" && !btn.active ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white" : ""}
                 ${btn.type === "mode" && btn.active ? "bg-brand-primary/10 border-brand-primary/30 text-brand-primary" : ""}
-                ${btn.type === "number" && !btn.className?.includes('bg-') ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
-                ${btn.type === "operator" && !btn.className?.includes('bg-') ? "bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white" : ""}
+                ${btn.type === "number" && !btn.className?.includes('bg-') ? "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white" : ""}
+                ${btn.type === "operator" && !btn.className?.includes('bg-') ? "bg-slate-50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 text-black dark:text-white" : ""}
                 ${btn.type === "func" && !btn.className?.includes('bg-') ? "bg-sky-50/50 dark:bg-sky-900/20 border-sky-100 dark:border-sky-800/50 text-sky-600 dark:text-sky-400" : ""}
                 hover:border-brand-primary/50
               `}

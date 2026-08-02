@@ -161,7 +161,7 @@ Macros:
         <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-8" id="body-details">
           <div className="flex items-center gap-2 mb-2">
             <Settings2 size={18} className="text-brand-primary" />
-            <h2 className="text-sm font-normal uppercase tracking-widest text-slate-800 dark:text-slate-100">Personal Details</h2>
+            <h2 className="text-sm font-normal uppercase tracking-widest text-black dark:text-white">Personal Details</h2>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -203,7 +203,7 @@ Macros:
                   min={50}
                   max={250}
                 />
-                <span className="absolute right-4 bottom-3 text-xs font-normal text-slate-400">cm</span>
+                <span className="absolute right-4 bottom-3 text-xs font-normal text-black dark:text-white">cm</span>
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-4">
@@ -214,7 +214,7 @@ Macros:
                     min={2}
                     max={8}
                   />
-                  <span className="absolute right-4 bottom-3 text-xs font-normal text-slate-400">ft</span>
+                  <span className="absolute right-4 bottom-3 text-xs font-normal text-black dark:text-white">ft</span>
                 </div>
                 <div className="relative">
                   <NumberInput
@@ -223,7 +223,7 @@ Macros:
                     min={0}
                     max={11}
                   />
-                  <span className="absolute right-4 bottom-3 text-xs font-normal text-slate-400">in</span>
+                  <span className="absolute right-4 bottom-3 text-xs font-normal text-black dark:text-white">in</span>
                 </div>
               </div>
             )}
@@ -234,7 +234,7 @@ Macros:
         <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5" id="activity-level">
           <div className="flex items-center gap-2 mb-6">
             <Activity size={18} className="text-brand-primary" />
-            <h2 className="text-sm font-normal uppercase tracking-widest text-slate-800 dark:text-slate-100">Activity Level</h2>
+            <h2 className="text-sm font-normal uppercase tracking-widest text-black dark:text-white">Activity Level</h2>
           </div>
           <div className="space-y-2">
             {(Object.keys(ACTIVITY_CONFIG) as ActivityLevel[]).map((key) => (
@@ -244,7 +244,7 @@ Macros:
                 className={`w-full text-left p-3 rounded-2xl border-2 transition-all ${activityLevel === key ? 'border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10' : 'border-slate-50 dark:border-slate-950 bg-slate-50 dark:bg-slate-950 hover:border-slate-200'}`}
               >
                 <div className="flex justify-between items-center">
-                  <span className={`text-xs font-normal ${activityLevel === key ? 'text-brand-primary' : 'text-slate-600'}`}>{ACTIVITY_CONFIG[key].label}</span>
+                  <span className={`text-xs font-normal ${activityLevel === key ? 'text-brand-primary' : 'text-black dark:text-white'}`}>{ACTIVITY_CONFIG[key].label}</span>
                   <span className="text-caption opacity-40 font-normal uppercase tracking-widest">{ACTIVITY_CONFIG[key].desc}</span>
                 </div>
               </button>
@@ -257,14 +257,14 @@ Macros:
       <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5" id="goal-selector">
         <div className="flex items-center gap-2 mb-6">
           <Apple size={18} className="text-brand-primary" />
-          <h2 className="text-sm font-normal uppercase tracking-widest text-slate-800 dark:text-slate-100">Your Fitness Goal</h2>
+          <h2 className="text-sm font-normal uppercase tracking-widest text-black dark:text-white">Your Fitness Goal</h2>
         </div>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(GOAL_CONFIG) as Goal[]).map((key) => (
             <button
               key={key}
               onClick={() => setGoal(key)}
-              className={`flex-1 min-w-[126px] p-3 rounded-2xl border-2 transition-all text-center ${goal === key ? 'border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10 text-brand-primary font-normal' : 'border-slate-50 dark:border-slate-950 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 text-slate-400'}`}
+              className={`flex-1 min-w-[126px] p-3 rounded-2xl border-2 transition-all text-center ${goal === key ? 'border-brand-primary bg-brand-primary/5 dark:bg-brand-primary/10 text-brand-primary font-normal' : 'border-slate-50 dark:border-slate-950 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 text-black dark:text-white'}`}
             >
               <div className="text-caption font-normal uppercase tracking-widest">{GOAL_CONFIG[key].label}</div>
             </button>
@@ -338,11 +338,11 @@ Macros:
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2">
                 <Settings2 size={18} className="text-brand-primary" />
-                <h2 className="text-sm font-normal uppercase tracking-widest text-slate-800 dark:text-slate-100">Custom Macro Split</h2>
+                <h2 className="text-sm font-normal uppercase tracking-widest text-black dark:text-white">Custom Macro Split</h2>
               </div>
               <button
                 onClick={() => setUseCustomMacros(!useCustomMacros)}
-                className={`px-4 py-1.5 rounded-full text-caption font-normal uppercase tracking-widest transition-all ${useCustomMacros ? 'bg-brand-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
+                className={`px-4 py-1.5 rounded-full text-caption font-normal uppercase tracking-widest transition-all ${useCustomMacros ? 'bg-brand-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-black dark:text-white'}`}
               >
                 {useCustomMacros ? 'Enabled' : 'Enable Custom'}
               </button>
@@ -357,8 +357,8 @@ Macros:
                 ].map(m => (
                   <div key={m.label} className="space-y-3">
                     <div className="flex justify-between items-end">
-                      <span className="text-caption font-normal uppercase tracking-widest text-slate-500">{m.label}</span>
-                      <span className="text-lg font-normal text-slate-900 dark:text-white">{m.val}%</span>
+                      <span className="text-caption font-normal uppercase tracking-widest text-black dark:text-white">{m.label}</span>
+                      <span className="text-lg font-normal text-black dark:text-white">{m.val}%</span>
                     </div>
                     <input type="range" min="0" max="100" value={m.val} onChange={e => m.set(parseInt(e.target.value))} className={`w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer ${m.color}`} />
                   </div>
@@ -373,7 +373,7 @@ Macros:
                 </Button>
               </div>
             ) : (
-              <p className="text-center text-caption text-slate-400 font-normal uppercase tracking-widest">Custom sliders are disabled. Using {GOAL_CONFIG[goal].label} presets.</p>
+              <p className="text-center text-caption text-black dark:text-white font-normal uppercase tracking-widest">Custom sliders are disabled. Using {GOAL_CONFIG[goal].label} presets.</p>
             )}
           </div>
 
@@ -397,7 +397,7 @@ Macros:
         </div>
       )}
 
-      <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
+      <div className="flex items-center justify-center gap-2 text-black dark:text-white select-none mt-12">
         <Zap size={14} />
         <span className="text-caption font-normal uppercase tracking-[0.25em]">Privacy First. Pure Browser Math. No Data Collection.</span>
       </div>

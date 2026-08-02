@@ -397,7 +397,7 @@ export function QrCodeGeneratorTool() {
                       onChange={(e) => setWifi({ ...wifi, hidden: e.target.checked })}
                       className="peer h-5 w-5 appearance-none rounded-md border-2 border-slate-300 dark:border-slate-700 checked:bg-brand-primary checked:border-brand-primary transition-all"
                     />
-                    <span className="text-sm font-normal text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Hidden Network</span>
+                    <span className="text-sm font-normal text-black dark:text-white group-hover:text-black dark:group-hover:text-white">Hidden Network</span>
                   </label>
                 </div>
               )}
@@ -486,11 +486,11 @@ export function QrCodeGeneratorTool() {
                 onClick={() => setOptionsOpen(!optionsOpen)}
                 className="flex items-center justify-between w-full p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl transition-all"
               >
-                <div className="flex items-center gap-2 text-slate-900 dark:text-white font-normal uppercase tracking-tight text-sm">
+                <div className="flex items-center gap-2 text-black dark:text-white font-normal uppercase tracking-tight text-sm">
                   <Settings2 size={16} className="text-brand-primary" />
                   Customize Appearance
                 </div>
-                <ChevronDown size={18} className={`text-slate-400 transition-transform duration-300 ${optionsOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={18} className={`text-black dark:text-white transition-transform duration-300 ${optionsOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {optionsOpen && (
@@ -535,11 +535,11 @@ export function QrCodeGeneratorTool() {
                       <label className="text-caption font-normal uppercase tracking-widest text-[#57544C] ml-1 mb-1.5">Colors</label>
                       <div className="grid grid-cols-1 gap-3">
                         <div className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800">
-                          <span className="text-xs font-normal text-slate-600 dark:text-slate-400">QR Code</span>
+                          <span className="text-xs font-normal text-black dark:text-white">QR Code</span>
                           <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="h-8 w-12 bg-transparent cursor-pointer" />
                         </div>
                         <div className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800">
-                          <span className="text-xs font-normal text-slate-600 dark:text-slate-400">Background</span>
+                          <span className="text-xs font-normal text-black dark:text-white">Background</span>
                           <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-8 w-12 bg-transparent cursor-pointer" />
                         </div>
                       </div>
@@ -551,7 +551,7 @@ export function QrCodeGeneratorTool() {
                         <label className="flex items-center justify-between p-3 bg-white dark:bg-slate-950 rounded-lg border border-[#D8D6CF] dark:border-slate-800 cursor-pointer group">
                           <div className="flex items-center gap-2">
                             <Type size={14} className="text-brand-primary" />
-                            <span className="text-xs font-normal text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white">Enable Label</span>
+                            <span className="text-xs font-normal text-black dark:text-white group-hover:text-black dark:group-hover:text-white">Enable Label</span>
                           </div>
                           <div className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -646,7 +646,7 @@ export function QrCodeGeneratorTool() {
                 </Button>
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-slate-500 select-none pt-2">
+              <div className="flex items-center justify-center gap-2 text-black dark:text-white select-none pt-2">
                 <Lock size={12} />
                 <span className="text-caption font-normal uppercase tracking-[0.2em]">Generated Locally</span>
               </div>
@@ -655,7 +655,7 @@ export function QrCodeGeneratorTool() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
+      <div className="flex items-center justify-center gap-2 text-black dark:text-white select-none mt-12">
         <Lock size={12} />
         <span className="text-caption font-normal uppercase tracking-[0.25em]">🔒 Generated in your browser. Never sent to any server.</span>
       </div>

@@ -120,10 +120,10 @@ export function RetirementPlannerClient() {
               className="bg-brand-primary/5 rounded-2xl p-6 border border-brand-primary/10 flex-shrink-0"
             >
               <p className="text-caption font-normal text-brand-primary uppercase tracking-[0.2em] mb-1">Projected Savings at Age {retireAge}</p>
-              <div className="text-4xl md:text-5xl font-normal text-slate-900 dark:text-white tracking-tighter">
+              <div className="text-4xl md:text-5xl font-normal text-black dark:text-white tracking-tighter">
                 <NumberTicker value={finalBalance} prefix="$" duration={0.8} />
               </div>
-              <p className="text-caption font-normal text-slate-400 uppercase tracking-widest mt-2">
+              <p className="text-caption font-normal text-black dark:text-white uppercase tracking-widest mt-2">
                 Based on {Math.max(0, parseInt(retireAge) - parseInt(currentAge))} years of compounding.
               </p>
             </div>

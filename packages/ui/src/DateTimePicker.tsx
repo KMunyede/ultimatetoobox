@@ -94,7 +94,7 @@ const TimeDial = React.memo(({
           key={i}
           onClick={() => handleClickItem(v)}
           className={`h-10 flex items-center justify-center snap-center cursor-pointer font-medium select-none transition-colors
-            ${v === value ? "text-blue-600 font-normal scale-110" : "text-slate-800 dark:text-slate-200 hover:text-blue-500"}`}
+            ${v === value ? "text-blue-600 font-normal scale-110" : "text-black dark:text-white hover:text-blue-500"}`}
         >
           {v.toString().padStart(2, '0')}
         </div>
@@ -243,7 +243,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
 
   return (
     <div className="relative w-full" ref={containerRef} id={id}>
-      {label && <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{label}</label>}
+      {label && <label className="block text-sm font-medium text-black dark:text-white mb-1">{label}</label>}
       
       <div className="relative w-full">
         <input
@@ -252,7 +252,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
           onChange={handleInputChange}
           placeholder="DD-MM-YYYY HH:mm:ss"
           onFocus={() => setIsOpen(true)}
-          className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-4 pr-12 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+          className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-4 pr-12 py-3 text-black dark:text-white placeholder:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
         />
         <button
           type="button"
@@ -274,7 +274,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
               <button 
                 type="button" 
                 onClick={handleHeaderClick}
-                className="font-normal text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 px-3 py-1 rounded-lg transition-colors"
+                className="font-normal text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 px-3 py-1 rounded-lg transition-colors"
               >
                 {headerLabel}
               </button>
@@ -334,7 +334,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
 
           {/* Time Scrollers */}
           <div className="w-full sm:w-[162px] flex flex-col items-center">
-            <div className="flex items-center gap-1 text-slate-500 text-sm font-medium mb-3">
+            <div className="flex items-center gap-1 text-black dark:text-white text-sm font-medium mb-3">
               <Clock size={16} /> Time
             </div>
             
@@ -346,13 +346,13 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
                 value={currentDate.getHours()}
                 onChange={(val) => handleTimeChange("hour", val)}
               />
-              <div className="h-full flex items-center font-normal text-slate-400 z-10">:</div>
+              <div className="h-full flex items-center font-normal text-black dark:text-white z-10">:</div>
               <TimeDial
                 type="minute"
                 value={currentDate.getMinutes()}
                 onChange={(val) => handleTimeChange("minute", val)}
               />
-              <div className="h-full flex items-center font-normal text-slate-400 z-10">:</div>
+              <div className="h-full flex items-center font-normal text-black dark:text-white z-10">:</div>
               <TimeDial
                 type="second"
                 value={currentDate.getSeconds()}
@@ -397,7 +397,7 @@ const MonthView = React.memo(({ currentYear, currentMonth, selectedDate, onSelec
         <>
             <div className="grid grid-cols-7 gap-1 text-center mb-2">
                 {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(day => (
-                    <div key={day} className="text-caption font-normal text-slate-400 uppercase">{day}</div>
+                    <div key={day} className="text-caption font-normal text-black dark:text-white uppercase">{day}</div>
                 ))}
             </div>
             <div className="grid grid-cols-7 gap-1">
@@ -413,7 +413,7 @@ const MonthView = React.memo(({ currentYear, currentMonth, selectedDate, onSelec
                             className={`h-8 w-8 mx-auto rounded-full flex items-center justify-center text-xs transition-all
                                 ${isSelected ? "bg-blue-600 text-white font-normal shadow-md scale-110"
                                 : isToday ? "border-2 border-blue-500 text-blue-600 dark:text-blue-400 font-normal"
-                                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                                : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700"}`}
                         >
                             {day}
                         </button>
@@ -437,8 +437,8 @@ const YearView = React.memo(({ currentYear, selectedYear, onSelect }: ViewProps)
                     onClick={() => onSelect(y)}
                     className={`py-3 rounded-xl text-xs transition-all font-medium
                         ${y === selectedYear ? "bg-blue-600 text-white shadow-md scale-105"
-                        : (y < startYear || y > startYear + 9) ? "text-slate-400 opacity-50"
-                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                        : (y < startYear || y > startYear + 9) ? "text-black dark:text-white opacity-50"
+                        : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700"}`}
                 >
                     {y}
                 </button>
@@ -461,8 +461,8 @@ const DecadeView = React.memo(({ currentYear, selectedYear, onSelect }: ViewProp
                     onClick={() => onSelect(d)}
                     className={`py-3 rounded-xl text-caption transition-all font-normal
                         ${Math.floor(selYear / 10) * 10 === d ? "bg-blue-600 text-white shadow-md"
-                        : (d < startDecade || d > startDecade + 90) ? "text-slate-400 opacity-50"
-                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                        : (d < startDecade || d > startDecade + 90) ? "text-black dark:text-white opacity-50"
+                        : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700"}`}
                 >
                     {d}s
                 </button>
@@ -485,8 +485,8 @@ const CenturyView = React.memo(({ currentYear, selectedYear, onSelect }: ViewPro
                     onClick={() => onSelect(c)}
                     className={`py-3 rounded-xl text-caption transition-all font-normal
                         ${Math.floor(selYear / 100) * 100 === c ? "bg-blue-600 text-white shadow-md"
-                        : (c < startCentury || c > startCentury + 900) ? "text-slate-400 opacity-50"
-                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"}`}
+                        : (c < startCentury || c > startCentury + 900) ? "text-black dark:text-white opacity-50"
+                        : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700"}`}
                 >
                     {c}s
                 </button>

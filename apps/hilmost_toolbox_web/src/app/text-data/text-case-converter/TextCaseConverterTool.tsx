@@ -202,10 +202,10 @@ export function TextCaseConverterTool() {
         {/* Input Section */}
         <div className="space-y-4" id="text-converter-input">
           <div className="flex items-center justify-between px-1">
-            <label className="text-caption font-normal uppercase tracking-widest text-slate-500">Input Text</label>
+            <label className="text-caption font-normal uppercase tracking-widest text-black dark:text-white">Input Text</label>
             <button
               onClick={() => { setInput(""); setOutput(""); setLastCase(null); }}
-              className="text-slate-400 hover:text-red-500 transition-colors"
+              className="text-black dark:text-white hover:text-red-500 transition-colors"
               title="Clear Input"
             >
               <X size={18} />
@@ -217,7 +217,7 @@ export function TextCaseConverterTool() {
             placeholder="Paste or type your text here..."
             className="w-full h-48 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
           />
-          <div className="flex gap-4 px-1 text-caption font-normal text-slate-400 uppercase tracking-widest">
+          <div className="flex gap-4 px-1 text-caption font-normal text-black dark:text-white uppercase tracking-widest">
             <span>Chars: {inputStats.chars}</span>
             <span>Words: {inputStats.words}</span>
           </div>
@@ -229,7 +229,7 @@ export function TextCaseConverterTool() {
             <button
               key={t}
               onClick={() => convert(t)}
-              className={`py-2.5 px-3 rounded-lg text-caption font-normal uppercase tracking-widest transition-all border ${lastCase === t ? 'bg-brand-primary text-white border-brand-primary shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-[#D8D6CF] dark:border-slate-700 hover:border-brand-primary hover:text-brand-primary'}`}
+              className={`py-2.5 px-3 rounded-lg text-caption font-normal uppercase tracking-widest transition-all border ${lastCase === t ? 'bg-brand-primary text-white border-brand-primary shadow-sm' : 'bg-white dark:bg-slate-800 text-black dark:text-white border-[#D8D6CF] dark:border-slate-700 hover:border-brand-primary hover:text-brand-primary'}`}
             >
               {t}
             </button>
@@ -243,7 +243,7 @@ export function TextCaseConverterTool() {
                 onClick={() => setIsFindReplaceOpen(!isFindReplaceOpen)}
                 className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
-                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                <div className="flex items-center gap-2 text-black dark:text-white">
                   <Search size={16} className="text-brand-primary" />
                   <span className="text-caption font-normal uppercase tracking-widest">Find & Replace</span>
                 </div>
@@ -273,7 +273,7 @@ export function TextCaseConverterTool() {
                         onChange={(e) => setMatchCase(e.target.checked)}
                         className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
                       />
-                      <span className="text-caption font-normal uppercase text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Match case</span>
+                      <span className="text-caption font-normal uppercase text-black dark:text-white group-hover:text-black dark:text-white dark:group-hover:text-white transition-colors">Match case</span>
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer group">
                       <input
@@ -282,7 +282,7 @@ export function TextCaseConverterTool() {
                         onChange={(e) => setWholeWord(e.target.checked)}
                         className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary"
                       />
-                      <span className="text-caption font-normal uppercase text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Whole word</span>
+                      <span className="text-caption font-normal uppercase text-black dark:text-white group-hover:text-black dark:text-white dark:group-hover:text-white transition-colors">Whole word</span>
                     </label>
                   </div>
 
@@ -317,7 +317,7 @@ export function TextCaseConverterTool() {
                 onClick={() => setIsCustomTermsOpen(!isCustomTermsOpen)}
                 className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
-                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                <div className="flex items-center gap-2 text-black dark:text-white">
                   <ShieldCheck size={16} className="text-brand-primary" />
                   <span className="text-caption font-normal uppercase tracking-widest">Terms Override</span>
                 </div>
@@ -346,12 +346,12 @@ export function TextCaseConverterTool() {
                     {customTerms.map((term) => (
                       <span
                         key={term}
-                        className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-caption font-normal uppercase rounded-lg border border-slate-200 dark:border-slate-700"
+                        className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-black dark:text-white text-caption font-normal uppercase rounded-lg border border-slate-200 dark:border-slate-700"
                       >
                         {term}
                         <button
                           onClick={() => handleRemoveTerm(term)}
-                          className="text-slate-400 hover:text-red-500 transition-colors"
+                          className="text-black dark:text-white hover:text-red-500 transition-colors"
                         >
                           <X size={12} />
                         </button>
@@ -362,7 +362,7 @@ export function TextCaseConverterTool() {
                   {customTerms.length > 0 && (
                     <button
                       onClick={() => setCustomTerms([])}
-                      className="text-caption font-normal text-slate-400 hover:text-red-500 underline transition-colors uppercase tracking-widest"
+                      className="text-caption font-normal text-black dark:text-white hover:text-red-500 underline transition-colors uppercase tracking-widest"
                     >
                       Clear all
                     </button>
@@ -375,7 +375,7 @@ export function TextCaseConverterTool() {
         {/* Output Section */}
         <div className="space-y-4 mt-8" id="text-converter-output">
           <div className="flex items-center justify-between px-1">
-            <label className="text-caption font-normal uppercase tracking-widest text-slate-500">Converted Output</label>
+            <label className="text-caption font-normal uppercase tracking-widest text-black dark:text-white">Converted Output</label>
             {lastCase && <span className="text-caption font-normal text-brand-primary uppercase tracking-widest">Case: {lastCase}</span>}
           </div>
           <textarea
@@ -406,7 +406,7 @@ export function TextCaseConverterTool() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-slate-400 select-none mt-12">
+      <div className="flex items-center justify-center gap-2 text-black dark:text-white select-none mt-12">
         <ShieldCheck size={12} />
         <span className="text-caption font-normal uppercase tracking-[0.25em]">🔒 100% Browser-Side processing. Privacy Guaranteed.</span>
       </div>

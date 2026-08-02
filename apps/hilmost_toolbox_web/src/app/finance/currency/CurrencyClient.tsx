@@ -124,14 +124,14 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
                 {loading ? 'Syncing Rates...' : provider}
             </div>
             {!loading && (
-              <span className="text-caption text-slate-400 font-normal uppercase tracking-widest opacity-60">
+              <span className="text-caption text-black dark:text-white font-normal uppercase tracking-widest opacity-60">
                 Updated: {lastUpdated.split(' ').slice(0, 4).join(' ')}
               </span>
             )}
             <button
                 onClick={fetchRates}
                 disabled={loading}
-                className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-colors disabled:opacity-50 hidden sm:block"
+                className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-black dark:text-white transition-colors disabled:opacity-50 hidden sm:block"
                 title="Refresh Exchange Rates"
             >
                 <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
@@ -185,7 +185,7 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
         </div>
 
         <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
-            <p className="text-slate-500 dark:text-slate-400 font-normal uppercase tracking-widest text-sm leading-relaxed">
+            <p className="text-black dark:text-white font-normal uppercase tracking-widest text-sm leading-relaxed">
                 {val1 || "0"} <span className="text-brand-primary font-normal">{unit1}</span> equals approximately <span className="text-brand-primary font-normal text-2xl">{val2 || "0"}</span> <span className="text-brand-primary font-normal">{unit2}</span>
             </p>
         </div>
