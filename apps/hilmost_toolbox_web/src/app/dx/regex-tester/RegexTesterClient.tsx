@@ -128,7 +128,7 @@ export function RegexTesterClient() {
                 value={testString}
                 onChange={(e) => setTestString(e.target.value)}
                 placeholder="Enter text to test against..."
-                className="flex-1 w-full bg-white dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
+                className="flex-1 w-full bg-white dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm text-black dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
             />
         </div>
 

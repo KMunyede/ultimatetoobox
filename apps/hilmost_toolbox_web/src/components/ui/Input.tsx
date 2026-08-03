@@ -17,7 +17,7 @@ export function Input({ label, className = "", ...props }: InputProps) {
       )}
       <input
         {...props}
-        className={`w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-3 text-base focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all ${className}`}
+        className={`w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg p-3 text-base text-black dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all ${className}`}
       />
     </div>
   );

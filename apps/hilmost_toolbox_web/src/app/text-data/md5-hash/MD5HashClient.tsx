@@ -35,7 +35,7 @@ export function MD5HashClient() {
                 <label className="block text-caption font-normal uppercase tracking-widest text-black dark:text-white">Input String</label>
             </div>
             <textarea
-                className="w-full h-40 p-5 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-2xl text-black dark:text-white text-xl font-medium outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
+                className="w-full h-40 p-5 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-2xl text-black dark:text-white text-xl font-medium placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
                 placeholder="Enter text to generate MD5 hash..."
                 value={text}
                 onChange={e => setState({ text: e.target.value })}

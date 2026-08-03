@@ -55,7 +55,7 @@ export function JWTDecoderClient() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-            className="w-full h-32 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-xs focus:border-brand-primary outline-none transition-all shadow-inner break-all resize-none"
+            className="w-full h-32 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl p-4 font-mono text-xs text-black dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-brand-primary outline-none transition-all shadow-inner break-all resize-none"
         />
       </div>
 

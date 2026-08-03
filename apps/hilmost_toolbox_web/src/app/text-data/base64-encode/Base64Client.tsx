@@ -59,7 +59,7 @@ export function Base64Client({ defaultMode }: { defaultMode?: "encode" | "decode
           <div id="tour-b64-input" className="space-y-1.5 w-full">
             <label className="block text-caption font-normal uppercase tracking-widest text-black dark:text-white ml-1 mb-1.5">Input Text</label>
             <textarea
-              className="w-full h-48 @[800px]:h-64 p-4 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl text-black dark:text-white font-mono text-sm outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
+              className="w-full h-48 @[800px]:h-64 p-4 bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl text-black dark:text-white font-mono text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-brand-primary transition-all resize-none shadow-inner"
               placeholder={mode === 'encode' ? 'Enter plain text...' : 'Enter Base64 string...'}
               value={input}
               onChange={e => setState({ input: e.target.value })}

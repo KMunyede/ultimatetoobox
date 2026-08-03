@@ -73,7 +73,7 @@ export function JSONFormatterClient() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder='Paste your JSON here... e.g. {"key": "value"}'
-          className="flex-1 w-full bg-white dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
+          className="flex-1 w-full bg-white dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl p-4 font-mono text-sm text-black dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-brand-primary outline-none transition-all resize-none shadow-inner"
         />
         {error && (
             <div className="mt-3 p-3 bg-rose-50 dark:bg-rose-900/10 border border-rose-200 dark:border-rose-800 rounded-xl text-caption text-rose-600 dark:text-rose-400 font-mono leading-relaxed">

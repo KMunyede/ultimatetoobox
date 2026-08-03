@@ -33,7 +33,7 @@ export function WordCountClient() {
         {/* Editor */}
         <div id="tour-wc-input" className="@[800px]:col-span-3 bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 focus-within:border-brand-primary transition-colors">
           <textarea
-            className="w-full min-h-[300px] @[800px]:min-h-[400px] p-4 bg-transparent text-black dark:text-white text-lg font-medium outline-none resize-none placeholder:text-black"
+            className="w-full min-h-[300px] @[800px]:min-h-[400px] p-4 bg-transparent text-black dark:text-white text-lg font-medium outline-none resize-none placeholder:text-black dark:placeholder:text-slate-500"
             placeholder="Start typing or paste your text here..."
             value={text}
             onChange={e => setState({ text: e.target.value })}
