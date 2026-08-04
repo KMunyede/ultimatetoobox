@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Search, Command, X, ArrowRight, Zap, History, Star, Settings } from "lucide-react";
 import { TOOLS_MAP } from "./RelatedTools";
 import { Tooltip } from "./Tooltip";
@@ -19,20 +19,12 @@ export function GlobalSearch() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isStaging, setIsStaging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsStaging(
-        window.location.hostname.includes("staging") ||
-        window.location.hostname.includes("localhost")
-      );
-    }
-  }, []);
+  const isStaging = process.env.NEXT_PUBLIC_APP_ENV === 'staging';
 
-  const toolboxDomain = isStaging ? "https://hilmost-toolbox-staging.web.app" : "https://hilmost-toolbox.hilmost.net";
-  const corporateDomain = isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net";
+  const toolboxDomain = useMemo(() => isStaging ? "https://hilmost-toolbox-staging.web.app" : "https://hilmost-toolbox.hilmost.net", [isStaging]);
+  const corporateDomain = useMemo(() => isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net", [isStaging]);
 
   // Quick Actions - shown when query is empty
   const quickActions: ToolEntry[] = [

@@ -1,25 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 export function Footer() {
-  const [isStaging, setIsStaging] = useState(false);
+  const isStaging = process.env.NEXT_PUBLIC_APP_ENV === 'staging';
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsStaging(
-        window.location.hostname.includes("staging") || 
-        window.location.hostname.includes("localhost")
-      );
-    }
-  }, []);
-
-  const domains = {
+  const domains = useMemo(() => ({
     corporate: isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net",
     toolbox: isStaging ? "https://hilmost-toolbox-staging.web.app" : "https://hilmost-toolbox.hilmost.net",
     wisdom: isStaging ? "https://hilmost-wisdom-staging.web.app" : "https://hilmost-wisdom.web.app",
-  };
+  }), [isStaging]);
 
   return (
     <footer className="border-t border-base bg-canvas-card text-text-primary mt-auto print:hidden">

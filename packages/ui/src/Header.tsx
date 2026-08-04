@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { BackButton } from "./BackButton";
 import { GlobalSearch } from "./GlobalSearch";
@@ -16,22 +16,12 @@ interface HeaderProps {
 }
 
 export function Header({ logoSrc, logoAlt = "Hilmost Logo" }: HeaderProps) {
-  const [isStaging, setIsStaging] = useState(false);
+  const isStaging = process.env.NEXT_PUBLIC_APP_ENV === 'staging';
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isStagingHost = window.location.hostname.includes("staging") ||
-                           window.location.hostname.includes("localhost");
-      if (isStagingHost !== isStaging) {
-        setIsStaging(isStagingHost);
-      }
-    }
-  }, [isStaging]);
-
-  const domains = {
+  const domains = useMemo(() => ({
     corporate: isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net",
     toolbox: isStaging ? "https://hilmost-toolbox-staging.web.app" : "https://hilmost-toolbox.hilmost.net",
-  };
+  }), [isStaging]);
 
   const wisdomUrl = `${domains.toolbox}/health/daily-wisdom`;
 

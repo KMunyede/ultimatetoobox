@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2, GraduationCap } from 'lucide-react';
@@ -20,23 +20,14 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 export function NavigationMenu() {
-  const [isStaging, setIsStaging] = useState(false);
   const [hubOpen, setHubOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
 
+  const isStaging = process.env.NEXT_PUBLIC_APP_ENV === 'staging';
   const isGuidesPage = pathname?.includes('/guides');
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsStaging(
-        window.location.hostname.includes("staging") ||
-        window.location.hostname.includes("localhost")
-      );
-    }
-  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -49,10 +40,10 @@ export function NavigationMenu() {
     };
   }, [mobileMenuOpen]);
 
-  const domains = {
+  const domains = useMemo(() => ({
     corporate: isStaging ? "https://hsc-platform-core-staging.web.app" : "https://hilmost.net",
     toolbox: isStaging ? "https://hilmost-toolbox-staging.web.app" : "https://hilmost-toolbox.hilmost.net",
-  };
+  }), [isStaging]);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
