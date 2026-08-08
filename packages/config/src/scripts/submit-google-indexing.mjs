@@ -29,12 +29,11 @@ async function submitToGoogle() {
 
   try {
     // 1. Authenticate
-    const jwtClient = new google.auth.JWT(
-      CONFIG.credentials.client_email,
-      null,
-      CONFIG.credentials.private_key,
-      ['https://www.googleapis.com/auth/indexing']
-    );
+    const jwtClient = new google.auth.JWT({
+      email: CONFIG.credentials.client_email,
+      key: CONFIG.credentials.private_key,
+      scopes: ['https://www.googleapis.com/auth/indexing']
+    });
 
     await jwtClient.authorize();
 
