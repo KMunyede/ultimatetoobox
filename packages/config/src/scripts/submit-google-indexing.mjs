@@ -16,7 +16,7 @@ async function submitToGoogle() {
 
   if (!CONFIG.credentials) {
     console.error('❌ Missing Google Credentials. Set GOOGLE_APPLICATION_CREDENTIALS_JSON environment variable.');
-    return;
+    process.exit(1);
   }
 
   try {
@@ -78,7 +78,8 @@ async function submitToGoogle() {
     console.log('--- Google Submission Complete ---');
   } catch (error) {
     console.error('❌ Critical Error during Google submission:', error);
+    process.exit(1);
   }
 }
 
-submitToGoogle();
+await submitToGoogle();

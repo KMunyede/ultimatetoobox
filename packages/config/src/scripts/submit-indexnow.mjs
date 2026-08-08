@@ -41,10 +41,12 @@ async function submitToIndexNow() {
       const errorText = await response.text();
       console.error(`❌ IndexNow Submission Failed: ${response.status} ${response.statusText}`);
       console.error(`Reason: ${errorText}`);
+      process.exit(1);
     }
   } catch (error) {
     console.error('❌ Critical Error during IndexNow submission:', error);
+    process.exit(1);
   }
 }
 
-submitToIndexNow();
+await submitToIndexNow();
