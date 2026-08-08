@@ -31,7 +31,7 @@ async function submitToGoogle() {
     await jwtClient.authorize();
 
     // 2. Fetch and parse sitemap
-    const sitemapRes = await fetch(CONFIG.sitemap);
+    const sitemapRes = await fetch(CONFIG.sitemap, { signal: AbortSignal.timeout(15000) });
     const sitemapXml = await sitemapRes.text();
     const parsed = await parseStringPromise(sitemapXml);
     const urls = parsed.urlset.url.map(entry => entry.loc[0]);
@@ -60,7 +60,8 @@ async function submitToGoogle() {
           ...options.headers,
           Authorization: `Bearer ${(await jwtClient.getAccessToken()).token}`
         },
-        body: options.body
+        body: options.body,
+        signal: AbortSignal.timeout(10000)
       });
 
       if (res.ok) {

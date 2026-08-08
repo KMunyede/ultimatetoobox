@@ -13,7 +13,7 @@ async function submitToIndexNow() {
 
   try {
     // 1. Fetch and parse sitemap
-    const sitemapRes = await fetch(CONFIG.sitemap);
+    const sitemapRes = await fetch(CONFIG.sitemap, { signal: AbortSignal.timeout(15000) });
     const sitemapXml = await sitemapRes.text();
     const parsed = await parseStringPromise(sitemapXml);
 
@@ -32,7 +32,8 @@ async function submitToIndexNow() {
     const response = await fetch('https://api.indexnow.org/indexnow', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(15000)
     });
 
     if (response.ok) {
