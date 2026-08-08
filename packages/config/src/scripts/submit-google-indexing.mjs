@@ -19,14 +19,6 @@ async function submitToGoogle() {
     process.exit(1);
   }
 
-  console.log('DEBUG: credentials object keys:', Object.keys(CONFIG.credentials));
-  console.log('DEBUG: client_email present:', !!CONFIG.credentials.client_email);
-  console.log('DEBUG: client_email value:', CONFIG.credentials.client_email);
-  console.log('DEBUG: private_key present:', !!CONFIG.credentials.private_key);
-  console.log('DEBUG: private_key type:', typeof CONFIG.credentials.private_key);
-  console.log('DEBUG: private_key length:', CONFIG.credentials.private_key ? CONFIG.credentials.private_key.length : 0);
-  console.log('DEBUG: private_key starts with:', CONFIG.credentials.private_key ? CONFIG.credentials.private_key.substring(0, 30) : 'N/A');
-
   try {
     // 1. Authenticate
     const jwtClient = new google.auth.JWT({
