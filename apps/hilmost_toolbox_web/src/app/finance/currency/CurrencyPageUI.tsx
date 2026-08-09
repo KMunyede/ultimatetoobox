@@ -10,7 +10,8 @@ export function CurrencyPageUI({
   title = "Live Currency Converter",
   description = "Free, real-time currency converter. Stop overpaying banks and instantly convert global currencies using live FX market rates.",
   canonicalUrl = "https://hilmost-toolbox.hilmost.net/finance/currency",
-  lastUpdated
+  lastUpdated,
+  dateModified
 }: {
   defaultFrom?: string;
   defaultTo?: string;
@@ -18,6 +19,7 @@ export function CurrencyPageUI({
   description?: string;
   canonicalUrl?: string;
   lastUpdated?: string;
+  dateModified?: string;
 }) {
   const breadcrumbItems = [
     { label: "Finance", href: "/finance" },
@@ -44,6 +46,17 @@ export function CurrencyPageUI({
     { element: 'select', popover: { title: '2. Pick Currencies', description: 'Choose from over 150 global currencies to compare values.' } },
   ];
 
+  const popularPairs = [
+    { from: "USD", to: "EUR" },
+    { from: "USD", to: "GBP" },
+    { from: "USD", to: "ZAR" },
+    { from: "EUR", to: "GBP" },
+    { from: "GBP", to: "ZAR" },
+    { from: "USD", to: "JPY" },
+    { from: "EUR", to: "ZAR" },
+    { from: "USD", to: "CAD" },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-1 max-w-6xl">
       <WebApplicationSchema
@@ -51,6 +64,7 @@ export function CurrencyPageUI({
         description={description}
         url={canonicalUrl}
         image="https://hilmost-toolbox.hilmost.net/og/finance.png"
+        dateModified={dateModified}
       />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={breadcrumbItems} />
@@ -112,6 +126,22 @@ export function CurrencyPageUI({
           </Link>
         </div>
       </ToolArticle>
+
+      <div className="mt-12 mb-8">
+        <h3 className="text-xl font-normal text-black dark:text-white mb-6 uppercase tracking-tight">Popular Currency Conversions</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {popularPairs.map((pair) => (
+            <Link
+              key={`${pair.from}-${pair.to}`}
+              href={`/finance/currency/${pair.from.toLowerCase()}-to-${pair.to.toLowerCase()}`}
+              className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-base dark:border-slate-800 rounded-2xl hover:border-brand-primary transition-all group shadow-sm hover:shadow-md"
+            >
+              <span className="text-sm font-medium text-black dark:text-white">{pair.from} to {pair.to} converter</span>
+              <ArrowRight size={14} className="text-brand-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+            </Link>
+          ))}
+        </div>
+      </div>
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="finance" currentPath={canonicalUrl.replace("https://hilmost-toolbox.hilmost.net", "")} />

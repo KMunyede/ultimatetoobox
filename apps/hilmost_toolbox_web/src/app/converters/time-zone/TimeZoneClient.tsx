@@ -9,6 +9,7 @@ import { Plus, X, ArrowRight, Clock, Search, Users, ChevronDown, User, Copy, Che
 import { Tooltip } from "@utilitiessite/ui";
 import { Button } from "../../../components/ui/Button";
 import { Input } from "../../../components/ui/Input";
+import { SearchableSelect } from "../../../components/ui/SearchableSelect";
 
 const formatZoneName = (zone: string) => {
   const name = zone.replace(/[_-]/g, " ");
@@ -47,8 +48,13 @@ function getAvailability(timezone: string, now: Date) {
   return { label: "Offline", color: "bg-red-100 text-red-700 border-red-200" };
 }
 
+interface TeamMember {
+  name: string;
+  timezone: string;
+}
+
 // Optimized Team Member Row
-const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: any, now: Date, onRemove: () => void }) => {
+const TeamMemberRow = React.memo(({ member, now, onRemove }: { member: TeamMember, now: Date, onRemove: () => void }) => {
   const availability = getAvailability(member.timezone, now);
   const timeStr = formatInTimeZone(now, member.timezone, "HH:mm:ss");
   const dateStr = formatInTimeZone(now, member.timezone, "EEE, MMM d");
@@ -151,65 +157,6 @@ const TargetZoneRow = React.memo(({ zone, date, onRemove }: { zone: string, date
 });
 TargetZoneRow.displayName = "TargetZoneRow";
 
-interface SearchableSelectProps {
-  value: string;
-  options: string[];
-  onChange: (val: string) => void;
-  placeholder?: string;
-  className?: string;
-  label?: string;
-}
-
-function SearchableSelect({ value, options, onChange, placeholder, className, label }: SearchableSelectProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const filtered = useMemo(() => {
-    const s = search.toLowerCase();
-    return options
-      .filter(o => o.toLowerCase().includes(s))
-      .sort((a, b) => a.localeCompare(b));
-  }, [options, search]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    if (isOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
-
-  return (
-    <div className={`relative ${className}`} ref={containerRef}>
-      <div className="relative group">
-        <Input
-          label={label}
-          type="text"
-          value={isOpen ? search : formatZoneName(value)}
-          placeholder={placeholder}
-          onFocus={() => { setIsOpen(true); setSearch(""); }}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <Search size={14} className="absolute right-3 bottom-3.5 text-slate-400 group-focus-within:text-brand-primary pointer-events-none" />
-      </div>
-      {isOpen && (
-        <div className="absolute z-[70] mt-1 w-full max-h-60 overflow-y-auto bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-800 rounded-lg shadow-2xl custom-scrollbar animate-in fade-in zoom-in-95 duration-200">
-          {filtered.length > 0 ? filtered.map(opt => (
-            <button key={opt} onClick={() => { onChange(opt); setIsOpen(false); setSearch(""); }}
-              className={`w-full text-left px-4 py-2.5 text-sm hover:bg-brand-primary/10 hover:text-brand-primary transition-colors ${opt === value ? 'bg-brand-primary/5 text-brand-primary font-normal' : 'text-black dark:text-white'}`}
-            >
-              {formatZoneName(opt)}
-            </button>
-          )) : <div className="p-4 text-xs text-black dark:text-white text-center">No matching time zones</div>}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export function TimeZoneClient() {
   const [state, setState] = useUrlState({
     sourceZone: "UTC",
@@ -223,7 +170,7 @@ export function TimeZoneClient() {
   const [newZone, setNewZone] = useState("");
   const [now, setNow] = useState(new Date());
 
-  const [teamMembers, setTeamMembers] = useState<{ name: string; timezone: string }[]>([]);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [newMemberName, setNewMemberName] = useState("");
   const [newMemberTZ, setNewMemberTZ] = useState("");
   const [isTeamOpen, setIsTeamOpen] = useState(false);
@@ -238,7 +185,14 @@ export function TimeZoneClient() {
 
   useEffect(() => {
     const saved = localStorage.getItem("hilmost_team_clocks");
-    if (saved) { try { setTeamMembers(JSON.parse(saved)); } catch (e) { console.error(e); } }
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setTimeout(() => setTeamMembers(parsed), 0);
+      } catch {
+        // Silently fail on parse error
+      }
+    }
 
     const params = new URLSearchParams(window.location.search);
     const teamParam = params.get("team");
@@ -248,20 +202,32 @@ export function TimeZoneClient() {
         const [name, timezone] = p.split(":");
         return { name: decodeURIComponent(name), timezone: decodeURIComponent(timezone) };
       }).filter(p => p.name && p.timezone);
-      if (loadedTeam.length > 0) { setTeamMembers(loadedTeam); setIsTeamOpen(true); }
+      if (loadedTeam.length > 0) {
+        setTimeout(() => {
+          setTeamMembers(loadedTeam);
+          setIsTeamOpen(true);
+        }, 0);
+      }
     }
 
-    try { setAvailableZones(Intl.supportedValuesOf("timeZone")); } catch (e) { console.warn("Intl.supportedValuesOf not supported"); }
+    try {
+      const zones = Intl.supportedValuesOf("timeZone");
+      setTimeout(() => setAvailableZones(zones), 0);
+    } catch {
+      // Silently fail if not supported
+    }
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-    if (!window.location.search.includes("sourceZone")) { setState({ sourceZone: userTimezone }); }
+    if (!window.location.search.includes("sourceZone")) {
+      setTimeout(() => setState({ sourceZone: userTimezone }), 0);
+    }
 
     if (!sourceTime && !window.location.search.includes("sourceTime")) {
       const d = new Date();
       const pad = (n: number) => n.toString().padStart(2, "0");
-      setState({ sourceTime: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}` });
+      setTimeout(() => setState({ sourceTime: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}` }), 0);
     }
-  }, []);
+  }, [sourceTime, sourceZone, setState]);
 
   useEffect(() => { localStorage.setItem("hilmost_team_clocks", JSON.stringify(teamMembers)); }, [teamMembers]);
 
@@ -316,7 +282,13 @@ export function TimeZoneClient() {
             </div>
           </div>
           <div className="space-y-4">
-            <SearchableSelect label="Source Time Zone" value={sourceZone} options={availableZones} onChange={(val) => setState({ sourceZone: val })} />
+            <SearchableSelect
+            label="Source Time Zone"
+            value={sourceZone}
+            options={availableZones.map(z => ({ label: z, value: z }))}
+            onChange={(val) => setState({ sourceZone: val })}
+            formatDisplay={formatZoneName}
+          />
             <DateTimePicker label="Date & Time" value={sourceTime} onChange={(val) => setState({ sourceTime: val })} />
           </div>
         </div>
@@ -335,7 +307,14 @@ export function TimeZoneClient() {
           </div>
           <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
             <div className="flex gap-2 items-end">
-              <SearchableSelect label="Add Time Zone" value={newZone} options={availableZones.filter(z => !targets.includes(z))} onChange={(val) => setNewZone(val)} className="flex-1" />
+              <SearchableSelect
+                label="Add Time Zone"
+                value={newZone}
+                options={availableZones.filter(z => !targets.includes(z)).map(z => ({ label: z, value: z }))}
+                onChange={(val) => setNewZone(val)}
+                className="flex-1"
+                formatDisplay={formatZoneName}
+              />
               <Button onClick={handleAddZone} disabled={!newZone} className="!px-6 !py-3 mb-0.5"><Plus className="w-6 h-6" /></Button>
             </div>
           </div>
@@ -360,7 +339,15 @@ export function TimeZoneClient() {
               <div className="p-6 pt-0 space-y-6 border-t border-slate-100 dark:border-slate-800">
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-6 items-end">
                   <div className="sm:col-span-4"><Input label="Member Name" placeholder="e.g. Keepy" value={newMemberName} onChange={(e) => setNewMemberName(e.target.value)} /></div>
-                  <div className="sm:col-span-5"><SearchableSelect label="Time Zone" value={newMemberTZ} options={availableZones} onChange={(val) => setNewMemberTZ(val)} /></div>
+                  <div className="sm:col-span-5">
+                    <SearchableSelect
+                      label="Time Zone"
+                      value={newMemberTZ}
+                      options={availableZones.map(z => ({ label: z, value: z }))}
+                      onChange={(val) => setNewMemberTZ(val)}
+                      formatDisplay={formatZoneName}
+                    />
+                  </div>
                   <div className="sm:col-span-3"><Button onClick={handleAddMember} disabled={!newMemberName || !newMemberTZ} className="w-full !py-3 mb-0.5">Add Member</Button></div>
                 </div>
                 <div className="space-y-3">

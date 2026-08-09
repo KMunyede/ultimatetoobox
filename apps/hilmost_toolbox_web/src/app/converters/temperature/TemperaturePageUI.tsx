@@ -10,10 +10,11 @@ const PATH = "/converters/temperature";
 export function TemperaturePageUI({
   defaultUnit1 = "celsius",
   defaultUnit2 = "fahrenheit",
-  title = TOOL_NAME,
   description = "Effortlessly switch between global weather scales. Instant conversions for Celsius, Fahrenheit, and Kelvin.",
   canonicalUrl = getCanonicalUrl(PATH),
+  title,
   lastUpdated,
+  dateModified,
   breadcrumbItems: customBreadcrumbItems,
   summary
 }: {
@@ -23,6 +24,7 @@ export function TemperaturePageUI({
   description?: string;
   canonicalUrl?: string;
   lastUpdated?: string;
+  dateModified?: string;
   breadcrumbItems?: { label: string; href: string }[];
   summary?: string;
 }) {
@@ -75,6 +77,7 @@ export function TemperaturePageUI({
         description={TOOL_DESC}
         url={canonicalUrl}
         image="https://hilmost-toolbox.hilmost.net/og/converters.png"
+        dateModified={dateModified}
       />
       <FAQSchema items={faqs} />
       <BreadcrumbSchema items={breadcrumbItems} />
@@ -86,7 +89,7 @@ export function TemperaturePageUI({
       <Breadcrumbs items={breadcrumbItems} />
 
       <ToolHeader
-        title={TOOL_NAME}
+        title={title || TOOL_NAME}
         subtitle={description}
         lastUpdated={lastUpdated}
         tourId="temperature_converter"

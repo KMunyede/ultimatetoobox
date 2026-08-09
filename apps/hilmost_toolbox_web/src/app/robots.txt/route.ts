@@ -32,7 +32,63 @@ Disallow: /*?sourceTime=*
 Disallow: /*?targetZones=*
 Disallow: /*?team=*
 
+User-agent: chatgpt-user
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /cdn-cgi/
+Disallow: /*?val1=*
+Disallow: /*?unit1=*
+Disallow: /*?val2=*
+Disallow: /*?unit2=*
+Disallow: /*?sourceZone=*
+Disallow: /*?sourceTime=*
+Disallow: /*?targetZones=*
+Disallow: /*?team=*
+
+User-agent: claudebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /cdn-cgi/
+Disallow: /*?val1=*
+Disallow: /*?unit1=*
+Disallow: /*?val2=*
+Disallow: /*?unit2=*
+Disallow: /*?sourceZone=*
+Disallow: /*?sourceTime=*
+Disallow: /*?targetZones=*
+Disallow: /*?team=*
+
+User-agent: claude-web
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /cdn-cgi/
+Disallow: /*?val1=*
+Disallow: /*?unit1=*
+Disallow: /*?val2=*
+Disallow: /*?unit2=*
+Disallow: /*?sourceZone=*
+Disallow: /*?sourceTime=*
+Disallow: /*?targetZones=*
+Disallow: /*?team=*
+
 User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /cdn-cgi/
+Disallow: /*?val1=*
+Disallow: /*?unit1=*
+Disallow: /*?val2=*
+Disallow: /*?unit2=*
+Disallow: /*?sourceZone=*
+Disallow: /*?sourceTime=*
+Disallow: /*?targetZones=*
+Disallow: /*?team=*
+
+User-agent: google-extended
 Allow: /
 Disallow: /api/
 Disallow: /_next/

@@ -1,23 +1,27 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { ArrowRightLeft, RefreshCw, Globe } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 import { NumberInput } from "../../../components/ui/NumberInput";
-import { Select } from "../../../components/ui/Select";
+import { SearchableSelect } from "../../../components/ui/SearchableSelect";
+import { CURRENCY_NAMES } from "@/lib/currencies";
 
+/**
+ * Approximate offline fallback rates (USD base = 1.0).
+ * These are mid-market estimates from mid-2026 to ensure the tool remains usable
+ * if live market APIs are unreachable.
+ */
 const FALLBACK_RATES: Record<string, number> = {
-  USD: 1,
-  EUR: 0.92,
-  GBP: 0.79,
-  JPY: 150.5,
-  AUD: 1.53,
-  CAD: 1.36,
-  CHF: 0.91,
-  CNY: 7.23,
-  INR: 83.3,
-  ZAR: 18.8,
-  NZD: 1.66,
+  // Hubs
+  USD: 1, EUR: 0.90, GBP: 0.77, JPY: 145.0, AUD: 1.50, CAD: 1.35, CHF: 0.88,
+  CNY: 7.15, INR: 83.0, NZD: 1.62, ZAR: 18.0, NGN: 1550.0, KES: 130.0, GHS: 15.0, AED: 3.67,
+  // Spokes
+  EGP: 48.0, MAD: 10.0, BWP: 13.5, ZMW: 26.0, MZN: 64.0, TZS: 2700.0, UGX: 3700.0,
+  SGD: 1.32, HKD: 7.8, SAR: 3.75, THB: 34.0, MYR: 4.4, IDR: 15800.0, PHP: 57.0,
+  VND: 25000.0, KRW: 1350.0, BRL: 5.4, MXN: 19.5, ARS: 950.0, CLP: 920.0, COP: 4100.0,
+  PLN: 3.9, SEK: 10.3, NOK: 10.7, DKK: 6.7, CZK: 23.0, HUF: 360.0, RON: 4.5,
+  TRY: 33.0, RUB: 90.0, ILS: 3.7, PKR: 278.0, BDT: 118.0, LKR: 300.0, XOF: 590.0
 };
 
 export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: string, defaultTo?: string }) {
@@ -77,7 +81,10 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
   }, []);
 
   useEffect(() => {
-    fetchRates();
+    const timeoutId = setTimeout(() => {
+      fetchRates();
+    }, 0);
+    return () => clearTimeout(timeoutId);
   }, [fetchRates]);
 
 
@@ -109,7 +116,18 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
     }
   }, [val2, unit1, unit2, activeInput, rates, setState]);
 
-  const currencyOptions = Object.keys(rates).sort().map(u => ({ label: u, value: u }));
+  const currencyOptions = useMemo(() => {
+    return Object.keys(rates).sort().map(code => ({
+      label: code,
+      value: code,
+      searchTerms: CURRENCY_NAMES[code] || ""
+    }));
+  }, [rates]);
+
+  const formatCurrencyDisplay = (label: string) => {
+    const name = CURRENCY_NAMES[label];
+    return name ? `${label} - ${name}` : label;
+  };
 
   return (
     <motion.div 
@@ -144,20 +162,19 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 1 */}
           <div id="tour-currency-input1" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-text-muted ml-1">From</label>
-            <div className="space-y-4">
-              <NumberInput
-                value={val1}
-                onChange={v => setState({ activeInput: 1, val1: v })}
-                className="text-2xl font-normal"
-                min={0}
-              />
-              <Select
-                value={unit1}
-                onChange={(e) => setState({ activeInput: 1, unit1: e.target.value })}
-                options={currencyOptions}
-              />
-            </div>
+            <NumberInput
+              value={val1}
+              onChange={v => setState({ activeInput: 1, val1: v })}
+              className="text-2xl font-normal"
+              min={0}
+            />
+            <SearchableSelect
+              label="From"
+              value={unit1}
+              onChange={(val) => setState({ activeInput: 1, unit1: val })}
+              options={currencyOptions}
+              formatDisplay={formatCurrencyDisplay}
+            />
           </div>
 
           <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 shadow-inner">
@@ -166,20 +183,19 @@ export function CurrencyClient({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
           {/* Currency 2 */}
           <div id="tour-currency-input2" className="flex-1 w-full space-y-4">
-            <label className="block text-caption font-normal uppercase tracking-widest text-text-muted ml-1">To</label>
-            <div className="space-y-4">
-              <NumberInput
-                value={val2}
-                onChange={v => setState({ activeInput: 2, val2: v })}
-                className="text-2xl font-normal"
-                min={0}
-              />
-              <Select
-                value={unit2}
-                onChange={(e) => setState({ activeInput: 1, unit2: e.target.value })}
-                options={currencyOptions}
-              />
-            </div>
+            <NumberInput
+              value={val2}
+              onChange={v => setState({ activeInput: 2, val2: v })}
+              className="text-2xl font-normal"
+              min={0}
+            />
+            <SearchableSelect
+              label="To"
+              value={unit2}
+              onChange={(val) => setState({ activeInput: 1, unit2: val })}
+              options={currencyOptions}
+              formatDisplay={formatCurrencyDisplay}
+            />
           </div>
 
         </div>

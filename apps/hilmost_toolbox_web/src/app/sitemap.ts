@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
 import { KNOWLEDGE_BASE, GUIDES } from '@utilitiessite/config';
+import { CURRENCIES, getProgrammaticCurrencyPairs } from '@/lib/currencies';
 
 export const dynamic = "force-static";
 
@@ -65,7 +66,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'converters/weight-mass': ["kilograms", "grams", "milligrams", "metric-tons", "pounds", "ounces", "stones"],
     'converters/temperature': ["celsius", "fahrenheit", "kelvin"],
     'converters/area': ["square-meter", "square-kilometer", "hectare", "acre"],
-    'finance/currency': ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "ZAR"],
   };
 
   Object.entries(UNITS_CONFIG).forEach(([pathPrefix, units]) => {
@@ -76,6 +76,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
         }
       }
     }
+  });
+
+  // Hub-and-Spoke Currency Pairs
+  getProgrammaticCurrencyPairs().forEach(pair => {
+    programmaticPages.push(`/finance/currency/${pair.from.toLowerCase()}-to-${pair.to.toLowerCase()}`);
   });
 
   const FIXED_PROGRAMMATIC: Record<string, string[]> = {

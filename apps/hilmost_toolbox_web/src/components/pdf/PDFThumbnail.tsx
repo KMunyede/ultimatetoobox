@@ -7,7 +7,7 @@ import * as pdfjs from "pdfjs-dist";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
 interface PDFThumbnailProps {
-  pdfProxy?: any | null; // pdfjs.PDFDocumentProxy
+  pdfProxy?: unknown | null;
   file?: File | null;
   pageNumber?: number;
   className?: string;
@@ -20,8 +20,8 @@ export function PDFThumbnail({ pdfProxy, file, pageNumber = 1, className = "", s
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
-  const renderTaskRef = useRef<any>(null);
-  const [internalProxy, setInternalProxy] = useState<any | null>(null);
+  const renderTaskRef = useRef<unknown>(null);
+  const [internalProxy, setInternalProxy] = useState<unknown | null>(null);
 
   // Intersection Observer to only render when in view
   useEffect(() => {
@@ -52,20 +52,20 @@ export function PDFThumbnail({ pdfProxy, file, pageNumber = 1, className = "", s
         const arrayBuffer = await file!.arrayBuffer();
         const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
         if (active) setInternalProxy(pdf);
-        else pdf.destroy();
-      } catch (err) {
+        else (pdf as { destroy: () => void }).destroy();
+      } catch {
         if (active) setError("Failed");
       }
     }
     loadInternal();
     return () => {
       active = false;
-      if (internalProxy) internalProxy.destroy();
+      if (internalProxy) (internalProxy as { destroy: () => void }).destroy();
     };
   }, [file, pdfProxy]);
 
   useEffect(() => {
-    const proxy = pdfProxy || internalProxy;
+    const proxy = (pdfProxy || internalProxy) as any;
     if (!proxy || !isVisible) return;
 
     let active = true;
@@ -87,7 +87,7 @@ export function PDFThumbnail({ pdfProxy, file, pageNumber = 1, className = "", s
           if (context) {
             // Cancel previous render if any
             if (renderTaskRef.current) {
-              renderTaskRef.current.cancel();
+              (renderTaskRef.current as { cancel: () => void }).cancel();
             }
 
             renderTaskRef.current = page.render({
@@ -96,12 +96,12 @@ export function PDFThumbnail({ pdfProxy, file, pageNumber = 1, className = "", s
               intent: 'display'
             });
 
-            await renderTaskRef.current.promise;
+            await (renderTaskRef.current as { promise: Promise<void> }).promise;
           }
         }
         setLoading(false);
-      } catch (err: any) {
-        if (active && err.name !== 'RenderingCancelledException') {
+      } catch (err: unknown) {
+        if (active && (err as Error).name !== 'RenderingCancelledException') {
           console.error("Thumbnail error:", err);
           setError("Failed");
           setLoading(false);
@@ -114,9 +114,10 @@ export function PDFThumbnail({ pdfProxy, file, pageNumber = 1, className = "", s
     return () => {
       active = false;
       if (renderTaskRef.current) {
-        renderTaskRef.current.cancel();
+        (renderTaskRef.current as { cancel: () => void }).cancel();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pdfProxy, internalProxy, pageNumber, isVisible, scale]);
 
   return (

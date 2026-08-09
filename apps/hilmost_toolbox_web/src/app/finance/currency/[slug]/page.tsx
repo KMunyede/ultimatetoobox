@@ -1,21 +1,16 @@
 import { Metadata } from "next";
 import { CurrencyPageUI } from "../CurrencyPageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
+import { getFileLastUpdated, getFileLastUpdatedISO } from "@utilitiessite/config/server";
 import path from "path";
 
-const CURRENCIES = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "INR", "ZAR", "NZD"];
+import { getProgrammaticCurrencyPairs } from "@/lib/currencies";
 
 export function generateStaticParams() {
-  const params: { slug: string }[] = [];
-  for (const from of CURRENCIES) {
-    for (const to of CURRENCIES) {
-      if (from !== to) {
-        params.push({ slug: `${from.toLowerCase()}-to-${to.toLowerCase()}` });
-      }
-    }
-  }
-  return params;
+  const pairs = getProgrammaticCurrencyPairs();
+  return pairs.map(p => ({
+    slug: `${p.from.toLowerCase()}-to-${p.to.toLowerCase()}`
+  }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -60,6 +55,7 @@ export default async function CurrencyProgrammaticPage({ params }: { params: Pro
 
   const filePath = path.join(process.cwd(), "src/app/finance/currency/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
+  const dateModified = getFileLastUpdatedISO(filePath);
 
   return (
     <CurrencyPageUI 
@@ -69,6 +65,7 @@ export default async function CurrencyProgrammaticPage({ params }: { params: Pro
       description={`Instantly convert ${from} to ${to} using live mid-market exchange rates. Perfect for travelers, freelancers, and global businesses.`}
       canonicalUrl={getCanonicalUrl(`/finance/currency/${slug}`)}
       lastUpdated={lastUpdated}
+      dateModified={dateModified}
     />
   );
 }

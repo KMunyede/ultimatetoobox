@@ -38,7 +38,19 @@ User-agent: ClaudeBot
 Disallow: /cdn-cgi/
 Allow: /
 
+User-agent: ChatGPT-User
+Disallow: /cdn-cgi/
+Allow: /
+
+User-agent: Claude-Web
+Disallow: /cdn-cgi/
+Allow: /
+
 User-agent: anthropic-ai
+Disallow: /cdn-cgi/
+Allow: /
+
+User-agent: Google-Extended
 Disallow: /cdn-cgi/
 Allow: /
 
