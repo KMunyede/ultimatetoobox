@@ -255,7 +255,7 @@ export function EquationSolverClient({
                 <motion.div
                   initial={{ scale: 0.95, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="bg-brand-primary/5 rounded-[2rem] p-8 border border-brand-primary/10 flex flex-col justify-center items-center text-center h-full min-h-[250px] shadow-inner"
+                  className="bg-brand-primary/5 rounded-[2rem] p-6 border border-brand-primary/10 flex flex-col justify-center items-center text-center h-full min-h-[160px] shadow-inner"
                 >
                   <div className="text-caption font-normal uppercase tracking-[0.2em] text-brand-primary mb-4">Calculated {target}</div>
                   <div className="text-2xl md:text-3xl font-mono font-normal text-black dark:text-white tracking-tighter truncate max-w-full">
