@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { CurrencyPageUI } from "./CurrencyPageUI";
 import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
+import { getFileLastUpdated, getFileLastUpdatedISO } from "@utilitiessite/config/server";
 import path from "path";
 import { formatTitle } from "@/lib/metadata";
 
@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = formatTitle("Currency Converter | Real-Time Exchange Rates");
   return {
     title,
-    description: "Convert global currencies instantly with real-time exchange rates. Our free, accurate, and bidirectional currency converter helps you track live market rates for over 150 currencies.",
+    description: "Convert global currencies instantly with real-time exchange rates. Free, accurate converter for 50+ currencies with live market updates and precision.",
     alternates: {
       canonical: PATH,
     },
@@ -30,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function CurrencyPage() {
   const filePath = path.join(process.cwd(), "src/app/finance/currency/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
+  const dateModified = getFileLastUpdatedISO(filePath);
 
-  return <CurrencyPageUI lastUpdated={lastUpdated} canonicalUrl={getCanonicalUrl(PATH)} />;
+  return <CurrencyPageUI lastUpdated={lastUpdated} dateModified={dateModified} canonicalUrl={getCanonicalUrl(PATH)} />;
 }
