@@ -37,9 +37,9 @@ export function CalculatorDisplay({
 
   return (
     <div className="flex flex-col gap-1">
-      {/* Main Display Card */}
-      <div className={`relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm overflow-hidden ${historyOnly && !showHistory ? 'hidden' : ''}`}>
-        {!historyOnly && (
+      {!historyOnly ? (
+        /* Standard Calculator Card */
+        <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm overflow-hidden">
           <div className="flex flex-col items-end min-h-[80px] justify-center">
             {/* Expression Line */}
             <div className="text-sm font-mono text-black dark:text-white break-all text-right w-full pr-8">
@@ -50,21 +50,39 @@ export function CalculatorDisplay({
               {formatValue(result) || "0"}
             </div>
           </div>
-        )}
 
-        {/* History Toggle Button */}
-        <button
-          onClick={() => setShowHistory(!showHistory)}
-          className={`absolute top-4 right-4 p-2 rounded-lg transition-colors ${
-            showHistory
-              ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-              : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
-          }`}
-          title="History Tape"
-        >
-          <IconHistory size={20} />
-        </button>
-      </div>
+          {/* History Toggle Button */}
+          <button
+            onClick={() => setShowHistory(!showHistory)}
+            className={`absolute top-4 right-4 p-2 rounded-lg transition-colors ${
+              showHistory
+                ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+                : "text-black dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+            }`}
+            title="History Tape"
+          >
+            <IconHistory size={20} />
+          </button>
+        </div>
+      ) : (
+        /* History-Only Mode Toggle (No Calculator Card) */
+        <div className="flex justify-end px-2">
+          <button
+            onClick={() => setShowHistory(!showHistory)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-caption font-normal uppercase tracking-widest border-2 transition-all active:scale-95 ${
+              showHistory
+                ? "bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800"
+                : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white hover:border-brand-primary shadow-sm"
+            }`}
+          >
+            <IconHistory size={16} />
+            {showHistory ? "Hide History" : "View History"}
+            {history.length > 0 && (
+              <span className="ml-1 opacity-60">({history.length})</span>
+            )}
+          </button>
+        </div>
+      )}
 
       {/* History Tape Panel */}
       <AnimatePresence>

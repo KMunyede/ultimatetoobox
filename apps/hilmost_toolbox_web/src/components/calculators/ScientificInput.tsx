@@ -38,13 +38,17 @@ export function ScientificInput({
   useEffect(() => {
     const adjustedVal = value / currentUnitMult;
     if (adjustedVal === 0) {
-      setCoefStr("0");
-      setExpStr("0");
+      setTimeout(() => {
+        setCoefStr("0");
+        setExpStr("0");
+      }, 0);
     } else {
       const eStr = adjustedVal.toExponential();
       const p = eStr.split("e");
-      setCoefStr(parseFloat(p[0]).toFixed(3).replace(/\.?0+$/, ""));
-      setExpStr(p[1].replace("+", ""));
+      setTimeout(() => {
+        setCoefStr(parseFloat(p[0]).toFixed(3).replace(/\.?0+$/, ""));
+        setExpStr(p[1].replace("+", ""));
+      }, 0);
     }
   }, [value, currentUnitMult]);
 
@@ -77,8 +81,8 @@ export function ScientificInput({
   };
 
   return (
-    <div className="flex flex-col gap-3 p-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm transition-all hover:shadow-md">
-      <div className="flex items-center justify-between px-1">
+    <div className="flex flex-col gap-2 p-2.5 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm transition-all hover:shadow-md">
+      <div className="flex items-center justify-between px-0.5">
         <label className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">{label}</label>
         {selectedPreset === "Custom" && (
           <span className="text-micro font-normal text-brand-primary uppercase tracking-widest bg-brand-primary/5 px-2 py-0.5 rounded-full">
@@ -89,12 +93,12 @@ export function ScientificInput({
 
       {/* 1. Presets - Horizontal Scroll */}
       {presets.length > 0 && (
-        <div className="flex overflow-x-auto pb-2 -mx-1 px-1 gap-1.5 no-scrollbar">
+        <div className="flex overflow-x-auto pb-1 -mx-0.5 px-0.5 gap-1 no-scrollbar">
           {presets.map((p) => (
             <button
               key={p.label}
               onClick={() => setSelectedPreset(p.label)}
-              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
+              className={`whitespace-nowrap px-2 py-1 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
                 selectedPreset === p.label
                   ? "bg-brand-primary text-white border-brand-primary shadow-sm"
                   : "bg-slate-50 dark:bg-slate-800 text-black dark:text-white border-transparent hover:border-slate-200"
@@ -105,7 +109,7 @@ export function ScientificInput({
           ))}
           <button
             onClick={() => setSelectedPreset("Custom")}
-            className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
+            className={`whitespace-nowrap px-2 py-1 rounded-lg text-caption font-normal uppercase tracking-tight transition-all border-2 flex-shrink-0 ${
               selectedPreset === "Custom"
                 ? "bg-brand-primary text-white border-brand-primary shadow-sm"
                 : "bg-slate-50 dark:bg-slate-800 text-black dark:text-white border-transparent hover:border-slate-200"
@@ -117,20 +121,20 @@ export function ScientificInput({
       )}
 
       {/* 2. Main Interaction Area */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         {selectedPreset !== "Custom" && selectedPreset !== null ? (
           /* Locked Display */
-          <div className="w-full bg-slate-50 dark:bg-slate-950 rounded-xl p-4 border border-dashed border-slate-200 dark:border-slate-800 flex items-center justify-center relative overflow-hidden group">
+          <div className="w-full bg-slate-50 dark:bg-slate-950 rounded-xl p-2.5 border border-dashed border-slate-200 dark:border-slate-800 flex items-center justify-center relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
                <Info size={12} className="text-slate-300" />
             </div>
-            <span className="text-2xl font-mono font-normal text-brand-primary tracking-tighter">
+            <span className="text-xl font-mono font-normal text-brand-primary tracking-tighter">
               {coefStr} &times; 10<sup className="text-xs ml-0.5 font-normal">{expStr}</sup>
             </span>
           </div>
         ) : (
           /* Expanded Custom Form - ULTRA DENSITY FIX */
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1">
             {/* Numerical Inputs */}
             <div className="flex items-center gap-1.5 flex-1 min-w-0">
               <input
@@ -138,7 +142,7 @@ export function ScientificInput({
                 inputMode="decimal"
                 value={coefStr}
                 onChange={(e) => handleCustomChange(e.target.value.replace(/[^0-9.-]/g, ""), expStr)}
-                className="flex-1 min-w-[70px] bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-3 py-2 font-mono font-normal text-black dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base shadow-inner"
+                className="flex-1 min-w-[70px] bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-2 py-1 font-mono font-normal text-black dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-sm shadow-inner"
                 placeholder="1.0"
               />
               <span className="text-black dark:text-white font-normal text-caption uppercase whitespace-nowrap shrink-0">
@@ -149,25 +153,25 @@ export function ScientificInput({
                 inputMode="numeric"
                 value={expStr}
                 onChange={(e) => handleCustomChange(coefStr, e.target.value.replace(/[^0-9-]/g, ""))}
-                className="w-14 sm:w-16 bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-2 py-2 font-mono font-normal text-black dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-base text-center shadow-inner"
+                className="w-12 sm:w-14 bg-white dark:bg-slate-900 border border-[#D8D6CF] dark:border-slate-700 rounded-lg px-1.5 py-1 font-mono font-normal text-black dark:text-white focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 outline-none transition-all text-sm text-center shadow-inner"
                 placeholder="0"
               />
             </div>
 
             {/* Units Dropdown */}
             {units.length > 0 && (
-              <div className="w-full sm:w-32 shrink-0">
+              <div className="w-full sm:w-28 shrink-0">
                 <div className="relative">
                    <select
                       value={currentUnitMult}
                       onChange={(e) => handleUnitChange(parseFloat(e.target.value))}
-                      className="w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg pl-3 pr-8 py-2 text-xs font-normal text-black dark:text-white outline-none cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all appearance-none"
+                      className="w-full bg-white dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-lg pl-2 pr-6 py-1 text-[10px] font-normal text-black dark:text-white outline-none cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all appearance-none"
                     >
                       {units.map((u) => (
                         <option key={u.label} value={u.value}>{u.label}</option>
                       ))}
                     </select>
-                    <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-black dark:text-white pointer-events-none" />
+                    <ChevronDown size={12} className="absolute right-1.5 top-1/2 -translate-y-1/2 text-black dark:text-white pointer-events-none" />
                 </div>
               </div>
             )}

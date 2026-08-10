@@ -222,10 +222,10 @@ export function AstrophysicsCalculatorClient({
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`@container max-w-4xl mx-auto flex flex-col gap-6 transition-colors duration-500 ${isAstronomerMode ? 'astronomer-theme' : ''}`}
+      className={`@container max-w-4xl mx-auto flex flex-col gap-4 my-5 transition-colors duration-500 ${isAstronomerMode ? 'astronomer-theme' : ''}`}
     >
-      <div className="flex justify-end items-center gap-4 px-2">
-        <div className="flex items-center gap-2 mr-auto">
+      <div className="flex justify-end items-center gap-2 px-1">
+        <div className="flex items-center gap-1.5 mr-auto">
           <div className={`w-2 h-2 rounded-full ${isAstronomerMode ? 'bg-rose-500 animate-pulse' : 'bg-brand-primary'}`} />
           <span className={`text-caption font-normal uppercase tracking-widest ${isAstronomerMode ? 'text-rose-500' : 'text-black dark:text-white'}`}>
             {isAstronomerMode ? 'Red Night-Vision Active' : 'Daylight Mode'}
@@ -234,7 +234,7 @@ export function AstrophysicsCalculatorClient({
 
         <button
           onClick={() => setIsAstronomerMode(!isAstronomerMode)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-caption font-normal uppercase tracking-widest border-2 transition-all active:scale-95 ${
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-caption font-normal uppercase tracking-widest border-2 transition-all active:scale-95 ${
             isAstronomerMode
               ? 'bg-rose-950 text-rose-500 border-rose-900 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
               : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-black dark:text-white hover:border-brand-primary'
@@ -258,18 +258,18 @@ export function AstrophysicsCalculatorClient({
         .astronomer-theme .shadow-sm, .astronomer-theme .shadow-xl { box-shadow: 0 10px 15px -3px rgba(139, 0, 0, 0.1) !important; }
       `}</style>
 
-      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-2.5 md:p-3.5">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
 
           {/* Controls Column */}
-          <div className="lg:col-span-1 flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
+          <div className="lg:col-span-1 flex flex-col gap-2.5">
+            <div className="flex flex-col gap-1">
               <label className="text-caption font-normal text-black dark:text-white uppercase tracking-widest ml-1">Calculation Type</label>
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl px-4 py-2.5 flex items-center justify-between gap-2 text-left transition-all outline-none shadow-inner group"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-[#D8D6CF] dark:border-slate-800 rounded-xl px-3 py-2 flex items-center justify-between gap-2 text-left transition-all outline-none shadow-inner group"
                 >
                   <span className="text-caption font-normal text-black dark:text-white uppercase leading-tight">
                     {CALC_OPTIONS.find(opt => opt.value === calcType)?.label}
@@ -321,7 +321,7 @@ export function AstrophysicsCalculatorClient({
           </div>
 
           {/* Dynamic Inputs Column */}
-          <div className="lg:col-span-3 flex flex-col gap-4">
+          <div className="lg:col-span-3 flex flex-col gap-2.5">
             {calcType === "gravity" && (
               <>
                 <ScientificInput label="Mass 1 (m1)" value={val1} onChange={setVal1} presets={MASS_PRESETS} units={MASS_UNITS} />
@@ -355,17 +355,17 @@ export function AstrophysicsCalculatorClient({
 
       {/* Result Card */}
       {result && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-brand-primary rounded-[2.5rem] p-6 text-white shadow-2xl relative overflow-hidden"
+            className="bg-brand-primary rounded-[2rem] p-4 text-white shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24 pointer-events-none" />
             <div className="relative z-10">
-              <div className="text-caption font-normal uppercase tracking-[0.3em] opacity-80 mb-2">Calculated Result</div>
-              <div className="text-4xl md:text-6xl font-mono font-normal mb-2 tracking-tighter leading-none">
-                <ScientificNumber value={parseFloat(result)} className="text-white" multiLine={true} />
+              <div className="text-caption font-normal uppercase tracking-[0.3em] opacity-80 mb-1">Calculated Result</div>
+              <div className="text-3xl md:text-5xl font-mono font-normal mb-1 tracking-tighter leading-none">
+                <ScientificNumber value={parseFloat(result)} className="text-white" multiLine={false} />
               </div>
               <div className="text-sm font-normal opacity-90 uppercase tracking-widest">
                 {humanResult}
@@ -374,7 +374,7 @@ export function AstrophysicsCalculatorClient({
           </motion.div>
 
           {/* Research Export Actions */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <Button
               variant="secondary"
               onClick={() => copyToClipboard(lastLaTeX, 'latex')}
