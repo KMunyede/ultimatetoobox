@@ -34,7 +34,7 @@ export default function ContactPage() {
             <div className="space-y-4 text-slate-600 dark:text-slate-400">
               <p>
                 <strong className="block text-slate-900 dark:text-white text-sm mb-1">Email</strong>
-                <a href="mailto:k.munyede@gmail.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">support@hilmost.net</a>
+                <a href="mailto:support@hilmost.net" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">support@hilmost.net</a>
               </p>
               <p>
                 <strong className="block text-slate-900 dark:text-white text-sm mb-1">Phone</strong>
@@ -47,7 +47,7 @@ export default function ContactPage() {
         {/* Contact Form */}
         <div className="lg:col-span-2">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm h-full">
-            <form className="space-y-6" action="mailto:k.munyede@gmail.com" method="POST" encType="text/plain">
+            <form className="space-y-6" action="mailto:support@hilmost.net" method="POST" encType="text/plain">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
