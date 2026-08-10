@@ -137,10 +137,10 @@ export function EquationSolverClient({
 
     try {
       const res = equation.solve(target, values);
-      const resStr = Number.isFinite(res) ? res.toExponential(4) : "Error";
+      const resStr = Number.isFinite(res) ? parseFloat(res.toExponential(8)).toExponential() : "Error";
       setResult(resStr);
       addEntry(`${equation.name} (Solve for ${target})`, resStr);
-    } catch (e) {
+    } catch {
       setResult("Error");
     }
   }, [equation, target, inputs, inputUnits, addEntry]);
@@ -258,11 +258,12 @@ export function EquationSolverClient({
                   className="bg-brand-primary/5 rounded-[2rem] p-8 border border-brand-primary/10 flex flex-col justify-center items-center text-center h-full min-h-[250px] shadow-inner"
                 >
                   <div className="text-caption font-normal uppercase tracking-[0.2em] text-brand-primary mb-4">Calculated {target}</div>
-                  <div className="text-5xl md:text-6xl font-mono font-normal text-black dark:text-white tracking-tighter">
+                  <div className="text-2xl md:text-3xl font-mono font-normal text-black dark:text-white tracking-tighter truncate max-w-full">
                     <ScientificNumber
                       value={parseFloat(result)}
                       suffix={equation.variables.find(v => v.id === target)?.unit}
-                      multiLine={true}
+                      precision={8}
+                      multiLine={false}
                     />
                   </div>
                 </motion.div>
