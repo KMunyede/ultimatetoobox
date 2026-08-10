@@ -40,8 +40,13 @@ async function submitToIndexNow(config) {
     const sitemapXml = await sitemapRes.text();
     const parsed = await parseStringPromise(sitemapXml);
 
-    const urls = parsed.urlset.url.map(entry => entry.loc[0]);
-    console.log(`Found ${urls.length} URLs in sitemap for ${config.host}.`);
+    const allUrls = parsed.urlset.url.map(entry => entry.loc[0]);
+
+    // Prioritize root URL
+    const rootUrl = `https://${config.host}/`;
+    const urls = [rootUrl, ...allUrls.filter(u => u !== rootUrl)];
+
+    console.log(`Found ${urls.length} URLs in sitemap for ${config.host}. Prioritizing homepage.`);
 
     // 2. Prepare payload
     const payload = {

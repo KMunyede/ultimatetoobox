@@ -49,12 +49,17 @@ async function submitToGoogle() {
     }
 
     // Google Indexing API limit is 200 per day.
-    // We prioritize the NEWEST URLs, specifically the 1,260 new currency pairs.
+    // We prioritize the homepage, then the newest URLs (currency pairs).
+    const homepages = allUrls.filter(url => url === 'https://hilmost-toolbox.hilmost.net/' || url === 'https://hilmost.net/');
     const currencyPairs = allUrls.filter(url => url.includes('/finance/currency/'));
-    const otherUrls = allUrls.filter(url => !url.includes('/finance/currency/'));
+    const otherUrls = allUrls.filter(url =>
+      !url.includes('/finance/currency/') &&
+      url !== 'https://hilmost-toolbox.hilmost.net/' &&
+      url !== 'https://hilmost.net/'
+    );
 
-    // Combine: New currency pairs first (reversed for recency), then others (reversed)
-    const prioritizedUrls = [...currencyPairs.reverse(), ...otherUrls.reverse()];
+    // Combine: Homepages first, then new currency pairs (reversed), then others (reversed)
+    const prioritizedUrls = [...homepages, ...currencyPairs.reverse(), ...otherUrls.reverse()];
 
     const subset = prioritizedUrls.slice(0, 100);
     console.log(`Found ${allUrls.length} total URLs (${currencyPairs.length} currency pairs).`);
