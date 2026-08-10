@@ -1,0 +1,117 @@
+diff --git a/apps/hilmost_toolbox_web/src/app/calculators/scientific/ScientificCalculatorClient.tsx b/apps/hilmost_toolbox_web/src/app/calculators/scientific/ScientificCalculatorClient.tsx
+index 73ae004..8c49b3c 100644
+--- a/apps/hilmost_toolbox_web/src/app/calculators/scientific/ScientificCalculatorClient.tsx
++++ b/apps/hilmost_toolbox_web/src/app/calculators/scientific/ScientificCalculatorClient.tsx
+@@ -1,21 +1,26 @@
+ "use client";
+
+ import React, { useState, useEffect, useCallback } from "react";
+-import { usePathname } from "next/navigation";
+ import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
+ import { useHistory } from "../../../hooks/useHistory";
+ import { motion } from "framer-motion";
+
+ type AngleMode = "deg" | "rad" | "grad";
+
++let mathPromise: Promise<any> | null = null;
++const getMath = async () => {
++  if (!mathPromise) {
++    mathPromise = import("mathjs").then(({ create, all }) => create(all));
++  }
++  return mathPromise;
++};
++
+ /**
+  * Scientific Calculator Client component.
+  * Refactored for complete orientation adaptability.
+  * Uses CSS Grid with @container queries to handle Portrait vs Landscape transitions.
+  */
+ export function ScientificCalculatorClient() {
+-  const pathname = usePathname();
+-
+   const [expression, setExpression] = useState("");
+   const [result, setResult] = useState("");
+   const [shouldReset, setShouldReset] = useState(false);
+@@ -30,15 +35,14 @@ export function ScientificCalculatorClient() {
+     const params = new URLSearchParams(window.location.search);
+     const expr = params.get("expr");
+     if (expr) {
+-      setExpression(decodeURIComponent(expr));
++      setTimeout(() => setExpression(decodeURIComponent(expr)), 0);
+     }
+   }, []);
+
+   const calculate = useCallback(async () => {
+     if (!expression) return;
+     try {
+-      const { create, all } = await import("mathjs");
+-      const math = create(all);
++      const math = await getMath();
+
+       let processedExpr = expression
+         .replace(/&pi;/g, "pi")
+@@ -67,7 +71,7 @@ export function ScientificCalculatorClient() {
+       setResult(formattedResult);
+       addEntry(expression, formattedResult);
+       setShouldReset(true);
+-    } catch (e) {
++    } catch {
+       setResult("Error");
+     }
+   }, [expression, addEntry, angleMode]);
+diff --git a/apps/hilmost_toolbox_web/src/app/calculators/standard/StandardCalculatorClient.tsx b/apps/hilmost_toolbox_web/src/app/calculators/standard/StandardCalculatorClient.tsx
+index a4e5eba..c7bcf2b 100644
+--- a/apps/hilmost_toolbox_web/src/app/calculators/standard/StandardCalculatorClient.tsx
++++ b/apps/hilmost_toolbox_web/src/app/calculators/standard/StandardCalculatorClient.tsx
+@@ -27,6 +27,14 @@ const BUTTONS = [
+   { label: "=", type: "equals", className: "bg-brand-primary text-white" },
+ ];
+
++let mathPromise: Promise<any> | null = null;
++const getMath = async () => {
++  if (!mathPromise) {
++    mathPromise = import("mathjs").then(({ create, all }) => create(all));
++  }
++  return mathPromise;
++};
++
+ export function StandardCalculatorClient() {
+   const [expression, setExpression] = useState("");
+   const [result, setResult] = useState("");
+@@ -36,8 +44,7 @@ export function StandardCalculatorClient() {
+   const calculate = useCallback(async () => {
+     if (!expression) return;
+     try {
+-      const { create, all } = await import("mathjs");
+-      const math = create(all);
++      const math = await getMath();
+
+       const cleanExpr = expression.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
+       const evalResult = math.evaluate(cleanExpr);
+@@ -48,7 +55,7 @@ export function StandardCalculatorClient() {
+       setResult(formattedResult);
+       addEntry(expression, formattedResult);
+       setShouldReset(true);
+-    } catch (e) {
++    } catch {
+       setResult("Error");
+     }
+   }, [expression, addEntry]);
+@@ -81,7 +88,7 @@ export function StandardCalculatorClient() {
+         const math = create(all);
+         const evalResult = math.evaluate(`(${expression}) * -1`);
+         setExpression(evalResult.toString());
+-      } catch (e) {
++      } catch {
+         setResult("Error");
+       }
+     }
+@@ -94,7 +101,7 @@ export function StandardCalculatorClient() {
+         const math = create(all);
+         const evalResult = math.evaluate(`(${expression}) / 100`);
+         setExpression(evalResult.toString());
+-      } catch (e) {
++      } catch {
+         setResult("Error");
+       }
+     }

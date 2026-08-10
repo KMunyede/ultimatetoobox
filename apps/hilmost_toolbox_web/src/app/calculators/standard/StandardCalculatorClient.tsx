@@ -27,6 +27,14 @@ const BUTTONS = [
   { label: "=", type: "equals", className: "bg-brand-primary text-white" },
 ];
 
+let mathPromise: Promise<any> | null = null;
+const getMath = async () => {
+  if (!mathPromise) {
+    mathPromise = import("mathjs").then(({ create, all }) => create(all));
+  }
+  return mathPromise;
+};
+
 export function StandardCalculatorClient() {
   const [expression, setExpression] = useState("");
   const [result, setResult] = useState("");
@@ -36,8 +44,7 @@ export function StandardCalculatorClient() {
   const calculate = useCallback(async () => {
     if (!expression) return;
     try {
-      const { create, all } = await import("mathjs");
-      const math = create(all);
+      const math = await getMath();
 
       const cleanExpr = expression.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
       const evalResult = math.evaluate(cleanExpr);
@@ -48,7 +55,7 @@ export function StandardCalculatorClient() {
       setResult(formattedResult);
       addEntry(expression, formattedResult);
       setShouldReset(true);
-    } catch (e) {
+    } catch {
       setResult("Error");
     }
   }, [expression, addEntry]);
@@ -64,7 +71,25 @@ export function StandardCalculatorClient() {
       }
       setShouldReset(false);
     } else {
-      setExpression((prev) => prev + val);
+      setExpression((prev) => {
+        const next = prev + val;
+        // Running-total auto-calculate on operator press
+        if (/[+\-*/]/.test(val)) {
+          const exprToEval = prev.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
+          if (exprToEval.trim() && !/[+\-*/]$/.test(exprToEval.trim())) {
+            getMath().then(math => {
+              try {
+                const evalResult = math.evaluate(exprToEval);
+                const formattedResult = Number.isInteger(evalResult)
+                  ? evalResult.toString()
+                  : parseFloat(evalResult.toFixed(8)).toString();
+                setResult(formattedResult);
+              } catch {}
+            });
+          }
+        }
+        return next;
+      });
     }
   }, [shouldReset, result]);
 
@@ -81,7 +106,7 @@ export function StandardCalculatorClient() {
         const math = create(all);
         const evalResult = math.evaluate(`(${expression}) * -1`);
         setExpression(evalResult.toString());
-      } catch (e) {
+      } catch {
         setResult("Error");
       }
     }
@@ -94,7 +119,7 @@ export function StandardCalculatorClient() {
         const math = create(all);
         const evalResult = math.evaluate(`(${expression}) / 100`);
         setExpression(evalResult.toString());
-      } catch (e) {
+      } catch {
         setResult("Error");
       }
     }

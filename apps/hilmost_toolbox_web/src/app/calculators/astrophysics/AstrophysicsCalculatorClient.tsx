@@ -250,10 +250,9 @@ export function AstrophysicsCalculatorClient({
         .astronomer-theme .bg-slate-900 { background-color: #0c0000 !important; }
         .astronomer-theme .bg-slate-50 { background-color: #1a0000 !important; }
         .astronomer-theme .bg-slate-950 { background-color: #1a0000 !important; }
-        .astronomer-theme .text-black { color: #ff3333 !important; }
-        .astronomer-theme .text-black { color: #ff3333 !important; }
-        .astronomer-theme .text-black { color: #cc0000 !important; }
-        .astronomer-theme .text-black { color: #880000 !important; }
+        .astronomer-theme .text-white, .astronomer-theme .text-text-primary { color: #ff3333 !important; }
+        .astronomer-theme .text-slate-600, .astronomer-theme .text-text-secondary { color: #cc0000 !important; }
+        .astronomer-theme .text-slate-400, .astronomer-theme .text-text-muted { color: #ff5555 !important; }
         .astronomer-theme .bg-brand-primary { background-color: #660000 !important; color: #ff3333 !important; }
         .astronomer-theme .border-slate-200, .astronomer-theme .border-slate-100, .astronomer-theme .border-slate-800 { border-color: #330000 !important; }
         .astronomer-theme .shadow-sm, .astronomer-theme .shadow-xl { box-shadow: 0 10px 15px -3px rgba(139, 0, 0, 0.1) !important; }
@@ -406,6 +405,7 @@ export function AstrophysicsCalculatorClient({
         onRestore={(entry) => {
           setResult(entry.result);
         }}
+        historyOnly={true}
       />
     </motion.div>
   );

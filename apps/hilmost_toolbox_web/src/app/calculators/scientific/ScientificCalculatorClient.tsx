@@ -1,12 +1,19 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { usePathname } from "next/navigation";
 import { CalculatorDisplay } from "../../../components/calculators/CalculatorDisplay";
 import { useHistory } from "../../../hooks/useHistory";
 import { motion } from "framer-motion";
 
 type AngleMode = "deg" | "rad" | "grad";
+
+let mathPromise: Promise<any> | null = null;
+const getMath = async () => {
+  if (!mathPromise) {
+    mathPromise = import("mathjs").then(({ create, all }) => create(all));
+  }
+  return mathPromise;
+};
 
 /**
  * Scientific Calculator Client component.
@@ -14,8 +21,6 @@ type AngleMode = "deg" | "rad" | "grad";
  * Uses CSS Grid with @container queries to handle Portrait vs Landscape transitions.
  */
 export function ScientificCalculatorClient() {
-  const pathname = usePathname();
-
   const [expression, setExpression] = useState("");
   const [result, setResult] = useState("");
   const [shouldReset, setShouldReset] = useState(false);
@@ -30,15 +35,14 @@ export function ScientificCalculatorClient() {
     const params = new URLSearchParams(window.location.search);
     const expr = params.get("expr");
     if (expr) {
-      setExpression(decodeURIComponent(expr));
+      setTimeout(() => setExpression(decodeURIComponent(expr)), 0);
     }
   }, []);
 
   const calculate = useCallback(async () => {
     if (!expression) return;
     try {
-      const { create, all } = await import("mathjs");
-      const math = create(all);
+      const math = await getMath();
 
       let processedExpr = expression
         .replace(/&pi;/g, "pi")
@@ -67,7 +71,7 @@ export function ScientificCalculatorClient() {
       setResult(formattedResult);
       addEntry(expression, formattedResult);
       setShouldReset(true);
-    } catch (e) {
+    } catch {
       setResult("Error");
     }
   }, [expression, addEntry, angleMode]);
@@ -83,9 +87,49 @@ export function ScientificCalculatorClient() {
       }
       setShouldReset(false);
     } else {
-      setExpression((prev) => prev + val);
+      setExpression((prev) => {
+        const next = prev + val;
+        // Running-total auto-calculate on operator press
+        if (/[+\-*/^]/.test(val) && prev.trim()) {
+          if (/[0-9)eπ]/.test(prev.trim().slice(-1))) {
+            let processedExpr = prev
+              .replace(/&pi;/g, "pi")
+              .replace(/&tau;/g, "tau")
+              .replace(/π/g, "pi")
+              .replace(/e/g, "e")
+              .replace(/√\(/g, "sqrt(")
+              .replace(/\^2/g, "^2")
+              .replace(/\^3/g, "^3")
+              .replace(/×/g, "*")
+              .replace(/÷/g, "/")
+              .replace(/−/g, "-");
+
+            if (angleMode === "deg") {
+              processedExpr = processedExpr.replace(/(sin|cos|tan|asin|acos|atan)\(([^)]+)\)/g, "$1(($2) deg)");
+            } else if (angleMode === "grad") {
+              processedExpr = processedExpr.replace(/(sin|cos|tan|asin|acos|atan)\(([^)]+)\)/g, "$1(($2) grad)");
+            }
+
+            const openCount = (processedExpr.match(/\(/g) || []).length;
+            const closeCount = (processedExpr.match(/\)/g) || []).length;
+
+            if (openCount === closeCount) {
+              getMath().then(math => {
+                try {
+                  const evalResult = math.evaluate(processedExpr);
+                  const formattedResult = typeof evalResult === "number"
+                    ? (Number.isInteger(evalResult) ? evalResult.toString() : parseFloat(evalResult.toFixed(10)).toString())
+                    : evalResult.toString();
+                  setResult(formattedResult);
+                } catch {}
+              });
+            }
+          }
+        }
+        return next;
+      });
     }
-  }, [shouldReset, result]);
+  }, [shouldReset, result, angleMode]);
 
   const onButtonClick = (val: string, type: string) => {
     if (type === "number") handleInput(val);

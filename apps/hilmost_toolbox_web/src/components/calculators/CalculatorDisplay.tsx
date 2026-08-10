@@ -11,6 +11,7 @@ interface CalculatorDisplayProps {
   history: HistoryEntry[];
   onClearHistory: () => void;
   onRestore: (entry: HistoryEntry) => void;
+  historyOnly?: boolean;
 }
 
 function formatValue(str: string) {
@@ -30,23 +31,26 @@ export function CalculatorDisplay({
   history,
   onClearHistory,
   onRestore,
+  historyOnly = false,
 }: CalculatorDisplayProps) {
   const [showHistory, setShowHistory] = useState(false);
 
   return (
     <div className="flex flex-col gap-1">
       {/* Main Display Card */}
-      <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm overflow-hidden">
-        <div className="flex flex-col items-end min-h-[80px] justify-center">
-          {/* Expression Line */}
-          <div className="text-sm font-mono text-black dark:text-white break-all text-right w-full pr-8">
-            {expression || "\u00A0"}
+      <div className={`relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm overflow-hidden ${historyOnly && !showHistory ? 'hidden' : ''}`}>
+        {!historyOnly && (
+          <div className="flex flex-col items-end min-h-[80px] justify-center">
+            {/* Expression Line */}
+            <div className="text-sm font-mono text-black dark:text-white break-all text-right w-full pr-8">
+              {expression || "\u00A0"}
+            </div>
+            {/* Result Line */}
+            <div className="text-4xl md:text-6xl font-mono font-normal text-black dark:text-white break-all text-right w-full pr-8 mt-2 tracking-tighter">
+              {formatValue(result) || "0"}
+            </div>
           </div>
-          {/* Result Line */}
-          <div className="text-3xl md:text-4xl font-mono font-normal text-black dark:text-white break-all text-right w-full pr-8 mt-1">
-            {formatValue(result) || "0"}
-          </div>
-        </div>
+        )}
 
         {/* History Toggle Button */}
         <button
@@ -76,9 +80,11 @@ export function CalculatorDisplay({
               <div className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-normal text-black dark:text-white uppercase tracking-wider">History tape</span>
-                  <span className="bg-slate-200 dark:bg-slate-700 text-black dark:text-white text-xs px-2 py-0.5 rounded-full font-normal">
-                    {history.length}
-                  </span>
+                  {history.length > 0 && (
+                    <span className="bg-slate-200 dark:bg-slate-700 text-black dark:text-white text-xs px-2 py-0.5 rounded-full font-normal">
+                      {history.length}
+                    </span>
+                  )}
                 </div>
                 {history.length > 0 && (
                   <button
