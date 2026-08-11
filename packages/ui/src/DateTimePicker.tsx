@@ -37,6 +37,7 @@ const TimeDial = React.memo(({
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<any>(null);
+  const isProgrammaticScrollRef = useRef(false);
   const max = type === "hour" ? 24 : 60;
 
   // Generate the 3x list once
@@ -54,6 +55,10 @@ const TimeDial = React.memo(({
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
+      if (isProgrammaticScrollRef.current) {
+        isProgrammaticScrollRef.current = false;
+        return;
+      }
       const index = Math.round(el.scrollTop / ITEM_HEIGHT) % max;
       onChange(index);
     }, 100);
@@ -61,8 +66,10 @@ const TimeDial = React.memo(({
 
   const handleClickItem = useCallback((val: number) => {
     const targetScroll = (val + max) * ITEM_HEIGHT;
+    isProgrammaticScrollRef.current = true;
     scrollRef.current?.scrollTo({ top: targetScroll, behavior: "smooth" });
-  }, [max]);
+    onChange(val);
+  }, [max, onChange]);
 
   // Sync scroll position when external value changes (e.g. via typed input)
   useEffect(() => {
@@ -149,6 +156,7 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
   }, [isOpen]);
 
   const applyChange = useCallback((newDate: Date) => {
+    if (!newDate || isNaN(newDate.getTime())) return;
     setCurrentDate(newDate);
     setInputValue(formatForInput(newDate));
     onChange(formatDateToISO(newDate));
@@ -230,6 +238,8 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
         if (type === "hour") next.setHours(newVal);
         else if (type === "minute") next.setMinutes(newVal);
         else if (type === "second") next.setSeconds(newVal);
+
+        if (isNaN(next.getTime())) return prev;
 
         // Side effects after state update
         setTimeout(() => {
@@ -363,7 +373,12 @@ export function DateTimePicker({ value, onChange, label, id }: DateTimePickerPro
             <div className="mt-4 w-full">
               <button 
                 type="button" 
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  if (currentDate && !isNaN(currentDate.getTime())) {
+                    onChange(formatDateToISO(currentDate));
+                  }
+                  setIsOpen(false);
+                }}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-sm transition-colors"
               >
                 Done
