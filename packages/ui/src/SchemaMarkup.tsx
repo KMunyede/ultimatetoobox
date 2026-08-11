@@ -6,12 +6,14 @@ export function WebApplicationSchema({
   url,
   image,
   category = "UtilityApplication",
+  dateModified,
 }: {
   name: string;
   description: string;
   url: string;
   image?: string;
   category?: string;
+  dateModified?: string;
 }) {
   const schema = {
     "@context": "https://schema.org",
@@ -20,6 +22,7 @@ export function WebApplicationSchema({
     description: description,
     url: url,
     image: image,
+    dateModified: dateModified,
     applicationCategory: category,
     operatingSystem: "All",
     browserRequirements: "Requires JavaScript",
