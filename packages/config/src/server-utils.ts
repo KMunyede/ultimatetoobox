@@ -34,3 +34,25 @@ export function getFileLastUpdated(filePath: string): string {
     });
   }
 }
+
+/**
+ * Gets the last modified date of a file from Git in ISO 8601 format (YYYY-MM-DD).
+ * Falls back to current date if git command fails or file is not tracked.
+ * NOTE: This is server-side only and cannot be imported into Client Components.
+ */
+export function getFileLastUpdatedISO(filePath: string): string {
+  try {
+    const result = execSync(`git log -1 --format=%ai -- "${filePath}"`, {
+      encoding: "utf-8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+
+    if (!result) {
+      return new Date().toISOString().split('T')[0];
+    }
+
+    return new Date(result).toISOString().split('T')[0];
+  } catch (error) {
+    return new Date().toISOString().split('T')[0];
+  }
+}
