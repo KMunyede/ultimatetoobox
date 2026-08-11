@@ -62,7 +62,7 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
     }
   };
 
-  const inputClass = "w-14 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-center py-1.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 tabular-nums text-black dark:text-white";
+  const inputClass = "w-10 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-center py-1.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 tabular-nums text-black dark:text-white";
 
   return (
     <div className="flex items-center justify-center gap-2 p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
