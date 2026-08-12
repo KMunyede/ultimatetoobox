@@ -75,6 +75,8 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
           onChange={(e) => setLocalH(e.target.value.replace(/\D/g, '').slice(0, 2))}
           onBlur={() => handleBlur('h')}
           className={inputClass}
+          style={{ width: '32px', minWidth: '32px' }}
+          size={2}
         />
       </div>
       <span className="text-slate-300 self-end pb-2.5 font-bold">:</span>
@@ -87,6 +89,8 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
           onChange={(e) => setLocalM(e.target.value.replace(/\D/g, '').slice(0, 2))}
           onBlur={() => handleBlur('m')}
           className={inputClass}
+          style={{ width: '32px', minWidth: '32px' }}
+          size={2}
         />
       </div>
       <span className="text-slate-300 self-end pb-2.5 font-bold">:</span>
@@ -99,6 +103,8 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
           onChange={(e) => setLocalS(e.target.value.replace(/\D/g, '').slice(0, 2))}
           onBlur={() => handleBlur('s')}
           className={inputClass}
+          style={{ width: '32px', minWidth: '32px' }}
+          size={2}
         />
       </div>
     </div>
