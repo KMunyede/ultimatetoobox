@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Button } from "../../../components/ui/Button";
 import { PillSelector } from "../../../components/ui/PillSelector";
-import { DateTimePicker } from "@utilitiessite/ui";
+import { DateTimeDropdown } from "@utilitiessite/ui";
 import {
   RotateCcw,
   Clock,
@@ -220,8 +220,10 @@ export function SleepCycleCalculatorTool() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <LiveClock onUseCurrentTime={useCurrentTime} />
         <div className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 flex items-center">
-          <DateTimePicker
-            label={mode === "wake_up" ? "I want to wake up at..." : "I'm going to bed at..."}
+          <DateTimeDropdown
+            id="sleep-time-picker"
+            key={`sleep-picker-${mode}`}
+            legend={mode === "wake_up" ? "Wake up at..." : "Go to bed at..."}
             value={inputTime}
             onChange={(val) => setInputTime(val)}
           />
