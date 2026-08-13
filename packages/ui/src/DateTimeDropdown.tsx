@@ -99,7 +99,7 @@ export function DateTimeDropdown({ value, onChange, legend, id }: DateTimeDropdo
   const selectClass = "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-black dark:text-white appearance-none cursor-pointer hover:border-slate-400 dark:hover:border-slate-600 transition-colors";
 
   return (
-    <fieldset className="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-5 bg-slate-50/50 dark:bg-slate-900/50 shadow-sm" id={id}>
+    <fieldset className="w-full border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-5 bg-slate-50/50 dark:bg-slate-900/50 shadow-sm" id={id}>
       <legend className="px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full">
         {legend}
       </legend>
