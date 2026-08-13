@@ -18,17 +18,20 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
   const [localH, setLocalH] = useState("");
   const [localM, setLocalM] = useState("");
   const [localS, setLocalS] = useState("");
+  const focusedFieldRef = React.useRef<'h' | 'm' | 's' | null>(null);
 
   // Sync local state when the date prop changes (e.g. from calendar click)
+  // Only sync fields that are not currently being focused/edited by the user
   useEffect(() => {
     if (date && isValid(date)) {
-      setLocalH(date.getHours().toString().padStart(2, '0'));
-      setLocalM(date.getMinutes().toString().padStart(2, '0'));
-      setLocalS(date.getSeconds().toString().padStart(2, '0'));
+      if (focusedFieldRef.current !== 'h') setLocalH(date.getHours().toString().padStart(2, '0'));
+      if (focusedFieldRef.current !== 'm') setLocalM(date.getMinutes().toString().padStart(2, '0'));
+      if (focusedFieldRef.current !== 's') setLocalS(date.getSeconds().toString().padStart(2, '0'));
     }
   }, [date]);
 
   const handleBlur = (type: 'h' | 'm' | 's') => {
+    focusedFieldRef.current = null;
     let val = parseInt(type === 'h' ? localH : type === 'm' ? localM : localS, 10);
 
     if (isNaN(val)) {
@@ -72,6 +75,7 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
           type="text"
           inputMode="numeric"
           value={localH}
+          onFocus={() => { focusedFieldRef.current = 'h'; }}
           onChange={(e) => setLocalH(e.target.value.replace(/\D/g, '').slice(0, 2))}
           onBlur={() => handleBlur('h')}
           className={inputClass}
@@ -86,6 +90,7 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
           type="text"
           inputMode="numeric"
           value={localM}
+          onFocus={() => { focusedFieldRef.current = 'm'; }}
           onChange={(e) => setLocalM(e.target.value.replace(/\D/g, '').slice(0, 2))}
           onBlur={() => handleBlur('m')}
           className={inputClass}
@@ -100,6 +105,7 @@ const TimeInput = ({ date, onChange }: { date?: Date; onChange?: (date: Date) =>
           type="text"
           inputMode="numeric"
           value={localS}
+          onFocus={() => { focusedFieldRef.current = 's'; }}
           onChange={(e) => setLocalS(e.target.value.replace(/\D/g, '').slice(0, 2))}
           onBlur={() => handleBlur('s')}
           className={inputClass}

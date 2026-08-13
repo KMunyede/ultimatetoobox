@@ -51,6 +51,7 @@ export function AgeCalculatorClient() {
                 </div>
                 <DateTimePicker
                     id="birth-date-picker"
+                    key="birth-date-picker"
                     value={birthDate}
                     onChange={val => setState({ birthDate: val })}
                 />
@@ -62,6 +63,7 @@ export function AgeCalculatorClient() {
                 </div>
                 <DateTimePicker
                     id="target-date-picker"
+                    key="target-date-picker"
                     value={targetDate}
                     onChange={val => setState({ targetDate: val })}
                 />
