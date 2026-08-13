@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { DateTimePicker } from "@utilitiessite/ui";
+import { DateTimeDropdown } from "@utilitiessite/ui";
 import { Copy, Check, Clock } from "lucide-react";
 import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
@@ -126,8 +126,12 @@ export function UnixTimeClient() {
         <div id="tour-unix-date2ts" className="bg-white dark:bg-slate-900 border border-[var(--color-border-base)] dark:border-slate-800 rounded-2xl p-4 md:p-5 space-y-6">
           <h2 className="text-caption font-normal uppercase tracking-widest text-black dark:text-white">Date to Timestamp</h2>
           <div className="space-y-4">
-            <DateTimePicker
+            <DateTimeDropdown
+              id="unix-date-picker"
+              key="unix-date-picker"
+              legend="Target Date & Time"
               value={dateStr}
+              showTodayButton={true}
               onChange={(val) => setState({ dateStr: val })}
             />
             <div className="min-h-16 flex items-center px-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-emerald-600 dark:text-emerald-400 font-mono text-2xl font-normal break-all shadow-inner">

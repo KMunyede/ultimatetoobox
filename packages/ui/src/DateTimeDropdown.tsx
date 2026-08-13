@@ -8,9 +8,10 @@ interface DateTimeDropdownProps {
   onChange: (value: string) => void;
   legend: string;
   id?: string;
+  showTodayButton?: boolean;
 }
 
-export function DateTimeDropdown({ value, onChange, legend, id }: DateTimeDropdownProps) {
+export function DateTimeDropdown({ value, onChange, legend, id, showTodayButton = false }: DateTimeDropdownProps) {
   // Instruction: "No useEffect syncing from a parent date prop after initial mount"
   // We parse the initial value once and then the component owns the state.
   const initialDate = useMemo(() => {
@@ -96,12 +97,32 @@ export function DateTimeDropdown({ value, onChange, legend, id }: DateTimeDropdo
     handleHourChange(h);
   };
 
+  const handleToday = () => {
+    const now = new Date();
+    setYearState(now.getFullYear());
+    setMonthState(now.getMonth() + 1);
+    setDayState(now.getDate());
+    setHourState(now.getHours());
+    setMinuteState(now.getMinutes());
+    setSecondState(now.getSeconds());
+    onChange(format(now, "yyyy-MM-dd'T'HH:mm:ss"));
+  };
+
   const selectClass = "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-black dark:text-white appearance-none cursor-pointer hover:border-slate-400 dark:hover:border-slate-600 transition-colors";
 
   return (
     <fieldset className="w-full border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-5 bg-slate-50/50 dark:bg-slate-900/50 shadow-sm" id={id}>
-      <legend className="px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full">
-        {legend}
+      <legend className="px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full flex items-center gap-2">
+        <span>{legend}</span>
+        {showTodayButton && (
+            <button
+                type="button"
+                onClick={handleToday}
+                className="ml-1 px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors border border-blue-100 dark:border-blue-800"
+            >
+                Today
+            </button>
+        )}
       </legend>
 
       <div className="flex flex-col @md:flex-row gap-6">

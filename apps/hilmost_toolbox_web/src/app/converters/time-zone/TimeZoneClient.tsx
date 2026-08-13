@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { formatInTimeZone, toDate } from "date-fns-tz";
 import { motion, AnimatePresence } from "framer-motion";
-import { DateTimePicker } from "@utilitiessite/ui";
+import { DateTimeDropdown } from "@utilitiessite/ui";
 import { useUrlState } from "@/hooks/useUrlState";
 import { Plus, X, ArrowRight, Clock, Search, Users, ChevronDown, User, Copy, Check } from "lucide-react";
 import { Tooltip } from "@utilitiessite/ui";
@@ -289,7 +289,14 @@ export function TimeZoneClient() {
             onChange={(val) => setState({ sourceZone: val })}
             formatDisplay={formatZoneName}
           />
-            <DateTimePicker label="Date & Time" value={sourceTime} onChange={(val) => setState({ sourceTime: val })} />
+            <DateTimeDropdown
+              id="source-time-picker"
+              key="source-time-picker"
+              legend="Source Date & Time"
+              value={sourceTime}
+              showTodayButton={true}
+              onChange={(val) => setState({ sourceTime: val })}
+            />
           </div>
         </div>
 
