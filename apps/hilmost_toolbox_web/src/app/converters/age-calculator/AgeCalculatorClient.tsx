@@ -3,7 +3,7 @@ import { useUrlState } from "@/hooks/useUrlState";
 import { motion } from "framer-motion";
 import { Cake, Calendar } from "lucide-react";
 import { parseISO, intervalToDuration } from "date-fns";
-import { DateTimePicker } from "@utilitiessite/ui";
+import { DateTimeDropdown } from "@utilitiessite/ui";
 import { useMemo } from "react";
 
 export function AgeCalculatorClient() {
@@ -49,10 +49,11 @@ export function AgeCalculatorClient() {
                     <Cake size={16} className="text-brand-primary" />
                     <label className="block text-caption font-medium uppercase tracking-widest text-black dark:text-white">Date of Birth</label>
                 </div>
-                <DateTimePicker
+                <DateTimeDropdown
                     id="birth-date-picker"
                     key="birth-date-picker"
                     value={birthDate}
+                    legend="Birth date and time"
                     onChange={val => setState({ birthDate: val })}
                 />
             </div>
@@ -61,10 +62,11 @@ export function AgeCalculatorClient() {
                     <Calendar size={16} className="text-slate-400" />
                     <label className="block text-caption font-medium uppercase tracking-widest text-black dark:text-white">Age at Date of</label>
                 </div>
-                <DateTimePicker
+                <DateTimeDropdown
                     id="target-date-picker"
                     key="target-date-picker"
                     value={targetDate}
+                    legend="Age at date and time"
                     onChange={val => setState({ targetDate: val })}
                 />
             </div>
