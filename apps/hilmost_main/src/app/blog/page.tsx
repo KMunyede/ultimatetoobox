@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    title: "The Six-Month War With a Date Picker",
+    slug: "six-month-war-with-a-date-picker",
+    excerpt: "A honest dev-log on rebuilding Hilmost's date/time picker three times and the decision to stop patching and start over.",
+    date: "August 2026"
+  },
+  {
     title: "What a Six-Week Indexing Stall Taught Me About Thinking Like Google",
     slug: "six-week-indexing-stall",
     excerpt: "How a bloated sitemap and parameterized URLs silenced our new tools in Google Search for over a month.",
