@@ -10,11 +10,11 @@
   "scripts": {
     "build": "turbo build",
     "lint": "turbo lint",
-    "deploy:test": "$env:NEXT_PUBLIC_APP_ENV='staging'; npm run build && firebase deploy --only \"hosting:hilmost-toolbox-staging,hosting:hsc-platform-core-staging,hosting:hilmost-staging,hosting:wisdom-staging\"",
-    "deploy:live": "$env:NEXT_PUBLIC_APP_ENV='production'; npm run build && firebase deploy --only \"hosting:hilmost-toolbox,hosting:hsc-platform-core,hosting:wisdom-prod\"",
+    "deploy:test": "$env:NEXT_PUBLIC_APP_ENV='staging'; $env:NEXT_PUBLIC_ADS_ENABLED='false'; npm run build && firebase deploy --only \"hosting:hilmost-toolbox-staging,hosting:hsc-platform-core-staging,hosting:hilmost-staging,hosting:wisdom-staging\"",
+    "deploy:live": "$env:NEXT_PUBLIC_APP_ENV='production'; $env:NEXT_PUBLIC_ADS_ENABLED='false'; npm run build && firebase deploy --only \"hosting:hilmost-toolbox,hosting:hsc-platform-core,hosting:wisdom-prod\"",
     "deploy:all": "npm run build && firebase deploy",
-    "ship": "$env:NEXT_PUBLIC_APP_ENV='production'; npm run build && npm run deploy:all && git add . && git commit -m \"chore: build, deploy and backup\" && git push",
-    "ship:test": "$env:NEXT_PUBLIC_APP_ENV='staging'; npm run build && npm run deploy:test && git add . && git commit -m \"chore: build, deploy to test and backup\" && git push"
+    "ship": "$env:NEXT_PUBLIC_APP_ENV='production'; $env:NEXT_PUBLIC_ADS_ENABLED='false'; npm run build && npm run deploy:all && git add . && git commit -m \"chore: build, deploy and backup\" && git push",
+    "ship:test": "$env:NEXT_PUBLIC_APP_ENV='staging'; $env:NEXT_PUBLIC_ADS_ENABLED='false'; npm run build && npm run deploy:test && git add . && git commit -m \"chore: build, deploy to test and backup\" && git push"
   },
   "dependencies": {
     "firebase": "^12.15.0",

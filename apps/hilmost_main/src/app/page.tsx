@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { TOOL_CATEGORIES, getFeaturedTools } from "@utilitiessite/config";
+import { TOOL_CATEGORIES, getFeaturedTools, TOTAL_TOOL_COUNT } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "Hilmost | Free Browser-Based Tools",
@@ -31,8 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
-  const displayCount = Math.floor(totalTools / 10) * 10;
+  const displayCount = Math.floor(TOTAL_TOOL_COUNT / 10) * 10;
   const featuredTools = getFeaturedTools();
 
   return (

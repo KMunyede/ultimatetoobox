@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ChevronDown, ChevronRight, LayoutGrid, Zap, Box, Banknote, FileText, Replace, Binary, Calculator, HeartPulse, ArrowRight, Menu, X, Code2, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from './Tooltip';
-import { TOOL_CATEGORIES } from '@utilitiessite/config';
+import { TOOL_CATEGORIES, TOTAL_TOOL_COUNT } from '@utilitiessite/config';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Code2: <Code2 size={16} />,
@@ -57,8 +57,7 @@ export function NavigationMenu() {
     }, 300);
   };
 
-  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.tools.length, 0);
-  const displayCount = Math.floor(totalTools / 10) * 10; // e.g. 49 -> 40
+  const displayCount = Math.floor(TOTAL_TOOL_COUNT / 10) * 10; // e.g. 49 -> 40
 
   const resolveHref = (path: string) => {
     return `${domains.toolbox}${path}`;

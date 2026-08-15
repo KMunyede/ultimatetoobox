@@ -2,7 +2,7 @@
 import { ShieldCheck, Code, Globe, User } from "lucide-react";
 import { CategoryGrid, AdLayout } from "@utilitiessite/ui";
 import Image from "next/image";
-import { TOOL_CATEGORIES } from "@utilitiessite/config";
+import { TOOL_CATEGORIES, TOTAL_TOOL_COUNT } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "About the Corporation | Hilmost Software Corporation",
@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const totalTools = TOOL_CATEGORIES.reduce((acc, cat) => acc + cat.count, 0);
-  const displayCount = Math.floor(totalTools / 10) * 10;
+  const displayCount = Math.floor(TOTAL_TOOL_COUNT / 10) * 10;
 
   return (
     <AdLayout publisherId="ca-pub-5650522247882745">

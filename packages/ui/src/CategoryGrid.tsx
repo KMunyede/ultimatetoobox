@@ -44,7 +44,7 @@ export function CategoryGrid({ limit = 6, variant = "minimalist" }: CategoryGrid
             <div className="flex-1 min-w-0">
               <h3 className="font-normal text-black dark:text-white truncate">{cat.name}</h3>
               <p className="text-caption font-normal text-black dark:text-white uppercase tracking-widest">
-                {cat.count} Utilities
+                {cat.tools.length} Utilities
               </p>
             </div>
             <ArrowRight size={16} className="text-slate-300 group-hover:text-blue-500 transition-colors group-hover:translate-x-1" />

@@ -4,19 +4,20 @@
 
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 ▲ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
 
   Creating an optimized production build ...
 ⚠ Specified "headers" will not automatically work with "output: export". See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
-✓ Compiled successfully in 34.2s
+✓ Compiled successfully in 35.8s
   Running TypeScript ...
-  Finished TypeScript in 12.4s ...
+  Finished TypeScript in 13.7s ...
   Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/398) ...
+  Generating static pages using 11 workers (0/1548) ...
+  Generating static pages using 11 workers (387/1548) 
+  Generating static pages using 11 workers (774/1548) 
 Warning: Please use the `legacy` build in Node.js environments.
-  Generating static pages using 11 workers (99/398) 
-  Generating static pages using 11 workers (198/398) 
-  Generating static pages using 11 workers (298/398) 
-✓ Generating static pages using 11 workers (398/398) in 23.8s
+  Generating static pages using 11 workers (1161/1548) 
+✓ Generating static pages using 11 workers (1548/1548) in 89s
   Finalizing page optimization ...
 ⚠ rewrites, redirects, and headers are not applied when exporting your application, detected (headers). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
 
@@ -91,7 +92,7 @@ Route (app)
 │ ├ /finance/currency/usd-to-eur
 │ ├ /finance/currency/usd-to-gbp
 │ ├ /finance/currency/usd-to-jpy
-│ └ [+107 more paths]
+│ └ [+1257 more paths]
 ├ ○ /finance/earnings-per-share-calculator
 ├ ○ /finance/income-tax
 ├ ○ /finance/inflation

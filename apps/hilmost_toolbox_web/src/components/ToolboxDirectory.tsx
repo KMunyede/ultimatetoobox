@@ -34,7 +34,7 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
                 <span className="text-lg font-normal text-text-primary group-hover:text-brand-primary transition-colors">
                   {cat.name}
                 </span>
-                <span className="text-xs text-text-muted mt-0.5">{cat.count} Tools</span>
+                <span className="text-xs text-text-muted mt-0.5">{cat.tools.length} Tools</span>
               </div>
               <ChevronRight size={20} className="text-text-muted group-hover:text-brand-primary transition-colors" />
             </button>

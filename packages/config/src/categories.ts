@@ -16,7 +16,6 @@ export interface ToolCategory {
   name: string;
   slug: string;
   description: string;
-  count: number;
   color: string;
   icon: string;
   tools: Tool[];
@@ -27,7 +26,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Developer Experience",
     slug: "dx",
     description: "JSON, Regex, and JWT utilities built for modern engineering workflows.",
-    count: 7,
     color: "slate",
     icon: "Code2",
     tools: [
@@ -44,7 +42,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Money & Tax",
     slug: "finance",
     description: "Professional calculators for currency, loans, interest, and taxes.",
-    count: 13,
     color: "amber",
     icon: "Banknote",
     tools: [
@@ -67,7 +64,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "PDF Tools",
     slug: "pdf-tools",
     description: "Securely merge, split, and manage PDF files 100% in your browser.",
-    count: 4,
     color: "red",
     icon: "FileText",
     tools: [
@@ -81,7 +77,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Unit Converters",
     slug: "converters",
     description: "Quickly convert length, weight, temperature, and data storage units.",
-    count: 11,
     color: "blue",
     icon: "Replace",
     tools: [
@@ -102,7 +97,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Text & Formatting",
     slug: "text-data",
     description: "Clean up text, count words, and encode data with ease.",
-    count: 6,
     color: "brand-primary",
     icon: "Binary",
     tools: [
@@ -118,7 +112,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Math & Science",
     slug: "calculators",
     description: "From standard math to astrophysics and science equation solvers.",
-    count: 4,
     color: "indigo",
     icon: "Calculator",
     tools: [
@@ -132,7 +125,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Health & Wellness",
     slug: "health",
     description: "Simple tools for BMI tracking and daily wellness check-ins.",
-    count: 4,
     color: "rose",
     icon: "HeartPulse",
     tools: [
@@ -146,7 +138,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     name: "Education",
     slug: "education",
     description: "GPA calculators and professional academic tracking tools.",
-    count: 1,
     color: "orange",
     icon: "GraduationCap",
     tools: [

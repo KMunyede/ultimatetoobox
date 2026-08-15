@@ -1,46 +1,56 @@
 # Hilmost Handover & Continuation Document
-**Date:** July 5, 2026
+**Updated:** August 15, 2026
 **Project:** UtilitiesSite Monorepo
 
 ---
 
-## 🏗 1. Architectural Source of Truth
+## 🔍 1. Tool Count Investigation (Latest Task)
 
-### Date/Time Infrastructure
-- **Component:** `packages/ui/src/DateTimePicker.tsx`
-- **Optimization:** Time dials are isolated into memoized sub-components (`TimeDial`). Infinite scrolling uses "Silent Loop" logic with `overscroll-contain`.
-- **Usage:** Standardized across Age Calculator, Sleep Cycle Calculator, Time Zone Hub, and Unix Time.
+### **Context**
+Investigated reported incorrect tool counts ("370+" and "39") on the `/about` pages and header banners.
 
-### Result Formatting Engine
+### **Findings**
+- **No Hardcoded Strings:** Exhaustive searches for "370" and "39" in source code yielded no results. These likely represent ghost strings from a previous deployment.
+- **Dynamic Logic:** The codebase now uses a dynamic `{displayCount}` variable derived from `TOOL_CATEGORIES`.
+- **Current Total:** The actual tool count in `packages/config/src/categories.ts` is **50**, which renders as **"50+"** across all sites.
+- **Implementation Inconsistency:**
+    - `packages/ui/src/NavigationMenu.tsx`: Uses `cat.tools.length` (dynamic).
+    - `apps/hilmost_main/src/app/about/page.tsx`: Uses `cat.count` (hardcoded property in config).
+- **Recommendation:** Refactor `TOOL_CATEGORIES` to remove the manual `count` property and use `tools.length` exclusively to prevent future drift.
+
+---
+
+## 🏗 2. Architectural Source of Truth
+
+### **Single Source of Truth (SSOT)**
+- **Tool Data:** `packages/config/src/categories.ts`. Controls the directory, total counts, and featured tools.
+- **Components:** Shared UI lives in `packages/ui`.
+- **Apps:** 
+    - `hilmost_main`: Maps to `hilmost.net` (Consumer Hub).
+    - `hilmost_toolbox_web`: Maps to `hilmost-toolbox.hilmost.net` (Advanced Tools).
+    - `hilmost_corporate`: Maps to `hilmost.net/corporate` context (B2B/Holdings).
+
+### **Result Formatting Engine**
 - **Component:** `packages/ui/src/ScientificNumber.tsx`
-- **Format:** Supports a 2-line "Lab Standard" layout for large/small numbers.
-    - **Line 1:** Mantissa with currency/symbol prefix.
-    - **Line 2:** Scale factor (`x 10 ^ exponent`) + Units.
-- **Trigger:** Salaries >= $100M automatically switch to this format to prevent UI overlap in result cards.
+- **Format:** Standardized "Lab Standard" layout for large/small numbers used across all converters and calculators.
 
 ---
 
-## 🚀 2. Active Development State
+## 🚀 3. Active Development State
 
-### Latest Wins (Performance & UI)
-- **High-Frequency State Isolation:** Live clocks (Sleep Cycle, Unix Time) and interactive lists (Time Zone Hub) now isolate their render cycles. This fixed the "scrolling lag" and browser jitter observed in previous versions.
-- **Salary Converter Overhaul:** Widened layout to `max-w-4xl`. Implemented high-precision scientific notation (7 decimal places) for extreme financial values.
-- **Scientific Equation Correctness:** Fixed the placement of exponents in physics equations; they now correctly sit as superscripts on the base-10 scale.
-
-### Key Deployment Command
+### **Key Deployment Command**
 - **Command:** `npm run ship`
-- **Action:** Runs `turbo build`, deploys to all **7 Firebase Hosting targets** (Live & Staging), commits changes, and pushes to GitHub in a single sequence.
+- **Action:** Builds all apps, deploys to Firebase (Production & Staging), commits, and pushes.
+- **Mapping:**
+    - `hosting:hilmost-toolbox` -> Toolbox Web
+    - `hosting:hsc-platform-core` -> Main Site
 
 ---
 
-## 🛠 3. Project Configuration
-- **Design Language:** "Enterprise-Calm".
-- **Architecture:** Zero-Server / Browser-Side.
-- **Hosting Target Mapping:**
-    - `hilmost-toolbox` (Next.js Rebuild)
-    - `hsc-platform-core` (Main Site)
-    - `hilmost-corporate` (Corporate Site)
-    - `hilmost-wisdom` (PWA Extension)
+## 🛠 4. Next Steps for New Chat
+1. **Refactor Categories:** Remove `count: number` from `ToolCategory` interface and object literals in `categories.ts`.
+2. **Update Components:** Ensure all components use `cat.tools.length` or the exported `TOTAL_TOOL_COUNT` constant.
+3. **Verify Deployment:** Trigger a fresh `npm run build` to confirm static pages reflect the "50+" count correctly.
 
 ---
 *Reference this document and AGENTS.md at the start of every new session.*

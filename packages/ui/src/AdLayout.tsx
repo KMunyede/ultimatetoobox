@@ -18,26 +18,30 @@ export function AdLayout({
   bottomSlotId = "2372116691",
   showInnerAds = true,
 }: AdLayoutProps) {
+  const adsEnabled = process.env.NEXT_PUBLIC_ADS_ENABLED === "true";
+
   return (
     <div className="w-full max-w-[1750px] mx-auto px-4 py-0">
       <div className="flex flex-col lg:flex-row gap-5 xl:gap-8 justify-center">
         {/* Left Sidebar Ad (Hidden on mobile/tablet) */}
-        <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
-          <div className="sticky top-24 h-[600px]">
-            <AdUnit
-              publisherId={publisherId}
-              slotId={leftSlotId}
-              format="vertical"
-              className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-              style={{ width: "100%", height: "600px" }}
-            />
+        {adsEnabled && (
+          <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
+            <div className="sticky top-24 h-[600px]">
+              <AdUnit
+                publisherId={publisherId}
+                slotId={leftSlotId}
+                format="vertical"
+                className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
+                style={{ width: "100%", height: "600px" }}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Center Content */}
         <div className="flex-1 w-full max-w-5xl min-w-0 mx-auto">
           {/* Mobile Top Ad - Moved lower and with more margin to prevent accidental clicks */}
-          {showInnerAds && (
+          {adsEnabled && showInnerAds && (
             <div className="block lg:hidden mb-2 w-full">
               <AdUnit
                 publisherId={publisherId}
@@ -53,7 +57,7 @@ export function AdLayout({
           {children}
 
           {/* Bottom Horizontal Ad - Significant margin for safety */}
-          {showInnerAds && (
+          {adsEnabled && showInnerAds && (
             <div className="mt-8 w-full">
               <AdUnit
                 publisherId={publisherId}
@@ -68,17 +72,19 @@ export function AdLayout({
         </div>
 
         {/* Right Sidebar Ad (Hidden on mobile/tablet) */}
-        <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
-          <div className="sticky top-24 h-[600px]">
-            <AdUnit
-              publisherId={publisherId}
-              slotId={rightSlotId}
-              format="vertical"
-              className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-              style={{ width: "100%", height: "600px" }}
-            />
+        {adsEnabled && (
+          <div className="hidden xl:block w-[160px] min-[1750px]:w-[300px] shrink-0 pt-8">
+            <div className="sticky top-24 h-[600px]">
+              <AdUnit
+                publisherId={publisherId}
+                slotId={rightSlotId}
+                format="vertical"
+                className="bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
+                style={{ width: "100%", height: "600px" }}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
