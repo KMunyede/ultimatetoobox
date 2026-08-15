@@ -66,6 +66,14 @@ export default function Home() {
             </p>
           </div>
 
+          {/* Why Hilmost Exists */}
+          <div className="mb-8 md:mb-16 max-w-3xl">
+            <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary mb-4">Why Hilmost Exists</h2>
+            <p className="text-base md:text-lg text-text-secondary leading-relaxed">
+              Hilmost started with a simple frustration: coordinating meetings across colleagues spread over five continents meant juggling time zones by hand, because the tools online were confusing or bloated. That became the Time Zone Converter — the first tool in what's grown into a toolbox of 50+ free utilities, all built on one principle: fast, private, and no unnecessary friction. No sign-up, no data collection — everything runs on your device.
+            </p>
+          </div>
+
           {/* Our Products Section */}
           <div className="mb-8 md:mb-16">
             <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary mb-6">Product Ecosystem</h2>
@@ -111,6 +119,20 @@ export default function Home() {
               >
                 Open Full Directory ({displayCount}+ Tools) <ArrowRight size={18} />
               </Link>
+            </div>
+          </div>
+
+          {/* From the Blog */}
+          <div className="mb-6 md:mb-8">
+            <div className="flex items-center gap-4 mb-6 md:mb-10">
+              <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary">From the Blog</h2>
+              <div className="h-px flex-1 bg-brand-primary/10" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
+              <Link href="/blog/why-we-built-the-toolbox" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">Why We Built the Hilmost Toolbox</Link>
+              <Link href="/blog/building-a-private-password-generator" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">Building an Actually Private Password Generator</Link>
+              <Link href="/blog/self-improvement-distracted-world" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">Building Software for Self-Improvement</Link>
+              <Link href="/blog/six-week-indexing-stall" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">What a Six-Week Indexing Stall Taught Me</Link>
             </div>
           </div>
         </div>

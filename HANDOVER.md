@@ -4,53 +4,57 @@
 
 ---
 
-## 🔍 1. Tool Count Investigation (Latest Task)
+## 🔍 1. Completed Tasks (This Session)
 
-### **Context**
-Investigated reported incorrect tool counts ("370+" and "39") on the `/about` pages and header banners.
+### **A. Tool Count Refactor (SSOT)**
+- **Refactor:** Removed the manual `count: number` property from the `ToolCategory` interface and all category definitions in `packages/config/src/categories.ts`.
+- **Logic Sync:** Updated all consumer components to use the dynamic `TOTAL_TOOL_COUNT` constant or `cat.tools.length`.
+- **Files Impacted:**
+    - `packages/config/src/categories.ts`
+    - `packages/ui/src/CategoryGrid.tsx`
+    - `packages/ui/src/NavigationMenu.tsx`
+    - `apps/hilmost_toolbox_web/src/components/ToolboxDirectory.tsx`
+    - `apps/hilmost_main/src/app/about/page.tsx`
+    - `apps/hilmost_main/src/app/page.tsx`
+    - `apps/hilmost_corporate/src/app/about/page.tsx`
 
-### **Findings**
-- **No Hardcoded Strings:** Exhaustive searches for "370" and "39" in source code yielded no results. These likely represent ghost strings from a previous deployment.
-- **Dynamic Logic:** The codebase now uses a dynamic `{displayCount}` variable derived from `TOOL_CATEGORIES`.
-- **Current Total:** The actual tool count in `packages/config/src/categories.ts` is **50**, which renders as **"50+"** across all sites.
-- **Implementation Inconsistency:**
-    - `packages/ui/src/NavigationMenu.tsx`: Uses `cat.tools.length` (dynamic).
-    - `apps/hilmost_main/src/app/about/page.tsx`: Uses `cat.count` (hardcoded property in config).
-- **Recommendation:** Refactor `TOOL_CATEGORIES` to remove the manual `count` property and use `tools.length` exclusively to prevent future drift.
+### **B. Ad Gating (Build-time Flag)**
+- **New Flag:** Introduced `NEXT_PUBLIC_ADS_ENABLED` (boolean string).
+- **Implementation:** Wrapped all 4 ad slots in `packages/ui/src/AdLayout.tsx` with this flag.
+- **Default State:** Set to `false` in all build scripts (`package.json`) and local environments.
+- **Turbo Config:** Added to `globalEnv` in `turbo.json` to ensure cache busting on flag changes.
+
+### **C. Deployment**
+- **Commit:** `94b9ea17f781aa16a0fd3648fd6ac6ddedd3ce28` ("chore: gate ad slots behind NEXT_PUBLIC_ADS_ENABLED flag").
+- **Staging:** Successfully deployed to all staging targets via `npm run deploy:test`.
+- **Status:** Staging sites currently show **0 ad slots** (clean layout).
 
 ---
 
 ## 🏗 2. Architectural Source of Truth
 
-### **Single Source of Truth (SSOT)**
-- **Tool Data:** `packages/config/src/categories.ts`. Controls the directory, total counts, and featured tools.
-- **Components:** Shared UI lives in `packages/ui`.
-- **Apps:** 
-    - `hilmost_main`: Maps to `hilmost.net` (Consumer Hub).
-    - `hilmost_toolbox_web`: Maps to `hilmost-toolbox.hilmost.net` (Advanced Tools).
-    - `hilmost_corporate`: Maps to `hilmost.net/corporate` context (B2B/Holdings).
-
-### **Result Formatting Engine**
-- **Component:** `packages/ui/src/ScientificNumber.tsx`
-- **Format:** Standardized "Lab Standard" layout for large/small numbers used across all converters and calculators.
+- **Single Source of Truth (SSOT) for Tools:** `packages/config/src/categories.ts`.
+- **Ad Rendering Hub:** `packages/ui/src/AdLayout.tsx` (now gated).
+- **Build Orchestration:** `turbo.json` and `package.json` at root.
 
 ---
 
 ## 🚀 3. Active Development State
 
-### **Key Deployment Command**
-- **Command:** `npm run ship`
-- **Action:** Builds all apps, deploys to Firebase (Production & Staging), commits, and pushes.
-- **Mapping:**
-    - `hosting:hilmost-toolbox` -> Toolbox Web
-    - `hosting:hsc-platform-core` -> Main Site
+### **Deployment Targets**
+- **Main Site:** `hilmost.net` / `hsc-platform-core`
+- **Toolbox:** `hilmost-toolbox.hilmost.net`
+- **Corporate:** `hilmost.net` (various paths)
+
+### **Key Command**
+- **Command:** `npm run deploy:test` (Deploys gated ads version to staging).
 
 ---
 
 ## 🛠 4. Next Steps for New Chat
-1. **Refactor Categories:** Remove `count: number` from `ToolCategory` interface and object literals in `categories.ts`.
-2. **Update Components:** Ensure all components use `cat.tools.length` or the exported `TOTAL_TOOL_COUNT` constant.
-3. **Verify Deployment:** Trigger a fresh `npm run build` to confirm static pages reflect the "50+" count correctly.
+1. **Production Deployment:** Once Keepy verifies the ad-free layout on staging, trigger a production deploy (`npm run ship` or `deploy:live`).
+2. **Feature Development:** Resume building out new tool categories or individual tools in `hilmost_toolbox_web`.
+3. **SEO Audit:** Monitor Lighthouse scores to ensure ad-gating improved CLS/LCP as expected.
 
 ---
 *Reference this document and AGENTS.md at the start of every new session.*
