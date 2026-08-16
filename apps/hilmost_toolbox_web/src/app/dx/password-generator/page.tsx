@@ -90,14 +90,15 @@ export default function PasswordGeneratorPage() {
       <PasswordGeneratorTool />
 
       <div className="max-w-4xl mx-auto my-6 space-y-6">
+        <ToolArticle title="Why Use a Password Generator?">
+          <p>
+            Weak and reused passwords are the leading cause of account breaches. A single compromised password can expose multiple accounts, leading to a domino effect that compromises your entire digital identity. Human-chosen passwords almost always follow predictable patterns—like using names, dates, or common keyboard sequences—that automated brute-force attacks exploit in mere seconds.
+          </p>
+        </ToolArticle>
+
         <ToolArticle title="Advanced Security Features">
           <p>
             Our Secure Password Laboratory offers advanced features designed for precision and usability. The <strong>&quot;Exclude Ambiguous Characters&quot;</strong> option removes confusing characters like <code>0</code> (zero) and <code>O</code> (uppercase o), preventing entry errors on sensitive logins.
-          </p>
-
-          <h2>Why use a password generator?</h2>
-          <p>
-            Weak and reused passwords are the leading cause of account breaches. A single compromised password can expose multiple accounts, leading to a domino effect that compromises your entire digital identity. Human-chosen passwords almost always follow predictable patterns—like using names, dates, or common keyboard sequences—that automated brute-force attacks exploit in mere seconds.
           </p>
 
           <h3>Guaranteeing Complexity</h3>
