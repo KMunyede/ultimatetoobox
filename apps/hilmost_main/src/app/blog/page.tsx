@@ -10,6 +10,24 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    title: "Why Our Currency Converter Has 50 Currencies, Not 10",
+    slug: "why-our-currency-converter-has-50-currencies",
+    excerpt: "The architectural decision behind a 1,260-route currency converter, and why every currency deserves the same treatment as the major ones.",
+    date: "August 2026"
+  },
+  {
+    title: "The Real Cost of a Bad Password",
+    slug: "the-real-cost-of-a-bad-password",
+    excerpt: "What our Password Generator actually checks for, and why we show crack-time estimates instead of vague strength labels.",
+    date: "August 2026"
+  },
+  {
+    title: "Time Zones Are Harder Than They Look",
+    slug: "time-zones-are-harder-than-they-look",
+    excerpt: "Why we rebuilt our Time Zone Converter on boring, correct fundamentals instead of a fragile custom component.",
+    date: "August 2026"
+  },
+  {
     title: "Building Software as a Quiet Practice",
     slug: "building-software-as-a-quiet-practice",
     excerpt: "What Stoicism and Hermeticism actually teach about disciplined work, and how they shape the daily rhythm behind Hilmost.",
