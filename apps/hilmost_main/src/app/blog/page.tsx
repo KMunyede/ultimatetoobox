@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { AdLayout } from "@utilitiessite/ui";
+import { BlogIndexClient } from "./BlogIndexClient";
 
 export const metadata: Metadata = {
   title: "Blog | Hilmost",
@@ -13,80 +13,104 @@ const posts = [
     title: "Why Our Currency Converter Has 50 Currencies, Not 10",
     slug: "why-our-currency-converter-has-50-currencies",
     excerpt: "The architectural decision behind a 1,260-route currency converter, and why every currency deserves the same treatment as the major ones.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Tool Deep-Dives"
   },
   {
     title: "The Real Cost of a Bad Password",
     slug: "the-real-cost-of-a-bad-password",
     excerpt: "What our Password Generator actually checks for, and why we show crack-time estimates instead of vague strength labels.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Tool Deep-Dives"
   },
   {
     title: "Time Zones Are Harder Than They Look",
     slug: "time-zones-are-harder-than-they-look",
     excerpt: "Why we rebuilt our Time Zone Converter on boring, correct fundamentals instead of a fragile custom component.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Tool Deep-Dives"
   },
   {
     title: "Building Software as a Quiet Practice",
     slug: "building-software-as-a-quiet-practice",
     excerpt: "What Stoicism and Hermeticism actually teach about disciplined work, and how they shape the daily rhythm behind Hilmost.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Founder's Notes"
   },
   {
     title: "The Question I Can't Stop Asking",
     slug: "the-question-i-cant-stop-asking",
     excerpt: "What quantum decoherence actually says, why the observer-effect myth misses the point, and what chasing an unresolved question taught me about building a company.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Founder's Notes"
   },
   {
     title: "Why I Still Think Like a Gamer When I Build Tools",
     slug: "why-i-still-think-like-a-gamer-when-i-build-tools",
     excerpt: "How reading game systems fast taught me to design faster, friction-free tools for Hilmost Toolbox.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Founder's Notes"
   },
   {
     title: "What Music Taught Me About Debugging",
     slug: "what-music-taught-me-about-debugging",
     excerpt: "A founder's note on how a musician's ear for timing and feel trained the same instinct now used to catch bugs no error log shows.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Founder's Notes"
   },
   {
     title: "The Six-Month War With a Date Picker",
     slug: "six-month-war-with-a-date-picker",
     excerpt: "A honest dev-log on rebuilding Hilmost's date/time picker three times and the decision to stop patching and start over.",
-    date: "August 2026"
+    date: "August 2026",
+    dateValue: "2026-08",
+    category: "Engineering Log"
   },
   {
     title: "What a Six-Week Indexing Stall Taught Me About Thinking Like Google",
     slug: "six-week-indexing-stall",
     excerpt: "How a bloated sitemap and parameterized URLs silenced our new tools in Google Search for over a month.",
-    date: "July 2026"
+    date: "July 2026",
+    dateValue: "2026-07",
+    category: "Engineering Log"
   },
   {
     title: "Building an Actually Private Password Generator",
     slug: "building-a-private-password-generator",
     excerpt: "Why we built our Password Generator around crypto.getRandomValues() instead of Math.random(), and what zero-server architecture actually means.",
-    date: "July 2026"
+    date: "July 2026",
+    dateValue: "2026-07",
+    category: "Tool Deep-Dives"
   },
   {
     title: "Why We Built the Hilmost Toolbox",
     slug: "why-we-built-the-toolbox",
     excerpt: "The Hilmost Toolbox started as a simple idea: what if a calculator, converter, or PDF tool just worked, instantly, without friction?",
-    date: "July 2026"
+    date: "July 2026",
+    dateValue: "2026-07",
+    category: "Founder's Notes"
   },
   {
     title: "Building Software for Self-Improvement in a Distracted World",
     slug: "self-improvement-distracted-world",
     excerpt: "At Hilmost, we're interested in how you build technology that helps people focus, reflect, and actually improve their lives.",
-    date: "July 2026"
+    date: "July 2026",
+    dateValue: "2026-07",
+    category: "Founder's Notes"
   }
 ];
 
 export default function BlogIndex() {
   return (
     <AdLayout publisherId="ca-pub-5650522247882745">
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <div className="container mx-auto px-4 py-12 max-w-6xl">
         <div className="flex items-center gap-3 mb-8">
           <div className="p-2 bg-brand-primary/10 rounded-lg">
             <BookOpen className="text-brand-primary" size={24} />
@@ -96,32 +120,11 @@ export default function BlogIndex() {
           </h1>
         </div>
 
-        <p className="text-xl text-slate-600 dark:text-slate-400 mb-16 leading-relaxed max-w-2xl">
+        <p className="text-xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed max-w-2xl">
           Thoughts on engineering, focus, and building tools that respect the user.
         </p>
 
-        <div className="grid gap-8">
-          {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group block p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm hover:shadow-md hover:border-brand-primary/50 transition-all"
-            >
-              <div className="text-xs font-bold text-text-muted uppercase tracking-widest mb-4">
-                {post.date}
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-brand-primary transition-colors">
-                {post.title}
-              </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed line-clamp-2">
-                {post.excerpt}
-              </p>
-              <div className="flex items-center gap-2 text-brand-primary font-bold uppercase text-sm tracking-widest">
-                Read Post <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-          ))}
-        </div>
+        <BlogIndexClient posts={posts} />
       </div>
     </AdLayout>
   );
