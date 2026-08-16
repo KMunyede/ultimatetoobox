@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import { Breadcrumbs } from "@utilitiessite/ui";
 import { GUIDES } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
-import Link from "next/link";
-import { BookOpen, ArrowRight, Calendar } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import path from "path";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { GuidesIndexClient } from "./GuidesIndexClient";
 
 export const metadata: Metadata = {
   metadataBase: new URL(METADATA_BASE_URL),
@@ -55,7 +55,7 @@ export default function GuidesIndex() {
       
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="text-center mb-16">
+      <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-caption font-normal uppercase tracking-widest mb-6">
           <BookOpen size={12} />
           Learning Center
@@ -68,34 +68,7 @@ export default function GuidesIndex() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {GUIDES.map((guide) => (
-          <Link
-            key={guide.slug}
-            href={`/guides/${guide.slug}`}
-            className="group flex flex-col bg-canvas-card border border-base rounded-3xl p-8 transition-all hover:shadow-xl hover:border-brand-primary/30"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-caption font-normal uppercase tracking-[0.2em] text-brand-primary block">
-                {guide.category.replace("-", " ")}
-              </span>
-              <span className="inline-flex items-center gap-1 text-caption font-normal text-black dark:text-white uppercase">
-                <Calendar size={10} />
-                {lastUpdated}
-              </span>
-            </div>
-            <h2 className="text-2xl font-normal text-text-primary mb-4 group-hover:text-brand-primary transition-colors">
-              {guide.title}
-            </h2>
-            <p className="text-text-secondary leading-relaxed mb-8 flex-1 font-medium">
-              {guide.excerpt}
-            </p>
-            <div className="flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
-              Read Guide <ArrowRight size={16} />
-            </div>
-          </Link>
-        ))}
-      </div>
+      <GuidesIndexClient guides={GUIDES} lastUpdated={lastUpdated} />
     </div>
   );
 }
