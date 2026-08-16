@@ -666,7 +666,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
 
 <div class="mt-12 p-8 border border-slate-200 rounded-xl text-center bg-white shadow-sm">
   <h3 class="text-2xl font-bold mb-4 text-slate-900">Check Live Exchange Rates</h3>
-  <p class="mb-6 text-slate-600">Convert between 150+ global currencies using our high-frequency, accurate data feed. 100% free and secure.</p>
+  <p class="mb-6 text-slate-600">Convert between 50 global currencies using our high-frequency, accurate data feed. 100% free and secure.</p>
   <a href="/finance/currency" class="inline-block bg-brand-primary text-white px-10 py-4 rounded-lg font-bold hover:opacity-90 transition-all">Open Currency Converter</a>
 </div>
     `
