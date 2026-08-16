@@ -10,6 +10,30 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    title: "Building Software as a Quiet Practice",
+    slug: "building-software-as-a-quiet-practice",
+    excerpt: "A reflection on the discipline of software development as a focused, deliberate, and quiet craft in a noisy world.",
+    date: "August 2026"
+  },
+  {
+    title: "The Question I Can't Stop Asking",
+    slug: "the-question-i-cant-stop-asking",
+    excerpt: "The one fundamental question that drives every design decision at Hilmost and ensures we stay focused on what truly matters.",
+    date: "August 2026"
+  },
+  {
+    title: "Why I Still Think Like a Gamer When I Build Tools",
+    slug: "why-i-still-think-like-a-gamer-when-i-build-tools",
+    excerpt: "How the mindset of a gamer—problem-solving, resource management, and trial and error—translates directly to building robust digital tools.",
+    date: "August 2026"
+  },
+  {
+    title: "What Music Taught Me About Debugging",
+    slug: "what-music-taught-me-about-debugging",
+    excerpt: "Exploring the parallels between musical rhythm and code logic, and how a musician's ear can help identify software patterns.",
+    date: "August 2026"
+  },
+  {
     title: "The Six-Month War With a Date Picker",
     slug: "six-month-war-with-a-date-picker",
     excerpt: "A honest dev-log on rebuilding Hilmost's date/time picker three times and the decision to stop patching and start over.",
