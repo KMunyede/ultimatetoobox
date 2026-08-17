@@ -88,7 +88,7 @@ export default function Home() {
               </Link>
               <div className="flex flex-col items-start px-6 py-4 rounded-xl border border-base text-text-muted cursor-not-allowed opacity-60">
                 <span className="text-xl font-bold">Hilmost Apps</span>
-                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">Soon</span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">Coming Soon</span>
               </div>
             </div>
           </div>
