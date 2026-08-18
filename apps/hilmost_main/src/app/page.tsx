@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { TOOL_CATEGORIES, getFeaturedTools, TOTAL_TOOL_COUNT } from "@utilitiessite/config";
+import { TOOL_CATEGORIES, getFeaturedTools, TOTAL_TOOL_COUNT, getLatestBlogPosts } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
   title: "Hilmost | Free Browser-Based Tools",
@@ -129,10 +129,15 @@ export default function Home() {
               <div className="h-px flex-1 bg-brand-primary/10" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
-              <Link href="/blog/why-we-built-the-toolbox" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">Why We Built the Hilmost Toolbox</Link>
-              <Link href="/blog/building-a-private-password-generator" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">Building an Actually Private Password Generator</Link>
-              <Link href="/blog/self-improvement-distracted-world" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">Building Software for Self-Improvement</Link>
-              <Link href="/blog/six-week-indexing-stall" className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block">What a Six-Week Indexing Stall Taught Me</Link>
+              {getLatestBlogPosts(4).map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="text-base font-medium text-text-secondary hover:text-brand-primary transition-colors block"
+                >
+                  {post.title}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
