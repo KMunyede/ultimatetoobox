@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${toolboxUrl}${route}`,
     lastModified,
     changeFrequency: 'weekly',
-    priority: 0.6
+    priority: 0.7
   }));
 
   // 4. KNOWLEDGE BASE ARTICLES
@@ -68,11 +68,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'converters/area': ["square-meter", "square-kilometer", "hectare", "acre"],
   };
 
+  const HUB_UNITS: Record<string, string[]> = {
+    'converters/length': ["meters", "kilometers", "miles", "feet", "inches"],
+    'converters/weight-mass': ["kilograms", "pounds", "ounces"],
+    'converters/temperature': ["celsius", "fahrenheit"],
+    'converters/area': ["square-meter", "hectare", "acre"],
+  };
+
   Object.entries(UNITS_CONFIG).forEach(([pathPrefix, units]) => {
+    const hubs = HUB_UNITS[pathPrefix] || [];
     for (const from of units) {
       for (const to of units) {
         if (from !== to) {
-          programmaticPages.push(`/${pathPrefix}/${from.toLowerCase()}-to-${to.toLowerCase()}`);
+          // SEO Hub-and-Spoke: Only include in sitemap if at least one side is a Hub unit
+          if (hubs.includes(from) || hubs.includes(to)) {
+            programmaticPages.push(`/${pathPrefix}/${from.toLowerCase()}-to-${to.toLowerCase()}`);
+          }
         }
       }
     }
@@ -103,9 +114,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 6. LEGAL & MISC
   const legalPages: MetadataRoute.Sitemap = [
-    { url: `${toolboxUrl}/privacy-policy`, lastModified, changeFrequency: 'monthly', priority: 0.3 },
-    { url: `${toolboxUrl}/terms-of-service`, lastModified, changeFrequency: 'monthly', priority: 0.3 },
-    { url: `${toolboxUrl}/cookie-policy`, lastModified, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${toolboxUrl}/privacy-policy`, lastModified, changeFrequency: 'monthly', priority: 0.1 },
+    { url: `${toolboxUrl}/terms-of-service`, lastModified, changeFrequency: 'monthly', priority: 0.1 },
+    { url: `${toolboxUrl}/cookie-policy`, lastModified, changeFrequency: 'monthly', priority: 0.1 },
     { url: `${toolboxUrl}/knowledge-base`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
   ];
 
