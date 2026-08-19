@@ -1,13 +1,13 @@
 import { MetadataRoute } from 'next';
+import { BLOG_POSTS } from '@utilitiessite/config';
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://hilmost.net';
-  
   const lastModified = new Date();
 
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
       lastModified,
@@ -57,4 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     }
   ];
+
+  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.8
+  }));
+
+  return [...staticPages, ...blogPages];
 }
