@@ -116,7 +116,7 @@ async function submitToGoogle() {
     }
 
     // 3. Submit each URL
-    for (const url of subset) {
+    for (const url of finalSelection) {
       const options = {
         url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
         method: 'POST',
