@@ -42,6 +42,26 @@ export default function BlogPost2() {
           <p>
             Neither app is trying to replace human connection or professional mental health support. They&apos;re tools — meant to sit alongside a person&apos;s life and make small, positive habits easier to sustain. That&apos;s the same philosophy behind everything we build: useful, honest, and designed to respect the person using it.
           </p>
+
+          <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 not-prose">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Hilmost Network</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/" className="text-brand-primary hover:underline font-medium">Hilmost Homepage</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net" className="text-brand-primary hover:underline font-medium">Hilmost Toolbox (Live Tools)</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net/guides/sleep-cycles-and-wake-times-explained" className="text-brand-primary hover:underline font-medium">Guide: Sleep Cycles and Wake Times Explained</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Latest Notes</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/blog/why-our-currency-converter-has-50-currencies" className="text-brand-primary hover:underline font-medium">Why Our Currency Converter Has 50 Currencies</Link></li>
+                  <li><Link href="/blog/the-real-cost-of-a-bad-password" className="text-brand-primary hover:underline font-medium">The Real Cost of a Bad Password</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <section className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">

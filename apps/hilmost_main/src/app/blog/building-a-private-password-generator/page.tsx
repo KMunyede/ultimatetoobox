@@ -51,6 +51,26 @@ export default function BlogPost3() {
           <p>
             We didn&apos;t build this tool to collect emails or show you pop-up ads. We built it because we needed a trusted place to generate our own keys. By combining industrial-strength randomness with total local privacy, we&apos;ve created a laboratory where you can forge your digital armor with confidence.
           </p>
+
+          <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 not-prose">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Hilmost Network</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/" className="text-brand-primary hover:underline font-medium">Hilmost Homepage</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net" className="text-brand-primary hover:underline font-medium">Hilmost Toolbox (Live Tools)</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net/guides/password-entropy-and-crack-time-explained" className="text-brand-primary hover:underline font-medium">Guide: Password Entropy and Crack Time Explained</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Latest Notes</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/blog/why-our-currency-converter-has-50-currencies" className="text-brand-primary hover:underline font-medium">Why Our Currency Converter Has 50 Currencies</Link></li>
+                  <li><Link href="/blog/the-real-cost-of-a-bad-password" className="text-brand-primary hover:underline font-medium">The Real Cost of a Bad Password</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <section className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">

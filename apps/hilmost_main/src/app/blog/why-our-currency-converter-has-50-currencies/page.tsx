@@ -52,6 +52,26 @@ export default function BlogPostCurrencyArchitecture() {
           <p>
             It&apos;s a small tool. But small tools built with the assumption that everyone&apos;s use case matters equally tend to actually hold up when real people with real, unpredictable needs show up.
           </p>
+
+          <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 not-prose">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Hilmost Network</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/" className="text-brand-primary hover:underline font-medium">Hilmost Homepage</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net" className="text-brand-primary hover:underline font-medium">Hilmost Toolbox (Live Tools)</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net/guides/currency-conversion-and-exchange-rates" className="text-brand-primary hover:underline font-medium">Guide: Currency Conversion and Exchange Rates</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Latest Notes</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/blog/the-real-cost-of-a-bad-password" className="text-brand-primary hover:underline font-medium">The Real Cost of a Bad Password</Link></li>
+                  <li><Link href="/blog/time-zones-are-harder-than-they-look" className="text-brand-primary hover:underline font-medium">Time Zones Are Harder Than They Look</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <section className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">

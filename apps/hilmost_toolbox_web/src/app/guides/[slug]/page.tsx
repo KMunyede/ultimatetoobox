@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, BreadcrumbSchema, RelatedTools } from "@utilitiessite/ui";
 import { GUIDES, getCanonicalUrl } from "@utilitiessite/config";
@@ -112,6 +113,24 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       </article>
 
       <div className="mt-12 pt-12 border-t border-base">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 bg-slate-50 dark:bg-slate-900/50 p-8 rounded-3xl border border-base">
+            <div>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-text-muted mb-4">Network Priority</h3>
+                <ul className="space-y-3 text-sm">
+                    <li><Link href="https://hilmost.net" className="text-brand-primary hover:underline font-medium">Hilmost Corporate Homepage</Link></li>
+                    <li><Link href="/" className="text-brand-primary hover:underline font-medium">Hilmost Toolbox Home</Link></li>
+                    <li><Link href="/guides" className="text-brand-primary hover:underline font-medium">Full Knowledge Base Index</Link></li>
+                </ul>
+            </div>
+            <div>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-text-muted mb-4">Latest Founder Insights</h3>
+                <ul className="space-y-3 text-sm">
+                    <li><Link href="https://hilmost.net/blog/why-our-currency-converter-has-50-currencies" className="text-brand-primary hover:underline font-medium">Why Our Currency Converter Has 50 Currencies</Link></li>
+                    <li><Link href="https://hilmost.net/blog/the-real-cost-of-a-bad-password" className="text-brand-primary hover:underline font-medium">The Real Cost of a Bad Password</Link></li>
+                </ul>
+            </div>
+        </div>
+
         <h2 className="text-2xl font-normal text-text-primary uppercase tracking-tight mb-8">Related Utilities</h2>
         <RelatedTools
           category={guide.category as "converters" | "calculators" | "finance" | "text-data" | "health" | "pdf-tools"}

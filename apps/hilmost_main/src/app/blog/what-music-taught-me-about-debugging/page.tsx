@@ -56,6 +56,26 @@ export default function BlogPostMusicDebugging() {
           <p>Music gave me that discipline before code did. It taught me that &quot;correct&quot; and &quot;right&quot; aren&apos;t always the same thing, and that the gap between them is usually where the real craft lives — in the part that&apos;s hard to write a test for.</p>
 
           <p>I still don&apos;t always know why something feels off before I know what&apos;s actually wrong. I&apos;ve just learned, the way you learn an ear for a flat note, to trust that feeling enough to go looking.</p>
+
+          <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 not-prose">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Hilmost Network</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/" className="text-brand-primary hover:underline font-medium">Hilmost Homepage</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net" className="text-brand-primary hover:underline font-medium">Hilmost Toolbox (Live Tools)</Link></li>
+                  <li><Link href="https://hilmost-toolbox.hilmost.net/guides/unit-conversion-made-simple" className="text-brand-primary hover:underline font-medium">Guide: Unit Conversion Made Simple</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Latest Notes</h3>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/blog/why-our-currency-converter-has-50-currencies" className="text-brand-primary hover:underline font-medium">Why Our Currency Converter Has 50 Currencies</Link></li>
+                  <li><Link href="/blog/the-real-cost-of-a-bad-password" className="text-brand-primary hover:underline font-medium">The Real Cost of a Bad Password</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <section className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
