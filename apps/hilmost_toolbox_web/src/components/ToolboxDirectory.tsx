@@ -62,7 +62,9 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
               >
                 <ChevronLeft size={24} />
               </button>
-              <h2 className="text-2xl font-normal text-text-primary tracking-tight">{cat.name}</h2>
+              <Link href={`/${cat.slug}`} className="hover:underline decoration-brand-primary/30">
+                <h2 className="text-2xl font-normal text-text-primary tracking-tight">{cat.name}</h2>
+              </Link>
             </div>
 
             <div className="flex-1 overflow-y-auto custom-scrollbar pb-8">
@@ -98,7 +100,9 @@ export function ToolboxDirectory({ categories }: ToolboxDirectoryProps) {
             className="group flex flex-col border border-base rounded-xl p-4 md:p-5 hover:border-brand-primary transition-all duration-300 focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2 outline-none"
           >
             <div className="mb-3">
-              <h2 className="text-lg font-normal text-text-primary tracking-tight">{category.name}</h2>
+              <Link href={`/${category.slug}`} className="hover:underline decoration-brand-primary/30">
+                <h2 className="text-lg font-normal text-text-primary tracking-tight">{category.name}</h2>
+              </Link>
             </div>
             <p className="text-text-secondary mb-5 text-sm leading-relaxed font-medium line-clamp-2">
               {category.description}
