@@ -86,10 +86,10 @@ export default function Home() {
                 <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
                 <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary">→ Shop Store</span>
               </Link>
-              <div className="flex flex-col items-start px-6 py-4 rounded-xl border border-base text-text-muted cursor-not-allowed opacity-60">
-                <span className="text-xl font-bold">Hilmost Apps</span>
-                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">Coming Soon</span>
-              </div>
+              <Link href="/softwarehub" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
+                <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apps</span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary">→ View Roadmap</span>
+              </Link>
             </div>
           </div>
 
@@ -124,9 +124,14 @@ export default function Home() {
 
           {/* From the Blog */}
           <div className="mb-6 md:mb-8">
-            <div className="flex items-center gap-4 mb-6 md:mb-10">
-              <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary">From the Blog</h2>
-              <div className="h-px flex-1 bg-brand-primary/10" />
+            <div className="flex items-center justify-between gap-4 mb-6 md:mb-10">
+              <div className="flex items-center gap-4 flex-1">
+                <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary whitespace-nowrap">From the Blog</h2>
+                <div className="h-px flex-1 bg-brand-primary/10" />
+              </div>
+              <Link href="/blog" className="text-[10px] font-bold uppercase tracking-widest text-brand-primary hover:underline">
+                View All Posts →
+              </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
               {getLatestBlogPosts(4).map((post) => (
