@@ -32,7 +32,10 @@ async function submitToGoogle() {
       jwtClient = new google.auth.JWT({
         email: CONFIG.credentials.client_email,
         key: CONFIG.credentials.private_key,
-        scopes: ['https://www.googleapis.com/auth/indexing']
+        scopes: [
+          'https://www.googleapis.com/auth/indexing',
+          'https://www.googleapis.com/auth/webmasters'
+        ]
       });
       await jwtClient.authorize();
     }
@@ -150,10 +153,47 @@ async function submitToGoogle() {
       }
     }
 
+    // 4. Submit Sitemaps via Search Console API
+    await submitSitemapsToSearchConsole(jwtClient);
+
     console.log('--- Google Submission Complete ---');
   } catch (error) {
     console.error('❌ Critical Error during Google submission:', error);
     process.exit(1);
+  }
+}
+
+async function submitSitemapsToSearchConsole(jwtClient) {
+  if (!jwtClient) return;
+  console.log('--- Submitting Sitemaps via Search Console API ---');
+  const webmasters = google.webmasters({ version: 'v3', auth: jwtClient });
+
+  for (const sitemapUrl of SITEMAPS) {
+    const urlObj = new URL(sitemapUrl);
+    const domain = urlObj.hostname;
+    const urlPrefixSite = `${urlObj.protocol}//${domain}/`;
+    const scDomainSite = `sc-domain:${domain}`;
+
+    const candidateSiteUrls = [urlPrefixSite, scDomainSite];
+    let submitted = false;
+
+    for (const siteUrl of candidateSiteUrls) {
+      try {
+        await webmasters.sitemaps.submit({
+          siteUrl: siteUrl,
+          feedpath: sitemapUrl
+        });
+        console.log(`✅ Search Console Sitemap Submitted: feedpath=${sitemapUrl} for siteUrl=${siteUrl}`);
+        submitted = true;
+        break;
+      } catch (err) {
+        console.warn(`⚠️ Search Console sitemap submission attempt failed for siteUrl=${siteUrl}: ${err.message || err}`);
+      }
+    }
+
+    if (!submitted) {
+      console.error(`❌ Failed to submit sitemap ${sitemapUrl} to Search Console for candidate siteUrls.`);
+    }
   }
 }
 
