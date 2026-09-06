@@ -26,17 +26,17 @@ import {
   calculateCumulativeGpa
 } from "./gpaCalculator";
 
+const createInitialCourses = (mode: InputMode): Course[] => [
+  { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: mode === 'letter' ? "A" : mode === 'percentage' ? "95" : "4.0", mode },
+  { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: mode === 'letter' ? "A" : mode === 'percentage' ? "95" : "4.0", mode },
+  { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: mode === 'letter' ? "A" : mode === 'percentage' ? "95" : "4.0", mode },
+];
+
 export function GpaCalculatorTool() {
   const [scale, setScale] = useState<GradingScale>('4.0');
   const [inputMode, setInputMode] = useState<InputMode>('letter');
 
-  const initialCourses: Course[] = [
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A", mode: "letter" },
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A", mode: "letter" },
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A", mode: "letter" },
-  ];
-
-  const [semesterCourses, setSemesterCourses] = useState<Course[]>(initialCourses);
+  const [semesterCourses, setSemesterCourses] = useState<Course[]>(() => createInitialCourses('letter'));
   const [prevGpa, setPrevGpa] = useState<string>("");
   const [prevCredits, setPrevCredits] = useState<string>("");
 
@@ -77,7 +77,7 @@ export function GpaCalculatorTool() {
   };
 
   const handleReset = () => {
-    setSemesterCourses(initialCourses);
+    setSemesterCourses(createInitialCourses(inputMode));
     setPrevGpa("");
     setPrevCredits("");
   };
