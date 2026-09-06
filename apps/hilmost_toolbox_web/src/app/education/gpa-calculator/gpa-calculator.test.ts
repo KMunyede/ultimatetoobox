@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   type Course,
   getPointsFromGrade,
+  clampGradeInput,
   calculateSemesterGpa,
   calculateCumulativeGpa,
   LETTER_GRADES
@@ -155,14 +156,10 @@ test('Classification Thresholds: Scale-proportional classification mapping', () 
 });
 
 test('Credits Input Validation & Rounding (0.5 Increments)', () => {
-  // Typing "3.7" in Credits auto-rounds to "3.5" on blur
   assert.equal(validateNumberInputBlur('3.7', 0.5, 0, 6), '3.5');
-  // Typing "3.8" in Credits auto-rounds to "4" on blur
   assert.equal(validateNumberInputBlur('3.8', 0.5, 0, 6), '4');
-  // Typing "3" or "1.5" works normally
   assert.equal(validateNumberInputBlur('3', 0.5, 0, 6), '3');
   assert.equal(validateNumberInputBlur('1.5', 0.5, 0, 6), '1.5');
-  // Out of range credits
   assert.equal(validateNumberInputBlur('10', 0.5, 0, 6), '6');
   assert.equal(validateNumberInputBlur('-2', 0.5, 0, 6), '0');
 });
@@ -170,4 +167,20 @@ test('Credits Input Validation & Rounding (0.5 Increments)', () => {
 test('Letter Grade Dropdown Completeness', () => {
   assert.equal(LETTER_GRADES.length, 13);
   assert.deepEqual(LETTER_GRADES, ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F']);
+});
+
+test('Grade Input Visual Clamping (Percentage & Points Modes)', () => {
+  // Percentage "1000" on blur → "100"
+  assert.equal(clampGradeInput('1000', 'percentage', '4.0'), '100');
+  // Percentage "-23" on blur → "0"
+  assert.equal(clampGradeInput('-23', 'percentage', '4.0'), '0');
+  // Points "123567" on 4.0 scale on blur → "4"
+  assert.equal(clampGradeInput('123567', 'points', '4.0'), '4');
+  // Points "4.6666" on 4.0 scale on blur → "4"
+  assert.equal(clampGradeInput('4.6666', 'points', '4.0'), '4');
+  // Points "4.6666" on 5.0 scale on blur → "4.6666"
+  assert.equal(clampGradeInput('4.6666', 'points', '5.0'), '4.6666');
+  // Valid values (percentage "89", points "3.5") unaffected
+  assert.equal(clampGradeInput('89', 'percentage', '4.0'), '89');
+  assert.equal(clampGradeInput('3.5', 'points', '4.0'), '3.5');
 });

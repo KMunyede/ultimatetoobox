@@ -22,6 +22,7 @@ import {
   InputMode,
   GradingScale,
   LETTER_GRADES,
+  clampGradeInput,
   calculateSemesterGpa,
   calculateCumulativeGpa
 } from "./gpaCalculator";
@@ -161,6 +162,10 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                       <Input
                         value={course.grade}
                         onChange={(e) => updateCourse(course.id, { grade: e.target.value })}
+                        onBlur={(e) => {
+                          const clamped = clampGradeInput(e.target.value, course.mode, scale);
+                          updateCourse(course.id, { grade: clamped });
+                        }}
                         placeholder={course.mode === 'percentage' ? "0-100" : "0.0"}
                         className="text-center"
                       />

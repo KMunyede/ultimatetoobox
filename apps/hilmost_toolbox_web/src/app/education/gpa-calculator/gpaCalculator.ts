@@ -27,6 +27,32 @@ export const GRADE_POINTS_5: Record<string, number> = {
 
 export const LETTER_GRADES = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F"];
 
+export function clampGradeInput(
+  grade: string,
+  mode: InputMode,
+  currentScale: GradingScale
+): string {
+  if (mode === 'letter') return grade;
+
+  const num = parseFloat(grade);
+  if (isNaN(num)) {
+    return "0";
+  }
+
+  if (mode === 'percentage') {
+    const clamped = Math.min(Math.max(num, 0), 100);
+    return Number(clamped.toFixed(4)).toString();
+  }
+
+  if (mode === 'points') {
+    const maxScale = currentScale === '4.0' ? 4.0 : 5.0;
+    const clamped = Math.min(Math.max(num, 0), maxScale);
+    return Number(clamped.toFixed(4)).toString();
+  }
+
+  return grade;
+}
+
 export function getPointsFromGrade(
   grade: string,
   mode: InputMode,
