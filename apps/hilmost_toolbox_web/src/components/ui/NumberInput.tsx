@@ -34,11 +34,15 @@ export function NumberInput({
     if (onValidate) {
       num = onValidate(num);
     } else {
+      if (step !== undefined && step > 0) {
+        num = Math.round(num / step) * step;
+      }
       if (min !== undefined) num = Math.max(min, num);
       if (max !== undefined) num = Math.min(max, num);
     }
 
-    onChange(num.toString());
+    const cleanStr = Number(num.toFixed(4)).toString();
+    onChange(cleanStr);
   };
 
   return (
@@ -63,4 +67,3 @@ export function NumberInput({
     </div>
   );
 }
-

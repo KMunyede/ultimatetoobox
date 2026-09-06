@@ -5,8 +5,23 @@ import {
   type Course,
   getPointsFromGrade,
   calculateSemesterGpa,
-  calculateCumulativeGpa
+  calculateCumulativeGpa,
+  LETTER_GRADES
 } from './gpaCalculator.ts';
+
+function validateNumberInputBlur(value: string, step = 0.5, min = 0, max = 6): string {
+  let num = parseFloat(value);
+  if (isNaN(num)) {
+    num = min !== undefined ? min : 0;
+  } else {
+    if (step !== undefined && step > 0) {
+      num = Math.round(num / step) * step;
+    }
+    if (min !== undefined) num = Math.max(min, num);
+    if (max !== undefined) num = Math.min(max, num);
+  }
+  return Number(num.toFixed(4)).toString();
+}
 
 test('Bug Reproduction & Fix: Mode switching retains row-level mode and grade-points', () => {
   let activeInputMode: 'letter' | 'percentage' | 'points' = 'letter';
@@ -117,7 +132,6 @@ test('Task 3f Audit: Final displayed GPA rounded to 2 decimal places', () => {
 });
 
 test('Classification Thresholds: Scale-proportional classification mapping', () => {
-  // On 4.0 scale: gpa 3.0 exactly → classification "B"
   const course4ScaleB: Course[] = [
     { id: '1', name: 'B Course', credits: '3', grade: 'B', mode: 'letter' }
   ];
@@ -125,7 +139,6 @@ test('Classification Thresholds: Scale-proportional classification mapping', () 
   assert.equal(res4ScaleB.gpa, 3.0);
   assert.equal(res4ScaleB.classification, 'B');
 
-  // On 5.0 scale: gpa 4.0 exactly (points mode 4.0) → classification "B", NOT "A"
   const course5ScaleB: Course[] = [
     { id: '1', name: '4.0 Points Course', credits: '3', grade: '4.0', mode: 'points' }
   ];
@@ -133,11 +146,28 @@ test('Classification Thresholds: Scale-proportional classification mapping', () 
   assert.equal(res5ScaleB.gpa, 4.0);
   assert.equal(res5ScaleB.classification, 'B');
 
-  // On 5.0 scale: gpa 4.625 (points mode 4.625) → classification "A"
   const course5ScaleA: Course[] = [
     { id: '1', name: '4.625 Points Course', credits: '3', grade: '4.625', mode: 'points' }
   ];
   const res5ScaleA = calculateSemesterGpa(course5ScaleA, '5.0');
   assert.equal(res5ScaleA.gpa, 4.625);
   assert.equal(res5ScaleA.classification, 'A');
+});
+
+test('Credits Input Validation & Rounding (0.5 Increments)', () => {
+  // Typing "3.7" in Credits auto-rounds to "3.5" on blur
+  assert.equal(validateNumberInputBlur('3.7', 0.5, 0, 6), '3.5');
+  // Typing "3.8" in Credits auto-rounds to "4" on blur
+  assert.equal(validateNumberInputBlur('3.8', 0.5, 0, 6), '4');
+  // Typing "3" or "1.5" works normally
+  assert.equal(validateNumberInputBlur('3', 0.5, 0, 6), '3');
+  assert.equal(validateNumberInputBlur('1.5', 0.5, 0, 6), '1.5');
+  // Out of range credits
+  assert.equal(validateNumberInputBlur('10', 0.5, 0, 6), '6');
+  assert.equal(validateNumberInputBlur('-2', 0.5, 0, 6), '0');
+});
+
+test('Letter Grade Dropdown Completeness', () => {
+  assert.equal(LETTER_GRADES.length, 13);
+  assert.deepEqual(LETTER_GRADES, ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F']);
 });

@@ -145,7 +145,8 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                       value={course.credits}
                       onChange={(val) => updateCourse(course.id, { credits: val })}
                       min={0}
-                      max={20}
+                      max={6}
+                      step={0.5}
                       className="text-center"
                     />
                   </div>
@@ -224,6 +225,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                 onChange={setPrevCredits}
                 min={0}
                 max={500}
+                step={0.5}
               />
 
               <div className="mt-10 pt-10 border-t border-slate-100 dark:border-slate-800 space-y-4 text-center">
