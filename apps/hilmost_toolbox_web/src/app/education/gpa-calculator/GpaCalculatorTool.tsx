@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Plus,
   X,
@@ -17,40 +17,23 @@ import { Input } from "../../../components/ui/Input";
 import { Select } from "../../../components/ui/Select";
 import { PillSelector } from "../../../components/ui/PillSelector";
 import { NumberInput } from "../../../components/ui/NumberInput";
-
-interface Course {
-  id: string;
-  name: string;
-  credits: string;
-  grade: string;
-}
-
-const GRADE_POINTS_4: Record<string, number> = {
-  "A+": 4.0, "A": 4.0, "A-": 3.7,
-  "B+": 3.3, "B": 3.0, "B-": 2.7,
-  "C+": 2.3, "C": 2.0, "C-": 1.7,
-  "D+": 1.3, "D": 1.0, "D-": 0.7,
-  "F": 0.0
-};
-
-const GRADE_POINTS_5: Record<string, number> = {
-  "A+": 5.0, "A": 5.0, "A-": 4.7,
-  "B+": 4.3, "B": 4.0, "B-": 3.7,
-  "C+": 3.3, "C": 3.0, "C-": 2.7,
-  "D+": 1.3, "D": 1.0, "D-": 0.7,
-  "F": 0.0
-};
-
-const LETTER_GRADES = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F"];
+import {
+  Course,
+  InputMode,
+  GradingScale,
+  LETTER_GRADES,
+  calculateSemesterGpa,
+  calculateCumulativeGpa
+} from "./gpaCalculator";
 
 export function GpaCalculatorTool() {
-  const [scale, setScale] = useState<'4.0' | '5.0'>('4.0');
-  const [inputMode, setInputMode] = useState<'letter' | 'percentage' | 'points'>('letter');
+  const [scale, setScale] = useState<GradingScale>('4.0');
+  const [inputMode, setInputMode] = useState<InputMode>('letter');
 
   const initialCourses: Course[] = [
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
-    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A" },
+    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A", mode: "letter" },
+    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A", mode: "letter" },
+    { id: Math.random().toString(36).substr(2, 9), name: "", credits: "3", grade: "A", mode: "letter" },
   ];
 
   const [semesterCourses, setSemesterCourses] = useState<Course[]>(initialCourses);
@@ -59,79 +42,17 @@ export function GpaCalculatorTool() {
 
   const [copyStatus, setCopyStatus] = useState(false);
 
-  const getPointsFromGrade = useCallback((grade: string, mode: 'letter' | 'percentage' | 'points', currentScale: '4.0' | '5.0') => {
-    const table = currentScale === '4.0' ? GRADE_POINTS_4 : GRADE_POINTS_5;
-
-    if (mode === 'points') {
-        const p = parseFloat(grade);
-        return isNaN(p) ? 0 : p;
-    }
-
-    if (mode === 'letter') {
-        return table[grade] || 0;
-    }
-
-    if (mode === 'percentage') {
-        const pct = parseFloat(grade);
-        if (isNaN(pct)) return 0;
-
-        let letter = "F";
-        if (pct >= 90) {
-            if (pct >= 97) letter = "A+";
-            else if (pct >= 93) letter = "A";
-            else letter = "A-";
-        } else if (pct >= 80) {
-            if (pct >= 87) letter = "B+";
-            else if (pct >= 83) letter = "B";
-            else letter = "B-";
-        } else if (pct >= 70) {
-            if (pct >= 77) letter = "C+";
-            else if (pct >= 73) letter = "C";
-            else letter = "C-";
-        } else if (pct >= 60) {
-            if (pct >= 67) letter = "D+";
-            else if (pct >= 63) letter = "D";
-            else letter = "D-";
-        }
-        return table[letter] || 0;
-    }
-
-    return 0;
-  }, []);
-
   const semesterResults = useMemo(() => {
-    let totalPoints = 0;
-    let totalCredits = 0;
-
-    semesterCourses.forEach(c => {
-      const gp = getPointsFromGrade(c.grade, inputMode, scale);
-      const creditsNum = parseFloat(c.credits) || 0;
-      totalPoints += gp * creditsNum;
-      totalCredits += creditsNum;
-    });
-
-    const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
-
-    let classification = "F";
-    if (gpa >= 3.7) classification = "A";
-    else if (gpa >= 3.0) classification = "B";
-    else if (gpa >= 2.0) classification = "C";
-    else if (gpa >= 1.0) classification = "D";
-
-    return { gpa, totalCredits, classification };
-  }, [semesterCourses, inputMode, scale, getPointsFromGrade]);
+    return calculateSemesterGpa(semesterCourses, scale);
+  }, [semesterCourses, scale]);
 
   const cumulativeResults = useMemo(() => {
-    const pGpa = parseFloat(prevGpa) || 0;
-    const pCreds = parseFloat(prevCredits) || 0;
-
-    const currentTotalPoints = semesterResults.gpa * semesterResults.totalCredits;
-    const prevTotalPoints = pGpa * pCreds;
-
-    const totalCredits = pCreds + semesterResults.totalCredits;
-    const gpa = totalCredits > 0 ? (currentTotalPoints + prevTotalPoints) / totalCredits : 0;
-
-    return { gpa, totalCredits };
+    return calculateCumulativeGpa(
+      prevGpa,
+      prevCredits,
+      semesterResults.totalPoints,
+      semesterResults.totalCredits
+    );
   }, [prevGpa, prevCredits, semesterResults]);
 
   const addCourse = () => {
@@ -139,19 +60,20 @@ export function GpaCalculatorTool() {
       id: Math.random().toString(36).substr(2, 9),
       name: "",
       credits: "3",
-      grade: inputMode === 'letter' ? "A" : inputMode === 'percentage' ? "95" : "4.0"
+      grade: inputMode === 'letter' ? "A" : inputMode === 'percentage' ? "95" : "4.0",
+      mode: inputMode
     };
-    setSemesterCourses([...semesterCourses, newCourse]);
+    setSemesterCourses(prev => [...prev, newCourse]);
   };
 
   const removeCourse = (id: string) => {
     if (semesterCourses.length > 1) {
-      setSemesterCourses(semesterCourses.filter(c => c.id !== id));
+      setSemesterCourses(prev => prev.filter(c => c.id !== id));
     }
   };
 
   const updateCourse = (id: string, updates: Partial<Course>) => {
-    setSemesterCourses(semesterCourses.map(c => c.id === id ? { ...c, ...updates } : c));
+    setSemesterCourses(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
   };
 
   const handleReset = () => {
@@ -228,7 +150,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                     />
                   </div>
                   <div className="col-span-3 sm:col-span-3">
-                    {inputMode === 'letter' ? (
+                    {course.mode === 'letter' ? (
                       <Select
                         value={course.grade}
                         onChange={(e) => updateCourse(course.id, { grade: e.target.value })}
@@ -238,7 +160,7 @@ Total Credits: ${cumulativeResults.totalCredits}`;
                       <Input
                         value={course.grade}
                         onChange={(e) => updateCourse(course.id, { grade: e.target.value })}
-                        placeholder={inputMode === 'percentage' ? "0-100" : "0.0"}
+                        placeholder={course.mode === 'percentage' ? "0-100" : "0.0"}
                         className="text-center"
                       />
                     )}
