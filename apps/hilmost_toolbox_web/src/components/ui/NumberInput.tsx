@@ -24,8 +24,8 @@ export function NumberInput({
   onValidate,
   ...props
 }: NumberInputProps) {
-  const handleBlur = () => {
-    let num = parseFloat(value);
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    let num = parseFloat(e.target.value);
     if (isNaN(num)) {
       if (min !== undefined) num = min;
       else num = 0;
