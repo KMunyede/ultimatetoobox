@@ -1,8 +1,6 @@
 name: Automated Index Submission
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch: # Allow manual trigger
   schedule:
     - cron: '0 21 * * *'
