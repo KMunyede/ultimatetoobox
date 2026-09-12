@@ -38,7 +38,7 @@ export const REGION_LABELS: Record<RegionEthnicity, string> = {
   europid: "Europid / Caucasian",
   south_asian: "South Asian / Chinese / South-Central American",
   japanese: "Japanese",
-  sub_saharan_african: "Sub-Saharan African",
+  sub_saharan_african: "African",
   middle_east: "Middle East / Arab",
 };
 

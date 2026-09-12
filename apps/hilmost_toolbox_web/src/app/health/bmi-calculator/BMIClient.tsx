@@ -101,7 +101,7 @@ export function BMIClient() {
             />
 
             <PillSelector
-              label="Biological Sex"
+              label="Biological Gender"
               value={sex}
               onChange={(val) => setState({ sex: val })}
               options={[
@@ -130,7 +130,7 @@ export function BMIClient() {
                 onChange={(val) => setState({ cm: val })}
                 placeholder="e.g. 175"
                 min={50}
-                max={250}
+                max={300}
               />
               <NumberInput
                 label="Weight (kg)"
@@ -138,7 +138,7 @@ export function BMIClient() {
                 onChange={(val) => setState({ kg: val })}
                 placeholder="e.g. 70"
                 min={10}
-                max={500}
+                max={300}
               />
             </div>
           ) : (
@@ -152,7 +152,7 @@ export function BMIClient() {
                        onChange={(val) => setState({ ft: val })}
                        placeholder="ft"
                        min={2}
-                       max={8}
+                       max={9}
                     />
                     <span className="absolute right-4 bottom-3 text-black dark:text-white font-normal text-xs">ft</span>
                   </div>
@@ -174,7 +174,7 @@ export function BMIClient() {
                 onChange={(val) => setState({ lbs: val })}
                 placeholder="e.g. 150"
                 min={20}
-                max={1000}
+                max={661}
               />
             </div>
           )}
