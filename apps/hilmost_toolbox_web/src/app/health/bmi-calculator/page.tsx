@@ -1,16 +1,15 @@
-import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, AuthorBio, BreadcrumbSchema } from "@utilitiessite/ui";
+import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, AuthorBio, BreadcrumbSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BMIClient } from "./BMIClient";
-import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
+import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
-const TOOL_NAME = "BMI Calculator";
-const TOOL_DESC = "Calculate your Body Mass Index (BMI) instantly. A free, beautifully designed health tool to check your ideal weight category with high precision.";
+const TOOL_NAME = "BMI & Health Risk Calculator";
+const TOOL_DESC = "Calculate Body Mass Index (BMI), Waist-to-Height Ratio (WHtR), and Waist-to-Hip Ratio (WHR) using regional IDF and WHO health risk thresholds.";
 const PATH = "/health/bmi-calculator";
 const CANONICAL_URL = `https://hilmost-toolbox.hilmost.net${PATH}`;
 
@@ -41,30 +40,34 @@ export async function generateMetadata(): Promise<Metadata> {
 const faqs = [
   {
     question: "What is a healthy BMI?",
-    answer: "A healthy BMI typically falls between 18.5 and 24.9. Below 18.5 is underweight, above 25 is overweight, and above 30 is obese.",
+    answer: "A healthy BMI typically falls between 18.5 and 24.9. Below 18.5 is underweight, 25–29.9 is overweight, and 30+ is obese.",
   },
   {
-    question: "Is BMI an accurate measure of health?",
-    answer: "It's a useful screening tool but not a direct diagnostic of body fat. It doesn't account for muscle mass, bone density, or distribution.",
+    question: "Why measure waist circumference alongside BMI?",
+    answer: "BMI alone cannot distinguish muscle from fat or measure abdominal adiposity. Waist circumference and Waist-to-Height ratio (WHtR) directly measure visceral fat, which is strongly linked to cardiovascular and metabolic risks.",
   },
   {
-    question: "How is BMI calculated?",
-    answer: "Weight in kilograms divided by height in meters squared (kg/m²).",
+    question: "What is the Waist-to-Height Ratio (WHtR) rule?",
+    answer: "A healthy guideline is to keep your waist circumference to less than half your height (WHtR < 0.50).",
+  },
+  {
+    question: "Why do IDF waist thresholds vary by ethnicity/region?",
+    answer: "Cardiovascular and type 2 diabetes risks occur at lower body fat levels in certain populations, such as South Asian, Chinese, and Japanese groups.",
   },
 ];
 
 export default function BMIPage() {
   const breadcrumbItems = [
     { label: "Health", href: "/health" },
-    { label: "BMI Calculator", href: PATH },
+    { label: "BMI & Health Risk Calculator", href: PATH },
   ];
 
   const filePath = path.join(process.cwd(), "src/app/health/bmi-calculator/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
   const tourSteps = [
-    { element: '#tour-bmi-inputs', popover: { title: '1. Enter Details', description: 'Input your height and weight. You can toggle between metric and imperial units.' } },
-    { element: '#tour-bmi-results', popover: { title: '2. Your BMI', description: 'See your calculated BMI score and which health category it falls into.' } },
+    { element: '#tour-bmi-inputs', popover: { title: '1. Enter Details', description: 'Input height, weight, waist, biological sex, and region to calculate your comprehensive risk profile.' } },
+    { element: '#tour-bmi-results', popover: { title: '2. Health Risk Dashboard', description: 'View your BMI, Waist-to-Height Ratio, and regional waist threshold evaluations side-by-side.' } },
   ];
 
   return (
@@ -81,7 +84,7 @@ export default function BMIPage() {
 
       <ToolHeader
         title={TOOL_NAME}
-        subtitle="Stop guessing your true physical status. Instantly reveal your exact Body Mass Index."
+        subtitle="Comprehensive body composition & abdominal adiposity screening. Calculate BMI, WHtR, WHR, and regional IDF risk indicators."
         lastUpdated={lastUpdated}
         tourId="bmi_calculator"
         tourSteps={tourSteps}
@@ -90,17 +93,17 @@ export default function BMIPage() {
       
       <BMIClient />
 
-      <ToolArticle title="Understanding Your Body Mass Index (BMI)">
+      <ToolArticle title="Understanding BMI & Abdominal Health Risk Assessment">
         <p>
-          Body Mass Index (BMI) is a standardized metric used globally by health professionals to estimate whether a person has a healthy body weight for their height.
+          While Body Mass Index (BMI) remains a widely used screening metric, modern clinical research emphasizes that abdominal adiposity—measured via Waist Circumference and Waist-to-Height Ratio—provides crucial insight into metabolic and cardiovascular risk.
         </p>
         
-        <h3>How to Use This Tool</h3>
+        <h3>How to Conduct a Comprehensive Screening</h3>
         
         <ol>
-          <li><strong>Step 1: Enter Metrics</strong> - Input your current height and weight accurately into the provided fields.</li>
-          <li><strong>Step 2: Select System</strong> - Toggle between Metric (cm/kg) or Imperial (ft/lbs) units depending on your preference.</li>
-          <li><strong>Step 3: Review Results</strong> - See your Body Mass Index score and its corresponding health category instantly.</li>
+          <li><strong>Step 1: Height & Weight</strong> - Input height and weight to calculate baseline Body Mass Index (BMI).</li>
+          <li><strong>Step 2: Biological Sex & Ethnicity</strong> - Select your sex and region to apply ethnic-specific IDF waist circumference thresholds.</li>
+          <li><strong>Step 3: Waist & Hip Circumference</strong> - Add waist circumference to calculate Waist-to-Height Ratio (WHtR) and Waist-to-Hip Ratio (WHR).</li>
         </ol>
 
         <div className="mt-8 p-6 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-2xl not-prose">
