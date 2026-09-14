@@ -90,7 +90,7 @@ export default function LoanCalculatorPage() {
 
       <ToolArticle title="Mastering Your Debt: How Loans Work">
         <p>
-          Taking out a loan—whether it&apos;s for a new house, a car, or personal expenses—is one of the most significant financial decisions you can make. Understanding exactly how your payments are structured is critical.
+          Taking out a loan—whether it&apos;s for a new house, a car, or personal expenses—is one of the most significant financial decisions you can make. Understanding exactly how your payments are structured is critical. <a href="/guides/loan-amortization-explained" className="text-brand-primary hover:underline">Read our guide on reading your amortization schedule</a>.
         </p>
         
         <h3>How to Use This Tool</h3>

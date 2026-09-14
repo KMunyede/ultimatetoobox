@@ -87,7 +87,7 @@ export default function DataStoragePage() {
 
       <ToolArticle title="Mastering Digital Measurements">
         <p>
-          Whether you are purchasing a new solid-state drive (SSD), subscribing to a cloud storage plan, or determining how long a file will take to download, understanding digital storage units is a mandatory skill.
+          Whether you are purchasing a new solid-state drive (SSD), subscribing to a cloud storage plan, or determining how long a file will take to download, understanding digital storage units is a mandatory skill. <a href="/guides/data-storage-units-explained" className="text-brand-primary hover:underline">Read our guide on decimal vs. binary storage units</a>.
         </p>
         
         <h3>How to Use This Tool</h3>

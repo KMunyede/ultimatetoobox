@@ -107,7 +107,7 @@ export default function PercentagePage() {
           <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
           <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master the formulas behind percentages and discounts?</p>
           <Link href="/guides/percentage-calculations-explained" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
-            Read our full Percentage Guide <ArrowRight size={14} />
+            Read our guide on the three percentage problems <ArrowRight size={14} />
           </Link>
         </div>
       </ToolArticle>

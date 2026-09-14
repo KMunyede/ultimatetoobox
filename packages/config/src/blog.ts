@@ -14,6 +14,46 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    title: "Why Compound Interest Feels Like a Trick",
+    slug: "why-compound-interest-feels-like-a-trick",
+    excerpt: "Most people asked to guess how $10,000 grows at 7% over 30 years guess low, often by half. Here's why the calculator shows a curve, not just a number.",
+    date: "September 2026",
+    dateValue: "2026-09-13",
+    category: "Tool Deep-Dives"
+  },
+  {
+    title: "The Percentage Mistake Everyone Makes At Least Once",
+    slug: "the-percentage-mistake-everyone-makes",
+    excerpt: "A shirt goes up 20%, then goes on sale for 20% off. Is it back to the original price? No — and the reason is the whole idea behind our Percentage Calculator's design.",
+    date: "September 2026",
+    dateValue: "2026-09-12",
+    category: "Tool Deep-Dives"
+  },
+  {
+    title: "Binary vs. Decimal: The Storage Math Nobody Explains Well",
+    slug: "binary-vs-decimal-storage-math",
+    excerpt: "Why your '1TB' hard drive shows up as ~931GB in Windows, and why the Data Storage Converter has a binary/decimal toggle instead of one fixed answer.",
+    date: "September 2026",
+    dateValue: "2026-09-11",
+    category: "Tool Deep-Dives"
+  },
+  {
+    title: "Building Financial Tools Without Being a Financial Advisor",
+    slug: "building-financial-tools-without-being-an-advisor",
+    excerpt: "A founder's note on the line between showing the mechanism and giving a recommendation — and why the narrower promise is the one I can actually keep.",
+    date: "September 2026",
+    dateValue: "2026-09-10",
+    category: "Founder's Notes"
+  },
+  {
+    title: "Why I Think in Probabilities, Not Certainties",
+    slug: "why-i-think-in-probabilities-not-certainties",
+    excerpt: "What the quantum measurement problem taught me about holding multiple explanations open at once, and why that's made me a more patient debugger.",
+    date: "September 2026",
+    dateValue: "2026-09-09",
+    category: "Founder's Notes"
+  },
+  {
     title: "Why Our Currency Converter Has 50 Currencies, Not 10",
     slug: "why-our-currency-converter-has-50-currencies",
     excerpt: "The architectural decision behind a 1,260-route currency converter, and why every currency deserves the same treatment as the major ones.",
