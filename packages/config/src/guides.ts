@@ -481,6 +481,10 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
       <p>(65 − 50) ÷ 50 = 0.3, × 100 = <strong>30% increase</strong></p>
       <p>If the new value is smaller, the result comes out negative — that&apos;s a percentage decrease. This formula is behind salary raises, stock price movement, weight change tracking, and year-over-year growth reporting.</p>
 
+      <h2>Why percentage increases and decreases aren't symmetric</h2>
+      <p>A price that rises from $50 to $65 is a 30% increase: ((65 − 50) ÷ 50) × 100 = 30%. But dropping back down from $65 to $50 is <strong>not</strong> a 30% decrease — it's ((50 − 65) ÷ 65) × 100 ≈ −23%. The base number changes between the two calculations, so an increase and a decrease covering the "same" move are never mirror images of each other.</p>
+      <p>The same logic trips people up with discounts and recoveries: a 50% decrease can't be undone by a 50% increase — it takes a full <strong>100% increase</strong> to get back to the original value, because the decrease shrank the base you're calculating the recovery from.</p>
+
       <h2>The most common mistake: confusing &quot;percent of&quot; with &quot;percentage points&quot;</h2>
       <p>If a savings account interest rate goes from 2% to 3%, that&apos;s a <strong>1 percentage point increase</strong> — but a <strong>50% increase</strong> in the actual rate (since 1 ÷ 2 = 0.5 = 50%). News headlines often blur this distinction, and it matters: &quot;interest rates rose by 50%&quot; and &quot;interest rates rose by 1 percentage point&quot; describe the exact same change, but sound very different. Always check which one is being reported.</p>
 
@@ -1267,36 +1271,6 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
         <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Convert Storage Units Correctly</h3>
         <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Use our free Data Storage Converter to switch between decimal and binary instantly, with no guessing.</p>
         <a href="/converters/data-storage" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open Data Storage Converter →</a>
-      </div>
-    `
-  },
-  {
-    slug: "percentage-calculations-explained",
-    title: "The Three Percentage Problems People Actually Confuse With Each Other",
-    metaTitle: "Percentage Calculations Explained | Increase, Decrease, Ratio | Hilmost",
-    metaDesc: "Percentage math feels harder than it should because it's actually three different questions. Learn to tell them apart and avoid the most common percentage mistake.",
-    category: "calculators",
-    excerpt: "\"Percentage\" sounds like one calculation. It's actually three different questions people confuse with each other — here's how to tell them apart.",
-    targetToolHref: "/converters/percentage",
-    content: `
-      <p>&quot;Percentage&quot; sounds like one calculation. It's actually three different questions people confuse with each other, which is why percentage math feels harder than it should.</p>
-
-      <h2>Problem 1 — What Is X% of Y?</h2>
-      <p>Straightforward: multiply. 20% of 150 = 0.20 × 150 = 30.</p>
-
-      <h2>Problem 2 — X Is What Percent of Y?</h2>
-      <p>This is a ratio question, not a multiplication question: (X ÷ Y) × 100. If 30 out of 150 people did something, that's (30 ÷ 150) × 100 = 20%.</p>
-
-      <h2>Problem 3 — Percentage Change (Increase/Decrease)</h2>
-      <p>This is the one that causes the most real-world errors: ((New &minus; Old) ÷ Old) × 100. A price that goes from $50 to $65 increased by ((65&minus;50)÷50)×100 = 30%. Going back down from $65 to $50 is NOT a 30% decrease — it's ((50&minus;65)÷65)×100 ≈ &minus;23%. Percentage increases and decreases are not symmetric, because the base number changes.</p>
-
-      <h2>Common Mistake: Assuming a 50% Decrease Can Be Undone by a 50% Increase</h2>
-      <p>It can't — you need a 100% increase to undo a 50% decrease, because the decrease shrinks the base you're calculating the increase from.</p>
-
-      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2rem]">
-        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Try All Three Percentage Modes</h3>
-        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Our Percentage Calculator separates these three problems into clearly labeled modes, so you never use the wrong formula by accident.</p>
-        <a href="/converters/percentage" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open Percentage Calculator →</a>
       </div>
     `
   }
