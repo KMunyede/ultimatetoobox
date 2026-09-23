@@ -7,6 +7,7 @@ export interface Guide {
   excerpt: string;
   targetToolHref: string;
   content: string; // Markdown or simple HTML
+  lastUpdated?: string;
 }
 
 export const GUIDES: Guide[] = [
@@ -18,6 +19,7 @@ export const GUIDES: Guide[] = [
     category: "finance",
     excerpt: "Understand the math behind your mortgage or personal loan. We break down the amortization formula and show you how to save thousands in interest.",
     targetToolHref: "/finance/loan-calculator",
+      lastUpdated: "June 24, 2026",
     content: `
       <p>Taking out a loan is one of the most significant financial commitments you will ever make. Whether it is a 30-year mortgage for your dream home, a car loan, or a personal credit line to consolidate debt, the ability to <strong>calculate monthly loan repayments</strong> accurately is a vital life skill. In this guide, we will strip away the complexity and show you exactly how banks determine your payment amount, how interest compounds, and what you can do to minimize the long-term cost of borrowing.</p>
 
@@ -71,6 +73,7 @@ export const GUIDES: Guide[] = [
     category: "finance",
     excerpt: "Discover how compounding turns modest savings into a massive fortune over time. Learn the formula, frequency, and why early entry is key.",
     targetToolHref: "/finance/compound-interest",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>Compound Interest Explained: The Mathematics of Long-Term Wealth Accumulation</h1>
 
@@ -145,6 +148,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "health",
     excerpt: "BMI is more than just a number. Learn the science behind the Body Mass Index and how to use it as a benchmark for your personal wellness journey.",
     targetToolHref: "/health/bmi-calculator",
+      lastUpdated: "June 24, 2026",
     content: `
       <p>The <strong>Body Mass Index (BMI)</strong> is one of the most widely recognized health metrics in the world. Used by doctors, insurance companies, and fitness professionals, it provides a quick, non-invasive way to estimate whether a person's weight is appropriate for their height. However, despite its popularity, many people are unsure of what their specific score actually means for their long-term health and wellness journey. In this guide, we will break down the categories, discuss the scientific limitations of the score, and show you how to use it as a powerful benchmark for your personal progress.</p>
 
@@ -192,6 +196,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "converters",
     excerpt: "From kitchen recipes to engineering blueprints, understanding unit systems is essential. We make measurement transformations fast, accurate, and easy.",
     targetToolHref: "/converters",
+      lastUpdated: "June 24, 2026",
     content: `
       <p>In a world that is more connected than ever, we constantly encounter different systems of measurement. A recipe from Europe might use grams and Celsius, while a user in the United States thinks in ounces and Fahrenheit. A scientist might work in meters, while a construction worker uses feet and inches. <strong>Unit conversion</strong> is the vital bridge that allows us to communicate, trade, and collaborate across these different cultural and scientific standards. In this guide, we will simplify the &quot;Great Divide&quot; between systems and show you how to perform precision conversions without the headache of manual math.</p>
 
@@ -233,6 +238,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "pdf-tools",
     excerpt: "Stop installing risky PDF software. Learn how to securely merge, split, and rotate your documents 100% in your browser with complete privacy.",
     targetToolHref: "/pdf-tools/merge-pdf",
+      lastUpdated: "June 24, 2026",
     content: `
       <p>The Portable Document Format (PDF) is the universal language of modern business, legal, and academic documentation. But as we move toward a paperless world, we often find ourselves with a &quot;file fragmentation&quot; problem: multiple separate files—scanned pages, different report chapters, or several receipts—that need to be combined into a single, professional document. The old way to <strong>merge PDF files</strong> involved downloading bloated, expensive software or, worse, uploading sensitive data to risky websites. Today, there is a better, more secure way to manage your documents. In this guide, we will show you how to leverage browser power to merge PDFs with 100% privacy.</p>
 
@@ -271,6 +277,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "calculators",
     excerpt: "From simple grocery bills to complex engineering equations, choosing the right tool is essential. We break down the differences and use cases for both.",
     targetToolHref: "/calculators",
+      lastUpdated: "June 24, 2026",
     content: `
       <p>In the digital age, we have more computing power in our pockets than the scientists who sent humans to the moon. Yet, when faced with a mathematical task, many of us still struggle with a basic question: <strong>Do I need a standard or a scientific calculator?</strong> Using the wrong tool can lead to confusion, extra work, or even incorrect results due to how different calculators handle the order of operations. In this guide, we will break down the fundamental differences between these two tools and help you choose the right one for your specific needs.</p>
 
@@ -329,6 +336,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "finance",
     excerpt: "Every dollar a company raises has a price. Learn how to calculate the blended cost of debt and equity to value investments accurately.",
     targetToolHref: "/finance/wacc-calculator",
+      lastUpdated: "July 17, 2026",
     content: `
       <p>Every dollar a company raises — whether from shareholders or lenders — has a price. <strong>WACC (Weighted Average Cost of Capital)</strong> is simply the blended price of all that money, expressed as a single percentage. It answers one question every business eventually has to ask: is this investment worth doing, or would the money be better left in the bank?</p>
 
@@ -377,6 +385,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "finance",
     excerpt: "At its core, EPS answers a simple question: for every share of stock outstanding, how much profit did the company generate?",
     targetToolHref: "/finance/earnings-per-share-calculator",
+      lastUpdated: "July 17, 2026",
     content: `
       <p><strong>Earnings Per Share (EPS)</strong> is one of the most quoted numbers in investing — and one of the most misunderstood. At its core, EPS answers a simple question: for every share of stock outstanding, how much profit did the company generate?</p>
 
@@ -420,6 +429,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "finance",
     excerpt: "Principal and interest are only half the story. Learn how property taxes and insurance impact your real monthly mortgage payment.",
     targetToolHref: "/finance/mortgage-calculator",
+      lastUpdated: "July 17, 2026",
     content: `
       <p>When people ask &quot;what will my mortgage payment be,&quot; they&apos;re usually only thinking about principal and interest. But your actual monthly payment — the number that hits your bank account — is almost always more than that. It&apos;s made up of four parts, commonly abbreviated <strong>PITI: Principal, Interest, Taxes, and Insurance</strong>.</p>
 
@@ -460,6 +470,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "converters",
     excerpt: "Percentages show up everywhere. We break down the three core formulas you need to master sale discounts, tips, and growth rates.",
     targetToolHref: "/converters/percentage",
+      lastUpdated: "September 15, 2026",
     content: `
       <p>Percentages show up everywhere — sale discounts, tips, exam grades, interest rates, population growth — yet the actual math behind them trips up more people than almost any other everyday calculation. The good news: there are really only three core percentage formulas, and once you know when to use each one, the rest is just plugging in numbers.</p>
 
@@ -515,6 +526,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "health",
     excerpt: "BMI is a quick health benchmark, but it has significant limitations. Learn the formula and why muscle mass and frame size matter.",
     targetToolHref: "/health/bmi-calculator",
+      lastUpdated: "July 17, 2026",
     content: `
       <p>Body Mass Index (BMI) is one of the most widely used health metrics in the world, appearing in everything from doctor&apos;s office charts to insurance calculations. It&apos;s also one of the most widely misunderstood — both in how it&apos;s calculated and, more importantly, in what it can and can&apos;t tell you.</p>
 
@@ -574,6 +586,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "calculators",
     excerpt: "One rule governs all mathematics. Learn why operation priority (PEMDAS) is the difference between a correct result and a costly mistake.",
     targetToolHref: "/calculators/standard",
+      lastUpdated: "July 17, 2026",
     content: `
       <p>Type 6 + 2 × 3 into two different calculators and you might get two different answers: 24, or 12. Only one is mathematically correct — and understanding why reveals one of the most important, and most commonly misapplied, rules in basic math.</p>
 
@@ -625,6 +638,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "finance",
     excerpt: "Traveling or working internationally? Learn how to get the best exchange rates and avoid the hidden costs of currency conversion.",
     targetToolHref: "/finance/currency",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>Currency Conversion and Exchange Rates: Navigating the Global Financial Landscape</h1>
 
@@ -683,6 +697,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "finance",
     excerpt: "The number in your job offer isn't what hits your bank account. Learn how taxes and benefits impact your real take-home pay.",
     targetToolHref: "/finance/salary-converter",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>Understanding Take-Home Salary: From Gross Pay to Net Income</h1>
 
@@ -784,6 +799,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "education",
     excerpt: "Your GPA is the most important number in your academic career. Learn how it's calculated and how to optimize your grades for success.",
     targetToolHref: "/education/gpa-calculator",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>How GPA is Calculated: A Professional Guide to Academic Metrics</h1>
 
@@ -880,6 +896,7 @@ First, we calculate the periodic rate (r/n): 0.08 / 12 = 0.006666... Next, we de
     category: "health",
     excerpt: "Waking up tired even after 8 hours? The secret is in your sleep cycles. Learn how to time your rest for peak mental performance.",
     targetToolHref: "/health/sleep-cycle-calculator",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>Sleep Cycles and Wake Times Explained: The Science of Waking Up Refreshed</h1>
 
@@ -948,6 +965,7 @@ The average healthy adult takes approximately 15 minutes to actually fall asleep
     category: "health",
     excerpt: "Stop guessing your nutrition needs. Learn the science of Basal Metabolic Rate and Total Daily Energy Expenditure to reach your fitness goals.",
     targetToolHref: "/health/calorie-macro-calculator",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>BMR, TDEE, and Macros Explained: The Roadmap to Body Composition</h1>
 
@@ -1026,6 +1044,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "text-data",
     excerpt: "Computers are built to be deterministic, yet we ask them to be unpredictable. Explore the science and security behind random number generation.",
     targetToolHref: "/text-data/random-name-number-generator",
+      lastUpdated: "July 20, 2026",
     content: `
 <h1>How Random Number Generators Work: Chaos, Seeds, and Security</h1>
 
@@ -1087,6 +1106,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "text-data",
     excerpt: "Discover the digital bridge between the physical and digital worlds. We break down the matrix, encoding levels, and why QR codes are here to stay.",
     targetToolHref: "/dx/qr-code-generator",
+      lastUpdated: "July 24, 2026",
     content: `
 <h1>How QR Codes Work & When to Use Them: A Comprehensive Guide</h1>
 
@@ -1134,6 +1154,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Coordinate across borders with confidence. We explain the mechanics of time zones, why DST shifts occur, and how to avoid scheduling pitfalls.",
     targetToolHref: "/converters/time-zone",
+      lastUpdated: "July 24, 2026",
     content: `
 <h1>Time Zones & Daylight Saving Time Explained: Navigating the Global Clock</h1>
 
@@ -1178,6 +1199,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "text-data",
     excerpt: "Stop guessing if your password is 'strong.' We break down bits of entropy, character set math, and the physics of why longer is always better.",
     targetToolHref: "/dx/password-generator",
+      lastUpdated: "July 24, 2026",
     content: `
 <h1>Password Entropy & Crack Time Explained: The Math of Digital Armor</h1>
 
@@ -1221,6 +1243,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "finance",
     excerpt: "Every loan payment splits between principal and interest — and that split shifts every month. Here's how to read your amortization schedule correctly.",
     targetToolHref: "/finance/loan-calculator",
+      lastUpdated: "September 14, 2026",
     content: `
       <p>Every loan payment is split two ways: part pays down the principal (what you borrowed), part pays interest (the cost of borrowing). Early in a loan, most of your payment goes to interest. Late in a loan, most goes to principal. This guide explains why — and how to read the schedule our <a href="/finance/loan-calculator">Loan &amp; Mortgage Calculator</a> generates.</p>
 
@@ -1251,6 +1274,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Two different standards for the same units have coexisted for decades. Here's why that matters and how to convert between them correctly.",
     targetToolHref: "/converters/data-storage",
+      lastUpdated: "September 14, 2026",
     content: `
       <p>This is one of the most persistently confusing unit conversions in computing, because two different standards have coexisted for decades — and almost nothing tells you which one it's using.</p>
 
@@ -1282,6 +1306,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Calculate your exact age in years, months, and days instantly. Free, accurate, and works on any device — no sign-up needed.",
     targetToolHref: "/converters/age-calculator",
+      lastUpdated: "September 23, 2026",
     content: `
       <script type="application/ld+json">
       {
@@ -1327,6 +1352,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Learn what Unix time is, how to convert timestamps to dates and back, and why seconds vs milliseconds trips people up.",
     targetToolHref: "/converters/unix-time",
+      lastUpdated: "September 23, 2026",
     content: `
       <script type="application/ld+json">
       {
@@ -1397,6 +1423,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Learn how to convert between metric and imperial length units, common conversions, and why the US still uses feet and inches.",
     targetToolHref: "/converters/length",
+      lastUpdated: "September 23, 2026",
     content: `
       <script type="application/ld+json">
       {
@@ -1473,6 +1500,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Learn how to convert between metric and imperial weight units, common conversions, and the difference between weight and mass.",
     targetToolHref: "/converters/weight-mass",
+      lastUpdated: "September 23, 2026",
     content: `
       <script type="application/ld+json">
       {

@@ -48,7 +48,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   if (!guide) return notFound();
 
   const filePath = path.join(process.cwd(), `src/app/guides/[slug]/page.tsx`);
-  const lastUpdated = getFileLastUpdated(filePath);
+  const lastUpdated = guide.lastUpdated || getFileLastUpdated(filePath);
 
   const breadcrumbItems = [
     { label: "Guides", href: "/guides" },
