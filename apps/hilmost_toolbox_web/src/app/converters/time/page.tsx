@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, BreadcrumbSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { TimeConverterClient } from "./TimeConverterClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -97,6 +99,14 @@ export default function TimeConverterPage() {
           <li><strong>Step 2: Choose Interval</strong> - Switch between small units like seconds or large units like years effortlessly.</li>
           <li><strong>Step 3: Verify Conversion</strong> - See the precise decimal or integer result for your specific timeframe.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about time duration conversions and how duration differs from a Unix timestamp?</p>
+          <Link href="/guides/time-unit-conversion-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
