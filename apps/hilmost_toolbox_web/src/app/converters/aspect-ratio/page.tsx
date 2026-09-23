@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { AspectRatioCalculatorClient } from "./AspectRatioCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -118,6 +120,14 @@ export default function AspectRatioPage() {
         <p>
           Knowing that an image is 1920x1080 is helpful, but knowing it is <strong>16:9</strong> is critical for technical planning. Simplified ratios allow developers to use CSS properties like `aspect-ratio` to create responsive containers that scale perfectly across mobile and desktop without layout shifts.
         </p>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about screen ratios, video presets, and calculating custom aspect ratios?</p>
+          <Link href="/guides/aspect-ratio-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

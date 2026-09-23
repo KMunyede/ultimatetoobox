@@ -1718,6 +1718,78 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
         <a href="/converters/time" class="inline-block px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-lg">Open Time Converter →</a>
       </div>
     `
+  },
+  {
+    slug: "aspect-ratio-guide",
+    title: "Aspect Ratio Guide: How to Calculate & Convert Screen Ratios",
+    metaTitle: "Aspect Ratio Calculator – Convert 16:9, 4:3, 1:1 & More | Hilmost Toolbox",
+    metaDesc: "Calculate and convert aspect ratios for video, photos, and screens — 16:9, 4:3, 1:1, 21:9 and custom ratios, instantly.",
+    category: "converters",
+    excerpt: "Learn how aspect ratios work, common ratios like 16:9 and 4:3, and how to calculate dimensions for video, photo, and screen design.",
+    targetToolHref: "/converters/aspect-ratio",
+    lastUpdated: "September 23, 2026",
+    content: `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "What is aspect ratio?", "acceptedAnswer": {"@type": "Answer", "text": "Aspect ratio is the proportional relationship between an image or screen's width and height, expressed as two numbers separated by a colon, like 16:9."}},
+          {"@type": "Question", "name": "What's the difference between 16:9 and 4:3?", "acceptedAnswer": {"@type": "Answer", "text": "16:9 is a widescreen ratio used by modern TVs, monitors, and video platforms, while 4:3 is the older, more square ratio used by classic TVs and early digital cameras."}},
+          {"@type": "Question", "name": "How do I calculate a custom aspect ratio?", "acceptedAnswer": {"@type": "Answer", "text": "Divide both the width and height by their greatest common divisor to get the simplest ratio form, or enter your dimensions into an aspect ratio calculator for an instant result."}}
+        ]
+      }
+      </script>
+
+      <p>An aspect ratio is the proportional relationship between an image, video frame, or screen display's width and height. Regardless of the actual resolution or physical size in inches or pixels, the aspect ratio dictates the overall shape of the visual frame. In this guide, we cover how aspect ratios work and how to use our free <a href="/converters/aspect-ratio">Aspect Ratio Calculator</a>.</p>
+
+      <h2>What Is Aspect Ratio?</h2>
+      <p>Aspect ratios are expressed as two numbers separated by a colon, written as <code>Width:Height</code> (for example, 16:9 or 4:3). The first number represents the relative width, and the second represents the relative height. An image with dimensions of 1920×1080 pixels has an aspect ratio of 16:9 because dividing both dimensions by 120 yields 16 and 9.</p>
+
+      <h2>How to Use the Aspect Ratio Converter</h2>
+      <p>Our <a href="/converters/aspect-ratio">Aspect Ratio Calculator</a> handles both ratio simplification and dimension scaling. Enter your original width and height to instantly view the simplified ratio, or enter a target ratio to calculate the missing height for a new width without stretching or distorting your image.</p>
+
+      <h2>Common Aspect Ratios</h2>
+      <ul class="space-y-4 my-8">
+        <li><strong>16:9 (Widescreen)</strong>: The universal standard for HDTVs, computer monitors, YouTube, and digital streaming. Common resolutions include 1920×1080 (1080p) and 3840×2160 (4K).</li>
+        <li><strong>4:3 (Standard/Classic)</strong>: The traditional ratio used by classic cathode-ray TVs, early computer monitors, and photography formats like Micro Four Thirds.</li>
+        <li><strong>1:1 (Square)</strong>: Popularized by Instagram and digital profile avatars. An equal width and height frame (e.g., 1080×1080).</li>
+        <li><strong>9:16 (Vertical/Mobile)</strong>: The exact vertical inverse of 16:9, designed specifically for smartphone screens, Instagram Stories, TikTok, and YouTube Shorts (e.g., 1080×1920).</li>
+        <li><strong>21:9 (Ultrawide/Cinematic)</strong>: Used in modern widescreen cinema releases and ultrawide gaming monitors (e.g., 3440×1440).</li>
+      </ul>
+
+      <h2>Common Uses</h2>
+      <ul class="space-y-4 my-8">
+        <li><strong>Video Editing & Exporting</strong>: Ensuring video timelines match distribution platform requirements (16:9 for YouTube vs 9:16 for TikTok).</li>
+        <li><strong>Responsive Web & UI Design</strong>: Setting CSS aspect-ratio properties on media containers to prevent layout shifts during page loads.</li>
+        <li><strong>Photo Cropping & Printing</strong>: Matching camera sensor aspect ratios to physical photo print dimensions (e.g., 4:6 prints = 2:3 ratio).</li>
+      </ul>
+
+      <h2>How to Calculate a Custom Ratio</h2>
+      <p>To calculate a custom aspect ratio manually, find the <strong>Greatest Common Divisor (GCD)</strong> of your width and height. For example, if an image is 1280 pixels wide by 720 pixels high, the GCD is 80. Divide 1280 by 80 = 16, and divide 720 by 80 = 9. The simplified aspect ratio is 16:9.</p>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-6 my-8">
+        <div>
+          <h3 class="text-lg font-bold">What is aspect ratio?</h3>
+          <p>Aspect ratio is the proportional relationship between an image or screen's width and height, expressed as two numbers separated by a colon, like 16:9.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">What's the difference between 16:9 and 4:3?</h3>
+          <p>16:9 is a widescreen ratio used by modern TVs, monitors, and video platforms, while 4:3 is the older, more square ratio used by classic TVs and early digital cameras.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">How do I calculate a custom aspect ratio?</h3>
+          <p>Divide both the width and height by their greatest common divisor to get the simplest ratio form, or enter your dimensions into an aspect ratio calculator for an instant result.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Calculate & Convert Aspect Ratios Instantly</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Fast, free, and accurate aspect ratio calculations for video, photos, and web design.</p>
+        <a href="/converters/aspect-ratio" class="inline-block px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-lg">Open Aspect Ratio Calculator →</a>
+      </div>
+    `
   }
 ];
 
