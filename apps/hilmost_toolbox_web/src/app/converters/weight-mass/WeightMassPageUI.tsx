@@ -1,4 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { WeightConverterClient } from "./WeightConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -124,6 +126,14 @@ export function WeightMassPageUI({
         <p>
           The world relies on the <strong>International System of Units (SI)</strong> for scientific research. However, the <code>Avoirdupois</code> system remains the standard for trade in the US and UK. Our tool simplifies this by providing a unified workspace for both, ensuring your data is always compatible with international standards.
         </p>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about converting between kilograms, pounds, and stone?</p>
+          <Link href="/guides/weight-mass-conversion-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
 
         <SourceReference
           sources={[

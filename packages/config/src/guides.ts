@@ -1464,6 +1464,79 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
         <a href="/converters/length" class="inline-block px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-lg">Open Length Converter →</a>
       </div>
     `
+  },
+  {
+    slug: "weight-mass-conversion-guide",
+    title: "Weight & Mass Conversion Guide: kg, lbs, oz & More",
+    metaTitle: "Weight & Mass Converter – Convert kg, lbs, oz, tonnes & More | Hilmost Toolbox",
+    metaDesc: "Convert between kilograms, pounds, ounces, stone, tonnes and more — instant, accurate, works both ways.",
+    category: "converters",
+    excerpt: "Learn how to convert between metric and imperial weight units, common conversions, and the difference between weight and mass.",
+    targetToolHref: "/converters/weight-mass",
+    content: `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "How do I convert kg to lbs?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply the number of kilograms by 2.20462 to get pounds."}},
+          {"@type": "Question", "name": "Why does the UK use stone for body weight?", "acceptedAnswer": {"@type": "Answer", "text": "Stone (14 lbs) is a traditional British unit that remains common for body weight in the UK and Ireland despite the switch to metric for most other measurements."}},
+          {"@type": "Question", "name": "What's the most accurate way to convert weight units?", "acceptedAnswer": {"@type": "Answer", "text": "Use exact conversion factors (e.g. 1 kg = 2.20462 lbs) rather than rounded approximations, especially for cooking, shipping, or scientific use."}}
+        ]
+      }
+      </script>
+
+      <p>Weight and mass conversion is essential when navigating international recipes, medical charts, fitness goals, and shipping requirements. Because different regions rely on different systems—primarily the metric system (kilograms, grams) and the imperial system (pounds, ounces, stone)—converting accurately prevents costly mistakes. In this guide, we explore how weight and mass conversions work and how to use our free <a href="/converters/weight-mass">Weight & Mass Converter</a>.</p>
+
+      <h2>What Is Weight vs. Mass?</h2>
+      <p>In everyday language, "weight" and "mass" are used interchangeably. However, in physics, they represent distinct concepts. Mass refers to the actual amount of matter in an object, measured in grams or kilograms, and remains constant regardless of where the object is located.</p>
+      <p>Weight, on the other hand, measures the gravitational force acting on that mass. While your mass is identical on Earth and the Moon, your weight on the Moon would be roughly one-sixth of your Earth weight due to weaker lunar gravity. Commercial scales and converters measure terrestrial mass under standard Earth gravity.</p>
+
+      <h2>How to Use the Converter</h2>
+      <p>Using our <a href="/converters/weight-mass">Weight & Mass Converter</a> takes just a second. Select your starting unit (such as Kilograms or Pounds), type your numerical value into the field, and select your target unit. The converter processes the math bidirectionally with up to six decimal places of precision.</p>
+
+      <h2>Common Conversions</h2>
+      <p>Here are the key formulas for the most common weight conversions:</p>
+      <ul class="space-y-4 my-8">
+        <li><strong>Kilograms to Pounds (kg → lbs)</strong>: Multiply kilograms by <code>2.20462</code> (e.g., 70 kg × 2.20462 = 154.323 lbs).</li>
+        <li><strong>Ounces to Grams (oz → g)</strong>: Multiply ounces by <code>28.3495</code> (e.g., 8 oz × 28.3495 = 226.796 g).</li>
+        <li><strong>Stone to Kilograms (st → kg)</strong>: Multiply stone by <code>6.35029</code> (e.g., 10 st × 6.35029 = 63.5029 kg).</li>
+        <li><strong>Metric Tonnes to Kilograms (t → kg)</strong>: Multiply tonnes by <code>1,000</code> (e.g., 2 t × 1,000 = 2,000 kg).</li>
+      </ul>
+
+      <h2>Common Uses</h2>
+      <ul class="space-y-4 my-8">
+        <li><strong>Cooking & Recipe Scaling</strong>: Converting ingredient weights between American cup/ounce recipes and European gram-based baking.</li>
+        <li><strong>Fitness & Health Tracking</strong>: Translating body weight goals between kilograms, pounds, and stone across international health apps.</li>
+        <li><strong>Shipping & Logistics</strong>: Calculating freight weights and airline baggage limits (e.g., 23 kg checked bag = 50.7 lbs).</li>
+        <li><strong>Scientific & Laboratory Work</strong>: Precision measuring of chemical compounds in milligrams and grams.</li>
+      </ul>
+
+      <h2>Why the US Still Uses Pounds</h2>
+      <p>While the rest of the world converted to the metric system (SI) during the 19th and 20th centuries, the US retained its customary system derived from old English units. Transitioning manufacturing equipment, commercial scales, and legal standards carries immense economic cost, leading the US to operate as a dual-system economy where scientific and medical sectors use metric while consumers use pounds and ounces.</p>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-6 my-8">
+        <div>
+          <h3 class="text-lg font-bold">How do I convert kg to lbs?</h3>
+          <p>Multiply the number of kilograms by 2.20462 to get pounds.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">Why does the UK use stone for body weight?</h3>
+          <p>Stone (14 lbs) is a traditional British unit that remains common for body weight in the UK and Ireland despite the switch to metric for most other measurements.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">What's the most accurate way to convert weight units?</h3>
+          <p>Use exact conversion factors (e.g. 1 kg = 2.20462 lbs) rather than rounded approximations, especially for cooking, shipping, or scientific use.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Convert Weight & Mass Instantly</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Fast, free, and accurate conversion across kilograms, pounds, ounces, and stone.</p>
+        <a href="/converters/weight-mass" class="inline-block px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-lg">Open Weight Converter →</a>
+      </div>
+    `
   }
 ];
 
