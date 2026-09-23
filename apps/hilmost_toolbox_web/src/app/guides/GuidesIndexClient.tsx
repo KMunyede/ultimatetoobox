@@ -9,6 +9,7 @@ type Guide = {
   title: string;
   excerpt: string;
   category: string;
+  lastUpdated?: string;
 };
 
 export function GuidesIndexClient({
@@ -78,7 +79,7 @@ export function GuidesIndexClient({
               </span>
               <span className="inline-flex items-center gap-1.5 text-[11px] font-normal text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/30 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
                 <Calendar size={9} />
-                {lastUpdated}
+                {guide.lastUpdated || lastUpdated}
               </span>
             </div>
             <h2 className="text-base font-normal text-text-primary mb-2 leading-snug group-hover:text-brand-primary transition-colors">
