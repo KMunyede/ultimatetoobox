@@ -125,7 +125,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${toolboxUrl}/guides`, lastModified, changeFrequency: 'daily' as const, priority: 0.9 },
     ...GUIDES.map(guide => ({
       url: `${toolboxUrl}/guides/${guide.slug}`,
-      lastModified,
+      lastModified: guide.lastUpdated ? new Date(guide.lastUpdated) : lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.8
     }))
