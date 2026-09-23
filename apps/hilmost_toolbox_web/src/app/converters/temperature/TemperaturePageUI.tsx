@@ -1,4 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { TemperatureConverterClient } from "./TemperatureConverterClient";
 import { ShareButton } from "@/components/ShareButton";
@@ -139,6 +141,14 @@ export function TemperaturePageUI({
           <li><strong>Step 2: Select Scale</strong> - Switch between Celsius, Fahrenheit, and Kelvin. We handle the complex subtraction and multiplication required for Kelvin-to-Fahrenheit conversions automatically.</li>
           <li><strong>Step 3: View Equivalent</strong> - The result is displayed instantly. We provide high-precision decimals, which are essential for laboratory work and specific industrial processes.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about converting between Celsius, Fahrenheit, and Kelvin?</p>
+          <Link href="/guides/temperature-conversion-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
 
         <SourceReference
           sources={[
