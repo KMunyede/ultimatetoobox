@@ -1,4 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader, HowToSchema, SourceReference, AuthorBio, DidYouKnow, PrivacyBadge } from "@utilitiessite/ui";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { LengthConverterClient } from "./LengthConverterClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -129,6 +131,14 @@ export function LengthPageUI({
           <li><strong>Step 2: Select Unit Type</strong> - Bridge the gap between systems by choosing your desired units. We support everything from microscopic millimeters to transcontinental kilometers.</li>
           <li><strong>Step 3: High-Precision Review</strong> - Instantly see the conversion. We provide up to six decimal places of precision, which is critical for engineering and scientific applications.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about converting between metric and imperial units?</p>
+          <Link href="/guides/length-conversion-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
 
         <SourceReference
           sources={[
