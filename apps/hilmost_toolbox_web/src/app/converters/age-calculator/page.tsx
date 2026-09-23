@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { AgeCalculatorClient } from "./AgeCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -99,6 +101,14 @@ export default function AgeCalculatorPage() {
           <li><strong>Step 2: Set Target Date</strong> - Choose the date you want to calculate your age at (defaults to today).</li>
           <li><strong>Step 3: View Breakdown</strong> - See your age displayed in years, months, days, and even total minutes.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about exact chronological age calculation and leap year math?</p>
+          <Link href="/guides/how-to-calculate-exact-age" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />

@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { UnixTimeClient } from "./UnixTimeClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -100,6 +102,14 @@ export default function UnixTimePage() {
           <li><strong>Step 2: Pick Calendar Date</strong> - Use the date picker to generate the corresponding Unix timestamp instantly.</li>
           <li><strong>Step 3: Copy to Clipboard</strong> - Click any result to copy it for use in your code, database, or logs.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about how Unix time works and avoid timestamp pitfalls?</p>
+          <Link href="/guides/understanding-unix-timestamps" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
