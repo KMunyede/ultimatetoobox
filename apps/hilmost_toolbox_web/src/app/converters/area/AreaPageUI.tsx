@@ -1,4 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, BreadcrumbSchema, ToolHeader } from "@utilitiessite/ui";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { AreaClient } from "./AreaClient";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -91,6 +93,14 @@ export function AreaPageUI({
           <li><strong>Step 2: Enter Dimensions</strong> - Type the numeric value of the land or floor space you want to convert.</li>
           <li><strong>Step 3: Get Instant Result</strong> - The converted measurement updates in real-time as you modify either field.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about area conversion formulas, acres vs hectares, and avoiding the squared-unit pitfall?</p>
+          <Link href="/guides/area-conversion-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
