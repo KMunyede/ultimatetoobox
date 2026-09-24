@@ -1799,7 +1799,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "converters",
     excerpt: "Learn how area conversion works, exact factors for acres and hectares, 3 worked examples, and how to avoid the squared-unit pitfall.",
     targetToolHref: "/converters/area",
-    lastUpdated: "September 23, 2026",
+    lastUpdated: "September 24, 2026",
     content: `
       <script type="application/ld+json">
       {
