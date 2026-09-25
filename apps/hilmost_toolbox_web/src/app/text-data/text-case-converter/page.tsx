@@ -1,5 +1,7 @@
 import { WebApplicationSchema, Breadcrumbs, ToolHeader, FAQAccordion, FAQSchema, ToolArticle, RelatedTools } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { TextCaseConverterTool } from "./TextCaseConverterTool";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -112,6 +114,14 @@ export default function TextCaseConverterPage() {
           <p>
             At Hilmost Software Corporation, we prioritize your security. Following our monorepo-wide standards, this tool uses a <strong>Zero-Server Architecture</strong>. Your text remains entirely within your browser&apos;s memory during the conversion process, ensuring your private data never touches a server.
           </p>
+
+          <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+            <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+            <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about text case conventions, camelCase vs snake_case, and headline rules?</p>
+            <Link href="/guides/text-case-converter-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+              Read the full guide <ArrowRight size={14} />
+            </Link>
+          </div>
         </ToolArticle>
 
         <FAQAccordion items={faqs} />
