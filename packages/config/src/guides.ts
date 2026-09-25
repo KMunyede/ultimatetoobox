@@ -1893,7 +1893,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "text-data",
     excerpt: "Learn how text case conversion works, camelCase vs snake_case vs kebab-case, headline capitalization rules, and common formatting pitfalls.",
     targetToolHref: "/text-data/text-case-converter",
-    lastUpdated: "September 23, 2026",
+    lastUpdated: "September 25, 2026",
     content: `
       <script type="application/ld+json">
       {
