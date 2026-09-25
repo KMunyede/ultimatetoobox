@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Search } from "lucide-react";
 
 type Guide = {
   slug: string;
@@ -25,22 +25,61 @@ export function GuidesIndexClient({
   }, [guides]);
 
   const [activeCategory, setActiveCategory] = useState("All");
-  const [sortOrder, setSortOrder] = useState<"az" | "za">("az");
+  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "az">("newest");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const visibleGuides = useMemo(() => {
-    const filtered =
+    let filtered =
       activeCategory === "All"
         ? guides
         : guides.filter((g) => g.category === activeCategory);
 
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      filtered = filtered.filter(
+        (g) => g.title.toLowerCase().includes(q) || g.excerpt.toLowerCase().includes(q)
+      );
+    }
+
     return [...filtered].sort((a, b) => {
-      const cmp = a.title.localeCompare(b.title);
-      return sortOrder === "az" ? cmp : -cmp;
+      if (sortBy === "az") {
+        return a.title.localeCompare(b.title);
+      }
+      const dateA = new Date(a.lastUpdated || lastUpdated).getTime();
+      const dateB = new Date(b.lastUpdated || lastUpdated).getTime();
+      return sortBy === "newest" ? dateB - dateA : dateA - dateB;
     });
-  }, [guides, activeCategory, sortOrder]);
+  }, [guides, activeCategory, searchQuery, sortBy, lastUpdated]);
 
   return (
     <div>
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8">
+        <div className="relative flex-1 max-w-md">
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search guides by title or keyword..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 bg-canvas-card border border-base rounded-full text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-primary transition-colors"
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          <label htmlFor="sort-select" className="text-xs font-normal uppercase tracking-wider text-text-muted whitespace-nowrap">Sort by:</label>
+          <select
+            id="sort-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as "newest" | "oldest" | "az")}
+            className="px-4 py-2 bg-canvas-card border border-base rounded-full text-sm text-text-primary focus:outline-none focus:border-brand-primary transition-colors cursor-pointer"
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="az">Title A-Z</option>
+          </select>
+        </div>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
         <div className="flex flex-wrap gap-2">
           {categories.map((cat) => (
@@ -57,13 +96,6 @@ export function GuidesIndexClient({
             </button>
           ))}
         </div>
-
-        <button
-          onClick={() => setSortOrder(sortOrder === "az" ? "za" : "az")}
-          className="px-4 py-2 rounded-full text-sm font-normal uppercase tracking-wide border border-base text-text-secondary hover:border-brand-primary/50 transition-colors whitespace-nowrap"
-        >
-          {sortOrder === "az" ? "A \u2013 Z" : "Z \u2013 A"}
-        </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -97,7 +129,7 @@ export function GuidesIndexClient({
 
       {visibleGuides.length === 0 && (
         <p className="text-text-secondary text-center py-16">
-          No guides in this category yet.
+          No guides found matching your search or selected category.
         </p>
       )}
     </div>
