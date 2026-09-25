@@ -1,8 +1,10 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
-import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { WordUnscramblerClient } from "./WordUnscramblerClient";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -108,6 +110,14 @@ export default function WordUnscramblerPage() {
           <li><strong>Step 2: Apply Filters</strong> - Narrow results by defining how words should start, end, or what they must contain.</li>
           <li><strong>Step 3: Pick Your Word</strong> - Browse results grouped by length and click any word to copy it to your clipboard.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn how anagram algorithms work, blank tile strategies, and word game tips?</p>
+          <Link href="/guides/word-unscrambler-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
