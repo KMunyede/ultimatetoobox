@@ -1,8 +1,10 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
-import { getCanonicalUrl } from "@utilitiessite/config";
-import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { WordCountClient } from "./WordCountClient";
+import { getCanonicalUrl } from "@utilitiessite/config";
+import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -102,6 +104,14 @@ export default function WordCountPage() {
           <li><strong>Step 2: Review Statistics</strong> - Monitor word, character, and line counts updating in real-time in the sidebar.</li>
           <li><strong>Step 3: Analyze Density</strong> - Use the metrics to ensure your content meets specific publication or academic limits.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn about character limits for SEO & social media, reading time formulas, and word counting edge cases?</p>
+          <Link href="/guides/word-count-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
