@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
 import { KNOWLEDGE_BASE, GUIDES } from '@utilitiessite/config';
-import { CURRENCIES, getProgrammaticCurrencyPairs } from '@/lib/currencies';
+import { getProgrammaticCurrencyPairs } from '@/lib/currencies';
 
 export const dynamic = "force-static";
 
@@ -13,6 +13,17 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   const toolboxUrl = 'https://hilmost-toolbox.hilmost.net';
   const lastModified = new Date();
+
+  // Load per-route last-modified dates
+  let routeDates: { tools?: Record<string, string>; currencyPairs?: string; unitAndFixedProgrammatic?: string } = {};
+  try {
+    const routeDatesPath = path.resolve(process.cwd(), '../../packages/config/src/scripts/route-dates.json');
+    if (fs.existsSync(routeDatesPath)) {
+      routeDates = JSON.parse(fs.readFileSync(routeDatesPath, 'utf8'));
+    }
+  } catch {
+    // Fallback if missing
+  }
 
   // 2. TOOLBOX CORE & CATEGORIES
   const CATEGORIES = ['calculators', 'converters', 'finance', 'text-data', 'pdf-tools', 'health', 'dx', 'education'];
@@ -43,12 +54,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
 
   const discoveredTools = CATEGORIES.flatMap(getToolRoutes);
-  const toolPages: MetadataRoute.Sitemap = discoveredTools.map(route => ({
-    url: `${toolboxUrl}${route}`,
-    lastModified,
-    changeFrequency: 'weekly',
-    priority: 0.7
-  }));
+  const toolPages: MetadataRoute.Sitemap = discoveredTools.map(route => {
+    const key = route.slice(1);
+    const dateStr = routeDates.tools?.[key];
+    return {
+      url: `${toolboxUrl}${route}`,
+      lastModified: dateStr ? new Date(dateStr) : lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.7
+    };
+  });
 
   // 4. KNOWLEDGE BASE ARTICLES
   const kbPages: MetadataRoute.Sitemap = KNOWLEDGE_BASE.map(article => ({
@@ -59,8 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // 5. PROGRAMMATIC ROUTES (e.g., meters-to-kilometers)
-  // We include these with lower priority to prevent index bloat while maintaining SEO
-  const programmaticPages: string[] = [];
+  const unitAndFixedPages: string[] = [];
   const UNITS_CONFIG: Record<string, string[]> = {
     'converters/length': ["meters", "kilometers", "centimeters", "millimeters", "miles", "yards", "feet", "inches"],
     'converters/weight-mass': ["kilograms", "grams", "milligrams", "metric-tons", "pounds", "ounces", "stones"],
@@ -80,18 +94,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const from of units) {
       for (const to of units) {
         if (from !== to) {
-          // SEO Hub-and-Spoke: Only include in sitemap if at least one side is a Hub unit
           if (hubs.includes(from) || hubs.includes(to)) {
-            programmaticPages.push(`/${pathPrefix}/${from.toLowerCase()}-to-${to.toLowerCase()}`);
+            unitAndFixedPages.push(`/${pathPrefix}/${from.toLowerCase()}-to-${to.toLowerCase()}`);
           }
         }
       }
     }
-  });
-
-  // Hub-and-Spoke Currency Pairs
-  getProgrammaticCurrencyPairs().forEach(pair => {
-    programmaticPages.push(`/finance/currency/${pair.from.toLowerCase()}-to-${pair.to.toLowerCase()}`);
   });
 
   const FIXED_PROGRAMMATIC: Record<string, string[]> = {
@@ -102,12 +110,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
 
   Object.entries(FIXED_PROGRAMMATIC).forEach(([pathPrefix, slugs]) => {
-    slugs.forEach(slug => programmaticPages.push(`/${pathPrefix}/${slug}`));
+    slugs.forEach(slug => unitAndFixedPages.push(`/${pathPrefix}/${slug}`));
   });
 
-  const programmaticSitemap: MetadataRoute.Sitemap = programmaticPages.map(route => ({
+  const unitAndFixedSitemap: MetadataRoute.Sitemap = unitAndFixedPages.map(route => ({
     url: `${toolboxUrl}${route}`,
-    lastModified,
+    lastModified: routeDates.unitAndFixedProgrammatic ? new Date(routeDates.unitAndFixedProgrammatic) : lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.4
+  }));
+
+  // Hub-and-Spoke Currency Pairs
+  const currencyPairPages: string[] = [];
+  getProgrammaticCurrencyPairs().forEach(pair => {
+    currencyPairPages.push(`/finance/currency/${pair.from.toLowerCase()}-to-${pair.to.toLowerCase()}`);
+  });
+
+  const currencyPairSitemap: MetadataRoute.Sitemap = currencyPairPages.map(route => ({
+    url: `${toolboxUrl}${route}`,
+    lastModified: routeDates.currencyPairs ? new Date(routeDates.currencyPairs) : lastModified,
     changeFrequency: 'monthly',
     priority: 0.4
   }));
@@ -137,7 +158,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...guidePages,
     ...toolPages,
     ...kbPages,
-    ...programmaticSitemap,
+    ...unitAndFixedSitemap,
+    ...currencyPairSitemap,
     ...legalPages,
   ];
 }
