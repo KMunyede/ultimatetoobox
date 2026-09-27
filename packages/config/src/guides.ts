@@ -2208,7 +2208,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "finance",
     excerpt: "Learn how progressive tax brackets work, marginal vs effective rates, pre-tax deductions, and calculating net take-home pay.",
     targetToolHref: "/finance/income-tax",
-    lastUpdated: "September 26, 2026",
+    lastUpdated: "September 27, 2026",
     content: `
       <script type="application/ld+json">
       {
