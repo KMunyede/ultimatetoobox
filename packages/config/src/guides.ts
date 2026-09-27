@@ -2222,7 +2222,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
       }
       </script>
 
-      <p class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl text-amber-900 dark:text-amber-200 text-sm font-medium mb-6">
+      <p class="p-4 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 rounded-xl text-amber-900 dark:text-amber-200 text-sm font-medium mb-6 not-prose">
         <strong>Disclaimer:</strong> This article is provided strictly for general educational purposes and software demonstration. It does NOT constitute financial, legal, or professional tax advice. Tax rates, brackets, and deduction allowances vary by country, state, and tax year. Always consult official local tax authority documentation or a certified tax professional when filing taxes.
       </p>
 
