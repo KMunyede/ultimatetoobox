@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { IncomeTaxClient } from "./IncomeTaxClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -100,6 +102,14 @@ export default function IncomeTaxPage() {
           <li><strong>Step 2: Apply Deductions</strong> - Subtract standard deductions or retirement contributions to find your taxable income.</li>
           <li><strong>Step 3: Review Net Pay</strong> - See your exact take-home pay after federal and local tax estimates are applied.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn how progressive tax brackets work, marginal vs effective tax rates, and pre-tax deductions?</p>
+          <Link href="/guides/income-tax-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
