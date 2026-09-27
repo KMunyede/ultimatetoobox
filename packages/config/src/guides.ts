@@ -2381,6 +2381,91 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
         <a href="/finance/vat-tax" class="inline-block px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-lg">Open VAT Calculator →</a>
       </div>
     `
+  },
+  {
+    slug: "tip-calculator-guide",
+    title: "Tip Calculator Guide: Tipping Etiquette, Math & Bill Splitting",
+    metaTitle: "Tip Calculator Guide – Tipping Etiquette & Bill Splitting | Hilmost Toolbox",
+    metaDesc: "Learn global tipping norms, whether to tip pre-tax or post-tax, how auto-gratuity works, and math for splitting group bills.",
+    category: "finance",
+    excerpt: "Learn global tipping etiquette, pre-tax vs post-tax tipping rules, handling auto-gratuity, and splitting restaurant bills accurately.",
+    targetToolHref: "/finance/tip-calculator",
+    lastUpdated: "September 27, 2026",
+    content: `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "Should I calculate the tip before or after tax?", "acceptedAnswer": {"@type": "Answer", "text": "Etiquette experts agree that tipping should be calculated on the pre-tax subtotal of the bill to avoid paying tip on top of government sales tax."}},
+          {"@type": "Question", "name": "What is the standard tipping percentage in restaurants?", "acceptedAnswer": {"@type": "Answer", "text": "In the United States and Canada, 15% is standard for adequate service, 18% to 20% for good service, and 20%+ for exceptional service."}},
+          {"@type": "Question", "name": "Do I need to leave an additional tip if auto-gratuity is included?", "acceptedAnswer": {"@type": "Answer", "text": "No. When an automatic service charge (gratuity) is added to a party's bill, an additional tip is optional and left only for extraordinary service."}}
+        ]
+      }
+      </script>
+
+      <p class="guide-disclaimer">
+        <strong>Disclaimer:</strong> Tipping norms and social customs vary widely by country, culture, and service industry. The guidelines below reflect common practices in North America and Western travel destinations and are provided for educational purposes.
+      </p>
+
+      <p>Calculating the tip at the end of a meal or service shouldn't cause awkward hesitation or math errors. Whether you are dining out at a restaurant, ordering food delivery, or splitting a large check among friends, knowing tipping etiquette and basic gratuity math makes paying smooth. In this guide, we explore tipping standards and how to use our free <a href="/finance/tip-calculator">Tip & Split Calculator</a>.</p>
+
+      <h2>Global Tipping Standards & Etiquette</h2>
+      <p>Tipping expectations differ significantly around the globe:</p>
+      <ul class="space-y-4 my-8">
+        <li><strong>United States & Canada</strong>: Tipping is a customary part of service worker compensation. Standard benchmarks are <strong>15%</strong> (adequate service), <strong>18%–20%</strong> (good/great service), and <strong>20%+</strong> (exceptional service). Food delivery drivers and bartenders typically receive $2–$5 or 15–20%.</li>
+        <li><strong>United Kingdom & Europe</strong>: Many European restaurants include a 10%–12.5% optional service charge on the bill. If no service charge is included, leaving a 5%–10% tip or rounding up the bill is customary.</li>
+        <li><strong>Asia & Australia</strong>: In Australia and New Zealand, tipping is optional and not traditionally expected. In Japan and South Korea, tipping can be considered confusing or offensive, as high service quality is built into standard hospitality.</li>
+      </ul>
+
+      <h2>Pre-Tax vs. Post-Tax Tipping Math</h2>
+      <p>A frequent debate when the bill arrives is whether the tip percentage should be calculated on the <strong>pre-tax subtotal</strong> or the final <strong>post-tax total</strong>.</p>
+
+      <p>Etiquette guidelines and financial planners universally agree: <strong>Tip on the pre-tax subtotal.</strong> Sales tax is a government levy, not a service provided by your server. Tipping on the post-tax total means you are paying a "tip on tax."</p>
+
+      <h3>Worked Example: Pre-Tax vs Post-Tax Tip</h3>
+      <p>Suppose your meal subtotal is <strong>$100.00</strong>, local sales tax is <strong>$8.00</strong> (8%), and the grand total is <strong>$108.00</strong>:</p>
+      <ul class="space-y-4 my-8">
+        <li><strong>18% Tip Pre-Tax</strong>: <code>$100.00 × 0.18 = $18.00</code>. Total paid = $100 + $8 tax + $18 tip = <strong>$126.00</strong>.</li>
+        <li><strong>18% Tip Post-Tax</strong>: <code>$108.00 × 0.18 = $19.44</code>. Total paid = $108 + $19.44 tip = <strong>$127.44</strong>.</li>
+      </ul>
+      <p>While the difference on a $100 check is only $1.44, pre-tax tipping keeps calculations fair and accurate across high-tax cities.</p>
+
+      <h2>Auto-Gratuity & Group Dining</h2>
+      <p>Restaurants frequently add an <strong>Automatic Gratuity</strong> (usually 18% or 20%) for large groups (typically parties of 6 or 8+). Always inspect the itemized receipt carefully before adding a tip on the signature line to avoid accidentally tipping twice on the same check.</p>
+
+      <h2>Bill Splitting Math: Equal vs Itemized</h2>
+      <p>When dining with a group, check splitting can be handled in two ways:</p>
+      <ul class="space-y-4 my-8">
+        <li><strong>Equal Split</strong>: Divide the grand total (Subtotal + Tax + Tip) equally by the number of diners: <code>Per Person = Total Bill / Diner Count</code>. Best for shared tapas or family-style meals.</li>
+        <li><strong>Itemized Split</strong>: Each person pays for their own meal and drink items, plus their proportional share of sales tax and tip (typically adding ~25%–28% on top of their individual pre-tax food total).</li>
+      </ul>
+
+      <h2>How to Use the Tip Calculator</h2>
+      <p>Our online <a href="/finance/tip-calculator">Tip & Split Calculator</a> makes group payments instant. Enter your bill subtotal, tap your desired tip percentage (15%, 18%, 20%, or custom), and adjust the diner count slider to see per-person totals immediately.</p>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-6 my-8">
+        <div>
+          <h3 class="text-lg font-bold">Should I calculate the tip before or after tax?</h3>
+          <p>Etiquette experts agree that tipping should be calculated on the pre-tax subtotal of the bill to avoid paying tip on top of government sales tax.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">What is the standard tipping percentage in restaurants?</h3>
+          <p>In the United States and Canada, 15% is standard for adequate service, 18% to 20% for good service, and 20%+ for exceptional service.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">Do I need to leave an additional tip if auto-gratuity is included?</h3>
+          <p>No. When an automatic service charge (gratuity) is added to a party's bill, an additional tip is optional and left only for extraordinary service.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Calculate Tips & Split Bills Instantly</h3>
+        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Fast, accurate gratuity and group bill calculations for dining out.</p>
+        <a href="/finance/tip-calculator" class="inline-block px-8 py-4 bg-brand-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-lg">Open Tip Calculator →</a>
+      </div>
+    `
   }
 ];
 

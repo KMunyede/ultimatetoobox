@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { TipCalculatorClient } from "./TipCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
@@ -102,6 +104,14 @@ export default function TipCalculatorPage() {
           <li><strong>Step 2: Set Tip %</strong> - Choose a standard percentage or enter a custom gratuity based on service quality.</li>
           <li><strong>Step 3: Split the Check</strong> - Enter the number of people to see exactly how much each person needs to pay.</li>
         </ol>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn about tipping etiquette, pre-tax vs post-tax tipping, and bill splitting math?</p>
+          <Link href="/guides/tip-calculator-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the full guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
