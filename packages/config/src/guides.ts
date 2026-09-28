@@ -2475,7 +2475,7 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
     category: "finance",
     excerpt: "Learn how to calculate your retirement nest egg, estimate compound returns, apply the 4% withdrawal rule, and avoid critical retirement planning mistakes.",
     targetToolHref: "/finance/retirement-planner",
-    lastUpdated: "September 27, 2026",
+    lastUpdated: "September 28, 2026",
     content: `
       <script type="application/ld+json">
       {
