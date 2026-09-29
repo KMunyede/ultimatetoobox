@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { AITokenCalculatorClient } from "./AITokenCalculatorClient";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
@@ -120,6 +122,14 @@ export default function AITokenCalculatorPage() {
         <p>
           To keep costs low, focus on <strong>Prompt Compression</strong>. Remove redundant instructions, use efficient data formats (like JSON with short keys), and always estimate your &quot;Output Ratio&quot;—the expected length of the AI&quot;s response relative to your prompt. Our tool includes an Output Ratio selector to help you project these variable costs.
         </p>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master LLM tokenization and cost optimization?</p>
+          <Link href="/guides/ai-token-calculator-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the complete AI Token & Cost Guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
