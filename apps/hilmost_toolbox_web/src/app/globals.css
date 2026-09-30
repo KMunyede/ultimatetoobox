@@ -102,3 +102,8 @@ html, body {
     color: var(--color-text-primary, #f8fafc);
   }
 }
+
+.prose :where(code):not(pre code)::before,
+.prose :where(code):not(pre code)::after {
+  content: none;
+}
