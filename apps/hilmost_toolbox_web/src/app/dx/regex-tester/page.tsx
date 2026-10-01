@@ -1,5 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, HowToSchema } from "@utilitiessite/ui";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { RegexTesterClient } from "./RegexTesterClient";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -118,6 +120,14 @@ export default function RegexTesterPage() {
         <p>
           Developers often need to test patterns against sensitive production data or logs. Using standard online testers can be a security risk. At Hilmost, we use a <strong>browser-side architecture</strong>. Your regex patterns and test strings are never sent to a server, ensuring 100% privacy for your proprietary code and data.
         </p>
+
+        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to master regular expressions and pattern matching?</p>
+          <Link href="/guides/regex-tester-guide" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
+            Read the complete Regex Tester Guide <ArrowRight size={14} />
+          </Link>
+        </div>
       </ToolArticle>
 
       <FAQAccordion items={faqs} />
