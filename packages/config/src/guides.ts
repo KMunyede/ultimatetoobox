@@ -2913,16 +2913,16 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
       <p>Examining practical regex patterns helps clarify how syntax rules assemble into working solutions:</p>
       <ul class="space-y-4 my-8">
         <li><strong>1. Digits Only</strong>: <code>^[0-9]+$</code>. The anchor <code>^</code> ensures matching starts at the beginning, <code>[0-9]+</code> matches one or more numeric digits, and <code>$</code> ensures the entire string consists exclusively of numbers.</li>
-        <li><strong>2. Simple Email Shape</strong>: <code>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}</code>. Matches standard local-name characters, an <code>@</code> symbol, domain name parts, a literal dot, and a top-level domain of at least two letters.</li>
-        <li><strong>3. Whitespace Trimming</strong>: <code>^\s+|\s+$</code>. Uses alternation <code>|</code> to match leading whitespace (<code>^\s+</code>) or trailing whitespace (<code>\s+$</code>) for clean text formatting.</li>
-        <li><strong>4. Word Boundaries</strong>: <code>\bcat\b</code>. The <code>\b</code> anchor ensures <code>cat</code> is matched only as a distinct standalone word, ignoring substrings inside larger words like <code>caterpillar</code> or <code>education</code>.</li>
+        <li><strong>2. Simple Email Shape</strong>: <code>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}</code>. Matches standard local-name characters, an <code>@</code> symbol, domain name parts, a literal dot, and a top-level domain of at least two letters.</li>
+        <li><strong>3. Whitespace Trimming</strong>: <code>^\\s+|\\s+$</code>. Uses alternation <code>|</code> to match leading whitespace (<code>^\\s+</code>) or trailing whitespace (<code>\\s+$</code>) for clean text formatting.</li>
+        <li><strong>4. Word Boundaries</strong>: <code>\\bcat\\b</code>. The <code>\\b</code> anchor ensures <code>cat</code> is matched only as a distinct standalone word, ignoring substrings inside larger words like <code>caterpillar</code> or <code>education</code>.</li>
       </ul>
 
       <h2>Common Regex Pitfalls to Avoid</h2>
       <p>Be mindful of these frequent traps when writing expressions:</p>
       <ul class="space-y-4 my-8">
         <li><strong>1. Greedy vs. Lazy Quantifiers</strong>: Quantifiers like <code>.*</code> are greedy by default, consuming as much text as possible. Append a question mark (<code>.*?</code>) to make them lazy when you need minimal matching.</li>
-        <li><strong>2. Unescaped Special Characters</strong>: Metacharacters such as <code>.</code>, <code>*</code>, <code>?</code>, <code>+</code>, and brackets have special meanings. If you want to match a literal dot, you must escape it with a backslash (<code>\.</code>).</li>
+        <li><strong>2. Unescaped Special Characters</strong>: Metacharacters such as <code>.</code>, <code>*</code>, <code>?</code>, <code>+</code>, and brackets have special meanings. If you want to match a literal dot, you must escape it with a backslash (<code>\\.</code>).</li>
         <li><strong>3. Forgetting the Global Flag</strong>: If your test string contains multiple valid matches but your pattern only highlights the first one, ensure the global <code>g</code> flag is enabled.</li>
       </ul>
 
