@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
 import { KNOWLEDGE_BASE, GUIDES } from '@utilitiessite/config';
-import { getProgrammaticCurrencyPairs } from '@/lib/currencies';
+import { getProgrammaticCurrencyPairs, HUB_CURRENCIES } from '@/lib/currencies';
 
 export const dynamic = "force-static";
 
@@ -122,9 +122,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Hub-and-Spoke Currency Pairs
   const currencyPairPages: string[] = [];
-  getProgrammaticCurrencyPairs().forEach(pair => {
-    currencyPairPages.push(`/finance/currency/${pair.from.toLowerCase()}-to-${pair.to.toLowerCase()}`);
-  });
+  // spoke pairs stay live but are not listed in the sitemap
+  getProgrammaticCurrencyPairs()
+    .filter(pair => HUB_CURRENCIES.includes(pair.from) && HUB_CURRENCIES.includes(pair.to))
+    .forEach(pair => {
+      currencyPairPages.push(`/finance/currency/${pair.from.toLowerCase()}-to-${pair.to.toLowerCase()}`);
+    });
 
   const currencyPairSitemap: MetadataRoute.Sitemap = currencyPairPages.map(route => ({
     url: `${toolboxUrl}${route}`,
