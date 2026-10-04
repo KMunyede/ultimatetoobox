@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { PrivacyPolicyContent } from "@utilitiessite/ui";
+import { GamesPrivacySection } from "./GamesPrivacySection";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://hilmost.net/privacy-policy" },
@@ -15,4 +16,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() { return <PrivacyPolicyContent />; }
+export default function Page() {
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <PrivacyPolicyContent />
+      <GamesPrivacySection />
+    </div>
+  );
+}
