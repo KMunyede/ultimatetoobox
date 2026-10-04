@@ -138,9 +138,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 6. LEGAL & MISC
   const legalPages: MetadataRoute.Sitemap = [
-    { url: `${toolboxUrl}/privacy-policy`, lastModified, changeFrequency: 'monthly', priority: 0.1 },
-    { url: `${toolboxUrl}/terms-of-service`, lastModified, changeFrequency: 'monthly', priority: 0.1 },
-    { url: `${toolboxUrl}/cookie-policy`, lastModified, changeFrequency: 'monthly', priority: 0.1 },
     { url: `${toolboxUrl}/knowledge-base`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
   ];
 
