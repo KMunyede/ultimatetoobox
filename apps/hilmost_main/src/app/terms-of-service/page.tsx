@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { TermsOfServiceContent } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://hilmost.net/terms-of-service" },
   title: "Terms of Service | Hilmost",
   description: "Terms governing your use of Hilmost's free browser-based tools and services.",
   openGraph: {

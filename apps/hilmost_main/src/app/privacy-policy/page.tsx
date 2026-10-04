@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { PrivacyPolicyContent } from "@utilitiessite/ui";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://hilmost.net/privacy-policy" },
   title: "Privacy Policy | Hilmost",
   description: "How Hilmost Software Corporation collects, uses, and protects your information across our tools and services.",
   openGraph: {
