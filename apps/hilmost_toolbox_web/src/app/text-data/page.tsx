@@ -4,6 +4,7 @@ import { FileText, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 const TITLE = "Text & Data Tools";
 const DESC = "Analyze, encode, and transform text and data instantly. Free online tools for word count, MD5 hashing, Base64 encoding, and unscrambling.";
@@ -150,6 +151,8 @@ export default function TextDataHub() {
       <div className="mt-16">
         <FAQAccordion items={faqs} />
       </div>
+
+      <RelatedGuides category="text-data" />
     </div>
   );
 }
