@@ -4,6 +4,7 @@ import { Activity, ArrowRight, Apple, Moon } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 const TITLE = "Health & Wellness Tools";
 const DESC = "Free online health and fitness tools including BMI calculators and metric trackers. Monitor your health metrics and maintain your well-being with precision.";
@@ -161,6 +162,8 @@ export default function HealthHub() {
       <div className="mt-16">
         <FAQAccordion items={faqs} />
       </div>
+
+      <RelatedGuides category="health" />
     </div>
   );
 }

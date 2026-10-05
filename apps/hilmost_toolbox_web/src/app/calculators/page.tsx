@@ -4,6 +4,7 @@ import { Calculator, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 const TITLE = "Math & Science Calculators";
 const DESC = "Master your daily tasks with quiet confidence. Everything you need, exactly when you need it: standard, scientific, and specialized math calculators.";
@@ -150,6 +151,8 @@ export default function CalculatorsHub() {
       <div className="mt-16">
         <FAQAccordion items={faqs} />
       </div>
+
+      <RelatedGuides category="calculators" />
     </div>
   );
 }

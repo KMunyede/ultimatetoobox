@@ -4,6 +4,7 @@ import { Replace, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 const TITLE = "Unit Converters";
 const DESC = "A complete collection of precision conversion tools. Easily convert units of length, weight, temperature, digital storage, and time with instant results.";
@@ -151,6 +152,8 @@ export default function ConvertersHub() {
       <div className="mt-16">
         <FAQAccordion items={faqs} />
       </div>
+
+      <RelatedGuides category="converters" />
     </div>
   );
 }

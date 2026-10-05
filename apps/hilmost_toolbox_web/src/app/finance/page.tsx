@@ -4,6 +4,7 @@ import { Banknote, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { RelatedGuides } from "@/components/RelatedGuides";
 
 const TITLE = "Financial Calculators";
 const DESC = "A complete collection of robust financial tools. Manage your wealth, compute compounding returns, estimate taxes, and convert global currencies with ease.";
@@ -151,6 +152,8 @@ export default function FinanceHub() {
       <div className="mt-16">
         <FAQAccordion items={faqs} />
       </div>
+
+      <RelatedGuides category="finance" />
     </div>
   );
 }
