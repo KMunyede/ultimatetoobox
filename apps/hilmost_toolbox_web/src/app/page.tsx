@@ -5,6 +5,7 @@ import { WebApplicationSchema, OrganizationSchema, BreadcrumbSchema } from "@uti
 import { getCanonicalUrl, TOOL_CATEGORIES } from "@utilitiessite/config";
 import { Metadata } from "next";
 import { ToolboxDirectory } from "@/components/ToolboxDirectory";
+import { FeaturedGuides } from "@/components/FeaturedGuides";
 
 const TITLE = "Free Online Calculators & Converters";
 const DESC = "Free online calculators and converters — fast, accurate, and private. No sign-up, no data collection.";
@@ -65,6 +66,8 @@ export default function Home() {
 
       {/* Directory Section */}
       <ToolboxDirectory categories={TOOL_CATEGORIES} />
+
+      <FeaturedGuides />
 
       {/* Trust Footer Section */}
       <div className="mt-16 py-8 border-t border-base text-center">
