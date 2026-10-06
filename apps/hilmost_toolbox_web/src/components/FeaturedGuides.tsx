@@ -47,9 +47,9 @@ export function FeaturedGuides() {
       <div className="text-center">
         <Link
           href="/guides"
-          className="inline-flex items-center text-sm font-normal text-indigo-600 dark:text-indigo-400 hover:underline group"
+          className="inline-flex items-center text-[28px] font-normal text-indigo-600 dark:text-indigo-400 hover:underline group"
         >
-          View all guides <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
+          View all guides <ArrowRight size={32} className="ml-1 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
     </div>
