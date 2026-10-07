@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Why Our Currency Converter Has 50 Currencies, Not 10 | Hilmost Blog",
@@ -81,6 +82,7 @@ export default function BlogPostCurrencyArchitecture() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="why-our-currency-converter-has-50-currencies" />
       </div>
     </AdLayout>
   );

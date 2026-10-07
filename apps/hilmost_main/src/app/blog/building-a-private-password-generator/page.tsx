@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Building an Actually Private Password Generator | Hilmost",
@@ -80,6 +81,7 @@ export default function BlogPost3() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="building-a-private-password-generator" />
       </div>
     </AdLayout>
   );

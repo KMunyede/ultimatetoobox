@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "The Percentage Mistake Everyone Makes | Hilmost",
@@ -72,6 +73,7 @@ export default function BlogPostPercentageMistake() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="the-percentage-mistake-everyone-makes" />
       </div>
     </AdLayout>
   );

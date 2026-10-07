@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Building Financial Tools Without Being a Financial Advisor | Hilmost",
@@ -68,6 +69,7 @@ export default function BlogPostFinancialTools() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="building-financial-tools-without-being-an-advisor" />
       </div>
     </AdLayout>
   );

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Why Compound Interest Feels Like a Trick | Hilmost",
@@ -72,6 +73,7 @@ export default function BlogPostCompoundInterest() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="why-compound-interest-feels-like-a-trick" />
       </div>
     </AdLayout>
   );

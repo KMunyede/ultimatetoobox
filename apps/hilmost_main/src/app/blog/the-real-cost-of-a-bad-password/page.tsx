@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "The Real Cost of a Bad Password | Hilmost Blog",
@@ -79,6 +80,7 @@ export default function BlogPostPasswordStrength() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="the-real-cost-of-a-bad-password" />
       </div>
     </AdLayout>
   );

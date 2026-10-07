@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Time Zones Are Harder Than They Look | Hilmost Blog",
@@ -81,6 +82,7 @@ export default function BlogPostTimeZones() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="time-zones-are-harder-than-they-look" />
       </div>
     </AdLayout>
   );

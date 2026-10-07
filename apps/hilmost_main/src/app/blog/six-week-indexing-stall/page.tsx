@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "What a Six-Week Indexing Stall Taught Me About Thinking Like Google | Hilmost",
@@ -83,6 +84,7 @@ export default function BlogPostIndexingStall() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="six-week-indexing-stall" />
       </div>
     </AdLayout>
   );

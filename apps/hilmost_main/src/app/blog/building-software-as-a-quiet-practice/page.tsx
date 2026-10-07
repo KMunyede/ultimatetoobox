@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Building Software as a Quiet Practice | Hilmost Blog",
@@ -79,6 +80,7 @@ export default function BlogPostQuietPractice() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="building-software-as-a-quiet-practice" />
       </div>
     </AdLayout>
   );

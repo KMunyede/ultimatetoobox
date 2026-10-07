@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 import { TOTAL_TOOL_COUNT, CATEGORY_COUNT } from "@utilitiessite/config";
 
 export const metadata: Metadata = {
@@ -76,6 +77,7 @@ export default function BlogPost1() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="why-we-built-the-toolbox" />
       </div>
     </AdLayout>
   );

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "The Question I Can't Stop Asking | Hilmost Blog",
@@ -81,6 +82,7 @@ export default function BlogPostQuantumQuestion() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="the-question-i-cant-stop-asking" />
       </div>
     </AdLayout>
   );

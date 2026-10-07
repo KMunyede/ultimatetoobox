@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "The Six-Month War With a Date Picker | Hilmost Blog",
@@ -129,6 +130,7 @@ export default function BlogPost5() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="six-month-war-with-a-date-picker" />
       </div>
     </AdLayout>
   );

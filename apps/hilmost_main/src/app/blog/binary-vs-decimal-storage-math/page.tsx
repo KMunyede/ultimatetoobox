@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Binary vs. Decimal: The Storage Math Nobody Explains Well | Hilmost",
@@ -72,6 +73,7 @@ export default function BlogPostBinaryVsDecimal() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="binary-vs-decimal-storage-math" />
       </div>
     </AdLayout>
   );

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "What Music Taught Me About Debugging | Hilmost Blog",
@@ -85,6 +86,7 @@ export default function BlogPostMusicDebugging() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="what-music-taught-me-about-debugging" />
       </div>
     </AdLayout>
   );

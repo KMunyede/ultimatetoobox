@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AdLayout, ToolArticle } from "@utilitiessite/ui";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import BlogPostExtras from "../../../components/BlogPostExtras";
 
 export const metadata: Metadata = {
   title: "Why I Still Think Like a Gamer When I Build Tools | Hilmost Blog",
@@ -81,6 +82,7 @@ export default function BlogPostGamerSystems() {
              </p>
            </ToolArticle>
         </section>
+           <BlogPostExtras slug="why-i-still-think-like-a-gamer-when-i-build-tools" />
       </div>
     </AdLayout>
   );
