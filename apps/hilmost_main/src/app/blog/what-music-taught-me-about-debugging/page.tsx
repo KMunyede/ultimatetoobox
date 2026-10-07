@@ -82,7 +82,7 @@ export default function BlogPostMusicDebugging() {
         <section className="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
            <ToolArticle title="About the Author">
              <p>
-               Written by the engineering team at Hilmost. We focus on building privacy-first utilities for the modern web.
+               Written by <Link href="/about" className="underline">Keepy Munyede</Link>, founder of Hilmost.
              </p>
            </ToolArticle>
         </section>

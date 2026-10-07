@@ -21,7 +21,7 @@ export default function BlogPostExtras({ slug }: { slug: string }) {
     datePublished: post.dateValue,
     articleSection: post.category,
     mainEntityOfPage: `https://hilmost.net/blog/${post.slug}`,
-    author: { "@type": "Person", name: "Keepy Munyede", jobTitle: "Technical Founder" },
+    author: { "@type": "Person", name: "Keepy Munyede", alternateName: "Keeplife Munyede", jobTitle: "Founder", url: "https://hilmost.net/about" },
     publisher: { "@type": "Organization", name: "Hilmost Software Corporation", url: "https://hilmost.net" },
   };
 
