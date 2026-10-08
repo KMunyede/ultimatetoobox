@@ -4,7 +4,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated, getFileLastUpdatedISO } from "@utilitiessite/config/server";
 import path from "path";
 
-import { getProgrammaticCurrencyPairs } from "@/lib/currencies";
+import { getProgrammaticCurrencyPairs, HUB_CURRENCIES } from "@/lib/currencies";
 
 export function generateStaticParams() {
   const pairs = getProgrammaticCurrencyPairs();
@@ -22,12 +22,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   const from = match[1].toUpperCase();
   const to = match[2].toUpperCase();
+  const isHubPair = (HUB_CURRENCIES as readonly string[]).includes(from) && (HUB_CURRENCIES as readonly string[]).includes(to);
   const canonical = getCanonicalUrl(`/finance/currency/${slug}`);
 
   return {
     title: `Convert ${from} to ${to} | Live Exchange Rate — Free Online Converter`,
     description: `Free online currency converter. Instantly convert ${from} to ${to} using live mid-market exchange rates. Perfect for travelers, freelancers, and global businesses — no signup required.`,
     alternates: { canonical },
+    robots: isHubPair ? { index: true, follow: true } : { index: false, follow: true },
     openGraph: {
       title: `Convert ${from} to ${to} | Live Exchange Rate`,
       description: `Instantly convert ${from} to ${to} using live mid-market exchange rates.`,
