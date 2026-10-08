@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
-import { KNOWLEDGE_BASE, GUIDES } from '@utilitiessite/config';
+import { GUIDES } from '@utilitiessite/config';
 import { getProgrammaticCurrencyPairs, HUB_CURRENCIES } from '@/lib/currencies';
 
 export const dynamic = "force-static";
@@ -64,14 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7
     };
   });
-
-  // 4. KNOWLEDGE BASE ARTICLES
-  const kbPages: MetadataRoute.Sitemap = KNOWLEDGE_BASE.map(article => ({
-    url: `${toolboxUrl}/knowledge-base/${article.slug}`,
-    lastModified,
-    changeFrequency: 'monthly',
-    priority: 0.5
-  }));
 
   // 5. PROGRAMMATIC ROUTES (e.g., meters-to-kilometers)
   const unitAndFixedPages: string[] = [];
@@ -157,7 +149,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...categoryPages,
     ...guidePages,
     ...toolPages,
-    ...kbPages,
     ...unitAndFixedSitemap,
     ...currencyPairSitemap,
     ...legalPages,

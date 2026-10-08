@@ -53,6 +53,48 @@
             }
           ]
         }
+      ],
+      "redirects": [
+        {
+          "source": "/knowledge-base/understanding-compound-interest",
+          "destination": "/guides/compound-interest-explained",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/what-is-body-mass-index",
+          "destination": "/guides/bmi-calculator-score-meaning",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/unix-epoch-time-explained",
+          "destination": "/guides/understanding-unix-timestamps",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/universal-law-of-gravitation",
+          "destination": "/calculators/astrophysics/gravitational-force",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/cryptographic-hashing-md5",
+          "destination": "/text-data/md5-hash",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/percentage-math-in-economics",
+          "destination": "/guides/percentage-calculations-explained",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/earnings-per-share-basic-vs-diluted",
+          "destination": "/guides/understanding-earnings-per-share-eps",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/weighted-average-cost-of-capital-guide",
+          "destination": "/guides/wacc-cost-of-capital-explained",
+          "type": 301
+        }
       ]
     },
     {
@@ -106,6 +148,48 @@
               "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\", </llms.txt>; rel=\"describedby\", </sitemap.xml>; rel=\"sitemap\""
             }
           ]
+        }
+      ],
+      "redirects": [
+        {
+          "source": "/knowledge-base/understanding-compound-interest",
+          "destination": "/guides/compound-interest-explained",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/what-is-body-mass-index",
+          "destination": "/guides/bmi-calculator-score-meaning",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/unix-epoch-time-explained",
+          "destination": "/guides/understanding-unix-timestamps",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/universal-law-of-gravitation",
+          "destination": "/calculators/astrophysics/gravitational-force",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/cryptographic-hashing-md5",
+          "destination": "/text-data/md5-hash",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/percentage-math-in-economics",
+          "destination": "/guides/percentage-calculations-explained",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/earnings-per-share-basic-vs-diluted",
+          "destination": "/guides/understanding-earnings-per-share-eps",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/weighted-average-cost-of-capital-guide",
+          "destination": "/guides/wacc-cost-of-capital-explained",
+          "type": 301
         }
       ]
     },
