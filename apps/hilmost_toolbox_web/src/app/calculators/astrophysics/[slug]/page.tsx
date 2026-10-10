@@ -7,6 +7,7 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { generatePageTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { isNoIndexPath } from "@/lib/indexing-policy";
 
 const SLUGS = [
   { slug: "gravitational-force", type: "gravity", title: "Gravitational Force Calculator", desc: "Calculate the gravitational attraction between two objects using Newton's Law of Universal Gravitation." },
@@ -28,17 +29,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!config) return { title: "Astrophysics Calculator" };
 
   const title = generatePageTitle(`${config.title} | Astrophysics`);
-  const canonical = `/calculators/astrophysics/${resolvedParams.slug}`;
+  const routePath = `/calculators/astrophysics/${resolvedParams.slug}`;
+  const canonical = getCanonicalUrl(routePath);
 
   return {
     metadataBase: new URL(METADATA_BASE_URL),
     title,
     description: config.desc,
     alternates: { canonical },
+    ...(isNoIndexPath(routePath) ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title,
       description: config.desc,
-      url: getCanonicalUrl(canonical),
+      url: canonical,
       type: "website",
       images: [{ url: "https://hilmost-toolbox.hilmost.net/og/calculators.png", width: 1200, height: 630, alt: config.title }],
     },

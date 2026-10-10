@@ -6,6 +6,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { isNoIndexPath } from "@/lib/indexing-policy";
 
 const SLUGS = [
   { slug: "newtons-second-law", cat: "Mechanics", id: "fma", title: "Newton's Second Law Solver", desc: "Solve for Force, Mass, or Acceleration (F=ma) instantly. High-precision physics calculator." },
@@ -23,12 +24,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
   if (!config) return { title: "Science Equation Solver" };
 
-  const canonical = getCanonicalUrl(`/calculators/equation-solver/${resolvedParams.slug}`);
+  const routePath = `/calculators/equation-solver/${resolvedParams.slug}`;
+  const canonical = getCanonicalUrl(routePath);
 
   return {
     title: `${config.title} | Equation Solver | Hilmost`,
     description: config.desc,
     alternates: { canonical },
+    ...(isNoIndexPath(routePath) ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: config.title,
       description: config.desc,

@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { GUIDES } from '@utilitiessite/config';
 import { getProgrammaticCurrencyPairs, HUB_CURRENCIES } from '@/lib/currencies';
+import { isNoIndexPath } from '@/lib/indexing-policy';
 
 export const dynamic = "force-static";
 
@@ -105,12 +106,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     slugs.forEach(slug => unitAndFixedPages.push(`/${pathPrefix}/${slug}`));
   });
 
-  const unitAndFixedSitemap: MetadataRoute.Sitemap = unitAndFixedPages.map(route => ({
-    url: `${toolboxUrl}${route}`,
-    lastModified: routeDates.unitAndFixedProgrammatic ? new Date(routeDates.unitAndFixedProgrammatic) : lastModified,
-    changeFrequency: 'monthly',
-    priority: 0.4
-  }));
+  const unitAndFixedSitemap: MetadataRoute.Sitemap = unitAndFixedPages
+    .filter(route => !isNoIndexPath(route))
+    .map(route => ({
+      url: `${toolboxUrl}${route}`,
+      lastModified: routeDates.unitAndFixedProgrammatic ? new Date(routeDates.unitAndFixedProgrammatic) : lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.4
+    }));
 
   // Hub-and-Spoke Currency Pairs
   const currencyPairPages: string[] = [];
