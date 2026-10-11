@@ -76,7 +76,7 @@
       </div>
       
       <p className="text-sm text-slate-500 mt-12 pt-6 border-t border-slate-200 dark:border-slate-800">
-        Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        Last Updated: October 11, 2026
       </p>
     </div>
   );
