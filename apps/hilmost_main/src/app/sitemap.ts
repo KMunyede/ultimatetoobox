@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { BLOG_POSTS } from '@utilitiessite/config';
+import { getAllApps } from '@/content/apps';
 
 export const dynamic = "force-static";
 
@@ -65,6 +66,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   ];
 
+  const apps = getAllApps();
+  const appsPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/apps`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    ...apps.flatMap(app => [
+      {
+        url: `${baseUrl}/apps/${app.slug}`,
+        lastModified,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/apps/${app.slug}/privacy`,
+        lastModified,
+        changeFrequency: 'yearly' as const,
+        priority: 0.3,
+      },
+      {
+        url: `${baseUrl}/apps/${app.slug}/terms`,
+        lastModified,
+        changeFrequency: 'yearly' as const,
+        priority: 0.3,
+      },
+      {
+        url: `${baseUrl}/apps/${app.slug}/delete-account`,
+        lastModified,
+        changeFrequency: 'yearly' as const,
+        priority: 0.3,
+      },
+    ]),
+  ];
+
   const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified,
@@ -72,5 +109,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8
   }));
 
-  return [...staticPages, ...blogPages];
+  return [...staticPages, ...appsPages, ...blogPages];
 }

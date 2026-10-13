@@ -32,7 +32,7 @@ export default function SoftwareHub() {
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-6xl">
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                 
                 {/* Tools & Utilities Tile */}
                 <Link
@@ -52,6 +52,28 @@ export default function SoftwareHub() {
                     </p>
                     <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
                         Launch Toolbox <ArrowRight size={16} />
+                    </span>
+                  </div>
+                </Link>
+
+                {/* Games & Apps Tile */}
+                <Link
+                    href="/apps"
+                    className="group relative flex flex-col bg-canvas-card border border-base rounded-3xl p-8 md:p-10 shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-primary/30 overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand-primary/5 rounded-full -mr-12 -mt-12 blur-2xl group-hover:bg-brand-primary/10 transition-colors" />
+                  <div className="relative z-10">
+                    <div className="h-16 w-16 mb-8 flex items-center justify-center rounded-2xl bg-brand-primary/10 text-brand-primary group-hover:scale-110 transition-transform duration-500">
+                        <Gamepad2 size={32} />
+                    </div>
+                    <h3 className="text-xl font-bold text-text-primary mb-4">
+                        Games & Apps
+                    </h3>
+                    <p className="text-text-secondary font-medium leading-relaxed mb-10">
+                        Free games and apps by Hilmost, each with its own privacy, terms and account pages.
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-primary group-hover:gap-4 transition-all">
+                        Browse Games & Apps <ArrowRight size={16} />
                     </span>
                   </div>
                 </Link>
