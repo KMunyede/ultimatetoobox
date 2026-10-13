@@ -245,12 +245,17 @@
       "redirects": [
         {
           "source": "/softwarehub",
-          "destination": "https://hilmost.net",
+          "destination": "/apps",
           "type": 301
         },
         {
           "source": "/softwarehub/:path*",
-          "destination": "https://hilmost.net",
+          "destination": "/apps",
+          "type": 301
+        },
+        {
+          "source": "/softwarehub/**",
+          "destination": "/apps",
           "type": 301
         }
       ]
@@ -312,12 +317,17 @@
       "redirects": [
         {
           "source": "/softwarehub",
-          "destination": "https://hilmost.net",
+          "destination": "/apps",
           "type": 301
         },
         {
           "source": "/softwarehub/:path*",
-          "destination": "https://hilmost.net",
+          "destination": "/apps",
+          "type": 301
+        },
+        {
+          "source": "/softwarehub/**",
+          "destination": "/apps",
           "type": 301
         }
       ]

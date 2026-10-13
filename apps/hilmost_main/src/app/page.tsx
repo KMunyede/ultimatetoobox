@@ -86,7 +86,7 @@ export default function Home() {
                 <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apparel</span>
                 <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary">→ Shop Store</span>
               </Link>
-              <Link href="/softwarehub" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
+              <Link href="/apps" className="group flex flex-col items-start px-6 py-4 rounded-xl border border-base hover:border-brand-primary hover:bg-brand-primary/5 focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-4 outline-none transition-all">
                 <span className="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">Hilmost Apps</span>
                 <span className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-primary">→ View Roadmap</span>
               </Link>
