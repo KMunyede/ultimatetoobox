@@ -74,32 +74,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    ...apps.flatMap(app => [
-      {
-        url: `${baseUrl}/apps/${app.slug}`,
-        lastModified,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: `${baseUrl}/apps/${app.slug}/privacy`,
-        lastModified,
-        changeFrequency: 'yearly' as const,
-        priority: 0.3,
-      },
-      {
-        url: `${baseUrl}/apps/${app.slug}/terms`,
-        lastModified,
-        changeFrequency: 'yearly' as const,
-        priority: 0.3,
-      },
-      {
-        url: `${baseUrl}/apps/${app.slug}/delete-account`,
-        lastModified,
-        changeFrequency: 'yearly' as const,
-        priority: 0.3,
-      },
-    ]),
+    ...apps.map(app => ({
+      url: `${baseUrl}/apps/${app.slug}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
   ];
 
   const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map(post => ({

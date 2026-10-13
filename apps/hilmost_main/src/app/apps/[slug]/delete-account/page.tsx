@@ -26,6 +26,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: `https://hilmost.net/apps/${app.slug}/delete-account`,
     },
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 
