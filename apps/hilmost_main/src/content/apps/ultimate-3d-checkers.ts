@@ -36,7 +36,7 @@ export const ultimate3DCheckers: AppContent = {
       heading: "What we collect",
       bullets: [
         "Guest play: your progress, stats and settings are saved only on your device. We do not receive them.",
-        "If you sign in with Google: your email address, your account ID (Firebase user ID) and the username you choose. Usernames are kept in a list so each one is unique.",
+        "If you sign in (with Google, or with an email address and password): your email address, your account ID (Firebase user ID) and the username you choose. Usernames are kept in a list so each one is unique. If you use an email and password, your password is handled by Firebase Authentication. We never see or store it.",
         "If you sign in: your game stats (wins, losses, games played), match history, saved and active games (board positions, turns, difficulty), and the dates your account was created or updated. When a guest signs in, their on-device stats are merged into the account.",
         "Playing against the computer: the current board position and difficulty level are sent to our server to calculate the computer's move. This contains no personal information and is not stored.",
         "No ads. No in-app purchases. No analytics or crash-reporting tools. We do not track you across other apps or websites. The app's only permission is internet access."
@@ -51,7 +51,7 @@ export const ultimate3DCheckers: AppContent = {
     },
     {
       heading: "Who processes it",
-      paragraphs: ["Google (Firebase Authentication, Cloud Firestore, Firebase Cloud Functions, Google Sign-In) stores and processes this data for us under Google's terms. Data may be stored on Google servers outside your country."]
+      paragraphs: ["Google (Firebase Authentication for Google sign-in and email-and-password accounts, Cloud Firestore, Cloud Functions, Google Sign-In) stores and processes this data for us under Google's terms. Data may be stored on Google servers outside your country."]
     },
     {
       heading: "How long we keep it",
@@ -85,7 +85,7 @@ export const ultimate3DCheckers: AppContent = {
     },
     {
       heading: "2. Accounts",
-      paragraphs: ["Sign-in is optional. Keep your Google account secure. Usernames must not be offensive or impersonate others. We may suspend or delete accounts that cheat, exploit bugs, abuse other players, or attack our systems."]
+      paragraphs: ["Sign-in is optional. Keep your sign-in details (Google account or email and password) secure. Usernames must not be offensive or impersonate others. We may suspend or delete accounts that cheat, exploit bugs, abuse other players, or attack our systems."]
     },
     {
       heading: "3. Fair use",
@@ -120,7 +120,7 @@ export const ultimate3DCheckers: AppContent = {
     {
       heading: "How to request deletion",
       bullets: [
-        "Email support@hilmost.net FROM the Google email you signed in with.",
+        "Email support@hilmost.net FROM the email address you signed in with (your Google email, or the email you registered with).",
         "Subject: \"Delete my Ultimate 3D Checkers account\".",
         "We confirm the request came from that address, then delete your account within 30 days and email you when it's done."
       ]
