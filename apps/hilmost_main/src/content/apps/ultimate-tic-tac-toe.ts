@@ -40,6 +40,7 @@ export const ultimateTicTacToe: AppContent = {
         "Guest play: when you play as a guest, Firebase gives you an anonymous account ID, and your game stats and saved games are stored with it on our servers. This ID is not linked to your name or email.",
         "If you sign in (with Google, an email address and password, or a username and password): your email address, account ID, username, and, if you use Google, your display name and profile photo link. Passwords are handled by Firebase Authentication. We never see or store them.",
         "Game data: your stats, progress and saved games. When a guest signs in, their guest stats are merged into the account and the guest record is deleted.",
+        "Sign-in protection: when someone signs in with a username, we keep a short-lived count of attempts, linked to that username and a scrambled (one-way hashed) form of the device's IP address. It is deleted automatically, usually within 1-2 days.",
         "Ads: the game shows ads from Google AdMob (banners and full-screen ads between games). To show ads, measure them and prevent fraud, AdMob may collect your device's advertising ID, approximate location (from your IP address), device information and how you interact with ads. Players in the UK, EEA and Switzerland are asked for consent before personalised ads are shown. You can reset or delete your advertising ID in your Android settings. How Google uses this data: https://policies.google.com/technologies/partner-sites",
         "Fonts: the game downloads its fonts from Google Fonts, which receives your device's IP address.",
         "No in-app purchases. No analytics or crash-reporting tools. The app's permissions are internet access and the advertising ID."
@@ -55,19 +56,20 @@ export const ultimateTicTacToe: AppContent = {
     {
       heading: "Who processes it",
       paragraphs: [
-        "Google (Firebase Authentication, Cloud Firestore, Cloud Functions, Google Sign-In, Google AdMob, Google Fonts) processes this data for us under Google's terms. Data may be stored on Google servers outside your country."
+        "Google (Firebase Authentication, Cloud Firestore, Cloud Functions, Google Sign-In, Google AdMob, Google Fonts) processes this data for us under Google's terms. Game data is stored in Google data centres in South Africa (Johannesburg). Our sign-in and game-server functions run in the United States."
       ]
     },
     {
       heading: "How long we keep it",
       paragraphs: [
-        "While your account exists. When you delete your account, your account and game data are deleted immediately. Nothing is kept after deletion, unless the law requires it. Ad data is held by Google AdMob under Google's policies."
+        "While your account exists. When you delete your account, it is hidden at once and permanently erased after 30 days. During those 30 days you can restore it by signing in again. Guest data stays until you delete it or ask us to. Sign-in attempt records expire within 1-2 days. Ad data is held by Google AdMob under Google's policies."
       ]
     },
     {
       heading: "Your choices and rights",
       paragraphs: [
-        "Play as a guest, refuse personalised ads in the consent form, or reset your advertising ID. Ask us for a copy of your data, a correction, or deletion: https://hilmost.net/apps/ultimate-tic-tac-toe/delete-account"
+        "Play as a guest, refuse personalised ads in the consent form, or reset your advertising ID. Ask us for a copy of your data, a correction, or deletion: https://hilmost.net/apps/ultimate-tic-tac-toe/delete-account",
+        "You can also complain to POTRAZ, Zimbabwe's data protection authority."
       ]
     },
     {
@@ -157,7 +159,7 @@ export const ultimateTicTacToe: AppContent = {
       bullets: [
         "Open the menu, then Account / Profile, then Delete Account.",
         "Confirm, entering your password if asked.",
-        "Your account is deleted immediately. This cannot be undone."
+        "Your account is hidden at once and permanently erased after 30 days. To change your mind, sign in again within 30 days and choose Restore."
       ]
     },
     {
@@ -175,7 +177,7 @@ export const ultimateTicTacToe: AppContent = {
     {
       heading: "What we keep",
       paragraphs: [
-        "Nothing, except where the law requires us to keep it."
+        "Your account data for 30 days after you delete it (so you can restore it), then nothing, except where the law requires it."
       ]
     },
     {
