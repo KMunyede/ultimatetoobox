@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import { getAllApps, getApp } from "@/content/apps";
 import { AppLegalNav } from "@/components/apps/AppLegalNav";
 import { StoreBadge } from "@/components/apps/StoreBadge";
+import { HowToPlay } from "@/components/apps/HowToPlay";
+import { AppFaq } from "@/components/apps/AppFaq";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -83,32 +85,9 @@ export default async function AppAboutPage({ params }: PageProps) {
         </ul>
       </div>
 
-      {app.howToPlay && app.howToPlay.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-text-primary">How to Play</h2>
-          <ul className="list-disc pl-5 space-y-2 text-text-secondary">
-            {app.howToPlay.map((item, idx) => (
-              <li key={idx} className="leading-relaxed">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <HowToPlay howToPlay={app.howToPlay} />
 
-      {app.faq && app.faq.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-text-primary">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {app.faq.map((item, idx) => (
-              <div key={idx} className="space-y-1">
-                <h3 className="font-semibold text-text-primary">{item.q}</h3>
-                <p className="text-text-secondary leading-relaxed">{item.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <AppFaq faq={app.faq} />
 
       <AppLegalNav slug={app.slug} currentPage="about" contactEmail={app.contactEmail} />
     </div>

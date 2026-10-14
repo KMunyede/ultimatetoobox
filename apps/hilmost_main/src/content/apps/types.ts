@@ -9,6 +9,12 @@ export interface FAQItem {
   a: string;
 }
 
+export interface HowToPlaySection {
+  heading: string;
+  paragraphs?: string[];
+  items?: string[];
+}
+
 export interface AppContent {
   slug: string;
   name: string;
@@ -21,8 +27,8 @@ export interface AppContent {
   tagline: string;
   summary: string[];
   features: string[];
-  howToPlay: string[];
-  faq: FAQItem[];
+  howToPlay?: HowToPlaySection[];
+  faq?: FAQItem[];
   effectiveDate: string;
   privacy: Section[];
   terms: Section[];

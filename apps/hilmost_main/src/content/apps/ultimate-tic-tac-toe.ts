@@ -19,8 +19,77 @@ export const ultimateTicTacToe: AppContent = {
     "Guest stats are merged into your account when you sign in",
     "Free to play, supported by ads"
   ],
-  howToPlay: [],
-  faq: [],
+  howToPlay: [
+    {
+      heading: "The basics",
+      paragraphs: [
+        "Two players take turns placing X and O; X always goes first. Each small board is classic tic-tac-toe: three in a row, column or diagonal wins that board. A full board with no line is a draw."
+      ]
+    },
+    {
+      heading: "Pick your rule set",
+      items: [
+        "Standard (default, 1 or 2 boards): to win the match you must win EVERY board in play. Anything less is a draw. Perfect for purists who like pressure.",
+        "Most Wins (1-9 boards): win more boards than your opponent. Equal tallies = draw.",
+        "Ultimate (always 9 boards): the classic Ultimate Tic Tac Toe. The 9 boards form a big 3x3 grid; win three small boards in a row on the big grid to win the match.",
+        "Chaos (1-9 boards): Most Wins scoring, plus a countdown clock and surprise turn twists. The clock scales with the board count: 1:30 (1-3 boards), 3:30 (4-6), 4:30 (7-9)."
+      ]
+    },
+    {
+      heading: "The Ultimate \"send\" rule",
+      paragraphs: [
+        "In Ultimate, where you play decides where your opponent plays next. Mark the top-right square of a small board, and your opponent must move in the top-right board. If that board is already won or full, they get a free move anywhere."
+      ]
+    },
+    {
+      heading: "Ways to play",
+      items: [
+        "Player vs AI: Easy, Medium or Hard. Hard searches deep with minimax.",
+        "Player vs Player: two people, one device.",
+        "Online AI: a smarter server opponent; if you lose connection, the game switches to the on-device AI automatically."
+      ]
+    },
+    {
+      heading: "Quick tips",
+      items: [
+        "Ultimate: before you move, look at the board you're sending your opponent to. Never send them to a board they can win next turn.",
+        "Ultimate: the centre board touches the most winning lines. Fight for it early.",
+        "Most Wins & Chaos: close out boards you're winning before starting new fights.",
+        "Standard: one lost board ends your hopes of a win, so play defence first.",
+        "Chaos: keep an eye on the clock; quick, solid moves beat perfect slow ones."
+      ]
+    }
+  ],
+  faq: [
+    {
+      q: "Is it free?",
+      a: "Yes. The game is free and supported by ads."
+    },
+    {
+      q: "Do I need an account?",
+      a: "No. Play as a guest right away. Sign in (Google, email or username) to keep your stats, XP and streaks synced to your account."
+    },
+    {
+      q: "Does it work offline?",
+      a: "Yes. Player vs AI and Player vs Player work without internet. Online AI needs a connection and falls back to the on-device AI if it drops."
+    },
+    {
+      q: "Can I save a game?",
+      a: "Yes, keep up to 3 saved games and continue them later."
+    },
+    {
+      q: "Is there undo or hints?",
+      a: "No, every move counts."
+    },
+    {
+      q: "What stats are tracked?",
+      a: "Wins, losses and draws for each AI level and for Player vs Player, plus total XP, current streak and best streak."
+    },
+    {
+      q: "How do I delete my account?",
+      a: "In the app: Menu > Account / Profile > Delete Account, or see our delete-account page: https://hilmost.net/apps/ultimate-tic-tac-toe/delete-account"
+    }
+  ],
   privacy: [
     {
       heading: "Who we are",
