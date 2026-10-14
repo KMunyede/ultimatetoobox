@@ -1,47 +1,56 @@
 import { Metadata } from "next";
+import { getAllApps } from "@/content/apps";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://hilmost.net/delete-account" },
   title: "Delete your Hilmost account and data | Hilmost",
-  description: "Instructions for deleting your Hilmost account and associated game data.",
+  description: "Instructions for deleting your Hilmost account and associated game data across our apps.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
     title: "Delete your Hilmost account and data | Hilmost",
-    description: "Instructions for deleting your Hilmost account and associated game data.",
+    description: "Instructions for deleting your Hilmost account and associated game data across our apps.",
   },
   twitter: {
     title: "Delete your Hilmost account and data | Hilmost",
-    description: "Instructions for deleting your Hilmost account and associated game data.",
+    description: "Instructions for deleting your Hilmost account and associated game data across our apps.",
   },
 };
 
 export default function DeleteAccountPage() {
+  const apps = getAllApps();
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-6">
-      <h1 className="text-3xl font-extrabold tracking-tight text-text-primary">Delete your Hilmost account and data</h1>
+      <h1 className="text-3xl font-extrabold tracking-tight text-text-primary">
+        Delete your account: choose your game
+      </h1>
 
-      <div className="space-y-4 text-text-secondary leading-relaxed">
-        <p>
-          <strong>In the app:&nbsp;</strong>Profile &gt; Delete account &gt; type DELETE &gt; confirm; hidden at once, erased after 30 days; sign in within 30 days and tap Restore to change your mind, or Delete now to erase at once.
-        </p>
-        <p>
-          <strong>If you cannot open the app:&nbsp;</strong>email support@hilmost.net from the account address, subject &quot;Delete my account&quot;, with your username (Google sign-in: your Google email); we confirm and delete within 30 days at the latest.
-        </p>
-        <p>
-          <strong>What we delete:&nbsp;</strong>sign-in account, email, username (available to others once erased), stats, saved games, cloud settings.
-        </p>
-        <p>
-          <strong>What we keep:&nbsp;</strong>nothing that identifies you after erasure.
-        </p>
-        <p>
-          <strong>Guests:&nbsp;</strong>not linked to identity; uninstalling removes local data.
-        </p>
-        <p>
-          <strong>Advertising data:&nbsp;</strong>held by Google AdMob under Google policies.
-        </p>
-        <p>
-          <strong>Questions:&nbsp;</strong>support@hilmost.net.
-        </p>
-      </div>
+      <p className="text-text-secondary leading-relaxed">
+        Each Hilmost game has its own account and data deletion page.
+      </p>
+
+      <ul className="list-disc pl-5 space-y-2 text-text-secondary">
+        {apps.map((app) => (
+          <li key={app.slug}>
+            <a
+              href={`/apps/${app.slug}/delete-account`}
+              className="text-emerald-800 underline font-semibold hover:underline"
+            >
+              {app.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p className="text-text-secondary leading-relaxed pt-4">
+        Questions:{" "}
+        <a href="mailto:support@hilmost.net" className="text-emerald-800 underline">
+          support@hilmost.net
+        </a>
+      </p>
     </div>
   );
 }
