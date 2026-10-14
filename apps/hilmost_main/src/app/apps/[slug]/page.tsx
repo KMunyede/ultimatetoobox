@@ -48,6 +48,18 @@ export default async function AppAboutPage({ params }: PageProps) {
           </div>
           <StoreBadge status={app.status} storeUrl={app.storeUrl} />
         </div>
+        {app.videoUrl && (
+          <div>
+            <a
+              href={app.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold text-sm transition-all shadow-sm"
+            >
+              Watch gameplay video
+            </a>
+          </div>
+        )}
         <p className="text-xs text-text-muted font-mono">Package ID: {app.packageId} · Developer: {app.developer}</p>
       </div>
 

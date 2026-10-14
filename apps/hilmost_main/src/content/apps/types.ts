@@ -17,6 +17,7 @@ export interface AppContent {
   contactEmail: string;
   status: "coming-soon" | "live";
   storeUrl: string;
+  videoUrl?: string;
   tagline: string;
   summary: string[];
   features: string[];
