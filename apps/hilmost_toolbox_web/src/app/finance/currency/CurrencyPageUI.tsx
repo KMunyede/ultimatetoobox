@@ -29,7 +29,7 @@ export function CurrencyPageUI({
   const faqs = [
     {
       question: "How often are the exchange rates updated?",
-      answer: "Rates are typically refreshed every few hours or daily depending on the market provider. We use a high-availability dual-API system for redundancy.",
+      answer: "Rates are fetched each time you open the converter, and the status bar shows the date the provider last updated them. We use two rate providers, so the converter keeps working if one is unavailable.",
     },
     {
       question: "Are these rates the same as what my bank offers?",
@@ -43,7 +43,7 @@ export function CurrencyPageUI({
 
   const tourSteps = [
     { element: 'input', popover: { title: '1. Enter Amount', description: 'Type the value in your base currency.' } },
-    { element: 'select', popover: { title: '2. Pick Currencies', description: 'Choose from over 150 global currencies to compare values.' } },
+    { element: 'select', popover: { title: '2. Pick Currencies', description: 'Choose from 50 global currencies to compare values.' } },
   ];
 
   const popularPairs = [
@@ -96,9 +96,9 @@ export function CurrencyPageUI({
           We designed our currency engine to be the fastest way to compare global values. Follow these steps for the best results:
         </p>
         <ol>
-          <li><strong>Step 1: Pick Currencies</strong> - Select the base currency (what you have) and the target currency (what you want) from our comprehensive list of over 150 global options, including USD, EUR, GBP, JPY, and more.</li>
+          <li><strong>Step 1: Pick Currencies</strong> - Select the base currency (what you have) and the target currency (what you want) from our list of 50 global currencies, including USD, EUR, GBP, JPY, and more.</li>
           <li><strong>Step 2: Enter Amount</strong> - Type the value in either field. Our bidirectional engine ensures that if you change the &quot;To&quot; field, the &quot;From&quot; field updates instantly.</li>
-          <li><strong>Step 3: Check Source</strong> - Monitor the status bar above the converter. We prioritize high-availability data from the European Central Bank and global FX market providers.</li>
+          <li><strong>Step 3: Check Source</strong> - The status bar above the converter shows which rate provider was used and when its rates were last updated. We use ExchangeRate-API first, with European Central Bank data (via Frankfurter) as a backup.</li>
         </ol>
 
         <h3>Why Exchange Rates Fluctuate</h3>
@@ -114,7 +114,7 @@ export function CurrencyPageUI({
         <SourceReference
           sources={[
             { name: "European Central Bank (ECB) - Foreign Exchange Rates", url: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" },
-            { name: "International Monetary Fund (IMF) - Representative Rates", url: "https://www.imf.org/external/np/fin/data/param_rms_mth.aspx" }
+            { name: "ExchangeRate-API - Exchange Rate Data", url: "https://www.exchangerate-api.com" }
           ]}
         />
 
