@@ -48,3 +48,11 @@ export function getProgrammaticCurrencyPairs() {
 
   return pairs;
 }
+
+/**
+ * Currency pair pages are thin (shared template). Kept usable but noindexed.
+ * To re-open a pair later, it must first get its own unique content.
+ */
+export function isIndexableCurrencyPair(_from: string, _to: string): boolean {
+  return false;
+}
