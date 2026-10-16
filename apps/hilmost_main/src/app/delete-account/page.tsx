@@ -1,21 +1,14 @@
 import { Metadata } from "next";
 import { getAllApps } from "@/content/apps";
 
+import { pageMeta } from "@/lib/seo";
+
 export const metadata: Metadata = {
+  ...pageMeta("/delete-account", "Delete your Hilmost account and data | Hilmost", "Instructions for deleting your Hilmost account and associated game data across our apps."),
   alternates: { canonical: "https://hilmost.net/delete-account" },
-  title: "Delete your Hilmost account and data | Hilmost",
-  description: "Instructions for deleting your Hilmost account and associated game data across our apps.",
   robots: {
     index: false,
     follow: true,
-  },
-  openGraph: {
-    title: "Delete your Hilmost account and data | Hilmost",
-    description: "Instructions for deleting your Hilmost account and associated game data across our apps.",
-  },
-  twitter: {
-    title: "Delete your Hilmost account and data | Hilmost",
-    description: "Instructions for deleting your Hilmost account and associated game data across our apps.",
   },
 };
 

@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "The Percentage Mistake Everyone Makes | Hilmost",
-  description: "A shirt goes up 20%, then goes on sale for 20% off. Is it back to the original price? No — and the reason is the whole idea behind our Percentage Calculator's design.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/the-percentage-mistake-everyone-makes",
+  "The Percentage Mistake Everyone Makes | Hilmost",
+  "A shirt goes up 20%, then goes on sale for 20% off. Is it back to the original price? No — and the reason is the whole idea behind our Percentage Calculator's design."
+);
 
 export default function BlogPostPercentageMistake() {
   return (

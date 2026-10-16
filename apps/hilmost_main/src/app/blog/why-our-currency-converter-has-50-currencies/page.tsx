@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Why Our Currency Converter Has 50 Currencies, Not 10 | Hilmost Blog",
-  description: "The architectural decision behind Hilmost's 1,260-route currency converter, and why we built for every currency instead of just the major ones.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/why-our-currency-converter-has-50-currencies",
+  "Why Our Currency Converter Has 50 Currencies, Not 10 | Hilmost Blog",
+  "The architectural decision behind Hilmost's 1,260-route currency converter, and why we built for every currency instead of just the major ones."
+);
 
 export default function BlogPostCurrencyArchitecture() {
   return (

@@ -1,10 +1,13 @@
 import { AppWindow, MonitorSmartphone } from "lucide-react";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Apps | Hilmost Software Corporation",
-  description: "Download powerful native applications for Windows, iOS, and Android devices. Explore our suite of practical software designed to enhance your productivity and digital experience.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/softwarehub/apps",
+  "Apps | Hilmost Software Corporation",
+  "Download powerful native applications for Windows, iOS, and Android devices. Explore our suite of practical software designed to enhance your productivity and digital experience."
+);
 
 export default function AppsPage() {
   return (

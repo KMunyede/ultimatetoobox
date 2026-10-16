@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Building Software for Self-Improvement | Hilmost Blog",
-  description: "How we build technology that helps people focus, reflect, and actually improve their lives. Discover our philosophy on creating digital tools for a more focused and intentional life.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/self-improvement-distracted-world",
+  "Building Software for Self-Improvement | Hilmost Blog",
+  "How we build technology that helps people focus, reflect, and actually improve their lives. Discover our philosophy on creating digital tools for a more focused and intentional life."
+);
 
 export default function BlogPost2() {
   return (

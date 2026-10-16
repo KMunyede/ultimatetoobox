@@ -4,6 +4,8 @@ import Script from "next/script";
 import { ThemeProvider, Header, Footer } from "@utilitiessite/ui";
 import "./globals.css";
 
+import { BASE_OPEN_GRAPH } from "@/lib/seo";
+
 const workSans = Work_Sans({
   subsets: ["latin"],
   variable: "--font-work-sans",
@@ -14,19 +16,9 @@ export const metadata: Metadata = {
   title: "Hilmost | The Digital Workshop. Achievement is One Click Away.",
   description: "Hilmost provides powerful, instant web tools and utilities. Achieve maximum results with zero effort today.",
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     title: "Hilmost | The Digital Workshop",
     description: "Hilmost provides powerful, instant web tools and utilities. Achieve maximum results with zero effort today.",
-    url: "https://hilmost.net",
-    siteName: "Hilmost",
-    type: "website",
-    images: [
-      {
-        url: "https://hilmost.net/og-home.png",
-        width: 1200,
-        height: 630,
-        alt: "Hilmost | Engineering the Everyday Utility",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",

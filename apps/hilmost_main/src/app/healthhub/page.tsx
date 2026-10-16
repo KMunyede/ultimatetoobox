@@ -1,9 +1,15 @@
 import Link from "next/link";
 import { ArrowRight, HeartPulse, Sparkles } from "lucide-react";
 
-export const metadata = {
-  title: "Hilmost Health Hub | Daily Wisdom & Wellness",
-  description: "Health and wellness applications from Hilmost Health, starting with Daily Wisdom & Wellness, a daily companion for inspiration and mental clarity.",
+import { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  ...pageMeta(
+    "/healthhub",
+    "Hilmost Health Hub | Daily Wisdom & Wellness",
+    "Health and wellness applications from Hilmost Health, starting with Daily Wisdom & Wellness, a daily companion for inspiration and mental clarity."
+  ),
   robots: { index: false, follow: true },
 };
 

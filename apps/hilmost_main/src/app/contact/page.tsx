@@ -1,9 +1,12 @@
 ﻿import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Hilmost Software Corporation",
-  description: "Get in touch with Hilmost Software Corporation. Contact our team for support, partnership inquiries, or feedback regarding the Hilmost Toolbox and our suite of digital applications.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/contact",
+  "Contact Us | Hilmost Software Corporation",
+  "Get in touch with Hilmost Software Corporation. Contact our team for support, partnership inquiries, or feedback regarding the Hilmost Toolbox and our suite of digital applications."
+);
 
 export default function ContactPage() {
   return (

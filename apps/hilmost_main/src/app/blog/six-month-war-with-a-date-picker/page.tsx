@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "The Six-Month War With a Date Picker | Hilmost Blog",
-  description: "A honest dev-log on rebuilding Hilmost's date/time picker three times, a live production crash, and the decision to stop patching and start over.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/six-month-war-with-a-date-picker",
+  "The Six-Month War With a Date Picker | Hilmost Blog",
+  "A honest dev-log on rebuilding Hilmost's date/time picker three times, a live production crash, and the decision to stop patching and start over."
+);
 
 export default function BlogPost5() {
   return (

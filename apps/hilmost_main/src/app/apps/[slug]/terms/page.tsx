@@ -15,14 +15,15 @@ export async function generateStaticParams() {
   return apps.map((app) => ({ slug: app.slug }));
 }
 
+import { pageMeta } from "@/lib/seo";
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const app = getApp(slug);
   if (!app) return {};
 
   return {
-    title: `Terms of Service - ${app.name} | Hilmost`,
-    description: `Terms of service and usage conditions for ${app.name}.`,
+    ...pageMeta(`/apps/${app.slug}/terms`, `Terms of Service - ${app.name} | Hilmost`, `Terms of service and usage conditions for ${app.name}.`),
     alternates: {
       canonical: `https://hilmost.net/apps/${app.slug}/terms`,
     },

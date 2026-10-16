@@ -4,10 +4,13 @@ import { AdLayout } from "@utilitiessite/ui";
 import { BlogIndexClient } from "./BlogIndexClient";
 import { BLOG_POSTS } from "@utilitiessite/config";
 
-export const metadata: Metadata = {
-  title: "Blog | Hilmost",
-  description: "Insights on software engineering, product design, and building the Hilmost Toolbox. Read our latest articles on crafting professional-grade digital utilities and tools.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog",
+  "Blog | Hilmost",
+  "Insights on software engineering, product design, and building the Hilmost Toolbox. Read our latest articles on crafting professional-grade digital utilities and tools."
+);
 
 export default function BlogIndex() {
   return (

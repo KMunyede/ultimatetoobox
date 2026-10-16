@@ -3,7 +3,7 @@ export function GamesPrivacySection() {
     <div className="mt-8 pt-8 border-t border-base space-y-6">
       <h2 className="text-2xl font-bold tracking-tight text-text-primary">Ultimate TicTacToe</h2>
       <p className="text-text-secondary mt-1">
-        Ultimate TicTacToe's privacy policy has moved to{" "}
+        Ultimate TicTacToe&apos;s privacy policy has moved to{" "}
         <a href="https://hilmost.net/apps/ultimate-tic-tac-toe/privacy" className="text-emerald-800 underline" target="_blank" rel="noopener noreferrer">
           https://hilmost.net/apps/ultimate-tic-tac-toe/privacy
         </a>
@@ -26,7 +26,7 @@ export function GamesPrivacySection() {
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Use</h3>
-          <p className="text-text-secondary mt-1">Only to show and measure ads. No analytics, no crash reporting, no Firebase, no network calls from the app's own code.</p>
+          <p className="text-text-secondary mt-1">Only to show and measure ads. No analytics, no crash reporting, no Firebase, no network calls from the app&apos;s own code.</p>
         </div>
 
         <div>
@@ -36,7 +36,7 @@ export function GamesPrivacySection() {
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Ads</h3>
-          <p className="text-text-secondary mt-1">Banner, interstitial and rewarded ads. No app-open ads. Ads and the advertising ID start only after the player taps "I agree" on the first-launch consent screen. If the player taps "No thanks", the app plays with no ads, the ads SDK is not started, and rewarded offers (extra time, undo refills) are hidden. Region-specific consent for the EEA and UK will be added before wider release.</p>
+          <p className="text-text-secondary mt-1">Banner, interstitial and rewarded ads. No app-open ads. Ads and the advertising ID start only after the player taps &quot;I agree&quot; on the first-launch consent screen. If the player taps &quot;No thanks&quot;, the app plays with no ads, the ads SDK is not started, and rewarded offers (extra time, undo refills) are hidden. Region-specific consent for the EEA and UK will be added before wider release.</p>
         </div>
 
         <div>

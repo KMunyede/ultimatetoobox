@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "What a Six-Week Indexing Stall Taught Me About Thinking Like Google | Hilmost",
-  description: "How a bloated sitemap and parameterized URLs silenced our new tools in Google Search for over a month, and the unglamorous fixes that restored crawl priority.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/six-week-indexing-stall",
+  "What a Six-Week Indexing Stall Taught Me About Thinking Like Google | Hilmost",
+  "How a bloated sitemap and parameterized URLs silenced our new tools in Google Search for over a month, and the unglamorous fixes that restored crawl priority."
+);
 
 export default function BlogPostIndexingStall() {
   return (

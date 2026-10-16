@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Building Financial Tools Without Being a Financial Advisor | Hilmost",
-  description: "A founder's note on the line between showing the mechanism and giving a recommendation — and why the narrower promise is the one I can actually keep.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/building-financial-tools-without-being-an-advisor",
+  "Building Financial Tools Without Being a Financial Advisor | Hilmost",
+  "A founder's note on the line between showing the mechanism and giving a recommendation — and why the narrower promise is the one I can actually keep."
+);
 
 export default function BlogPostFinancialTools() {
   return (

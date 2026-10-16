@@ -3,9 +3,10 @@ import { Metadata } from "next";
 import { getAllApps } from "@/content/apps";
 import { StoreBadge } from "@/components/apps/StoreBadge";
 
+import { pageMeta } from "@/lib/seo";
+
 export const metadata: Metadata = {
-  title: "Games & Apps | Hilmost",
-  description: "Explore immersive mobile games and applications built by Hilmost Software Corporation.",
+  ...pageMeta("/apps", "Games & Apps | Hilmost", "Explore immersive mobile games and applications built by Hilmost Software Corporation."),
   alternates: {
     canonical: "https://hilmost.net/apps",
   },

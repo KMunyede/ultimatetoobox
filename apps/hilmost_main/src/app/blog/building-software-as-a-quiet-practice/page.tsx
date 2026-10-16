@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Building Software as a Quiet Practice | Hilmost Blog",
-  description: "What Stoicism and Hermeticism actually teach about disciplined work, and how they shape the daily operating rhythm behind Hilmost.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/building-software-as-a-quiet-practice",
+  "Building Software as a Quiet Practice | Hilmost Blog",
+  "What Stoicism and Hermeticism actually teach about disciplined work, and how they shape the daily operating rhythm behind Hilmost."
+);
 
 export default function BlogPostQuietPractice() {
   return (

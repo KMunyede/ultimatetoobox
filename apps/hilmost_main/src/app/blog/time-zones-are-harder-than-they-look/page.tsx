@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Time Zones Are Harder Than They Look | Hilmost Blog",
-  description: "Why we rebuilt our Time Zone Converter on boring, correct fundamentals instead of a fragile custom component — and what that taught us about invisible correctness.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/time-zones-are-harder-than-they-look",
+  "Time Zones Are Harder Than They Look | Hilmost Blog",
+  "Why we rebuilt our Time Zone Converter on boring, correct fundamentals instead of a fragile custom component — and what that taught us about invisible correctness."
+);
 
 export default function BlogPostTimeZones() {
   return (

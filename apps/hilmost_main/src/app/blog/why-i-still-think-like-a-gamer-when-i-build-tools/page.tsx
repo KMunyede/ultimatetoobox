@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Why I Still Think Like a Gamer When I Build Tools | Hilmost Blog",
-  description: "How years of reading game systems fast taught me to design faster, friction-free tools for Hilmost Toolbox.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/why-i-still-think-like-a-gamer-when-i-build-tools",
+  "Why I Still Think Like a Gamer When I Build Tools | Hilmost Blog",
+  "How years of reading game systems fast taught me to design faster, friction-free tools for Hilmost Toolbox."
+);
 
 export default function BlogPostGamerSystems() {
   return (

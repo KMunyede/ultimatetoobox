@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Binary vs. Decimal: The Storage Math Nobody Explains Well | Hilmost",
-  description: "Why your '1TB' hard drive shows up as ~931GB in Windows, and why the Data Storage Converter has a binary/decimal toggle instead of one fixed answer.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/binary-vs-decimal-storage-math",
+  "Binary vs. Decimal: The Storage Math Nobody Explains Well | Hilmost",
+  "Why your '1TB' hard drive shows up as ~931GB in Windows, and why the Data Storage Converter has a binary/decimal toggle instead of one fixed answer."
+);
 
 export default function BlogPostBinaryVsDecimal() {
   return (

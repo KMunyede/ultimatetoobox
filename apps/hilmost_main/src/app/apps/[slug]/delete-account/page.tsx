@@ -15,14 +15,15 @@ export async function generateStaticParams() {
   return apps.map((app) => ({ slug: app.slug }));
 }
 
+import { pageMeta } from "@/lib/seo";
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const app = getApp(slug);
   if (!app) return {};
 
   return {
-    title: `Delete Account & Data - ${app.name} | Hilmost`,
-    description: `Instructions for deleting your account and data for ${app.name}.`,
+    ...pageMeta(`/apps/${app.slug}/delete-account`, `Delete Account & Data - ${app.name} | Hilmost`, `Instructions for deleting your account and data for ${app.name}.`),
     alternates: {
       canonical: `https://hilmost.net/apps/${app.slug}/delete-account`,
     },

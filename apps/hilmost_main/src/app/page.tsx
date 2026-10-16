@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-import { TOOL_CATEGORIES, getFeaturedTools, TOTAL_TOOL_COUNT, getLatestBlogPosts } from "@utilitiessite/config";
+import { getFeaturedTools, TOTAL_TOOL_COUNT, getLatestBlogPosts } from "@utilitiessite/config";
+import { BASE_OPEN_GRAPH } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Hilmost | Free Browser-Based Tools",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     title: "Hilmost | Free Browser-Based Tools",
     description: "Free browser-based tools and utilities for everyday tasks — fast, private, no sign-up required.",
     url: "https://hilmost.net",
@@ -70,7 +72,7 @@ export default function Home() {
           <div className="mb-8 md:mb-16 max-w-3xl">
             <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary mb-4">Why Hilmost Exists</h2>
             <p className="text-base md:text-lg text-text-secondary leading-relaxed">
-              Hilmost started with a simple frustration: coordinating meetings across colleagues spread over five continents meant juggling time zones by hand, because the tools online were confusing or bloated. That became the Time Zone Converter — the first tool in what's grown into a toolbox of 50+ free utilities, all built on one principle: fast, private, and no unnecessary friction. No sign-up, no data collection — everything runs on your device.
+              Hilmost started with a simple frustration: coordinating meetings across colleagues spread over five continents meant juggling time zones by hand, because the tools online were confusing or bloated. That became the Time Zone Converter — the first tool in what&apos;s grown into a toolbox of 50+ free utilities, all built on one principle: fast, private, and no unnecessary friction. No sign-up, no data collection — everything runs on your device.
             </p>
           </div>
 

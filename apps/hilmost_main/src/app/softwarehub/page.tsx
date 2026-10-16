@@ -2,10 +2,13 @@ import Link from "next/link";
 import { AppWindow, Gamepad2, Wrench, ArrowRight, Sparkles } from "lucide-react";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Hilmost Software Hub | Apps, Games & Utilities",
-  description: "Explore the ecosystem of Hilmost Software Corporation products including the free Ultimate Toolbox, native desktop applications, and casual games.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/softwarehub",
+  "Hilmost Software Hub | Apps, Games & Utilities",
+  "Explore the ecosystem of Hilmost Software Corporation products including the free Ultimate Toolbox, native desktop applications, and casual games."
+);
 
 export default function SoftwareHub() {
   return (

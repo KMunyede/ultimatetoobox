@@ -2,18 +2,11 @@ import { Metadata } from "next";
 import { PrivacyPolicyContent } from "@utilitiessite/ui";
 import { GamesPrivacySection } from "./GamesPrivacySection";
 
+import { pageMeta } from "@/lib/seo";
+
 export const metadata: Metadata = {
+  ...pageMeta("/privacy-policy", "Privacy Policy | Hilmost", "How Hilmost Software Corporation collects, uses, and protects your information across our tools and services."),
   alternates: { canonical: "https://hilmost.net/privacy-policy" },
-  title: "Privacy Policy | Hilmost",
-  description: "How Hilmost Software Corporation collects, uses, and protects your information across our tools and services.",
-  openGraph: {
-    title: "Privacy Policy | Hilmost",
-    description: "How Hilmost Software Corporation collects, uses, and protects your information across our tools and services.",
-  },
-  twitter: {
-    title: "Privacy Policy | Hilmost",
-    description: "How Hilmost Software Corporation collects, uses, and protects your information across our tools and services.",
-  },
 };
 
 export default function Page() {

@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "What Music Taught Me About Debugging | Hilmost Blog",
-  description: "How years of listening to music built the same instinct I now use to catch bugs that don't show up in any error log — a founder's note on timing, feel, and craft.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/what-music-taught-me-about-debugging",
+  "What Music Taught Me About Debugging | Hilmost Blog",
+  "How years of listening to music built the same instinct I now use to catch bugs that don't show up in any error log — a founder's note on timing, feel, and craft."
+);
 
 export default function BlogPostMusicDebugging() {
   return (

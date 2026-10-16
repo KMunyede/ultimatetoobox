@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Building an Actually Private Password Generator | Hilmost",
-  description: "Why we built our Password Generator around crypto.getRandomValues() instead of Math.random(), and what zero-server architecture actually means in practice.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/building-a-private-password-generator",
+  "Building an Actually Private Password Generator | Hilmost",
+  "Why we built our Password Generator around crypto.getRandomValues() instead of Math.random(), and what zero-server architecture actually means in practice."
+);
 
 export default function BlogPost3() {
   return (

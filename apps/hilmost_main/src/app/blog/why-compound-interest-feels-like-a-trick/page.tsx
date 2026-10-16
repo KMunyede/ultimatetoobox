@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Why Compound Interest Feels Like a Trick | Hilmost",
-  description: "Most people asked to guess how $10,000 grows at 7% over 30 years guess low, often by half. Here's why the calculator shows a curve, not just a number.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/why-compound-interest-feels-like-a-trick",
+  "Why Compound Interest Feels Like a Trick | Hilmost",
+  "Most people asked to guess how $10,000 grows at 7% over 30 years guess low, often by half. Here's why the calculator shows a curve, not just a number."
+);
 
 export default function BlogPostCompoundInterest() {
   return (

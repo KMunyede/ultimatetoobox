@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "The Question I Can't Stop Asking | Hilmost Blog",
-  description: "What quantum decoherence actually says, why the observer-effect myth misses the point, and what chasing an unresolved question taught me about building a company.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/the-question-i-cant-stop-asking",
+  "The Question I Can't Stop Asking | Hilmost Blog",
+  "What quantum decoherence actually says, why the observer-effect myth misses the point, and what chasing an unresolved question taught me about building a company."
+);
 
 export default function BlogPostQuantumQuestion() {
   return (

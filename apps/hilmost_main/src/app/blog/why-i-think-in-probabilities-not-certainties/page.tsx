@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "Why I Think in Probabilities, Not Certainties | Hilmost",
-  description: "What the quantum measurement problem taught me about holding multiple explanations open at once, and why that's made me a more patient debugger.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/why-i-think-in-probabilities-not-certainties",
+  "Why I Think in Probabilities, Not Certainties | Hilmost",
+  "What the quantum measurement problem taught me about holding multiple explanations open at once, and why that's made me a more patient debugger."
+);
 
 export default function BlogPostProbabilities() {
   return (

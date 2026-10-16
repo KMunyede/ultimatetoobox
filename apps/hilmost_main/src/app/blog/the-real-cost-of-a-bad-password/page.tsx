@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 
-export const metadata: Metadata = {
-  title: "The Real Cost of a Bad Password | Hilmost Blog",
-  description: "What our Password Generator actually checks for, why we show crack-time estimates, and how making consequences visible beats vague advice.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/the-real-cost-of-a-bad-password",
+  "The Real Cost of a Bad Password | Hilmost Blog",
+  "What our Password Generator actually checks for, why we show crack-time estimates, and how making consequences visible beats vague advice."
+);
 
 export default function BlogPostPasswordStrength() {
   return (

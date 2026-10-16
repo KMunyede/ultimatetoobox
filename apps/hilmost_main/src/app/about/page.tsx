@@ -3,12 +3,15 @@ import Link from "next/link";
 import { GitBranch, Mail, MapPin } from "lucide-react";
 import { CategoryGrid, AdLayout } from "@utilitiessite/ui";
 import Image from "next/image";
-import { TOOL_CATEGORIES, TOTAL_TOOL_COUNT } from "@utilitiessite/config";
+import { TOTAL_TOOL_COUNT } from "@utilitiessite/config";
 
-export const metadata: Metadata = {
-  title: "About Hilmost | Practical Software for Everyday Tasks",
-  description: "Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks. Explore our mission to create high-performance, private software for all.",
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/about",
+  "About Hilmost | Practical Software for Everyday Tasks",
+  "Hilmost Software Corporation (HSC) builds free, practical software that removes friction from everyday tasks. Explore our mission to create high-performance, private software for all."
+);
 
 export default function AboutPage() {
   const displayCount = Math.floor(TOTAL_TOOL_COUNT / 10) * 10;

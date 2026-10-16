@@ -5,10 +5,13 @@ import { ChevronLeft } from "lucide-react";
 import BlogPostExtras from "../../../components/BlogPostExtras";
 import { TOTAL_TOOL_COUNT, CATEGORY_COUNT } from "@utilitiessite/config";
 
-export const metadata: Metadata = {
-  title: "Why We Built the Hilmost Toolbox | Hilmost Blog",
-  description: `The story behind our collection of ${TOTAL_TOOL_COUNT}+ free online utilities and our commitment to friction-free software. Learn how we engineered a high-performance, private digital toolkit.`,
-};
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta(
+  "/blog/why-we-built-the-toolbox",
+  "Why We Built the Hilmost Toolbox | Hilmost Blog",
+  "The story behind our collection of ${TOTAL_TOOL_COUNT}+ free online utilities and our commitment to friction-free software. Learn how we engineered a high-performance, private digital toolkit."
+);
 
 export default function BlogPost1() {
   return (
