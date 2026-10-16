@@ -130,10 +130,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4
   }));
 
-  // 6. LEGAL & MISC
-  const legalPages: MetadataRoute.Sitemap = [
-    { url: `${toolboxUrl}/knowledge-base`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
-  ];
 
   // 1.5 GUIDES ARTICLES
   const guidePages: MetadataRoute.Sitemap = [
@@ -153,6 +149,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...toolPages,
     ...unitAndFixedSitemap,
     ...currencyPairSitemap,
-    ...legalPages,
   ];
 }

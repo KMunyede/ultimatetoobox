@@ -90,6 +90,16 @@
           "source": "/knowledge-base/weighted-average-cost-of-capital-guide",
           "destination": "/guides/wacc-cost-of-capital-explained",
           "type": 301
+        },
+        {
+          "source": "/knowledge-base",
+          "destination": "/guides",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/",
+          "destination": "/guides",
+          "type": 301
         }
       ]
     },
@@ -185,6 +195,16 @@
         {
           "source": "/knowledge-base/weighted-average-cost-of-capital-guide",
           "destination": "/guides/wacc-cost-of-capital-explained",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base",
+          "destination": "/guides",
+          "type": 301
+        },
+        {
+          "source": "/knowledge-base/",
+          "destination": "/guides",
           "type": 301
         }
       ]

@@ -39,15 +39,6 @@ https://hilmost-toolbox.hilmost.net/pdf-tools/delete-pages
 https://hilmost-toolbox.hilmost.net/pdf-tools/merge-pdf
 https://hilmost-toolbox.hilmost.net/pdf-tools/rotate-pdf
 https://hilmost-toolbox.hilmost.net/pdf-tools/split-pdf
-https://hilmost-toolbox.hilmost.net/knowledge-base
-https://hilmost-toolbox.hilmost.net/knowledge-base/cryptographic-hashing-md5
-https://hilmost-toolbox.hilmost.net/knowledge-base/earnings-per-share-basic-vs-diluted
-https://hilmost-toolbox.hilmost.net/knowledge-base/percentage-math-in-economics
-https://hilmost-toolbox.hilmost.net/knowledge-base/understanding-compound-interest
-https://hilmost-toolbox.hilmost.net/knowledge-base/universal-law-of-gravitation
-https://hilmost-toolbox.hilmost.net/knowledge-base/unix-epoch-time-explained
-https://hilmost-toolbox.hilmost.net/knowledge-base/weighted-average-cost-of-capital-guide
-https://hilmost-toolbox.hilmost.net/knowledge-base/what-is-body-mass-index
 https://hilmost-toolbox.hilmost.net/privacy-policy
 https://hilmost-toolbox.hilmost.net/terms-of-service
 https://hilmost-toolbox.hilmost.net/cookie-policy
