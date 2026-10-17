@@ -1,5 +1,5 @@
 ﻿import { Metadata } from "next";
-
+import Link from "next/link";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta(
@@ -10,67 +10,93 @@ export const metadata: Metadata = pageMeta(
 
 export default function ContactPage() {
   return (
-    <div className="container mx-auto px-4 py-16 max-w-2xl">
-      <div className="prose prose-slate dark:prose-invert max-w-none mb-8">
-        <h1>Contact Us</h1>
-        <p className="lead">
-          Have a question or need support? We&apos;d love to hear from you.
+    <div className="container mx-auto px-4 py-16 max-w-3xl space-y-12">
+      <div className="prose prose-slate dark:prose-invert max-w-none space-y-4">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          Contact Hilmost Software Corporation (Not yet Incorporated)
+        </h1>
+        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+          Hilmost Software Corporation is a small software studio based in Harare, Zimbabwe. We build free web tools on{" "}
+          <a href="https://hilmost-toolbox.hilmost.net" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Hilmost Toolbox
+          </a>
+          , and mobile apps and games such as{" "}
+          <Link href="/apps/ultimate-tic-tac-toe" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Ultimate Tic Tac Toe
+          </Link>{" "}
+          and{" "}
+          <Link href="/apps/ultimate-3d-checkers" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Ultimate 3D Checkers
+          </Link>
+          . A real person reads every message.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        {/* Company Info */}
-        <div className="lg:col-span-1 space-y-8">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Company Address</h3>
-            <address className="not-italic text-slate-600 dark:text-slate-400 space-y-1">
-              <p>Harare</p>
-              <p>Zimbabwe</p>
-            </address>
-          </div>
-
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Contact Details</h3>
-            <div className="space-y-4 text-slate-600 dark:text-slate-400">
-              <p>
-                <strong className="block text-slate-900 dark:text-white text-sm mb-1">Email</strong>
-                <a href="mailto:support@hilmost.net" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">support@hilmost.net</a>
-              </p>
-            </div>
-          </div>
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">How to reach us</h2>
+        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Email{" "}
+          <a href="mailto:support@hilmost.net" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            support@hilmost.net
+          </a>
+          . We aim to reply within 2 working days.
+        </p>
+        <div>
+          <a
+            href="mailto:support@hilmost.net"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
+          >
+            Email us
+          </a>
         </div>
+      </div>
 
-        {/* Contact Form */}
-        <div className="lg:col-span-2">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm h-full">
-            <form className="space-y-6" action="mailto:support@hilmost.net" method="POST" encType="text/plain">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
-                  <input type="text" name="firstName" className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="John" required />
-                </div>
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
-                  <input type="text" name="lastName" className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Doe" required />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
-                <input type="email" name="email" className="w-full h-12 px-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="john@example.com" required />
-              </div>
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">What to include</h2>
+        <ul className="list-disc pl-5 space-y-3 text-slate-600 dark:text-slate-400 leading-relaxed">
+          <li>
+            <strong className="text-slate-900 dark:text-white">Help with a tool or app:</strong> the page link or app name, your device, and what happened.
+          </li>
+          <li>
+            <strong className="text-slate-900 dark:text-white">Bug reports:</strong> the steps to make it happen again, plus a screenshot if you can.
+          </li>
+          <li>
+            <strong className="text-slate-900 dark:text-white">Partnerships and business enquiries:</strong> who you are and what you have in mind.
+          </li>
+          <li>
+            <strong className="text-slate-900 dark:text-white">Feedback and ideas:</strong> tell us which tool you&apos;d like us to build next.
+          </li>
+        </ul>
+      </div>
 
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
-                <textarea name="message" className="w-full p-4 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none min-h-[150px]" placeholder="How can we help you?" required></textarea>
-              </div>
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Your account and data</h2>
+        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          To remove an app account and its data, see{" "}
+          <Link href="/delete-account" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Delete your account
+          </Link>
+          . To see how we handle data, read our{" "}
+          <Link href="/privacy-policy" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Privacy Policy
+          </Link>
+          ,{" "}
+          <Link href="/cookie-policy" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Cookie Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms-of-service" className="text-emerald-800 dark:text-emerald-400 underline font-medium">
+            Terms of Service
+          </Link>
+          .
+        </p>
+      </div>
 
-              <button type="submit" className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors shadow-sm shadow-blue-500/20">
-                Send Message
-              </button>
-            </form>
-          </div>
-        </div>
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Where we are</h2>
+        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+          Harare, Zimbabwe. We work online only, so we can&apos;t take walk-in visits.
+        </p>
       </div>
     </div>
   );
