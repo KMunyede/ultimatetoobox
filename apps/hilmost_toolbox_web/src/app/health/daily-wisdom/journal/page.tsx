@@ -1,9 +1,11 @@
 import { Metadata } from "next";
 import { JournalClient } from "./JournalClient";
+import { NOINDEX_APP_SCREEN } from "@/lib/indexing-policy";
 
 export const metadata: Metadata = {
   title: "Private Journal | Daily Wisdom",
   description: "Your private space for reflection and stoic journaling. Use our secure, browser-side tool to record your thoughts, practice mindfulness, and apply timeless wisdom to your daily life.",
+  ...NOINDEX_APP_SCREEN,
 };
 
 export default function JournalPage() {

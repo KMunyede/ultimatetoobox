@@ -12,6 +12,10 @@ export const NOINDEX_PATHS: ReadonlySet<string> = new Set([
   "/text-data/base64-encode/base64-decode"
 ]);
 
+export const NOINDEX_APP_SCREEN = {
+  robots: { index: false, follow: true },
+} as const;
+
 export function isNoIndexPath(path: string): boolean {
   if (!path) return false;
   const cleanPath = path.endsWith("/") && path.length > 1 ? path.slice(0, -1) : path;
