@@ -2,14 +2,11 @@ import { Metadata } from "next";
 import { ArrowRight, HeartPulse, Sparkles } from "lucide-react";
 import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  ...pageMeta(
-    "/healthhub",
-    "Hilmost Health Hub | Daily Wisdom & Wellness",
-    "Free health and well-being tools from Hilmost: Daily Wisdom for a clear mind, plus BMI and waist risk, calorie and macro, and sleep cycle calculators."
-  ),
-  robots: { index: false, follow: true },
-};
+export const metadata: Metadata = pageMeta(
+  "/healthhub",
+  "Hilmost Health Hub | Daily Wisdom & Wellness",
+  "Free health and well-being tools from Hilmost: Daily Wisdom for a clear mind, plus BMI and waist risk, calorie and macro, and sleep cycle calculators."
+);
 
 interface HealthTool {
   group: "Mind" | "Body";
