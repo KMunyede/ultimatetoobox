@@ -24,3 +24,4 @@
 2026-10-18 | hilmost.net /healthhub | indexable (noindex removed), included in sitemap | Gemini (HM230C) | staging curl check
 2026-10-18 | hilmost.net /apps | intro, how-we-build, web app link, In development list from in-development.ts; package IDs hidden | Gemini HM231B staging | curl
 2026-10-18 | hilmost.net footer | links straight to /apps as Games & Apps | Gemini HM232 staging | curl
+2026-10-18 | hilmost.net /careers | deep green links matching /contact (emerald-800/emerald-400); no blue classes | Gemini HM233 staging | apps/hilmost_main/src/app/careers/page.tsx

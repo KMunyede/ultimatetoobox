@@ -43,7 +43,7 @@ export default function CareersPage() {
               If you believe you&apos;d be a great fit for Hilmost but don&apos;t see a relevant role, we&apos;d still love to hear from you. Send your resume and a brief introduction to our team.
             </p>
             <p className="mt-4">
-              <strong>Email us at:</strong> <a href="mailto:support@hilmost.net" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>
+              <strong>Email us at:</strong> <a href="mailto:support@hilmost.net" className="text-emerald-800 dark:text-emerald-400 hover:underline">support@hilmost.net</a>
             </p>
           </section>
         </div>
