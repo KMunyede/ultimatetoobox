@@ -22,3 +22,4 @@
 2026-10-17 | Daily Wisdom | The app screens /health/daily-wisdom/journal, /library and /profile are "noindex, follow" (shared NOINDEX_APP_SCREEN constant) and not in the sitemap. The main /health/daily-wisdom page stays indexable with a self canonical. | Claude live check + Gemini (HM229) | apps/hilmost_toolbox_web/src/app/health/daily-wisdom
 2026-10-17 | hilmost.net /contact & /healthhub | Mailto form replaced by Email us button; health hub expanded modularly; deep green buttons (emerald-800); no blue classes. | Gemini (HM230B) | apps/hilmost_main/src/app/contact/page.tsx, apps/hilmost_main/src/app/healthhub/page.tsx
 2026-10-18 | hilmost.net /healthhub | indexable (noindex removed), included in sitemap | Gemini (HM230C) | staging curl check
+2026-10-18 | hilmost.net /apps | intro, how-we-build, web app link, In development list from in-development.ts; package IDs hidden | Gemini HM231B staging | curl
