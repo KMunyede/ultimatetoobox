@@ -5,7 +5,6 @@ export interface InDevelopmentItem {
 
 export const IN_DEVELOPMENT_ITEMS: readonly InDevelopmentItem[] = [
   { name: "Ultimate Driver", kind: "game" },
-  { name: "Ultimate Twenty48", kind: "game" },
   { name: "Ultimate Tetris", kind: "game" },
   { name: "Space Rangers", kind: "game" },
   { name: "Daily Stoic", kind: "app" },

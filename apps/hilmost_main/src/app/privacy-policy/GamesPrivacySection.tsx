@@ -26,7 +26,7 @@ export function GamesPrivacySection() {
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Use</h3>
-          <p className="text-text-secondary mt-1">Only to show and measure ads. No analytics, no crash reporting, no Firebase, no network calls from the app&apos;s own code.</p>
+          <p className="text-text-secondary mt-1">Only to show and measure ads, and to check Google Play for updates (at most once a day, plus a &quot;Check for updates&quot; button in Settings). This sends nothing to Hilmost and Hilmost collects no new data. No analytics, no crash reporting, no Firebase.</p>
         </div>
 
         <div>
@@ -36,17 +36,17 @@ export function GamesPrivacySection() {
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Ads</h3>
-          <p className="text-text-secondary mt-1">Banner, interstitial and rewarded ads. No app-open ads. Ads and the advertising ID start only after the player taps &quot;I agree&quot; on the first-launch consent screen. If the player taps &quot;No thanks&quot;, the app plays with no ads, the ads SDK is not started, and rewarded offers (extra time, undo refills) are hidden. Region-specific consent for the EEA and UK will be added before wider release.</p>
+          <p className="text-text-secondary mt-1">Banner, interstitial and rewarded ads. No app-open ads. On first launch a consent screen asks the player to agree or decline. Ads and the advertising ID start only after &quot;I agree&quot;. If declined on first launch, the ads SDK is not started. If switched off later via the &quot;Ads&quot; on/off switch in Settings, the player sees no ads and no ad offers. The player can change the choice there at any time. Region-specific consent for the EEA and UK will be added before wider release.</p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Where</h3>
-          <p className="text-text-secondary mt-1">Stored on the device only: last daily-challenge date, daily streak, best daily streak, game mode, target value, high score, selected theme. Never sent anywhere.</p>
+          <p className="text-text-secondary mt-1">Stored on the device only, never sent anywhere: high score, game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, consent choice and consent version, ads on/off choice, time of last update check.</p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Retention</h3>
-          <p className="text-text-secondary mt-1">Local settings are removed if the player uninstalls the app or clears app data. Players can change their consent choice by clearing app data or reinstalling.</p>
+          <p className="text-text-secondary mt-1">Uninstalling the app or clearing app data removes all local data. Ad data held by Google is governed by Google policies (<a href="https://policies.google.com/technologies/ads" className="text-brand-primary underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a>); the player can reset or delete their advertising ID in Android Settings &gt; Google &gt; Ads. The player can change their ads choice in Settings at any time.</p>
         </div>
 
         <div>
