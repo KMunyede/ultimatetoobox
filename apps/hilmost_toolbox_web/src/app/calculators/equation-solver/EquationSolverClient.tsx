@@ -199,7 +199,7 @@ export function EquationSolverClient({
               }`}
             >
               <div className="font-normal text-black dark:text-white mb-1 truncate uppercase text-xs tracking-tight">{eq.name}</div>
-              <div className="text-caption font-mono text-brand-primary font-normal">{eq.formula}</div>
+              <div className="text-base font-mono text-brand-primary font-normal break-words">{eq.formula}</div>
             </button>
           ))}
         </div>
