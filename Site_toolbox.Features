@@ -27,3 +27,4 @@
 2026-10-18 | hilmost.net /careers | deep green links matching /contact (emerald-800/emerald-400); no blue classes | Gemini HM233 staging | apps/hilmost_main/src/app/careers/page.tsx
 2026-10-18 | Equation solvers | Added modular content data file (equation-content.ts), worked examples, FAQs and related solver links across the 4 equation pages (360-401 words each) and hub worked example. | Gemini (HM234B) | apps/hilmost_toolbox_web/src/app/calculators/equation-solver/
 2026-10-18 | Equation solvers indexing | Removed the 4 equation pages from NOINDEX_PATHS in indexing-policy.ts (cause of old noindex) and verified sitemap inclusion (+4 URLs). | Gemini (HM234C) | apps/hilmost_toolbox_web/src/lib/indexing-policy.ts
+2026-10-18 | UI Theme | Replaced blue hover classes in FAQAccordion and ToolTutorial with enterprise-calm emerald in packages/ui. | Gemini (HM234D) | packages/ui/src/

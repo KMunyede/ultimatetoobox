@@ -39,7 +39,7 @@ export function ToolTutorial({ tourId, steps, buttonText = "How to use" }: ToolT
       </a>
       <button
         onClick={() => driverRef.current?.drive()}
-        className="inline-flex items-center gap-1.5 px-2 py-1 text-caption font-normal text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-900/30 dark:hover:bg-blue-900/50 transition-colors"
+        className="inline-flex items-center gap-1.5 px-2 py-1 text-caption font-normal text-emerald-800 bg-emerald-50 rounded-lg hover:bg-emerald-100 dark:text-emerald-300 dark:bg-emerald-900/30 dark:hover:bg-emerald-900/50 transition-colors"
         title="Step-by-step guide on how to use this tool"
       >
         <HelpCircle className="w-3.5 h-3.5" />
