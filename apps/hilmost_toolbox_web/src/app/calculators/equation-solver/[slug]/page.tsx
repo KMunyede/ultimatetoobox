@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, RelatedTools, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
+import Link from "next/link";
+import { WebApplicationSchema, Breadcrumbs, ToolArticle, FAQAccordion, FAQSchema, RelatedTools, ToolHeader, BreadcrumbSchema } from "@utilitiessite/ui";
 import { EquationSolverClient } from "../EquationSolverClient";
+import { EQUATION_CONTENT } from "../equation-content";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -50,7 +52,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function EquationProgrammaticPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const config = SLUGS.find(s => s.slug === resolvedParams.slug);
-  if (!config) return notFound();
+  const content = EQUATION_CONTENT[resolvedParams.slug];
+  if (!config || !content) return notFound();
 
   const breadcrumbItems = [
     { label: "Calculators", href: "/calculators" },
@@ -61,6 +64,8 @@ export default async function EquationProgrammaticPage({ params }: { params: Pro
   const filePath = path.join(process.cwd(), "src/app/calculators/equation-solver/[slug]/page.tsx");
   const lastUpdated = getFileLastUpdated(filePath);
 
+  const otherEquations = SLUGS.filter(s => s.slug !== resolvedParams.slug);
+
   return (
     <div className="container mx-auto px-4 py-2 max-w-6xl">
       <WebApplicationSchema
@@ -69,6 +74,7 @@ export default async function EquationProgrammaticPage({ params }: { params: Pro
         url={getCanonicalUrl(`/calculators/equation-solver/${resolvedParams.slug}`)}
         image="https://hilmost-toolbox.hilmost.net/og/calculators.png"
       />
+      <FAQSchema items={content.faqs} />
       <BreadcrumbSchema items={breadcrumbItems} />
 
       <Breadcrumbs items={breadcrumbItems} />
@@ -85,14 +91,56 @@ export default async function EquationProgrammaticPage({ params }: { params: Pro
       <EquationSolverClient initialCategory={config.cat} initialEquationId={config.id} />
 
       <ToolArticle title={`Mastering ${config.title}`}>
-        <p>{config.desc} Our solver eliminates the need for manual algebraic rearrangement, allowing you to focus on the science.</p>
+        <p>{content.intro}</p>
+
+        <h3>Formula &amp; SI Units</h3>
+        <p className="font-mono text-base bg-slate-100 dark:bg-slate-800 p-3 rounded-md font-semibold text-slate-900 dark:text-slate-100">
+          {content.formula.expression}
+        </p>
+        <ul>
+          {content.formula.variables.map((v, idx) => (
+            <li key={idx}>
+              <strong>{v.symbol} ({v.name}):</strong> {v.description}. SI unit: {v.unit}.
+            </li>
+          ))}
+        </ul>
+
         <h3>How to Use This Tool</h3>
         <ol>
-          <li><strong>Step 1: Verify Equation</strong> - The {config.cat} formula is pre-selected for your convenience.</li>
-          <li><strong>Step 2: Choose Target</strong> - Select the variable you want to solve for from the dropdown menu.</li>
-          <li><strong>Step 3: Enter Values</strong> - Input your known data and select the appropriate units for an instant result.</li>
+          {content.howToUse.map((step, idx) => (
+            <li key={idx}>{step}</li>
+          ))}
         </ol>
+
+        <h3>Worked Example ({content.workedExample.title})</h3>
+        <p><strong>Scenario:</strong> {content.workedExample.scenario}</p>
+        <p><strong>Given:</strong> {content.workedExample.given.join(", ")}.</p>
+        <ol>
+          {content.workedExample.steps.map((step, idx) => (
+            <li key={idx}>{step}</li>
+          ))}
+        </ol>
+        <p><strong>Result:</strong> {content.workedExample.result}</p>
+
+        <h3>Related Solvers</h3>
+        <p>Explore other dedicated physics and thermodynamics equation solvers:</p>
+        <ul>
+          {otherEquations.map((other) => (
+            <li key={other.slug}>
+              <Link href={`/calculators/equation-solver/${other.slug}`} className="text-emerald-800 dark:text-emerald-400 underline font-medium hover:opacity-80">
+                {other.title}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link href="/calculators/equation-solver" className="text-emerald-800 dark:text-emerald-400 underline font-medium hover:opacity-80">
+              Science Equation Solver Hub (All Physics Formulas)
+            </Link>
+          </li>
+        </ul>
       </ToolArticle>
+
+      <FAQAccordion items={content.faqs} />
 
       <RelatedTools category="calculators" currentPath={`/calculators/equation-solver/${resolvedParams.slug}`} />
     </div>

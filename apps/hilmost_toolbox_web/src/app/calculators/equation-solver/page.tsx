@@ -99,6 +99,16 @@ export default function EquationSolverPage() {
           <li><strong>Step 3: Solve for X</strong> - Enter known values and units to bypass complex algebraic rearrangement instantly.</li>
         </ol>
 
+        <h3>Worked Example (Ohm&apos;s Law)</h3>
+        <p>
+          Consider a simple circuit with a voltage <strong>V = 12 V</strong> and resistance <strong>R = 4 Ω</strong>. To calculate the electric current (I):
+        </p>
+        <ol>
+          <li>State formula: <code>I = V / R</code></li>
+          <li>Substitute values: <code>I = 12 V / 4 Ω</code></li>
+          <li>Result: Electric current <code>I = 3 A</code> (Amperes).</li>
+        </ol>
+
         <h3>Libraries Included</h3>
         <ul>
           <li><strong>Mechanics:</strong> Newton&apos;s Laws, Kinetic Energy, Work, and Power.</li>
