@@ -4,10 +4,6 @@ export const NOINDEX_PATHS: ReadonlySet<string> = new Set([
   "/calculators/astrophysics/escape-velocity",
   "/calculators/astrophysics/luminosity-calculator",
   "/calculators/astrophysics/hubble-distance",
-  "/calculators/equation-solver/newtons-second-law",
-  "/calculators/equation-solver/kinetic-energy",
-  "/calculators/equation-solver/ideal-gas-law",
-  "/calculators/equation-solver/ohms-law",
   "/text-data/base64-encode/base64-encode",
   "/text-data/base64-encode/base64-decode"
 ]);
