@@ -8,7 +8,7 @@ export const twenty48GrandMasters: AppContent = {
   contactEmail: "support@hilmost.net",
   status: "coming-soon",
   storeUrl: "https://play.google.com/store/apps/details?id=net.hilmost.twenty48",
-  effectiveDate: "18 October 2026",
+  effectiveDate: "19 October 2026",
   tagline: "Slide-and-merge 2048 puzzle with classic, timed, and daily challenge modes",
   summary: [
     "2048 GrandMasters is a slide-and-merge 2048 puzzle game featuring classic and timed modes, daily challenges with streaks, undo and swap helpers, 5 visual themes, and selectable target values."
@@ -56,9 +56,9 @@ export const twenty48GrandMasters: AppContent = {
       heading: "What we collect",
       bullets: [
         "No accounts or login: 2048 GrandMasters has no accounts or sign-in mechanism and collects no personal data itself. There are no analytics, crash reporting tools, or Firebase services included in the app.",
-        "Ads: Google AdMob delivers banner, interstitial, and rewarded ads (no app-open ads). On first launch, a consent screen asks you to agree or decline. Ads and the advertising ID start only after you tap \"I agree\". If you decline on first launch, the ads SDK is not started. If you switch ads off later in Settings, no ads or ad offers are shown. You can change your choice in Settings at any time. AdMob may collect your device's advertising ID and ad-related device data to serve and measure ads. Region-specific consent (Google UMP) for the EEA and UK will be added before wider release. Google's privacy policy: https://policies.google.com/technologies/ads",
-        "App updates: the app checks Google Play for updates using the Google Play in-app update service at most once a day, plus a manual \"Check for updates\" button in Settings. This sends no data to Hilmost and Hilmost collects no new data.",
-        "Stored on device only: high score, game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, consent choice and consent version, ads on/off choice, and time of last update check are saved locally on your device and never sent anywhere."
+        "Ads: Google AdMob delivers banner, interstitial, and rewarded ads (no app-open ads). The app first asks for your choice on first launch; ads start only after you agree. In the EEA, UK and similar regions Google's consent message (Google User Messaging Platform) may also be shown, and your choice is stored on your device by Google's SDK. If you decline on first launch, the ads SDK is not started. In Settings, when it is available, a \"Privacy choices\" option lets you review or change that choice; you can also switch ads off in Settings. AdMob may collect your device's advertising ID and ad-related device data to serve and measure ads. Google's privacy policy: https://policies.google.com/technologies/ads",
+        "App updates: the app checks Google Play for updates using the Google Play in-app update service at most once a day, plus a manual \"Check for updates\" button in Settings. This sends nothing to Hilmost and Hilmost collects no new data.",
+        "Stored on device only (never sent to us): game progress and settings, best score, daily-challenge streaks, simple play statistics (games played, wins, highest tile), your current level / rank in Normal mode (Apprentice, Expert, GrandMaster), whether you have seen the How to play guide, and your consent choice (along with game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, consent version, ads on/off choice, and time of last update check). Uninstalling the app or clearing its storage deletes all of it."
       ]
     },
     {
@@ -121,7 +121,7 @@ export const twenty48GrandMasters: AppContent = {
     {
       heading: "2. Accounts",
       paragraphs: [
-        "No account or sign-in is required or provided for 2048 GrandMasters. All game progress and preferences are stored strictly on your device."
+        "No account or sign-in is required or provided for 2048 GrandMasters. All game progress and preferences (including best score, daily-challenge streaks, play statistics, level/rank, settings, and consent choices) are stored strictly on your device. Uninstalling the app or clearing its storage deletes all of it."
       ]
     },
     {
@@ -172,7 +172,7 @@ export const twenty48GrandMasters: AppContent = {
       heading: "In the app",
       bullets: [
         "No account exists for 2048 GrandMasters.",
-        "All data (high score, game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, consent choice, ads choice, and update check timestamp) is stored strictly on your device.",
+        "All data (game progress and settings, best score, daily-challenge streaks, simple play statistics (games played, wins, highest tile), your current level / rank in Normal mode (Apprentice, Expert, GrandMaster), whether you have seen the How to play guide, consent choice, game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, ads choice, and update check timestamp) is stored strictly on your device. Uninstalling the app or clearing its storage deletes all of it.",
         "Uninstall the app or clear app data in Android Settings to delete all local data immediately."
       ]
     },

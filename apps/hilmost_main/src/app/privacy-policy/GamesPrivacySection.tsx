@@ -12,7 +12,7 @@ export function GamesPrivacySection() {
 
       <div id="2048-grandmasters" className="mt-8 pt-8 border-t border-base space-y-6">
         <h2 className="text-2xl font-bold tracking-tight text-text-primary">2048 GrandMasters</h2>
-        <p className="text-text-secondary mt-1">This section applies from the version of 2048 GrandMasters that includes the first-launch consent screen.</p>
+        <p className="text-text-secondary mt-1">This section applies from the version of 2048 GrandMasters that includes the first-launch consent screen. Effective 19 October 2026.</p>
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Who</h3>
@@ -36,12 +36,12 @@ export function GamesPrivacySection() {
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Ads</h3>
-          <p className="text-text-secondary mt-1">Banner, interstitial and rewarded ads. No app-open ads. On first launch a consent screen asks the player to agree or decline. Ads and the advertising ID start only after &quot;I agree&quot;. If declined on first launch, the ads SDK is not started. If switched off later via the &quot;Ads&quot; on/off switch in Settings, the player sees no ads and no ad offers. The player can change the choice there at any time. Region-specific consent for the EEA and UK will be added before wider release.</p>
+          <p className="text-text-secondary mt-1">Banner, interstitial and rewarded ads. No app-open ads. The app first asks for your choice on first launch; ads start only after you agree. In the EEA, UK and similar regions Google&apos;s consent message (Google User Messaging Platform) may also be shown, and your choice is stored on your device by Google&apos;s SDK. If declined on first launch, the ads SDK is not started. In Settings, when it is available, a &quot;Privacy choices&quot; option lets you review or change that choice; you can also switch ads off in Settings. AdMob may collect your device&apos;s advertising ID and ad-related device data to serve and measure ads. The player can change their ads choice in Settings at any time.</p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold text-text-primary">Where</h3>
-          <p className="text-text-secondary mt-1">Stored on the device only, never sent anywhere: high score, game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, consent choice and consent version, ads on/off choice, time of last update check.</p>
+          <p className="text-text-secondary mt-1">Stored on the device only (never sent to us): game progress and settings, best score, daily-challenge streaks, simple play statistics (games played, wins, highest tile), your current level / rank in Normal mode (Apprentice, Expert, GrandMaster), whether you have seen the How to play guide, and your consent choice (along with game mode, target value, selected theme, daily-challenge date, daily streak, best daily streak, consent version, ads on/off choice, and time of last update check). Uninstalling the app or clearing its storage deletes all of it.</p>
         </div>
 
         <div>
