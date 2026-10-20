@@ -17,7 +17,7 @@ export const ultimate3DCheckers: AppContent = {
     "Rotating 3D board you can view from any angle",
     "Player vs player on one device, or player vs computer",
     "Play offline",
-    "Optional Google sign-in, or play as a guest",
+    "Optional Google sign-in, email and password, or anonymous sign-in via Firebase Authentication, or play as a guest",
     "Guest stats are merged into your account when you sign in"
   ],
   howToPlay: [],
@@ -36,9 +36,9 @@ export const ultimate3DCheckers: AppContent = {
       heading: "What we collect",
       bullets: [
         "Guest play: your progress, stats and settings are saved only on your device. We do not receive them.",
-        "If you sign in (with Google, or with an email address and password): your email address, your account ID (Firebase user ID) and the username you choose. Usernames are kept in a list so each one is unique. If you use an email and password, your password is handled by Firebase Authentication. We never see or store it.",
-        "If you sign in: your game stats (wins, losses, games played), match history, saved and active games (board positions, turns, difficulty), and the dates your account was created or updated. When a guest signs in, their on-device stats are merged into the account.",
-        "Playing against the computer: the current board position and difficulty level are sent to our server to calculate the computer's move. This contains no personal information and is not stored.",
+        "If you sign in (with Google, email and password, or anonymous sign-in via Firebase Authentication): your email address, your account ID (Firebase user ID) and the username you choose. Usernames are kept in a list so each one is unique. If you use an email and password, your password is handled by Firebase Authentication. We never see or store it.",
+        "Signed-in data stored in Google Firebase (Cloud Firestore): your profile and chosen username, match history, win/loss statistics and one saved game in progress. When a guest signs in, their on-device stats are merged into the account.",
+        "Playing against the computer: board positions are sent to a Firebase Cloud Function to calculate the AI move. No username, email, or personal details are sent for this.",
         "Ads: the app shows Google AdMob banner and interstitial ads. Consent for personalised ads is requested through Google's User Messaging Platform (UMP) consent form where required. The app caps ad content at PG maturity rating. The app is not directed at children under 13.",
         "No in-app purchases.",
         "We run no analytics or crash-reporting tools of our own. Google's ad SDK may collect device identifiers and ad interaction data under Google's privacy policy (https://policies.google.com/privacy).",
@@ -142,7 +142,7 @@ export const ultimate3DCheckers: AppContent = {
     },
     {
       heading: "In the app",
-      paragraphs: ["The app has an in-app \"Delete account\" option, which removes the account and its stored data; also available on https://hilmost.net/apps/ultimate-3d-checkers/delete-account."]
+      paragraphs: ["The app has an in-app \"Delete account\" option, which removes your account from Firebase Authentication and deletes all user data from Cloud Firestore (including your profile, chosen username, match history, win/loss statistics, and saved games); also available on https://hilmost.net/apps/ultimate-3d-checkers/delete-account."]
     },
     {
       heading: "Queries & Feedback",
