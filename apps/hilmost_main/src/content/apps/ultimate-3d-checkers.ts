@@ -22,7 +22,7 @@ export const ultimate3DCheckers: AppContent = {
   ],
   howToPlay: [],
   faq: [],
-  effectiveDate: "13 October 2026",
+  effectiveDate: "20 October 2026",
   privacy: [
     {
       heading: "Who we are",
@@ -39,7 +39,10 @@ export const ultimate3DCheckers: AppContent = {
         "If you sign in (with Google, or with an email address and password): your email address, your account ID (Firebase user ID) and the username you choose. Usernames are kept in a list so each one is unique. If you use an email and password, your password is handled by Firebase Authentication. We never see or store it.",
         "If you sign in: your game stats (wins, losses, games played), match history, saved and active games (board positions, turns, difficulty), and the dates your account was created or updated. When a guest signs in, their on-device stats are merged into the account.",
         "Playing against the computer: the current board position and difficulty level are sent to our server to calculate the computer's move. This contains no personal information and is not stored.",
-        "No ads. No in-app purchases. No analytics or crash-reporting tools. We do not track you across other apps or websites. The app's only permission is internet access."
+        "Ads: the app shows Google AdMob banner and interstitial ads. Consent for personalised ads is requested through Google's User Messaging Platform (UMP) consent form where required. The app caps ad content at PG maturity rating. The app is not directed at children under 13.",
+        "No in-app purchases.",
+        "We run no analytics or crash-reporting tools of our own. Google's ad SDK may collect device identifiers and ad interaction data under Google's privacy policy (https://policies.google.com/privacy).",
+        "Permissions: internet access and the Google advertising ID permission (com.google.android.gms.permission.AD_ID), used by Google's ad SDK."
       ]
     },
     {
@@ -138,8 +141,8 @@ export const ultimate3DCheckers: AppContent = {
       paragraphs: ["Your data is only on your device. Uninstall the app, or clear its data, to remove it."]
     },
     {
-      heading: "Coming soon",
-      paragraphs: ["An in-app \"Delete account\" option. This page will be updated when it ships."]
+      heading: "In the app",
+      paragraphs: ["The app has an in-app \"Delete account\" option, which removes the account and its stored data; also available on https://hilmost.net/apps/ultimate-3d-checkers/delete-account."]
     },
     {
       heading: "Queries & Feedback",
