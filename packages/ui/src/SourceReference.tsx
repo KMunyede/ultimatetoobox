@@ -16,7 +16,7 @@ export function SourceReference({ sources, title = "Data Sources & References" }
   return (
     <div className="mt-8 p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-inner">
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
+        <div className="p-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg">
           <BookOpen size={16} />
         </div>
         <h4 className="text-xs font-normal text-black dark:text-white uppercase tracking-[0.1em]">
@@ -31,7 +31,7 @@ export function SourceReference({ sources, title = "Data Sources & References" }
               href={source.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs md:text-sm font-normal text-blue-600 dark:text-blue-400 hover:underline decoration-2 underline-offset-4"
+              className="text-xs md:text-sm font-normal text-emerald-600 dark:text-emerald-400 hover:underline decoration-2 underline-offset-4"
             >
               {source.name}
             </a>

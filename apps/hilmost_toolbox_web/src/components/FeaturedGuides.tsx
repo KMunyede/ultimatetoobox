@@ -30,7 +30,7 @@ export function FeaturedGuides() {
           <Link
             key={guide.slug}
             href={`/guides/${guide.slug}`}
-            className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-indigo-500/50"
+            className="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm ring-1 ring-slate-200 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-emerald-500/50"
           >
             <h3 className="text-xl font-normal text-black dark:text-white mb-2">
               {guide.title}
@@ -38,7 +38,7 @@ export function FeaturedGuides() {
             <p className="text-sm text-black dark:text-white mb-4 line-clamp-3">
               {guide.excerpt}
             </p>
-            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-indigo-600 dark:text-indigo-400">
+            <div className="mt-auto pt-2 flex items-center text-sm font-normal text-emerald-600 dark:text-emerald-400">
               Read Guide <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -47,7 +47,7 @@ export function FeaturedGuides() {
       <div className="text-center">
         <Link
           href="/guides"
-          className="inline-flex items-center text-[28px] font-normal text-indigo-600 dark:text-indigo-400 hover:underline group"
+          className="inline-flex items-center text-[28px] font-normal text-emerald-600 dark:text-emerald-400 hover:underline group"
         >
           View all guides <ArrowRight size={32} className="ml-1 group-hover:translate-x-1 transition-transform" />
         </Link>

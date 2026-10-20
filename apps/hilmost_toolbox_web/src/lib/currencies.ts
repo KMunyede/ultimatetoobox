@@ -50,9 +50,16 @@ export function getProgrammaticCurrencyPairs() {
 }
 
 /**
+ * Owner-approved top-20 indexable currency pair allowlist
+ */
+export const INDEXABLE_PAIR_SLUGS = new Set<string>([
+  "usd-to-eur", "usd-to-gbp", "usd-to-inr", "usd-to-jpy", "eur-to-usd", "gbp-to-usd", "usd-to-cad", "usd-to-aud", "eur-to-gbp", "usd-to-cny", "usd-to-chf", "usd-to-mxn", "gbp-to-eur", "usd-to-zar", "gbp-to-inr", "usd-to-php", "usd-to-ngn", "eur-to-inr", "eur-to-jpy", "usd-to-hkd"
+]);
+
+/**
  * Currency pair pages are thin (shared template). Kept usable but noindexed.
  * To re-open a pair later, it must first get its own unique content.
  */
-export function isIndexableCurrencyPair(_from: string, _to: string): boolean {
-  return false;
+export function isIndexableCurrencyPair(from: string, to: string): boolean {
+  return INDEXABLE_PAIR_SLUGS.has(`${from}-to-${to}`.toLowerCase());
 }
