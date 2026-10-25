@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { TimeConverterClient } from "./TimeConverterClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -108,6 +109,8 @@ export default function TimeConverterPage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/converters/time" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="converters" currentPath="/converters/time" />

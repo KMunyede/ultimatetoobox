@@ -1,6 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { RetirementPlannerClient } from "./RetirementPlannerClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -101,6 +102,8 @@ export default function RetirementPlannerPage() {
           <li><strong>Step 3: Track Trajectory</strong> - Visualize if your current path will meet your retirement income needs.</li>
         </ol>
       </ToolArticle>
+
+      <ToolExtraSection route="/finance/retirement-planner" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="finance" />

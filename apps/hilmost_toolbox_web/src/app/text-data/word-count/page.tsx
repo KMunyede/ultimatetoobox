@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { WordCountClient } from "./WordCountClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -113,6 +114,8 @@ export default function WordCountPage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/text-data/word-count" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="text-data" currentPath={PATH} />

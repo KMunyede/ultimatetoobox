@@ -3,6 +3,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import { Metadata } from "next";
 import { MD5HashClient } from "./MD5HashClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
@@ -103,6 +104,8 @@ export default function MD5Page() {
           <li><strong>Step 3: Verify Integrity</strong> - Copy the unique hash to confirm file authenticity or perform data deduplication.</li>
         </ol>
       </ToolArticle>
+
+      <ToolExtraSection route="/text-data/md5-hash" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="text-data" currentPath={PATH} />

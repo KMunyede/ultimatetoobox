@@ -1,6 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion , RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { InflationClient } from "./InflationClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -103,6 +104,8 @@ export default function InflationPage() {
           <li><strong>Step 3: Adjust Rate</strong> - Modify the average annual inflation rate to see different economic scenarios.</li>
         </ol>
       </ToolArticle>
+
+      <ToolExtraSection route="/finance/inflation" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="finance" />
