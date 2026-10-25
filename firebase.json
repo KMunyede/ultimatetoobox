@@ -100,6 +100,31 @@
           "source": "/knowledge-base/",
           "destination": "/guides",
           "type": 301
+        },
+        {
+          "source": "/converters/length/:path+",
+          "destination": "/converters/length",
+          "type": 301
+        },
+        {
+          "source": "/converters/weight-mass/:path+",
+          "destination": "/converters/weight-mass",
+          "type": 301
+        },
+        {
+          "source": "/converters/area/:path+",
+          "destination": "/converters/area",
+          "type": 301
+        },
+        {
+          "source": "/converters/temperature/:path+",
+          "destination": "/converters/temperature",
+          "type": 301
+        },
+        {
+          "source": "/finance/salary-converter/:path+",
+          "destination": "/finance/salary-converter",
+          "type": 301
         }
       ]
     },
@@ -205,6 +230,31 @@
         {
           "source": "/knowledge-base/",
           "destination": "/guides",
+          "type": 301
+        },
+        {
+          "source": "/converters/length/:path+",
+          "destination": "/converters/length",
+          "type": 301
+        },
+        {
+          "source": "/converters/weight-mass/:path+",
+          "destination": "/converters/weight-mass",
+          "type": 301
+        },
+        {
+          "source": "/converters/area/:path+",
+          "destination": "/converters/area",
+          "type": 301
+        },
+        {
+          "source": "/converters/temperature/:path+",
+          "destination": "/converters/temperature",
+          "type": 301
+        },
+        {
+          "source": "/finance/salary-converter/:path+",
+          "destination": "/finance/salary-converter",
           "type": 301
         }
       ]

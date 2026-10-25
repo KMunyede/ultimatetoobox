@@ -52,9 +52,8 @@ export function getProgrammaticCurrencyPairs() {
 /**
  * Owner-approved top-20 indexable currency pair allowlist
  */
-export const INDEXABLE_PAIR_SLUGS = new Set<string>([
-  "usd-to-eur", "usd-to-gbp", "usd-to-inr", "usd-to-jpy", "eur-to-usd", "gbp-to-usd", "usd-to-cad", "usd-to-aud", "eur-to-gbp", "usd-to-cny", "usd-to-chf", "usd-to-mxn", "gbp-to-eur", "usd-to-zar", "gbp-to-inr", "usd-to-php", "usd-to-ngn", "eur-to-inr", "eur-to-jpy", "usd-to-hkd"
-]);
+// Emptied by owner decision 25 Oct 2026: pairs stay noindex and out of the sitemap until each has unique data.
+export const INDEXABLE_PAIR_SLUGS = new Set<string>([]);
 
 /**
  * Currency pair pages are thin (shared template). Kept usable but noindexed.

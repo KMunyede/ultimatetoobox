@@ -4,6 +4,7 @@ import path from 'path';
 import { GUIDES } from '@utilitiessite/config';
 import { getProgrammaticCurrencyPairs, isIndexableCurrencyPair } from '@/lib/currencies';
 import { isNoIndexPath } from '@/lib/indexing-policy';
+import { isRetiredPath } from '@/lib/retired-pages';
 
 export const dynamic = "force-static";
 
@@ -107,7 +108,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   const unitAndFixedSitemap: MetadataRoute.Sitemap = unitAndFixedPages
-    .filter(route => !isNoIndexPath(route))
+    .filter(route => !isNoIndexPath(route) && !isRetiredPath(route))
     .map(route => ({
       url: `${toolboxUrl}${route}`,
       lastModified: routeDates.unitAndFixedProgrammatic ? new Date(routeDates.unitAndFixedProgrammatic) : lastModified,
