@@ -5,6 +5,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Loan Calculator";
@@ -101,6 +102,8 @@ export default function LoanCalculatorPage() {
           <li><strong>Step 3: View Schedule</strong> - See your monthly payment and the total interest you will pay over the life of the loan.</li>
         </ol>
       </ToolArticle>
+
+      <ToolExtraSection route="/finance/loan-calculator" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="finance" />

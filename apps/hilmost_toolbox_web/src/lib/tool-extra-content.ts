@@ -309,5 +309,268 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
       "Decide whether to tip on the amount before tax or on the total including tax, and use the same rule every time.",
       "An even split is only fair when everyone had a similar meal. If one person ordered much more, split by what each person ordered."
     ]
+  },
+  "/converters/age-calculator": {
+    "subject": "the age calculator",
+    "howItWorks": [
+      "The calculator measures the gap between a birth date and a target date, which defaults to today. It counts complete years first, then the complete months left over, then the remaining days. A separate figure gives the total number of days, which is the difference between the two dates divided by the length of a day.",
+      "Calendar rules such as different month lengths and leap days are handled for you, so you do not have to count them by hand. You can also change the target date to find an age at a past or future moment, such as on the day you start a job or retire."
+    ],
+    "examples": [
+      {
+        "title": "15 March 1990 to 26 October 2026",
+        "steps": [
+          "Complete years: 36 (up to 15 March 2026)",
+          "Complete months after that: 7 (up to 15 October 2026)",
+          "Remaining days: 11",
+          "Result: 36 years, 7 months and 11 days"
+        ]
+      },
+      {
+        "title": "Why total days is not years × 365",
+        "steps": [
+          "1 January 2000 to 1 January 2001 is 1 year and 366 days, because 2000 was a leap year."
+        ]
+      }
+    ],
+    "tips": [
+      "Enter the birth date exactly as on the official document, and check the order of day and month, which differs between countries.",
+      "A leap-day birthday (29 February) happens only in leap years. Countries differ on whether a person born that day turns a year older on 28 February or on 1 March in other years, so check the rule that applies for legal purposes.",
+      "Use the target date field for forms that ask for your age on a given date, such as an entry deadline or a school cut-off."
+    ]
+  },
+  "/converters/area": {
+    "subject": "the area converter",
+    "howItWorks": [
+      "Every unit on this page is defined against one base unit, the square metre. A value is first converted to square metres by multiplying by that unit's size, then divided by the size of the unit you want. A hectare is 10,000 square metres and an acre is about 4,046.9 square metres, so these two steps work for any pair of the ten units.",
+      "Area units are squares of length units, so the factors grow quickly. One metre is about 3.28 feet, but one square metre is about 10.76 square feet, because the length factor is squared."
+    ],
+    "examples": [
+      {
+        "title": "1 hectare in square metres",
+        "steps": [
+          "1 × 10,000 = 10,000 m²"
+        ]
+      },
+      {
+        "title": "1 acre in hectares and square feet",
+        "steps": [
+          "1 acre ≈ 4,046.86 m²",
+          "4,046.86 ÷ 10,000 ≈ 0.405 hectares",
+          "1 acre ≈ 43,560 square feet"
+        ]
+      },
+      {
+        "title": "A 2,500 sq ft house in square metres",
+        "steps": [
+          "2,500 × 0.0929 ≈ 232 m²"
+        ]
+      }
+    ],
+    "tips": [
+      "Do not reuse a length factor for area. Converting square feet to square metres needs 0.0929, not 0.3048.",
+      "Land is often sold in acres or hectares, floor space in square feet or square metres. Convert both to one unit before you compare prices per unit of area.",
+      "A square mile is 640 acres, or about 259 hectares."
+    ]
+  },
+  "/converters/percentage": {
+    "subject": "the percentage calculator",
+    "howItWorks": [
+      "The calculator has three modes. What is X% of Y multiplies Y by X divided by 100. X is what % of Y divides X by Y and multiplies by 100. Percentage change subtracts the old value from the new one, divides by the old value and multiplies by 100. A negative result means a decrease.",
+      "A percentage is always relative to a starting amount. Changing which number you treat as the starting point changes the answer, which is the source of most percentage mistakes."
+    ],
+    "examples": [
+      {
+        "title": "What is 15% of 80?",
+        "steps": [
+          "80 × 15 ÷ 100 = 12"
+        ]
+      },
+      {
+        "title": "30 is what percent of 120?",
+        "steps": [
+          "30 ÷ 120 × 100 = 25%"
+        ]
+      },
+      {
+        "title": "Percentage change, up and down",
+        "steps": [
+          "From 80 to 100: (100 − 80) ÷ 80 × 100 = +25%",
+          "From 100 back to 80: (80 − 100) ÷ 100 × 100 = −20%",
+          "The same 20-unit gap is a 25% rise one way and a 20% fall the other, because the starting amounts differ."
+        ]
+      }
+    ],
+    "tips": [
+      "Two discounts do not add up. A 20% discount followed by a further 10% discount leaves 0.8 × 0.9 = 0.72 of the price, a 28% saving in total, not 30%.",
+      "Do not mix up percent and percentage points. If an interest rate moves from 4% to 5%, it rose by 1 percentage point but by 25% in relative terms.",
+      "To add a percentage, multiply by 1 plus the rate: adding 15% to 200 is 200 × 1.15 = 230."
+    ]
+  },
+  "/converters/time-zone": {
+    "subject": "the time zone converter",
+    "howItWorks": [
+      "Every place on Earth follows a time zone defined as an offset from Coordinated Universal Time (UTC). The converter turns the time you enter into a single UTC moment, then shows that moment as local time in each zone you pick. Zones are named after regions and cities, such as Africa/Harare or America/New_York, because a city's rules can include daylight saving changes that a plain offset cannot describe.",
+      "The zone list and the daylight saving rules come from the zone data built into your browser and the date-fns-tz library, so results follow the rules in force on the date you choose, not just today's offset."
+    ],
+    "examples": [
+      {
+        "title": "15:00 UTC in Harare",
+        "steps": [
+          "Harare is UTC+2 all year, with no daylight saving.",
+          "15:00 + 2 hours = 17:00"
+        ]
+      },
+      {
+        "title": "09:00 in New York on 15 March 2027, in London",
+        "steps": [
+          "The United States starts daylight saving on 14 March 2027, so New York is on UTC−4.",
+          "The United Kingdom does not change until 28 March 2027, so London is still on UTC+0.",
+          "09:00 + 4 hours = 13:00 in London. For most of the year the gap is 5 hours."
+        ]
+      }
+    ],
+    "tips": [
+      "Pick the city or region name, not an abbreviation. CST can mean US Central, China or Cuba Standard Time.",
+      "Daylight saving dates differ by country. The US and the EU change on different weekends, so the gap between two cities can shift by an hour for a few weeks each year.",
+      "For meetings across several zones, convert once and share the UTC time as well as each local time to avoid mix-ups."
+    ]
+  },
+  "/finance/earnings-per-share-calculator": {
+    "subject": "the earnings per share calculator",
+    "howItWorks": [
+      "Earnings per share shows how much of a company's profit belongs to each share. Basic EPS subtracts preferred dividends from net income, because those are owed to preferred shareholders first, and divides what is left by the weighted average number of ordinary shares during the period.",
+      "Diluted EPS adds shares that could be created by options, warrants or convertible securities to the divisor. It shows a cautious view for existing shareholders and, when earnings are positive, is equal to or lower than basic EPS."
+    ],
+    "examples": [
+      {
+        "title": "Net income $5,000,000, preferred dividends $500,000, 2,000,000 weighted shares",
+        "steps": [
+          "Earnings for ordinary shareholders: 5,000,000 − 500,000 = $4,500,000",
+          "Basic EPS: 4,500,000 ÷ 2,000,000 = $2.25",
+          "With 250,000 dilutive shares: 4,500,000 ÷ 2,250,000 = $2.00"
+        ]
+      }
+    ],
+    "tips": [
+      "Use the weighted average share count for the period, not the number outstanding at year end, because shares issued or bought back during the year only count for part of it.",
+      "Compare EPS only between similar periods. To compare different companies, look at it next to the share price, for example in the price-to-earnings ratio.",
+      "EPS is only as good as the net income behind it. One-off gains or losses can distort it, so check whether they are included."
+    ]
+  },
+  "/finance/income-tax": {
+    "subject": "the income tax calculator",
+    "howItWorks": [
+      "Most income tax systems are progressive: income is split into bands, and each band is taxed at its own rate. Only the part of your income that falls inside a band is taxed at that band's rate, so a pay rise never lowers your take-home pay by pushing all of your income into a higher rate.",
+      "This calculator covers 16 countries, using the 2025 or 2025-26 tax year rates built into it. It estimates income tax only and does not include state or local taxes or social security contributions, which can be large in some countries. Treat the result as an estimate, not as a tax return."
+    ],
+    "examples": [
+      {
+        "title": "US example: $60,000 income with the default standard deduction",
+        "steps": [
+          "Taxable income: 60,000 − 15,750 = $44,250",
+          "First $11,925 at 10% = $1,192.50",
+          "Next $32,325 (up to $44,250) at 12% = $3,879.00",
+          "Total tax: $5,071.50, an average rate of about 8.45% of income",
+          "The marginal rate, the rate on the last dollar earned, is 12%."
+        ]
+      }
+    ],
+    "tips": [
+      "Know the difference between the marginal rate and the average (effective) rate. The marginal rate applies to your next dollar, while the average rate is total tax divided by total income.",
+      "Deductions reduce the income that is taxed; credits reduce the tax itself, so a credit of the same size is worth more.",
+      "Rates and allowances change every year. Check your tax authority for the current figures before you file."
+    ]
+  },
+  "/finance/loan-calculator": {
+    "subject": "the loan calculator",
+    "howItWorks": [
+      "The monthly payment follows the standard amortisation formula: M = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), where P is the amount borrowed, r is the monthly rate (the yearly rate divided by 100 and by 12) and n is the number of monthly payments (years × 12). Interest is charged on the balance that remains each month, so early payments are mostly interest and later payments are mostly principal.",
+      "This calculator needs an interest rate above zero. For a zero-interest loan, divide the amount by the number of months yourself."
+    ],
+    "examples": [
+      {
+        "title": "$10,000 at 6% a year for 5 years",
+        "steps": [
+          "r = 0.06 ÷ 12 = 0.005 and n = 60",
+          "Monthly payment ≈ $193.33",
+          "Total paid: 193.33 × 60 ≈ $11,600, so interest is about $1,600"
+        ]
+      },
+      {
+        "title": "The same loan over 10 years",
+        "steps": [
+          "r = 0.005 and n = 120",
+          "Monthly payment ≈ $111.02",
+          "Total paid ≈ $13,322, so interest rises to about $3,322"
+        ]
+      }
+    ],
+    "tips": [
+      "A longer term lowers the monthly payment but raises the total interest, as the two examples show.",
+      "Paying extra toward the principal shortens the loan and cuts interest, because every extra dollar reduces the balance that interest is charged on.",
+      "The payment shown covers principal and interest only. Compare loans using the annual percentage rate (APR) from the lender, which includes certain fees."
+    ]
+  },
+  "/finance/salary-converter": {
+    "subject": "the salary converter",
+    "howItWorks": [
+      "The converter turns a pay rate into the other common periods using three assumptions: 52 weeks a year, 5 working days a week, and a number of hours per week that starts at 40 and that you can change. At 40 hours that makes 40 × 52 = 2,080 working hours a year and a working day of 8 hours.",
+      "Hourly pay is annual pay divided by the yearly hours, and every other period follows from the same two numbers. The figures are gross, meaning before tax and other deductions."
+    ],
+    "examples": [
+      {
+        "title": "$25 an hour at 40 hours a week",
+        "steps": [
+          "Weekly: 25 × 40 = $1,000",
+          "Annual: 1,000 × 52 = $52,000",
+          "Monthly: 52,000 ÷ 12 ≈ $4,333.33",
+          "Daily: 25 × 8 = $200"
+        ]
+      },
+      {
+        "title": "A $60,000 salary as an hourly rate",
+        "steps": [
+          "60,000 ÷ 2,080 ≈ $28.85 an hour"
+        ]
+      },
+      {
+        "title": "The same $25 rate at 37.5 hours a week",
+        "steps": [
+          "25 × 37.5 × 52 = $48,750 a year"
+        ]
+      }
+    ],
+    "tips": [
+      "Change the hours per week if your contract differs. A shorter week lowers every annual figure.",
+      "Paid leave and public holidays are already inside the 52 weeks. If you are paid only for hours worked and take unpaid leave, your real annual income will be lower.",
+      "Overtime, bonuses and tax are not included. Use the result to compare offers, not to predict your bank balance."
+    ]
+  },
+  "/text-data/word-unscrambler": {
+    "subject": "the word unscrambler",
+    "howItWorks": [
+      "Enter a set of letters and the tool searches a word list for real words that can be made from them. The word lists are stored by length, from 2 to 15 letters, in six languages: English, French, German, Spanish, Italian and Portuguese. Pick the language first, because the same letters can form words in one language and not in another.",
+      "Words that use exactly the same letters in a different order are called anagrams, for example listen, silent, enlist and tinsel. The results can also include shorter words made from only some of your letters, which is useful in word games."
+    ],
+    "examples": [
+      {
+        "title": "Letters entered: listen",
+        "steps": [
+          "Anagrams found include silent, enlist and tinsel."
+        ]
+      },
+      {
+        "title": "Letters entered: team",
+        "steps": [
+          "Anagrams found include meat, mate and tame."
+        ]
+      }
+    ],
+    "tips": [
+      "Word lists differ from game to game. A word that appears here may not be accepted by a particular game's official dictionary, and the other way round.",
+      "If you hold a blank tile, try the unscrambler once for each letter it could stand for.",
+      "Spelling variants such as colour and color may appear in only one list, so try both."
+    ]
   }
 };

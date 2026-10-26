@@ -7,6 +7,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 
 import { formatTitle } from "@/lib/metadata";
 
@@ -111,6 +112,8 @@ export default function TimeZonePage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/converters/time-zone" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="converters" currentPath="/converters/time-zone" />

@@ -1,6 +1,7 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { SalaryConverterClient } from "./SalaryConverterClient";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -90,6 +91,8 @@ export function SalaryConverterPageUI({
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/finance/salary-converter" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="finance" />

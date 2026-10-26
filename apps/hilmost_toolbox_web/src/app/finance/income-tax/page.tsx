@@ -7,6 +7,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Income Tax Calculator";
@@ -111,6 +112,8 @@ export default function IncomeTaxPage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/finance/income-tax" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="finance" />

@@ -7,6 +7,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "Word Unscrambler";
@@ -119,6 +120,8 @@ export default function WordUnscramblerPage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/text-data/word-unscrambler" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="text-data" currentPath={PATH} />

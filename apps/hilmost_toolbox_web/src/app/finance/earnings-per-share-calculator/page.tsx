@@ -7,6 +7,7 @@ import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
 
 const TOOL_NAME = "EPS Analysis Engine";
@@ -114,6 +115,8 @@ export default function EPSCalculatorPage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/finance/earnings-per-share-calculator" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="finance" />

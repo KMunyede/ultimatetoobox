@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AreaClient } from "./AreaClient";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 
 export function AreaPageUI({
   defaultFrom = "Square Foot",
@@ -102,6 +103,8 @@ export function AreaPageUI({
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/converters/area" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="converters" currentPath={canonicalUrl.replace("https://hilmost-toolbox.hilmost.net", "")} />
