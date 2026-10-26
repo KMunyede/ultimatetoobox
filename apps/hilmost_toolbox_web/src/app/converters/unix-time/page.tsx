@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { UnixTimeClient } from "./UnixTimeClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
@@ -111,6 +112,8 @@ export default function UnixTimePage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/converters/unix-time" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="converters" currentPath={PATH} />

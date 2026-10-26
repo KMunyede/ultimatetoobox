@@ -1,5 +1,6 @@
 import { WebApplicationSchema, FAQSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader, BreadcrumbSchema, AuthorBio } from "@utilitiessite/ui";
 import { BudgetClient } from "./BudgetClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -107,6 +108,8 @@ export default function BudgetPlannerPage() {
           <li><strong>Step 3: Analyze Balance</strong> - Use the visual breakdown to see if your spending aligns with your financial goals.</li>
         </ol>
       </ToolArticle>
+
+        <ToolExtraSection route="/finance/budget-planner" />
 
         <FAQAccordion items={faqs} />
         <AuthorBio category="finance" />

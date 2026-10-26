@@ -1,6 +1,7 @@
 import { WebApplicationSchema, FAQSchema, BreadcrumbSchema, ToolArticle, FAQAccordion, RelatedTools, Breadcrumbs, ToolHeader } from "@utilitiessite/ui";
 import { Metadata } from "next";
 import { DataStorageClient } from "./DataStorageClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getCanonicalUrl } from "@utilitiessite/config";
 import { getFileLastUpdated } from "@utilitiessite/config/server";;
 import path from "path";
@@ -98,6 +99,8 @@ export default function DataStoragePage() {
           <li><strong>Step 3: Verify Binary/Decimal</strong> - Ensure your storage calculations match your operating system&apos;s logic.</li>
         </ol>
       </ToolArticle>
+
+      <ToolExtraSection route="/converters/data-storage" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="converters" currentPath="/converters/data-storage" />

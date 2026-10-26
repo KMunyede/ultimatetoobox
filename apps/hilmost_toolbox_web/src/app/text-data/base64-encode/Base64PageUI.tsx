@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Base64Client } from "./Base64Client";
 import { ShareButton } from "@/components/ShareButton";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 
 export function Base64PageUI({
   defaultMode = "encode",
@@ -88,6 +89,8 @@ export function Base64PageUI({
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/text-data/base64-encode" />
 
       <FAQAccordion items={faqs} />
       <RelatedTools category="text-data" currentPath="/text-data/base64-encode" />
