@@ -1286,15 +1286,31 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
       <p>It's the reason a &quot;1TB&quot; hard drive shows up as roughly 931GB in Windows File Explorer. The drive manufacturer used decimal (1TB = 1,000,000,000,000 bytes); Windows reports in binary (dividing by 1,024 repeatedly). Nothing is missing — it's two different definitions of the same word.</p>
 
       <h2>What Our Converter Handles</h2>
-      <p>Bit ↔ Byte conversions (8 bits = 1 byte, always, no ambiguity there); KB/MB/GB/TB in both decimal and binary modes; and network speed conversions (Mbps vs MB/s — a very common mix-up, since network speeds are measured in bits, file sizes in bytes).</p>
+      <p>Bit ↔ Byte conversions (8 bits = 1 byte, always, no ambiguity there); Our converter works in binary units only: 1 KB is 1,024 bytes, and each larger step multiplies by 1,024 again.; and network speed conversions (Mbps vs MB/s — a very common mix-up, since network speeds are measured in bits, file sizes in bytes).</p>
+
+      <h2>Units the Converter Covers</h2>
+      <p>The converter handles bits, bytes, kilobytes (KB), megabytes (MB), gigabytes (GB), terabytes (TB) and petabytes (PB). A bit is one-eighth of a byte, so 1 bit equals 0.125 bytes. Results show up to six decimal places, with trailing zeros removed.</p>
+
+      <h2>Why a 256 GB Drive Shows 238 GB</h2>
+      <p>Buy a drive labelled 256 GB, install it, and your computer may report about 238 GB. A 512 GB drive may show about 476 GB. The drive has not been shortchanged. The two numbers use different units.</p>
+      <h3>The math behind the gap</h3>
+      <ul class="space-y-4 my-8">
+        <li><strong>Drive makers count in powers of 1,000</strong>. One GB is 1,000,000,000 bytes.</li>
+        <li><strong>Windows and most software count in powers of 1,024</strong>. One GB is 1,073,741,824 bytes.</li>
+        <li><strong>256 GB</strong> is 256,000,000,000 bytes. Divided by 1,073,741,824, that is about 238.4, which shows as 238 GB.</li>
+        <li><strong>512 GB</strong> is 512,000,000,000 bytes. Divided by 1,073,741,824, that is about 476.8, which shows as 476 GB.</li>
+      </ul>
+      <p>Each computer GB is about 7.4% bigger than a box GB, so the same bytes produce a number about 6.9% smaller. For a quick check, divide the label by 1.074. Formatting also reserves a little space for the file system and system files, so the figure can be slightly lower again.</p>
+      <p>Windows and most software show the binary figure, such as 238 GB. Drive labels and box specs use the decimal figure, such as 256 GB.</p>
+      <p>Our converter works in binary units only, so it cannot turn 256 GB into 238 GB. To match a box label, enter 238.4 GB. The converter then shows the same number of bytes as the 256 GB label, about 256 billion.</p>
 
       <h2>Common Mistake: Confusing Mbps with MB/s</h2>
       <p>Mbps (megabits per second) is used for internet speed. MB/s (megabytes per second) is used for file transfer/download size. Divide Mbps by 8 to estimate real-world MB/s — a &quot;100 Mbps&quot; connection tops out around 12.5 MB/s, not 100 MB/s.</p>
 
-      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2rem]">
-        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Convert Storage Units Correctly</h3>
-        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Use our free Data Storage Converter to switch between decimal and binary instantly, with no guessing.</p>
-        <a href="/converters/data-storage" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open Data Storage Converter →</a>
+      <div class="mt-12 p-8 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-[2rem]">
+        <h3 class="text-2xl font-black text-emerald-900 dark:text-emerald-100 mb-4">Convert Storage Units Correctly</h3>
+        <p class="text-emerald-800 dark:text-emerald-300 mb-6 text-lg">Use our free Data Storage Converter to switch between decimal and binary instantly, with no guessing.</p>
+        <a href="/converters/data-storage" class="inline-block px-8 py-4 bg-emerald-700 text-white font-black uppercase tracking-widest rounded-xl hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg">Open Data Storage Converter →</a>
       </div>
     `
   },
@@ -1337,11 +1353,26 @@ If this individual chooses a standard balanced ratio of 30% Protein, 40% Carbohy
         <li><strong>Personal Milestones & Event Planning</strong>: Calculating anniversary counts, retirement countdowns, or total days lived for personal record-keeping.</li>
       </ul>
 
-      <div class="mt-12 p-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-[2.5rem]">
-        <h3 class="text-2xl font-black text-blue-900 dark:text-blue-100 mb-4">Calculate Your Exact Age Now</h3>
-        <p class="text-blue-800 dark:text-blue-300 mb-6 text-lg">Instant, private, and precise. No registration or downloads required.</p>
-        <a href="/converters/age-calculator" class="inline-block px-8 py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 hover:scale-105 transition-all shadow-lg">Open Age Calculator →</a>
+      <div class="mt-12 p-8 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-[2.5rem]">
+        <h3 class="text-2xl font-black text-emerald-900 dark:text-emerald-100 mb-4">Calculate Your Exact Age Now</h3>
+        <p class="text-emerald-800 dark:text-emerald-300 mb-6 text-lg">Instant, private, and precise. No registration or downloads required.</p>
+        <a href="/converters/age-calculator" class="inline-block px-8 py-4 bg-emerald-700 text-white font-black uppercase tracking-widest rounded-xl hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg">Open Age Calculator →</a>
       </div>
+
+      <h2>What the Calculator Shows</h2>
+      <p>You enter a birth date and a target date. The calculator returns your age in years, months and days, which is what most people mean by exact age. It also shows the total weeks, days, hours and minutes between the two dates, which helps when you are planning or counting down to a milestone.</p>
+
+      <h2>A Worked Example</h2>
+      <p>Take someone born on 15 March 1990, checked on 26 October 2026.</p>
+      <ul class="space-y-4 my-8">
+        <li><strong>Years</strong>: 15 March 1990 to 15 March 2026 is 36 full years.</li>
+        <li><strong>Months</strong>: 15 March to 15 October is 7 months.</li>
+        <li><strong>Days</strong>: 15 October to 26 October is 11 days.</li>
+      </ul>
+      <p>So the exact age is 36 years, 7 months and 11 days. The total is 13,374 days. Nine leap days fall inside that span, and the calculation counts them.</p>
+
+      <h2>Tips for Accurate Results</h2>
+      <p>Check the birth date first, because one wrong digit changes every result. Use the same date format each time. Totals for hours and minutes count elapsed time, so read them as duration, not as calendar age.</p>
     `
   },
   {
