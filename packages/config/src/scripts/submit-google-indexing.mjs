@@ -33,7 +33,6 @@ async function submitToGoogle() {
         email: CONFIG.credentials.client_email,
         key: CONFIG.credentials.private_key,
         scopes: [
-          'https://www.googleapis.com/auth/indexing',
           'https://www.googleapis.com/auth/webmasters'
         ]
       });
@@ -116,41 +115,6 @@ async function submitToGoogle() {
       console.log('--- DRY RUN: URLS TO SUBMIT ---');
       finalSelection.forEach(u => console.log(u));
       process.exit(0);
-    }
-
-    // 3. Submit each URL
-    for (const url of finalSelection) {
-      const options = {
-        url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        auth: jwtClient,
-        body: JSON.stringify({
-          url: url,
-          type: 'URL_UPDATED'
-        })
-      };
-
-      const res = await fetch(options.url, {
-        method: options.method,
-        headers: {
-          ...options.headers,
-          Authorization: `Bearer ${(await jwtClient.getAccessToken()).token}`
-        },
-        body: options.body,
-        signal: AbortSignal.timeout(10000)
-      });
-
-      if (res.ok) {
-        console.log(`✅ Indexed: ${url}`);
-      } else {
-        const err = await res.text();
-        console.error(`❌ Failed: ${url} (${res.status}) - ${err}`);
-        if (res.status === 429) {
-          console.warn('⚠️ Rate limit hit. Stopping batch.');
-          break;
-        }
-      }
     }
 
     // 4. Submit Sitemaps via Search Console API
