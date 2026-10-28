@@ -25,22 +25,28 @@ export function LoanCalculatorClient() {
   let totalPayable = 0;
   let totalInterest = 0;
 
-  if (P > 0 && r > 0 && n > 0) {
-    monthlyPayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-    totalPayable = monthlyPayment * n;
-    totalInterest = totalPayable - P;
+  if (P > 0 && n > 0 && r >= 0) {
+    if (r === 0) {
+      monthlyPayment = P / n;
+      totalPayable = P;
+      totalInterest = 0;
+    } else {
+      monthlyPayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      totalPayable = monthlyPayment * n;
+      totalInterest = totalPayable - P;
+    }
   }
 
   const schedule = useMemo(() => {
-    if (P <= 0 || r <= 0 || n <= 0) return [];
+    if (P <= 0 || n <= 0 || r < 0) return [];
 
     const data = [];
     let balance = P;
 
     for (let i = 1; i <= n; i++) {
-      const interest = balance * r;
+      const interest = r === 0 ? 0 : balance * r;
       const principal = monthlyPayment - interest;
-      balance = Math.max(0, balance - principal);
+      balance = i === n ? 0 : Math.max(0, balance - principal);
 
       data.push({
         month: i,
