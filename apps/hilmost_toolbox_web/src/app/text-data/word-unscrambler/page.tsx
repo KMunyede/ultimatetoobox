@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     question: "Can it find blank tile possibilities?",
-    answer: "Currently, this specific tool finds exact matches. Use common vowels or consonants along with your scrambled letters to test possibilities.",
+    answer: "Yes. Type ? or * in place of a missing letter. Each one stands for exactly one blank tile, so c?t finds cat, cot and cut. Enter at least 2 letters; blank tiles count towards that minimum.",
   },
 ];
 
