@@ -569,7 +569,7 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
     ],
     "tips": [
       "Word lists differ from game to game. A word that appears here may not be accepted by a particular game's official dictionary, and the other way round.",
-      "If you hold a blank tile, try the unscrambler once for each letter it could stand for.",
+      "Use ? or * for a blank tile. Each one stands for exactly one letter, so c?t finds cat, cot and cut. Enter at least 2 letters; blank tiles count towards that.",
       "Spelling variants such as colour and color may appear in only one list, so try both."
     ]
   }
