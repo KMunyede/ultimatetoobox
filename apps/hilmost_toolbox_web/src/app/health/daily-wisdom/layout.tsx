@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/wisdom/AuthProvider";
+import { LAYOUT_TITLE } from "./daily-virtue-content";
 
 export const metadata: Metadata = {
-  title: "Daily Wisdom and Wellness | Change you want to see starts within You",
+  title: LAYOUT_TITLE,
   description: "Your daily companion for Stoic quotes, wellness habits, and private journaling.",
 };
 
