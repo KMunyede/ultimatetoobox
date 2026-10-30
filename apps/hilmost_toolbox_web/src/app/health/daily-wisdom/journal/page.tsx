@@ -3,7 +3,7 @@ import { JournalClient } from "./JournalClient";
 import { NOINDEX_APP_SCREEN } from "@/lib/indexing-policy";
 
 export const metadata: Metadata = {
-  title: "Private Journal | Daily Wisdom",
+  title: "Reflection Journal | Daily Virtue",
   description: "Your private space for reflection and stoic journaling. Use our secure, browser-side tool to record your thoughts, practice mindfulness, and apply timeless wisdom to your daily life.",
   ...NOINDEX_APP_SCREEN,
 };
@@ -13,7 +13,7 @@ export default function JournalPage() {
     <div className="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-normal tracking-tight text-black dark:text-white mb-4">
-          Private <span className="text-emerald-600 dark:text-emerald-500">Journal</span>
+          Reflection <span className="text-emerald-600 dark:text-emerald-500">Journal</span>
         </h1>
         <p className="text-lg text-black dark:text-white">
           Reflect on your day, your thoughts, and your personal growth.
