@@ -486,7 +486,7 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
     "subject": "the loan calculator",
     "howItWorks": [
       "The monthly payment follows the standard amortisation formula: M = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), where P is the amount borrowed, r is the monthly rate (the yearly rate divided by 100 and by 12) and n is the number of monthly payments (years × 12). Interest is charged on the balance that remains each month, so early payments are mostly interest and later payments are mostly principal.",
-      "This calculator needs an interest rate above zero. For a zero-interest loan, divide the amount by the number of months yourself."
+      "At a 0% rate the calculator simply divides the amount by the number of months, so 12000 over 1 year is 1000 a month with no interest charged."
     ],
     "examples": [
       {
