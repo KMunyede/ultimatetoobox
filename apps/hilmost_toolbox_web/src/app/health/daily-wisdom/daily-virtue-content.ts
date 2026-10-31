@@ -3,21 +3,21 @@ export interface FAQItem {
   answer: string;
 }
 
-export const META_TITLE = "Daily Virtue: Stoic and Philosophical Quotes with a Reflection Journal";
-export const META_DESCRIPTION = "Read a handful of Stoic and philosophical quotes and write down your thoughts in a simple reflection journal. Free to use, no account needed.";
+export const META_TITLE = "Daily Virtue: Wisdom Quotes and a Reflection Journal";
+export const META_DESCRIPTION = "Read wisdom quotes from Stoic writers and from the Bible, Quran and Hadith, then note your thoughts in a simple journal. Free, no account needed.";
 export const LAYOUT_TITLE = "Daily Virtue | Quotes and daily reflection";
 export const TOOL_HEADER_TITLE = "Daily Virtue";
-export const TOOL_HEADER_SUBTITLE = "Stoic and philosophical quotes, and a simple place to write down what is on your mind.";
+export const TOOL_HEADER_SUBTITLE = "Wisdom quotes from Stoic and faith traditions, and a simple place to write down what is on your mind.";
 export const BREADCRUMB_LABEL = "Daily Virtue";
 
 export const ARTICLE_SECTIONS = {
   whatItDoes: {
     heading: "What Daily Virtue does",
-    paragraph: "Daily Virtue shows you five short quotes at a time, taken from a small hand-picked set of Stoic and other philosophical sayings. Each quote shows the name of the person it is attributed to. The quotes are chosen at random when you open the page in a new browser session, and they stay the same while that session lasts, so you can come back to them later in the day. Read them, pick the one that speaks to you, and think of one moment in your day where it applies. It takes less than a minute, costs nothing and needs no account.",
+    paragraph: "Daily Virtue shows you five short quotes at a time, taken from a small hand-picked set of wisdom sayings. The set includes sayings from Stoic writers such as Marcus Aurelius, Seneca and Epictetus, and from the Bible, the Quran and the Hadith. Each quote shows the source or the person it is attributed to. The quotes are chosen at random when you open the page in a new browser session, and they stay the same while that session lasts, so you can come back to them later in the day. Read them, pick the one that speaks to you, and think of one moment in your day where it applies. It takes less than a minute, costs nothing and needs no account.",
   },
   whyStoicIdeasHelp: {
     heading: "Why Stoic ideas still help",
-    paragraph: "Stoicism began in Athens around 300 BCE with Zeno of Citium and was later shaped by teachers such as Epictetus, Seneca and Marcus Aurelius. It is a practical philosophy about how to live well when things go wrong. Its central idea, set out by Epictetus, is to separate what is up to you, such as your choices, effort and attitude, from what is not, such as other people's opinions, the weather or the outcome of a job application. The Stoics also named four core virtues: wisdom, courage, justice and temperance. Reading a quote each day is a small reminder to measure your day against those ideas instead of against your mood.",
+    paragraph: "Stoicism began in Athens around 300 BCE with Zeno of Citium and was later shaped by teachers such as Epictetus, Seneca and Marcus Aurelius. It is a practical philosophy about how to live well when things go wrong. Its central idea, set out by Epictetus, is to separate what is up to you, such as your choices, effort and attitude, from what is not, such as other people's opinions, the weather or the outcome of a job application. The Stoics also named four core virtues: wisdom, courage, justice and temperance. Reading a few wise sayings each day is a small reminder to measure your day against those ideas instead of against your mood.",
   },
   howToUse: {
     heading: "How to use the page",
@@ -56,6 +56,6 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "Where do the quotes come from?",
-    answer: "They are a small hand-picked set of Stoic and other philosophical sayings built into the page. Each is shown with the person it is attributed to.",
+    answer: "They are a small hand-picked set built into the page: sayings from Stoic writers such as Marcus Aurelius, Seneca and Epictetus, and from the Bible, the Quran and the Hadith. Each is shown with its source or the person it is attributed to.",
   },
 ];
