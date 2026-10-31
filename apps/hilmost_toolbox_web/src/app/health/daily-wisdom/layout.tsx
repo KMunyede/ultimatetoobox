@@ -4,7 +4,7 @@ import { LAYOUT_TITLE } from "./daily-virtue-content";
 
 export const metadata: Metadata = {
   title: LAYOUT_TITLE,
-  description: "Your daily companion for Stoic quotes, wellness habits, and private journaling.",
+  description: "Your daily companion for Stoic quotes and private journaling.",
 };
 
 export default function DailyWisdomLayout({

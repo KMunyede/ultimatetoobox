@@ -53,7 +53,7 @@ export const TOOLS_MAP: Record<Category, { name: string; href: string; descripti
     { name: "BMI Calculator", href: "/health/bmi-calculator", description: "Check your Body Mass Index." },
     { name: "Sleep Cycle Calculator", href: "/health/sleep-cycle-calculator", description: "Calculate optimal wake-up times." },
     { name: "Calorie & Macro Calculator", href: "/health/calorie-macro-calculator", description: "Plan your daily nutrition targets." },
-    { name: "Daily Wisdom", href: "/health/daily-wisdom", description: "Inspirational quotes & journaling." },
+    { name: "Daily Virtue", href: "/health/daily-wisdom", description: "Inspirational quotes & journaling." },
   ],
   "pdf-tools": [
     { name: "Merge PDF", href: "/pdf-tools/merge-pdf", description: "Combine multiple PDF files." },

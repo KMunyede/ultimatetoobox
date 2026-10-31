@@ -9,7 +9,7 @@
 - [PDF Tools](https://hilmost-toolbox.hilmost.net/pdf-tools): Merge, split, rotate, delete pages — client-side only
 - [Developer Tools](https://hilmost-toolbox.hilmost.net/dx): JSON formatter, Regex tester, JWT decoder
 - [Text & Data](https://hilmost-toolbox.hilmost.net/text-data): Word count, Base64, MD5, word unscrambler
-- [Health & Wellness](https://hilmost-toolbox.hilmost.net/health): BMI calculator, daily wisdom
+- [Health & Wellness](https://hilmost-toolbox.hilmost.net/health): BMI calculator, daily virtue
 
 ## About
 Built by Hilmost Software Corporation (Harare, Zimbabwe). Launched June 2026.

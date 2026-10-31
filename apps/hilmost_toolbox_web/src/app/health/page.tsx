@@ -57,7 +57,7 @@ const faqs = [
   },
   {
     question: "Can I use these tools on my mobile phone while at the gym?",
-    answer: "Absolutely. Hilmost Toolbox is fully responsive and optimized for mobile devices. You can quickly check your metrics or access daily wisdom directly from your smartphone, anytime and anywhere."
+    answer: "Absolutely. Hilmost Toolbox is fully responsive and optimized for mobile devices. You can quickly check your metrics or access Daily Virtue directly from your smartphone, anytime and anywhere."
   }
 ];
 
@@ -141,9 +141,9 @@ export default function HealthHub() {
             Maintaining a healthy weight is about more than just numbers; it&apos;s about long-term wellness. Our <strong>BMI Calculator</strong> provides an instant analysis of your Body Mass Index, helping you understand your weight category relative to your height. We use standard medical formulas to ensure that your results are reliable, whether you are using Metric or Imperial measurements. By tracking these metrics regularly, you can make more informed decisions about your diet and exercise routines.
           </p>
 
-          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Daily Wisdom and Mental Well-being</h2>
+          <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Daily Virtue and Mental Well-being</h2>
           <p>
-            At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Wisdom & Wellness</strong> project—a private space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;private space&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
+            At Hilmost, we believe that health is holistic. Beyond physical metrics, we offer the <strong>Daily Virtue & Wellness</strong> project—a private space for mental grounding. Access stoic philosophy, daily quotes, and journaling prompts designed to reduce stress and improve focus in the modern era. Our goal is to provide a &quot;private space&quot; where you can take a moment to reflect and reset amidst your busy daily workflow.
           </p>
 
           <h2 className="text-2xl font-normal mt-8 mb-4 uppercase tracking-tight">Secure and Private Health Monitoring</h2>

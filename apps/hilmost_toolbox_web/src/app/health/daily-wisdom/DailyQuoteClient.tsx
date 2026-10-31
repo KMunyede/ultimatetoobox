@@ -58,7 +58,7 @@ export function DailyQuoteClient() {
     <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
       <div className="relative flex items-center w-full px-4 md:px-12">
         {/* Desktop Arrows - Positioned absolutely to be clearly "detached" */}
-        <Tooltip content="Previous philosophical insight" position="top">
+        <Tooltip content="Previous timeless insight" position="top">
           <button
             onClick={() => scrollToQuote(activeIndex - 1)}
             className="absolute left-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-black dark:text-white hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-normal hidden sm:flex -ml-2 md:-ml-7"
@@ -85,7 +85,7 @@ export function DailyQuoteClient() {
           ))}
         </div>
 
-        <Tooltip content="Next philosophical insight" position="top">
+        <Tooltip content="Next timeless insight" position="top">
           <button
             onClick={() => scrollToQuote(activeIndex + 1)}
             className="absolute right-0 z-30 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 text-black dark:text-white hover:text-emerald-600 hover:border-emerald-500 transition-all text-2xl font-mono font-normal hidden sm:flex -mr-2 md:-mr-7"
