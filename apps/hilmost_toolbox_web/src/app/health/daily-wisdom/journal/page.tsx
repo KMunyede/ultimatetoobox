@@ -4,7 +4,7 @@ import { NOINDEX_APP_SCREEN } from "@/lib/indexing-policy";
 
 export const metadata: Metadata = {
   title: "Reflection Journal | Daily Virtue",
-  description: "Your private space for reflection and stoic journaling. Use our secure, browser-side tool to record your thoughts, practice mindfulness, and apply timeless wisdom to your daily life.",
+  description: "Your private space for reflection and reflective journaling. Use our secure, browser-side tool to record your thoughts, practice mindfulness, and apply timeless wisdom to your daily life.",
   ...NOINDEX_APP_SCREEN,
 };
 

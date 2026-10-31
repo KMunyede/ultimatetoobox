@@ -51,7 +51,7 @@ export default function Home() {
   const lastUpdated = getFileLastUpdated(filePath);
 
   const tourSteps = [
-    { element: '.quote-container', popover: { title: '1. Daily Quote', description: 'Read a hand-picked philosophical insight every day.' } },
+    { element: '.quote-container', popover: { title: '1. Daily Quote', description: 'Read a hand-picked timeless insight every day.' } },
     { element: '.bg-emerald-600', popover: { title: '2. Reflection Journal', description: 'Reflect on the quotes and record your thoughts privately.' } },
   ];
 

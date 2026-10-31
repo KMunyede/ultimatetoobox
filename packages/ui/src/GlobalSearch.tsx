@@ -29,7 +29,7 @@ export function GlobalSearch() {
   // Quick Actions - shown when query is empty
   const quickActions: ToolEntry[] = [
     {
-      name: "Open Daily Wisdom",
+      name: "Open Daily Virtue",
       href: `${toolboxDomain}/health/daily-wisdom`,
       description: "Get your daily dose of philosophy",
       category: "Quick Action",

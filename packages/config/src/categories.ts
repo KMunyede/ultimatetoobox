@@ -128,7 +128,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     color: "rose",
     icon: "HeartPulse",
     tools: [
-      { name: "Daily Wisdom", href: "/health/daily-wisdom", tooltip: "Stoic quotes and daily guidance.", description: "A private space for mental well-being. Access daily quotes, journaling tools, and library resources." },
+      { name: "Daily Virtue", href: "/health/daily-wisdom", tooltip: "Stoic quotes and daily guidance.", description: "A private space for mental well-being. Access daily quotes, journaling tools, and library resources." },
       { name: "BMI Calculator", href: "/health/bmi-calculator", tooltip: "Calculate Body Mass Index safely.", description: "Calculate your Body Mass Index (BMI) instantly. Understand your weight category and trajectory." },
       { name: "Calorie & Macro", href: "/health/calorie-macro-calculator", tooltip: "Precision nutrition and macro ratios.", description: "Calculate your BMR, TDEE, and optimal macronutrient split for your fitness goals." },
       { name: "Sleep Cycle", href: "/health/sleep-cycle-calculator", tooltip: "Optimal wake-up and bed times.", description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Wake up refreshed.", icon: "Moon" },
