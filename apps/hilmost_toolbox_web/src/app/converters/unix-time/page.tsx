@@ -104,9 +104,9 @@ export default function UnixTimePage() {
           <li><strong>Step 3: Copy to Clipboard</strong> - Click any result to copy it for use in your code, database, or logs.</li>
         </ol>
 
-        <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl not-prose">
-          <h4 className="text-lg font-normal text-blue-900 dark:text-blue-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
-          <p className="text-blue-800 dark:text-blue-300 mb-4 font-medium">Want to learn more about how Unix time works and avoid timestamp pitfalls?</p>
+        <div className="mt-8 p-6 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl not-prose">
+          <h4 className="text-lg font-normal text-emerald-900 dark:text-emerald-100 mb-2 uppercase tracking-tight">Deeper Dive</h4>
+          <p className="text-emerald-800 dark:text-emerald-300 mb-4 font-medium">Want to learn more about how Unix time works and avoid timestamp pitfalls?</p>
           <Link href="/guides/understanding-unix-timestamps" className="inline-flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-brand-primary hover:underline">
             Read the full guide <ArrowRight size={14} />
           </Link>
