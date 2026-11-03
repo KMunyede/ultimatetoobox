@@ -108,7 +108,7 @@ export function DateTimeDropdown({ value, onChange, legend, id, showTodayButton 
     onChange(format(now, "yyyy-MM-dd'T'HH:mm:ss"));
   };
 
-  const selectClass = "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none text-black dark:text-white appearance-none cursor-pointer hover:border-slate-400 dark:hover:border-slate-600 transition-colors";
+  const selectClass = "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none text-black dark:text-white appearance-none cursor-pointer hover:border-slate-400 dark:hover:border-slate-600 transition-colors";
 
   return (
     <fieldset className="w-full border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-5 bg-slate-50/50 dark:bg-slate-900/50 shadow-sm" id={id}>
@@ -118,7 +118,7 @@ export function DateTimeDropdown({ value, onChange, legend, id, showTodayButton 
             <button
                 type="button"
                 onClick={handleToday}
-                className="ml-1 px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors border border-blue-100 dark:border-blue-800"
+                className="ml-1 px-2 py-0.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-md hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors border border-emerald-100 dark:border-emerald-800"
             >
                 Today
             </button>
@@ -243,14 +243,14 @@ export function DateTimeDropdown({ value, onChange, legend, id, showTodayButton 
                 <button
                     type="button"
                     onClick={() => setIs12Hour(false)}
-                    className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${!is12Hour ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                    className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${!is12Hour ? 'bg-white dark:bg-slate-700 text-emerald-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
                 >
                     24H
                 </button>
                 <button
                     type="button"
                     onClick={() => setIs12Hour(true)}
-                    className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${is12Hour ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                    className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${is12Hour ? 'bg-white dark:bg-slate-700 text-emerald-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
                 >
                     12H
                 </button>
