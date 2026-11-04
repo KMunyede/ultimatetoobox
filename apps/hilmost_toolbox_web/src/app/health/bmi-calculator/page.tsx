@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BMIClient } from "./BMIClient";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
@@ -114,6 +115,8 @@ export default function BMIPage() {
           </Link>
         </div>
       </ToolArticle>
+
+      <ToolExtraSection route="/health/bmi-calculator" />
 
       <FAQAccordion items={faqs} />
       <AuthorBio category="health" />
