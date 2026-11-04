@@ -7,6 +7,7 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 
 const TOOL_NAME = "Free GPA Calculator";
 const TOOL_DESC = "Calculate your semester and cumulative GPA using letter grades, percentages, or 4.0 scale. Our free tool supports weighted 4.0 and 5.0 scales for high school and university students.";
@@ -124,6 +125,8 @@ export default function GpaCalculatorPage() {
             </Link>
           </div>
         </ToolArticle>
+
+        <ToolExtraSection route="/education/gpa-calculator" />
 
         <FAQAccordion items={faqs} />
         <RelatedTools category="education" currentPath={PATH} />

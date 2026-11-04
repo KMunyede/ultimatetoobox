@@ -7,6 +7,7 @@ import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
 import { formatTitle, METADATA_BASE_URL } from "@/lib/metadata";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 
 const TOOL_NAME = "Strong Password Generator";
 const TOOL_DESC = "Generate secure random passwords instantly. Customize length and character sets. High-security standards with 100% browser-side generation.";
@@ -118,6 +119,8 @@ export default function PasswordGeneratorPage() {
             </Link>
           </div>
         </ToolArticle>
+
+        <ToolExtraSection route="/dx/password-generator" />
 
         <FAQAccordion items={faqs} />
         <RelatedTools category="dx" currentPath={PATH} />
