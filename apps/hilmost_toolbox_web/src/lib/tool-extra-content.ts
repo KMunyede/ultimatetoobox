@@ -135,7 +135,6 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
       "Know the limits you write for: a post on X allows 280 characters, and search results usually show only the first 155 to 160 characters of a meta description.",
       "Check whether a limit counts spaces. Many forms count them, some do not.",
       "Paste plain text where you can. Text copied from web pages or documents can carry hidden characters that change the count.",
-      "When pasting text into web forms, review both character metrics to verify if spaces are included in the official character limit.",
       "Blank lines increase the line count because line breaks separate lines, even when no characters exist on a line."
     ]
   },
@@ -158,7 +157,7 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
         "title": "154 lb weight and 69 inches height",
         "steps": [
           "Square height: 69 × 69 = 4,761",
-          "Multiply ratio by 703: (154 ÷ 4,761) × 703 = 22.738...",
+          "Multiply ratio by 703: (154 ÷ 4,761) × 703 = 22.739...",
           "Result rounded to one decimal place: 22.7"
         ]
       }
