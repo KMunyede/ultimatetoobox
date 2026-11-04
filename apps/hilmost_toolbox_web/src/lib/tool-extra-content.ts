@@ -630,5 +630,46 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
       "Use ? or * for a blank tile. Each one stands for exactly one letter, so c?t finds cat, cot and cut. Enter at least 2 letters; blank tiles count towards that.",
       "Spelling variants such as colour and color may appear in only one list, so try both."
     ]
+  },
+  "/education/gpa-calculator": {
+    "subject": "the GPA calculator",
+    "howItWorks": [
+      "Grade Point Average multiplies each grade value by course credits, summing total points and dividing by total credits. Results round to two decimal places. Courses with zero credits are excluded."
+    ],
+    "examples": [
+      {
+        "title": "Standard 4.0 calculation",
+        "steps": [
+          "A (4.0) in 3 credits: 4 × 3 = 12 points",
+          "B (3.0) in 4 credits: 3 × 4 = 12 points",
+          "C (2.0) in 2 credits: 2 × 2 = 4 points",
+          "Total: (12 + 12 + 4) ÷ 9 credits = 3.11"
+        ]
+      }
+    ],
+    "tips": [
+      "Check if your institution uses 4.0 or weighted 5.0 scales.",
+      "Exclude pass or fail subjects with zero credit weight."
+    ]
+  },
+  "/dx/password-generator": {
+    "subject": "the password generator",
+    "howItWorks": [
+      "Password entropy measures strength as length multiplied by log2 of pool size, using window.crypto.getRandomValues for random values. Length of zero yields an empty weak result."
+    ],
+    "examples": [
+      {
+        "title": "Alphanumeric 12-character entropy",
+        "steps": [
+          "Pool size: 26 uppercase + 26 lowercase + 10 digits = 62",
+          "Entropy: 12 × log2(62) = 12 × 5.954 = 71.45 bits",
+          "Strength rating: Strong (75% score band)"
+        ]
+      }
+    ],
+    "tips": [
+      "Enable guarantee options so all active character types appear.",
+      "Filter ambiguous characters like zero and capital O when typing manually."
+    ]
   }
 };
