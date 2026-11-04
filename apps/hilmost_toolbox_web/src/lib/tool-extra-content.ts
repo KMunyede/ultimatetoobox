@@ -104,7 +104,8 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
     "subject": "the word counter",
     "howItWorks": [
       "Words are counted as groups of characters separated by spaces or line breaks. Characters are counted two ways: with spaces, which is what most limits use, and without spaces. Lines are counted by line breaks. Everything updates as you type, so you can trim a draft until it fits.",
-      "Programs differ in small ways, for example in how they treat hyphenated words, numbers and symbols, so the same text can show slightly different counts in different tools. If a strict limit matters, leave a small margin."
+      "Programs differ in small ways, for example in how they treat hyphenated words, numbers and symbols, so the same text can show slightly different counts in different tools. If a strict limit matters, leave a small margin.",
+      "Text processing splits words on whitespace, so hyphenated compounds like well-known count as one word. Clearing input resets all metrics to zero, while each line break increments the total line count."
     ],
     "examples": [
       {
@@ -113,6 +114,14 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
           "Words: 9",
           "Characters with spaces: 43",
           "Characters without spaces: 35"
+        ]
+      },
+      {
+        "title": "The quick brown fox",
+        "steps": [
+          "Words: 4",
+          "Characters with spaces: 19",
+          "Characters without spaces: 16"
         ]
       },
       {
@@ -125,7 +134,57 @@ export const TOOL_EXTRA: Record<string, ToolExtra> = {
     "tips": [
       "Know the limits you write for: a post on X allows 280 characters, and search results usually show only the first 155 to 160 characters of a meta description.",
       "Check whether a limit counts spaces. Many forms count them, some do not.",
-      "Paste plain text where you can. Text copied from web pages or documents can carry hidden characters that change the count."
+      "Paste plain text where you can. Text copied from web pages or documents can carry hidden characters that change the count.",
+      "When pasting text into web forms, review both character metrics to verify if spaces are included in the official character limit.",
+      "Blank lines increase the line count because line breaks separate lines, even when no characters exist on a line."
+    ]
+  },
+  "/health/bmi-calculator": {
+    "subject": "Body Mass Index",
+    "howItWorks": [
+      "Body Mass Index measures body mass against height. In metric units, divide weight in kilograms by height in metres squared. In imperial units, divide weight in pounds by height in inches squared and multiply by 703. Results are rounded to one decimal place.",
+      "World Health Organization cut-offs for adults classify scores under 18.5 as underweight, 18.5 to 24.9 as normal weight, 25 to 29.9 as overweight, and 30 or above as obese. Both height and weight inputs must be above zero."
+    ],
+    "examples": [
+      {
+        "title": "70 kg weight and 1.75 m height",
+        "steps": [
+          "Square height: 1.75 × 1.75 = 3.0625",
+          "Divide weight by height squared: 70 ÷ 3.0625 = 22.857...",
+          "Result rounded to one decimal place: 22.9"
+        ]
+      },
+      {
+        "title": "154 lb weight and 69 inches height",
+        "steps": [
+          "Square height: 69 × 69 = 4,761",
+          "Multiply ratio by 703: (154 ÷ 4,761) × 703 = 22.738...",
+          "Result rounded to one decimal place: 22.7"
+        ]
+      }
+    ],
+    "tips": [
+      "BMI provides an initial estimate but cannot separate muscular weight from body fat.",
+      "These cut-off ranges apply only to adults aged 18 and older.",
+      "Combine BMI with waist measurements to evaluate abdominal fat risk."
+    ]
+  },
+  "/health/calorie-macro-calculator": {
+    "subject": "the calorie calculator",
+    "howItWorks": [
+      "BMR for ages 15 and over uses the Mifflin-St Jeor formula. Activity multipliers span 1.2 to 1.9. Daily targets enforce a 1,200 kcal minimum. Custom macro splits must total 100%."
+    ],
+    "examples": [
+      {
+        "title": "Woman, age 30, 165 cm, 60 kg, sedentary",
+        "steps": [
+          "BMR: 10×60 + 6.25×165 − 5×30 − 161 = 1,320.25 kcal",
+          "TDEE: 1,320.25 × 1.2 = 1,584.3 kcal"
+        ]
+      }
+    ],
+    "tips": [
+      "Pick activity levels matching true weekly exercise. Output is an estimate, not a medical diagnosis."
     ]
   },
   "/text-data/base64-encode": {

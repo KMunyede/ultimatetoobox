@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CalorieMacroCalculatorTool } from "./CalorieMacroCalculatorTool";
+import { ToolExtraSection } from "@/components/ToolExtraSection";
 import { getFileLastUpdated } from "@utilitiessite/config/server";
 import path from "path";
 import { ShareButton } from "@/components/ShareButton";
@@ -124,6 +125,8 @@ export default function CalorieMacroCalculatorPage() {
             </Link>
           </div>
         </ToolArticle>
+
+        <ToolExtraSection route="/health/calorie-macro-calculator" />
 
         <FAQAccordion items={faqs} />
         <RelatedTools category="health" currentPath={PATH} />
