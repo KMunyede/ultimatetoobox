@@ -28,6 +28,7 @@ export default function Page() {
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Usage Data:</strong> We collect non-personally identifiable information such as browser type, operating system, and pages visited to improve our services.</li>
               <li><strong>Cookies:</strong> We use cookies to store your preferences (such as Dark/Light mode) and for analytics purposes.</li>
+              <li><strong>Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on your prior visits to our websites. Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your visit to our sites and/or other sites on the Internet.</li>
             </ul>
             <p className="mt-4">
               We use Google Analytics to collect usage data through cookies to help us understand site activity and improve our services. For more details on cookie usage, please see our{" "}
@@ -45,6 +46,7 @@ export default function Page() {
             <ul className="list-disc pl-6 space-y-2">
               <li>To personalize your user experience and improve our applications.</li>
               <li>To provide core functionality for our tools without transmitting sensitive data to our servers (most of our toolbox processing is done locally on your device).</li>
+              <li>To serve relevant advertisements through networks like Google AdSense.</li>
             </ul>
           </section>
 
