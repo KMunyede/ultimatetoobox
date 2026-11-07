@@ -1,8 +1,9 @@
 import { Metadata } from "next";
-import { PrivacyPolicyContent } from "@utilitiessite/ui";
+import Link from "next/link";
 import { GamesPrivacySection } from "./GamesPrivacySection";
 
 import { pageMeta } from "@/lib/seo";
+import { OPERATOR_NAME, OPERATOR_ADDRESS } from "@/lib/constants";
 
 export const metadata: Metadata = {
   ...pageMeta("/privacy-policy", "Privacy Policy | Hilmost", "How Hilmost Software Corporation collects, uses, and protects your information across our tools and services."),
@@ -12,7 +13,90 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <PrivacyPolicyContent />
+      <div className="prose prose-slate dark:prose-invert max-w-none">
+        <h1>Privacy Policy</h1>
+        <p className="lead text-xl text-slate-600 dark:text-slate-400 mb-8">
+          At Hilmost Software Corporation (HSC) (not yet incorporated, operated by {OPERATOR_NAME}), we take your privacy seriously. Hilmost Software Corporation is not a registered company. This Privacy Policy outlines how we collect, use, and protect your information across our network of applications and services.
+        </p>
+
+        <div className="space-y-10">
+          <section>
+            <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">1. Information We Collect</h2>
+            <p className="mb-4">
+              When you use our services (such as Hilmost Toolbox or Hilmost Main), we may collect the following types of information:
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Usage Data:</strong> We collect non-personally identifiable information such as browser type, operating system, and pages visited to improve our services.</li>
+              <li><strong>Cookies:</strong> We use cookies to store your preferences (such as Dark/Light mode) and for analytics purposes.</li>
+            </ul>
+            <p className="mt-4">
+              We use Google Analytics to collect usage data through cookies to help us understand site activity and improve our services. For more details on cookie usage, please see our{" "}
+              <Link href="/cookie-policy" className="text-blue-600 dark:text-blue-400 hover:underline">
+                Cookie Policy
+              </Link>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">2. How We Use Your Information</h2>
+            <p className="mb-4">
+              The information we collect is used in the following ways:
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>To personalize your user experience and improve our applications.</li>
+              <li>To provide core functionality for our tools without transmitting sensitive data to our servers (most of our toolbox processing is done locally on your device).</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">3. Data Security</h2>
+            <p>
+              We implement a variety of security measures to maintain the safety of your personal information. Our websites use secure SSL encryption to protect data transmitted between your browser and our servers.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">4. Third-Party Links</h2>
+            <p>
+              Occasionally, at our discretion, we may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We therefore have no responsibility or liability for the content and activities of these linked sites.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">5. Changes to this Policy</h2>
+            <p>
+              HSC reserves the right to update this privacy policy at any time. We encourage users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-normal text-slate-900 dark:text-white border-b pb-2 mb-4">6. Contact Us</h2>
+            <p className="mb-6">
+              If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:
+            </p>
+            <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800 not-prose">
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3">
+                  <span className="font-normal text-slate-900 dark:text-white min-w-[72px]">Email:</span>
+                  <a href="mailto:support@hilmost.net" className="text-blue-600 dark:text-blue-400 hover:underline">support@hilmost.net</a>
+                </li>
+                <li className="flex items-start gap-3 pt-2">
+                  <span className="font-normal text-slate-900 dark:text-white min-w-[72px]">Address:</span>
+                  <address className="text-slate-600 dark:text-slate-400 not-italic">
+                    Hilmost Software Corporation (not yet incorporated)<br />
+                    Operated by {OPERATOR_NAME}<br />
+                    {OPERATOR_ADDRESS}
+                  </address>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <p className="text-sm text-slate-500 mt-12 pt-6 border-t border-slate-200 dark:border-slate-800">
+          Last Updated: November 7, 2026
+        </p>
+      </div>
       <GamesPrivacySection />
     </div>
   );

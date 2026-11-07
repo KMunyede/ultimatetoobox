@@ -1,6 +1,7 @@
 ﻿import { Metadata } from "next";
 import Link from "next/link";
 import { pageMeta } from "@/lib/seo";
+import { OPERATOR_NAME, OPERATOR_ADDRESS } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta(
   "/contact",
@@ -95,7 +96,7 @@ export default function ContactPage() {
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Where we are</h2>
         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-          Harare, Zimbabwe. We work online only, so we can&apos;t take walk-in visits.
+          Hilmost Software Corporation (not yet incorporated), operated by {OPERATOR_NAME}, {OPERATOR_ADDRESS}. We work online only, so we can&apos;t take walk-in visits.
         </p>
       </div>
     </div>
